@@ -6,9 +6,10 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.forms import CommentForm
 from django.utils.encoding import StrAndUnicode, force_unicode
-from django.utils.safestring import mark_safe
 
 from ratings.models import RatingComment
+
+from jinja2.utils import Markup
 
 CHOICES = [(i, str(i+1)) for i in range(5)]
 
@@ -42,7 +43,7 @@ class NoSoapRadio(StrAndUnicode):
 
     def render(self):
         """Outputs a <ul> for this set of radio fields."""
-        return mark_safe(u'\n'.join(force_unicode(w) for w in self))
+        return Markup(u'\n'.join(force_unicode(w) for w in self))
 
 class RatingCommentForm(CommentForm):
     rating = fields.IntegerField(min_value=0, max_value=4,

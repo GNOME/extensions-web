@@ -1,6 +1,6 @@
-<form action="{% url auth-login %}" method="POST" class="login_popup_form">
-  {% csrf_token %}
-  {{ login_popup_form.as_plain }}
+<form action="{{ url('auth-login') }}" method="POST" class="login_popup_form">
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+  {{ login_popup_form.as_plain()|safe }}
   <input type="submit" value="Login">
-  <a href="{% url registration_register %}">Register</a>
+  <a href="{{ url('registration_register') }}">Register</a>
 </form>

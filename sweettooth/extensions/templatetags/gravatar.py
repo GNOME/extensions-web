@@ -1,8 +1,6 @@
 from django import template
 import urllib, hashlib
 
-register = template.Library()
-
 GRAVATAR_BASE = "https://secure.gravatar.com/avatar/%s?%s"
 
 @register.simple_tag

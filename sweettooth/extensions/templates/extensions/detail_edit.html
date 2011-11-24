@@ -1,7 +1,7 @@
 {% extends "extensions/detail.html" %}
 
-{% block extra-body-header %}
-  {{ block.super }}
+{% block extra_body_header %}
+  {{ super() }}
   {% if is_preview %}
   <div class="step edit">
     <h2 class="steptitle">Step <span>2</span></h2>
@@ -35,7 +35,7 @@
       A reviewer will review the extension you submitted to make sure there's nothing too
       dangerous. You'll be emailed the result of the review.
 
-      <button id="submit-ajax" data-url="{% url extensions-ajax-submit pk=version.pk %}">
+      <button id="submit-ajax" data-url="{{ url('extensions-ajax-submit', pk=version.pk) }}">
         Submit the extension for review.
       </button>
     </p>
@@ -43,18 +43,18 @@
   {% endif %}
 
   {% if not is_preview %}
-    <a href="{% url extensions-upload-file pk=extension.pk %}">Upload a new version</a>
+    <a href="{{ url('extensions-upload-file', pk=extension.pk) }}">Upload a new version</a>
   {% endif %}
 {% endblock %}
 
 {% block screenshot %}
 <div class="screenshot upload">
-  <img src="{{ th.url }}" />
+  <img src="{{ thumbnail(extension.screenshot, '300x200').url }}" />
   <input type="file" accept="image/*">
 </div>
 {% endblock %}
 
-{% block no-screenshot %}
+{% block no_screenshot %}
 <div class="screenshot upload placeholder">
   <div class="text">
     <span>Upload a screenshot</span>
@@ -71,10 +71,11 @@
 </div>
 {% endblock %}
 
-{% block document-ready %}{{ block.super }}
-    $("#extension_name, #extension_description, #extension_url").csrfEditable("{% url extensions-ajax-inline pk=extension.pk %}");
+{% block document_ready %}{{ super() }}
+    $("h3, p.description").csrfEditable("{{ url('extensions-ajax-inline', pk=extension.pk) }}");
     require(['uploader'], function() {
-        $(".screenshot.upload").uploadify("{% url extensions-ajax-screenshot pk=extension.pk %}?geometry=300x200");
-        $(".icon.upload").uploadify("{% url extensions-ajax-icon pk=extension.pk %}");
+        $(".screenshot.upload").uploadify("{{ url('extensions-ajax-screenshot', pk=extension.pk) }}?geometry=300x200");
+        $(".icon.upload").uploadify("{{ url('extensions-ajax-icon', pk=extension.pk) }}");
+>>>>>>> Start a port to Jinja/Jingo
     });
 {% endblock %}

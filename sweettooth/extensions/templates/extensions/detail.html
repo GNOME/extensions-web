@@ -1,25 +1,22 @@
 {% extends "base.html" %}
-{% load thumbnail %}
-{% block title %}{{ extension.name }} - {{ block.super }}{% endblock %}
+{% block title %}{{ extension.name }} - {{ super() }}{% endblock %}
 
-{% block extra-messages %}
-  {{ block.super }}
+{% block extra_messages %}
+  {{ super() }}
   {% if is_rejected %}
-   {% spaceless %}
     <p class="message error">
       This version of {{ extension.name }} was rejected.
-      <a href="{% url extensions-detail pk=extension.pk %}">View the latest accepted version.</a>
+      <a href="{{ url('extensions-detail', pk=extension.pk) }}">View the latest accepted version.</a>
     </p>
-    {% endspaceless %}
   {% else %} {% if old_version %}
     <p class="message warning">
-      You are viewing an old version of <a href="{% url extensions-detail pk=extension.pk %}">{{ extension.name }}</a>
+      You are viewing an old version of <a href="{{ url('extensions-detail', pk=extension.pk) }}">{{ extension.name }}</a>
     </p>
   {% endif %} {% endif %}
 {% endblock %}
 
 {% block body %}
-{% block extra-body-header %}
+{% block extra_body_header %}
 {% endblock %}
 
     <div class="extension"
@@ -33,18 +30,18 @@
       {% endblock icon %}
 
       {% if extension.screenshot %}
-      {% thumbnail extension.screenshot "300x200" as th %}
       {% block screenshot %}
-      <a href="{{ extension.screenshot.url }}" class="screenshot"><img src="{{ th.url }}" /></a>
+      <a href="{{ extension.screenshot.url }}" class="screenshot">
+        <img src="{{ thumbnail(extension.screenshot, '300x200').url }}" />
+      </a>
       {% endblock screenshot %}
-      {% endthumbnail %}
       {% else %}
-      {% block no-screenshot %}
+      {% block no_screenshot %}
       {% endblock %}
       {% endif %}
 
       <h3 class="extension-name" id="extension_name">{{ extension.name }}</h3>
-      <span class="author">by <a href="{% url auth-profile user=extension.creator.username %}">{{ extension.creator }}</a></span>
+      <span class="author">by <a href="{{ url('auth-profile', user=extension.creator.username) }}">{{ extension.creator }}</a></span>
       <p class="description" id="extension_description">
         {{ extension.description }}
       </p>

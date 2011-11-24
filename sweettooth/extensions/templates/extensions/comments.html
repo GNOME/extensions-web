@@ -1,37 +1,33 @@
 <div id="comments">
   <h4>User comments</h4>
-  {% load comments %}
-  {% load gravatar %}
-  {% load rating %}
-  {% get_comment_list for extension as comments %}
-  {% for comment in comments %}
+  {% for comment in get_comments(extension) %}
   <div class="comment">
-    <img src="{% gravatar_url comment.user_email %}" class="gravatar">
+    <img src="{{ gravatar_url(comment.user_email) }}" class="gravatar">
     <div class="rating-author">
       <div class="rating">
-        {% rating comment.rating 5 %}
+        {{ rating(comment.rating, 5) }}
       </div> by
-      <a class="comment-author" href="{% url auth-profile user=comment.user.username %}">{{ comment.user }}</a>
+      <a class="comment-author" href="{{ url('auth-profile', user=comment.user.username) }}">{{ comment.user }}</a>
     </div>
     <p>{{ comment.comment }}</p>
-    <abbr class="timestamp" title="{{ comment.submit_date|date:"c" }}">{{ comment.submit_date|date:"F j, Y" }}</abbr>
+    <abbr class="timestamp" title="{{ comment.submit_date.isoformat() }}">{{ comment.submit_date|datetime("%B  %d, %Y") }}</abbr>
   </div>
   <hr>
-  {% empty %}
+  {% else %}
   There are no comments.
   {% endfor %}
 </div>
 <div id="new-comment-form">
   <div>
     <h4>Your opinion</h4>
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated() %}
     <div class="report rating">
       <span class="txt">It worked, and...</span>
-      {% render_comment_form for extension %}
+      {{ render_comment_form(extension) }}
     </div>
 
     <div class="report error">
-      <a class="txt" href="{% url errorreports-report pk=extension.pk %}" class="report error">Help! It didn't work!</a>
+      <a class="txt" href="{{ url('errorreports-report', pk=extension.pk) }}" class="report error">Help! It didn't work!</a>
       <p>
         Errors should be reported through the error reporting tool &mdash; it
         helps extension authors be known about bugs in their extension!
@@ -39,7 +35,7 @@
     </div>
     {% else %}
     <p class="unauthenticated">
-      Unfortunately, to help prevent spam, we require that you <a href="{% url auth-login %}">log in to GNOME Shell Extensions</a> in order to post a comment or report an error. You understand, right?
+      Unfortunately, to help prevent spam, we require that you <a href="{{ url('auth-login') }}">log in to GNOME Shell Extensions</a> in order to post a comment or report an error. You understand, right?
     </p>
     {% endif %}
   </div>

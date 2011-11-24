@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
 <form action="" method="POST" id="auth_form">
-  {% csrf_token %}
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   <ol>
-    {{ form.as_ul }}
+    {{ form.as_ul()|safe }}
 
     <li class="submit">
       <input type="submit" value="Register">

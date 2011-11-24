@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Report Error for "{{ extension.name }}" - {{ block.super }}{% endblock %}
+{% block title %}Report Error for "{{ extension.name }}" - {{ super() }}{% endblock %}
 {% block body %}
 <h2><em>{{ extension.name }}</em> is malfunctioning?</h2>
 
 <p>Please look through the information below and edit out any unwanted information.</p>
 <form action="" method="POST" id="error_report" data-uuid="{{ extension.uuid }}">
-  {% csrf_token %}
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
   <h3> Comments for the author </h3>
-  {{ form.comments }}
+  {{ form.comments|safe }}
 
   <p>GNOME Shell Extensions will not provide the extension author with any contact information by default. If you wish to be contacted by the extension author, please check the box below.</p>
 
-  {{ form.can_contact }} {{ form.can_contact.label_tag }}
+  {{ form.can_contact|safe }} {{ form.can_contact.label_tag()|safe }}
 
   <input type="submit" value="Report Errors">
 </form>

@@ -1,13 +1,13 @@
 {% extends "review/review.html" %}
 
 {% block extra %}
-{{ block.super }}
+{{ super() }}
 
 <h2 class="expanded"> Review </h2>
 
 <div id="review">
-  <form id="review_form" action="{% url review-submit pk=version.pk %}" method="POST">
-    {% csrf_token %}
+  <form id="review_form" action="{{ url('review-submit', pk=version.pk) }}" method="POST">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <textarea id="comments" name="comments"></textarea>
 {% if can_approve %}
     <select name="status">

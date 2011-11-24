@@ -1,24 +1,22 @@
 {% extends "base.html" %}
-{% block title %}{{ display_name }}'s Profile - {{ block.super }}{% endblock %}
+{% block title %}{{ display_name }}'s Profile - {{ super() }}{% endblock %}
 
 {% block body %}
-{% load thumbnail %}
-{% load gravatar %}
 <div class="profile">
   {% if is_editable %}
   <h2 class="editable"
       id="new_display_name"
-      editurl="{% url auth-ajax-edit-display-name %}">{{ display_name }}</h2>
+      editurl="{{ url('auth-ajax-edit-display-name') }}">{{ display_name }}</h2>
   {% else %}
   <h2>{{ display_name }}</h2>
   {% endif %}
-  <img class="gravatar" src="{% gravatar_url user.email 128 %}">
+  <img class="gravatar" src="{{ gravatar_url('user.email', 128) }}">
 
   <h3> {{ display_name }} has authored </h3>
   <ul>
     {% for extension in extensions %}
     <li class="extension profile">
-      <h4 class="extension-name"><a href="{% url extensions-detail pk=extension.pk %}">      <img src="{{ extension.icon.url }}" class="icon">{{ extension.name }}</a></h4>
+      <h4 class="extension-name"><a href="{{ url('extensions-detail', pk=extension.pk) }}">      <img src="{{ extension.icon.url }}" class="icon">{{ extension.name }}</a></h4>
       <p class="description">
         {{ extension.description }}
       </p>
@@ -30,14 +28,14 @@
   <div class="reviews">
     {% for review in reviews %}
     <div class="review">
-      <a href="{% url extensions-version-detail ext_pk=review.version.extension.pk slug=review.version.extension.slug pk=review.version.pk %}">
+      <a href="{{ url('extensions-version-detail', ext_pk=review.version.extension.pk, slug=review.version.extension.slug, pk=review.version.pk) }}">
         <span class="extension-name">{{ review.version.extension.name }}</span>
         <span class="extension-version">(version {{ review.version.version }})</span>
       </a>
-      <abbr class="timestamp" title="{{ review.date|date:"c" }}">{{ review.date|date:"F j, Y" }}</abbr>
+      <abbr class="timestamp" title="{{ review.date.isoformat() }}">{{ review.date|datetime("%B  %d, %Y") }}</abbr>
       <blockquote>{{ review.comments }}</blockquote>
     </div>
-    {% empty %}
+    {% else %}
       <p>No reviews.</p>
     {% endfor %}
   </div>

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% load thumbnail %}
 
-{% block title %}Review "{{ version.extension.name }}" - {{ block.super }}{% endblock %}
+{% block title %}Review "{{ version.extension.name }}" - {{ super() }}{% endblock %}
 
 {% block body %}
 <h2 class="expanded"> Details Page Preview </h2>
@@ -10,13 +9,13 @@
     <img src="{{ extension.icon.url }}" class="icon">
 
     {% if extension.screenshot %}
-    {% thumbnail extension.screenshot "300x200" as th %}
-    <a href="{{ extension.screenshot.image.url }}" class="screenshot"><img src="{{ th.url }}" /></a>
-    {% endthumbnail %}
+    <a href="{{ extension.screenshot.image.url }}" class="screenshot">
+      <img src="{{ thumbnail(extension.screenshot, '300x200').url }}" />
+    </a>
     {% endif %}
 
     <h3 class="extension-name">{{ extension.name }}</h3>
-    <span class="author">by <a href="{% url auth-profile user=extension.creator %}">{{ extension.creator }}</a></span>
+    <span class="author">by <a href="{{ url('auth-profile', user=extension.creator) }}">{{ extension.creator }}</a></span>
     <p class="description">
       {{ extension.description }}
     </p>
@@ -32,7 +31,7 @@
   <div id="files" data-pk="{{ version.pk }}">
   </div>
   <p>Note: Binary files aren't showed on the web site. To see all
-    files, please <a href="{% url review-download pk=version.pk %}">download
+    files, please <a href="{{ url('review-download', pk=version.pk) }}">download
       the extension zipfile</a>.</p>
 </div>
 
@@ -53,7 +52,7 @@
     <tbody>
       {% for version in previous_versions %}
       <tr>
-        <td><a href="{% url extensions-version-detail ext_pk=extension.pk slug=extension.slug pk=version.pk %}">{{ version.version }}</a></td>
+        <td><a href="{{ url('extensions-version-detail', ext_pk=extension.pk, slug=extension.slug, pk=version.pk) }}">{{ version.version }}</a></td>
         <td>
           <span class="{{ version.get_status_class }}">{{ version.get_status_display }}</span>
         </td>
@@ -71,16 +70,16 @@
 <div id="previous_reviews">
   {% for review in previous_reviews %}
   <div class="review">
-    <a class="review-author" href="{% url auth-profile user=review.reviewer.username %}">{{ review.reviewer }}</a>
+    <a class="review-author" href="{{ url('auth-profile', user=review.reviewer.username) }}">{{ review.reviewer }}</a>
     {% if review.changelog %}
     <span class="{{ review.changelog.get_newstatus_class }}">{{ review.changelog.get_newstatus_display|lower }}</span>
     {% else %}
     posted a review
     {% endif %}
-    <abbr class="timestamp" title="{{ review.date|date:"c" }}">{{ review.date|date:"F j, Y" }}</abbr>
+    <abbr class="timestamp" title="{{ review.date.isoformat() }}">{{ review.date|datetime("%B  %d, %Y") }}</abbr>
     <blockquote>{{ review.comments }}</blockquote>
   </div>
-  {% empty %}
+  {% else %}
   <p>No reviews.</p>
   {% endfor %}
 </div>
@@ -91,9 +90,9 @@
 
 {% endblock %}
 
-{% block js-main %}review-main{% endblock %}
+{% block js_main %}review-main{% endblock %}
 
 {% block head %}
-  {{ block.super }}
+  {{ super() }}
   <link rel="stylesheet" href="/static/css/review.css" />
 {% endblock %}

@@ -2,23 +2,23 @@
 {% block body %}
 <form action="" method="POST" id="auth_form">
   <input type="hidden" name="next" value="{{ next }}">
-  {% csrf_token %}
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
   <ol>
     <li>
       {% for error in form.username.errors %}
         <p class="error">{{ error }}</p>
       {% endfor %}
-      {{ form.username.label_tag }}
-      {{ form.username }}
+      {{ form.username.label_tag()|safe }}
+      {{ form.username|safe }}
     </li>
 
     <li>
       {% for error in form.password.errors %}
         <p class="error">{{ error }}</p>
       {% endfor %}
-      {{ form.password.label_tag }}
-      {{ form.password }}
+      {{ form.password.label_tag()|safe }}
+      {{ form.password|safe }}
     </li>
 
     <li class="submit">
@@ -27,6 +27,6 @@
   </ol>
 </form>
 
-<a href="{% url registration_register %}">Register</a>
-<a href="{% url auth_password_reset %}">Forgot your password?</a>
+<a href="{{ url('registration_register') }}">Register</a>
+<a href="{{ url('auth_password_reset') }}">Forgot your password?</a>
 {% endblock %}

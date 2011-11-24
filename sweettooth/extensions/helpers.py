@@ -1,11 +1,16 @@
 
-from django import template
-from django.utils.safestring import mark_safe
+import hashlib
+import urllib
 
 from jingo import register
+from jinja2.utils import Markup
+
+from sorl.thumbnail.shortcuts import get_thumbnail
+
+GRAVATAR_BASE = "https://secure.gravatar.com/avatar/%s?%s"
 
 @register.function
-def paginator(page_obj, context=3):
+def paginator_html(page_obj, context=3):
     number = page_obj.number
     context_left = range(max(number-context, 2), number)
     context_right = range(number+1, min(number+context+1, page_obj.paginator.num_pages+1))
@@ -26,4 +31,14 @@ def paginator(page_obj, context=3):
         for i in context_right:
             lines.append(u'<a class="next number" href="?page=%d">%d</a>' % (i, i))
 
-    return mark_safe(u'\n'.join(lines))
+    return Markup(u'\n'.join(lines))
+
+@register.function
+def gravatar_url(email, size=70, default="http://planet.gnome.org/heads/nobody.png"):
+    email_md5 = hashlib.md5(email.lower()).hexdigest()
+    options = urllib.urlencode(dict(d=default, s=size))
+    return GRAVATAR_BASE % (email_md5, options)
+
+@register.function
+def thumbnail(field, geometry):
+    return get_thumbnail(field, geometry)

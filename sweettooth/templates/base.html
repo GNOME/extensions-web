@@ -8,36 +8,32 @@
     <title>{% block title %}GNOME Shell Extensions{% endblock %}</title>
     <script>
 window._SW = function() {
-{% block document-ready %}{% endblock %}
+{% block document_ready %}{% endblock %}
 };
     </script>
     <script src="/static/js/jquery.js"></script>
-    <script data-main="/static/js/{% block js-main %}main{% endblock %}.js" src="/static/js/require.js"></script>
+    <script data-main="/static/js/{% block js_main %}main{% endblock %}.js" src="/static/js/require.js"></script>
   </head>
   <body>
     <div id="global_domain_bar">
       <div class="maxwidth">
         <div class="tab">
-          {% spaceless %}
-
           <a class="root" href="http://www.gnome.org/">GNOME.org</a>
           {% if n_unreviewed_extensions %}
-          <a id="unreviewed_counter" href="{% url review-list %}">{{ n_unreviewed_extensions }}</a>
+          <a id="unreviewed_counter" href="{{ url('review-list') }}">{{ n_unreviewed_extensions }}</a>
           {% endif %}
-          {% if request.user.is_authenticated %}
+          {% if request.user.is_authenticated() %}
           <a class="user" href="#">{{ request.user.username }}</a>
           {% else %}
-          <a class="user" href="{% url auth-login %}">Login</a>
+          <a class="user" href="{{ url('auth-login') }}">Login</a>
           {% endif %}
-
-          {% endspaceless %}
         </div>
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated() %}
         <div class="user_settings">
           <ul>
-            <li><a href="{% url auth-profile user=request.user.username %}">Your profile</a></li>
-            <li><a href="{% url auth-settings user=request.user.username %}">Settings</a></li>
-            <li><a href="{% url auth-logout %}">Log out</a></li>
+            <li><a href="{{ url('auth-profile', user=request.user.username) }}">Your profile</a></li>
+            <li><a href="{{ url('auth-settings', user=request.user.username) }}">Settings</a></li>
+            <li><a href="{{ url('auth-logout') }}">Log out</a></li>
           </ul>
         </div>
         {% else %}
@@ -52,9 +48,9 @@ window._SW = function() {
         <h1><a href="/"><img src="/static/images/foot.png" alt="GNOME" />Shell Extensions</a><span class="alpha-banner">Alpha!</span></h1>
         
         <ul id="globalnav" class="{% block navclass %}{% endblock %}">
-          <li class="main"><a href="{% url extensions-index %}">Extensions</a></li>
-          <li class="upload"><a href="{% url extensions-upload-file %}">Add yours</a></li>
-          <li class="local"><a href="{% url extensions-local %}">Installed extensions</a></li>
+          <li class="main"><a href="{{ url('extensions-index') }}">Extensions</a></li>
+          <li class="upload"><a href="{{ url('extensions-upload-file') }}">Add yours</a></li>
+          <li class="local"><a href="{{ url('extensions-local') }}">Installed extensions</a></li>
         </ul>
         
         <!-- <div class="right"> -->
@@ -73,7 +69,7 @@ window._SW = function() {
             <p class="message {{ message.tags }}">{{ message }}</p>
             {% endfor %}
 
-            {% block extra-messages %}
+            {% block extra_messages %}
             {% endblock %}
           </div>
           {% block body %}

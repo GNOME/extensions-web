@@ -76,10 +76,16 @@ SECRET_KEY = 'tv(d+lom-sa^de5i#ab)(g^3249tbzssizuvh8m9_lwppdn1bw'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    'jingo.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
+
+JINJA_CONFIG = {'extensions': ['jinja2.ext.i18n',
+                               'jinja2.ext.with_']}
+
+JINGO_EXCLUDE_APPS = ['comments']
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
