@@ -2,7 +2,6 @@
   <h4>User comments</h4>
   {% load comments %}
   {% load gravatar %}
-  {% load rating %}
   {% get_comment_list for extension as comments %}
   {% for comment in comments %}
   {% if comment.user == extension.creator %}
@@ -13,9 +12,7 @@
   {% endif %}
     <img src="{% gravatar_url comment.email %}" class="gravatar">
     <div class="rating-author">
-      <div class="rating">
-        {% rating comment.rating 5 %}
-      </div> by
+      Comment by
       <a class="comment-author" href="{% url auth-profile user=comment.user.username %}">{{ comment.user }}</a>
     </div>
     <p>{{ comment.comment }}</p>

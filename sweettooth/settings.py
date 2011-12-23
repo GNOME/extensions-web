@@ -116,11 +116,11 @@ LOGIN_URL = '/accounts/login/'
 INSTALLED_APPS = (
     'django.contrib.auth',
 
-    'registration',
-
     # 'ratings' goes before django's comments
     # app so it will find our templates
     'ratings',
+
+    'registration',
 
     'django.contrib.comments',
     'django.contrib.contenttypes',
@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'auth',
     'review',
     'errorreports',
+    'discussions',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
@@ -143,7 +144,7 @@ INSTALLED_APPS = (
     'south',
 )
 
-COMMENTS_APP = 'ratings'
+COMMENTS_APP = 'discussions'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

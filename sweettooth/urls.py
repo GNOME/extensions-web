@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^errors/', include('errorreports.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^comments/', include('ratings.urls')),
+    url(r'^comments/', include('discussions.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
 
 )
