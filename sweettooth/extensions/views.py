@@ -343,9 +343,20 @@ def upload_file(request, pk):
     errors = []
     extra_debug = None
 
+    def redirect_to_page():
+        if pk is not None:
+            return redirect('extensions-upload-file', pk=pk)
+        else:
+            return redirect('extensions-upload-file')
+
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
+            gplv2_compliant = form.cleaned_data['gplv2_compliant']
+            if not gplv2_compliant:
+                messages.error(request, "You must be able to distribute your extension under the terms of the GPLv2+.")
+                return redirect_to_page()
+
             file_source = form.cleaned_data['source']
 
             try:
@@ -353,11 +364,7 @@ def upload_file(request, pk):
                 uuid = metadata['uuid']
             except (models.InvalidExtensionData, KeyError), e:
                 messages.error(request, "Invalid extension data: %s" % (e.message,))
-
-                if pk is not None:
-                    return redirect('extensions-upload-file', pk=pk)
-                else:
-                    return redirect('extensions-upload-file')
+                return redirect_to_page()
 
             existing = models.Extension.objects.filter(uuid=uuid)
             if pk is None and existing.exists():

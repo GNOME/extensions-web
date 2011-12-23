@@ -35,6 +35,16 @@
     {% csrf_token %}
 
     {{ form.source }}
+
+    <br>
+    {{ form.gplv2_compliant }}
+    {{ form.gplv2_compliant.label_tag }}
+
+    <br>
+    {{ form.tos_compliant }}
+    {{ form.tos_compliant.label_tag }}
+
+    <br>
     <input type="submit" value="Upload extension">
   </form>
 
