@@ -5,7 +5,12 @@
   {% load rating %}
   {% get_comment_list for extension as comments %}
   {% for comment in comments %}
+  {% if comment.user == extension.creator %}
+  <div class="comment extension-creator">
+    <div class="extension-creator-badge">Author</div>
+  {% else %}
   <div class="comment">
+  {% endif %}
     <img src="{% gravatar_url comment.email %}" class="gravatar">
     <div class="rating-author">
       <div class="rating">
