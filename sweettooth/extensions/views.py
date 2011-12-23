@@ -1,7 +1,10 @@
 
+import datetime
+
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
+from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseForbidden, HttpResponseServerError, Http404
@@ -92,14 +95,22 @@ def ajax_query_params_query(request):
     if sort not in ('created', 'downloads', 'popularity', 'name'):
         raise Http404()
 
-    if 'order' in request.GET:
-        order = request.GET['order']
-        order = dict(desc='-', asc='').get(order, '-')
-    else:
-        # order by ASC for 'name', DESC for everything else
-        order = dict(name='').get(sort, '-')
+    if sort == 'popularity':
+        # XXX - This filters out extensions which don't
+        # have any popularity items in the past week. Hopefully
+        # this will never happen in a real-world scenario
+        queryset = (queryset
+                    .filter(popularity_items__date__gt=(datetime.datetime.now()-datetime.timedelta(days=7)))
+                    .annotate(popularity=Sum('popularity_items__offset')))
 
-    queryset = queryset.order_by('%s%s' % (order, sort))
+    queryset = queryset.order_by(sort)
+
+    # sort by DESC for name, ASC for everything else
+    default_order = dict(name='asc').get(sort, 'desc')
+
+    if request.GET.get('order', default_order) == 'desc':
+        queryset = queryset.reverse()
+
     return queryset
 
 @ajax_view
@@ -213,17 +224,16 @@ def ajax_adjust_popularity_view(request):
     action = request.GET['action']
 
     extension = models.Extension.objects.get(uuid=uuid)
+    pop = models.ExtensionPopularityItem(extension=extension)
 
     if action == 'enable':
-        extension.enables += 1
-        extension.popularity += 1
+        pop.offset = +1
     elif action == 'disable':
-        extension.disables += 1
-        extension.popularity -= 1
+        pop.offset = -1
     else:
         return HttpResponseServerError()
 
-    extension.save()
+    pop.save()
 
 @ajax_view
 @require_POST

@@ -73,10 +73,6 @@ class Extension(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
 
-    enables = models.IntegerField(default=0)
-    disables = models.IntegerField(default=0)
-    popularity = models.IntegerField(default=0)
-
     class Meta:
         permissions = (
             ("can-modify-data", "Can modify extension data"),
@@ -143,6 +139,14 @@ class Extension(models.Model):
     def get_absolute_url(self):
         return reverse('extensions-detail', kwargs=dict(pk=self.pk,
                                                         slug=self.slug))
+
+
+
+class ExtensionPopularityItem(models.Model):
+    extension = models.ForeignKey(Extension, db_index=True,
+                                  related_name='popularity_items')
+    offset = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
 
 class InvalidShellVersion(Exception):
     pass
