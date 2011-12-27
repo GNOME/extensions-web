@@ -55,7 +55,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
             metadata = models.parse_zipfile_metadata(f)
         version.parse_metadata_json(metadata)
 
-        self.assertEquals(extension.uuid, "test-extension@gnome.org")
+        self.assertEquals(extension.uuid, "test-extension@mecheye.net")
         self.assertEquals(extension.name, "Test Extension")
         self.assertEquals(extension.description, "Simple test metadata")
         self.assertEquals(extension.url, "http://test-metadata.gnome.org")
@@ -70,7 +70,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         version.parse_metadata_json(metadata)
 
         extra = json.loads(version.extra_json_fields)
-        self.assertEquals(extension.uuid, "test-extension-2@gnome.org")
+        self.assertEquals(extension.uuid, "test-extension-2@mecheye.net")
         self.assertEquals(extra["extra"], "This is some good data")
         self.assertTrue("description" not in extra)
         self.assertTrue("url" not in extra)
@@ -109,12 +109,16 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
         new_zip.close()
 
 class UploadTest(BasicUserTestCase, TestCase):
-    def test_upload_parsing(self):
-        with get_test_zipfile('SimpleExtension') as f:
-            response = self.client.post(reverse('extensions-upload-file'),
-                                        dict(source=f), follow=True)
+    def upload_file(self, zipfile):
+        with get_test_zipfile(zipfile) as f:
+            return self.client.post(reverse('extensions-upload-file'),
+                                    dict(source=f,
+                                         gplv2_compliant=True,
+                                         tos_compliant=True), follow=True)
 
-        extension = models.Extension.objects.get(uuid="test-extension@gnome.org")
+    def test_upload_parsing(self):
+        response = self.upload_file('SimpleExtension')
+        extension = models.Extension.objects.get(uuid="test-extension@mecheye.net")
         version1 = extension.versions.order_by("-version")[0]
 
         self.assertEquals(version1.status, models.STATUS_NEW)
@@ -132,9 +136,7 @@ class UploadTest(BasicUserTestCase, TestCase):
         version1.save()
 
         # Try again, hoping to get a new version
-        with get_test_zipfile('SimpleExtension') as f:
-            response = self.client.post(reverse('extensions-upload-file'),
-                                        dict(source=f), follow=True)
+        self.upload_file('SimpleExtension')
 
         version2 = extension.versions.order_by("-version")[0]
         self.assertNotEquals(version1, version2)
@@ -144,11 +146,9 @@ class UploadTest(BasicUserTestCase, TestCase):
 
 
     def test_upload_large_uuid(self):
-        with get_test_zipfile('LargeUUID') as f:
-            response = self.client.post(reverse('extensions-upload-file'),
-                                        dict(source=f), follow=True)
+        self.upload_file('LargeUUID')
 
-        large_uuid = '1234567890'*9 + '@gnome.org'
+        large_uuid = '1234567890'*9 + '@mecheye.net'
         extension = models.Extension.objects.get(uuid=large_uuid)
         version1 = extension.versions.order_by("-version")[0]
 
@@ -162,7 +162,7 @@ class UploadTest(BasicUserTestCase, TestCase):
 class ExtensionVersionTest(BasicUserTestCase, TestCase):
     def test_single_version(self):
         metadata = {"name": "Test Metadata",
-                    "uuid": "test-1@gnome.org",
+                    "uuid": "test-1@mecheye.net",
                     "description": "Simple test metadata",
                     "url": "http://test-metadata.gnome.org"}
 
@@ -179,7 +179,7 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
 
     def test_multiple_versions(self):
         metadata = {"name": "Test Metadata 2",
-                    "uuid": "test-2@gnome.org",
+                    "uuid": "test-2@mecheye.net",
                     "description": "Simple test metadata",
                     "url": "http://test-metadata.gnome.org"}
 
@@ -204,7 +204,7 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
 
     def test_unpublished_version(self):
         metadata = {"name": "Test Metadata 3",
-                    "uuid": "test-3@gnome.org",
+                    "uuid": "test-3@mecheye.net",
                     "description": "Simple test metadata",
                     "url": "http://test-metadata.gnome.org"}
 
