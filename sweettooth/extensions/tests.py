@@ -364,3 +364,37 @@ class UpdateVersionTest(TestCase):
 
         response = self.grab_response(installed)
         self.assertEqual(self.full_expected, response)
+
+class TestVoteTracker(BasicUserTestCase, TestCase):
+    def test_simple(self):
+        extension = models.Extension(name="Hi! I'm a talking door!",
+                                     creator=self.user,
+                                     uuid='talking-door@mecheye.net')
+        extension.save()
+
+        response = self.client.post('/ajax/adjust-rating/',
+                                    dict(uuid=extension.uuid,
+                                         action='like'))
+
+        tracker = models.ExtensionLikeTracker.objects.get(user=self.user,
+                                                          extension=extension)
+        self.assertEqual(tracker.user, self.user)
+        self.assertEqual(tracker.extension, extension)
+        self.assertEqual(tracker.vote, True)
+
+        # Man, I love floating point
+        extension = models.Extension.objects.get(uuid='talking-door@mecheye.net')
+        self.assertTrue(abs(models.confidence(1, 0) - extension.rating) < 0.1)
+
+        response = self.client.post('/ajax/adjust-rating/',
+                                    dict(uuid=extension.uuid,
+                                         action='dislike'))
+
+        tracker = models.ExtensionLikeTracker.objects.get(user=self.user,
+                                                          extension=extension)
+        self.assertEqual(tracker.user, self.user)
+        self.assertEqual(tracker.extension, extension)
+        self.assertEqual(tracker.vote, False)
+
+        extension = models.Extension.objects.get(uuid='talking-door@mecheye.net')
+        self.assertTrue(abs(models.confidence(0, 1) - extension.rating) < 0.1)
