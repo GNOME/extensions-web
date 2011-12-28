@@ -139,6 +139,43 @@ def ajax_extensions_list(request):
     return dict(html=render_to_string('extensions/list_bare.html', context),
                 numpages = paginator.num_pages)
 
+
+def standard_extension_context(extension, request, wants_tracker=True):
+    tracker = None
+
+    total_votes = extension.like_trackers.count()
+    likes = extension.likes
+    dislikes = extension.dislikes
+
+    if total_votes == 0:
+        like_percent = 0
+        dislike_percent = 0
+    else:
+        like_percent = likes / float(total_votes) * 100
+        dislike_percent = dislikes / float(total_votes) * 100
+
+    context = dict(like_percent = like_percent,
+                   dislike_percent = dislike_percent,
+                   likes = likes,
+                   dislikes = dislikes)
+
+    if wants_tracker:
+        if request.user.is_authenticated():
+            try:
+                tracker = models.ExtensionLikeTracker.objects.get(user=request.user,
+                                                                  extension=extension)
+            except models.ExtensionLikeTracker.DoesNotExist:
+                pass
+
+        if tracker is None:
+            # Rely on the fact that in Django's template language, foo.is_like
+            # can do a dict lookup after an attribute lookup.
+            tracker = dict(is_like=False, is_dislike=False)
+
+        context['like_tracker'] = tracker
+
+    return context
+
 @model_view(models.Extension)
 def extension_view(request, obj, **kwargs):
     extension, versions = obj, obj.visible_versions
@@ -165,6 +202,8 @@ def extension_view(request, obj, **kwargs):
                    all_versions = extension.versions.order_by('-version'),
                    is_visible = True,
                    is_multiversion = True)
+    context.update(standard_extension_context(extension, request))
+
     return render(request, template_name, context)
 
 @model_view(models.ExtensionVersion)
@@ -213,10 +252,36 @@ def extension_version_view(request, obj, **kwargs):
                    is_rejected = status in models.REJECTED_STATUSES,
                    is_new_extension = (extension.versions.count() == 1),
                    status = status)
+    context.update(standard_extension_context(extension, request))
 
     if extension.latest_version is not None:
         context['old_version'] = version.version < extension.latest_version.version
     return render(request, template_name, context)
+
+@require_POST
+@login_required
+@ajax_view
+def ajax_adjust_rating_view(request):
+    uuid = request.POST['uuid']
+    action = request.POST['action']
+
+    extension = models.Extension.objects.get(uuid=uuid)
+
+    tracker, created = models.ExtensionLikeTracker.objects.get_or_create(user=request.user,
+                                                                         extension=extension)
+
+    if action == 'like':
+        tracker.vote = True
+    elif action == 'dislike':
+        tracker.vote = False
+    else:
+        return HttpResponseServerError()
+
+    tracker.save()
+    extension.recalculate_rating()
+    extension.save()
+
+    return standard_extension_context(extension, None, wants_tracker=False)
 
 @require_POST
 @ajax_view

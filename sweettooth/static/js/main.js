@@ -145,5 +145,32 @@ require(['jquery', 'messages', 'extensions', 'uploader',
             $('.screenshot.upload').uploadify('/ajax/upload/screenshot/'+pk+'?geometry=300x200');
             $('.icon.upload').uploadify('/ajax/upload/icon/'+pk);
         }
+
+        var uuid = $('.extension').data('uuid');
+        if (uuid) {
+            var $brd = $('.binary-rating div');
+            var ratingClick = function(action) {
+                return function() {
+                    if ($(this).hasClass('depressed'))
+                        return;
+
+                    var d = $.ajax({ type: 'POST',
+                                     url: '/ajax/adjust-rating/',
+                                     data: { uuid: uuid,
+                                             action: action }});
+
+                    d.done(function(result) {
+                        $('.binary-rating-stats-likes').css('width', result.like_percent + '%');
+                        $('.binary-rating-stats-dislikes').css('width', result.dislike_percent + '%');
+                    });
+
+                    $brd.removeClass('depressed');
+                    $(this).addClass('depressed');
+                };
+            };
+
+            $('.binary-rating-like').click(ratingClick('like'));
+            $('.binary-rating-dislike').click(ratingClick('dislike'));
+        }
     });
 });

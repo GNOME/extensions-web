@@ -27,6 +27,23 @@
   <div>
     <h4>Your opinion</h4>
     {% if request.user.is_authenticated %}
+    <div class="binary-rating">
+      <div class="binary-rating-like {% if like_tracker.is_like %} depressed {% endif %}">
+        <span>I like it!</span>
+      </div>
+
+      <div class="binary-rating-dislike {% if like_tracker.is_dislike %} depressed {% endif %}">
+        <span>I hate it!</span>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="binary-rating-stats">
+      <div class="binary-rating-stats-likes" style="width: {{ like_percent }}%;"></div>
+      <div class="binary-rating-stats-dislikes" style="width: {{ dislike_percent }}%;"></div>
+    </div>
+
+    {% if request.user.is_authenticated %}
     <div class="report rating">
       <span class="txt">It worked, and...</span>
       {% render_comment_form for extension %}

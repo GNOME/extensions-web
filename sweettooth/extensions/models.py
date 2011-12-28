@@ -4,6 +4,7 @@ try:
 except ImportError:
     import simplejson as json
 
+import math
 import uuid
 from zipfile import ZipFile, BadZipfile
 
@@ -63,6 +64,28 @@ def build_shell_version_map(versions):
 
     return shell_version_map
 
+
+# Ported to Python, from https://github.com/reddit/reddit/blob/master/r2/r2/lib/db/_sorts.pyx
+# Licensed under the CPAL 1.0, written by Reddit, Inc.
+
+def confidence(ups, downs):
+    """The confidence sort.
+http://www.evanmiller.org/how-not-to-sort-by-average-rating.html"""
+    n = ups + downs
+
+    if n == 0:
+        return 0
+
+    z = 1.281551565545 # 80% confidence
+    p = float(ups) / n
+
+    left = p + 1/(2*n)*z*z
+    right = z*math.sqrt(p*(1-p)/n + z*z/(4*n*n))
+    under = 1+1/n*z*z
+
+    return (left - right) / under
+
+
 class Extension(models.Model):
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
@@ -72,6 +95,8 @@ class Extension(models.Model):
     url = models.URLField(verify_exists=False, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
+
+    rating = models.FloatField(default=0)
 
     class Meta:
         permissions = (
@@ -141,7 +166,28 @@ class Extension(models.Model):
         return reverse('extensions-detail', kwargs=dict(pk=self.pk,
                                                         slug=self.slug))
 
+    @property
+    def likes(self):
+        return self.like_trackers.filter(vote=True).count()
 
+    @property
+    def dislikes(self):
+        return self.like_trackers.filter(vote=False).count()
+
+    def recalculate_rating(self):
+        self.rating = confidence(self.likes, self.dislikes)
+
+class ExtensionLikeTracker(models.Model):
+    extension = models.ForeignKey(Extension, db_index=True,
+                                  related_name='like_trackers')
+    user = models.ForeignKey(User, db_index=True)
+    vote = models.BooleanField(db_index = True)
+
+    def is_like(self):
+        return self.vote
+
+    def is_dislike(self):
+        return not self.vote
 
 class ExtensionPopularityItem(models.Model):
     extension = models.ForeignKey(Extension, db_index=True,

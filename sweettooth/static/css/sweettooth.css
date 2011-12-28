@@ -600,6 +600,80 @@ input[type=submit], button {
     float: right;
 }
 
+/* Ratings */
+/* ==================================================================== */
+
+.binary-rating {
+    overflow: auto;
+    margin-bottom: 0.2em;
+}
+
+.binary-rating div {
+    float: left;
+    width: 49%;
+    font-size: 1.4em;
+    line-height: 2.5em;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-image: linear-gradient(270deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+    background-image: -moz-linear-gradient(270deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+    background-image: -webkit-linear-gradient(270deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+    cursor: pointer;
+}
+
+.binary-rating div:hover {
+    background-image: linear-gradient(270deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1));
+    background-image: -moz-linear-gradient(270deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1));
+    background-image: -webkit-linear-gradient(270deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1));
+}
+
+.binary-rating div.depressed {
+    background-image: none;
+    box-shadow: inset 0 3px 10px 2px rgba(0,0,0,0.2);
+    cursor: auto;
+}
+
+.binary-rating-like {
+    background-color: #aaeeaa;
+}
+
+.binary-rating-dislike {
+    background-color: #eeaaaa;
+}
+
+.binary-rating div:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.binary-rating div:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.binary-rating-stats {
+    width: 99%;
+    border: 1px solid #ccc;
+    margin-bottom: 1em;
+}
+
+.binary-rating-stats,
+.binary-rating-stats-likes,
+.binary-rating-stats-dislikes {
+    height: 6px;
+}
+
+.binary-rating-stats-likes,
+.binary-rating-stats-dislikes {
+    float: left;
+}
+
+.binary-rating-stats-likes {
+    background-color: #44bb44;
+}
+
+.binary-rating-stats-dislikes {
+    background-color: #bb4444;
+}
+
 /* Review List */
 /* ==================================================================== */
 
