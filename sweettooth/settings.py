@@ -116,10 +116,6 @@ LOGIN_URL = '/accounts/login/'
 INSTALLED_APPS = (
     'django.contrib.auth',
 
-    # 'ratings' goes before django's comments
-    # app so it will find our templates
-    'ratings',
-
     'registration',
 
     'django.contrib.comments',
