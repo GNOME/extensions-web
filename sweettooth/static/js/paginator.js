@@ -133,7 +133,7 @@ define(['jquery', 'jquery.hashchange'], function($) {
             if (hashParams.sort !== hp.sort)
                 return true;
 
-            if (hashParams.page !== hp.sort)
+            if (hashParams.page !== hp.page)
                 return true;
 
             return false;
@@ -141,14 +141,13 @@ define(['jquery', 'jquery.hashchange'], function($) {
 
         $(window).hashchange(function() {
             var hp = getHashParams();
-            if (hashChanged) {
+            if (hp.page === undefined)
+                hp.page = 1;
+            else
+                hp.page = parseInt(hp.page);
+
+            if (hashChanged(hp)) {
                 hashParams = hp;
-
-                if (hashParams.page === undefined)
-                    hashParams.page = 1;
-                else
-                    hashParams.page = parseInt(hashParams.page);
-
                 loadPage();
             }
         });
