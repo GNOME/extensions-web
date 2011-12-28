@@ -357,6 +357,11 @@ def upload_file(request, pk):
                 messages.error(request, "You must be able to distribute your extension under the terms of the GPLv2+.")
                 return redirect_to_page()
 
+            tos_compliant = form.cleaned_data['tos_compliant']
+            if not tos_compliant:
+                messages.error(request, "You must agree to the GNOME Shell Extensions terms of service.")
+                return redirect_to_page()
+
             file_source = form.cleaned_data['source']
 
             try:
