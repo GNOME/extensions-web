@@ -118,6 +118,7 @@ function($, messages, dbusProxy, extensionUtils) {
 
         function sendPopularity(action) {
             $.ajax({ url: '/ajax/adjust-popularity/',
+                     type: 'POST',
                      data: { uuid: uuid,
                              action: action } });
         }

@@ -218,10 +218,11 @@ def extension_version_view(request, obj, **kwargs):
         context['old_version'] = version.version < extension.latest_version.version
     return render(request, template_name, context)
 
+@require_POST
 @ajax_view
 def ajax_adjust_popularity_view(request):
-    uuid = request.GET['uuid']
-    action = request.GET['action']
+    uuid = request.POST['uuid']
+    action = request.POST['action']
 
     extension = models.Extension.objects.get(uuid=uuid)
     pop = models.ExtensionPopularityItem(extension=extension)
