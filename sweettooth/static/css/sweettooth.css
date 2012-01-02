@@ -175,6 +175,10 @@ hr.bottom_shadow {
     border-radius: 3px;
 }
 
+.paginator-content {
+    text-align: center;
+}
+
 /* Filtering and Sorting UI */
 /* ==================================================================== */
 
@@ -194,6 +198,8 @@ a.filter-ui-link {
     -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    margin-top: -2.2em;
 }
 
 .filter-ui-link.selected {
