@@ -175,6 +175,73 @@ hr.bottom_shadow {
     border-radius: 3px;
 }
 
+/* Filtering and Sorting UI */
+/* ==================================================================== */
+
+a.filter-ui-link {
+    float: right;
+    border-radius: 4px;
+    font-size: 0.8em;
+    line-height: 2.2em;
+    padding: 0 1em;
+    cursor: pointer;
+
+    text-decoration: none;
+    color: #204a87;
+
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.filter-ui-link.selected {
+    background-color: #fff;
+    text-decoration: none;
+    color: #222;
+}
+
+.filter-ui {
+    background-color: #fff;
+    position: absolute;
+
+    -webkit-transition: visiblity 0.2s ease-in-out;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #BABDB6;
+    border-top: none;
+    padding: 1em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.filter-ui h4 {
+    margin: 0;
+}
+
+.filter-sort-ui-sort-link {
+    text-decoration: none;
+    color: #444;
+    list-style-position: inside;
+    list-style-type: none;
+    padding: .5em 0 .5em 1em;
+    cursor: pointer;
+    margin-left: 0;
+    padding-left: 2em;
+}
+
+.filter-sort-ui-sort-link.selected {
+    list-style-type: disc;
+    padding-left: 1em;
+}
+
+.filter-sort-ui-sort-link:hover {
+    background-color: #e5e5e0;
+}
+
 /* Extension view */
 /* ==================================================================== */
 

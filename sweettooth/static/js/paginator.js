@@ -1,38 +1,6 @@
 "use strict";
 
-define(['jquery', 'jquery.hashchange'], function($) {
-
-    function getHashParams() {
-        var hash = window.location.hash;
-        if (!hash)
-            return {};
-
-        var values = hash.slice(1).split('&');
-        var obj = {};
-        for (var i = 0; i < values.length; i++) {
-            if (!values[i])
-                continue;
-
-            var kv = values[i].split('=');
-            obj[kv[0]] = kv[1];
-        }
-
-        return obj;
-    }
-
-    function makeHashParams(obj) {
-        var hash = '';
-        for (var key in obj) {
-            hash += key + '=' + obj[key] + '&';
-        }
-
-        // Remove last '&'
-        return hash.slice(0, -1);
-    }
-
-    function setHashParams(obj) {
-        window.location.hash = makeHashParams(obj);
-    }
+define(['jquery', 'hashparamutils', 'jquery.hashchange'], function($, hashparamutils) {
 
     $.fn.paginatorify = function(url, context) {
         if (!this.length)
@@ -70,8 +38,8 @@ define(['jquery', 'jquery.hashchange'], function($) {
 
                 numPages = result.numpages;
 
-                $beforePaginator = buildPaginator();
-                $afterPaginator = buildPaginator();
+                $beforePaginator = buildPaginator().addClass('before-paginator');
+                $afterPaginator = buildPaginator().addClass('after-paginator');
 
                 var $newContent = $(result.html);
 
@@ -93,7 +61,7 @@ define(['jquery', 'jquery.hashchange'], function($) {
             hp.page = pageNumber;
 
             return $('<a>', {'class': 'number ' + styleClass,
-                             'href': '#' + makeHashParams(hp)}).text(text);
+                             'href': '#' + hashparamutils.makeHashParams(hp)}).text(text);
         }
 
         function buildPaginator() {
@@ -140,7 +108,7 @@ define(['jquery', 'jquery.hashchange'], function($) {
         }
 
         $(window).hashchange(function() {
-            var hp = getHashParams();
+            var hp = hashparamutils.getHashParams();
             if (hp.page === undefined)
                 hp.page = 1;
             else

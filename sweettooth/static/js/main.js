@@ -1,6 +1,6 @@
 "use strict";
 
-require(['jquery', 'messages', 'extensions', 'uploader',
+require(['jquery', 'messages', 'extensions', 'uploader', 'filter',
          'jquery.cookie', 'jquery.jeditable',
          'jquery.timeago', 'jquery.rating'], function($, messages) {
     if (!$.ajaxSettings.headers)
@@ -106,6 +106,7 @@ require(['jquery', 'messages', 'extensions', 'uploader',
             paginatorify('/ajax/extensions-list/').
             bind('page-loaded', function() {
                 $('li.extension').addOutOfDateIndicator();
+                $('#extensions-list .before-paginator').filterUIify();
             });
 
         $('#error_report').fillInErrors();
