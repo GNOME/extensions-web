@@ -122,11 +122,12 @@ class Extension(models.Model):
         if not validate_uuid(self.uuid):
             raise ValidationError("Invalid UUID")
 
-    def save(self, *args, **kwargs):
+    def save(self, replace_metadata_json=True, *args, **kwargs):
         super(Extension, self).save(*args, **kwargs)
-        for version in self.versions.all():
-            if version.source:
-                version.replace_metadata_json()
+        if replace_metadata_json:
+            for version in self.versions.all():
+                if version.source:
+                    version.replace_metadata_json()
  
     @property
     def visible_shell_version_map(self):
