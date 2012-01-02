@@ -192,8 +192,8 @@ class ExtensionLikeTracker(models.Model):
 class ExtensionPopularityItem(models.Model):
     extension = models.ForeignKey(Extension, db_index=True,
                                   related_name='popularity_items')
-    offset = models.IntegerField()
-    date = models.DateTimeField(auto_now_add=True)
+    offset = models.IntegerField(db_index=True)
+    date = models.DateTimeField(auto_now_add=True, db_index=True)
 
 class InvalidShellVersion(Exception):
     pass
