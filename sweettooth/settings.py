@@ -116,6 +116,10 @@ LOGIN_URL = '/accounts/login/'
 INSTALLED_APPS = (
     'django.contrib.auth',
 
+    # 'discussions' goes before django's comments
+    # app so it will find our templates
+    'discussions',
+
     'registration',
 
     'django.contrib.comments',
@@ -130,7 +134,6 @@ INSTALLED_APPS = (
     'auth',
     'review',
     'errorreports',
-    'discussions',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
