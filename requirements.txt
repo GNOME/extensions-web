@@ -4,3 +4,4 @@ django-contrib-comments==1.7.3
 django-registration==2.1.2
 Pygments==1.6
 pillow==3.4.2
+chardet>=2.2.1

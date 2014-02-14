@@ -63,7 +63,8 @@ def can_approve_extension(user, extension):
 
 def highlight_file(filename, raw, formatter):
     try:
-        lexer = pygments.lexers.guess_lexer_for_filename(filename, raw)
+        lexer = pygments.lexers.guess_lexer_for_filename(filename, raw,
+                                                         encoding='chardet')
     except pygments.util.ClassNotFound:
         # released pygments doesn't yet have .json
         # so hack around it here.
