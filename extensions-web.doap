@@ -6,8 +6,12 @@
 
   <name xml:lang="en">extensions-web</name>
   <shortdesc xml:lang="en">GNOME Shell Extensions Repository</shortdesc>
+  <description>GNOME Shell Extensions Repository</description>
   <homepage rdf:resource="http://extensions.gnome.org/" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#infrastructure" />
+  <programming-language>Python</programming-language>
+  <programming-language>JavaScript</programming-language>
+  <programming-language>HTML</programming-language>
 
   <maintainer>
     <foaf:Person>
