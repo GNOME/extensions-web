@@ -7,7 +7,7 @@ from review.views import get_old_version, should_auto_approve_changeset
 
 from testutils import BasicUserTestCase
 
-from difftests import DiffTests
+from difftests import DiffTest
 
 class DiffViewTest(BasicUserTestCase, TestCase):
     def test_get_zipfiles(self):
