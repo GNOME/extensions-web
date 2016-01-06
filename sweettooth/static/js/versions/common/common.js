@@ -4,13 +4,23 @@ define(['jquery', 'dbus!API'], function($, API) {
     "use strict";
 
     function _makeRawPromise(result) {
-        // Make a new completed promise -- when we move the plugin
-        // over to async, we can remove this.
+        // Check if result is promise already
+        if(isPromise(result))
+            return result;
+
         return (new $.Deferred()).resolve(result);
     }
 
     function _makePromise(result) {
+        // Check if result is promise already
+        if(isPromise(result))
+            return result;
+
         return _makeRawPromise(JSON.parse(result));
+    }
+
+    function isPromise(value) {
+        return value && value.promise;
     }
 
     return {
@@ -43,18 +53,30 @@ define(['jquery', 'dbus!API'], function($, API) {
         },
 
         InstallExtensionOne: function(uuid) {
-            API.installExtension(uuid);
+            var result = API.installExtension(uuid);
+
+            if(isPromise(result))
+		    return result;
+
             return _makeRawPromise('succeeded');
         },
 
         InstallExtensionTwo: function(uuid) {
-            API.installExtension(uuid, "");
+            var result = API.installExtension(uuid, "");
+
+            if(isPromise(result))
+		    return result;
+
             return _makeRawPromise('succeeded');
         },
 
         InstallExtensionAsync: function(uuid) {
             var d = new $.Deferred();
-            API.installExtension(uuid, d.done.bind(d), d.fail.bind(d));
+            var result = API.installExtension(uuid, d.done.bind(d), d.fail.bind(d));
+
+            if(isPromise(result))
+		    return result;
+
             return d;
         },
 
