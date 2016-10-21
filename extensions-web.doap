@@ -15,8 +15,9 @@
 
   <maintainer>
     <foaf:Person>
-      <foaf:name>Jasper St. Pierre</foaf:name>
-      <gnome:userid>jstpierre</gnome:userid>
+      <foaf:name>Yuri Konotopov</foaf:name>
+      <foaf:mbox rdf:resource="mailto:ykonotopov@gnome.org" />
+      <gnome:userid>ykonotopov</gnome:userid>
     </foaf:Person>
   </maintainer>
 </Project>
