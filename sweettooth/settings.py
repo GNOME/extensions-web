@@ -84,7 +84,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'sweettooth.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -100,8 +100,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    "sweettooth.review.context_processors.n_unreviewed_extensions",
-    "sweettooth.auth.context_processors.login_form",
+    "review.context_processors.n_unreviewed_extensions",
+    "auth.context_processors.login_form",
 )
 
 ACCOUNT_ACTIVATION_DAYS = 5
