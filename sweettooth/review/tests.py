@@ -17,18 +17,18 @@ class DiffViewTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version1 = models.ExtensionVersion.objects.create(extension=extension,
                                                           source=File(ContentFile("doot doo"), name="aa"),
-                                                          status=models.STATUS_NEW)
+                                                          status=models.STATUS_UNREVIEWED)
         self.assertEquals(None, get_old_version(version1))
 
         # This one is broken...
         version2 = models.ExtensionVersion.objects.create(extension=extension,
                                                           source="",
-                                                          status=models.STATUS_NEW)
+                                                          status=models.STATUS_UNREVIEWED)
         self.assertEquals(version1, get_old_version(version2))
 
         version3 = models.ExtensionVersion.objects.create(extension=extension,
                                                           source=File(ContentFile("doot doo"), name="bb"),
-                                                          status=models.STATUS_NEW)
+                                                          status=models.STATUS_UNREVIEWED)
         self.assertEquals(version1, get_old_version(version3))
 
 class TestAutoApproveLogic(TestCase):
