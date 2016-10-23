@@ -1,6 +1,6 @@
 
 from django.conf.urls import patterns, include, url
-from django.views.generic.simple import direct_to_template
+from django.views.generic.base import TemplateView
 
 from extensions import views, models, feeds
 
@@ -29,16 +29,16 @@ shell_patterns = patterns('',
 )
 
 urlpatterns = patterns('',
-    url(r'^$', direct_to_template, dict(template='extensions/list.html'), name='extensions-index'),
+    url(r'^$', TemplateView.as_view(template_name='extensions/list.html'), name='extensions-index'),
 
-    url(r'^about/$', direct_to_template, dict(template='extensions/about.html'), name='extensions-about'),
+    url(r'^about/$', TemplateView.as_view(template_name='extensions/about.html'), name='extensions-about'),
 
     url(r'^extension/(?P<pk>\d+)/(?P<slug>.+)/$',
         views.extension_view, name='extensions-detail'),
     url(r'^extension/(?P<pk>\d+)/$',
         views.extension_view, dict(slug=None), name='extensions-detail'),
 
-    url(r'^local/', direct_to_template, dict(template='extensions/local.html'), name='extensions-local'),
+    url(r'^local/', TemplateView.as_view(template_name='extensions/local.html'), name='extensions-local'),
 
     url(r'^rss/', feeds.LatestExtensionsFeed(), name='extensions-rss-feed'),
 

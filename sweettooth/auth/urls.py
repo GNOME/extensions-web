@@ -1,5 +1,5 @@
 
-from django.views.generic.simple import direct_to_template
+from django.views.generic.base import TemplateView
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.views import login, logout
 from auth import views, forms
@@ -19,8 +19,7 @@ urlpatterns = patterns('',
         dict(form_class=forms.AutoFocusRegistrationForm),
         name='registration_register'),
 
-    url(r'settings/(?P<user>.+)', direct_to_template,
-        dict(template='registration/settings.html'),
+    url(r'settings/(?P<user>.+)', TemplateView.as_view(template_name='registration/settings.html'),
         name='auth-settings'),
 
     url(r'', include('registration.urls')),
