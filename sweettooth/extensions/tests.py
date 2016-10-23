@@ -208,7 +208,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.upload_file('SimpleExtension')
 
         version2 = extension.versions.order_by("-version")[0]
-        self.assertNotEquals(version1, version2)
+        self.assertNotEqual(version1, version2)
 
         # This should be auto-approved.
         self.assertEqual(version2.status, models.STATUS_ACTIVE)
