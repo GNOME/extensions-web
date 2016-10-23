@@ -1,6 +1,6 @@
 
 from django.views.generic.simple import direct_to_template
-from django.conf.urls.defaults import patterns, url, include
+from django.conf.urls import patterns, url, include
 from django.contrib.auth.views import login, logout
 from auth import views, forms
 from registration.views import register

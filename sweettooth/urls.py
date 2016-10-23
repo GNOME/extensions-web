@@ -1,7 +1,7 @@
 
 import os.path
 
-from django.conf.urls.defaults import patterns, include, url, handler404, handler500
+from django.conf.urls import patterns, include, url, handler404, handler500
 from django.conf import settings
 from django.http import HttpResponse
 
