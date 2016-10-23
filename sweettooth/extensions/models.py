@@ -69,7 +69,7 @@ class Extension(models.Model):
     slug = autoslug.AutoSlugField(populate_from="name")
     creator = models.ForeignKey(User, db_index=True)
     description = models.TextField(blank=True)
-    url = models.URLField(verify_exists=False, blank=True)
+    url = models.URLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)

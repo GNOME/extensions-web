@@ -28,10 +28,10 @@
         </td>
         {% if version.is_approved %}
         <td class="extension_status_toggle{% if version.is_active %} visible{% endif %}">
-          <a href="{% url extensions-ajax-set-status-inactive %}">Inactivate</a>
+          <a href="{% url 'extensions-ajax-set-status-inactive' %}">Inactivate</a>
         </td>
         <td class="extension_status_toggle{% if version.is_inactive %} visible{% endif %}">
-          <a href="{% url extensions-ajax-set-status-active %}">Activate</a>
+          <a href="{% url 'extensions-ajax-set-status-active' %}">Activate</a>
         </td>
         {% endif %}
 

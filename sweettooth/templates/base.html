@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/static/css/sweettooth.css" />
     <link rel="shortcut icon" href="/static/images/favicon.png" />
     <link rel="alternate" type="application/rss+xml"
-          href="{% url extensions-rss-feed %}" title="Latest extensions in GNOME Shell Extensions" />
+          href="{% url 'extensions-rss-feed' %}" title="Latest extensions in GNOME Shell Extensions" />
     <title>{% block title %}GNOME Shell Extensions{% endblock %}</title>
     <script>
       var require = { baseUrl: '/static/js/' };
@@ -25,12 +25,12 @@
 
           <a class="root" href="http://www.gnome.org/">GNOME.org</a>
           {% if n_unreviewed_extensions %}
-          <a id="unreviewed_counter" href="{% url review-list %}">{{ n_unreviewed_extensions }}</a>
+          <a id="unreviewed_counter" href="{% url 'review-list' %}">{{ n_unreviewed_extensions }}</a>
           {% endif %}
           {% if request.user.is_authenticated %}
           <a class="user" href="#">{{ request.user.username }}</a>
           {% else %}
-          <a class="user" href="{% url auth-login %}">Login</a>
+          <a class="user" href="{% url 'auth-login' %}">Login</a>
           {% endif %}
 
           {% endspaceless %}
@@ -46,10 +46,10 @@
         <h1><a href="/"><img src="/static/images/foot.png" alt="GNOME" />Extensions</a></h1>
         
         <ul id="globalnav" class="{% block navclass %}{% endblock %}">
-          <li class="main"><a href="{% url extensions-index %}">Extensions</a></li>
-          <li class="upload"><a href="{% url extensions-upload-file %}">Add yours</a></li>
-          <li class="local"><a href="{% url extensions-local %}">Installed extensions</a></li>
-          <li class="about"><a href="{% url extensions-about %}">About</a></li>
+          <li class="main"><a href="{% url 'extensions-index' %}">Extensions</a></li>
+          <li class="upload"><a href="{% url 'extensions-upload-file' %}">Add yours</a></li>
+          <li class="local"><a href="{% url 'extensions-local' %}">Installed extensions</a></li>
+          <li class="about"><a href="{% url 'extensions-about' %}">About</a></li>
         </ul>
 
         {% block search-bar %}

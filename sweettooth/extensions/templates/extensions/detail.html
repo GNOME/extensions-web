@@ -18,7 +18,7 @@
         {% endblock icon %}
 
         <h3 class="extension-name" id="extension_name">{{ extension.name }}</h3>
-        <span class="author">by <a href="{% url auth-profile user=extension.creator.username %}">{{ extension.creator }}</a></span>
+        <span class="author">by <a href="{% url 'auth-profile' user=extension.creator.username %}">{{ extension.creator }}</a></span>
       </div>
 
       <div class="extension-details">
