@@ -21,5 +21,6 @@ for ext in Extension.objects.all():
     data = (ext.popularity_items
             .filter(date__gt=(datetime.datetime.now()-datetime.timedelta(days=7)))
             .aggregate(popularity=Sum('offset')))
-    ext.popularity = data['popularity']
-    ext.save(replace_metadata_json=False)
+    if data['popularity'] is not None:
+        ext.popularity = data['popularity']
+        ext.save(replace_metadata_json=False)
