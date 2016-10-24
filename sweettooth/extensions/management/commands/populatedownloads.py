@@ -1,6 +1,6 @@
 
 from django.core.management.base import BaseCommand, CommandError
-from extensions.models import Extension
+from sweettooth.extensions.models import Extension
 
 class Command(BaseCommand):
     args = 'downnload_data [download_data ...]'

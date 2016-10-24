@@ -14,9 +14,9 @@ except ImportError:
 from django.test import TestCase, TransactionTestCase
 from django.core.files.base import File
 from django.core.urlresolvers import reverse
-from extensions import models
+from sweettooth.extensions import models
 
-from testutils import BasicUserTestCase
+from sweettooth.testutils import BasicUserTestCase
 
 testdata_dir = os.path.join(os.path.dirname(__file__), 'testdata')
 

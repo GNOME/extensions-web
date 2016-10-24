@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
 
-from extensions import views, models, feeds
+from sweettooth.extensions import views, models, feeds
 
 ajax_patterns = patterns('',
     url(r'^edit/(?P<pk>\d+)', views.ajax_inline_edit_view, name='extensions-ajax-inline'),

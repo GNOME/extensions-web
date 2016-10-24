@@ -1,9 +1,9 @@
 
 from django.contrib import admin
 
-from extensions.models import Extension, ExtensionVersion
-from extensions.models import STATUS_ACTIVE, STATUS_REJECTED
-from review.models import CodeReview
+from sweettooth.extensions.models import Extension, ExtensionVersion
+from sweettooth.extensions.models import STATUS_ACTIVE, STATUS_REJECTED
+from sweettooth.review.models import CodeReview
 
 class CodeReviewAdmin(admin.TabularInline):
     model = CodeReview

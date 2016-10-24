@@ -12,7 +12,7 @@ sys.path.extend([os.path.join(_path, '..'),
                  os.path.join(_path, '..', 'sweettooth')])
 
 from django.db.models import Sum
-from extensions.models import Extension
+from sweettooth.extensions.models import Extension
 
 for ext in Extension.objects.all():
     data = (ext.popularity_items

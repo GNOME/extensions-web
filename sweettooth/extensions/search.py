@@ -4,8 +4,8 @@ import xapian
 from django.conf import settings
 from django.db.models import signals
 
-from extensions.models import Extension, ExtensionVersion
-from extensions.models import reviewed, extension_updated
+from sweettooth.extensions.models import Extension, ExtensionVersion
+from sweettooth.extensions.models import reviewed, extension_updated
 
 def index_extension(extension):
     if extension.latest_version is None:

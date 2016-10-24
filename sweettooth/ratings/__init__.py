@@ -1,5 +1,5 @@
 
-from ratings import models, forms
+from sweettooth.ratings import models, forms
 
 def get_model():
     return models.RatingComment

@@ -13,10 +13,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
 
-from extensions import models, search
-from extensions.forms import UploadForm
+from sweettooth.extensions import models, search
+from sweettooth.extensions.forms import UploadForm
 
-from decorators import ajax_view, model_view
+from sweettooth.decorators import ajax_view, model_view
 
 def get_versions_for_version_strings(version_strings):
     def get_version(major, minor, point):

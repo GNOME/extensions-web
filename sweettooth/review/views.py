@@ -16,11 +16,11 @@ from django.template import Context
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
 
-from review.diffutils import get_chunks
-from review.models import CodeReview, get_all_reviewers
-from extensions import models
+from sweettooth.review.diffutils import get_chunks
+from sweettooth.review.models import CodeReview, get_all_reviewers
+from sweettooth.extensions import models
 
-from decorators import ajax_view, model_view
+from sweettooth.decorators import ajax_view, model_view
 
 IMAGE_TYPES = {
     '.png':  'image/png',

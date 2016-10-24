@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.comments.admin import CommentsAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from ratings.models import RatingComment
+from sweettooth.ratings.models import RatingComment
 
 class RatingCommentsAdmin(CommentsAdmin):
     fieldsets = (

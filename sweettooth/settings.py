@@ -84,7 +84,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'sweettooth.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -100,8 +100,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    "review.context_processors.n_unreviewed_extensions",
-    "auth.context_processors.login_form",
+    "sweettooth.review.context_processors.n_unreviewed_extensions",
+    "sweettooth.auth.context_processors.login_form",
 )
 
 ACCOUNT_ACTIVATION_DAYS = 5
@@ -115,7 +115,7 @@ INSTALLED_APPS = (
 
     # 'ratings' goes before django's comments
     # app so it will find our templates
-    'ratings',
+    'sweettooth.ratings',
 
     'django.contrib.comments',
     'django.contrib.contenttypes',
@@ -124,10 +124,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.messages',
 
-    'extensions',
-    'auth',
-    'review',
-    'errorreports',
+    'sweettooth.extensions',
+    'sweettooth.auth',
+    'sweettooth.review',
+    'sweettooth.errorreports',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
@@ -137,7 +137,7 @@ INSTALLED_APPS = (
     'south',
 )
 
-COMMENTS_APP = 'ratings'
+COMMENTS_APP = 'sweettooth.ratings'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

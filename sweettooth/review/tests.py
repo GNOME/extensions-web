@@ -2,10 +2,10 @@
 from django.test import TestCase
 from django.core.files.base import File, ContentFile, StringIO
 
-from extensions import models
-from review.views import get_old_version, should_auto_approve_changeset
+from sweettooth.extensions import models
+from sweettooth.review.views import get_old_version, should_auto_approve_changeset
 
-from testutils import BasicUserTestCase
+from sweettooth.testutils import BasicUserTestCase
 
 from difftests import DiffTest
 

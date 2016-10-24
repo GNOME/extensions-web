@@ -8,7 +8,7 @@ from django.contrib.comments.forms import CommentForm
 from django.utils.encoding import StrAndUnicode, force_unicode
 from django.utils.safestring import mark_safe
 
-from ratings.models import RatingComment
+from sweettooth.ratings.models import RatingComment
 
 # Raty inserts its own <input> element, so we don't want to provide
 # a widget here. We'll insert a <div> for raty to fill in the template.

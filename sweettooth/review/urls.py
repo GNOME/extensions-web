@@ -2,8 +2,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic.list import ListView
 
-from extensions.models import ExtensionVersion
-from review import views
+from sweettooth.extensions.models import ExtensionVersion
+from sweettooth.review import views
 
 urlpatterns = patterns('',
     url(r'^$', ListView.as_view(template_name='review/list.html',

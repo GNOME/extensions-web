@@ -2,7 +2,7 @@
 from django.views.generic.base import TemplateView
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.views import login, logout
-from auth import views, forms
+from sweettooth.auth import views, forms
 from registration.backends.default.views import RegistrationView
 
 urlpatterns = patterns('',

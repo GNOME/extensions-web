@@ -9,11 +9,11 @@ from django.shortcuts import redirect, render
 from django.template import Context
 from django.template.loader import render_to_string
 
-from errorreports.models import ErrorReport, error_reported
-from errorreports.forms import ErrorReportForm
-from extensions.models import Extension
+from sweettooth.errorreports.models import ErrorReport, error_reported
+from sweettooth.errorreports.forms import ErrorReportForm
+from sweettooth.extensions.models import Extension
 
-from decorators import model_view
+from sweettooth.decorators import model_view
 
 @model_view(Extension.objects.visible())
 def report_error(request, extension):
@@ -56,7 +56,7 @@ def view_error_report(request, obj):
                                                           show_email=can_see_reporter_email(request.user, obj)))
 
 def send_email_on_error_reported(sender, request, extension, report, **kwargs):
-    url = request.build_absolute_uri(reverse('errorreports.views.view_error_report',
+    url = request.build_absolute_uri(reverse('sweettooth.errorreports.views.view_error_report',
                                              kwargs=dict(pk=report.pk)))
 
     data = dict(extension=extension,
