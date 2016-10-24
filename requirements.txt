@@ -1,8 +1,7 @@
-Django==1.5.12
-django-autoslug==1.5.0
-django-registration==1.0
+Django==1.7.11
+django-autoslug==1.7.2
+django-registration==2.0
 Pygments==1.6
 wsgiref==0.1.2
-South==0.7.6
 sorl-thumbnail
 pillow

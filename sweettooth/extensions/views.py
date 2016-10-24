@@ -366,43 +366,47 @@ def ajax_set_status_view(request, newstatus):
     return dict(svm=json.dumps(extension.visible_shell_version_map),
                 mvs=render_to_string('extensions/multiversion_status.html', context))
 
-@transaction.commit_manually
 def create_version(request, file_source):
+    transaction.set_autocommit(False)
     try:
-        metadata = models.parse_zipfile_metadata(file_source)
-        uuid = metadata['uuid']
-    except (models.InvalidExtensionData, KeyError), e:
-        messages.error(request, "Invalid extension data: %s" % (e.message,))
-        transaction.rollback()
-        return None, []
-
-    try:
-        extension = models.Extension.objects.get(uuid=uuid)
-    except models.Extension.DoesNotExist:
-        extension = models.Extension(creator=request.user)
-    else:
-        if request.user != extension.creator and not request.user.is_superuser:
-            messages.error(request, "An extension with that UUID has already been added.")
+        try:
+            metadata = models.parse_zipfile_metadata(file_source)
+            uuid = metadata['uuid']
+        except (models.InvalidExtensionData, KeyError), e:
+            messages.error(request, "Invalid extension data: %s" % (e.message,))
             transaction.rollback()
             return None, []
 
-    extension.parse_metadata_json(metadata)
-    extension.save()
+        try:
+            extension = models.Extension.objects.get(uuid=uuid)
+        except models.Extension.DoesNotExist:
+            extension = models.Extension(creator=request.user)
+        else:
+            if request.user != extension.creator and not request.user.is_superuser:
+                messages.error(request, "An extension with that UUID has already been added.")
+                transaction.rollback()
+                return None, []
 
-    try:
-        extension.full_clean()
-    except ValidationError, e:
-        transaction.rollback()
-        return None, e.messages
+        extension.parse_metadata_json(metadata)
+        extension.save()
 
-    version = models.ExtensionVersion.objects.create(extension=extension,
-                                                     source=file_source,
-                                                     status=models.STATUS_UNREVIEWED)
-    version.parse_metadata_json(metadata)
-    version.replace_metadata_json()
-    version.save()
+        try:
+            extension.full_clean()
+        except ValidationError, e:
+            transaction.rollback()
+            return None, e.messages
 
-    transaction.commit()
+        version = models.ExtensionVersion.objects.create(extension=extension,
+                                                         source=file_source,
+                                                         status=models.STATUS_UNREVIEWED)
+        version.parse_metadata_json(metadata)
+        version.replace_metadata_json()
+        version.save()
+
+        transaction.commit()
+    finally:
+        transaction.set_autocommit(True)
+
     return version, []
 
 @login_required
