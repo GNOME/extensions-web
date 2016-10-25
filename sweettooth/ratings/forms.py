@@ -4,7 +4,7 @@ import datetime
 from django.forms import fields, widgets
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.comments.forms import CommentForm
+from django_comments.forms import CommentForm
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 

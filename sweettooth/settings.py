@@ -117,7 +117,8 @@ INSTALLED_APPS = (
     # app so it will find our templates
     'sweettooth.ratings',
 
-    'django.contrib.comments',
+    'django_comments',
+
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',

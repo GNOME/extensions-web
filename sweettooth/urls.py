@@ -20,7 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^comments/', include('ratings.urls')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django_comments.urls')),
 
 )
 
