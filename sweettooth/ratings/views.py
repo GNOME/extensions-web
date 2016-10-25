@@ -1,8 +1,8 @@
 
 import json
 
+import django_comments as comments
 from django.core.urlresolvers import reverse
-from django.contrib import comments
 from django.contrib.messages import info
 from django.shortcuts import redirect
 from django.utils.dateformat import format as format_date
