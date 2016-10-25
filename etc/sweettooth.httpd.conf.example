@@ -9,7 +9,7 @@ WSGISocketPrefix /run/wsgi
         WSGIDaemonProcess ego processes=1 threads=10
         WSGIProcessGroup ego
 
-        Alias /static/extension-data/ /home/jstpierre/Source/sweettooth/sweettooth/uploaded-files/
+        Alias /extension-data/ /home/jstpierre/Source/sweettooth/sweettooth/uploaded-files/
         Alias /static/ /home/jstpierre/Source/sweettooth/sweettooth/static/
 </VirtualHost>
 
@@ -21,7 +21,7 @@ WSGISocketPrefix /run/wsgi
         WSGIDaemonProcess ego-tls processes=1 threads=10
         WSGIProcessGroup ego-tls
 
-        Alias /static/extension-data/ /home/jstpierre/Source/sweettooth/sweettooth/uploaded-files/
+        Alias /extension-data/ /home/jstpierre/Source/sweettooth/sweettooth/uploaded-files/
         Alias /static/ /home/jstpierre/Source/sweettooth/sweettooth/static/
 
         SSLEngine on
