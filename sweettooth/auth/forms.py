@@ -17,7 +17,7 @@ class AutoFocusForm(object):
     def __init__(self, *a, **kw):
         super(AutoFocusForm, self).__init__(*a, **kw)
         for field in self.fields:
-            self.fields[field].widget.attrs['autofocus'] = True
+            self.fields[field].widget.attrs['autofocus'] = 'autofocus'
             break
 
 class InlineForm(object):
