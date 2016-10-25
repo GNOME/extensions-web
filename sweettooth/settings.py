@@ -172,6 +172,8 @@ XAPIAN_DB_PATH = os.path.join(SITE_ROOT, '..', 'xapian.db')
 
 THUMBNAIL_DEBUG = True
 
+TEST_RUNNER="django.test.simple.DjangoTestSuiteRunner"
+
 try:
     from local_settings import *
 except ImportError:
