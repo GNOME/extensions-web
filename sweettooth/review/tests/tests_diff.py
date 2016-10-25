@@ -1,6 +1,6 @@
 
 from unittest import TestCase
-from diffutils import get_chunks, new_chunk, new_line
+from sweettooth.review.diffutils import get_chunks, new_chunk, new_line
 
 def strip_regions(chunks):
     for chunk in chunks:
