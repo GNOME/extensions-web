@@ -1,7 +1,7 @@
-Django==1.7.11
-django-autoslug==1.7.2
+Django==1.8.15
+django-autoslug==1.9.3
 django-contrib-comments==1.7.3
-django-registration==2.0
+django-registration==2.1.2
 Pygments==1.6
 wsgiref==0.1.2
 sorl-thumbnail
