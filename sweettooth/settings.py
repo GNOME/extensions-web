@@ -4,11 +4,9 @@ import os
 
 DEBUG = False
 
-ADMINS = (
-    ('Jasper St. Piere', 'jstpierre@mecheye.net'),
+
 )
 
-MANAGERS = ADMINS
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -62,6 +60,12 @@ USE_I18N = True
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
 USE_L10N = True
+
+ADMINS = (
+    ('Administrator', 'admin@localhost.local'),
+)
+
+MANAGERS = ADMINS
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
