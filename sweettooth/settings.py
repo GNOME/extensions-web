@@ -3,7 +3,6 @@
 import os
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Jasper St. Piere', 'jstpierre@mecheye.net'),
@@ -12,6 +11,27 @@ ADMINS = (
 MANAGERS = ADMINS
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(SITE_ROOT, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.core.context_processors.debug",
+                "django.core.context_processors.i18n",
+                "django.core.context_processors.media",
+                "django.core.context_processors.request",
+                "django.contrib.messages.context_processors.messages",
+                "sweettooth.review.context_processors.n_unreviewed_extensions",
+                "sweettooth.auth.context_processors.login_form",
+            ],
+            'debug': DEBUG,
+        },
+    },
+]
 
 DATABASES = {
     'default': {
@@ -69,13 +89,6 @@ STATICFILES_DIRS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'tv(d+lom-sa^de5i#ab)(g^3249tbzssizuvh8m9_lwppdn1bw'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -85,24 +98,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'sweettooth.urls'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(SITE_ROOT, 'templates'),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-    "django.contrib.messages.context_processors.messages",
-    "sweettooth.review.context_processors.n_unreviewed_extensions",
-    "sweettooth.auth.context_processors.login_form",
-)
 
 ACCOUNT_ACTIVATION_DAYS = 5
 
