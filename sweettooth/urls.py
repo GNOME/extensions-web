@@ -12,14 +12,14 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # 'login' and 'register'
-    url(r'^accounts/', include('auth.urls')),
-    url(r'^', include('extensions.urls'), name='index'),
+    url(r'^accounts/', include('sweettooth.auth.urls')),
+    url(r'^', include('sweettooth.extensions.urls'), name='index'),
 
-    url(r'^review/', include('review.urls')),
-    url(r'^errors/', include('errorreports.urls')),
+    url(r'^review/', include('sweettooth.review.urls')),
+    url(r'^errors/', include('sweettooth.errorreports.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^comments/', include('ratings.urls')),
+    url(r'^comments/', include('sweettooth.ratings.urls')),
     url(r'^comments/', include('django_comments.urls')),
 
 )
