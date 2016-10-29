@@ -29,7 +29,7 @@ SECRET_KEY = 'tv(d+lom-sa^de5i#ab)(g^3249tbzssizuvh8m9_lwppdn1bw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["extensions.gnome.org"]
 
 
 # Application definition
