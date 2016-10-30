@@ -1,0 +1,10 @@
+[Unit]
+Description=SweetTooth-Web
+After=syslog.target
+
+[Service]
+ExecStart=/bin/bash -c 'source /srv/sweettooth/venv/bin/activate; uwsgi --ini /srv/sweettooth/wsgi.ini'
+RuntimeDirectory=sweettooth
+
+[Install]
+WantedBy=multi-user.target
