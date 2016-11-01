@@ -463,6 +463,10 @@ class UpdateVersionTest(TestCase):
     reject_uuid = 'reject-extension@testcases.sweettooth.mecheye.net'
     downgrade_uuid = 'downgrade-extension@testcases.sweettooth.mecheye.net'
     nonexistant_uuid = "blah-blah-blah@testcases.sweettooth.mecheye.net"
+    full_expected = {
+        upgrade_uuid: u'upgrade',
+        downgrade_uuid: u'downgrade',
+        reject_uuid: u'blacklist'}
 
     def build_response(self, installed):
         return dict((k, dict(version=v)) for k, v in installed.iteritems())
@@ -478,7 +482,7 @@ class UpdateVersionTest(TestCase):
         uuid = self.upgrade_uuid
 
         # The user has an old version, upgrade him
-        expected = { uuid: 'upgrade' }
+        expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
 
@@ -489,7 +493,7 @@ class UpdateVersionTest(TestCase):
     def test_reject_me(self):
         uuid = self.reject_uuid
 
-        expected = { uuid: 'blacklist' }
+        expected = {uuid: self.full_expected[self.reject_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
 
@@ -501,7 +505,7 @@ class UpdateVersionTest(TestCase):
         uuid = self.downgrade_uuid
 
         # The user has a rejected version, so downgrade.
-        expected = { uuid: 'downgrade' }
+        expected = { uuid: self.full_expected[self.downgrade_uuid] }
         response = self.grab_response({ uuid: 2 })
         self.assertEqual(response, expected)
 
