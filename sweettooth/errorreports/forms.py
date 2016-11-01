@@ -1,7 +1,7 @@
 
 from django import forms
 
-from errorreports.models import ErrorReport
+from sweettooth.errorreports.models import ErrorReport
 
 class ErrorReportForm(forms.ModelForm):
 

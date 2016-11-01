@@ -1,8 +1,8 @@
 
 from django.db import models
-from django.contrib.comments.models import Comment
-from django.contrib.comments.managers import CommentManager
-from django.contrib.comments.signals import comment_will_be_posted
+from django_comments.models import Comment
+from django_comments.managers import CommentManager
+from django_comments.signals import comment_will_be_posted
 
 class RatingComment(Comment):
     objects = CommentManager()

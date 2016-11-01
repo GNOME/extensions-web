@@ -2,7 +2,7 @@
 from django.contrib import auth
 from django.db import models
 from django.dispatch import Signal
-from extensions.models import Extension
+from sweettooth.extensions.models import Extension
 
 class ErrorReport(models.Model):
     comment = models.TextField(blank=True)

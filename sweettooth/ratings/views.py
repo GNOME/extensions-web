@@ -1,15 +1,15 @@
 
 import json
 
+import django_comments as comments
 from django.core.urlresolvers import reverse
-from django.contrib import comments
 from django.contrib.messages import info
 from django.shortcuts import redirect
 from django.utils.dateformat import format as format_date
 
-from extensions import models
-from decorators import ajax_view, model_view
-from utils import gravatar_url
+from sweettooth.extensions import models
+from sweettooth.decorators import ajax_view, model_view
+from sweettooth.utils import gravatar_url
 
 def comment_done(request):
     pk = request.GET['c']

@@ -1,5 +1,5 @@
 
-from django.db.models import forms
+from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import ugettext_lazy as _
 from registration.forms import RegistrationForm
@@ -16,7 +16,9 @@ class PlainOutputForm(object):
 class AutoFocusForm(object):
     def __init__(self, *a, **kw):
         super(AutoFocusForm, self).__init__(*a, **kw)
-        self.fields.value_for_index(0).widget.attrs['autofocus'] = True
+        for field in self.fields:
+            self.fields[field].widget.attrs['autofocus'] = 'autofocus'
+            break
 
 class InlineForm(object):
     def __init__(self, *a, **kw):

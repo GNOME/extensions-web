@@ -2,12 +2,12 @@
 from django.test import TestCase
 from django.core.files.base import File, ContentFile, StringIO
 
-from extensions import models
-from review.views import get_old_version, should_auto_approve_changeset
+from sweettooth.extensions import models
+from sweettooth.review.views import get_old_version, should_auto_approve_changeset
 
-from testutils import BasicUserTestCase
+from sweettooth.testutils import BasicUserTestCase
 
-from difftests import DiffTest
+from tests_diff import DiffTest
 
 class DiffViewTest(BasicUserTestCase, TestCase):
     def test_get_zipfiles(self):
@@ -17,19 +17,19 @@ class DiffViewTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version1 = models.ExtensionVersion.objects.create(extension=extension,
                                                           source=File(ContentFile("doot doo"), name="aa"),
-                                                          status=models.STATUS_NEW)
-        self.assertEquals(None, get_old_version(version1))
+                                                          status=models.STATUS_UNREVIEWED)
+        self.assertEqual(None, get_old_version(version1))
 
         # This one is broken...
         version2 = models.ExtensionVersion.objects.create(extension=extension,
                                                           source="",
-                                                          status=models.STATUS_NEW)
-        self.assertEquals(version1, get_old_version(version2))
+                                                          status=models.STATUS_UNREVIEWED)
+        self.assertEqual(version1, get_old_version(version2))
 
         version3 = models.ExtensionVersion.objects.create(extension=extension,
                                                           source=File(ContentFile("doot doo"), name="bb"),
-                                                          status=models.STATUS_NEW)
-        self.assertEquals(version1, get_old_version(version3))
+                                                          status=models.STATUS_UNREVIEWED)
+        self.assertEqual(version1, get_old_version(version3))
 
 class TestAutoApproveLogic(TestCase):
     def build_changeset(self, added=None, deleted=None, changed=None, unchanged=None):

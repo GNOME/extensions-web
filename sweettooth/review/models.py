@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Permission, Group
 from django.db import models
 from django.db.models import Q
 
-from extensions.models import ExtensionVersion, STATUSES
+from sweettooth.extensions.models import ExtensionVersion, STATUSES
 
 def get_all_reviewers():
     perm = Permission.objects.get(codename="can-review-extensions")

@@ -3,28 +3,31 @@ SweetTooth-Web
 ==============
 
 **SweetTooth-Web** is a Django-powered web application that, in co-operation
-with some `co-horts in GNOME Shell`_ and other places, allows users to install,
-upgrade and enable/disable their own Shell Extensions. All operations with
-the Shell are done through a special NPAPI plugin which proxies over to the
-Shell by DBus.
+with some GNOME Shell integration helper (`NPAPI plugin`_ or `Browser extension`_)
+allows users to install, upgrade and enable/disable their own Shell Extensions.
+All operations with the Shell are done through a special helper which proxies
+over to the Shell by DBus.
 
 Since extensions can be dangerous, all extensions uploaded to the repository
 must go through code review and testing.
 
-.. _co-horts in GNOME Shell: http://git.gnome.org/browse/gnome-shell/tree/browser-plugin
+.. _NPAPI plugin: http://git.gnome.org/browse/gnome-shell/tree/browser-plugin
+.. _Browser extension: https://git.gnome.org/browse/chrome-gnome-shell/
 
 Getting Started
 ---------------
 
 You can get started developing the website with::
 
-  $ git clone git://github.com/magcius/sweettooth.git
-  $ cd sweettooth
-  $ virtualenv_ --system-site-packages ./venv
+  $ git clone https://git.gnome.org/browse/extensions-web
+  $ cd extensions-web/sweettooth
+  $ change "Debug" variable value to "True" in settings.py
+  $ virtualenv --system-site-packages ./venv
   $ . ./venv/bin/activate
-  $ pip_ install -r requirements.txt
-  $ # ... Database setup...
-  $ python sweettooth/manage.py `runserver_plus`_
+  $ pip install -r ../requirements.txt
+  $ python sweettooth/manage.py syncdb
+  $ python sweettooth/manage.py migrate
+  $ python sweettooth/manage.py runserver
 
 I use `--system-site-packages` because we require Xapian, which doesn't have
 its Python bindings in PyPI.
@@ -32,7 +35,6 @@ its Python bindings in PyPI.
 Create a superuser, and log in. You should be able to upload extensions and
 review extensions.
 
-.. _runserver_plus: http://packages.python.org/django-extensions/
 .. _virtualenv: http://www.virtualenv.org/
 .. _pip: http://www.pip-installer.org/
 
@@ -86,15 +88,14 @@ Requirements
   * django_
   * django-autoslug_
   * Pygments_
-  * sorl-thumbnail_
-  * south_
   * django-registration_
   * xapian_
+  * pillow_
 
 .. _django: http://www.djangoproject.com/
 .. _django-autoslug: http://packages.python.org/django-autoslug/
 .. _Pygments: http://www.pygments.org/
-.. _sorl-thumbnail: http://thumbnail.sorl.net/
 .. _south: http://south.aeracode.org/
 .. _django-registration: http://pypi.python.org/pypi/django-registration
 .. _xapian: http://www.xapian.org/
+.. _pillow: https://github.com/python-pillow/Pillow
