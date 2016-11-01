@@ -474,7 +474,6 @@ class UpdateVersionTest(TestCase):
 
         return json.loads(response.content)
 
-    @unittest.expectedFailure
     def test_upgrade_me(self):
         uuid = self.upgrade_uuid
 
@@ -498,7 +497,6 @@ class UpdateVersionTest(TestCase):
         response = self.grab_response({ uuid: 2 })
         self.assertEqual(response, {})
 
-    @unittest.expectedFailure
     def test_downgrade_me(self):
         uuid = self.downgrade_uuid
 
@@ -516,7 +514,6 @@ class UpdateVersionTest(TestCase):
         response = self.grab_response({ self.nonexistant_uuid: 1 })
         self.assertEqual(response, {})
 
-    @unittest.expectedFailure
     def test_multiple(self):
         installed = { self.upgrade_uuid: 1,
                       self.reject_uuid: 1,
