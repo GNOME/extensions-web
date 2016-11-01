@@ -3,15 +3,16 @@ SweetTooth-Web
 ==============
 
 **SweetTooth-Web** is a Django-powered web application that, in co-operation
-with some `co-horts in GNOME Shell`_ and other places, allows users to install,
-upgrade and enable/disable their own Shell Extensions. All operations with
-the Shell are done through a special NPAPI plugin which proxies over to the
-Shell by DBus.
+with some GNOME Shell integration helper (`NPAPI plugin`_ or `Browser extension`_)
+allows users to install, upgrade and enable/disable their own Shell Extensions.
+All operations with the Shell are done through a special helper which proxies
+over to the Shell by DBus.
 
 Since extensions can be dangerous, all extensions uploaded to the repository
 must go through code review and testing.
 
-.. _co-horts in GNOME Shell: http://git.gnome.org/browse/gnome-shell/tree/browser-plugin
+.. _NPAPI plugin: http://git.gnome.org/browse/gnome-shell/tree/browser-plugin
+.. _Browser extension: https://git.gnome.org/browse/chrome-gnome-shell/
 
 Getting Started
 ---------------
@@ -87,9 +88,9 @@ Requirements
   * django_
   * django-autoslug_
   * Pygments_
-  * south_
   * django-registration_
   * xapian_
+  * pillow_
 
 .. _django: http://www.djangoproject.com/
 .. _django-autoslug: http://packages.python.org/django-autoslug/
@@ -97,3 +98,4 @@ Requirements
 .. _south: http://south.aeracode.org/
 .. _django-registration: http://pypi.python.org/pypi/django-registration
 .. _xapian: http://www.xapian.org/
+.. _pillow: https://github.com/python-pillow/Pillow
