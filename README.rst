@@ -87,7 +87,6 @@ Requirements
   * django_
   * django-autoslug_
   * Pygments_
-  * sorl-thumbnail_
   * south_
   * django-registration_
   * xapian_
@@ -95,7 +94,6 @@ Requirements
 .. _django: http://www.djangoproject.com/
 .. _django-autoslug: http://packages.python.org/django-autoslug/
 .. _Pygments: http://www.pygments.org/
-.. _sorl-thumbnail: http://thumbnail.sorl.net/
 .. _south: http://south.aeracode.org/
 .. _django-registration: http://pypi.python.org/pypi/django-registration
 .. _xapian: http://www.xapian.org/
