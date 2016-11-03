@@ -67,10 +67,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
 
 ROOT_URLCONF = 'sweettooth.urls'
@@ -199,7 +202,20 @@ DEFAULT_FROM_EMAIL = "noreply@gnome.org"
 
 THUMBNAIL_DEBUG = True
 
+NO_SECURE_SETTINGS = False
+
 try:
     from local_settings import *
 except ImportError:
     pass
+
+
+# Enable secure settings in case DEBUG is disabled and NO_SECURE_SETTINGS is not set to True
+if not DEBUG and not NO_SECURE_SETTINGS:
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 4 * 60 * 60
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_PROXY_SSL_HEADER = ('HTTPS', 'https')
+    SECURE_SSL_REDIRECT = True
