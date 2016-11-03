@@ -20,20 +20,36 @@ Getting Started
 You can get started developing the website with::
 
   $ git clone https://git.gnome.org/browse/extensions-web
-  $ cd extensions-web/sweettooth
-  $ change "Debug" variable value to "True" in settings.py
+  $ cd extensions-web
   $ virtualenv --system-site-packages ./venv
-  $ . ./venv/bin/activate
-  $ pip install -r ../requirements.txt
-  $ python sweettooth/manage.py syncdb
-  $ python sweettooth/manage.py migrate
-  $ python sweettooth/manage.py runserver
 
 I use `--system-site-packages` because we require Xapian, which doesn't have
 its Python bindings in PyPI.
+::
 
-Create a superuser, and log in. You should be able to upload extensions and
-review extensions.
+  $ . ./venv/bin/activate
+  $ pip install -r ../requirements.txt
+  $ python manage.py syncdb
+
+You should be asked to create superuser account. Provide some login and password.
+::
+
+  $ python manage.py migrate
+
+After above steps your database should be initialized and almost ready to run.
+You should manualy specify your site's domain with SQL update::
+
+  UPDATE `django_site`
+  SET `domain` = 'your.domain.name',
+      `name` = 'your.domain.name'
+  WHERE `django_site`.`id` = 1;
+
+Create file "local_settings.py" with line "Debug = True". Then start your website:
+::
+
+  $ python manage.py runserver
+
+Log in using superuser account. You should be able to upload and review extensions.
 
 .. _virtualenv: http://www.virtualenv.org/
 .. _pip: http://www.pip-installer.org/
