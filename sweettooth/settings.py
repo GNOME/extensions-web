@@ -212,7 +212,6 @@ except ImportError:
 
 # Enable secure settings in case DEBUG is disabled and NO_SECURE_SETTINGS is not set to True
 if not DEBUG and not NO_SECURE_SETTINGS:
-    CSRF_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 4 * 60 * 60
