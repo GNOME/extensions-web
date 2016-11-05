@@ -41,8 +41,8 @@ server {
         root /usr/share/nginx/html;
     }
 
-    location /extensions-data/ {
-        alias /srv/sweettooth/extensions-web/extensions-data/;
+    location /extension-data/ {
+        alias /srv/sweettooth/extensions-web/uploaded-files/;
     }
 
     location /static/ {
