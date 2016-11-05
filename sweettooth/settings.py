@@ -93,6 +93,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "sweettooth.review.context_processors.n_unreviewed_extensions",
                 "sweettooth.auth.context_processors.login_form",
+                "sweettooth.context_processors.navigation",
             ],
             'debug': DEBUG,
         },
