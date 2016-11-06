@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Cantarell';
+  src: local('Cantarell'), local('Cantarell Regular'),
+  url(../fonts/Cantarell-Regular.otf);
+}
 
-@import url("https://fonts.googleapis.com/css?family=Copse");
-@import url("https://fonts.googleapis.com/css?family=Cantarell:400,400italic,700,700italic");
+@font-face {
+  font-family: 'Cantarell';
+  font-weight: bold;
+  src: local('Cantarell'), local('Cantarell Bold'), local('Cantarell-Bold'),
+  url(../fonts/Cantarell-Bold.otf);
+}

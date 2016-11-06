@@ -1,13 +1,21 @@
 
 @import url("pygments.css");
 
-.maxwidth {
+#container, .container_12, .maxwidth {
     width: auto !important;
     margin: 0 1em;
 }
 
-#gnome_header .maxwidth {
-    margin-left: 150px;
+#header {
+    margin: 20px 1em 0;
+}
+
+#top_bar {
+    float: right;
+}
+
+.extension {
+    margin-left: 0;
 }
 
 #files table {

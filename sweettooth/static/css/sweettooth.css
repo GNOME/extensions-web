@@ -1,155 +1,23 @@
-
-@import url("reset.css");
-@import url("fonts.css");
 @import url("switch.css");
 @import url("jquery.rating.css");
 
-
-/* Base text and layout structure */
+/* Footer Artwork */
 /* ========================================================================== */
 
-body {
-    font-family: Cantarell, 'Droid Sans', Ubuntu, 'DejaVu Sans', Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #2e3436;
-}
-h1, h2, h3, h4, h5, h6, dt {
-    color: #0489b7;
-}
-h1 {
-    font-size: 42px;
-}
-h2 {
-    font-size: 25px;
-}
-h3, dt {
-    font-size: 21px;
-    margin: 0.4em 0 0.5em;
-    color: #2e3436;
-}
-dt {
-    color: #e36615;
-}
-dt a:hover {
-    color: #fa7721;    
-}
-h4 {
-    font-size: 16px;
-    color: #ce5c00;
-}
-h5 {
-    font-size: 14px;
-}
-h6 {
-    font-size: 12px;
-}
-ol {
-    list-style:decimal;
-}
-ul {
-    list-style:square;
-}
-li {
-    margin-left:30px;
-}
-dl,dt,h1,h2,h3,h4,h5,h6,pre,table,address,fieldset {
-    margin: 0.8em 0 0.4em;
-}
-p, dd, .action_box, ul, ol {
-    margin: 0.4em 0 1em;
-}
-code {
-    background: #ececec;
-    background: rgba(0,0,0,0.1);
-    padding: 1px;
-}
 
 
-/* Base information */
-/* ========================================================================== */
-
-html {
-    background: #fff url(../images/html-bg.png) 0 10px repeat-x;
+#footer_art.applications {
+    background-image: url(../images/footer_arts/applications.png);
 }
 
-a {
-    color: #204a87;
-}
-a:hover {
-    color: #3465a4;
-}
-a:visited {
-    color: #5d396e;
-}
-.left {
-    float: left;
-}
-.right {
-    float: right;
-}
-.hidden {
-    display: none;
-}
-.maxwidth {
-    width: 940px;
-    margin: 0 auto;
-}
-.clear {
-    clear: both;
-}
-
-/* Fancy hack for off-screen switch widgets
- * on small screen sizes. No math to these numbers,
- * just guesses and trial and error. */
-@media screen and (max-width: 1308px) {
-    .maxwidth {
-        margin-left: 176px;
-    }
-}
 
 /* Global Domain Bar */
 /* ========================================================================== */
 
-
-#global_domain_bar {
-    background: #fff;
-    height: 10px;
-}
-#global_domain_bar .maxwidth {
-    position: relative;
-}
-
-/* Tab */
-
-#global_domain_bar .tab {
-    background: #fff;
-    position: absolute;
-    right: 0;
-    float: right;
-    padding: 6px 8px;
-    font-size: 12px;
-    line-height: 16px;
-    border-radius: 5px;
-    box-shadow: 0 4px 2px -2px #8fb3d9;
-    white-space: nowrap;
-}
 #global_domain_bar .tab a.root {
-    color: #555753 !important;
-    font-weight: bold;
-    text-decoration: none;
-    background: #fff url(../images/favicon.png) 0 0 no-repeat;
-    padding-left: 18px;
-    border-right: 1px solid #ccc;
-    padding-right: 6px;
+    margin-right: 0 !important;
 }
-#global_domain_bar .tab a.root:last-child {
-    border-right: 0;
-    padding-right: 0;
-}
-#global_domain_bar .tab a.root:hover {
-    text-decoration: underline;
-}
+
 #global_domain_bar .tab a.user {
     padding: 2px 14px 2px 4px;
     margin: -2px -4px -2px 2px;
@@ -166,10 +34,6 @@ a:visited {
 #global_domain_bar .tab a.user.active {
     background-color: #ececec;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
-}
-
-#global_domain_bar .tab a:visited {
-    color: #204a87;
 }
 
 /* User settings */
@@ -224,209 +88,6 @@ a:visited {
 }
 #global_domain_bar .avatar:hover {
     border: 2px solid #bbbbbb;
-}
-
-
-/* GNOME Header */
-/* ========================================================================== */
-
-#gnome_header {
-    margin: 0;
-    padding: 6px 0;
-}
-
-#gnome_header h1 {
-    margin: 0;
-    padding: 20px 0;
-    font-size: 25pt;
-    line-height: 54px;
-    color: #2e3436;
-    font-family: "Copse";
-    font-weight: normal;
-    text-shadow: 0 1px 0 #fff;
-    float: left;
-}
-#gnome_header h1 a {
-    color: inherit;
-    text-decoration: none;
-}
-#gnome_header h1 a img {
-    vertical-align: bottom;
-}
-
-#gnome_header .right {
-    margin-top: 38px;
-}
-#gnome_header #search_input {
-    border: 1px solid #999;
-    padding: 4px 28px 4px 9px;
-    background: #fff url(../images/search-icon.png) 172px 5px no-repeat;
-    width: 160px;
-    border-radius: 25px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.2);
-}
-#gnome_header #search_input:focus {
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.2), 0 0 3px #0489b7;
-    outline: none;
-}
-
-
-/* Global Navigation */
-/* ========================================================================== */
-
-#globalnav {
-    list-style: none;
-    display: block;
-    float: left;
-    margin: 34px 0 16px 20px;
-    vertical-align: middle;
-}
-#globalnav li {
-    float: left;
-    margin: 0;
-    padding: 0;
-}
-#globalnav li a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    padding: 5px 15px;
-    font-weight: bold;
-    text-shadow: 0 1px 0 #fff;
-    outline: none;
-    line-height: 22px;
-}
-#globalnav li a:hover {
-    color: #000;
-}
-#globalnav li a:active {
-    position: relative;
-    top: 1px;
-}
-
-#globalnav.main li.main a,
-#globalnav.upload li.upload a,
-#globalnav.local li.local a,
-#globalnav.about li.about a,
-#globalnav li.active a {
-    background: #7fa7d4;
-    padding: 5px 15px;
-    color: #000;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: inset 0 2px 3px -1px #396da9, 0 1px 0 #fff;
-    position: relative;
-}
-
-#globalnav.main li.main a:after,
-#globalnav.upload li.upload a:after,
-#globalnav.local li.local a:after,
-#globalnav.about li.about a:after,
-#globalnav li.active a:after {
-    content: url(../images/globalnav-arrow.png);
-    position: absolute;
-    bottom: 0;
-    margin-bottom: -11px;
-    left: 50%;
-    margin-left: -8px;
-}
-
-
-
-
-/* GNOME Container */
-/* ========================================================================== */
-
-
-#gnome_container {
-    min-height: 400px;
-}
-
-
-
-/* Footer */
-/* ========================================================================== */
-
-
-/* Footer Artwork */
-
-#footer_art {
-    background: transparent no-repeat bottom center;
-    height: 180px;
-    margin-top: 0;
-    clear: left;
-}
-#footer_art.none {
-    height: 30px;
-    margin-top: 0;
-}
-#footer_art.default {
-    background-image: url(../images/footer_art/applications.png);
-}
-
-/* Footer Grass */
-
-#footer_grass {
-    background: url(../images/grass.png) top center repeat-x;
-    height: 39px;
-    margin-top: -33px;
-}
-
-/* Footer */
-
-#footer {
-    font-size: 11px;
-    line-height: 1.5em;
-    clear: left;
-    background: #d3d7cf;
-    color: #555753;
-    padding: 20px 0;
-}
-#footer .links {
-    overflow: hidden;
-}
-#footer .links > div > ul > li {
-    float: left;
-    margin: 0 40px 10px 0;
-}
-#footer .links a,
-#footer .links strong {
-    display: block;
-    text-decoration: none;
-}
-#footer .links a:hover,
-#footer .links a:focus {
-    text-decoration: underline;
-}
-
-#footer ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-#footer ul li {
-    margin: 0;
-    padding: 0;
-}
-#footer .links > div > ul > li > a {
-    font-weight: bold;
-}
-#footer .links a {
-    color: inherit;
-    -webkit-transition: background-color 100ms ease-in;
-    -moz-transition: background-color 100ms ease-in;
-    transition: background-color 100ms ease-in;
-}
-
-#footnotes {
-    margin-top: 20px;
-}
-#footnotes small {
-    font-size: 88%;
-}
-#footnotes a {
-    color: inherit;
 }
 
 /* Unreviewed Extension Counter */
@@ -496,74 +157,6 @@ a:visited {
 
 #auth_form input {
     width: 40%;
-}
-
-
-/* Beta Banner */
-/* ==================================================================== */
-
-.beta-banner {
-    -webkit-transform: rotate(-35deg);
-    -moz-transform: rotate(-35deg);
-    -ms-transform: rotate(-35deg);
-    -o-transform: rotate(-35deg);
-    transform: rotate(-35deg);
-    z-index: -1;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-family: serif;
-    font-size: 1.4em;
-    position: absolute;
-    width: 200px;
-    top: 36px;
-    left: -45px;
-    border: 1px solid #4e9a06;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-}
-
-.beta-banner span {
-    display: block;
-    background-image: linear-gradient(#4e9a06, #73d216);
-    background-image: -o-linear-gradient(#4e9a06, #73d216);
-    background-image: -ms-linear-gradient(#4e9a06, #73d216);
-    background-image: -moz-linear-gradient(#4e9a06, #73d216);
-    background-image: -webkit-linear-gradient(#4e9a06, #73d216);
-    background-color: #73d216;
-    color: white;
-    text-shadow: 0px 2px 0 rgba(0, 0, 0, 0.4);
-    border-top: 1px solid #73d216;
-    border-bottom: 1px solid #a9ef65;
-}
-
-.beta-disclaimer {
-    font-size: larger;
-    font-weight: bold;
-    text-align: center;
-}
-
-
-/* Separators */
-/* ==================================================================== */
-
-hr {
-    border: 0;
-    height: 1px;
-    background: #ccc;
-    background: rgba(0, 0, 0, 0.2);
-    margin: 20px 0;
-}
-hr.top_shadow,
-hr.bottom_shadow {
-    height: 25px;
-    background: url(../images/hr-shadow.png) no-repeat bottom;
-    background-size: contain;
-    border: 0;
-}
-hr.bottom_shadow {
-    -moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
 }
 
 
@@ -715,6 +308,7 @@ li.extension:last-child {
     padding: 0;
     margin-top: 10px;
     position: relative;
+    margin-left: 172px;
 }
 
 .extension.out-of-date > * {
@@ -821,7 +415,7 @@ li.extension:last-child {
 }
 
 .extension .description {
-    margin: 0.5em;
+    margin: 0.5em 32px 0.5em 0.5em;
     font-size: 1.2em;
     overflow: auto;
     white-space: pre-line;
@@ -1124,7 +718,6 @@ p.message.warning {
     background-color: rgba(255, 255, 200, 0.8);
 }
 
-
 /* Forms */
 /* ==================================================================== */
 
@@ -1263,22 +856,15 @@ input[type=submit], button {
 }
 
 
-/* Super fancy expandy headers that need to die */
+/* Super fancy expandy headers that no longer need to die */
 /* ==================================================================== */
 
 .expandy_header {
     cursor: pointer;
-    background-color: #336C84;
-    color: white;
-    line-height: 1.5em;
     padding-left: 0.5em;
     margin-bottom: 0;
     margin-top: 10px;
     clear: both;
-}
-
-.expandy_header:hover {
-    background-color: #447D95;
 }
 
 .expandy_header:before {
@@ -1286,28 +872,16 @@ input[type=submit], button {
     display: block;
     float: left;
     border-color: transparent;
-    border-left-color: white;
+    border-left-color: #0489B7;
     border-style: solid;
     border-width: .4em;
     margin-top: .4em;
     width: 0;
-
-    -webkit-transition: -webkit-transform 0.4s ease-in-out;
-    -webkit-transform-origin: 25% 50%;
-
-    -moz-transition: -moz-transform 0.4s ease-in-out;
-    -moz-transform-origin: 25% 50%;
-
-    -o-transition: -o-transform 0.4s ease-in-out;
-    -o-transform-origin: 25% 50%;
 
     transition: transform 0.4s ease-in-out;
     transform-origin: 25% 50%;
 }
 
 .expandy_header.expanded:before {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
