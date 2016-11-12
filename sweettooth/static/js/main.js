@@ -3,7 +3,7 @@
 define(['jquery', 'messages', 'modal', 'hashParamUtils',
         'templates', 'extensions', 'uploader', 'fsui',
         'jquery.cookie', 'jquery.jeditable',
-        'jquery.timeago', 'jquery.raty'],
+        'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
 function($, messages, modal, hashParamUtils, templates) {
     "use strict";
 
@@ -41,6 +41,12 @@ function($, messages, modal, hashParamUtils, templates) {
             $(this).toggleClass('selected');
             $("#login_popup_form").slideToggle();
             return false;
+        });
+
+        // Add lightbox for screenshots
+        $('div.screenshot > a').colorbox({
+            maxWidth: '80%',
+            maxHeight: '80%'
         });
 
         $("time").timeago();
@@ -175,7 +181,7 @@ function($, messages, modal, hashParamUtils, templates) {
                 $('#extension_name, #extension_url').csrfEditable(inlineEditURL);
                 $('#extension_description').csrfEditable(inlineEditURL, {type: 'textarea'});
 
-                $('.screenshot.upload').uploadify('/ajax/upload/screenshot/'+pk);
+                $('.screenshot .upload').parent().uploadify('/ajax/upload/screenshot/'+pk);
                 $('.icon.upload').uploadify('/ajax/upload/icon/'+pk);
             }
 

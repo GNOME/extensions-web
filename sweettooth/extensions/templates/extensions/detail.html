@@ -23,9 +23,11 @@
 
       <div class="extension-details">
         {% if extension.screenshot %}
-        {% block screenshot %}
-        <a href="{{ extension.screenshot.url }}" class="screenshot"><img src="{{ extension.screenshot.url }}" /></a>
-        {% endblock screenshot %}
+            <div class="screenshot">
+                <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}" /></a>
+                {% block screenshot_upload %}
+                {% endblock screenshot_upload %}
+            </div>
         {% else %}
         {% block no-screenshot %}
         {% endblock %}
