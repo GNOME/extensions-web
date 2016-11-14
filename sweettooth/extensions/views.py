@@ -320,7 +320,7 @@ def ajax_details(extension, version=None):
                    description = extension.description,
                    link = extension.get_absolute_url(),
                    icon = extension.icon.url,
-                   screenshot = extension.screenshot.url,
+                   screenshot = extension.screenshot.url if extension.screenshot else None,
                    shell_version_map = extension.visible_shell_version_map)
 
     if version is not None:
