@@ -12,7 +12,7 @@
       </a>
     </h3>
 
-    <span class="author">by <a href="{% url auth-profile user=extension.creator %}">{{ extension.creator }}</a></span>
+    <span class="author">by <a href="{% url 'auth-profile' user=extension.creator %}">{{ extension.creator }}</a></span>
 
     <div>
       {% if extension.screenshot %}
@@ -51,7 +51,7 @@
   <div id="files" data-pk="{{ version.pk }}">
   </div>
   <p>Note: Binary files aren't shown on the web site. To see all
-    files, please <a href="{% url review-download pk=version.pk %}">download
+    files, please <a href="{% url 'review-download' pk=version.pk %}">download
       the extension zipfile</a>.</p>
 </div>
 
@@ -72,9 +72,9 @@
         <td> {{ ver.version }} </td>
         <td>
           {% if ver.version == version.version %}
-          <span class="current_version extension-status {{ ver.get_status_class }}">{{ ver.get_status_display }}</a>
+          <span class="current_version extension-status {{ ver.get_status_class }}">{{ ver.get_status_display }}</span>
           {% else %}
-          <a class="extension-status {{ ver.get_status_class }}" href="{% url review-version pk=ver.pk %}">{{ ver.get_status_display }}</a>
+          <a class="extension-status {{ ver.get_status_class }}" href="{% url 'review-version' pk=ver.pk %}">{{ ver.get_status_display }}</a>
           {% endif %}
         </td>
       </tr>
@@ -88,7 +88,7 @@
 <div id="previous_reviews">
   {% for review in previous_reviews %}
   <div class="review">
-    <a class="review-author" href="{% url auth-profile user=review.reviewer.username %}">{{ review.reviewer }}</a>
+    <a class="review-author" href="{% url 'auth-profile' user=review.reviewer.username %}">{{ review.reviewer }}</a>
     {% if review.new_status %}
     <span class="extension-status {{ review.get_new_status_display|lower }}">
       {% if review.auto %}auto-{% endif%}
@@ -110,7 +110,7 @@
 <h2 class="expanded"> Review </h2>
 
 <div id="review">
-  <form id="review_form" action="{% url review-submit pk=version.pk %}" method="POST">
+  <form id="review_form" action="{% url 'review-submit' pk=version.pk %}" method="POST">
     {% csrf_token %}
     <textarea id="comments" name="comments"></textarea>
     <select name="status">

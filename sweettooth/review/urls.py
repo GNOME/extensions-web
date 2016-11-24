@@ -1,14 +1,14 @@
 
-from django.conf.urls.defaults import patterns, url
-from django.views.generic.list_detail import object_list
+from django.conf.urls import patterns, url
+from django.views.generic.list import ListView
 
-from extensions.models import ExtensionVersion
-from review import views
+from sweettooth.extensions.models import ExtensionVersion
+from sweettooth.review import views
 
 urlpatterns = patterns('',
-    url(r'^$', object_list, dict(queryset=ExtensionVersion.objects.unreviewed(),
-                                 template_object_name='version',
-                                 template_name='review/list.html'),
+    url(r'^$', ListView.as_view(template_name='review/list.html',
+                                queryset=ExtensionVersion.objects.unreviewed(),
+                                context_object_name='version_list'),
         name='review-list'),
     url(r'^ajax/get-file/(?P<pk>\d+)', views.ajax_get_file_view, name='review-ajax-files'),
     url(r'^ajax/get-file-list/(?P<pk>\d+)', views.ajax_get_file_list_view, name='review-ajax-file-list'),

@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from extensions.models import ExtensionVersion
+from sweettooth.extensions.models import ExtensionVersion
 
 class Command(BaseCommand):
     args = ''

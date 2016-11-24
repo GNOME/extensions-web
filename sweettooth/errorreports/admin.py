@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 
-from errorreports.models import ErrorReport
+from sweettooth.errorreports.models import ErrorReport
 
 class ErrorReportAdmin(admin.ModelAdmin):
     list_display = 'extension', 'user'

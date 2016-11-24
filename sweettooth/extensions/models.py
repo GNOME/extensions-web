@@ -63,13 +63,22 @@ def build_shell_version_map(versions):
 
     return shell_version_map
 
+
+def make_screenshot_filename(obj, filename=None):
+    return "screenshots/screenshot_%d.png" % (obj.pk,)
+
+
+def make_icon_filename(obj, filename=None):
+    return "icons/icon_%d.png" % (obj.pk,)
+
+
 class Extension(models.Model):
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
     creator = models.ForeignKey(User, db_index=True)
     description = models.TextField(blank=True)
-    url = models.URLField(verify_exists=False, blank=True)
+    url = models.URLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
@@ -79,14 +88,7 @@ class Extension(models.Model):
             ("can-modify-data", "Can modify extension data"),
         )
 
-    def make_screenshot_filename(self, filename=None):
-        return "screenshots/screenshot_%d.png" % (self.pk,)
-
     screenshot = models.ImageField(upload_to=make_screenshot_filename, blank=True)
-
-    def make_icon_filename(self, filename=None):
-        return "icons/icon_%d.png" % (self.pk,)
-
     icon = models.ImageField(upload_to=make_icon_filename, blank=True, default="/static/images/plugin.png")
 
     objects = ExtensionManager()
@@ -194,7 +196,11 @@ class ShellVersionManager(models.Manager):
 
     def get_for_version_string(self, version_string):
         major, minor, point = parse_version_string(version_string)
-        obj, created = self.get_or_create(major=major, minor=minor, point=point)
+        try:
+            obj = self.get(major=major, minor=minor, point=point)
+        except self.model.DoesNotExist:
+            obj = self.create(major=major, minor=minor, point=point)
+
         return obj
 
 class ShellVersion(models.Model):
@@ -261,6 +267,11 @@ class ExtensionVersionManager(models.Manager):
     def visible(self):
         return self.filter(status=STATUS_ACTIVE)
 
+
+def make_filename(obj, filename=None):
+    return "%s.v%d.shell-extension.zip" % (obj.extension.uuid, obj.version)
+
+
 class ExtensionVersion(models.Model):
     extension = models.ForeignKey(Extension, related_name="versions")
     version = models.IntegerField(default=0)
@@ -274,9 +285,6 @@ class ExtensionVersion(models.Model):
 
     def __unicode__(self):
         return "Version %d of %s" % (self.version, self.extension)
-
-    def make_filename(self, filename):
-        return "%s.v%d.shell-extension.zip" % (self.extension.uuid, self.version)
 
     source = models.FileField(upload_to=make_filename,
                               max_length=filename_max_length)

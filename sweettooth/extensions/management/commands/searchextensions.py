@@ -1,7 +1,7 @@
 
 from django.core.management.base import BaseCommand, make_option
-from extensions.models import Extension
-from extensions.search import enquire
+from sweettooth.extensions.models import Extension
+from sweettooth.extensions.search import enquire
 
 def append_version(option, opt_str, value, parser):
     values = parser.values

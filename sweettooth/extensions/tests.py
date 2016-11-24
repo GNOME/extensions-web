@@ -14,9 +14,9 @@ except ImportError:
 from django.test import TestCase, TransactionTestCase
 from django.core.files.base import File
 from django.core.urlresolvers import reverse
-from extensions import models
+from sweettooth.extensions import models
 
-from testutils import BasicUserTestCase
+from sweettooth.testutils import BasicUserTestCase
 
 testdata_dir = os.path.join(os.path.dirname(__file__), 'testdata')
 
@@ -53,21 +53,21 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
                     "description": "Simple test metadata"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        self.assertEquals(extension.first_line_of_description, "Simple test metadata")
+        self.assertEqual(extension.first_line_of_description, "Simple test metadata")
 
         metadata = {"uuid": "test-metadata-2@mecheye.net",
                     "name": "Test Metadata",
                     "description": "First line\n\Second line"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        self.assertEquals(extension.first_line_of_description, "First line")
+        self.assertEqual(extension.first_line_of_description, "First line")
 
         metadata = {"uuid": "test-metadata-3@mecheye.net",
                     "name": "Test Metadata",
                     "description": ""}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        self.assertEquals(extension.first_line_of_description, "")
+        self.assertEqual(extension.first_line_of_description, "")
 
     def test_shell_versions_json(self):
         metadata = {"uuid": "test-metadata@mecheye.net",
@@ -79,7 +79,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
                                                          status=models.STATUS_UNREVIEWED)
         version.parse_metadata_json(metadata)
 
-        self.assertEquals(version.shell_versions_json, '["3.2", "3.2.1"]')
+        self.assertEqual(version.shell_versions_json, '["3.2", "3.2.1"]')
 
 class ParseZipfileTest(BasicUserTestCase, TestCase):
     def test_simple_metadata(self):
@@ -92,9 +92,9 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         version = models.ExtensionVersion(extension=extension)
         version.parse_metadata_json(metadata)
 
-        self.assertEquals(extension.name, "Test Metadata")
-        self.assertEquals(extension.description, "Simple test metadata")
-        self.assertEquals(extension.url, "http://test-metadata.gnome.org")
+        self.assertEqual(extension.name, "Test Metadata")
+        self.assertEqual(extension.description, "Simple test metadata")
+        self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
     def test_simple_zipdata_data(self):
         with get_test_zipfile('SimpleExtension') as f:
@@ -104,10 +104,10 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         version = models.ExtensionVersion(extension=extension)
         version.parse_metadata_json(metadata)
 
-        self.assertEquals(extension.uuid, "test-extension@mecheye.net")
-        self.assertEquals(extension.name, "Test Extension")
-        self.assertEquals(extension.description, "Simple test metadata")
-        self.assertEquals(extension.url, "http://test-metadata.gnome.org")
+        self.assertEqual(extension.uuid, "test-extension@mecheye.net")
+        self.assertEqual(extension.name, "Test Extension")
+        self.assertEqual(extension.description, "Simple test metadata")
+        self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
     def test_extra_metadata(self):
         with get_test_zipfile('ExtraMetadata') as f:
@@ -118,8 +118,8 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         version.parse_metadata_json(metadata)
 
         extra = json.loads(version.extra_json_fields)
-        self.assertEquals(extension.uuid, "test-extension-2@mecheye.net")
-        self.assertEquals(extra["extra"], "This is some good data")
+        self.assertEqual(extension.uuid, "test-extension-2@mecheye.net")
+        self.assertEqual(extra["extra"], "This is some good data")
         self.assertTrue("description" not in extra)
         self.assertTrue("url" not in extra)
 
@@ -130,17 +130,17 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         with get_test_zipfile('TooLarge') as f:
             with self.assertRaises(models.InvalidExtensionData) as cm:
                 models.parse_zipfile_metadata(f)
-            self.assertEquals(cm.exception.message, "Zip file is too large")
+            self.assertEqual(cm.exception.message, "Zip file is too large")
 
         with get_test_zipfile('NoMetadata') as f:
             with self.assertRaises(models.InvalidExtensionData) as cm:
                 models.parse_zipfile_metadata(f)
-            self.assertEquals(cm.exception.message, "Missing metadata.json")
+            self.assertEqual(cm.exception.message, "Missing metadata.json")
 
         with get_test_zipfile('BadMetadata') as f:
             with self.assertRaises(models.InvalidExtensionData) as cm:
                 models.parse_zipfile_metadata(f)
-            self.assertEquals(cm.exception.message, "Invalid JSON data")
+            self.assertEqual(cm.exception.message, "Invalid JSON data")
 
 class ReplaceMetadataTest(BasicUserTestCase, TestCase):
     @unittest.expectedFailure
@@ -184,18 +184,18 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
 
     def test_upload_page_works(self):
         response = self.client.get(reverse('extensions-upload-file'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_upload_parsing(self):
         response = self.upload_file('SimpleExtension')
         extension = models.Extension.objects.get(uuid="test-extension@mecheye.net")
         version1 = extension.versions.order_by("-version")[0]
 
-        self.assertEquals(version1.status, models.STATUS_UNREVIEWED)
-        self.assertEquals(extension.creator, self.user)
-        self.assertEquals(extension.name, "Test Extension")
-        self.assertEquals(extension.description, "Simple test metadata")
-        self.assertEquals(extension.url, "http://test-metadata.gnome.org")
+        self.assertEqual(version1.status, models.STATUS_UNREVIEWED)
+        self.assertEqual(extension.creator, self.user)
+        self.assertEqual(extension.name, "Test Extension")
+        self.assertEqual(extension.description, "Simple test metadata")
+        self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
         url = reverse('extensions-detail', kwargs=dict(pk=extension.pk,
                                                        slug=extension.slug))
@@ -208,11 +208,11 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.upload_file('SimpleExtension')
 
         version2 = extension.versions.order_by("-version")[0]
-        self.assertNotEquals(version1, version2)
+        self.assertNotEqual(version1, version2)
 
         # This should be auto-approved.
-        self.assertEquals(version2.status, models.STATUS_ACTIVE)
-        self.assertEquals(version2.version, version1.version+1)
+        self.assertEqual(version2.status, models.STATUS_ACTIVE)
+        self.assertEqual(version2.version, version1.version+1)
 
     def test_upload_large_uuid(self):
         self.upload_file('LargeUUID')
@@ -221,11 +221,11 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         extension = models.Extension.objects.get(uuid=large_uuid)
         version1 = extension.versions.order_by("-version")[0]
 
-        self.assertEquals(version1.status, models.STATUS_UNREVIEWED)
-        self.assertEquals(extension.creator, self.user)
-        self.assertEquals(extension.name, "Large UUID test")
-        self.assertEquals(extension.description, "Simple test metadata")
-        self.assertEquals(extension.url, "http://test-metadata.gnome.org")
+        self.assertEqual(version1.status, models.STATUS_UNREVIEWED)
+        self.assertEqual(extension.creator, self.user)
+        self.assertEqual(extension.name, "Large UUID test")
+        self.assertEqual(extension.description, "Simple test metadata")
+        self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
     def test_upload_bad_shell_version(self):
         self.upload_file('BadShellVersion')
@@ -243,15 +243,15 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion.objects.create(extension=extension,
                                                          status=models.STATUS_ACTIVE)
-        self.assertEquals(version.version, 1)
+        self.assertEqual(version.version, 1)
         # Make sure that saving again doesn't change the version.
         version.save()
-        self.assertEquals(version.version, 1)
+        self.assertEqual(version.version, 1)
         version.save()
-        self.assertEquals(version.version, 1)
+        self.assertEqual(version.version, 1)
 
-        self.assertEquals(version.version, 1)
-        self.assertEquals(extension.latest_version, version)
+        self.assertEqual(version.version, 1)
+        self.assertEqual(extension.latest_version, version)
 
     def test_multiple_versions(self):
         metadata = {"name": "Test Metadata 2",
@@ -263,14 +263,14 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
 
         v1 = models.ExtensionVersion.objects.create(extension=extension,
                                                     status=models.STATUS_ACTIVE)
-        self.assertEquals(v1.version, 1)
+        self.assertEqual(v1.version, 1)
 
         v2 = models.ExtensionVersion.objects.create(extension=extension,
                                                     status=models.STATUS_ACTIVE)
-        self.assertEquals(v2.version, 2)
+        self.assertEqual(v2.version, 2)
 
-        self.assertEquals(list(extension.visible_versions.order_by('version')), [v1, v2])
-        self.assertEquals(extension.latest_version, v2)
+        self.assertEqual(list(extension.visible_versions.order_by('version')), [v1, v2])
+        self.assertEqual(extension.latest_version, v2)
 
     def test_unpublished_version(self):
         metadata = {"name": "Test Metadata 3",
@@ -282,21 +282,21 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
 
         v1 = models.ExtensionVersion.objects.create(extension=extension,
                                                     status=models.STATUS_ACTIVE)
-        self.assertEquals(v1.version, 1)
+        self.assertEqual(v1.version, 1)
 
         v2 = models.ExtensionVersion.objects.create(extension=extension,
                                                     status=models.STATUS_UNREVIEWED)
-        self.assertEquals(v2.version, 2)
+        self.assertEqual(v2.version, 2)
 
-        self.assertEquals(list(extension.visible_versions.order_by('version')), [v1])
-        self.assertEquals(extension.latest_version, v1)
+        self.assertEqual(list(extension.visible_versions.order_by('version')), [v1])
+        self.assertEqual(extension.latest_version, v1)
 
         v3 = models.ExtensionVersion.objects.create(extension=extension,
                                                     status=models.STATUS_ACTIVE)
-        self.assertEquals(v3.version, 3)
+        self.assertEqual(v3.version, 3)
 
-        self.assertEquals(list(extension.visible_versions.order_by('version')), [v1, v3])
-        self.assertEquals(extension.latest_version, v3)
+        self.assertEqual(list(extension.visible_versions.order_by('version')), [v1, v3])
+        self.assertEqual(extension.latest_version, v3)
 
     def test_shell_versions_simple(self):
         metadata = {"name": "Test Metadata 4",
@@ -311,7 +311,7 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         version.parse_metadata_json(metadata)
 
         shell_versions = sorted(sv.version_string for sv in version.shell_versions.all())
-        self.assertEquals(shell_versions, ["3.0.0", "3.0.1", "3.0.2"])
+        self.assertEqual(shell_versions, ["3.0.0", "3.0.1", "3.0.2"])
 
     def test_shell_versions_stable(self):
         metadata = {"name": "Test Metadata 5",
@@ -327,7 +327,7 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         version.parse_metadata_json(metadata)
 
         shell_versions = sorted(sv.version_string for sv in version.shell_versions.all())
-        self.assertEquals(shell_versions, ["3.0", "3.2"])
+        self.assertEqual(shell_versions, ["3.0", "3.2"])
 
 class ShellVersionTest(TestCase):
     def test_shell_version_parsing(self):
@@ -335,22 +335,22 @@ class ShellVersionTest(TestCase):
         get_version = models.ShellVersion.objects.get_for_version_string
 
         # Make sure we don't create a new version
-        self.assertEquals(lookup_version("3.0.0"), None)
+        self.assertEqual(lookup_version("3.0.0"), None)
         version = get_version("3.0.0")
-        self.assertEquals(lookup_version("3.0.0"), version)
-        self.assertEquals(version.major, 3)
-        self.assertEquals(version.minor, 0)
-        self.assertEquals(version.point, 0)
+        self.assertEqual(lookup_version("3.0.0"), version)
+        self.assertEqual(version.major, 3)
+        self.assertEqual(version.minor, 0)
+        self.assertEqual(version.point, 0)
 
-        self.assertEquals(lookup_version("3.2"), None)
+        self.assertEqual(lookup_version("3.2"), None)
         version = get_version("3.2")
-        self.assertEquals(lookup_version("3.2"), version)
-        self.assertEquals(version.major, 3)
-        self.assertEquals(version.minor, 2)
-        self.assertEquals(version.point, -1)
+        self.assertEqual(lookup_version("3.2"), version)
+        self.assertEqual(version.major, 3)
+        self.assertEqual(version.minor, 2)
+        self.assertEqual(version.point, -1)
 
         version1 = get_version("3.2.2")
-        self.assertEquals(lookup_version("3.2.2.1"), version1)
+        self.assertEqual(lookup_version("3.2.2.1"), version1)
 
         with self.assertRaises(models.InvalidShellVersion):
             get_version("3.1")
@@ -463,6 +463,10 @@ class UpdateVersionTest(TestCase):
     reject_uuid = 'reject-extension@testcases.sweettooth.mecheye.net'
     downgrade_uuid = 'downgrade-extension@testcases.sweettooth.mecheye.net'
     nonexistant_uuid = "blah-blah-blah@testcases.sweettooth.mecheye.net"
+    full_expected = {
+        upgrade_uuid: u'upgrade',
+        downgrade_uuid: u'downgrade',
+        reject_uuid: u'blacklist'}
 
     def build_response(self, installed):
         return dict((k, dict(version=v)) for k, v in installed.iteritems())
@@ -478,7 +482,7 @@ class UpdateVersionTest(TestCase):
         uuid = self.upgrade_uuid
 
         # The user has an old version, upgrade him
-        expected = { uuid: 'upgrade' }
+        expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
 
@@ -489,7 +493,7 @@ class UpdateVersionTest(TestCase):
     def test_reject_me(self):
         uuid = self.reject_uuid
 
-        expected = { uuid: 'blacklist' }
+        expected = {uuid: self.full_expected[self.reject_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
 
@@ -501,7 +505,7 @@ class UpdateVersionTest(TestCase):
         uuid = self.downgrade_uuid
 
         # The user has a rejected version, so downgrade.
-        expected = { uuid: 'downgrade' }
+        expected = { uuid: self.full_expected[self.downgrade_uuid] }
         response = self.grab_response({ uuid: 2 })
         self.assertEqual(response, expected)
 

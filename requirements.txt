@@ -1,7 +1,6 @@
-Django==1.4
-Pygments==1.4
-django-autoslug==1.4.1
-django-registration==0.7
-wsgiref==0.1.2
-South==0.7.3
-sorl-thumbnail
+Django==1.8.15
+django-autoslug==1.9.3
+django-contrib-comments==1.7.3
+django-registration==2.1.2
+Pygments==1.6
+pillow==3.4.2

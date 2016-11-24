@@ -1,6 +1,6 @@
 
 from django.contrib.syndication.views import Feed
-from extensions.models import Extension
+from sweettooth.extensions.models import Extension
 
 class LatestExtensionsFeed(Feed):
     title = "Latest extensions in GNOME Shell Extensions"

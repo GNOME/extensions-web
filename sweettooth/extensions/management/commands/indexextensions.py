@@ -1,7 +1,7 @@
 
 from django.core.management.base import BaseCommand
-from extensions.models import Extension
-from extensions.search import index_extension
+from sweettooth.extensions.models import Extension
+from sweettooth.extensions.search import index_extension
 
 class Command(BaseCommand):
     args = ''

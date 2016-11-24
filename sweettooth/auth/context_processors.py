@@ -1,5 +1,5 @@
 
-from auth import forms
+from sweettooth.auth import forms
 
 def login_form(request):
     if request.user.is_authenticated():

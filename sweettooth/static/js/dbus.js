@@ -13,9 +13,34 @@ define(['jquery'], function($) {
     var exports = {};
 
     var load = exports.load = function(name, req, onLoad, config) {
+        function processLoad()
+        {
+            if (name == "API") {
+                onLoad(window.SweetTooth);
+                return;
+            }
+
+            var apiVersion = undefined;
+
+            try {
+                if (window.SweetTooth) {
+                    apiVersion = window.SweetTooth.apiVersion;
+                }
+            } catch (e) { }
+
+            if (!apiVersion)
+                apiVersion = 'dummy';
+
+            var scriptname = './versions/' + apiVersion + '/main';
+            // requirejs caches response.
+            req([scriptname], function(module) {
+                onLoad(module);
+            });
+        }
 
         $(document).ready(function() {
             if (!('SweetTooth' in window)) {
+                // Try NPAPI plugin
                 try {
                     var MIME_TYPE = 'application/x-gnome-shell-integration';
                     var $plg = $('<embed>', { type: MIME_TYPE });
@@ -43,29 +68,21 @@ define(['jquery'], function($) {
                     // plugin to NULL
                     window.SweetTooth = null;
                 }
+
+                processLoad();
             }
-
-            if (name == "API") {
-                onLoad(window.SweetTooth);
-                return;
+            else if (typeof(SweetTooth.initialize) === 'function')
+            {
+                // Browser extension
+                // SweetTooth.initialize should be Promise or jQuery.Deferred
+                SweetTooth.initialize().then(function() {
+                    processLoad();
+                })
             }
-
-            var apiVersion = undefined;
-
-            try {
-                if (window.SweetTooth) {
-                    apiVersion = window.SweetTooth.apiVersion;
-                }
-            } catch (e) { }
-
-            if (!apiVersion)
-                apiVersion = 'dummy';
-
-            var scriptname = './versions/' + apiVersion + '/main';
-            // requirejs caches response.
-            req([scriptname], function(module) {
-                onLoad(module);
-            });
+            else
+            {
+                processLoad();
+            }
         });
     };
 

@@ -5,10 +5,10 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
-from review.models import CodeReview
-from extensions.models import Extension, ExtensionVersion
+from sweettooth.review.models import CodeReview
+from sweettooth.extensions.models import Extension, ExtensionVersion
 
-from decorators import ajax_view
+from sweettooth.decorators import ajax_view
 
 def profile(request, user):
     userobj = get_object_or_404(models.User, username=user)

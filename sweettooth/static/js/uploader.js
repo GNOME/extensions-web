@@ -1,10 +1,13 @@
 // -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
 
+/*
+    Replaces img src value with changed input value
+ */
 define(['jquery'], function($) {
     "use strict";
 
     $.fn.uploadify = function(url) {
-        var $elem = $(this), $input = $elem.next('input');
+        var $elem = $(this), $input = $elem.find('input[type=file]').first();
 
         var BOUNDARY = ' -- 598275094719306587185414';
         // Stolen from http://demos.hacks.mozilla.org/openweb/imageUploader/js/extends/xhr.js
@@ -19,7 +22,7 @@ define(['jquery'], function($) {
         }
 
         function uploadComplete(result) {
-            var $old = $elem.children().first();
+            var $old = $elem.find('img').first();
             $old.attr('src', result);
             $elem.removeClass('placeholder');
         }
@@ -60,10 +63,6 @@ define(['jquery'], function($) {
             }
 
             return false;
-        });
-
-        $elem.on('click', function(e) {
-            $input.get(0).click();
         });
     };
 });

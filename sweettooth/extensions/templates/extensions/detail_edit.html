@@ -28,10 +28,10 @@
         </td>
         {% if version.is_approved %}
         <td class="extension_status_toggle{% if version.is_active %} visible{% endif %}">
-          <a href="{% url extensions-ajax-set-status-inactive %}">Inactivate</a>
+          <a href="{% url 'extensions-ajax-set-status-inactive' %}">Inactivate</a>
         </td>
         <td class="extension_status_toggle{% if version.is_inactive %} visible{% endif %}">
-          <a href="{% url extensions-ajax-set-status-active %}">Activate</a>
+          <a href="{% url 'extensions-ajax-set-status-active' %}">Activate</a>
         </td>
         {% endif %}
 
@@ -51,11 +51,11 @@
   </div>
 {% endblock %}
 
-{% block screenshot %}
-<div class="screenshot upload">
-  <img src="{{ extension.screenshot.url }}" />
-</div>
-<input type="file" accept="image/*">
+{% block screenshot_upload %}
+  <label class="upload">
+      <span class="action_button">Upload new</span>
+      <input type="file" accept="image/*">
+  </label>
 {% endblock %}
 
 {% block no-screenshot %}
@@ -69,10 +69,10 @@
 
 
 {% block icon %}
-<div class="icon upload">
+<label class="icon upload">
   <img src="{{ extension.icon.url }}">
-</div>
-<input type="file" accept="image/*">
+  <input type="file" accept="image/*">
+</label>
 {% endblock %}
 
 {% block extra-ext-class %}can-edit{% endblock %}

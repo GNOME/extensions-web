@@ -10,7 +10,7 @@
     Leave a...
     <a href="javascript:void 0" id="leave_comment">Comment</a>
     <a href="javascript:void 0" id="leave_rating">Rating</a>
-    <a href="{% url errorreports.views.report_error pk=extension.pk %}">Bug report</a>
+    <a href="{% url 'sweettooth.errorreports.views.report_error' pk=extension.pk %}">Bug report</a>
   </div>
   <div id="rating_form">
     {% load comments %}
@@ -18,7 +18,7 @@
   </div>
   {% else %}
   <p class="unauthenticated">
-    Unfortunately, to help prevent spam, we require that you <a href="{% url auth-login %}">log in to GNOME Shell Extensions</a> in order to post a comment or report an error. You understand, right?
+    Unfortunately, to help prevent spam, we require that you <a href="{% url 'auth-login' %}">log in to GNOME Shell Extensions</a> in order to post a comment or report an error. You understand, right?
   </p>
   {% endif %}
 </div>
