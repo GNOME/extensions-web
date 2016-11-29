@@ -21,11 +21,6 @@ urlpatterns = patterns('',
     url(r'settings/(?P<user>.+)', TemplateView.as_view(template_name='registration/settings.html'),
         name='auth-settings'),
 
-    url(r'^password/reset/$', auth_views.password_reset,
-        {'post_reset_redirect': 'auth_password_reset_done',
-        'email_template_name': 'registration/password_reset_email.html'},
-        name='auth_password_reset'),
-
     url(r'', include('registration.backends.default.urls')),
     url(r'^profile/(?P<user>.+)', views.profile, name='auth-profile'),
     url(r'^profile/', views.profile_redirect, name='auth-profile'),
