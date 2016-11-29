@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import ugettext_lazy as _
-from registration.forms import RegistrationForm
+from registration.forms import RegistrationFormUniqueEmail
 
 class PlainOutputForm(object):
     def as_plain(self):
@@ -33,7 +33,7 @@ class InlineAuthenticationForm(PlainOutputForm, AutoFocusForm,
 class AuthenticationForm(AutoFocusForm, auth_forms.AuthenticationForm):
     pass
 
-class RegistrationForm(RegistrationForm):
+class RegistrationForm(RegistrationFormUniqueEmail):
     # Copies the standard setting from the django.contrib.auth.forms
     username = forms.RegexField(label=_("Username"), max_length=30, regex=r'^[\w.@+-]+$',
         help_text = _("Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."),
