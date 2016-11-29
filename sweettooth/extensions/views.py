@@ -201,7 +201,7 @@ def ajax_query_search_query(request, versions, n_per_page):
 @ajax_view
 def ajax_query_view(request):
     try:
-        n_per_page = int(request.GET['n_per_page'])
+        n_per_page = min(int(request.GET['n_per_page']), 25)
     except (KeyError, ValueError), e:
         n_per_page = 10
 
