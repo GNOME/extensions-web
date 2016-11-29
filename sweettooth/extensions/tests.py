@@ -527,6 +527,19 @@ class UpdateVersionTest(TestCase):
         response = self.grab_response(installed)
         self.assertEqual(self.full_expected, response)
 
+    def test_wrong_version(self):
+        uuid = self.upgrade_uuid
+
+        # The user provided wrong version, upgrade him if we have version > 1
+        expected = {uuid: self.full_expected[self.upgrade_uuid]}
+        response = self.grab_response({uuid: ''})
+        self.assertEqual(response, expected)
+
+        expected = {uuid: self.full_expected[self.upgrade_uuid]}
+        response = self.grab_response({uuid: '0.8.4'})
+        self.assertEqual(response, expected)
+
+
 class QueryExtensionsTest(BasicUserTestCase, TestCase):
     def get_response(self, params):
         response = self.client.get(reverse('extensions-query'), params)
