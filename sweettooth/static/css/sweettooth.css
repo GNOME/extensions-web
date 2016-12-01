@@ -346,6 +346,13 @@ li.extension:last-child {
     color: #445;
 }
 
+.extension .system-extension {
+    margin: 0;
+    margin-left: 8px;
+    font-size: 0.8em;
+    cursor: help;
+}
+
 .extension .author, .extension .author a {
     color: #888;
 }

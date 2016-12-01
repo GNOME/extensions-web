@@ -11,10 +11,13 @@
   {{name}}
   {{/link}}
 </h3>
+{{#system}}
+  <div class='system-extension' title='System extension should be uninstalled using package manager. See «About» page for more details.'>System extension</div>
+{{/system}}
 {{#creator}}
   <span class="author">by <a href="{{creator_url}}"> {{creator}} </a></span>
 {{/creator}}
 <p class="description">{{first_line_of_description}}</p>
-{{#want_uninstall}}
+{{^system}}
   <button class="uninstall" title="Uninstall">Uninstall</button>
-{{/want_uninstall}}
+{{/system}}

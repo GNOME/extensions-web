@@ -217,7 +217,12 @@ function($, messages, dbusProxy, extensionUtils, templates) {
                         var $elem = $('<a>');
 
                         function renderExtension() {
-                            extension.want_uninstall = true;
+                            // https://git.gnome.org/browse/gnome-shell/tree/js/misc/extensionUtils.js#n16
+                            // ExtensionType.SYSTEM = 1
+                            if (extension.type === 1) {
+                                extension.system = true;
+                            }
+
                             if (extension.description)
                                 extension.first_line_of_description = extension.description.split('\n')[0];
 
