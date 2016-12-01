@@ -21,12 +21,13 @@ def comment_details(request, comment):
     extension = comment.content_object
     gravatar = gravatar_url(request, comment.email)
     is_extension_creator = (comment.user == extension.creator)
+    username = comment.user.username if comment.user else "nobody"
 
     details = dict(gravatar = gravatar,
                    is_extension_creator = is_extension_creator,
                    comment = comment.comment,
-                   author = dict(username=comment.user.username,
-                                 url=reverse('auth-profile', kwargs=dict(user=comment.user.username))),
+                   author = dict(username=username,
+                                 url=reverse('auth-profile', kwargs=dict(user=username))),
                    date = dict(timestamp = comment.submit_date.isoformat(),
                                standard = format_date(comment.submit_date, 'F j, Y')))
 
