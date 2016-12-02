@@ -7,7 +7,7 @@ from django.http import HttpResponse
 
 from django.contrib import admin
 from django.views import static
-from django.contrib.staticfiles import urls as static_urls
+from django.views.generic.base import TemplateView
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^comments/', include('sweettooth.ratings.urls')),
     url(r'^comments/', include('django_comments.urls')),
-
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 )
 
 if settings.DEBUG:
