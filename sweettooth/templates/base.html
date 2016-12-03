@@ -13,7 +13,9 @@
     <script src="/static/js/require.js"></script>
     <script src="/static/js/jquery.js"></script>
     <script>
-      require(['main'], function(){});
+        jQuery(function($) {
+            require(['main'], function(){});
+        });
     </script>
     {% block head %} {% endblock %}
   </head>
