@@ -8,7 +8,10 @@
           href="{% url 'extensions-rss-feed' %}" title="Latest extensions in GNOME Shell Extensions" />
     <title>{% block title %}GNOME Shell Extensions{% endblock %}</title>
     <script>
-      var require = { baseUrl: '/static/js/' };
+        var require = {
+            baseUrl: '/static/js/',
+            waitSeconds: 30 // It's fails sometimes with default 7 secs
+        };
     </script>
     <script src="/static/js/require.js"></script>
     <script src="/static/js/jquery.js"></script>
