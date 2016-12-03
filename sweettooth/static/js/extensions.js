@@ -73,7 +73,7 @@ function($, messages, dbusProxy, extensionUtils, templates) {
     dbusProxy.extensionStateChangedHandler = extensionStateChanged;
 
     dbusProxy.shellRestartHandler = function() {
-        dbusProxy.ListExtensions().done(function(extensions) {
+        dbusProxy.ListExtensions().then(function(extensions) {
             $.each(extensions, function() {
                 extensionStateChanged(this.uuid, this.state);
             });
@@ -94,13 +94,13 @@ function($, messages, dbusProxy, extensionUtils, templates) {
 
         $elem.find('.upgrade-button').on('click', function() {
             $elem.removeClass('upgradable');
-            dbusProxy.UninstallExtension(uuid).done(function(result) {
+            dbusProxy.UninstallExtension(uuid).then(function(result) {
                 // If we weren't able to uninstall the extension, don't
                 // do anything more.
                 if (!result)
                     return;
 
-                dbusProxy.InstallExtension(uuid).done(function(result) {
+                dbusProxy.InstallExtension(uuid).then(function(result) {
                     if (result === 'cancelled') {
                         // WELP. We can't really do anything except leave the
                         // thing uninstalled.
@@ -135,7 +135,7 @@ function($, messages, dbusProxy, extensionUtils, templates) {
                 if (oldState == ExtensionState.UNINSTALLED) {
                     // If the extension is uninstalled and we
                     // flick the switch on, install.
-                    dbusProxy.InstallExtension(uuid).done(function(result) {
+                    dbusProxy.InstallExtension(uuid).then(function(result) {
                         if (result === 'succeeded') {
                             sendPopularity('enable');
                         } else if (result === 'cancelled') {
@@ -183,7 +183,7 @@ function($, messages, dbusProxy, extensionUtils, templates) {
     $.fn.addLocalExtensions = function () {
         return this.each(function() {
             var $container = $(this);
-            dbusProxy.ListExtensions().done(function(extensions) {
+            dbusProxy.ListExtensions().then(function(extensions) {
                 if (extensions && !$.isEmptyObject(extensions)) {
                     var extensionValues = [];
                     for (var uuid in extensions) {
@@ -204,7 +204,7 @@ function($, messages, dbusProxy, extensionUtils, templates) {
                         var uuid = extension.uuid;
 
                         function uninstall() {
-                            dbusProxy.UninstallExtension(uuid).done(function(result) {
+                            dbusProxy.UninstallExtension(uuid).then(function(result) {
                                 if (result) {
                                     $elem.fadeOut({ queue: false }).slideUp({ queue: false });
                                     messages.addInfo(templates.get('extensions/uninstall')(extension));
@@ -261,8 +261,8 @@ function($, messages, dbusProxy, extensionUtils, templates) {
             var $form = $(this);
             var uuid = $form.data('uuid');
             var $textarea = $form.find('textarea');
-            dbusProxy.GetExtensionInfo(uuid).done(function(meta) {
-                dbusProxy.GetErrors($form.data('uuid')).done(function(errors) {
+            dbusProxy.GetExtensionInfo(uuid).then(function(meta) {
+                dbusProxy.GetErrors($form.data('uuid')).then(function(errors) {
                     var context = { sv: dbusProxy.ShellVersion,
                                     ev: (meta && meta.version) ? meta.version : null,
                                     errors: errors };
@@ -292,7 +292,7 @@ function($, messages, dbusProxy, extensionUtils, templates) {
                 }
             });
 
-            dbusProxy.GetExtensionInfo(uuid).done(function(meta) {
+            dbusProxy.GetExtensionInfo(uuid).then(function(meta) {
                 addExtensionSwitch(uuid, $extension, meta);
             });
         });

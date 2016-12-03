@@ -4,23 +4,21 @@ define(['jquery', 'dbus!API'], function($, API) {
     "use strict";
 
     function _makeRawPromise(result) {
-        // Check if result is promise already
-        if(isPromise(result))
-            return result;
-
         return (new $.Deferred()).resolve(result);
     }
 
     function _makePromise(result) {
         // Check if result is promise already
         if(isPromise(result))
+        {
             return result;
+        }
 
         return _makeRawPromise(JSON.parse(result));
     }
 
     function isPromise(value) {
-        return value && value.promise;
+        return value && typeof(value.then) == 'function';
     }
 
     return {
@@ -56,7 +54,7 @@ define(['jquery', 'dbus!API'], function($, API) {
             var result = API.installExtension(uuid);
 
             if(isPromise(result))
-		    return result;
+                return result;
 
             return _makeRawPromise('succeeded');
         },
@@ -65,7 +63,7 @@ define(['jquery', 'dbus!API'], function($, API) {
             var result = API.installExtension(uuid, "");
 
             if(isPromise(result))
-		    return result;
+                return result;
 
             return _makeRawPromise('succeeded');
         },
@@ -75,7 +73,7 @@ define(['jquery', 'dbus!API'], function($, API) {
             var result = API.installExtension(uuid, d.done.bind(d), d.fail.bind(d));
 
             if(isPromise(result))
-		    return result;
+                return result;
 
             return d;
         },
