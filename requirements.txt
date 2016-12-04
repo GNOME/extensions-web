@@ -1,7 +1,7 @@
-Django==1.8.15
-django-autoslug==1.9.3
-django-contrib-comments==1.7.3
-django-registration==2.1.2
-Pygments==1.6
-pillow==3.4.2
-chardet>=2.2.1
+Django == 1.8.15
+django-autoslug >= 1.4.1
+django-contrib-comments == 1.7.3
+django-registration == 2.1.2
+Pygments >= 1.4
+pillow >= 2.0.0
+chardet >= 2.2.1
