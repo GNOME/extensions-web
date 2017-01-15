@@ -44,9 +44,14 @@ function($, messages, modal, hashParamUtils, templates) {
         });
 
         // Add lightbox for screenshots
-        $('div.screenshot > a').colorbox({
-            maxWidth: '80%',
-            maxHeight: '80%'
+        $('div.extension-details').on('click', 'div.screenshot > a', function(event) {
+            event.preventDefault();
+
+            $.colorbox({
+                href: $(this).prop('href'),
+                maxWidth: '80%',
+                maxHeight: '80%'
+            });
         });
 
         $("time").timeago();

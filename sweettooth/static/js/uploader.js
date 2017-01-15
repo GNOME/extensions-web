@@ -23,8 +23,27 @@ define(['jquery'], function($) {
 
         function uploadComplete(result) {
             var $old = $elem.find('img').first();
-            $old.attr('src', result);
-            $elem.removeClass('placeholder');
+            if($old.length == 0)
+            {
+                $elem.prepend(
+                    $('<a />')
+                        .prop('href', result)
+                        .append(
+                            $('<img />')
+                                .prop('src', result)
+                        )
+                );
+            }
+            else
+            {
+                $old.prop('src', result);
+                $elem.removeClass('placeholder');
+
+                if ($old.parent().is('a'))
+                {
+                    $old.parent().prop('href', result);
+                }
+            }
         }
 
         $input.on('change', function(e) {

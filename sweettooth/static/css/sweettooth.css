@@ -490,30 +490,7 @@ li.extension:last-child {
     display: none;
 }
 
-.extension .upload.placeholder {
-    border: 2px dashed #ccc;
-    padding: 0;
-    background-color: #eee;
-}
-
 .extension .screenshot .upload {
-    text-align: center;
-}
-
-.extension .screenshot.upload.placeholder {
-    width: 250px;
-    height: 200px;
-}
-
-.extension .screenshot.upload.placeholder .text {
-    display: table;
-    width: 100%;
-    height: 100%;
-}
-
-.extension .screenshot.upload.placeholder .text span {
-    display: table-cell;
-    vertical-align: middle;
     text-align: center;
 }
 
