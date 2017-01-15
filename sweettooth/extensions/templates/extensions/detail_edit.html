@@ -51,13 +51,24 @@
   </div>
 {% endblock %}
 
-{% block screenshot_upload %}
-  <label class="upload">
-      <span class="action_button">Upload screenshot</span>
-      <input type="file" accept="image/*">
-  </label>
+{% block screenshot %}
+    <div class="screenshot">
+        <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}"/></a>
+        <label class="upload">
+            <span class="action_button">Upload screenshot</span>
+            <input type="file" accept="image/*">
+        </label>
+    </div>
 {% endblock %}
 
+{% block no-screenshot %}
+    <div class="screenshot">
+        <label class="upload">
+            <span class="action_button">Upload screenshot</span>
+            <input type="file" accept="image/*">
+        </label>
+    </div>
+{% endblock %}
 
 {% block icon %}
 <label class="icon upload">

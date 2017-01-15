@@ -22,13 +22,16 @@
       </div>
 
       <div class="extension-details">
-            <div class="screenshot">
-                {% if extension.screenshot %}
-                <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}" /></a>
-                {% endif %}
-                {% block screenshot_upload %}
-                {% endblock screenshot_upload %}
-            </div>
+          {% if extension.screenshot %}
+              {% block screenshot %}
+              <div class="screenshot">
+                  <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}" /></a>
+              </div>
+              {% endblock screenshot %}
+          {% else %}
+              {% block no-screenshot %}
+              {% endblock no-screenshot %}
+          {% endif %}
 
         <p class="description" id="extension_description">{{ extension.description }}</p>
 
