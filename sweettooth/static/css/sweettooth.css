@@ -317,14 +317,13 @@ li.extension:last-child {
     padding: 0;
     margin-top: 10px;
     position: relative;
-    margin-left: 172px;
 }
 
 .extension.out-of-date > * {
     opacity: 0.5;
 }
 
-.extension.out-of-date .uninstall,
+.extension.out-of-date .uninstall-button,
 .extension.out-of-date .upgrade-button {
     opacity: 1.0;
 }
@@ -340,6 +339,10 @@ li.extension:last-child {
     margin: 0;
     margin-left: 8px;
     font-size: 1.3em;
+}
+
+.extension .extension-header .extension-name {
+    margin-left: 0;
 }
 
 .extension .extension-name a:hover {
@@ -361,22 +364,22 @@ li.extension:last-child {
     color: #666;
 }
 
-/* Upgrade, Configure buttons */
+/* Upgrade, Configure, Uninstall buttons */
 
 .extension .extra-buttons {
-    position: absolute;
-    margin-left: -172px;
+    float: right;
     margin-top: 4px;
-    width: 72px;
 }
 
 .extension .configure-button,
-.extension .upgrade-button {
+.extension .upgrade-button,
+.extension .uninstall-button {
     display: none;
 }
 
 .extension.configurable .configure-button,
-.extension.upgradable .upgrade-button {
+.extension.upgradable .upgrade-button,
+.extension.installed .uninstall-button {
     float: right;
 
     display: block;
@@ -387,7 +390,7 @@ li.extension:last-child {
     border-style: solid;
     border-width: 2px;
     text-align: center;
-    margin-right: 8px;
+    margin-right: 3px;
 
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -417,12 +420,23 @@ li.extension:last-child {
     border-color: #75a444;
 }
 
+.extension .uninstall-button {
+    background-color: #de2900;
+    background-image: url(../images/uninstall-extension.png);
+    border-color: #bf2000;
+}
+
+.extension .uninstall-button:hover {
+    background-color: #f22c00;
+    border-color: #d92400;
+}
+
 /* Extension switch */
 
 .extension ._gnome-switch {
-    position: absolute;
-    margin-left: -100px;
     margin-top: 4px;
+    margin-right: 32px;
+    float: right;
 }
 
 ._gnome-switch.customized .error {
@@ -497,24 +511,6 @@ li.extension:last-child {
 }
 
 /* Various other things */
-
-.extension .uninstall {
-    text-indent: -9999em;
-    border: none;
-    padding: 0;
-
-    background-color: transparent;
-    background-image: url(../images/edit-delete.png);
-
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 0.8em;
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-}
 
 .extension dt, .extension dd {
     font-size: 1em;

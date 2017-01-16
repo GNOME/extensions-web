@@ -1,8 +1,3 @@
-<div class="switch"></div>
-<div class="extra-buttons">
-  <div class="upgrade-button" title="Upgrade this extension"></div>
-  <div class="configure-button" title="Configure this extension"></div>
-</div>
 <h3 class="extension-name">
   {{#link}}
     <a href="{{link}}" class="title-link"><img src="{{icon}}" class="icon">{{name}}</a>
@@ -12,12 +7,18 @@
   {{/link}}
 </h3>
 {{#creator}}
-  <span class="author">by <a href="{{creator_url}}"> {{creator}} </a></span>
+  <span class="author">by <a href="{{creator_url}}">{{creator}}</a></span>
 {{/creator}}
+<div class="switch"></div>
+<div class="extra-buttons">
+  <div class="upgrade-button" title="Upgrade this extension"></div>
+  <div class="configure-button" title="Configure this extension"></div>
+{{^system}}
+  <div class="uninstall-button" title="Uninstall this extension"></div>
+{{/system}}
+</div>
+<div style="clear: both"></div>
 {{#system}}
   <div class='system-extension' title='System extension should be uninstalled using package manager. See «About» page for more details.'>System extension</div>
 {{/system}}
 <p class="description">{{first_line_of_description}}</p>
-{{^system}}
-  <button class="uninstall" title="Uninstall">Uninstall</button>
-{{/system}}

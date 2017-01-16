@@ -110,6 +110,21 @@ function($, messages, dbusProxy, extensionUtils, templates) {
             });
         });
 
+        $elem.find('.uninstall-button').on('click', function () {
+			dbusProxy.UninstallExtension(uuid).then(function (result) {
+				if (result)
+				{
+					$elem.fadeOut({queue: false}).slideUp({queue: false});
+					messages.addInfo(templates.get('extensions/uninstall')(meta));
+				}
+			});
+		});
+
+        if([ExtensionState.UNINSTALLED, ExtensionState.DOWNLOADING].indexOf(_state) == -1)
+        {
+            $elem.addClass('installed');
+        }
+
         $elem.data({'elem': $elem,
                     'state': _state});
 
@@ -203,15 +218,6 @@ function($, messages, dbusProxy, extensionUtils, templates) {
                     extensionValues.forEach(function(extension) {
                         var uuid = extension.uuid;
 
-                        function uninstall() {
-                            dbusProxy.UninstallExtension(uuid).then(function(result) {
-                                if (result) {
-                                    $elem.fadeOut({ queue: false }).slideUp({ queue: false });
-                                    messages.addInfo(templates.get('extensions/uninstall')(extension));
-                                }
-                            });
-                        }
-
                         // Give us a dummy element that we'll replace when
                         // rendering below, to keep renderExtension simple.
                         var $elem = $('<a>');
@@ -227,7 +233,6 @@ function($, messages, dbusProxy, extensionUtils, templates) {
                                 extension.first_line_of_description = extension.description.split('\n')[0];
 
                             $elem = $(templates.get('extensions/info')(extension)).replaceAll($elem);
-                            $elem.find('.uninstall').on('click', uninstall);
 
                             addExtensionSwitch(uuid, $elem, extension);
                         }

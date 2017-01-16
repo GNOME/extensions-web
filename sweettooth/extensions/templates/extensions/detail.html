@@ -21,6 +21,8 @@
         <span class="author">by <a href="{% url 'auth-profile' user=extension.creator.username %}">{{ extension.creator }}</a></span>
       </div>
 
+      <div style="clear: both;"></div>
+
       <div class="extension-details">
           {% if extension.screenshot %}
               {% block screenshot %}
