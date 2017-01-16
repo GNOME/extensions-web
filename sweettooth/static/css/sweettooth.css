@@ -435,6 +435,7 @@ li.extension:last-child {
     font-size: 1.2em;
     overflow: auto;
     white-space: pre-line;
+    padding-left: 36px;
 }
 
 .extension textarea {
@@ -474,6 +475,7 @@ li.extension:last-child {
     height: 32px;
     display: inline-block;
     vertical-align: bottom;
+    margin-right: 4px;
 }
 
 .extension .screenshot label.upload {
