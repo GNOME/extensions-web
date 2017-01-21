@@ -6,12 +6,6 @@
          data-epk="{{ extension.pk }}"
          data-uuid="{{ extension.uuid }}"
          data-svm="{{ shell_version_map }}">
-      <div class="switch"></div>
-      <div class="extra-buttons">
-        <div class="upgrade-button"></div>
-        <div class="configure-button"></div>
-      </div>
-
       <div class="extension-header">
         {% block icon %}
         <img src="{{ extension.icon.url }}" class="icon">
@@ -19,6 +13,14 @@
 
         <h3 class="extension-name" id="extension_name">{{ extension.name }}</h3>
         <span class="author">by <a href="{% url 'auth-profile' user=extension.creator.username %}">{{ extension.creator }}</a></span>
+      </div>
+
+      <div class="controls">
+        <div class="switch"></div>
+        <div class="extra-buttons">
+          <div class="upgrade-button"></div>
+          <div class="configure-button"></div>
+        </div>
       </div>
 
       <div style="clear: both;"></div>

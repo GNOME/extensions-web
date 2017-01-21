@@ -341,6 +341,10 @@ li.extension:last-child {
     font-size: 1.3em;
 }
 
+.extension .extension-header {
+    float: left;
+}
+
 .extension .extension-header .extension-name {
     margin-left: 0;
 }
@@ -366,8 +370,13 @@ li.extension:last-child {
 
 /* Upgrade, Configure, Uninstall buttons */
 
-.extension .extra-buttons {
+.extension .controls {
     float: right;
+    width: 180px;
+}
+
+.extension .extra-buttons {
+    float: left;
     margin-top: 4px;
 }
 
@@ -380,7 +389,7 @@ li.extension:last-child {
 .extension.configurable .configure-button,
 .extension.upgradable .upgrade-button,
 .extension.installed .uninstall-button {
-    float: right;
+    float: left;
 
     display: block;
     height: 24px;
@@ -435,8 +444,8 @@ li.extension:last-child {
 
 .extension ._gnome-switch {
     margin-top: 4px;
-    margin-right: 32px;
-    float: right;
+    margin-right: 0.5em;
+    float: left;
 }
 
 ._gnome-switch.customized .error {
