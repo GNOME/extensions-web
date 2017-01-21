@@ -375,6 +375,11 @@ li.extension:last-child {
     width: 180px;
 }
 
+.extension.single-page .controls {
+    width: auto;
+    margin-right: 32px;
+}
+
 .extension .extra-buttons {
     float: left;
     margin-top: 4px;
