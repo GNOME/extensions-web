@@ -210,10 +210,6 @@ a:visited {
 #top_bar li.selected a {
     font-weight: bold;
 }
-#top_bar li a span.home {
-    background: url("../images/top_bar-item-home.png") no-repeat;
-    padding-left: 18px;
-}
 #top_bar #main_search {
     text-align: right;
 }
@@ -243,49 +239,6 @@ a:visited {
     border-bottom-right-radius: 6px;
 }
 
-
-/* ========================================================================== */
-/* Page Title */
-/* ========================================================================== */
-
-
-
-.page_title {
-    margin: 10px 10px 20px;
-    border-bottom: 1px solid #d3d7cf;
-}
-.page_title .breadcrumb {
-    color: #888a85;
-}
-.page_title .breadcrumb a {
-    color: inherit;
-    text-decoration: none;
-}
-.page_title .breadcrumb a:hover {
-    text-decoration: underline;
-}
-.page_title h1 {
-    margin: 0 0 6px;
-    font-size: 37px;
-    text-shadow: 0 1px 0 #fff;
-    line-height: normal;
-    letter-spacing: -0.05em;
-}
-.page_title h1 a {
-    text-decoration: none;
-    color: inherit;
-}
-.page_title h1 a:hover {
-    text-decoration: underline;
-}
-.page_title.with_subpages_list {
-    display: table-row;
-}
-.page_title.with_subpages_list h1 {
-    display: table-cell;
-    width: 100%;
-}
-
 /* -> subpages list */
 
 /*
@@ -312,16 +265,6 @@ a:visited {
     color: inherit;
     text-decoration: none;
     padding: 3px 6px;
-}
-.page_title .subpages_list li a:hover {
-    outline: 0;
-    background: red;
-    background: #dde5ef url(../images/focus-bg.png) top repeat-x;
-    border: 1px solid #bbc5d5;
-    padding: 2px 5px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 .page_title .subpages_list li a:active {
     -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
@@ -398,26 +341,6 @@ a:visited {
 /* ========================================================================== */
 
 
-
-/*
- * -> Call to Action boxes
- *
- *
- */
-
-.action_box {
-    background: #fffae5 url(../images/action_box-bg.png) repeat-x bottom;
-    -moz-box-shadow: 0 1px 2px #e5d693, inset 0 1px rgba(100%, 100%, 100%, 0.4);
-    -webkit-box-shadow: 0 1px 2px #e5d693, inset 0 1px rgba(100%, 100%, 100%, 0.4);
-    box-shadow: 0 1px 2px #e5d693, inset 0 1px rgba(100%, 100%, 100%, 0.4);
-    padding: 10px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid #e7d172;
-}
-
-
 /*
  * -> Subtle boxes
  *
@@ -456,122 +379,6 @@ a:visited {
     margin: 0 0 10px;
 }
 
-/*
- * --> Navigation list
- *
- * Navigation lists are used to generate a list of links which are in the same
- * hierarchical level of the current page. Use it preferably in a grid_3 element.
- *
- * Don't forget to highlight with <li class="current_page_item"> the current page.
- *
- */
-
-.navigation_list {
-    background: #fff;
-    margin: 0 0 20px;
-    padding: 0;
-    border: 1px solid #d3d7cf;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    list-style: none;
-    font-size: small;
-    -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), inset 0 1px 2px #fff;
-    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), inset 0 1px 2px #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), inset 0 1px 2px #fff;
-}
-.navigation_list > li {
-    margin: 0;
-    background: #f5f5f4;
-    border: 1px solid #fff;
-    border-bottom-color: #d3d7cf;
-}
-.navigation_list > li.current_page_item,
-.navigation_list > li a.navTreeCurrentItem {
-    background: #dde5ef url(../images/focus-bg.png) top repeat-x;
-}
-.navigation_list li:first-child {
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-.navigation_list li:last-child {
-    border-bottom: 0;
-}
-.navigation_list li:last-child {
-    -moz-border-radius-bottomleft: 5px;
-    -moz-border-radius-bottomright: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-.navigation_list a {
-    padding: 6px 9px;
-    color: inherit;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-    text-shadow:  white 0 1px 0;
-}
-.navigation_list a.without_icon {
-    padding-left: 37px;
-}
-.navigation_list a:hover {
-    color: #3465a4;
-    background: rgba(100%,100%,100%,0.5);
-    /*-webkit-transition: all 200ms linear;*/
-}
-.navigation_list a:focus {
-    background: #dde5ef url(../images/focus-bg.png) top repeat-x;
-    outline: 0;
-    padding: 2px 5px;
-    margin: 3px;
-    border: 1px solid #bbc5d5;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-}
-.navigation_list a.without_icon:focus {
-    padding-left: 33px;
-}
-.navigation_list a img {
-    vertical-align: middle;
-    margin-right: 6px;
-}
-.navigation_list > li ul {
-    background: #fff;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.navigation_list > li ul li {
-    border-top: 1px solid #ececec;
-    margin: 0;
-    padding: 0;
-}
-.navigation_list > li ul li:first-child {
-    border-top: 0;
-}
-.navigation_list > li ul li a {
-    font-weight: normal;
-    padding: 4px 9px;
-    color: #555753;
-}
-.navigation_list > li ul li.current_page_item a {
-    font-weight: bold;
-}
-.navigation_list > li ul li a:focus {
-    padding: 0 5px;
-}
-.navigation_list > li ul  {
-    padding-top: 1px;
-}
-
 /* -> Simple List */
 
 .simple_list {
@@ -591,36 +398,6 @@ a:visited {
     text-decoration: none;
     display: block;
     color: #888a85;
-}
-
-/* -> Iconified Menu */
-
-ul.iconified_menu {
-    list-style: none;
-    margin: 0 0 20px;
-    font-size: small;
-}
-ul.iconified_menu li {
-    margin: 0 0 5px;
-}
-ul.iconified_menu li a {
-    padding: 5px;
-    display: block;
-    text-decoration: none;
-    border: 1px solid transparent;
-    overflow: hidden;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-}
-ul.iconified_menu li a:hover, ul.iconified_menu li a:focus {
-    background: #dde5ef url(../images/focus-bg.png) top repeat-x;
-    outline: 0;
-    border: 1px solid #bbc5d5;
-}
-ul.iconified_menu li a img {
-    float: left;
-    margin-right: 5px;
 }
 
 /* -> Definition Lists */
@@ -737,37 +514,6 @@ dl.icon_list dt img {
     margin-bottom: 0.8em;
 }
 
-/* Page Navigation */
-/* ========================================================================== */
-
-
-
-.page_navigation {
-    margin: 30px auto 0;
-}
-.page_navigation .prev, .page_navigation .next {
-    height: 32px;
-    line-height: 32px;
-}
-.page_navigation a {
-    text-decoration: none;
-    color: inherit;
-}
-.page_navigation a:hover {
-    text-decoration: underline;
-}
-.page_navigation .prev a {
-    float: left;
-    background: url(../images/go-previous.png) top left no-repeat;
-    padding-left: 40px;
-}
-.page_navigation .next a {
-    float: right;
-    background: url(../images/go-next.png) top right no-repeat;
-    padding-right: 40px;
-}
-
-
 
 /* Footer Artwork */
 /* ========================================================================== */
@@ -783,9 +529,6 @@ dl.icon_list dt img {
 #footer_art.none {
     height: 30px;
     margin-top: 0;
-}
-#footer_art.default {
-    background-image: url(../images/footer_arts/default.png);
 }
 
 
@@ -806,7 +549,6 @@ dl.icon_list dt img {
 
 #footer {
     clear: left;
-    /*background: #d3d7cf url(images/grass.png) top center repeat-x;*/
     background: #d3d7cf;
     color: #555753;
     padding: 20px 0;
@@ -821,50 +563,6 @@ dl.icon_list dt img {
 }
 #footer div.links div a:hover, #footer div.links div a:focus {
     text-decoration: underline;
-}
-#footer div.language {
-    float: right;
-}
-#footer div.language a {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    width: 220px;
-    height: 110px;
-    background: url(../images/footer-map.png) center center no-repeat;
-    outline: none;
-    text-decoration: none;
-}
-#footer div.language a span {
-    background: #f4f4f4;
-    background: -moz-linear-gradient(bottom, #ececec, #fff);
-    background: -webkit-linear-gradient(bottom, #ececec, #fff);
-    background: linear-gradient(bottom, #ececec, #fff);
-    padding: 4px 12px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    color: #333;
-}
-
-#footer div.language a span.loading {
-    display: none;
-}
-#footer div.language a.loading {
-    cursor: wait !important;
-}
-#footer div.language a.loading span.switch {
-    display: none;
-}
-#footer div.language a.loading span.loading {
-    display: inline-block;
-}
-#footer div.language a:hover span.switch {
-    background: #fff;
-    background: -moz-linear-gradient(bottom, #fff, #fff);
 }
 
 #footer div.icons {
@@ -918,56 +616,6 @@ dl.icon_list dt img {
     color: inherit;
 }
 
-
-/* Language Selector */
-/* ========================================================================== */
-
-
-#language_selector {
-    display: none;
-    /* poor wanda the fish */
-    background: #555753 url(../images/language-selector-bg.png) top center repeat-x;
-    clear: left;
-    overflow: hidden;
-}
-#language_selector .container_12 {
-    background: url(../images/language-selector-wanda-bg.png) right 60px no-repeat;
-    overflow: hidden;
-}
-#language_selector h3 {
-    color: #f57900;
-    margin: 60px 0 35px;
-}
-#language_selector ul {
-    list-style: none;
-    -moz-column-count: 4;
-    -webkit-column-count: 4;
-    column-count: 4;
-    margin: 10px 0 40px;
-    color: #fff;
-}
-#language_selector ul li {
-    margin: 0;
-    padding: 0;
-    margin: 0 0 7px;
-}
-#language_selector ul li.active {
-    font-weight: bold;
-}
-#language_selector ul a {
-    color: #fff;
-    text-decoration: none;
-}
-#language_selector ul a:hover {
-    text-decoration: underline;
-}
-#language_selector .help_us_translating {
-    color: #d3d7cf;
-    margin: 129px 0 30px;
-}
-#language_selector .help_us_translating a {
-    color: #fff;
-}
 
 /* Separators */
 /* ========================================================================== */

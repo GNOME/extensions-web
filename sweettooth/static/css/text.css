@@ -94,17 +94,6 @@ code {
     color: #888a85;
 }
 
-.more {
-    background: url(../images/more-arrow.png) right 6px no-repeat;
-    cursor: pointer;
-    white-space: nowrap;
-    padding-right: 10px;
-    text-decoration: none;
-}
-.more {
-    text-decoration: underline;
-}
-
 #footer {
     font-size: 12px;
     line-height: 1.4em;
