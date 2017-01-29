@@ -246,7 +246,8 @@ def extension_view(request, obj, **kwargs):
     context = dict(shell_version_map = json.dumps(extension.visible_shell_version_map),
                    extension = extension,
                    all_versions = extension.versions.order_by('-version'),
-                   is_visible = extension.latest_version is not None)
+                   is_visible = extension.latest_version is not None,
+                   next=extension.get_absolute_url())
     return render(request, template_name, context)
 
 @require_POST

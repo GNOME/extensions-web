@@ -96,15 +96,29 @@ function($, messages, modal, hashParamUtils, templates) {
         $.fn.ratify = function() {
             return this.each(function() {
                 $(this).raty({
-                    start: $(this).data('rating-value'),
+                    score: $(this).data('rating-value'),
                     readOnly: true
                 });
             });
         };
 
+        let rating_initial = $('#rating_form').find('input[name="rating_initial"]');
+
         $('.comment .rating').ratify();
-        $('#rating_form').hide();
-        $('#rating_form .rating').raty({ scoreName: 'rating' });
+        $('#rating_form:not(.preview)').hide();
+        $('#rating_form .rating').raty({
+            scoreName: 'rating',
+            score: rating_initial.length > 0 ? rating_initial.val() : undefined
+        });
+
+        if($('#rating_form input[name="show_rating"]').val() == '1')
+        {
+            $('#rating_form').find('.rating').show();
+        }
+        else
+        {
+            $('#rating_form').find('.rating').hide();
+        }
 
         function makeShowForm(isRating) {
             return function() {
@@ -112,9 +126,15 @@ function($, messages, modal, hashParamUtils, templates) {
                 $(this).addClass('selected');
                 var $rating = $('#rating_form').slideDown().find('.rating');
                 if (isRating)
-                    $rating.show();
+				{
+					$rating.show();
+					$('#rating_form input[name="show_rating"]').val('1');
+				}
                 else
-                    $rating.hide();
+				{
+					$rating.hide();
+					$('#rating_form input[name="show_rating"]').val('0');
+				}
             };
         }
 
