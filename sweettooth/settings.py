@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'sweettooth.auth',
     'sweettooth.review',
     'sweettooth.errorreports',
+    'sweettooth.templates',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
@@ -154,6 +155,8 @@ STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static'),
 )
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 ACCOUNT_ACTIVATION_DAYS = 5
 
 LOGIN_URL = '/accounts/login/'
@@ -209,3 +212,6 @@ if not DEBUG and not NO_SECURE_SETTINGS:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_PROXY_SSL_HEADER = ('HTTPS', 'https')
     SECURE_SSL_REDIRECT = True
+
+if DEBUG:
+    STATICFILES_STORAGE = None

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static from staticfiles %}
 
 {% block title %}Review "{{ extension.name }}" - {{ block.super }}{% endblock %}
 
@@ -130,7 +131,7 @@
 
 {% block head %}
   {{ block.super }}
-  <link rel="stylesheet" href="/static/css/review.css" />
+  <link rel="stylesheet" href="{% static 'css/review.css' %}" />
   <script>
       jQuery(function ($) {
           require(['review-main'], function(){});

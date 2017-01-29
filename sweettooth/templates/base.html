@@ -1,20 +1,23 @@
 <!doctype html>
 <html>
   <head>
+    {% load static from staticfiles %}
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="shortcut icon" href="/static/images/favicon.png" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
     <link rel="alternate" type="application/rss+xml"
           href="{% url 'extensions-rss-feed' %}" title="Latest extensions in GNOME Shell Extensions" />
     <title>{% block title %}GNOME Shell Extensions{% endblock %}</title>
     <script>
+        {% load static_paths %}
         var require = {
             baseUrl: '/static/js/',
+            paths: {% static_paths %},
             waitSeconds: 30 // It's fails sometimes with default 7 secs
         };
     </script>
-    <script src="/static/js/require.js"></script>
-    <script src="/static/js/jquery.js"></script>
+    <script src="{% static 'js/require.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
     <script>
         jQuery(function($) {
             require(['main'], function(){});
@@ -48,7 +51,7 @@
     <!-- header -->
     <div id="header" class="container_12">
         <div id="logo" class="grid_3">
-            <h1><a title="GNOME Shell Extensions" href="/"><img src="/static/images/gnome-logo-extensions.png" alt="GNOME Shell Extensions" /></a></h1>
+            <h1><a title="GNOME Shell Extensions" href="/"><img src="{% static 'images/gnome-logo-extensions.png' %}" alt="GNOME Shell Extensions" /></a></h1>
         </div>
         <div id="top_bar" class="grid_9">
             <div class="left">
