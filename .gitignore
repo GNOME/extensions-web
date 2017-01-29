@@ -51,3 +51,5 @@ local_settings.py
 *.crt
 *.csr
 *.key
+
+/static/
