@@ -15,6 +15,8 @@
             paths: {% static_js_paths %},
             waitSeconds: 30 // It's fails sometimes with default 7 secs
         };
+
+        var django_static_images = {% static_img_paths %};
     </script>
     <script src="{% static 'js/require.js' %}"></script>
     <script src="{% static 'js/jquery.js' %}"></script>

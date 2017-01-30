@@ -15,6 +15,7 @@ import json
 
 register = template.Library()
 js_paths = None
+img_paths = None
 
 
 @register.simple_tag
@@ -32,5 +33,24 @@ def static_js_paths():
             js_paths = json.dumps(js_paths)
 
         return js_paths
+
+    return "{}"
+
+
+@register.simple_tag
+def static_img_paths():
+    global img_paths
+
+    if isinstance(staticfiles_storage, ManifestStaticFilesStorage):
+        if img_paths is None:
+            img_paths = {};
+
+            for base_file, hashed_file in staticfiles_storage.hashed_files.iteritems():
+                if base_file.startswith('images/'):
+                    img_paths[base_file] = hashed_file
+
+            img_paths = json.dumps(img_paths)
+
+        return img_paths
 
     return "{}"
