@@ -1,10 +1,10 @@
 // -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
 
 define(['jquery', 'messages', 'modal', 'hashParamUtils',
-        'templates', 'extensions', 'uploader', 'fsui',
+        'templates', 'staticfiles', 'extensions', 'uploader', 'fsui',
         'jquery.cookie', 'jquery.jeditable',
         'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
-function($, messages, modal, hashParamUtils, templates) {
+function($, messages, modal, hashParamUtils, templates, staticfiles) {
     "use strict";
 
     if (!$.ajaxSettings.headers)
@@ -92,6 +92,16 @@ function($, messages, modal, hashParamUtils, templates) {
             starOn: 'star-full.png',
             size: 25
         });
+
+        if (staticfiles.getImage('images/star-empty.png'))
+        {
+            $.fn.raty.defaults.starOff = staticfiles.getImageFile('images/star-empty.png');
+        }
+
+        if (staticfiles.getImage('images/star-full.png'))
+        {
+            $.fn.raty.defaults.starOn = staticfiles.getImageFile('images/star-full.png');
+        }
 
         $.fn.ratify = function() {
             return this.each(function() {
