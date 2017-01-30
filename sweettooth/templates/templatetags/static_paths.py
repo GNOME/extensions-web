@@ -18,7 +18,7 @@ js_paths = None
 
 
 @register.simple_tag
-def static_paths():
+def static_js_paths():
     global js_paths
 
     if isinstance(staticfiles_storage, ManifestStaticFilesStorage):
