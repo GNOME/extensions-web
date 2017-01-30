@@ -32,7 +32,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["extensions.gnome.org"]
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -197,6 +196,7 @@ DEFAULT_FROM_EMAIL = "noreply@gnome.org"
 THUMBNAIL_DEBUG = True
 
 NO_SECURE_SETTINGS = False
+NO_STATICFILES_SETTINGS = False
 
 try:
     from local_settings import *
@@ -213,5 +213,6 @@ if not DEBUG and not NO_SECURE_SETTINGS:
     SECURE_PROXY_SSL_HEADER = ('HTTPS', 'https')
     SECURE_SSL_REDIRECT = True
 
-if DEBUG:
-    STATICFILES_STORAGE = None
+if DEBUG and not NO_STATICFILES_SETTINGS:
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+    STATIC_ROOT = None
