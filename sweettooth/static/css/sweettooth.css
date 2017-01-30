@@ -506,6 +506,10 @@ li.extension:last-child {
     margin-right: 4px;
 }
 
+.extension span.plugin-unknown {
+    background-image: url(../images/plugin-unknown.png)
+}
+
 .extension .screenshot label.upload {
     display: block;
 }
