@@ -337,15 +337,15 @@ def ajax_details(extension, version=None):
 @ajax_view
 def ajax_details_view(request):
     uuid = request.GET.get('uuid', None)
-    try:
-        pk = int(request.GET.get('pk', None))
-    except (TypeError, ValueError):
-        raise Http404()
+    pk = request.GET.get('pk', None)
 
     if uuid is not None:
         extension = get_object_or_404(models.Extension.objects.visible(), uuid=uuid)
     elif pk is not None:
-        extension = get_object_or_404(models.Extension.objects.visible(), pk=pk)
+        try:
+            extension = get_object_or_404(models.Extension.objects.visible(), pk=pk)
+        except (TypeError, ValueError):
+            raise Http404()
     else:
         raise Http404()
 
