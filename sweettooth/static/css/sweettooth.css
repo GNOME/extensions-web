@@ -304,12 +304,14 @@ li.extension {
     list-style-type: none;
     list-style-position: inside;
     margin-left: 0px;
+}
 
+li.extension, #local_extensions div.extension {
     border-bottom: 1px solid #ccc;
     border-bottom-color: rgba(0, 0, 0, 0.2);
 }
 
-li.extension:last-child {
+li.extension:last-child, #local_extensions div.extension:last-child {
     border-bottom: 0;
 }
 
