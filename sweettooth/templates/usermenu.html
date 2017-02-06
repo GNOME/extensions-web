@@ -1,12 +1,13 @@
+{% load i18n %}
 {% if request.user.is_authenticated %}
 <div class="user_settings user_popup">
   {% load gravatar %}
-  <a class="avatar" href="{% url 'auth-profile' user=request.user.username %}" title="Profile">
+  <a class="avatar" href="{% url 'auth-profile' user=request.user.username %}" title="{% trans "Profile" %}">
     <img src="{% gravatar_url request request.user.email %}">
   </a>
   <ul>
-    <li><a class="text" href="{% url 'auth-settings' user=request.user.username %}">Website Settings</a></li>
-    <li><a class="text" href="{% url 'auth-logout' %}">Log Out</a></li>
+    <li><a class="text" href="{% url 'auth-settings' user=request.user.username %}">{% trans "Website Settings" %}</a></li>
+    <li><a class="text" href="{% url 'auth-logout' %}">{% trans "Log out" %}</a></li>
   </ul>
 </div>
 {% else %}

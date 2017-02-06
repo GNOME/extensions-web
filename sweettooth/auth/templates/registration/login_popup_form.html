@@ -1,7 +1,8 @@
+{% load i18n %}
 <form action="{% url 'auth-login' %}" method="POST" class="login_popup_form user_popup">
   {% csrf_token %}
   {{ login_popup_form.as_plain }}
   <input type="hidden" name="next" value="{{ request.path }}">
-  <input type="submit" value="Login">
-  <a href="{% url 'registration_register' %}">Register</a>
+  <input type="submit" value="{% trans "Log in" %}">
+  <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>
 </form>
