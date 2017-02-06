@@ -133,8 +133,11 @@ function($, messages, dbusProxy, extensionUtils, templates) {
 
         var svm = meta.shell_version_map || $elem.data('svm');
         var latest = extensionUtils.grabProperExtensionVersion(svm, dbusProxy.ShellVersion);
-        if (latest !== null && (!meta.version || latest.version > meta.version || _state === ExtensionState.OUT_OF_DATE))
+        if (_state !== ExtensionState.UNINSTALLED && latest !== null &&
+            (!meta.version || latest.version > meta.version || _state === ExtensionState.OUT_OF_DATE))
+        {
             $elem.addClass('upgradable');
+        }
 
         function sendPopularity(action) {
             $.ajax({ url: '/ajax/adjust-popularity/',
