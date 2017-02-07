@@ -73,7 +73,12 @@ def highlight_file(filename, raw, formatter):
         else:
             lexer = pygments.lexers.get_lexer_by_name('text')
 
-    return pygments.highlight(raw, lexer, formatter)
+    try:
+        return pygments.highlight(raw, lexer, formatter)
+    except TypeError:
+        # Fallback to UTF-8 for old broken pygments version
+        lexer.encoding = "utf-8"
+        return pygments.highlight(raw, lexer, formatter)
 
 def html_for_file(filename, raw):
     base, extension = os.path.splitext(filename)
