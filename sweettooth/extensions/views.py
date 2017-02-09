@@ -83,8 +83,12 @@ def shell_download(request, uuid):
 
 @ajax_view
 def shell_update(request):
-    installed = json.loads(request.GET['installed'])
-    shell_version = request.GET['shell_version']
+    try:
+        installed = json.loads(request.GET['installed'])
+        shell_version = request.GET['shell_version']
+    except (KeyError, ValueError):
+        return {}
+
     operations = {}
 
     for uuid, meta in installed.iteritems():
