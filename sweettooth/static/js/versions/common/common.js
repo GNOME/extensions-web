@@ -53,11 +53,11 @@ define(['jquery', 'dbus!API'], function ($, API) {
 		},
 
 		EnableExtension: function (uuid) {
-			API.setExtensionEnabled(uuid, true);
+			return _makePromise(API.setExtensionEnabled(uuid, true), true);
 		},
 
 		DisableExtension: function (uuid) {
-			API.setExtensionEnabled(uuid, false);
+			return _makePromise(API.setExtensionEnabled(uuid, false), true);
 		},
 
 		InstallExtensionOne: function (uuid) {
