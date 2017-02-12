@@ -16,14 +16,14 @@ define(['jquery', 'dbus!API'], function ($, API) {
 		return (new $.Deferred()).resolve(result);
 	}
 
-	function _makePromise(result) {
+	function _makePromise(result, resolveValue) {
 		// Check if result is promise already
 		if (isPromise(result))
 		{
 			return result;
 		}
 
-		return _makeRawPromise(JSON.parse(result));
+		return _makeRawPromise(typeof(resolveValue) == 'undefined' ? JSON.parse(result) : resolveValue);
 	}
 
 	function isPromise(value) {
@@ -61,25 +61,11 @@ define(['jquery', 'dbus!API'], function ($, API) {
 		},
 
 		InstallExtensionOne: function (uuid) {
-			var result = API.installExtension(uuid);
-
-			if (isPromise(result))
-			{
-				return result;
-			}
-
-			return _makeRawPromise('succeeded');
+			return _makePromise(API.installExtension(uuid), 'succeeded');
 		},
 
 		InstallExtensionTwo: function (uuid) {
-			var result = API.installExtension(uuid, "");
-
-			if (isPromise(result))
-			{
-				return result;
-			}
-
-			return _makeRawPromise('succeeded');
+			return _makePromise(API.installExtension(uuid, ""), 'succeeded');
 		},
 
 		InstallExtensionAsync: function (uuid) {
