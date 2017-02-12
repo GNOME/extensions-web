@@ -31,6 +31,12 @@ define([], function () {
 		UNINSTALLED: 99
 	};
 
+	// https://git.gnome.org/browse/gnome-shell/tree/js/misc/extensionUtils.js
+	exports.ExtensionType = {
+		SYSTEM: 1,
+		PER_USER: 2
+	};
+
 	exports.grabProperExtensionVersion = function (map, current) {
 		if (!map)
 		{

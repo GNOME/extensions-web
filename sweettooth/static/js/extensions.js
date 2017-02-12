@@ -275,9 +275,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 							var $elem = $('<a>');
 
 							function renderExtension() {
-								// https://git.gnome.org/browse/gnome-shell/tree/js/misc/extensionUtils.js#n16
-								// ExtensionType.SYSTEM = 1
-								if (extension.type === 1)
+								if (extension.type == extensionUtils.ExtensionType.SYSTEM)
 								{
 									extension.system = true;
 								}
