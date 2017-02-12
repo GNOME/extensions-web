@@ -154,7 +154,13 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 				}
 				else
 				{
-					installExtension();
+					dbusProxy.DisableExtension(uuid).then(function (result) {
+						// Install extension if we were able to disable it first
+						if(result)
+						{
+							installExtension();
+						}
+					});
 				}
 			});
 
