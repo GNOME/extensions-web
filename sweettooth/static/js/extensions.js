@@ -83,12 +83,23 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 			}
 		}
 
+		function extensionTypeChanged(uuid, newType) {
+			if (elems[uuid] !== undefined)
+			{
+				if(elems[uuid].data('type') != newType)
+				{
+					elems[uuid].trigger('type-changed', newState);
+				}
+			}
+		}
+
 		dbusProxy.extensionStateChangedHandler = extensionStateChanged;
 
 		dbusProxy.shellRestartHandler = function () {
 			dbusProxy.ListExtensions().then(function (extensions) {
 				$.each(extensions, function () {
 					extensionStateChanged(this.uuid, this.state);
+					extensionTypeChanged(this.uuid, this.type);
 				});
 			});
 		};
@@ -110,15 +121,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 			});
 
 			$elem.find('.upgrade-button').on('click', function () {
-				$elem.removeClass('upgradable');
-				dbusProxy.UninstallExtension(uuid).then(function (result) {
-					// If we weren't able to uninstall the extension, don't
-					// do anything more.
-					if (!result)
-					{
-						return;
-					}
-
+				function installExtension() {
 					dbusProxy.InstallExtension(uuid).then(function (result) {
 						if (result === 'cancelled')
 						{
@@ -126,8 +129,33 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 							// thing uninstalled.
 							$switch.switchify('activate', false);
 						}
+						// GNOME Shell bug https://bugzilla.gnome.org/show_bug.cgi?id=777544
+						else if (['s', 'successful'].indexOf(result) != -1)
+						{
+							// It should always became "per user" extension if installed from repository.
+							$elem.trigger('type-changed', extensionUtils.ExtensionType.PER_USER);
+						}
 					});
-				});
+				}
+
+				$elem.removeClass('upgradable');
+				if($elem.data('type') == extensionUtils.ExtensionType.PER_USER)
+				{
+					dbusProxy.UninstallExtension(uuid).then(function (result) {
+						// If we weren't able to uninstall the extension, don't
+						// do anything more.
+						if (!result)
+						{
+							return;
+						}
+
+						installExtension();
+					});
+				}
+				else
+				{
+					installExtension();
+				}
 			});
 
 			$elem.find('.uninstall-button').on('click', function () {
@@ -145,9 +173,15 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 				$elem.addClass('installed');
 			}
 
+			if(meta.type == extensionUtils.ExtensionType.SYSTEM)
+			{
+				$elem.addClass('system');
+			}
+
 			$elem.data({
 				'elem': $elem,
-				'state': _state
+				'state': _state,
+				'type': meta.type
 			});
 
 			$switch.data('elem', $elem);
@@ -237,6 +271,20 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 					$switch.switchify('customize', "OUTDATED", 'outdated');
 				}
 			});
+
+			$elem.on('type-changed', function (e, newType) {
+				if(newType == extensionUtils.ExtensionType.SYSTEM)
+				{
+					$elem.addClass('system');
+				}
+				else
+				{
+					$elem.removeClass('system');
+				}
+
+				$elem.data('type', newType);
+			});
+
 			$elem.trigger('state-changed', _state);
 			elems[uuid] = $elem;
 		}

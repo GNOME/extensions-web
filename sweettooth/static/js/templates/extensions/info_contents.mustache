@@ -14,13 +14,9 @@
   <div class="extra-buttons">
     <div class="upgrade-button" title="Upgrade this extension"></div>
     <div class="configure-button" title="Configure this extension"></div>
-  {{^system}}
     <div class="uninstall-button" title="Uninstall this extension"></div>
-  {{/system}}
   </div>
 </div>
 <div style="clear: both"></div>
-{{#system}}
-  <div class='system-extension' title='System extension should be uninstalled using package manager. See «About» page for more details.'>System extension</div>
-{{/system}}
+<div class='system-extension' title='System extension should be uninstalled using package manager. See «About» page for more details.'>System extension</div>
 <p class="description">{{first_line_of_description}}</p>

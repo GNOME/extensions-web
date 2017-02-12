@@ -360,6 +360,11 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     margin-left: 44px;
     font-size: 0.8em;
     cursor: help;
+    display: none;
+}
+
+.extension.system .system-extension {
+    display: block;
 }
 
 .extension .author, .extension .author a {
@@ -412,6 +417,10 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     background-position: 50% 50%;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.extension.installed.system .uninstall-button {
+    display: none;
 }
 
 .extension.configurable .configure-button {
