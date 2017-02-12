@@ -121,6 +121,8 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 			});
 
 			$elem.find('.upgrade-button').on('click', function () {
+				let extensionState = $elem.data('state');
+
 				function installExtension() {
 					dbusProxy.InstallExtension(uuid).then(function (result) {
 						if (result === 'cancelled')
@@ -134,6 +136,12 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 						{
 							// It should always became "per user" extension if installed from repository.
 							$elem.trigger('type-changed', extensionUtils.ExtensionType.PER_USER);
+
+							// Disable extensions if it was disabled prior to upgrade
+							if (extensionState == extensionUtils.ExtensionState.DISABLED)
+							{
+								dbusProxy.DisableExtension(uuid);
+							}
 						}
 					});
 				}
