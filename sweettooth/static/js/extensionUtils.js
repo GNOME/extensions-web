@@ -1,92 +1,120 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2017  Yuri Konotopov <ykonotopov@gnome.org>
 
-define([], function() {
-    "use strict";
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
-    var exports = {};
+define([], function () {
+	"use strict";
 
-    // ExtensionState is stolen and should be kept in sync with the Shell.
-    // Licensed under GPL2+
-    // See: http://git.gnome.org/browse/gnome-shell/tree/js/ui/extensionSystem.js
+	var exports = {};
 
-    exports.ExtensionState = {
-        ENABLED: 1,
-        DISABLED: 2,
-        ERROR: 3,
-        OUT_OF_DATE: 4,
-        DOWNLOADING: 5,
-        INITIALIZED: 6,
+	// ExtensionState is stolen and should be kept in sync with the Shell.
+	// Licensed under GPL2+
+	// See: http://git.gnome.org/browse/gnome-shell/tree/js/ui/extensionSystem.js
 
-        // Not a real state, used when there's no extension
-        // with the associated UUID in the extension map.
-        UNINSTALLED: 99
-    };
+	exports.ExtensionState = {
+		ENABLED: 1,
+		DISABLED: 2,
+		ERROR: 3,
+		OUT_OF_DATE: 4,
+		DOWNLOADING: 5,
+		INITIALIZED: 6,
 
-    exports.grabProperExtensionVersion = function(map, current) {
-        if (!map)
-            return null;
+		// Not a real state, used when there's no extension
+		// with the associated UUID in the extension map.
+		UNINSTALLED: 99
+	};
 
-        // Only care about the first three parts -- look up
-        // "3.2.2" when given "3.2.2.1"
+	exports.grabProperExtensionVersion = function (map, current) {
+		if (!map)
+		{
+			return null;
+		}
 
-        var parts = current.split('.');
+		// Only care about the first three parts -- look up
+		// "3.2.2" when given "3.2.2.1"
 
-        var versionA = map[(parts[0] + '.' + parts[1] + '.' + parts[2])];
+		var parts = current.split('.');
 
-        // Unstable releases
-        if (parseInt(parts[1]) % 2 != 0) {
-            if (versionA !== undefined)
-                return versionA;
-            else
-                return null;
-        }
+		var versionA = map[(parts[0] + '.' + parts[1] + '.' + parts[2])];
 
-        var versionB = map[(parts[0] + '.' + parts[1])];
+		// Unstable releases
+		if (parseInt(parts[1]) % 2 != 0)
+		{
+			if (versionA !== undefined)
+			{
+				return versionA;
+			}
+			else
+			{
+				return null;
+			}
+		}
 
-        if (versionA !== undefined && versionB !== undefined) {
-            return (versionA.version > versionB.version) ? versionA : versionB;
-        } else if (versionA !== undefined) {
-            return versionA;
-        } else if (versionB !== undefined) {
-            return versionB;
-        } else {
-            return null;
-        }
-    };
+		var versionB = map[(parts[0] + '.' + parts[1])];
 
-    exports.findNextHighestVersion = function(map, current) {
-        function saneParseInt(p) {
-            return parseInt(p, 10);
-        }
+		if (versionA !== undefined && versionB !== undefined)
+		{
+			return (versionA.version > versionB.version) ? versionA : versionB;
+		}
+		else if (versionA !== undefined)
+		{
+			return versionA;
+		}
+		else if (versionB !== undefined)
+		{
+			return versionB;
+		}
+		else
+		{
+			return null;
+		}
+	};
 
-        var currentParts = current.split('.').map(saneParseInt);
-        var nextHighestParts = [Infinity, Infinity, Infinity];
+	exports.findNextHighestVersion = function (map, current) {
+		function saneParseInt(p) {
+			return parseInt(p, 10);
+		}
 
-        $.each(map, function(key) {
-            var parts = key.split('.').map(saneParseInt);
+		var currentParts = current.split('.').map(saneParseInt);
+		var nextHighestParts = [Infinity, Infinity, Infinity];
 
-            if (parts[0] >= currentParts[0] &&
-                parts[1] >= currentParts[1] &&
-                ((parts[2] !== undefined && parts[2] >= currentParts[2])
-                 || parts[2] === undefined) &&
-                parts[0] < nextHighestParts[0] &&
-                parts[1] < nextHighestParts[1] &&
-                ((parts[2] !== undefined && parts[2] < nextHighestParts[2]) || parts[2] === undefined))
-                nextHighestParts = parts;
-        });
+		$.each(map, function (key) {
+			var parts = key.split('.').map(saneParseInt);
 
-        // In this case, it's a downgrade.
-        if (nextHighestParts[0] === Infinity ||
-            nextHighestParts[1] === Infinity ||
-            nextHighestParts[2] === Infinity) {
-            return {'operation': 'downgrade'};
-        }
+			if (parts[0] >= currentParts[0] &&
+				parts[1] >= currentParts[1] &&
+				((parts[2] !== undefined && parts[2] >= currentParts[2])
+				|| parts[2] === undefined) &&
+				parts[0] < nextHighestParts[0] &&
+				parts[1] < nextHighestParts[1] &&
+				((parts[2] !== undefined && parts[2] < nextHighestParts[2]) || parts[2] === undefined))
+			{
+				nextHighestParts = parts;
+			}
+		});
 
-        return {'operation': 'upgrade',
-                'stability': (nextHighestParts[1] % 2 === 0) ? 'stable' : 'unstable',
-                'version': nextHighestParts.join('.')};
-    };
+		// In this case, it's a downgrade.
+		if (nextHighestParts[0] === Infinity ||
+			nextHighestParts[1] === Infinity ||
+			nextHighestParts[2] === Infinity)
+		{
+			return {'operation': 'downgrade'};
+		}
 
-    return exports;
+		return {
+			'operation': 'upgrade',
+			'stability': (nextHighestParts[1] % 2 === 0) ? 'stable' : 'unstable',
+			'version': nextHighestParts.join('.')
+		};
+	};
+
+	return exports;
 
 });
