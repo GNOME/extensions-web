@@ -268,10 +268,15 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 					newState == ExtensionState.INITIALIZED ||
 					newState == ExtensionState.UNINSTALLED)
 				{
+					// Remove customization
+					$switch.switchify('customize');
 					$switch.switchify('activate', false);
+					$elem.removeClass('out-of-date');
 				}
 				else if (newState == ExtensionState.ENABLED)
 				{
+					// Remove customization
+					$switch.switchify('customize');
 					$switch.switchify('activate', true);
 					$elem.removeClass('out-of-date');
 				}
