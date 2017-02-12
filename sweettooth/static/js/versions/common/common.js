@@ -1,99 +1,119 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2016-2017  Yuri Konotopov <ykonotopov@gnome.org>
 
-define(['jquery', 'dbus!API'], function($, API) {
-    "use strict";
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
-    function _makeRawPromise(result) {
-        return (new $.Deferred()).resolve(result);
-    }
+define(['jquery', 'dbus!API'], function ($, API) {
+	"use strict";
 
-    function _makePromise(result) {
-        // Check if result is promise already
-        if(isPromise(result))
-        {
-            return result;
-        }
+	function _makeRawPromise(result) {
+		return (new $.Deferred()).resolve(result);
+	}
 
-        return _makeRawPromise(JSON.parse(result));
-    }
+	function _makePromise(result) {
+		// Check if result is promise already
+		if (isPromise(result))
+		{
+			return result;
+		}
 
-    function isPromise(value) {
-        return value && typeof(value.then) == 'function';
-    }
+		return _makeRawPromise(JSON.parse(result));
+	}
 
-    return {
-        _makePromise: _makePromise,
+	function isPromise(value) {
+		return value && typeof(value.then) == 'function';
+	}
 
-        ListExtensions: function() {
-            return _makePromise(API.listExtensions());
-        },
+	return {
+		_makePromise: _makePromise,
 
-        GetExtensionInfo: function(uuid) {
-            return _makePromise(API.getExtensionInfo(uuid));
-        },
+		ListExtensions: function () {
+			return _makePromise(API.listExtensions());
+		},
 
-        GetErrors: function(uuid) {
-            return _makePromise(API.getExtensionErrors(uuid));
-        },
+		GetExtensionInfo: function (uuid) {
+			return _makePromise(API.getExtensionInfo(uuid));
+		},
 
-        LaunchExtensionPrefs: function(uuid) {
-            return API.launchExtensionPrefs(uuid);
-        },
+		GetErrors: function (uuid) {
+			return _makePromise(API.getExtensionErrors(uuid));
+		},
 
-        LaunchExtensionPrefsDummy: function(uuid) { },
+		LaunchExtensionPrefs: function (uuid) {
+			return API.launchExtensionPrefs(uuid);
+		},
 
-        EnableExtension: function(uuid) {
-            API.setExtensionEnabled(uuid, true);
-        },
+		LaunchExtensionPrefsDummy: function (uuid) {
+		},
 
-        DisableExtension: function(uuid) {
-            API.setExtensionEnabled(uuid, false);
-        },
+		EnableExtension: function (uuid) {
+			API.setExtensionEnabled(uuid, true);
+		},
 
-        InstallExtensionOne: function(uuid) {
-            var result = API.installExtension(uuid);
+		DisableExtension: function (uuid) {
+			API.setExtensionEnabled(uuid, false);
+		},
 
-            if(isPromise(result))
-                return result;
+		InstallExtensionOne: function (uuid) {
+			var result = API.installExtension(uuid);
 
-            return _makeRawPromise('succeeded');
-        },
+			if (isPromise(result))
+			{
+				return result;
+			}
 
-        InstallExtensionTwo: function(uuid) {
-            var result = API.installExtension(uuid, "");
+			return _makeRawPromise('succeeded');
+		},
 
-            if(isPromise(result))
-                return result;
+		InstallExtensionTwo: function (uuid) {
+			var result = API.installExtension(uuid, "");
 
-            return _makeRawPromise('succeeded');
-        },
+			if (isPromise(result))
+			{
+				return result;
+			}
 
-        InstallExtensionAsync: function(uuid) {
-            var d = new $.Deferred();
-            var result = API.installExtension(uuid, d.done.bind(d), d.fail.bind(d));
+			return _makeRawPromise('succeeded');
+		},
 
-            if(isPromise(result))
-                return result;
+		InstallExtensionAsync: function (uuid) {
+			var d = new $.Deferred();
+			var result = API.installExtension(uuid, d.done.bind(d), d.fail.bind(d));
 
-            return d;
-        },
+			if (isPromise(result))
+			{
+				return result;
+			}
 
-        UninstallExtension: function(uuid) {
-            return _makePromise(API.uninstallExtension(uuid));
-        },
+			return d;
+		},
 
-        API_onchange: function(proxy) {
-            return function(uuid, newState, error) {
-                if (proxy.extensionStateChangedHandler !== null)
-                    proxy.extensionStateChangedHandler(uuid, newState, error);
-            };
-        },
+		UninstallExtension: function (uuid) {
+			return _makePromise(API.uninstallExtension(uuid));
+		},
 
-        API_onshellrestart: function(proxy) {
-            return function() {
-                if (proxy.shellRestartHandler !== null)
-                    proxy.shellRestartHandler();
-            };
-        }
-    };
+		API_onchange: function (proxy) {
+			return function (uuid, newState, error) {
+				if (proxy.extensionStateChangedHandler !== null)
+				{
+					proxy.extensionStateChangedHandler(uuid, newState, error);
+				}
+			};
+		},
+
+		API_onshellrestart: function (proxy) {
+			return function () {
+				if (proxy.shellRestartHandler !== null)
+				{
+					proxy.shellRestartHandler();
+				}
+			};
+		}
+	};
 });
