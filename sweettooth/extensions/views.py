@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
-from django.http import HttpResponseForbidden, HttpResponseServerError, Http404
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
@@ -87,7 +87,7 @@ def shell_update(request):
         installed = json.loads(request.GET['installed'])
         shell_version = request.GET['shell_version']
     except (KeyError, ValueError):
-        return {}
+        return HttpResponseBadRequest()
 
     operations = {}
 
