@@ -557,67 +557,35 @@ dl.icon_list dt img {
 }
 
 
-/* Footer Artwork */
-/* ========================================================================== */
-
-
-
-#footer_art {
-    background: transparent no-repeat;
-    height: 180px;
-    margin-top: 0;
-    clear: left;
-}
-#footer_art.none {
-    height: 30px;
-    margin-top: 0;
-}
-
-
-/* Footer Grass */
-/* ========================================================================== */
-
-#footer_grass {
-    background: url(../images/grass.png) top center repeat-x;
-    height: 39px;
-    margin-top: -33px;
-}
-
-
 /* Footer */
 /* ========================================================================== */
 
-
-
 #footer {
+    font-size: 12px;
+    line-height: 1.4em;
     clear: left;
-    background: #d3d7cf;
-    color: #555753;
-    padding: 20px 0;
+    background: #000;
+    color: #919191;
+    padding: 20px 20px;
+    padding-top: 40px;
+    margin-top: 80px;
 }
 #footer div.links > div > ul > li {
     float: left;
-    margin: 0 40px 10px 0;
+    margin: 0 40px 10px 5px;
 }
-#footer div.links div a, #footer div.links div strong {
+#footer .links {
+    overflow: hidden;
+    font-size: 14px;
+}
+#footer .links a,
+#footer .links strong {
     display: block;
     text-decoration: none;
 }
-#footer div.links div a:hover, #footer div.links div a:focus {
+#footer .links a:hover,
+#footer .links a:focus {
     text-decoration: underline;
-}
-
-#footer div.icons {
-    float: right;
-}
-#footer div.icons a {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    width: 220px;
-    height: 110px;
-    outline: none;
-    text-decoration: none;
 }
 
 #footer ul {
@@ -632,21 +600,30 @@ dl.icon_list dt img {
 #footer ul.menu > li > a {
     font-weight: bold;
 }
+#footer .links > ul > li > a {
+    font-weight: bold;
+}
 #footer .links a {
     color: inherit;
-    -webkit-transition: background-color 100ms ease-in;
-    -moz-transition: background-color 100ms ease-in;
-    transition: background-color 100ms ease-in;
-}
-#footer .links a:focus {
-    background: #ececec;
-    padding: 1px 3px;
-    margin: -1px -3px;
-    text-decoration: none !important;
     outline: 0;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+    margin: 6px 0;
+}
+#footer .links a:hover {
+    color: #c4c4c4;
+}
+#footer .links a:active,
+#footer .links a:focus {
+    color: #fff;
+}
+#footer div.links div a, #footer div.links div strong {
+    display: block;
+    text-decoration: none;
+}
+#footer div.links div a:hover, #footer div.links div a:focus {
+    text-decoration: underline;
 }
 #footer #footnotes {
     margin-top: 20px;
@@ -657,7 +634,6 @@ dl.icon_list dt img {
 #footer #footnotes a {
     color: inherit;
 }
-
 
 /* Separators */
 /* ========================================================================== */

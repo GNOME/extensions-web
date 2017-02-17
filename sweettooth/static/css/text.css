@@ -90,16 +90,3 @@ a {
     font-size: 16pt;
     line-height: 130%;
 }
-
-.footnotes {
-    font-size: 11px;
-    color: #888a85;
-}
-.footnotes a {
-    color: #888a85;
-}
-
-#footer {
-    font-size: 12px;
-    line-height: 1.4em;
-}

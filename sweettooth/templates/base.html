@@ -116,56 +116,33 @@
               {% block body %}
               {% endblock %}
             </div>
-
-            <!-- footer artwork -->
-            <div id="footer_art" class="grid_12 applications">
-                &nbsp;
-            </div>
         </div>
     </div>
 
     <div class="clearfix"></div>
 
-    <!-- footer grass -->
-    <div id="footer_grass">
-        &nbsp;
-    </div>
-
     <div id="footer">
-      <div class="container_12">
-        <div class="links grid_9">
-          {% include "footer_links.html" %}
-        </div>
-
-        <div class="icons grid_3">
-            <div class="social_network_icons">
-                <a href="//identi.ca/gnome">
-                    <img src="https://www.gnome.org/wp-content/themes/gnome-grass/images/social_networks/identica.png"
-                         alt=" ">
-                </a>
-                <a href="//twitter.com/gnome">
-                    <img src="https://www.gnome.org/wp-content/themes/gnome-grass/images/social_networks/twitter.png"
-                         alt=" ">
-                </a>
-                <a href="//www.facebook.com/GNOMEDesktop">
-                    <img src="https://www.gnome.org/wp-content/themes/gnome-grass/images/social_networks/facebook.png"
-                         alt=" ">
-                </a>
-                <a href="//plus.google.com/108054458791366257368/posts">
-                    <img src="https://www.gnome.org/wp-content/themes/gnome-grass/images/social_networks/gplus.png"
-                         alt="GNOME on Google+" rel="publisher">
-                </a>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="links col-xs-12 col-sm-9">
+                      {% include "footer_links.html" %}
+                    </div>
+                </div>
             </div>
-	    </div>
-
-        <!-- footnotes -->
-        <div id="footnotes" class="grid_9">
-          Copyright &copy; 2005&#8210;{% now "Y" %} <strong class="gnome_logo">The GNOME Project</strong><br>
-          <small>Free to share and remix: <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC-BY</a>. Optimised for standards. Hosted by <a href="https://www.redhat.com/">Red Hat</a>. Powered by <a href="//www.djangoproject.com">Django</a> and <a href="//git.gnome.org/browse/extensions-web">SweetTooth</a></small>
         </div>
-
+        <!-- footnotes -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="footnotes" class="col-sm-9">
+                        Copyright &copy; 2005&#8210;{% now "Y" %} <strong class="gnome_logo">The GNOME Project</strong><br>
+                        <small>Free to share and remix: <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC-BY</a>. Optimised for standards. Hosted by <a href="https://www.redhat.com/">Red Hat</a>. Powered by <a href="//www.djangoproject.com">Django</a> and <a href="//git.gnome.org/browse/extensions-web">SweetTooth</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="clear"></div>
-      </div>
     </div>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>

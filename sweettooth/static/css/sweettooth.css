@@ -10,16 +10,6 @@ span.action_button {
     font-weight: bold;
 }
 
-/* Footer Artwork */
-/* ========================================================================== */
-
-
-
-#footer_art.applications {
-    background-image: url(../images/footer_arts/applications.png);
-}
-
-
 /* Unreviewed Extension Counter */
 /* ==================================================================== */
 
