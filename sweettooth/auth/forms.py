@@ -7,9 +7,9 @@ from registration.forms import RegistrationFormUniqueEmail
 class PlainOutputForm(object):
     def as_plain(self):
         return self._html_output(
-            normal_row = u'%(errors)s%(field)s%(help_text)s',
+            normal_row = u'<div class="form-group">%(field)s</div> %(errors)s%(help_text)s',
             error_row = u'%s',
-            row_ender = u'',
+            row_ender = u'</div>',
             help_text_html = u'<br /><span class="helptext">%s</span>',
             errors_on_separate_row = False)
 
@@ -25,6 +25,7 @@ class InlineForm(object):
         super(InlineForm, self).__init__(*a, **kw)
         for field in self.fields.itervalues():
             field.widget.attrs['placeholder'] = field.label
+            field.widget.attrs['class'] = 'form-control'
 
 class InlineAuthenticationForm(PlainOutputForm, AutoFocusForm,
                                InlineForm, auth_forms.AuthenticationForm):

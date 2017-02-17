@@ -1,7 +1,22 @@
-<form action="{% url 'auth-login' %}" method="POST" class="login_popup_form user_popup">
-  {% csrf_token %}
-  {{ login_popup_form.as_plain }}
-  <input type="hidden" name="next" value="{{ request.path }}">
-  <input type="submit" value="Login">
-  <a href="{% url 'registration_register' %}">Register</a>
-</form>
+<div class="row">
+    <div class="col-sm-12">
+        <form action="{% url 'auth-login' %}" method="POST" class="form">
+          {% csrf_token %}
+          {{ login_popup_form.as_plain }}
+            <div class="form-group">
+                <input type="hidden" name="next" id="id_username" class="form-control" value="{{ request.path }}"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </div>
+            <div class="form-group">
+                <a href="{% url 'auth_password_reset' %}" class="">Forgot your password?</a>
+            </div>
+            <li class="divider"></li>
+            <p>Don't have an account?</p>
+            <div class="form-group">
+                <a href="{% url 'registration_register' %}" class="btn btn-success btn-block no-decoration">Register</a>
+            </div>
+        </form>
+    </div>
+</div>

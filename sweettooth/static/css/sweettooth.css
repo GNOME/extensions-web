@@ -20,126 +20,27 @@ span.action_button {
 }
 
 
-/* Global Domain Bar */
-/* ========================================================================== */
-
-#global_domain_bar .tab a.root {
-    margin-right: 0 !important;
-}
-
-#global_domain_bar .tab a.user {
-    padding: 2px 14px 2px 4px;
-    margin: -2px -4px -2px 2px;
-    color: inherit !important;
-    text-decoration: none;
-    border-radius: 4px;
-    background: url(../images/globaldomain-user-arrow.png) right center no-repeat;
-    outline: none;
-}
-#global_domain_bar .tab a.user:hover,
-#global_domain_bar .tab a.user:focus {
-    background-color: #ececec;
-}
-#global_domain_bar .tab a.user.active {
-    background-color: #ececec;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
-}
-
-/* User settings */
-
-#global_domain_bar .user_popup:before {
-    width: 20px;
-    height: 10px;
-    margin-top: -17px;
-    pointer-events: none;
-    right: 10px;
-    position: absolute;
-    content: url(../images/globaldomain-popup-arrow.png);
-}
-#global_domain_bar .user_popup {
-    display: none;
-    z-index: 10;
-    position: absolute;
-    background: #000;
-    background: rgba(0, 0, 0, 0.9);
-    border: 2px solid rgba(100%, 100%, 100%, 0.2);
-    right: 0;
-    top: -10px;
-    margin: 32px 0 0 0;
-    min-width: 140px;
-    border-radius: 10px;
-}
-#global_domain_bar .user_popup a.text {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    padding: 3px 16px;
-}
-#global_domain_bar .user_settings a.text:hover {
-    background: rgba(100%, 100%, 100%, 0.2);
-}
-#global_domain_bar .user_settings ul {
-    margin: 14px 0;
-}
-#global_domain_bar .user_settings li {
-    list-style-type: none;
-    margin-left: 0;
-}
-#global_domain_bar .avatar {
-    display: block;
-    margin: 14px auto 0 auto;
-    width: 70px;
-    height: 70px;
-    background-color: #fff;
-    background-size: contain;
-    border: 2px solid #8b8b8b;
-    border-radius: 5px;
-}
-#global_domain_bar .avatar:hover {
-    border: 2px solid #bbbbbb;
-}
-
 /* Unreviewed Extension Counter */
 /* ==================================================================== */
 
 #unreviewed_counter {
-    border-right: 1px solid #ccc;
-    color: #555753;
+    background-color: #3968A1;
+    color: #ffffff;
+    font-weight: 700;
     text-decoration: none;
-    padding: 0 4px;
+    padding: 0 5px;
+    border-radius: 4px;
+    margin-top: 13px;
+    margin-right: 10px;
+    border: 1px solid #195EB1;
 }
 
 #unreviewed_counter:hover {
-    background-color: #ececec;
+    background-color: #195EB1;
 }
 
 /* Login Area */
 /* ==================================================================== */
-
-#global_domain_bar .login_popup_form * {
-    display: block;
-    margin: 10px 5px;
-}
-
-#global_domain_bar .login_popup_form input[type=submit],
-#global_domain_bar .login_popup_form a {
-    color: #fff;
-    display: block;
-    margin: 0;
-    border: 0;
-    background: none;
-    font-weight: normal;
-    padding: 3px 0;
-    border-radius: 0;
-    width: 100%;
-    text-decoration: none;
-    text-align: center;
-}
-
-#global_domain_bar .login_popup_form input[type=submit]:hover,
-#global_domain_bar .login_popup_form a:hover {
-    background: rgba(100%, 100%, 100%, 0.2);
-}
 
 #auth_form ol {
     list-style-type: none;
