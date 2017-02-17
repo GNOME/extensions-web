@@ -8,11 +8,7 @@ Version: 20160212
 
 
 @import url("text.css");
-@import url("960.css");
 @import url("sweettooth.css");
-
-
-
 
 
 /* Base information */
@@ -35,14 +31,6 @@ a:visited {
 }
 .hidden {
     display: none;
-}
-.maxwidth {
-    width: 940px;
-    margin: 0 auto;
-}
-.sanewidth {
-    width: 780px;
-    margin: 0 auto;
 }
 .col-centered{
     float: none;
@@ -345,39 +333,10 @@ ul.login_popup_form li p {
 /* ========================================================================== */
 
 
-
 #container {
     padding-top: 20px;
     color: #555;
-    width: 960px;
-    margin: auto;
-    min-height: 240px;
 }
-
-/*
- * this is basically used to force specific elements not to use
- * grid_* classes
- */
-#container .page_title, #container .content, #container .sidebar {
-    display: inline;
-    float: left;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-#container .content, #container .page_title {
-    width: 940px;
-}
-#container.two_columns .content {
-    width: 700px;
-}
-#container.two_columns .content.without_sidebar {
-    width: 940px;
-}
-#container.two_columns .sidebar {
-    width: 220px;
-}
-
-
 
 /* Content specs */
 /* ========================================================================== */

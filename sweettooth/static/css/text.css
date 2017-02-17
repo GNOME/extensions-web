@@ -24,6 +24,7 @@ body.win h1, body.win h2, body.win h3, body.win h4, body.win h5, body.win h6 {
 
 h1, h2, h3, h4, h5, h6, dt {
     color: #0489B7;
+    font-weight: bold;
 }
 h1 {
     font-size: 42px;
