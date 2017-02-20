@@ -28,7 +28,7 @@
       <div class="extension-details">
           {% if extension.screenshot %}
               {% block screenshot %}
-              <div class="screenshot">
+              <div class="screenshot col-xs-12 col-sm-5 col-md-4 col-lg-3">
                   <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}" /></a>
               </div>
               {% endblock screenshot %}
@@ -37,14 +37,16 @@
               {% endblock no-screenshot %}
           {% endif %}
 
-        <p class="description" id="extension_description">{{ extension.description }}</p>
+        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+            <p class="description" id="extension_description">{{ extension.description }}</p>
 
-        <dl>
-          {% if extension.url %}
-          <dt>Extension Homepage</dt>
-          <dd><a href="{{ extension.url }}" id="extension_url">{{ extension.url }}</a></dd>
-          {% endif %}
-        </dl>
+            <dl>
+              {% if extension.url %}
+              <dt>Extension Homepage</dt>
+              <dd><a href="{{ extension.url }}" id="extension_url">{{ extension.url }}</a></dd>
+              {% endif %}
+            </dl>
+        </div>
       </div>
 
       {% if not is_visible %}

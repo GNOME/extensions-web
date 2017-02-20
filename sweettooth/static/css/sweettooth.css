@@ -5,9 +5,9 @@
 
 /* -> Action Button */
 
-
 span.action_button {
     font-weight: bold;
+    margin: 10px;
 }
 
 /* Unreviewed Extension Counter */
@@ -361,11 +361,9 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 }
 
 .extension .description {
-    margin: 0.5em 32px 0.5em 0.5em;
     font-size: 1.2em;
     overflow: auto;
     white-space: pre-line;
-    padding-left: 36px;
 }
 
 .extension textarea {
@@ -375,9 +373,6 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 }
 
 .extension textarea, .extension input {
-    border: 0;
-    border-radius: 0;
-
     line-height: 1.6;
     font-size: 100%;
 }
@@ -385,12 +380,9 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 /* Screenshots and Icons */
 
 .extension .screenshot {
-    margin-right: 0.5em;
-    border: 1px solid #cccccc;
     background: #ffffff;
-    padding: 0.5em;
+    padding: 0.5em 0;
     font-weight: bold;
-    float: left;
 }
 
 .extension .screenshot img {
@@ -414,6 +406,12 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 
 .extension .screenshot label.upload {
     display: block;
+}
+
+@media screen and (max-width: 767px) {
+    .extension .screenshot {
+        text-align: center;
+    }
 }
 
 /* Uploader */
@@ -518,12 +516,6 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 /* Comments */
 /* ==================================================================== */
 
-#comments {
-    width: 510px;
-    float: left;
-    margin-right: 30px;
-}
-
 #comments .loading {
     background-image: url(../images/spinner.gif);
     background-repeat: no-repeat;
@@ -582,6 +574,9 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     z-index: 999;
 }
 
+.comments-holder {
+    margin-top: 20px;
+}
 
 /* Errors & Messages */
 /* ==================================================================== */
@@ -628,27 +623,17 @@ p.message.warning {
 }
 
 .editable {
-    background-color: rgba(255, 255, 200, 0.8);
+    background: url(../images/edit.svg) right rgba(255, 255, 200, 0.8) no-repeat;
+    padding-right: 20px;
 }
 
 /* Forms */
 /* ==================================================================== */
 
 input, textarea, input[type=submit], button {
-    padding: 3px;
-    border: 1px solid #999;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #fff;
 }
-
-input[type=submit], button {
-    background-color: #ddd;
-    color: #444;
-    padding: .2em 2em;
-    font-weight: bold;
-    padding: .1em 2em;
-}
-
 
 /* Opinion form */
 /* ==================================================================== */
@@ -661,10 +646,6 @@ input[type=submit], button {
     display: block;
 }
 
-#opinion_form .rating {
-    float: left;
-}
-
 #opinion_form p input,
 #opinion_form p textarea {
     width: 100%;
@@ -672,7 +653,8 @@ input[type=submit], button {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 3px;
-    border: 1px solid #888;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 #opinion_form p textarea {
@@ -687,13 +669,12 @@ input[type=submit], button {
 
 #opinion_form .comment_choice {
     display: block;
-    height: 32px;
     font-size: 16pt;
-    background-repeat: no-repeat;
+    margin-bottom: 30px;
 }
 
-#opinion_form .comment_choice a.selected {
-    font-weight: bold;
+#opinion_form .comment_choice a {
+    text-decoration: none;
 }
 
 #opinion_form .unauthenticated {

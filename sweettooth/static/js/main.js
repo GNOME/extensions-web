@@ -132,8 +132,8 @@ function($, messages, modal, hashParamUtils, templates, staticfiles) {
 
         function makeShowForm(isRating) {
             return function() {
-                $('#leave_comment, #leave_rating').removeClass('selected');
-                $(this).addClass('selected');
+                $('#leave_comment, #leave_rating').removeClass('active');
+                $(this).addClass('active');
                 var $rating = $('#rating_form').slideDown().find('.rating');
                 if (isRating)
 				{
