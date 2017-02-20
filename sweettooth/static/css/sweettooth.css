@@ -474,19 +474,12 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     margin-left: 1em;
 }
 
-#error_report input[type=submit] {
-    display: block;
-    margin: 1em;
-}
-
 #error_report textarea,
 #error_report div {
     display: block;
-    width: 97%;
+    width: 100%;
     resize: vertical;
     min-height: 80px;
-    padding: 0.5em;
-    margin: 1em;
 }
 
 #error_report textarea {
