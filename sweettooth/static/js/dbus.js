@@ -95,9 +95,7 @@ define(['jquery'], function ($) {
 			{
 				// Browser extension
 				// SweetTooth.initialize should be Promise or jQuery.Deferred
-				SweetTooth.initialize().then(function () {
-					processLoad();
-				});
+				SweetTooth.initialize().then(processLoad, processLoad);
 			}
 			else
 			{
