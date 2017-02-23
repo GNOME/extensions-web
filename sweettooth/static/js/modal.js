@@ -9,7 +9,7 @@ define(['jquery'], function($) {
     // This is a trick that fires jQuery's event handler during the
     // capturing phase.
     function captureHandler() {
-        $.event.handle.apply(document.body, arguments);
+        $.event.dispatch.apply(document.body, arguments);
     }
 
     exports.activateModal = function(elem, closeFunction) {
