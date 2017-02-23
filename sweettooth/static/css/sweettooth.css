@@ -9,6 +9,13 @@ span.action_button {
     margin: 10px;
 }
 
+/* User Profile */
+/* ==================================================================== */
+
+.profile ul {
+    padding-left: 0px;
+}
+
 /* Unreviewed Extension Counter */
 /* ==================================================================== */
 
@@ -31,31 +38,47 @@ span.action_button {
 /* Login Area */
 /* ==================================================================== */
 
-#auth_form ol {
+#auth_form  {
+    padding: 0;
+    margin: 0;
+}
+
+#auth_form h3 {
+    color: #0489B7;
+}
+
+#auth_form li, #auth_form ol {
     list-style-type: none;
-    font-size: 2em;
+}
+
+#auth_form ul {
+    padding: 0px;
+}
+
+#auth_form ul > li {
+    margin-bottom: 15px;
 }
 
 #auth_form .helptext {
-    font-size: 0.5em;
     display: block;
-}
-
-#auth_form li.submit input {
-    width: 86.5%;
-    margin: 0 5%;
 }
 
 #auth_form label {
     display: inline-block;
-    width: 45%;
-    margin-left: 5%;
     line-height: 1.8;
     vertical-align: top;
 }
 
 #auth_form input {
-    width: 40%;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+#auth_form input:focus {
+    border-color: #66afe9;
+    outline: 0;
 }
 
 
@@ -623,12 +646,22 @@ p.message.warning {
     padding-right: 20px;
 }
 
+.errorlist {
+    color: #a94442;
+}
+
 /* Forms */
 /* ==================================================================== */
 
 input, textarea, input[type=submit], button {
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #66afe9;
+    outline: 0;
 }
 
 /* Opinion form */
@@ -651,6 +684,12 @@ input, textarea, input[type=submit], button {
     padding: 3px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+#opinion_form p input:focus,
+#opinion_form p textarea:focus {
+    border-color: #66afe9;
+    outline: 0;
 }
 
 #opinion_form p textarea {
