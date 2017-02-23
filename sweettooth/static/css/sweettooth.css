@@ -2,7 +2,6 @@
 @import url("jquery.rating.css");
 @import url("jquery.colorbox.css");
 
-
 /* -> Action Button */
 
 span.action_button {
@@ -158,6 +157,7 @@ span.action_button {
 
 .fsui-dropdown ul {
     margin: 0;
+    padding: 0;
 }
 
 .fsui-dropdown-item {
@@ -185,10 +185,12 @@ span.action_button {
 
 #extensions-list {
     position: relative;
+    padding-left: 0;
 }
 
 ul.extensions {
     margin-top: 0;
+    padding-left: 0;
 }
 
 li.extension {
@@ -361,9 +363,11 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 }
 
 .extension .description {
+    margin: 0.5em 32px 0.5em 0.5em;
     font-size: 1.2em;
     overflow: auto;
     white-space: pre-line;
+    padding-left: 36px;
 }
 
 .extension textarea {
@@ -504,7 +508,6 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     font-family: monospace;
     font-size: 1.2em;
 }
-
 
 /* Comments */
 /* ==================================================================== */
