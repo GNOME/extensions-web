@@ -62,6 +62,7 @@ a:visited {
     height: 30px;
     border-radius: 50%;
 }
+.navbar-default .navbar-nav > #userDropdownMenu > a,
 .navbar-default .navbar-nav > #userDropdownMenu > a:hover,
 .navbar-default .navbar-nav > #userDropdownMenu > a:focus {
     background: transparent;
