@@ -61,28 +61,6 @@ function($, messages, modal, hashParamUtils, templates, staticfiles) {
             $(this).csrfEditable('/accounts/change_display_name/' + pk);
         });
 
-        var $userPopupLink = $('#global_domain_bar .user');
-        var $userPopup = $('#global_domain_bar .user_popup');
-        function closeUserSettings() {
-            if ($userPopupLink.hasClass('active')) {
-                $userPopupLink.removeClass('active');
-                $userPopup.animate({ top: '10px', opacity: 0 }, 200, function() {
-                    $(this).hide();
-                });
-                return true;
-            }
-        }
-
-        $userPopupLink.click(function() {
-            $userPopupLink.addClass('active');
-            $userPopup.
-                show().
-                css({ top: '-10px', opacity: 0 }).
-                animate({ top: '0', opacity: 1 }, 200);
-            modal.activateModal($userPopup, closeUserSettings);
-            return false;
-        });
-
         $('#local_extensions').addLocalExtensions();
         $('.extension.single-page').addExtensionSwitch();
 
