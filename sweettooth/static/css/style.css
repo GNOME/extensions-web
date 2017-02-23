@@ -6,7 +6,6 @@ Description: The original theme for the GNOME Project website.
 Version: 20160212
 */
 
-
 @import url("text.css");
 @import url("sweettooth.css");
 
@@ -159,6 +158,24 @@ a:visited {
 }
 .navbar-default .navbar-header .icons li{
     display: inline-block !important;
+}
+
+/* Search bar*/
+
+#search-bar {
+    margin-bottom: 40px;
+}
+#search-bar input {
+    padding-left: 50px;
+}
+
+/* CSS hack to align search icon with the text */
+
+.has-feedback-left .form-control-feedback {
+    top: 0;
+    left: 0;
+    padding-left: 5px;
+    pointer-events: none;
 }
 
 /* User settings */
