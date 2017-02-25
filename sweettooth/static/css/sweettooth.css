@@ -372,6 +372,10 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     border-color: #d92400;
 }
 
+.extension-details dl {
+    padding-left: 36px;
+}
+
 /* Extension switch */
 
 .extension ._gnome-switch {
@@ -386,7 +390,7 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 }
 
 .extension .description {
-    margin: 0.5em 32px 0.5em 0.5em;
+    margin: 0.5em 32px 0.5em 0;
     font-size: 1.2em;
     overflow: auto;
     white-space: pre-line;
