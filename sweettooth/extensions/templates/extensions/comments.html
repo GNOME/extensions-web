@@ -2,7 +2,7 @@
   <h4>Your opinion</h4>
   {% if request.user.is_authenticated %}
   <div class="comment_choice btn-group btn-group-justified">
-    Leave a...
+    Leave a…
     <a class="btn btn-default" href="javascript:void 0" id="leave_comment">Comment</a>
     <a class="btn btn-default" href="javascript:void 0" id="leave_rating">Rating</a>
     <a class="btn btn-default" href="{% url 'sweettooth.errorreports.views.report_error' pk=extension.pk %}">Bug report</a>
