@@ -44,9 +44,16 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 		// is running with an old Shell version but a newer plugin, error out.
 		if (dbusProxy.IsDummy)
 		{
-			// We don't have a proper DBus proxy -- it's probably an old
-			// version of GNOME3 or the Shell.
-			messages.addError(templates.get('messages/dummy_proxy')());
+			// We don't have a proper DBus proxy
+			if (IS_CHROME || IS_FIREFOX || IS_OPERA) // browser_extension.js should be included globally
+			{
+				// Help user to install browser extension for supported browsers
+				messages.addInfo(templates.get('messages/browser_extension')());
+			}
+			else
+			{
+				messages.addError(templates.get('messages/dummy_proxy')());
+			}
 
 			$.fn.addExtensionSwitch = function () {
 				// Don't show our switches -- CSS styles define a clickable
