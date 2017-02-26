@@ -302,6 +302,10 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     box-sizing: content-box;
 }
 
+.extension.single-page .description {
+    padding-left: 17px;
+}
+
 .extension.single-page .controls {
     width: auto;
     margin-right: 32px;
