@@ -298,6 +298,10 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     width: 180px;
 }
 
+.extension .controls * {
+    box-sizing: content-box;
+}
+
 .extension.single-page .controls {
     width: auto;
     margin-right: 32px;
@@ -614,6 +618,7 @@ p.message {
     background-position: 16px center;
     border: 1px solid rgba(33, 33, 33, 0.3);
     border-top: 0;
+    box-sizing: content-box;
 }
 
 p.message:first-child {
