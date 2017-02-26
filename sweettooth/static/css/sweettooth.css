@@ -422,6 +422,7 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     background: #ffffff;
     padding: 0.5em 0;
     font-weight: bold;
+    padding-left: 40px;
 }
 
 .extension .screenshot img {
