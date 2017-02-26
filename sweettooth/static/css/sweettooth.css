@@ -605,9 +605,9 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 /* ==================================================================== */
 
 p.message {
-    min-height: 50px;
+    min-height: 42px;
     display: block;
-    padding: .9em;
+    padding: .5em;
     margin: 0 auto;
     padding-left: 72px;
     background-repeat: no-repeat;
