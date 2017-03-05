@@ -398,11 +398,10 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 }
 
 .extension .description {
-    margin: 0.5em 32px 0.5em 8px;
+    margin: 0.5em 32px 0.5em 44px;
     font-size: 1.2em;
     overflow: auto;
     white-space: pre-line;
-    padding-left: 36px;
 }
 
 .extension textarea {
