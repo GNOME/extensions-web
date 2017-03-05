@@ -3,7 +3,7 @@
 {% block title %}Unreviewed Extensions - {{ block.super }}{% endblock %}
 
 {% block body %}
-<h2> Unreviewed Extensions </h2>
+<h2>Unreviewed Extensions</h2>
 <ul class="extensions">
 {% for version in version_list %}
 {% with version.extension as extension %}
