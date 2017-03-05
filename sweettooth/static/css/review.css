@@ -1,7 +1,7 @@
 
 @import url("pygments.css");
 
-#container, .container_12, .maxwidth {
+#container, .maxwidth {
     width: auto !important;
     margin: 0 1em;
 }
