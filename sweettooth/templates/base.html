@@ -42,6 +42,20 @@
                         <span class="icon-bar bottom-bar"></span>
                     </button>
                     <a class="gnome-navbar-brand" title="GNOME Shell Extensions" href="/"><img src="{% static 'images/gnome-extensions.svg' %}" alt="GNOME Shell Extensions" /></a>
+                    <ul class="nav navbar-nav icons visible-xs">
+                        {% if n_unreviewed_extensions %}
+                        <li>
+                            <a id="unreviewed_counter" href="{% url 'review-list' %}">{{ n_unreviewed_extensions }}</a>
+                        </li>
+                        {% endif%}
+                        <li class="dropdown">
+                        {% if request.user.is_authenticated %}
+                            <a data-target="#userDropdownMenu" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% gravatar_url request request.user.email %}"></a>
+                        {% else %}
+                            <a href="#userDropdownMenu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% static 'images/avatar-default.svg' %}" alt="GNOME Shell Extensions" /></a>
+                        {% endif %}
+                        </li>
+                    </ul>
                 </div>
                 <ul class="nav navbar-nav navbar-right no-padding">
                     <li id="userDropdownMenu" class="dropdown">
