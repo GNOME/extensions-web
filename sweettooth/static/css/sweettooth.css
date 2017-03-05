@@ -19,7 +19,8 @@ span.action_button {
 /* Unreviewed Extension Counter */
 /* ==================================================================== */
 
-#unreviewed_counter {
+div.nav.navbar-nav a.unreviewed_counter,
+div.navbar-header a.unreviewed_counter {
     background-color: #3968A1;
     color: #ffffff;
     font-weight: 700;
@@ -31,7 +32,8 @@ span.action_button {
     border: 1px solid #195EB1;
 }
 
-#unreviewed_counter:hover {
+div.nav.navbar-nav a.unreviewed_counter:hover,
+div.navbar-header a.unreviewed_counter:hover {
     background-color: #195EB1;
 }
 

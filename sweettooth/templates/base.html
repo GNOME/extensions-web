@@ -45,7 +45,7 @@
                     <ul class="nav navbar-nav icons visible-xs">
                         {% if n_unreviewed_extensions %}
                         <li>
-                            <a id="unreviewed_counter" href="{% url 'review-list' %}">{{ n_unreviewed_extensions }}</a>
+                            <a class="unreviewed_counter" href="{% url 'review-list' %}">{{ n_unreviewed_extensions }}</a>
                         </li>
                         {% endif%}
                         <li class="dropdown">
@@ -76,7 +76,7 @@
                 {% if n_unreviewed_extensions %}
                 <div class="nav navbar-nav navbar-right hidden-xs">
                     <li>
-                        <a id="unreviewed_counter" href="{% url 'review-list' %}">{{ n_unreviewed_extensions }}</a>
+                        <a class="unreviewed_counter" href="{% url 'review-list' %}">{{ n_unreviewed_extensions }}</a>
                     </li>
                 </div>
                 {% endif %}
