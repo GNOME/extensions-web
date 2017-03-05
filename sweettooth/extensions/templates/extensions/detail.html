@@ -6,16 +6,17 @@
          data-epk="{{ extension.pk }}"
          data-uuid="{{ extension.uuid }}"
          data-svm="{{ shell_version_map }}">
-      <div class="extension-header">
+      <div class="extension-header col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        {% spaceless %}
         {% block icon %}
         <img src="{{ extension.icon.url }}" class="icon">
         {% endblock icon %}
-
         <h3 class="extension-name" id="extension_name">{{ extension.name }}</h3>
+        {% endspaceless %}
         <span class="author">by <a href="{% url 'auth-profile' user=extension.creator.username %}">{{ extension.creator }}</a></span>
       </div>
 
-      <div class="controls">
+      <div class="controls col-xs-12 col-sm-4 col-md-4 col-lg-4">
         <div class="switch"></div>
         <div class="extra-buttons">
           <div class="upgrade-button"></div>
@@ -32,12 +33,15 @@
                   <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}" /></a>
               </div>
               {% endblock screenshot %}
+
+            <div class="col-sm-1 col-md-1 col-lg-1">
+            </div>
           {% else %}
               {% block no-screenshot %}
               {% endblock no-screenshot %}
           {% endif %}
 
-        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
             <p class="description" id="extension_description">{{ extension.description }}</p>
 
             <dl>

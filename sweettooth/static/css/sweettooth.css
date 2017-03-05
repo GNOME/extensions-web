@@ -302,8 +302,14 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     box-sizing: content-box;
 }
 
+.extension.single-page .extension-details {
+    /* 32px icon + 4px icon margin */
+    padding-left: 36px;
+}
+
 .extension.single-page .description {
-    padding-left: 17px;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 .extension.single-page .controls {
@@ -380,10 +386,6 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     border-color: #d92400;
 }
 
-.extension-details dl {
-    padding-left: 36px;
-}
-
 /* Extension switch */
 
 .extension ._gnome-switch {
@@ -419,9 +421,9 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 
 .extension .screenshot {
     background: #ffffff;
-    padding: 0.5em 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     font-weight: bold;
-    padding-left: 40px;
 }
 
 .extension .screenshot img {
