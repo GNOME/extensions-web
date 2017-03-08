@@ -46,7 +46,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 		{
 			// We don't have a proper DBus proxy, however API may be exported.
 			// If API is exported let's assume that browser extension is installed and will handle errors.
-			if(!('SweetTooth' in window))
+			if(!window.SweetTooth || typeof(window.SweetTooth.initialize) !== 'function')
 			{
 				if (IS_CHROME || IS_FIREFOX || IS_OPERA) // browser_extension.js should be included globally
 				{
