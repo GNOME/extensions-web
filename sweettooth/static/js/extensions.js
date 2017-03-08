@@ -44,15 +44,19 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 		// is running with an old Shell version but a newer plugin, error out.
 		if (dbusProxy.IsDummy)
 		{
-			// We don't have a proper DBus proxy
-			if (IS_CHROME || IS_FIREFOX || IS_OPERA) // browser_extension.js should be included globally
+			// We don't have a proper DBus proxy, however API may be exported.
+			// If API is exported let's assume that browser extension is installed and will handle errors.
+			if(!('SweetTooth' in window))
 			{
-				// Help user to install browser extension for supported browsers
-				messages.addInfo(templates.get('messages/browser_extension')());
-			}
-			else
-			{
-				messages.addError(templates.get('messages/dummy_proxy')());
+				if (IS_CHROME || IS_FIREFOX || IS_OPERA) // browser_extension.js should be included globally
+				{
+					// Help user to install browser extension for supported browsers
+					messages.addInfo(templates.get('messages/browser_extension')());
+				}
+				else
+				{
+					messages.addError(templates.get('messages/dummy_proxy')());
+				}
 			}
 
 			$.fn.addExtensionSwitch = function () {
