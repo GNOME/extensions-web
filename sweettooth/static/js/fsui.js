@@ -1,127 +1,138 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2012  Jasper St. Pierre <jstpierre@mecheye.net>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
 // FSUI is short for "Filtering and Sorting UI", which contains
 // controls for filtering and sorting the extensions list
 
 define(['jquery', 'dbus!_', 'hashParamUtils', 'modal'],
-function($, dbusProxy, hashParamUtils, modal) {
-    "use strict";
+	function ($, dbusProxy, hashParamUtils, modal) {
+		"use strict";
 
-    function makeDropdownLink(text) {
-        return $('<a>', {'class': 'fsui-dropdown-link'}).
-            append($('<span>').text(text)).
-            append($('<span>', {'class': 'fsui-dropdown-link-arrow'}).text('\u2304'));
-    }
+		function makeDropdownLink(text) {
+			return $('<a>', {'class': 'fsui-dropdown-link'}).append($('<span>').text(text)).append($('<span>', {'class': 'fsui-dropdown-link-arrow'}).text('\u2304'));
+		}
 
-    function makeDropdown($fsui, $link) {
-        return $('<div>', {'class': 'fsui-dropdown'}).
-            appendTo($fsui).
-            css('right', calculateRight($fsui, $link)).
-            hide().
-            fadeIn('fast');
-    }
+		function makeDropdown($fsui, $link) {
+			return $('<div>', {'class': 'fsui-dropdown'}).appendTo($fsui).css('right', calculateRight($fsui, $link)).hide().fadeIn('fast');
+		}
 
-    function calculateRight($fsui, $link) {
-        return $fsui.innerWidth() - $link.position().left - $link.outerWidth() - parseFloat($link.css('marginLeft'));
-    }
+		function calculateRight($fsui, $link) {
+			return $fsui.innerWidth() - $link.position().left - $link.outerWidth() - parseFloat($link.css('marginLeft'));
+		}
 
-    function makeLink(key, value, text, closeUI) {
-        return $('<li>', {'class': 'fsui-dropdown-item'}).
-            text(text).
-            click(function() {
-                hashParamUtils.setHashParam(key, value);
-                hashParamUtils.setHashParam('page', undefined);
-                closeUI();
-            });
-    }
+		function makeLink(key, value, text, closeUI) {
+			return $('<li>', {'class': 'fsui-dropdown-item'}).text(text).click(function () {
+				hashParamUtils.setHashParam(key, value);
+				hashParamUtils.setHashParam('page', undefined);
+				closeUI();
+			});
+		}
 
-    var sortCriteria = {
-        'name': "Name",
-        'recent': "Recent",
-        'downloads': "Downloads",
-        'popularity': "Popularity"
-    };
+		var sortCriteria = {
+			'name': "Name",
+			'recent': "Recent",
+			'downloads': "Downloads",
+			'popularity': "Popularity"
+		};
 
-    $.fn.fsUIify = function() {
+		$.fn.fsUIify = function () {
 
-        return this.each(function() {
-            var $elem = $(this);
+			return this.each(function () {
+				var $elem = $(this);
 
-            function makeCloseUI($link, $dropdown) {
-                return function() {
-                    if ($link.hasClass('selected')) {
-                        $dropdown.fadeOut('fast', function() {
-                            $(this).detach();
-                        });
-                        $link.removeClass('selected');
-                        return true;
-                    }
-                    return false;
-                };
-            }
+				function makeCloseUI($link, $dropdown) {
+					return function () {
+						if ($link.hasClass('selected'))
+						{
+							$dropdown.fadeOut('fast', function () {
+								$(this).detach();
+							});
+							$link.removeClass('selected');
+							return true;
+						}
+						return false;
+					};
+				}
 
-            var hp = hashParamUtils.getHashParams();
-            if (hp.sort === undefined || !sortCriteria.hasOwnProperty(hp.sort))
-                hp.sort = 'popularity';
+				var hp = hashParamUtils.getHashParams();
+				if (hp.sort === undefined || !sortCriteria.hasOwnProperty(hp.sort))
+				{
+					hp.sort = 'popularity';
+				}
 
-            var $fsui = $('<div>', {'class': 'fsui'}).appendTo($elem);
+				var $fsui = $('<div>', {'class': 'fsui'}).appendTo($elem);
 
-            $fsui.append('<span>Sort by</span>');
+				$fsui.append('<span>Sort by</span>');
 
-            var $link;
+				var $link;
 
-            $link = makeDropdownLink(sortCriteria[hp.sort]).
-                click(function() {
-                    var $dropdown = makeDropdown($fsui, $(this));
-                    $(this).addClass('selected');
-                    var closeUI = makeCloseUI($(this), $dropdown);
-                    modal.activateModal($dropdown, closeUI);
+				$link = makeDropdownLink(sortCriteria[hp.sort]).click(function () {
+					var $dropdown = makeDropdown($fsui, $(this));
+					$(this).addClass('selected');
+					var closeUI = makeCloseUI($(this), $dropdown);
+					modal.activateModal($dropdown, closeUI);
 
-                    var $sortUL = $('<ul>').appendTo($dropdown);
-                    var sortLinks = {};
-                    $.each(sortCriteria, function(key) {
-                        sortLinks[key] = makeLink('sort', key, this, closeUI).appendTo($sortUL);
-                    });
+					var $sortUL = $('<ul>').appendTo($dropdown);
+					var sortLinks = {};
+					$.each(sortCriteria, function (key) {
+						sortLinks[key] = makeLink('sort', key, this, closeUI).appendTo($sortUL);
+					});
 
-                    sortLinks[hp.sort].addClass('selected');
+					sortLinks[hp.sort].addClass('selected');
 
-                    return false;
-                }).appendTo($fsui);
+					return false;
+				}).appendTo($fsui);
 
-            function textForFilterValue(value) {
-                if (value === 'all')
-                    return "All versions";
-                else if (value === dbusProxy.ShellVersion)
-                    return "Current version";
-                return "GNOME Shell version " + value;
-            }
+				function textForFilterValue(value) {
+					if (value === 'all')
+					{
+						return "All versions";
+					}
+					else if (value === dbusProxy.ShellVersion)
+					{
+						return "Current version";
+					}
+					return "GNOME Shell version " + value;
+				}
 
-            if (dbusProxy.ShellVersion === undefined)
-                return;
+				if (dbusProxy.ShellVersion === undefined)
+				{
+					return;
+				}
 
-            var shellVersion = hp.shell_version;
-            if (shellVersion === undefined)
-                shellVersion = dbusProxy.ShellVersion;
+				var shellVersion = hp.shell_version;
+				if (shellVersion === undefined)
+				{
+					shellVersion = dbusProxy.ShellVersion;
+				}
 
-            $fsui.append('<span>Compatible with</span>');
+				$fsui.append('<span>Compatible with</span>');
 
-            $link = makeDropdownLink(textForFilterValue(shellVersion)).
-                click(function() {
-                    var $dropdown = makeDropdown($fsui, $(this));
-                    $(this).addClass('selected');
-                    var closeUI = makeCloseUI($(this), $dropdown);
-                    modal.activateModal($dropdown, closeUI);
+				$link = makeDropdownLink(textForFilterValue(shellVersion)).click(function () {
+					var $dropdown = makeDropdown($fsui, $(this));
+					$(this).addClass('selected');
+					var closeUI = makeCloseUI($(this), $dropdown);
+					modal.activateModal($dropdown, closeUI);
 
-                    var $filterUL = $('<ul>').appendTo($dropdown);
+					var $filterUL = $('<ul>').appendTo($dropdown);
 
-                    $.each(['all', dbusProxy.ShellVersion], function() {
-                        var $filterItem = makeLink('shell_version', this, textForFilterValue(this), closeUI).appendTo($filterUL);
-                        if (shellVersion === this)
-                            $filterItem.addClass('selected');
-                    });
+					$.each(['all', dbusProxy.ShellVersion], function () {
+						var $filterItem = makeLink('shell_version', this, textForFilterValue(this), closeUI).appendTo($filterUL);
+						if (shellVersion === this)
+						{
+							$filterItem.addClass('selected');
+						}
+					});
 
-                    return false;
-                }).appendTo($fsui);
-        });
-    };
-});
+					return false;
+				}).appendTo($fsui);
+			});
+		};
+	});
