@@ -273,7 +273,7 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 
 .extension .system-extension {
     margin: 0;
-    margin-left: 44px;
+    margin-left: 36px;
     font-size: 0.8em;
     cursor: help;
     display: none;
