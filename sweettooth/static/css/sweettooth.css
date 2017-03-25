@@ -256,7 +256,6 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     display: inline-block;
     line-height: 32px;
     margin: 0;
-    margin-left: 8px;
     font-size: 1.3em;
 }
 
@@ -401,7 +400,7 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 }
 
 .extension .description {
-    margin: 0.5em 32px 0.5em 44px;
+    margin: 0.5em 32px 0.5em 36px;
     font-size: 1.2em;
     overflow: auto;
     white-space: pre-line;
