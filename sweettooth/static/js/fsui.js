@@ -1,6 +1,7 @@
 /*
     GNOME Shell extensions repository
     Copyright (C) 2012  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2017  Yuri Konotopov <ykonotopov@gnome.org>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -110,7 +111,14 @@ define(['jquery', 'dbus!_', 'hashParamUtils', 'modal'],
 				var shellVersion = hp.shell_version;
 				if (shellVersion === undefined)
 				{
-					shellVersion = dbusProxy.ShellVersion;
+					if (dbusProxy.VersionValidationEnabled)
+					{
+						shellVersion = dbusProxy.ShellVersion;
+					}
+					else
+					{
+						shellVersion = 'all';
+					}
 				}
 
 				$fsui.append('<span>Compatible with</span>');
