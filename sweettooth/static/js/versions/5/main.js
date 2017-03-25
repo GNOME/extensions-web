@@ -16,6 +16,7 @@ define(['jquery', 'dbus!API', 'versions/common/common'], function($, API, common
         LaunchExtensionPrefs: common.LaunchExtensionPrefs,
 
         ShellVersion: API.shellVersion,
+        VersionValidationEnabled: typeof(API.versionValidationEnabled) == 'undefined' || API.versionValidationEnabled,
 
         extensionStateChangedHandler: null,
         shellRestartHandler: null
