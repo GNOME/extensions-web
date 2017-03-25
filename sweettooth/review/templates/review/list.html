@@ -3,12 +3,12 @@
 {% block title %}Unreviewed Extensions - {{ block.super }}{% endblock %}
 
 {% block body %}
-<h2> Unreviewed Extensions </h2>
+<h2>Unreviewed Extensions</h2>
 <ul class="extensions">
 {% for version in version_list %}
 {% with version.extension as extension %}
 <li class="extension">
-  <h3 class="extension-name"><a href="{% url 'review-version' pk=version.pk %}"><img src="{{ extension.icon.url }}" class="icon"> {{ extension.name }}</a></h3>
+  <h3 class="extension-name"><a href="{% url 'review-version' pk=version.pk %}"><img src="{{ extension.icon.url }}" class="icon">{{ extension.name }}</a></h3>
   <span class="version">(v{{ version.version }})</span>
   <span class="author">by <a href="{% url 'auth-profile' user=extension.creator %}">{{ extension.creator }}</a></span>
   <p class="description">{{ extension.first_line_of_description }}</p>

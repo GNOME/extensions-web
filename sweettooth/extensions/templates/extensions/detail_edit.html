@@ -52,19 +52,19 @@
 {% endblock %}
 
 {% block screenshot %}
-    <div class="screenshot">
+    <div class="screenshot col-xs-12 col-sm-5 col-md-4 col-lg-3 no-left-padding">
         <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}"/></a>
         <label class="upload">
-            <span class="action_button">Upload screenshot</span>
+            <span class="action_button btn btn-primary">Upload screenshot</span>
             <input type="file" accept="image/*">
         </label>
     </div>
 {% endblock %}
 
 {% block no-screenshot %}
-    <div class="screenshot">
+    <div class="screenshot col-xs-12 col-sm-5 col-md-4 col-lg-3 no-left-padding">
         <label class="upload">
-            <span class="action_button">Upload screenshot</span>
+            <span class="action_button btn btn-primary">Upload screenshot</span>
             <input type="file" accept="image/*">
         </label>
     </div>

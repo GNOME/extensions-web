@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
+<div class="col-sm-8 col-md-6 col-centered">
 <form action="" method="POST" id="auth_form">
   {% csrf_token %}
-  <ol>
-    {{ form.as_ul }}
-
-    <li class="submit">
-      <input type="submit" value="Register">
-    </li>
-  </ol>
+  <h3>Account Registration</h3>
+  <ul>
+  {{ form.as_ul }}
+  </ul>
+  <button type="submit" class="btn btn-primary btn-block">Register</button>
 </form>
+</div>
 {% endblock %}

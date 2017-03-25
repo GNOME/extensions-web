@@ -24,6 +24,7 @@ body.win h1, body.win h2, body.win h3, body.win h4, body.win h5, body.win h6 {
 
 h1, h2, h3, h4, h5, h6, dt {
     color: #0489B7;
+    font-weight: bold;
 }
 h1 {
     font-size: 42px;
@@ -58,9 +59,9 @@ ol {
 ul {
     list-style:square;
 }
-li {
+/*li {
     margin-left:30px;
-}
+}*/
 dl,dt,h1,h2,h3,h4,h5,h6,pre,table,address,fieldset {
     margin: 0.8em 0 0.4em;
 }
@@ -72,7 +73,12 @@ code {
     background: rgba(0,0,0,0.1);
     padding: 1px;
 }
-
+a {
+    text-decoration: underline;
+}
+.no-decoration {
+    text-decoration: none;
+}
 
 /* Text classes */
 /* ========================================================================== */
@@ -82,19 +88,6 @@ code {
 }
 
 .main_feature {
-    font-size: 16pt;
+    font-size: 14pt;
     line-height: 130%;
-}
-
-.footnotes {
-    font-size: 11px;
-    color: #888a85;
-}
-.footnotes a {
-    color: #888a85;
-}
-
-#footer {
-    font-size: 12px;
-    line-height: 1.4em;
 }

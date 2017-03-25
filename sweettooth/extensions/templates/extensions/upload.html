@@ -20,8 +20,7 @@
     Use <code>zip -j</code> when making your zipfile to ensure this. Other files like <code class="file">stylesheet.css</code> are optional.
   </p>
 
-  <form enctype="multipart/form-data" action=""
-        method="POST">
+  <form enctype="multipart/form-data" action="" method="POST">
     {% csrf_token %}
 
     {{ form.source }}
@@ -39,8 +38,7 @@
 
     <p>Make sure that you read <a href="http://blog.mecheye.net/2012/02/requirements-and-tips-for-getting-your-gnome-shell-extension-approved/">Requirements and Tips for getting your GNOME Shell Extension approved</a> &mdash; it goes over some of the things that reviewers look for.</p>
 
-    <br>
-    <input type="submit" value="Upload extension">
+    <button type="submit" class="btn btn-primary">Upload extension</button>
   </form>
 
 </div>

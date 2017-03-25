@@ -1,13 +1,10 @@
 {% if request.user.is_authenticated %}
-<div class="user_settings user_popup">
-  {% load gravatar %}
-  <a class="avatar" href="{% url 'auth-profile' user=request.user.username %}" title="Profile">
-    <img src="{% gravatar_url request request.user.email %}">
-  </a>
-  <ul>
-    <li><a class="text" href="{% url 'auth-settings' user=request.user.username %}">Website Settings</a></li>
-    <li><a class="text" href="{% url 'auth-logout' %}">Log Out</a></li>
-  </ul>
+<div class="row">
+    <div class="col-sm-12">
+        <p><a class="btn btn-link no-decoration" href="{% url 'auth-profile' user=request.user.username %}">User Profile</a></p>
+        <p><a class="btn btn-link no-decoration" href="{% url 'auth-settings' user=request.user.username %}">User Settings</a></p>
+        <p><a class="btn btn-link no-decoration" href="{% url 'auth-logout' %}">Log out</a></p>
+    </div>
 </div>
 {% else %}
 {% include "registration/login_popup_form.html" %}

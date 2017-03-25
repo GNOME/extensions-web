@@ -1,6 +1,11 @@
 {% load comments i18n %}
 <form action="{% comment_form_target %}" method="post">{% csrf_token %}
   {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
+  <div class="rating text-center">
+    <p class="text-left"><strong>Rating</strong></p>
+  </div>
+  <p><strong>Summary</strong></p>
+  <p>{% trans "What do you think about this GNOME extension?" %}</p>
   <p>{{ form.comment }}</p>
   {% for field in form %}
     {% ifnotequal field.name "comment" %}
@@ -16,10 +21,9 @@
     {% endif %}
     {% endifnotequal %}
   {% endfor %}
-  <div class="rating"></div>
   <input type="hidden" name="show_rating" value="1" />
   <p class="submit">
-    <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}"/>
-    <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}"/>
+    <input type="submit" name="post" class="btn btn-default" value="{% trans "Post" %}"/> <br><br>
+    <input type="submit" name="preview" class="btn btn-primary" value="{% trans "Preview" %}"/>
   </p>
 </form>
