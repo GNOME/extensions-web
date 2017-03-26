@@ -1,81 +1,103 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
 
-define(['jquery', 'hashParamUtils', 'paginatorUtils', 'dbus!_', 'templates', 'jquery.hashchange'], function($, hashParamUtils, paginatorUtils, dbusProxy, templates) {
-    "use strict";
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
-    $.fn.paginatorify = function(context) {
-        if (!this.length)
-            return this;
+define(['jquery', 'hashParamUtils', 'paginatorUtils', 'dbus!_', 'templates', 'jquery.hashchange'], function ($, hashParamUtils, paginatorUtils, dbusProxy, templates) {
+	"use strict";
 
-        if (context === undefined)
-            context = 3;
+	$.fn.paginatorify = function (context) {
+		if (!this.length)
+		{
+			return this;
+		}
 
-        var $elem = $(this);
-        var $beforePaginator = null;
-        var $afterPaginator = null;
+		if (context === undefined)
+		{
+			context = 3;
+		}
 
-        var currentRequest = null;
+		var $elem = $(this);
+		var $beforePaginator = null;
+		var $afterPaginator = null;
 
-        function loadPage() {
-            if (currentRequest !== null)
-                currentRequest.abort();
+		var currentRequest = null;
 
-            if ($beforePaginator !== null)
-                $beforePaginator.addClass('loading');
+		function loadPage() {
+			if (currentRequest !== null)
+			{
+				currentRequest.abort();
+			}
 
-            var queryParams = hashParamUtils.getHashParams();
-            if (queryParams.page === undefined)
-                queryParams.page = 1;
-            if (queryParams.shell_version === undefined)
-                queryParams.shell_version = dbusProxy.ShellVersion;
-            if ($('#search_input').val())
-                queryParams.search = $('#search_input').val();
+			if ($beforePaginator !== null)
+			{
+				$beforePaginator.addClass('loading');
+			}
 
-            currentRequest = $.ajax({
-                url: '/extension-query/',
-                dataType: 'json',
-                data: queryParams,
-                type: 'GET'
-            }).done(function(result) {
-                if ($beforePaginator)
-                    $beforePaginator.detach();
-                if ($afterPaginator)
-                    $afterPaginator.detach();
+			var queryParams = hashParamUtils.getHashParams();
+			if (queryParams.page === undefined)
+			{
+				queryParams.page = 1;
+			}
+			if (queryParams.shell_version === undefined)
+			{
+				queryParams.shell_version = dbusProxy.ShellVersion;
+			}
+			if ($('#search_input').val())
+			{
+				queryParams.search = $('#search_input').val();
+			}
 
-                var page = parseInt(queryParams.page, 10);
-                var numPages = result.numpages;
+			currentRequest = $.ajax({
+				url: '/extension-query/',
+				dataType: 'json',
+				data: queryParams,
+				type: 'GET'
+			}).done(function (result) {
+				if ($beforePaginator)
+				{
+					$beforePaginator.detach();
+				}
+				if ($afterPaginator)
+				{
+					$afterPaginator.detach();
+				}
 
-                var $paginator = paginatorUtils.buildPaginator(page, numPages, context);
-                $beforePaginator = $paginator.clone().addClass('before-paginator');
-                $afterPaginator = $paginator.clone().addClass('after-paginator');
-                $paginator.empty();
+				var page = parseInt(queryParams.page, 10);
+				var numPages = result.numpages;
 
-                $.each(result.extensions, function() {
-                    // Serialize out the svm as we want it to be JSON
-                    // in the data attribute.
-                    this.shell_version_map = JSON.stringify(this.shell_version_map);
+				var $paginator = paginatorUtils.buildPaginator(page, numPages, context);
+				$beforePaginator = $paginator.clone().addClass('before-paginator');
+				$afterPaginator = $paginator.clone().addClass('after-paginator');
+				$paginator.empty();
 
-                    if (this.description)
-                        this.first_line_of_description = this.description.split('\n')[0];
-                });
+				$.each(result.extensions, function () {
+					// Serialize out the svm as we want it to be JSON
+					// in the data attribute.
+					this.shell_version_map = JSON.stringify(this.shell_version_map);
 
-                var $newContent = $(templates.get('extensions/info_list')(result));
+					if (this.description)
+					{
+						this.first_line_of_description = this.description.split('\n')[0];
+					}
+				});
 
-                $elem.
-                    removeClass('loading').
-                    empty().
-                    append($beforePaginator).
-                    append($newContent).
-                    append($afterPaginator).
-                    trigger('page-loaded');
-            });
-        }
+				var $newContent = $(templates.get('extensions/info_list')(result));
 
-        $(window).hashchange(loadPage);
+				$elem.removeClass('loading').empty().append($beforePaginator).append($newContent).append($afterPaginator).trigger('page-loaded');
+			});
+		}
 
-        this.on('load-page', loadPage);
+		$(window).hashchange(loadPage);
 
-        return this;
-    };
+		this.on('load-page', loadPage);
+
+		return this;
+	};
 
 });
