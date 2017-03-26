@@ -1,6 +1,7 @@
 /*
     GNOME Shell extensions repository
     Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2017  Yuri Konotopov <ykonotopov@gnome.org>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -44,10 +45,19 @@ define(['jquery', 'hashParamUtils', 'paginatorUtils', 'dbus!_', 'templates', 'jq
 			{
 				queryParams.page = 1;
 			}
+
 			if (queryParams.shell_version === undefined)
 			{
-				queryParams.shell_version = dbusProxy.ShellVersion;
+				if (dbusProxy.VersionValidationEnabled)
+				{
+					queryParams.shell_version = dbusProxy.ShellVersion;
+				}
+				else
+				{
+					queryParams.shell_version = 'all';
+				}
 			}
+
 			if ($('#search_input').val())
 			{
 				queryParams.search = $('#search_input').val();
