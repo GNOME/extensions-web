@@ -213,7 +213,12 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 			$switch.switchify();
 
 			var svm = meta.shell_version_map || $elem.data('svm');
-			var latest = extensionUtils.grabProperExtensionVersion(svm, dbusProxy.ShellVersion);
+			var latest = extensionUtils.grabProperExtensionVersion(
+				svm,
+				dbusProxy.ShellVersion,
+				!dbusProxy.VersionValidationEnabled
+			);
+
 			if (_state !== ExtensionState.UNINSTALLED && latest !== null &&
 				(!meta.version || latest.version > meta.version || _state === ExtensionState.OUT_OF_DATE))
 			{
@@ -466,7 +471,11 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 					return;
 				}
 
-				var vpk = extensionUtils.grabProperExtensionVersion(svm, dbusProxy.ShellVersion);
+				var vpk = extensionUtils.grabProperExtensionVersion(
+					svm,
+					dbusProxy.ShellVersion,
+					!dbusProxy.VersionValidationEnabled
+				);
 				if (vpk === null)
 				{
 					$elem.addClass('out-of-date');

@@ -37,8 +37,61 @@ define([], function () {
 		PER_USER: 2
 	};
 
-	exports.grabProperExtensionVersion = function (map, current) {
-		if (!map)
+	exports.grabProperExtensionVersion = function (map, current, findBestVersion) {
+		function getBestShellVersion() {
+			function versionCompare(a, b) {
+				function toInt(value) {
+					return parseInt(value);
+				}
+
+				if (a == b)
+				{
+					return 0;
+				}
+
+				a = a.split('.').map(toInt);
+				b = b.split('.').map(toInt);
+
+				for (let i = 0; i < Math.max(a.length, b.length); i++)
+				{
+					if (a.length < i + 1)
+					{
+						return -1;
+					}
+
+					if (b.length < i + 1)
+					{
+						return 1;
+					}
+
+					if (a[i] < b[i])
+					{
+						return -1;
+					}
+
+					if (b[i] < a[i])
+					{
+						return 1;
+					}
+				}
+
+				return 0;
+			}
+
+			let supported_shell_versions = Object.keys(map).sort(versionCompare);
+
+			if (versionCompare(supported_shell_versions[0], current) == 1)
+			{
+				return supported_shell_versions[0];
+			}
+			else
+			{
+				return supported_shell_versions[supported_shell_versions.length - 1];
+			}
+		}
+
+
+		if (!map || !current)
 		{
 			return null;
 		}
@@ -56,6 +109,10 @@ define([], function () {
 			if (versionA !== undefined)
 			{
 				return versionA;
+			}
+			else if(findBestVersion)
+			{
+				return map[getBestShellVersion()];
 			}
 			else
 			{
@@ -76,6 +133,10 @@ define([], function () {
 		else if (versionB !== undefined)
 		{
 			return versionB;
+		}
+		else if(findBestVersion)
+		{
+			return map[getBestShellVersion()];
 		}
 		else
 		{

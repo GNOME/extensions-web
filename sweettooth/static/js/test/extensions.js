@@ -20,6 +20,21 @@ require(['extensionUtils', 'jquery', 'test/qunit'], function(extensionUtils) {
         equal(grabProperExtensionVersion(map, "3.4.1.1").version, 7);
     });
 
+    test("getBestExtensionVersion", function() {
+        var map = { "3.10": { version: 1, pk: 1 },
+                    "3.13.4": { version: 2, pk: 2 },
+                    "3.20": { version: 3, pk: 3 } };
+
+        equal(grabProperExtensionVersion(map, "3.4.0", true).version, 1);
+        equal(grabProperExtensionVersion(map, "3.7.4.1", true).version, 1);
+        equal(grabProperExtensionVersion(map, "3.10.0", true).version, 1);
+        equal(grabProperExtensionVersion(map, "3.13.4", true).version, 2);
+        equal(grabProperExtensionVersion(map, "3.11.2", true).version, 3);
+        equal(grabProperExtensionVersion(map, "3.20.0", true).version, 3);
+        equal(grabProperExtensionVersion(map, "3.24.0", true).version, 3);
+        equal(grabProperExtensionVersion(map, "4.14.0", true).version, 3);
+    });
+
     function nhvEqual(versions, current, operation, stability, version) {
         var vm = {};
         versions.forEach(function(v) { vm[v] = true; });
