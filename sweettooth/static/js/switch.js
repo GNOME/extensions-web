@@ -1,168 +1,207 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
 
-define(['jquery'], function($) {
-    "use strict";
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
-    function getSides($elem, $slider) {
-        var left = -2;
-        var right = $elem.outerWidth() - $slider.outerWidth() + 2;
-        var center = right / 2 + left;
-        return {left: left, right: right, center: center};
-    }
+define(['jquery'], function ($) {
+	"use strict";
 
-    var methods = {
-        init: function() {
-            return this.each(function() {
-                var $elem = $(this);
-                var $slider = $('<span>', {'class': 'slider not-dragging'});
-                $slider.append($('<span>', {'class': 'handle'}));
-                var data = $elem.data('switch');
-                if (!data) {
-                    data = {};
-                    data.activated = undefined;
-                    data.customized = null;
-                    $elem.data('switch', data);
-                }
+	function getSides($elem, $slider) {
+		var left = -2;
+		var right = $elem.outerWidth() - $slider.outerWidth() + 2;
+		var center = right / 2 + left;
+		return {left: left, right: right, center: center};
+	}
 
-                function mouseup(e) {
-                    $slider.addClass('not-dragging');
-                    $(document).off('mousemove.slider').off('mouseup.slider');
-                    var s = getSides($elem, $slider);
-                    $slider.css('left', data.activated ? s.right : s.left);
-                    if (data.activated !== data.initialActivated)
-                        $elem.trigger('changed', data.activated);
-                    return false;
-                }
+	var methods = {
+		init: function () {
+			return this.each(function () {
+				var $elem = $(this);
+				var $slider = $('<span>', {'class': 'slider not-dragging'});
+				$slider.append($('<span>', {'class': 'handle'}));
+				var data = $elem.data('switch');
+				if (!data)
+				{
+					data = {};
+					data.activated = undefined;
+					data.customized = null;
+					$elem.data('switch', data);
+				}
 
-                function mousemove(e) {
-                    var s = getSides($elem, $slider);
-                    var x = e.pageX - data.initialPageX + data.initialLeft;
-                    if (x < s.left)  x = s.left;
-                    if (x > s.right) x = s.right;
+				function mouseup(e) {
+					$slider.addClass('not-dragging');
+					$(document).off('mousemove.slider').off('mouseup.slider');
+					var s = getSides($elem, $slider);
+					$slider.css('left', data.activated ? s.right : s.left);
+					if (data.activated !== data.initialActivated)
+					{
+						$elem.trigger('changed', data.activated);
+					}
+					return false;
+				}
 
-                    data.activated = x >= s.center;
-                    $elem.toggleClass('activated', data.activated);
+				function mousemove(e) {
+					var s = getSides($elem, $slider);
+					var x = e.pageX - data.initialPageX + data.initialLeft;
+					if (x < s.left)
+					{
+						x = s.left;
+					}
+					if (x > s.right)
+					{
+						x = s.right;
+					}
 
-                    $slider.css('left', x);
-                    return false;
-                }
+					data.activated = x >= s.center;
+					$elem.toggleClass('activated', data.activated);
 
-                var contents = $elem.text();
-                $elem.text('');
+					$slider.css('left', x);
+					return false;
+				}
 
-                var classNames = $elem.attr('class');
-                var activated = $elem.hasClass('activated');
+				var contents = $elem.text();
+				$elem.text('');
 
-                $elem
-                    .removeClass()
-                    .addClass('_gnome-switch')
-                    .append($('<span>', {'class': 'on'}).text("ON"))
-                    .append($('<span>', {'class': 'off'}).text("OFF"))
-                    .append($('<span>', {'class': 'custom-content'}))
-                    .append($slider)
+				var classNames = $elem.attr('class');
+				var activated = $elem.hasClass('activated');
 
-                // Disable selection.
-                    .css({'cursor': 'default',
-                          '-moz-user-select': 'none'})
-                    .attr('unselectable', 'on')
-                    .on('selectstart', function() { return false; });
+				$elem
+					.removeClass()
+					.addClass('_gnome-switch')
+					.append($('<span>', {'class': 'on'}).text("ON"))
+					.append($('<span>', {'class': 'off'}).text("OFF"))
+					.append($('<span>', {'class': 'custom-content'}))
+					.append($slider)
 
-                if (contents)
-                    methods.customize.call($elem, contents, classNames);
-                methods.activate.call($elem, activated);
+					// Disable selection.
+					.css({
+						'cursor': 'default',
+						'-moz-user-select': 'none'
+					})
+					.attr('unselectable', 'on')
+					.on('selectstart', function () {
+						return false;
+					});
 
-                $slider.on('mousedown', function(e) {
-                    data.initialActivated = data.activated;
-                    data.initialPageX = e.pageX;
-                    var left = $slider.position().left;
-                    data.initialLeft = left;
-                    $slider.css({'position': 'absolute', 'left': left});
-                    $slider.removeClass('not-dragging');
-                    $(document).on({
-                        'mousemove.slider': mousemove,
-                        'mouseup.slider': mouseup
-                    });
-                    return false;
-                });
+				if (contents)
+				{
+					methods.customize.call($elem, contents, classNames);
+				}
+				methods.activate.call($elem, activated);
 
-                $elem.on('click', function(e) {
-                    var doToggle;
-                    var isActivated = !!data.activated;
+				$slider.on('mousedown', function (e) {
+					data.initialActivated = data.activated;
+					data.initialPageX = e.pageX;
+					var left = $slider.position().left;
+					data.initialLeft = left;
+					$slider.css({'position': 'absolute', 'left': left});
+					$slider.removeClass('not-dragging');
+					$(document).on({
+						'mousemove.slider': mousemove,
+						'mouseup.slider': mouseup
+					});
+					return false;
+				});
 
-                    if (data.customized !== null)
-                        return true;
+				$elem.on('click', function (e) {
+					var doToggle;
+					var isActivated = !!data.activated;
 
-                    if (data.initialPageX === undefined) {
-                        doToggle = true;
-                    } else {
-                        // Make sure we didn't drag before toggling.
-                        var travelDistance = Math.abs(e.pageX - data.initialPageX);
-                        doToggle = travelDistance < 4 && isActivated === data.initialActivated;
+					if (data.customized !== null)
+					{
+						return true;
+					}
 
-                        delete data.initialActivated;
-                        delete data.initialPageX;
-                        delete data.initialLeft;
-                    }
+					if (data.initialPageX === undefined)
+					{
+						doToggle = true;
+					}
+					else
+					{
+						// Make sure we didn't drag before toggling.
+						var travelDistance = Math.abs(e.pageX - data.initialPageX);
+						doToggle = travelDistance < 4 && isActivated === data.initialActivated;
 
-                    if (doToggle)
-                        methods.activate.call($elem, !isActivated);
+						delete data.initialActivated;
+						delete data.initialPageX;
+						delete data.initialLeft;
+					}
 
-                    e.stopImmediatePropagation();
-                    return false;
-                });
-            });
-        },
+					if (doToggle)
+					{
+						methods.activate.call($elem, !isActivated);
+					}
 
-        activate: function(value) {
-            return this.each(function() {
-                var $elem = $(this);
+					e.stopImmediatePropagation();
+					return false;
+				});
+			});
+		},
 
-                var data = $elem.data('switch');
-                if (data.activated === value)
-                    return;
+		activate: function (value) {
+			return this.each(function () {
+				var $elem = $(this);
 
-                data.activated = value;
+				var data = $elem.data('switch');
+				if (data.activated === value)
+				{
+					return;
+				}
 
-                $elem.trigger('changed', value);
-                $elem.toggleClass('activated', value);
+				data.activated = value;
 
-                var $slider = $elem.find('span.slider');
-                var s = getSides($elem, $slider);
-                $slider.css('left', value ? s.right : s.left);
-            });
-        },
+				$elem.trigger('changed', value);
+				$elem.toggleClass('activated', value);
 
-        customize: function(label, styleClass) {
-            return this.each(function() {
-                var $elem = $(this);
-                var $customContent = $elem.find('.custom-content');
+				var $slider = $elem.find('span.slider');
+				var s = getSides($elem, $slider);
+				$slider.css('left', value ? s.right : s.left);
+			});
+		},
 
-                var data = $elem.data('switch');
-                var customized = !!label || !!styleClass;
+		customize: function (label, styleClass) {
+			return this.each(function () {
+				var $elem = $(this);
+				var $customContent = $elem.find('.custom-content');
 
-                if (data.customized) {
-                    $customContent.text('').removeClass(data.customized.styleClass);
-                    $elem.removeClass('customized').removeClass(data.customized.styleClass);
-                    data.customized = null;
-                }
+				var data = $elem.data('switch');
+				var customized = !!label || !!styleClass;
 
-                if (customized) {
-                    $customContent.text(label).addClass(styleClass);
-                    $elem.addClass('customized').addClass(styleClass);
-                    data.customized = { label: label, styleClass: styleClass };
-                }
-            });
-        }
-    };
+				if (data.customized)
+				{
+					$customContent.text('').removeClass(data.customized.styleClass);
+					$elem.removeClass('customized').removeClass(data.customized.styleClass);
+					data.customized = null;
+				}
 
-    $.fn.switchify = function(method) {
-        if (methods[method]) {
-            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === 'object' || !method) {
-            return methods.init.apply(this, arguments);
-        } else {
-            $.error('Method ' +  method + ' does not exist on jQuery.switchify');
-        }    
-    };
+				if (customized)
+				{
+					$customContent.text(label).addClass(styleClass);
+					$elem.addClass('customized').addClass(styleClass);
+					data.customized = {label: label, styleClass: styleClass};
+				}
+			});
+		}
+	};
+
+	$.fn.switchify = function (method) {
+		if (methods[method])
+		{
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		}
+		else if (typeof method === 'object' || !method)
+		{
+			return methods.init.apply(this, arguments);
+		}
+		else
+		{
+			$.error('Method ' + method + ' does not exist on jQuery.switchify');
+		}
+	};
 
 });
