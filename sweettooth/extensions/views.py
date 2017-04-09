@@ -2,7 +2,6 @@
 import json
 from math import ceil
 
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
@@ -228,8 +227,9 @@ def ajax_query_view(request):
     try:
         n_per_page = int(request.GET['n_per_page'])
         if n_per_page == 1000:
+            from django.conf import settings
             # This is GNOME Software request. Let's redirect it to static file
-            return redirect(static("extensions.json"), permanent=True)
+            return redirect((settings.STATIC_URL + "extensions.json"), permanent=True)
 
         n_per_page = min(n_per_page, 25)
     except (KeyError, ValueError), e:
