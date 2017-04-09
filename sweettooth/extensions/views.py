@@ -44,23 +44,42 @@ def get_versions_for_version_strings(version_strings):
         if base_version:
             yield base_version
 
-def grab_proper_extension_version(extension, shell_version):
+def grab_proper_extension_version(extension, shell_version, disable_version_validation=False):
+    def get_best_shell_version():
+        visible_versions = extension.visible_versions
+
+        supported_shell_versions = set(shell_version
+                                       for version in visible_versions
+                                       for shell_version in version.shell_versions.all())
+        supported_shell_versions = sorted(supported_shell_versions, key=lambda x: (x.major, x.minor, x.point))
+        requested_shell_version = models.parse_version_string(shell_version)
+
+        if cmp((supported_shell_versions[0].major, supported_shell_versions[0].minor,
+                supported_shell_versions[0].point), requested_shell_version) > 0:
+            versions = visible_versions.filter(shell_versions=supported_shell_versions[0])
+        else:
+            versions = visible_versions.filter(shell_versions=supported_shell_versions[-1])
+
+        return versions.order_by('-version')[0]
+
     shell_versions = set(get_versions_for_version_strings([shell_version]))
     if not shell_versions:
-        return None
+        return get_best_shell_version() if disable_version_validation else None
 
     versions = extension.visible_versions.filter(shell_versions__in=shell_versions)
     if versions.count() < 1:
-        return None
+        return get_best_shell_version() if disable_version_validation else None
     else:
         return versions.order_by('-version')[0]
 
 def find_extension_version_from_params(extension, params):
     vpk = params.get('version_tag', '')
     shell_version = params.get('shell_version', '')
+    disable_version_validation = False if params.get('disable_version_validation', "1").lower() in ["0",
+                                                                                                    "false"] else True
 
     if shell_version:
-        return grab_proper_extension_version(extension, shell_version)
+        return grab_proper_extension_version(extension, shell_version, disable_version_validation)
     elif vpk:
         try:
             return extension.visible_versions.get(pk=int(vpk))
@@ -86,6 +105,7 @@ def shell_update(request):
     try:
         installed = json.loads(request.GET['installed'])
         shell_version = request.GET['shell_version']
+        disable_version_validation = request.GET.get('disable_version_validation', False)
     except (KeyError, ValueError):
         return HttpResponseBadRequest()
 
@@ -112,7 +132,7 @@ def shell_update(request):
             # The user may have a newer version than what's on the site.
             continue
 
-        proper_version = grab_proper_extension_version(extension, shell_version)
+        proper_version = grab_proper_extension_version(extension, shell_version, disable_version_validation)
 
         if proper_version is not None:
             if version < proper_version.version:

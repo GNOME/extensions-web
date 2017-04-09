@@ -14,7 +14,7 @@ except ImportError:
 from django.test import TestCase, TransactionTestCase
 from django.core.files.base import File
 from django.core.urlresolvers import reverse
-from sweettooth.extensions import models
+from sweettooth.extensions import models, views
 
 from sweettooth.testutils import BasicUserTestCase
 
@@ -652,3 +652,27 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         self.assertEqual(uuids, [one.uuid, two.uuid])
         uuids = self.gather_uuids(dict(sort="downloads", order="asc"))
         self.assertEqual(uuids, [two.uuid, one.uuid])
+
+    def test_grab_proper_extension_version(self):
+        extension = self.create_extension("extension")
+
+        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
+        v.parse_metadata_json({"shell-version": ["3.10"]})
+
+        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
+        v.parse_metadata_json({"shell-version": ["3.13.4"]})
+
+        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
+        v.parse_metadata_json({"shell-version": ["3.20.0"]})
+
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.20.0").version, 3)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.2.0"), None)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.4.0"), None)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.4.0", True).version, 1)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.7.4.1", True).version, 1)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.10.0", True).version, 1)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.13.4", True).version, 2)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.11.2", True).version, 3)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.20.0", True).version, 3)
+        self.assertEqual(views.grab_proper_extension_version(extension, "3.24.0", True).version, 3)
+        self.assertEqual(views.grab_proper_extension_version(extension, "4.14.0", True).version, 3)
