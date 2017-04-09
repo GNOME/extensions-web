@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import django
+
+import json
+
+_path = os.path.dirname(__file__)
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'sweettooth.settings'
+sys.path.extend([os.path.join(_path, '..'),
+                 os.path.join(_path, '..', 'sweettooth')])
+
+from django.contrib.staticfiles.storage import staticfiles_storage
+from sweettooth.extensions import models, views
+
+django.setup()
+
+version_qs = models.ExtensionVersion.objects.visible()
+queryset = models.Extension.objects.distinct().filter(versions__in=version_qs)[:1000]
+
+with open(staticfiles_storage.path("extensions.json"), 'w') as outfile:
+    json.dump(dict(extensions=[views.ajax_details(e) for e in queryset]), outfile)
