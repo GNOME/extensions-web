@@ -8,6 +8,7 @@
     line-height: 1.6;
 }
 
+._gnome-switch.outdated,
 ._gnome-switch.incompatible {
     width: auto;
 }
@@ -102,8 +103,12 @@
     border-radius: 4px;
 }
 
+._gnome-switch.customized .custom-content.outdated,
 ._gnome-switch.customized .custom-content.incompatible {
     width: auto;
+}
+
+._gnome-switch.customized .custom-content.incompatible {
     cursor: help;
 }
 
