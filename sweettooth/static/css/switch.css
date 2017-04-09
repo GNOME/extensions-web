@@ -8,6 +8,10 @@
     line-height: 1.6;
 }
 
+._gnome-switch.incompatible {
+    width: auto;
+}
+
 /* create a new BFC to have floating label work correctly.
  * http://colinaarts.com/articles/float-containment/ */
 ._gnome-switch:before, ._gnome-switch:after {
@@ -96,6 +100,11 @@
     /* 80px - 4px */
     width: 76px;
     border-radius: 4px;
+}
+
+._gnome-switch.customized .custom-content.incompatible {
+    width: auto;
+    cursor: help;
 }
 
 ._gnome-switch .off {

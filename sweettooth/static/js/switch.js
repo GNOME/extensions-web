@@ -1,6 +1,7 @@
 /*
     GNOME Shell extensions repository
     Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2017  Yuri Konotopov <ykonotopov@gnome.org>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -164,7 +165,7 @@ define(['jquery'], function ($) {
 			});
 		},
 
-		customize: function (label, styleClass) {
+		customize: function (label, styleClass, title) {
 			return this.each(function () {
 				var $elem = $(this);
 				var $customContent = $elem.find('.custom-content');
@@ -176,6 +177,7 @@ define(['jquery'], function ($) {
 				{
 					$customContent.text('').removeClass(data.customized.styleClass);
 					$elem.removeClass('customized').removeClass(data.customized.styleClass);
+					$elem.removeProp('title');
 					data.customized = null;
 				}
 
@@ -184,6 +186,11 @@ define(['jquery'], function ($) {
 					$customContent.text(label).addClass(styleClass);
 					$elem.addClass('customized').addClass(styleClass);
 					data.customized = {label: label, styleClass: styleClass};
+				}
+
+				if(title)
+				{
+					$elem.prop('title', title);
 				}
 			});
 		}

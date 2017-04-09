@@ -283,6 +283,18 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 					$switch.switchify('customize');
 					$switch.switchify('activate', false);
 					$elem.removeClass('out-of-date');
+
+					if(newState == ExtensionState.UNINSTALLED && !latest)
+					{
+						$switch.switchify(
+							'customize',
+							"INCOMPATIBLE",
+							'incompatible',
+							"This extension is incompatible with your GNOME Shell version. For GNOME Shell 3.12 " +
+							" or newer you can set \"disable-extension-version-validation\" dconf setting to true" +
+							" to force installation of incompatible extensions."
+						);
+					}
 				}
 				else if (newState == ExtensionState.ENABLED)
 				{
