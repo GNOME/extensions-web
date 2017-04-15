@@ -51,6 +51,10 @@ def grab_proper_extension_version(extension, shell_version, disable_version_vali
         supported_shell_versions = set(shell_version
                                        for version in visible_versions
                                        for shell_version in version.shell_versions.all())
+
+        if not supported_shell_versions:
+            return None
+
         supported_shell_versions = sorted(supported_shell_versions, key=lambda x: (x.major, x.minor, x.point))
         requested_shell_version = models.parse_version_string(shell_version)
 
