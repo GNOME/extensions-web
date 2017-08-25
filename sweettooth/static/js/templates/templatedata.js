@@ -2,6 +2,7 @@
 "use strict";
 
 define({
+  "diff/equals_chunk_row": "<tr class=\"diff-line equal\">\n    <td class=\"old linum\">{{oldlinenum}}</td>\n    <td class=\"new linum\">{{newlinenum}}</td>\n    <td class=\"new contents\">{{contents}}</td>\n</tr>",
   "extensions/comment": "<div class=\"comment\">\n  {{#is_extension_creator}}\n  <div class=\"extension-creator-badge\">Author</div>\n  {{/is_extension_creator}}\n  <img src=\"{{gravatar}}\" class=\"gravatar\">\n  <div class=\"rating-author\">\n    {{#rating}}\n      <div class=\"rating\" data-rating-value=\"{{rating}}\"></div> by\n    {{/rating}}\n    <a class=\"comment-author\" href=\"{{author.url}}\">{{author.username}}</a>\n    <p>{{comment}}</p>\n    <time datetime=\"{{date.timestamp}}Z\">{{date.standard}}</time>\n  </div>\n</div>",
   "extensions/comments_list": "{{#comments}}\n  {{>extensions/comment}}\n  <hr>\n{{/comments}}\n{{^show_all}}\n<p class=\"show-all\">Show more reviews</p>\n{{/show_all}}\n\n{{^comments}}\n  <p>There are no comments. Be the first!</p>\n{{/comments}}",
   "extensions/error_report_template": "What's wrong?\n\n\n\nWhat have you tried?\n\n\n\nAutomatically detected errors:\n\n{{#errors}}\n  {{.}}\n\n================\n{{/errors}}\n{{^errors}}\nGNOME Shell Extensions did not detect any errors with this extension.\n{{/errors}}\n\nVersion information:\n\n    Shell version: {{sv}}\n    Extension version: {{#ev}}{{ev}}{{/ev}}{{^ev}}Unknown{{/ev}}",

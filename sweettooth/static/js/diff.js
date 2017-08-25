@@ -9,7 +9,7 @@
     (at your option) any later version.
  */
 
-define(['jquery'], function ($) {
+define(['jquery', 'templates'], function ($, templates) {
 	"use strict";
 
 	var exports = {};
@@ -20,71 +20,41 @@ define(['jquery'], function ($) {
 	//
 	// Each "buildChunk" function below should build full row(s).
 
-	// For some reason it's hard to turn an array of jQuery objects into
-	// one jQuery object.
-	function flatten(list) {
-		var $elems = $();
-		$.each(list, function () {
-			$elems = $elems.add(this);
-		});
-		return $elems;
-	}
-
 	function buildEqualChunk(chunk, oldContents, newContents) {
-		function triggerCollapse() {
-			// show() and hide() don't work on table-rows - jQuery
-			// will set the row back to 'display: block'. Unsure if it's
-			// a jQuery or browser bug.
-			if (collapsed)
-			{
-				$triggerRow.removeClass('collapsed');
-				$collapsable.css('display', 'table-row');
-				$triggers.text('-');
-			}
-			else
-			{
-				$triggerRow.addClass('collapsed');
-				$collapsable.css('display', 'none');
-				$triggers.text('+');
-			}
+		let $elems = [];
 
-			collapsed = !collapsed;
-		}
+		for (let i in chunk.lines)
+		{
+			let line = chunk.lines[i];
 
-		var $triggerRow;
-		var $triggers = $();
-		var $collapsable = $();
-		var collapsed = false;
-
-		var $elems = $.map(chunk.lines, function (line, i) {
 			var contents = oldContents[line.oldindex];
 
-			var $row = $('<tr>', {'class': 'diff-line equal'}).append($('<td>', {'class': 'old linum'}).text(line.oldlinenum)).append($('<td>', {'class': 'new linum'}).text(line.newlinenum)).append($('<td>', {'class': 'new contents'}).text(contents));
+			var $row = $(templates.get('diff/equals_chunk_row')({
+				oldlinenum: line.oldlinenum,
+				newlinenum: line.newlinenum,
+				contents: contents
+			}));
+
+			if (i == 0)
+			{
+				$row.addClass('equals-chunk-first-row')
+			}
 
 			if (chunk.collapsable)
 			{
 				if (i == 0)
 				{
-					$triggerRow = $row;
-					$row.addClass('collapsable-trigger-row').find('.contents').each(function () {
-						var $trigger = $('<a>', {'class': 'collapsable-trigger'}).click(triggerCollapse);
-						$triggers = $triggers.add($trigger);
-						$(this).append($trigger);
-					});
+					$row.find('.contents').append(
+						$('<a>', {'class': 'collapsable-trigger'}).text('+')
+					);
 				}
 				else
 				{
-					$row.addClass('collapsable-collapsed-row');
-					$collapsable = $collapsable.add($row);
+					$row.addClass('collapsable-collapsed-row').hide();
 				}
 			}
 
-			return $row;
-		});
-
-		if (chunk.collapsable)
-		{
-			triggerCollapse($collapsable);
+			$elems.push($row);
 		}
 
 		return $elems;
@@ -127,8 +97,9 @@ define(['jquery'], function ($) {
 		var regionElems = [];
 		var lastEnd = 0;
 
-		$.each(regions, function () {
-			var start = this[0], end = this[1];
+		for (let region of regions)
+		{
+			let start = region[0], end = region[1];
 
 			// The indexes in the 'regions' are the changed regions. We
 			// can expect that the regions in between the indexes are
@@ -138,7 +109,7 @@ define(['jquery'], function ($) {
 			regionElems.push(changed(contents.slice(start, end)));
 
 			lastEnd = end;
-		});
+		}
 
 		// We may have an unchanged region left over at the end of a row.
 		if (contents.slice(lastEnd))
@@ -150,7 +121,7 @@ define(['jquery'], function ($) {
 	}
 
 	function buildInsertLine(line, contents) {
-		return $('<tr>', {'class': 'diff-line inserted'}).append($('<td>', {'class': 'linum'})).append($('<td>', {'class': 'new linum'}).text(line.newlinenum)).append($('<td>', {'class': 'new contents'}).append(flatten(buildReplaceRegions(line.newregion, contents[line.newindex]))));
+		return $('<tr>', {'class': 'diff-line inserted'}).append($('<td>', {'class': 'linum'})).append($('<td>', {'class': 'new linum'}).text(line.newlinenum)).append($('<td>', {'class': 'new contents'}).append(buildReplaceRegions(line.newregion, contents[line.newindex])));
 	}
 
 	function buildInsertChunk(chunk, oldContents, newContents) {
@@ -160,7 +131,7 @@ define(['jquery'], function ($) {
 	}
 
 	function buildDeleteLine(line, contents) {
-		return $('<tr>', {'class': 'diff-line deleted'}).append($('<td>', {'class': 'old linum'}).text(line.oldlinenum)).append($('<td>', {'class': 'linum'})).append($('<td>', {'class': 'old contents'}).append(flatten(buildReplaceRegions(line.oldregion, contents[line.oldindex]))));
+		return $('<tr>', {'class': 'diff-line deleted'}).append($('<td>', {'class': 'old linum'}).text(line.oldlinenum)).append($('<td>', {'class': 'linum'})).append($('<td>', {'class': 'old contents'}).append(buildReplaceRegions(line.oldregion, contents[line.oldindex])));
 	}
 
 	function buildDeleteChunk(chunk, oldContents, newContents) {
@@ -176,14 +147,13 @@ define(['jquery'], function ($) {
 
 		var deleteChunk = [], insertChunk = [];
 
-		$.each(chunk.lines, function () {
-			var line = this;
-
+		for (let line of chunk.lines)
+		{
 			deleteChunk.push(buildDeleteLine(line, oldContents));
 			insertChunk.push(buildInsertLine(line, newContents));
-		});
+		}
 
-		return [flatten(deleteChunk), flatten(insertChunk)];
+		return deleteChunk.concat(insertChunk);
 	}
 
 	var operations = {
@@ -196,8 +166,23 @@ define(['jquery'], function ($) {
 	exports.buildDiffTable = function (chunks, oldContents, newContents) {
 		var $table = $('<table>', {'class': 'code'});
 
-		$.each(chunks, function () {
-			$table.append(flatten(operations[this.change](this, oldContents, newContents)));
+		for (let chunk of chunks)
+		{
+			$table.append(operations[chunk.change](chunk, oldContents, newContents));
+		}
+
+		$table.on('click', 'a.collapsable-trigger', function (event) {
+			let triggerRow = $(this).closest('tr.equals-chunk-first-row');
+			triggerRow.toggleClass('collapsed');
+			triggerRow.nextUntil('tr.equals-chunk-first-row').toggle();
+			if ($(this).text() == '-')
+			{
+				$(this).text('+');
+			}
+			else
+			{
+				$(this).text('-');
+			}
 		});
 
 		return $table;
