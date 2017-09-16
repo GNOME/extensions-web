@@ -63,6 +63,22 @@ def build_shell_version_map(versions):
 
     return shell_version_map
 
+def build_shell_version_array(versions):
+    shell_version_map = {}
+
+    for version in versions:
+        for shell_version in version.shell_versions.all():
+            key = shell_version.version_string
+            if key not in shell_version_map:
+                shell_version_map[key] = {}
+
+            if version.pk not in shell_version_map[key]:
+                shell_version_map[key][version.pk] = dict(
+                    pk=version.pk,
+                    version=version.version)
+
+    return shell_version_map
+
 
 def make_screenshot_filename(obj, filename=None):
     return "screenshots/screenshot_%d.png" % (obj.pk,)
@@ -150,6 +166,10 @@ class Extension(models.Model):
     @property
     def visible_shell_version_map(self):
         return build_shell_version_map(self.visible_versions)
+
+    @property
+    def visible_shell_version_array(self):
+        return build_shell_version_array(self.visible_versions)
 
 class ExtensionPopularityItem(models.Model):
     extension = models.ForeignKey(Extension, db_index=True,

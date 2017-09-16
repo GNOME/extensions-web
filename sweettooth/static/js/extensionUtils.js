@@ -37,47 +37,49 @@ define([], function () {
 		PER_USER: 2
 	};
 
-	exports.grabProperExtensionVersion = function (map, current, findBestVersion) {
-		function getBestShellVersion() {
-			function versionCompare(a, b) {
-				function toInt(value) {
-					return parseInt(value);
-				}
+	function versionCompare(a, b) {
+		function toInt(value) {
+			return parseInt(value);
+		}
 
-				if (a == b)
-				{
-					return 0;
-				}
+		if (a == b)
+		{
+			return 0;
+		}
 
-				a = a.split('.').map(toInt);
-				b = b.split('.').map(toInt);
+		a = a.split('.').map(toInt);
+		b = b.split('.').map(toInt);
 
-				for (let i = 0; i < Math.max(a.length, b.length); i++)
-				{
-					if (a.length < i + 1)
-					{
-						return -1;
-					}
-
-					if (b.length < i + 1)
-					{
-						return 1;
-					}
-
-					if (a[i] < b[i])
-					{
-						return -1;
-					}
-
-					if (b[i] < a[i])
-					{
-						return 1;
-					}
-				}
-
-				return 0;
+		for (let i = 0; i < Math.max(a.length, b.length); i++)
+		{
+			if (a.length < i + 1)
+			{
+				return -1;
 			}
 
+			if (b.length < i + 1)
+			{
+				return 1;
+			}
+
+			if (a[i] < b[i])
+			{
+				return -1;
+			}
+
+			if (b[i] < a[i])
+			{
+				return 1;
+			}
+		}
+
+		return 0;
+	}
+
+	exports.shellVersionCompare = versionCompare;
+
+	exports.grabProperExtensionVersion = function (map, current, findBestVersion) {
+		function getBestShellVersion() {
 			let supported_shell_versions = Object.keys(map).sort(versionCompare);
 
 			if (versionCompare(supported_shell_versions[0], current) == 1)

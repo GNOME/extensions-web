@@ -5,7 +5,8 @@
     <div class="extension single-page {% block extra-ext-class %}{% endblock %}"
          data-epk="{{ extension.pk }}"
          data-uuid="{{ extension.uuid }}"
-         data-svm="{{ shell_version_map }}">
+         data-svm="{{ shell_version_map }}"
+         data-versions="{{ visible_versions }}">
       <div class="extension-header col-xs-12 col-sm-8 col-md-8 col-lg-8 no-padding">
         {% spaceless %}
         {% block icon %}
@@ -49,6 +50,18 @@
               <dt>Extension Homepage</dt>
               <dd><a href="{{ extension.url }}" id="extension_url">{{ extension.url }}</a></dd>
               {% endif %}
+            </dl>
+            <dl>
+              <dt>Download</dt>
+              <dd class="extension-download">
+                  <select class="shell-version form-control">
+                      <option>Shell version…</option>
+                  </select>
+
+                  <select class="extension-version form-control">
+                      <option>Extension version…</option>
+                  </select>
+              </dd>
             </dl>
         </div>
       </div>

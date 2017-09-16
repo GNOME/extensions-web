@@ -63,6 +63,7 @@ function($, messages, modal, hashParamUtils, templates, staticfiles) {
 
         $('#local_extensions').addLocalExtensions();
         $('.extension.single-page').addExtensionSwitch();
+        $('.extension.single-page').addDownloadOptions();
 
         $.extend($.fn.raty.defaults, {
             path: '/static/images/',

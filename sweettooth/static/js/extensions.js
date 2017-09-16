@@ -39,6 +39,52 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 			});
 		};
 
+		$.fn.addDownloadOptions = function () {
+			return this.each(function () {
+				let $extension = $(this);
+				let $extension_download = $extension.find('.extension-download');
+				let $shell_version_select = $extension.find('select.shell-version');
+				let extension_versions = $extension.data('versions');
+				let uuid = $extension.data('uuid');
+
+				let shell_versions = Object.keys(extension_versions);
+				shell_versions.sort(extensionUtils.shellVersionCompare).reverse();
+
+				for(let shell_version of shell_versions)
+				{
+					$shell_version_select.append(
+						$('<option />').val(shell_version).text(shell_version)
+					);
+				}
+
+				$extension.on('change', 'select.shell-version', function(event) {
+					let $extension_version_select = $extension_download.find('select.extension-version');
+					$extension_version_select.find('option:not(:first)').remove();
+
+					if($(this).prop('selectedIndex'))
+					{
+						let shell_version = $(this).val();
+						for (let extension_version_pk in extension_versions[shell_version])
+						{
+							$extension_version_select.append(
+								$('<option />').val(extension_version_pk).text(extension_versions[shell_version][extension_version_pk].version)
+							);
+						}
+					}
+					$extension_download.toggleClass('shell-selected', !!$(this).prop('selectedIndex'));
+				});
+
+				$extension.on('change', 'select.extension-version', function(event) {
+					if($(this).prop('selectedIndex'))
+					{
+						window.location = '/download-extension/'
+							+ encodeURIComponent(uuid) + '.shell-extension.zip?version_tag='
+							+ encodeURIComponent($(this).val());
+					}
+				});
+			});
+		};
+
 		// While technically we shouldn't have mismatched API versions,
 		// the plugin doesn't check whether the Shell matches, so if someone
 		// is running with an old Shell version but a newer plugin, error out.

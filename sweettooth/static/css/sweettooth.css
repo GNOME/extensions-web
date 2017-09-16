@@ -291,6 +291,19 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     color: #666;
 }
 
+.extension .extension-download select {
+    display: inline;
+    width: auto;
+}
+
+.extension .extension-download .extension-version {
+    display: none;
+}
+
+.extension .extension-download.shell-selected .extension-version {
+    display: inline;
+}
+
 /* Upgrade, Configure, Uninstall buttons */
 
 .extension .controls {
