@@ -47,6 +47,11 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 				let extension_versions = $extension.data('versions');
 				let uuid = $extension.data('uuid');
 
+				if(!extension_versions)
+				{
+					return;
+				}
+
 				let shell_versions = Object.keys(extension_versions);
 				shell_versions.sort(extensionUtils.shellVersionCompare).reverse();
 
