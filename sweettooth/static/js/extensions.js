@@ -238,7 +238,14 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 				dbusProxy.UninstallExtension(uuid).then(function (result) {
 					if (result)
 					{
-						$elem.fadeOut({queue: false}).slideUp({queue: false});
+						if(!$elem.hasClass('single-page'))
+						{
+							$elem.fadeOut({queue: false}).slideUp({queue: false});
+						}
+						else
+						{
+							$elem.removeClass('installed upgradable configurable');
+						}
 						messages.addInfo(templates.get('extensions/uninstall')(meta));
 					}
 				});
