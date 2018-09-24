@@ -1,9 +1,9 @@
 from registration import validators
 from registration.tests.base import RegistrationTestCase
 
-from forms import AutoFocusRegistrationForm
 from django.contrib.auth import get_user_model
 from django.utils.six import text_type
+from .forms import AutoFocusRegistrationForm
 
 User = get_user_model()
 

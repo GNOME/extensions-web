@@ -58,8 +58,8 @@ def grab_proper_extension_version(extension, shell_version, disable_version_vali
         supported_shell_versions = sorted(supported_shell_versions, key=lambda x: (x.major, x.minor, x.point))
         requested_shell_version = models.parse_version_string(shell_version)
 
-        if cmp((supported_shell_versions[0].major, supported_shell_versions[0].minor,
-                supported_shell_versions[0].point), requested_shell_version) > 0:
+        if (supported_shell_versions[0].major, supported_shell_versions[0].minor,
+                supported_shell_versions[0].point) > requested_shell_version:
             versions = visible_versions.filter(shell_versions=supported_shell_versions[0])
         else:
             versions = visible_versions.filter(shell_versions=supported_shell_versions[-1])
@@ -115,7 +115,7 @@ def shell_update(request):
 
     operations = {}
 
-    for uuid, meta in installed.iteritems():
+    for uuid, meta in installed.items():
         try:
             version = int(meta['version'])
         except (KeyError, TypeError):
@@ -236,7 +236,7 @@ def ajax_query_view(request):
             return redirect((settings.STATIC_URL + "extensions.json"), permanent=True)
 
         n_per_page = min(n_per_page, 25)
-    except (KeyError, ValueError), e:
+    except (KeyError, ValueError):
         n_per_page = 10
 
     version_strings = request.GET.getlist('shell_version')
@@ -416,7 +416,7 @@ def create_version(request, file_source):
             try:
                 metadata = models.parse_zipfile_metadata(file_source)
                 uuid = metadata['uuid']
-            except (models.InvalidExtensionData, KeyError), e:
+            except (models.InvalidExtensionData, KeyError) as e:
                 messages.error(request, "Invalid extension data: %s" % (e.message,))
                 raise DatabaseErrorWithMessages
 
@@ -434,7 +434,7 @@ def create_version(request, file_source):
 
             try:
                 extension.full_clean()
-            except ValidationError, e:
+            except ValidationError as e:
                 raise DatabaseErrorWithMessages(e.messages)
 
             version = models.ExtensionVersion.objects.create(extension=extension,
@@ -445,7 +445,7 @@ def create_version(request, file_source):
             version.save()
 
             return version, []
-    except DatabaseErrorWithMessages, e:
+    except DatabaseErrorWithMessages as e:
         return None, e.messages
 
 @login_required

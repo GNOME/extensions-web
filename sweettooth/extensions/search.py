@@ -27,7 +27,7 @@ def index_extension(extension):
 
     idterm = "Q%s" % (extension.pk,)
     doc.add_boolean_term(idterm)
-    for shell_version in extension.visible_shell_version_map.iterkeys():
+    for shell_version in extension.visible_shell_version_map.keys():
         doc.add_boolean_term("V%s" % (shell_version,))
 
     db.replace_document(idterm, doc)

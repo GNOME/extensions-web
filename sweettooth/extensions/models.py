@@ -15,7 +15,7 @@ import re
  STATUS_REJECTED,
  STATUS_INACTIVE,
  STATUS_ACTIVE,
- STATUS_WAITING) = xrange(5)
+ STATUS_WAITING) = range(5)
 
 STATUSES = {
     STATUS_UNREVIEWED: u"Unreviewed",
@@ -57,7 +57,7 @@ def build_shell_version_map(versions):
             if version.version > shell_version_map[key].version:
                 shell_version_map[key] = version
 
-    for key, version in shell_version_map.iteritems():
+    for key, version in shell_version_map.items():
         shell_version_map[key] = dict(pk = version.pk,
                                       version = version.version)
 
@@ -109,7 +109,7 @@ class Extension(models.Model):
 
     objects = ExtensionManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.uuid
 
     def parse_metadata_json(self, metadata):
@@ -125,13 +125,13 @@ class Extension(models.Model):
             raise ValidationError("Your extension has an invalid UUID")
 
     def save(self, replace_metadata_json=True, *args, **kwargs):
-        super(Extension, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
         if replace_metadata_json:
             for version in self.versions.all():
                 if version.source:
                     try:
                         version.replace_metadata_json()
-                    except BadZipfile, e:
+                    except BadZipfile:
                         # Ignore bad zipfiles, we don't care
                         pass
 
@@ -187,14 +187,14 @@ def parse_version_string(version_string):
     try:
         major, minor = version[:2]
         major, minor = int(major), int(minor)
-    except ValueError, e:
+    except ValueError:
         raise InvalidShellVersion()
 
     if len(version) in (3, 4):
         # 3.0.1, 3.1.4
         try:
             point = int(version[2])
-        except ValueError, e:
+        except ValueError:
             raise InvalidShellVersion()
 
     elif len(version) == 2 and minor % 2 == 0:
@@ -232,7 +232,7 @@ class ShellVersion(models.Model):
 
     objects = ShellVersionManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.version_string
 
     @property
@@ -263,7 +263,7 @@ def parse_zipfile_metadata(uploaded_file):
         raise InvalidExtensionData("Zip file is too large")
 
     try:
-        metadata = json.load(zipfile.open('metadata.json', 'r'))
+        metadata = json.loads(zipfile.open('metadata.json', 'r').read().decode('utf-8'))
     except KeyError:
         # no metadata.json in archive, raise error
         raise InvalidExtensionData("Missing metadata.json")
@@ -303,7 +303,7 @@ class ExtensionVersion(models.Model):
         unique_together = ('extension', 'version'),
         get_latest_by = 'version'
 
-    def __unicode__(self):
+    def __str__(self):
         return "Version %d of %s" % (self.version, self.extension)
 
     source = models.FileField(upload_to=make_filename,
@@ -362,7 +362,7 @@ class ExtensionVersion(models.Model):
             filemap[info] = contents
 
         zipfile = self.get_zipfile("w")
-        for info, contents in filemap.iteritems():
+        for info, contents in filemap.items():
             zipfile.writestr(info, contents)
 
         metadata = self.make_metadata_json()
@@ -381,7 +381,7 @@ class ExtensionVersion(models.Model):
             except self.DoesNotExist:
                 self.version = 1
 
-        super(ExtensionVersion, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def parse_metadata_json(self, metadata):
         """
