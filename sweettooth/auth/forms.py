@@ -15,15 +15,15 @@ class PlainOutputForm(object):
 
 class AutoFocusForm(object):
     def __init__(self, *a, **kw):
-        super(AutoFocusForm, self).__init__(*a, **kw)
+        super().__init__(*a, **kw)
         for field in self.fields:
             self.fields[field].widget.attrs['autofocus'] = 'autofocus'
             break
 
 class InlineForm(object):
     def __init__(self, *a, **kw):
-        super(InlineForm, self).__init__(*a, **kw)
-        for field in self.fields.itervalues():
+        super().__init__(*a, **kw)
+        for field in self.fields.values():
             field.widget.attrs['placeholder'] = field.label
             field.widget.attrs['class'] = 'form-control'
 

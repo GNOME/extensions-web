@@ -3,13 +3,9 @@ import os.path
 import json
 import tempfile
 import unittest
+from io import BytesIO
 from uuid import uuid4
 from zipfile import ZipFile
-
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
 
 from django.test import TestCase, TransactionTestCase
 from django.core.files.base import File
@@ -36,7 +32,7 @@ class UUIDPolicyTest(TestCase):
         self.assertTrue(models.validate_uuid("foo-3@mecheye.net"))
         self.assertTrue(models.validate_uuid("Foo4@mecheye.net"))
 
-        for i in xrange(10):
+        for i in range(10):
             self.assertTrue(models.validate_uuid(str(uuid4())))
 
         self.assertFalse(models.validate_uuid("<Wonderful>"))
@@ -124,23 +120,21 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         self.assertTrue("url" not in extra)
 
     def test_bad_zipfile_metadata(self):
-        bad_data = StringIO("deadbeef")
+        bad_data = BytesIO(b"deadbeef")
         self.assertRaises(models.InvalidExtensionData, models.parse_zipfile_metadata, bad_data)
 
         with get_test_zipfile('TooLarge') as f:
-            with self.assertRaises(models.InvalidExtensionData) as cm:
+            with self.assertRaisesMessage(models.InvalidExtensionData, "Zip file is too large"):
                 models.parse_zipfile_metadata(f)
-            self.assertEqual(cm.exception.message, "Zip file is too large")
 
         with get_test_zipfile('NoMetadata') as f:
-            with self.assertRaises(models.InvalidExtensionData) as cm:
+            with self.assertRaisesMessage(models.InvalidExtensionData, "Missing metadata.json"):
                 models.parse_zipfile_metadata(f)
-            self.assertEqual(cm.exception.message, "Missing metadata.json")
 
         with get_test_zipfile('BadMetadata') as f:
-            with self.assertRaises(models.InvalidExtensionData) as cm:
+            with self.assertRaisesMessage(models.InvalidExtensionData, "Invalid JSON data"):
                 models.parse_zipfile_metadata(f)
-            self.assertEqual(cm.exception.message, "Invalid JSON data")
+
 
 class ReplaceMetadataTest(BasicUserTestCase, TestCase):
     @unittest.expectedFailure
@@ -469,14 +463,14 @@ class UpdateVersionTest(TestCase):
         reject_uuid: u'blacklist'}
 
     def build_response(self, installed):
-        return dict((k, dict(version=v)) for k, v in installed.iteritems())
+        return dict((k, dict(version=v)) for k, v in installed.items())
 
     def grab_response(self, installed):
         installed = self.build_response(installed)
         response = self.client.get(reverse('extensions-shell-update'),
                                    dict(installed=json.dumps(installed), shell_version='3.2.0'))
 
-        return json.loads(response.content)
+        return json.loads(response.content.decode('utf-8'))
 
     def test_upgrade_me(self):
         uuid = self.upgrade_uuid
@@ -543,7 +537,7 @@ class UpdateVersionTest(TestCase):
 class QueryExtensionsTest(BasicUserTestCase, TestCase):
     def get_response(self, params):
         response = self.client.get(reverse('extensions-query'), params)
-        return json.loads(response.content)
+        return json.loads(response.content.decode('utf-8'))
 
     def gather_uuids(self, params):
         if 'sort' not in params:

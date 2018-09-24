@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class BasicUserTestCase(object):
     def setUp(self):
-        super(BasicUserTestCase, self).setUp()
+        super().setUp()
         self.username = 'TestUser1'
         self.email = 'non-existant@non-existant.tld'
         self.password = 'a random password'

@@ -4,7 +4,7 @@
 # Copyright 2011 Review Board Team
 
 import re
-from itertools import izip_longest
+from itertools import zip_longest
 from difflib import SequenceMatcher
 
 class MyersDiffer:
@@ -237,7 +237,7 @@ class MyersDiffer:
                 down_max -= 1
 
             # Extend the forward path
-            for k in xrange(down_max, down_min - 1, -2):
+            for k in range(down_max, down_min - 1, -2):
                 tlo = down_vector[self.downoff + k - 1]
                 thi = down_vector[self.downoff + k + 1]
 
@@ -278,7 +278,7 @@ class MyersDiffer:
             else:
                 up_max -= 1
 
-            for k in xrange(up_max, up_min - 1, -2):
+            for k in range(up_max, up_min - 1, -2):
                 tlo = up_vector[self.upoff + k - 1]
                 thi = up_vector[self.upoff + k + 1]
 
@@ -352,7 +352,7 @@ class MyersDiffer:
     def _find_diagonal(self, minimum, maximum, k, best, diagoff, vector,
                        vdiff_func, check_x_range, check_y_range,
                        discard_index, k_offset, cost):
-        for d in xrange(maximum, minimum - 1, -2):
+        for d in range(maximum, minimum - 1, -2):
             dd = d - k
             x = vector[diagoff + d]
             y = x - d
@@ -526,7 +526,7 @@ class MyersDiffer:
         def scan_run(discards, i, length, index_func):
             consec = 0
 
-            for j in xrange(length):
+            for j in range(length):
                 index = index_func(i, j)
                 discard = discards[index]
 
@@ -557,7 +557,7 @@ class MyersDiffer:
 
                     # Find the end of this run of discardable lines and count
                     # how many are provisionally discardable.
-                    #for j in xrange(i, data.length):
+                    #for j in range(i, data.length):
                     j = i
                     while j < data.length:
                         if discards[j] == self.DISCARD_NONE:
@@ -708,7 +708,7 @@ def new_chunk(lines, collapsable=False, tag='equal'):
     }
 
 def get_fake_chunk(numlines, tag):
-    lines = [new_line(oldindex=n, newindex=n) for n in xrange(numlines)]
+    lines = [new_line(oldindex=n, newindex=n) for n in range(numlines)]
     return new_chunk(lines, tag=tag)
 
 def get_linenum(idx):
@@ -757,10 +757,10 @@ def get_chunks(a, b):
     for tag, i1, i2, j1, j2 in differ.get_opcodes():
         numlines = max(i2-i1, j2-j1)
 
-        oldlines = zip(xrange(i1, i2), a[i1:i2])
-        newlines = zip(xrange(j1, j2), b[j1:j2])
+        oldlines = zip(range(i1, i2), a[i1:i2])
+        newlines = zip(range(j1, j2), b[j1:j2])
 
-        lines = [diff_line(old, new) for old, new in izip_longest(oldlines, newlines, fillvalue=(None, None))]
+        lines = [diff_line(old, new) for old, new in zip_longest(oldlines, newlines, fillvalue=(None, None))]
 
         if tag == 'equal' and numlines > collapse_threshold:
             last_range_start = numlines - context_num_lines

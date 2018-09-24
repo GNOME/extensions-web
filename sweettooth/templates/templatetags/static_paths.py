@@ -28,7 +28,7 @@ def static_js_paths():
         if js_paths is None:
             js_paths = {};
 
-            for base_file, hashed_file in staticfiles_storage.hashed_files.iteritems():
+            for base_file, hashed_file in staticfiles_storage.hashed_files.items():
                 if base_file.endswith('.js') and base_file.startswith('js/'):
                     js_paths[base_file[3:-3]] = hashed_file[3:-3]
 
@@ -48,7 +48,7 @@ def static_img_paths():
         if img_paths is None:
             img_paths = {};
 
-            for base_file, hashed_file in staticfiles_storage.hashed_files.iteritems():
+            for base_file, hashed_file in staticfiles_storage.hashed_files.items():
                 if base_file.startswith('images/'):
                     img_paths[base_file] = hashed_file
 
