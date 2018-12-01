@@ -294,8 +294,9 @@ def render_mail(version, template, data):
     subject_template = 'review/%s_mail_subject.txt' % (template,)
     body_template = 'review/%s_mail.txt' % (template,)
 
-    subject = render_to_string(subject_template, data, Context(autoescape=False))
-    body = render_to_string(body_template, data, Context(autoescape=False))
+    # TODO: review autoescape
+    subject = render_to_string(subject_template, data)
+    body = render_to_string(body_template, data)
 
     references = "<%s-review-v%d@extensions.gnome.org>" % (extension.uuid, version.version)
     headers = {'In-Reply-To': references,

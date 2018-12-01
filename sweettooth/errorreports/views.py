@@ -63,12 +63,14 @@ def send_email_on_error_reported(sender, request, extension, report, **kwargs):
                 report=report,
                 url=url)
 
-    subject = render_to_string('errorreports/report_mail_subject.txt', data, Context(autoescape=False))
+    # TODO: review autoescape
+    subject = render_to_string('errorreports/report_mail_subject.txt', data)
     subject = subject.strip()
     subject = subject.replace('\n', '')
     subject = subject.replace('\r', '')
 
-    message = render_to_string('errorreports/report_mail.txt', data, Context(autoescape=False))
+    # TODO: review autoescape
+    message = render_to_string('errorreports/report_mail.txt', data)
     message = message.strip()
 
     send_mail(subject=subject,
