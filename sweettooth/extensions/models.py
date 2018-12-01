@@ -243,7 +243,9 @@ class ShellVersion(models.Model):
         return "%d.%d.%d" % (self.major, self.minor, self.point)
 
 class InvalidExtensionData(Exception):
-    pass
+    def __init__(self, message, *args):
+        super(InvalidExtensionData, self).__init__(message, *args)
+        self.message = message
 
 
 def parse_zipfile_metadata(uploaded_file):
