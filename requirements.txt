@@ -1,4 +1,4 @@
-Django == 1.8.15
+Django >= 1.11,<1.12
 django-autoslug >= 1.4.1
 django-contrib-comments == 1.7.3
 django-registration == 2.1.2
