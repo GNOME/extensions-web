@@ -1,11 +1,11 @@
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic.list import ListView
 
 from sweettooth.extensions.models import ExtensionVersion
 from sweettooth.review import views
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', ListView.as_view(template_name='review/list.html',
                                 queryset=ExtensionVersion.objects.unreviewed(),
                                 context_object_name='version_list'),
@@ -19,5 +19,4 @@ urlpatterns = patterns('',
         views.download_zipfile, name='review-download'),
 
     url(r'^(?P<pk>\d+)', views.review_version_view, name='review-version'),
-
-)
+]

@@ -1,11 +1,11 @@
 
 from django.views.generic.base import TemplateView
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from sweettooth.auth import views, forms
 from registration.backends.default.views import RegistrationView
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^login/', auth_views.login,
         dict(template_name='registration/login.html',
              authentication_form=forms.AuthenticationForm), name='auth-login'),
@@ -24,5 +24,4 @@ urlpatterns = patterns('',
     url(r'', include('registration.backends.default.urls')),
     url(r'^profile/(?P<user>.+)', views.profile, name='auth-profile'),
     url(r'^profile/', views.profile_redirect, name='auth-profile'),
-
-)
+]

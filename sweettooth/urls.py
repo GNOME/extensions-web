@@ -1,7 +1,7 @@
 
 import os.path
 
-from django.conf.urls import patterns, include, url, handler404, handler500
+from django.conf.urls import include, url, handler404, handler500
 from django.conf import settings
 from django.http import HttpResponse
 
@@ -10,7 +10,7 @@ from django.views import static
 from django.views.generic.base import TemplateView
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # 'login' and 'register'
     url(r'^accounts/', include('sweettooth.auth.urls')),
     url(r'^', include('sweettooth.extensions.urls'), name='index'),
@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     url(r'^comments/', include('sweettooth.ratings.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
-)
+]
 
 if settings.DEBUG:
     # Use static.serve for development...
