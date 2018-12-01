@@ -56,7 +56,7 @@ def view_error_report(request, obj):
                                                           show_email=can_see_reporter_email(request.user, obj)))
 
 def send_email_on_error_reported(sender, request, extension, report, **kwargs):
-    url = request.build_absolute_uri(reverse('sweettooth.errorreports.views.view_error_report',
+    url = request.build_absolute_uri(reverse(view_error_report,
                                              kwargs=dict(pk=report.pk)))
 
     data = dict(extension=extension,

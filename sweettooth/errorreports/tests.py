@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from sweettooth.extensions.models import Extension, ExtensionVersion, STATUS_ACTIVE
-from sweettooth.errorreports import models
+from sweettooth.errorreports import models, views
 
 from sweettooth.testutils import BasicUserTestCase
 
@@ -23,7 +23,7 @@ class SubmitErrorReportTestCase(BasicUserTestCase, TestCase):
 
         comment = "YOUR EXTENSION SUCKS IT BROKE"
 
-        self.client.post(reverse('sweettooth.errorreports.views.report_error',
+        self.client.post(reverse(views.report_error,
                                  kwargs=dict(pk=extension.pk)),
                          dict(comment=comment), follow=True)
 
