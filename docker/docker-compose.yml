@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.3
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: extensions-web
+      MYSQL_USER:
+      MYSQL_PASSWORD:
+    ports:
+      - "127.0.0.1:43306:3306"
+    volumes:
+      - "database:/var/lib/mysql"
+  extensions-web:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: bash -c "python manage.py migrate && rm -r /extensions-web/www/static-files; python manage.py collectstatic --noinput && uwsgi --enable-threads --ini /extensions-web/wsgi.ini"
+    image: extensions-web
+    environment:
+      EGO_ADMINISTRATOR_NAME: Yuri Konotopov
+      EGO_ADMINISTRATOR_EMAIL: ykonotopov@gnome.org
+      EGO_ALLOWED_HOST:
+      EGO_DATABASE_URL:
+      EGO_SECRET_KEY:
+      EGO_XAPIAN_DB:
+      EGO_MEDIA_ROOT: /extensions-web/www/uploaded-files
+      EGO_STATIC_ROOT: /extensions-web/www/static-files
+    depends_on:
+      - db
+    links:
+      - db
+    volumes:
+      - "static:/extensions-web/www"
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    restart: always
+    links:
+      - extensions-web
+    ports:
+      - "8080:80"
+    volumes:
+      - "static:/extensions-web/www"
+
+volumes:
+  database:
+  static:

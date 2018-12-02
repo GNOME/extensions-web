@@ -11,26 +11,26 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import dj_database_url
 import os
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(SITE_ROOT)
 
-XAPIAN_DB_PATH = os.path.join(BASE_DIR, 'xapian.db')
-
+XAPIAN_DB_PATH = os.getenv('EGO_XAPIAN_DB') or os.path.join(BASE_DIR, 'xapian.db')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Set this in local_settings.py to some random value
-SECRET_KEY = ''
+SECRET_KEY = os.getenv('EGO_SECRET_KEY') or ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["extensions.gnome.org"]
+ALLOWED_HOSTS = [os.getenv('EGO_ALLOWED_HOST') or "extensions.gnome.org"]
 
 # Application definition
 
@@ -107,12 +107,8 @@ WSGI_APPLICATION = 'sweettooth.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test.db',
-    }
+    'default': dj_database_url.config(env="EGO_DATABASE_URL", default="sqlite://test.db")
 }
 
 
@@ -130,7 +126,7 @@ USE_L10N = True
 USE_TZ = False
 
 ADMINS = (
-    ('Administrator', 'admin@localhost.local'),
+    (os.getenv('EGO_ADMINISTRATOR_NAME') or 'Administrator', os.getenv('EGO_ADMINISTRATOR_EMAIL') or 'admin@localhost.local'),
 )
 
 MANAGERS = ADMINS
@@ -139,7 +135,7 @@ SITE_ID = 1
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(SITE_ROOT, '..', 'uploaded-files')
+MEDIA_ROOT = os.getenv('EGO_MEDIA_ROOT') or os.path.join(SITE_ROOT, '..', 'uploaded-files')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -212,8 +208,10 @@ if not DEBUG and not NO_SECURE_SETTINGS:
     SECURE_HSTS_SECONDS = 4 * 60 * 60
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_PROXY_SSL_HEADER = ('HTTPS', 'https')
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
 
 if DEBUG and not NO_STATICFILES_SETTINGS:
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
     STATIC_ROOT = None
+else:
+    STATIC_ROOT = os.getenv('EGO_STATIC_ROOT')
