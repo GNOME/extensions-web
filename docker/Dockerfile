@@ -56,9 +56,11 @@ RUN set -ex \
 
 RUN mkdir -p /extensions-web/app
 WORKDIR /extensions-web/app
-COPY --chown=www-data:www-data . /extensions-web/app
-COPY --chown=www-data:www-data docker/wsgi.ini /extensions-web
+COPY . /extensions-web/app
+COPY docker/wsgi.ini /extensions-web
 RUN set -ex \
+	&& chown www-data:www-data -R /extensions-web/app
+	&& chown www-data:www-data /extensions-web/wsgi.ini
 	&& pip install -r requirements.txt \
 	&& pip install mysql-python \
 	&& pip install uWSGI
