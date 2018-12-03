@@ -6,10 +6,6 @@ ENV PYTHONUNBUFFERED 1
 ENV XAPIAN_VERSION 1.4.9
 ENV GPG_KEY 08E2400FF7FE8FEDE3ACB52818147B073BAD2B07
 
-#	&& apt-get update \
-#	&& apt-get install -y --no-install-recommends libxapian-dev \
-#	&& rm -r /var/lib/apt/lists/* \
-
 RUN set -ex \
 	&& pip install Sphinx \
 	&& wget -O xapian-core.tar.xz "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-core-$XAPIAN_VERSION.tar.xz" \
