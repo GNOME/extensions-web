@@ -59,8 +59,8 @@ WORKDIR /extensions-web/app
 COPY . /extensions-web/app
 COPY docker/wsgi.ini /extensions-web
 RUN set -ex \
-	&& chown www-data:www-data -R /extensions-web/app
-	&& chown www-data:www-data /extensions-web/wsgi.ini
+	&& chown www-data:www-data -R /extensions-web/app \
+	&& chown www-data:www-data /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
 	&& pip install mysql-python \
 	&& pip install uWSGI
