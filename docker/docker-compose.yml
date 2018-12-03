@@ -36,8 +36,8 @@ services:
       - "static:/extensions-web/www"
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile.nginx
+      context: nginx
+      dockerfile: Dockerfile
     restart: always
     links:
       - extensions-web
