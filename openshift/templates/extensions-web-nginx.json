@@ -272,7 +272,9 @@
               {
                 "name": "${NAME}",
                 "image": " ",
-                "command": "bash -c 'python manage.py migrate && uwsgi --enable-threads --ini /extensions-web/wsgi.ini'",
+                "command": [
+                    "bash -c 'python manage.py migrate && uwsgi --enable-threads --ini /extensions-web/wsgi.ini'"
+                ],
                 "ports": [
                   {
                     "containerPort": 8001
