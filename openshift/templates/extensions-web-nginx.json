@@ -1,0 +1,402 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "extensions-web",
+    "annotations": {
+      "openshift.io/display-name": "GNOME Shell extensions website",
+      "description": "GNOME Shell extensions website. For more information about using this template see https://gitlab.gnome.org/Infrastructure/extensions-web.",
+      "tags": "gnome,python,nginx,uwsgi,extensions-web",
+      "iconClass": "icon-django",
+      "openshift.io/long-description": "This template defines resources needed to run GNOME Shell extensions repository website, including a build configuration and application deployment configuration.  It does not include a database.",
+      "openshift.io/provider-display-name": "GNOME",
+      "openshift.io/documentation-url": "https://gitlab.gnome.org/Infrastructure/extensions-web",
+      "openshift.io/support-url": "https://gitlab.gnome.org/Infrastructure/extensions-web/issues",
+      "template.openshift.io/bindable": "false"
+    }
+  },
+  "message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, see https://gitlab.gnome.org/Infrastructure/extensions-web.",
+  "labels": {
+      "template": "extensions-web",
+      "app": "extensions-web"
+  },
+  "objects": [
+    {
+      "kind": "Secret",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}"
+      },
+      "stringData": {
+        "database-url": "${EGO_DATABASE_URL}",
+        "secret-key": "${EGO_SECRET_KEY}"
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "description": "Exposes and load balances the application pods"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "${NAME}",
+            "port": 80,
+            "targetPort": 80
+          }
+        ],
+        "selector": {
+          "name": "frontend"
+        }
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}"
+      },
+      "spec": {
+        "host": "${APPLICATION_DOMAIN}",
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}"
+        }
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "description": "Keeps track of changes in the application image"
+        }
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "description": "Defines how to build the application",
+          "template.alpha.openshift.io/wait-for-ready": "true"
+        }
+      },
+      "spec": {
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "${SOURCE_REPOSITORY_URL}",
+            "ref": "${SOURCE_REPOSITORY_REF}"
+          }
+        },
+        "postCommit": {
+            "script": "python manage.py test"
+        },
+        "strategy": {
+          "type": "Docker",
+          "dockerStrategy": {
+            "dockerfilePath": "openshift/docker/Dockerfile"
+          }
+        },
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "${NAME}:latest"
+          }
+        },
+        "triggers": [
+          {
+            "type": "ImageChange"
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "frontend",
+        "annotations": {
+          "description": "Defines how to build the frontend",
+          "template.alpha.openshift.io/wait-for-ready": "true"
+        }
+      },
+      "spec": {
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "${SOURCE_REPOSITORY_URL}",
+            "ref": "${SOURCE_REPOSITORY_REF}"
+          },
+          "contextDir": "openshift/docker/nginx"
+        },
+        "strategy": {
+          "type": "Docker"
+        },
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "frontend:latest"
+          }
+        },
+        "triggers": [
+          {
+            "type": "ImageChange"
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "static"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "1024Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "description": "Defines how to deploy the application server",
+          "template.alpha.openshift.io/wait-for-ready": "true"
+        }
+      },
+      "spec": {
+        "strategy": {
+          "type": "Recreate"
+        },
+        "triggers": [
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "name": "${NAME}:latest"
+              }
+            }
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name": "${NAME}"
+        },
+        "template": {
+          "metadata": {
+            "name": "${NAME}",
+            "labels": {
+              "name": "${NAME}"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "static-www",
+                "persistentVolumeClaim": {
+                  "claimName": "static"
+                }
+              }
+            ],
+            "containers": [
+              {
+                "name": "${NAME}",
+                "image": " ",
+                "ports": [
+                  {
+                    "containerPort": 8001
+                  }
+                ],
+                "readinessProbe": {
+                  "timeoutSeconds": 3,
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 60,
+                  "httpGet": {
+                    "path": "/",
+                    "port": 8001
+                  }
+                },
+                "livenessProbe": {
+                  "timeoutSeconds": 3,
+                  "initialDelaySeconds": 30,
+                  "periodSeconds": 60,
+                  "httpGet": {
+                    "path": "/",
+                    "port": 8001
+                  }
+                },
+                "env": [
+                  {
+                    "name": "EGO_DATABASE_URL",
+                    "valueFrom": {
+                      "secretKeyRef" : {
+                        "name" : "${NAME}",
+                        "key" : "database-url"
+                      }
+                    }
+                  },
+                  {
+                    "name": "EGO_SECRET_KEY",
+                    "valueFrom": {
+                      "secretKeyRef" : {
+                        "name" : "${NAME}",
+                        "key" : "secret-key"
+                      }
+                    }
+                  },
+                  {
+                    "name": "EGO_ALLOWED_HOST",
+                    "value": "${APPLICATION_DOMAIN}"
+                  },
+                  {
+                    "name": "EGO_XAPIAN_DB",
+                    "value": "${EGO_XAPIAN_DB}"
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "name": "static-www",
+                    "mountPath": "/extensions-web/www"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "memory": "${MEMORY_LIMIT}"
+                  }
+                }
+              },
+              
+              {
+                "name": "frontend",
+                "image": " ",
+                "ports": [
+                  {
+                    "containerPort": 80
+                  }
+                ],
+                "readinessProbe": {
+                  "timeoutSeconds": 3,
+                  "initialDelaySeconds": 10,
+                  "periodSeconds": 60,
+                  "httpGet": {
+                    "path": "/",
+                    "port": 80
+                  }
+                },
+                "livenessProbe": {
+                  "timeoutSeconds": 3,
+                  "initialDelaySeconds": 45,
+                  "periodSeconds": 60,
+                  "httpGet": {
+                    "path": "/",
+                    "port": 80
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "static-www",
+                    "mountPath": "/extensions-web/www"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "memory": "512Mi"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "NAME",
+      "displayName": "Name",
+      "description": "The name assigned to all of the frontend objects defined in this template.",
+      "required": true,
+      "value": "extensions-web"
+    },
+    {
+      "name": "NAMESPACE",
+      "displayName": "Namespace",
+      "description": "The OpenShift Namespace where the ImageStream resides.",
+      "required": true,
+      "value": "openshift"
+    },
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Memory Limit",
+      "description": "Maximum amount of memory the container can use.",
+      "required": true,
+      "value": "2048Mi"
+    },
+    {
+      "name": "SOURCE_REPOSITORY_URL",
+      "displayName": "Git Repository URL",
+      "description": "The URL of the repository with your application source code.",
+      "required": true,
+      "value": "https://gitlab.gnome.org/Infrastructure/extensions-web.git"
+    },
+    {
+      "name": "SOURCE_REPOSITORY_REF",
+      "displayName": "Git Reference",
+      "description": "Set this to a branch name, tag or other ref of your repository if you are not using the default branch."
+    },
+    {
+      "name": "APPLICATION_DOMAIN",
+      "displayName": "Application Hostname",
+      "description": "The exposed hostname that will route to the extensions-web service, if left blank a value will be defaulted.",
+      "value": ""
+    },
+    {
+      "name": "EGO_DATABASE_URL",
+      "displayName": "Database URL",
+      "description": "Database URL in format suitable for dj-database-url",
+      "value": ""
+    },
+    {
+      "name": "EGO_SECRET_KEY",
+      "displayName": "Django secret key",
+      "description": "Django secret key.",
+      "value": ""
+    },
+    {
+      "name": "EGO_XAPIAN_DB",
+      "displayName": "Xapian database path",
+      "description": "Path to Xapian database.",
+      "value": ""
+    }
+  ]
+}

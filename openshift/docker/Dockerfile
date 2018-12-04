@@ -57,7 +57,7 @@ RUN set -ex \
 RUN mkdir -p /extensions-web/app
 WORKDIR /extensions-web/app
 COPY . /extensions-web/app
-COPY docker/wsgi.ini /extensions-web
+COPY openshift/docker/wsgi.ini /extensions-web
 RUN set -ex \
 	&& chown www-data:www-data -R /extensions-web/app \
 	&& chown www-data:www-data /extensions-web/wsgi.ini \
