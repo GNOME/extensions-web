@@ -16,7 +16,7 @@ services:
   extensions-web:
     build:
       context: ../
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile
     command: bash -c "python manage.py migrate && rm -r /extensions-web/www/static-files; python manage.py collectstatic --noinput && uwsgi --enable-threads --ini /extensions-web/wsgi.ini"
     image: extensions-web
     environment:
