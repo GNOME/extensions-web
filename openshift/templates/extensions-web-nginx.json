@@ -22,6 +22,17 @@
   },
   "objects": [
     {
+      "kind": "ConfigMap",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}"
+      },
+      "data": {
+        "media-root": "/extensions-web/www/uploaded-files",
+        "static-root": "/extensions-web/www/static-files"
+      }
+    },
+    {
       "kind": "Secret",
       "apiVersion": "v1",
       "metadata": {
@@ -97,11 +108,40 @@
           }
         },
         "postCommit": {
-            "script": "python manage.py test"
+            "script": "bash -c 'python manage.py collectstatic --noinput && python manage.py test'"
         },
         "strategy": {
           "type": "Docker",
           "dockerStrategy": {
+            "env": [
+                {
+                    "name": "EGO_SECRET_KEY",
+                    "valueFrom": {
+                        "secretKeyRef": {
+                            "name": "extensions-web",
+                            "key": "secret-key"
+                        }
+                    }
+                },
+                {
+                    "name": "EGO_MEDIA_ROOT",
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "extensions-web",
+                            "key": "media-root"
+                        }
+                    }
+                },
+                {
+                    "name": "EGO_STATIC_ROOT",
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "extensions-web",
+                            "key": "static-root"
+                        }
+                    }
+                }
+            ],
             "dockerfilePath": "openshift/docker/Dockerfile"
           }
         },
@@ -232,6 +272,7 @@
               {
                 "name": "${NAME}",
                 "image": " ",
+                "command": "bash -c 'python manage.py migrate && uwsgi --enable-threads --ini /extensions-web/wsgi.ini'",
                 "ports": [
                   {
                     "containerPort": 8001
