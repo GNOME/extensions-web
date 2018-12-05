@@ -361,7 +361,7 @@
                   "initialDelaySeconds": 10,
                   "periodSeconds": 60,
                   "httpGet": {
-                    "path": "/",
+                    "path": "/health",
                     "port": 8080
                   }
                 },
@@ -370,7 +370,7 @@
                   "initialDelaySeconds": 45,
                   "periodSeconds": 60,
                   "httpGet": {
-                    "path": "/",
+                    "path": "/health",
                     "port": 8080
                   }
                 },
