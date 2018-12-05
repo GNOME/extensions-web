@@ -288,8 +288,7 @@
                   "timeoutSeconds": 3,
                   "initialDelaySeconds": 3,
                   "periodSeconds": 60,
-                  "httpGet": {
-                    "path": "/",
+                  "tcpSocket": {
                     "port": 8001
                   }
                 },
@@ -297,8 +296,7 @@
                   "timeoutSeconds": 3,
                   "initialDelaySeconds": 30,
                   "periodSeconds": 60,
-                  "httpGet": {
-                    "path": "/",
+                  "tcpSocket": {
                     "port": 8001
                   }
                 },
