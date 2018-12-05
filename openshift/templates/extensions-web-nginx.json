@@ -203,7 +203,7 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "static"
+        "name": "extensions-claim"
       },
       "spec": {
         "accessModes": [
@@ -211,7 +211,7 @@
         ],
         "resources": {
           "requests": {
-            "storage": "1024Mi"
+            "storage": "3096Mi"
           }
         }
       }
@@ -262,9 +262,9 @@
           "spec": {
             "volumes": [
               {
-                "name": "static-www",
+                "name": "data-volume",
                 "persistentVolumeClaim": {
-                  "claimName": "static"
+                  "claimName": "extensions-claim"
                 }
               }
             ],
@@ -328,8 +328,14 @@
                 ],
                 "volumeMounts": [
                   {
-                    "name": "static-www",
-                    "mountPath": "/extensions-web/www"
+                    "name": "data-volume",
+                    "mountPath": "/extensions-web/www",
+                    "subPath": "www"
+                  },
+                  {
+                    "mountPath": "/extensions-web/data",
+                    "name": "data-volume",
+                    "subPath": "data"
                   }
                 ],
                 "resources": {
@@ -338,7 +344,6 @@
                   }
                 }
               },
-              
               {
                 "name": "frontend",
                 "image": " ",
@@ -367,8 +372,9 @@
                 },
                 "volumeMounts": [
                   {
-                    "name": "static-www",
-                    "mountPath": "/extensions-web/www"
+                    "name": "data-volume",
+                    "mountPath": "/extensions-web/www",
+                    "subPath": "www"
                   }
                 ],
                 "resources": {
