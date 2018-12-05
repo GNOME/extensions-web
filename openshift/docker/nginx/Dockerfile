@@ -8,4 +8,5 @@ RUN set -ex \
 	&& mkdir -p /extensions-web/www \
 	&& chmod g+rwX -R /extensions-web/www \
 	&& chmod g+rwX -R /var/log/nginx \
-	&& chmod g+rwX -R /var/cache/nginx
+	&& chmod g+rwX -R /var/cache/nginx \
+	&& chmod g+rwX -R /var/run
