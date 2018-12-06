@@ -5,7 +5,7 @@ MAINTAINER Yuri Konotopov <ykonotopov@gnome.org>
 COPY nginx.conf /tmp
 
 RUN set -ex \
-	&& envsubst < /tmp/nginx.conf > /etc/nginx/nginx.conf \
+	&& envsubst '$EGO_NODE_ADDRESS' < /tmp/nginx.conf > /etc/nginx/nginx.conf \
 	&& rm /tmp/nginx.conf \
 	&& mkdir -p /extensions-web/www \
 	&& chmod g+rwX -R /extensions-web/www \
