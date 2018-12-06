@@ -2,9 +2,11 @@ FROM nginx:stable
 
 MAINTAINER Yuri Konotopov <ykonotopov@gnome.org>
 
-COPY nginx.conf /etc/nginx
+COPY nginx.conf /tmp
 
 RUN set -ex \
+	&& envsubst < /tmp/nginx.conf > /etc/nginx/nginx.conf \
+	&& rm /tmp/nginx.conf \
 	&& mkdir -p /extensions-web/www \
 	&& chmod g+rwX -R /extensions-web/www \
 	&& chmod g+rwX -R /var/log/nginx \

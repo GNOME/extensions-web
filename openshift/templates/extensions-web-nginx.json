@@ -61,7 +61,7 @@
           }
         ],
         "selector": {
-          "name": "frontend"
+          "name": "extensions-web"
         }
       }
     },
@@ -181,7 +181,15 @@
           "contextDir": "openshift/docker/nginx"
         },
         "strategy": {
-          "type": "Docker"
+          "type": "Docker",
+          "dockerStrategy": {
+            "env": [
+              {
+                "name": "EGO_NODE_ADDRESS",
+                "value": "${EGO_NODE_ADDRESS}"
+              }
+            ]
+          }
         },
         "output": {
           "to": {
@@ -436,6 +444,12 @@
       "displayName": "Database URL",
       "description": "Database URL in format suitable for dj-database-url",
       "value": ""
+    },
+    {
+      "name": "EGO_NODE_ADDRESS",
+      "displayName": "Address of extensions-web container",
+      "description": "Either DNS name or IP address. Should be localhost for Openshift.",
+      "value": "localhost"
     },
     {
       "name": "EGO_SECRET_KEY",
