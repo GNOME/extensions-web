@@ -285,7 +285,7 @@
                 ],
                 "args": [
                     "-c",
-                    "python manage.py migrate && uwsgi --enable-threads --ini /extensions-web/wsgi.ini"
+                    "python manage.py collectstatic --noinput && python manage.py migrate && uwsgi --enable-threads --ini /extensions-web/wsgi.ini"
                 ],
                 "ports": [
                   {
