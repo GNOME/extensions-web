@@ -12,3 +12,5 @@ RUN set -ex \
 	&& chmod g+rwX -R /var/log/nginx \
 	&& chmod g+rwX -R /var/cache/nginx \
 	&& chmod g+rwX -R /var/run
+
+CMD ["bash"]
