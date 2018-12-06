@@ -70,4 +70,4 @@ RUN set -ex \
 	&& pip install mysql-python \
 	&& pip install uWSGI
 
-ENTRYPOINT["bash"]
+ENTRYPOINT ["bash"]
