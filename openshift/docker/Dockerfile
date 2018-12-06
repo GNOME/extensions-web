@@ -69,5 +69,3 @@ RUN set -ex \
 	&& pip install -r requirements.txt \
 	&& pip install mysql-python \
 	&& pip install uWSGI
-
-ENTRYPOINT ["bash"]
