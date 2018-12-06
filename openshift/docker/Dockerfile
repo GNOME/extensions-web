@@ -58,15 +58,14 @@ RUN set -ex \
 	&& mkdir -p /extensions-web/app \
 	&& mkdir -p /extensions-web/data \
 	&& mkdir -p /extensions-web/www \
-	&& chown www-data:root -R /extensions-web/app \
-	&& chown www-data:root -R /extensions-web/data \
 	&& chmod g+rwX -R /extensions-web/data \
-	&& chown www-data:root -R /extensions-web/www \
 	&& chmod g+rwX -R /extensions-web/www
 WORKDIR /extensions-web/app
 COPY . /extensions-web/app
 COPY openshift/docker/wsgi.ini /extensions-web
 RUN set -ex \
+	&& chmod g+rwX -R /extensions-web/www \
+	&& chown www-data:root -R /extensions-web/app \
 	&& chown www-data:root /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
 	&& pip install mysql-python \
