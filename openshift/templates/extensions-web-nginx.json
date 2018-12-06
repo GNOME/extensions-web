@@ -44,6 +44,16 @@
       }
     },
     {
+      "kind": "Secret",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "gnome-gitlab"
+      },
+      "stringData": {
+        "WebHookSecretKey": "${WEBHOOK_SECRET_KEY}"
+      }
+    },
+    {
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
@@ -157,6 +167,14 @@
           },
           {
             "type": "ConfigChange"
+          },
+          {
+            "type": "GitLab",
+            "gitlab": {
+              "secretReference": {
+                "name": "gnome-gitlab"
+              }
+            }
           }
         ]
       }
@@ -203,6 +221,14 @@
           },
           {
             "type": "ConfigChange"
+          },
+          {
+            "type": "GitLab",
+            "gitlab": {
+              "secretReference": {
+                "name": "gnome-gitlab"
+              }
+            }
           }
         ]
       }
@@ -461,6 +487,12 @@
       "name": "EGO_XAPIAN_DB",
       "displayName": "Xapian database path",
       "description": "Path to Xapian database.",
+      "value": ""
+    },
+    {
+      "name": "WEBHOOK_SECRET_KEY",
+      "displayName": "WebHook secret key",
+      "description": "Secret key for GNOME Gitlab.",
       "value": ""
     }
   ]
