@@ -31,9 +31,9 @@ local_settings.py
 *.key
 
 contrib/
-docker/
-!docker/nginx.conf
-!docker/wsgi.ini
+openshift/docker/
+!openshift/docker/nginx.conf
+!openshift/docker/wsgi.ini
 static/
 uploaded-files/
 xapian*

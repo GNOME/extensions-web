@@ -2,9 +2,9 @@ FROM python:2
 
 MAINTAINER Yuri Konotopov <ykonotopov@gnome.org>
 
-ENV PYTHONUNBUFFERED 1
-ENV XAPIAN_VERSION 1.4.9
-ENV GPG_KEY 08E2400FF7FE8FEDE3ACB52818147B073BAD2B07
+ENV PYTHONUNBUFFERED=1 \
+	XAPIAN_VERSION=1.4.9 \
+	GPG_KEY=08E2400FF7FE8FEDE3ACB52818147B073BAD2B07
 
 RUN set -ex \
 	&& pip install Sphinx \
@@ -54,13 +54,18 @@ RUN set -ex \
 		\) -exec rm -r '{}' + \
 	&& rm -r /usr/src/xapian-bindings
 
-RUN mkdir -p /extensions-web/app
+RUN set -ex \
+	&& mkdir -p /extensions-web/app \
+	&& mkdir -p /extensions-web/data \
+	&& mkdir -p /extensions-web/www \
+	&& chmod g+rwX -R /extensions-web/data \
+	&& chmod g+rwX -R /extensions-web/www
 WORKDIR /extensions-web/app
 COPY . /extensions-web/app
-COPY docker/wsgi.ini /extensions-web
+COPY openshift/docker/wsgi.ini /extensions-web
 RUN set -ex \
-	&& chown www-data:www-data -R /extensions-web/app \
-	&& chown www-data:www-data /extensions-web/wsgi.ini \
+	&& chown www-data:root -R /extensions-web/app \
+	&& chown www-data:root /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
 	&& pip install mysql-python \
 	&& pip install uWSGI
