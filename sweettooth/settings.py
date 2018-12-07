@@ -213,5 +213,5 @@ if not DEBUG and not NO_SECURE_SETTINGS:
 if DEBUG and not NO_STATICFILES_SETTINGS:
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
     STATIC_ROOT = None
-else:
+elif not STATIC_ROOT:
     STATIC_ROOT = os.getenv('EGO_STATIC_ROOT')
