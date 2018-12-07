@@ -12,6 +12,7 @@ from django import template
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
 import json
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 js_paths = None
@@ -19,6 +20,7 @@ img_paths = None
 
 
 @register.simple_tag
+@mark_safe
 def static_js_paths():
     global js_paths
 
@@ -38,6 +40,7 @@ def static_js_paths():
 
 
 @register.simple_tag
+@mark_safe
 def static_img_paths():
     global img_paths
 
