@@ -427,6 +427,58 @@
           }
         }
       }
+    },
+    {
+      "kind": "CronJob",
+      "apiVersion": "batch/v1beta1",
+      "metadata": {
+        "name": "job-update-popularity"
+      },
+      "spec": {
+        "schedule": "0 0 * * *",
+        "jobTemplate": {
+          "spec": {
+            "template": {
+              "spec": {
+                "containers": [
+                  {
+                    "name": "update-popularity",
+                    "image": "${NAME}:latest",
+                    "command": ["/extensions-web/app/bin/sweettooth-cron-update"]
+                  }
+                ],
+                "restartPolicy": "Never"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "kind": "CronJob",
+      "apiVersion": "batch/v1beta1",
+      "metadata": {
+        "name": "job-update-software"
+      },
+      "spec": {
+        "schedule": "10 0 * * *",
+        "jobTemplate": {
+          "spec": {
+            "template": {
+              "spec": {
+                "containers": [
+                  {
+                    "name": "update-software",
+                    "image": "${NAME}:latest",
+                    "command": ["/extensions-web/app/bin/sweettooth-cron-software"]
+                  }
+                ],
+                "restartPolicy": "Never"
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "parameters": [
