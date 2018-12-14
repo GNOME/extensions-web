@@ -27,4 +27,5 @@ for ext in Extension.objects.all():
         ext.popularity = popularity_data['popularity']
         ext.save(replace_metadata_json=False)
 
-    ext.popularity_items.filter(date__lte=date).delete()
+    # TODO: review and restore cleanup
+    # ext.popularity_items.filter(date__lte=date).delete()
