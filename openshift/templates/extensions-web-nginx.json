@@ -28,8 +28,10 @@
         "name": "${NAME}"
       },
       "data": {
+        "allowed-host": "${APPLICATION_DOMAIN}",
         "media-root": "/extensions-web/www/uploaded-files",
-        "static-root": "/extensions-web/www/static-files"
+        "static-root": "/extensions-web/www/static-files",
+        "xapian-db": "/extensions-web/data/xapian.db"
       }
     },
     {
@@ -377,11 +379,21 @@
                   },
                   {
                     "name": "EGO_ALLOWED_HOST",
-                    "value": "${APPLICATION_DOMAIN}"
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "allowed-host"
+                        }
+                    }
                   },
                   {
                     "name": "EGO_XAPIAN_DB",
-                    "value": "${EGO_XAPIAN_DB}"
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "xapian-db"
+                        }
+                    }
                   }
                 ],
                 "volumeMounts": [
@@ -502,11 +514,21 @@
                       },
                       {
                         "name": "EGO_ALLOWED_HOST",
-                        "value": "${APPLICATION_DOMAIN}"
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "allowed-host"
+                          }
+                        }
                       },
                       {
                         "name": "EGO_XAPIAN_DB",
-                        "value": "${EGO_XAPIAN_DB}"
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "xapian-db"
+                          }
+                        }
                       }
                     ]
                   }
@@ -582,11 +604,21 @@
                       },
                       {
                         "name": "EGO_ALLOWED_HOST",
-                        "value": "${APPLICATION_DOMAIN}"
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "allowed-host"
+                          }
+                        }
                       },
                       {
                         "name": "EGO_XAPIAN_DB",
-                        "value": "${EGO_XAPIAN_DB}"
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "xapian-db"
+                          }
+                        }
                       }
                     ],
                     "volumeMounts": [
@@ -667,12 +699,6 @@
       "name": "EGO_SECRET_KEY",
       "displayName": "Django secret key",
       "description": "Django secret key.",
-      "value": ""
-    },
-    {
-      "name": "EGO_XAPIAN_DB",
-      "displayName": "Xapian database path",
-      "description": "Path to Xapian database.",
       "value": ""
     },
     {
