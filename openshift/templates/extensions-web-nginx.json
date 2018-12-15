@@ -209,6 +209,11 @@
         "strategy": {
           "type": "Docker",
           "dockerStrategy": {
+            "forcePull": true,
+            "from": {
+              "kind": "DockerImage",
+              "name": "nginx:stable"
+            },
             "env": [
               {
                 "name": "EGO_NODE_ADDRESS",
