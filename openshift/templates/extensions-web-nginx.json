@@ -28,6 +28,8 @@
         "name": "${NAME}"
       },
       "data": {
+        "administrator-name": "${EGO_ADMINISTRATOR_NAME}",
+        "administrator-email": "${EGO_ADMINISTRATOR_EMAIL}",
         "allowed-host": "${APPLICATION_DOMAIN}",
         "media-root": "/extensions-web/www/uploaded-files",
         "static-root": "/extensions-web/www/static-files",
@@ -360,6 +362,24 @@
                     }
                   },
                   {
+                    "name": "EGO_ADMINISTRATOR_NAME",
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-name"
+                        }
+                    }
+                  },
+                  {
+                    "name": "EGO_ADMINISTRATOR_EMAIL",
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-email"
+                        }
+                    }
+                  },
+                  {
                     "name": "EGO_MEDIA_ROOT",
                     "valueFrom": {
                         "configMapKeyRef": {
@@ -495,6 +515,24 @@
                         }
                       },
                       {
+                        "name": "EGO_ADMINISTRATOR_NAME",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-name"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ADMINISTRATOR_EMAIL",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-email"
+                          }
+                        }
+                      },
+                      {
                         "name": "EGO_MEDIA_ROOT",
                         "valueFrom": {
                             "configMapKeyRef": {
@@ -581,6 +619,24 @@
                           "secretKeyRef" : {
                             "name" : "${NAME}",
                             "key" : "secret-key"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ADMINISTRATOR_NAME",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-name"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ADMINISTRATOR_EMAIL",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-email"
                           }
                         }
                       },
@@ -681,6 +737,18 @@
       "name": "APPLICATION_DOMAIN",
       "displayName": "Application Hostname",
       "description": "The exposed hostname that will route to the extensions-web service, if left blank a value will be defaulted.",
+      "value": ""
+    },
+    {
+      "name": "EGO_ADMINISTRATOR_NAME",
+      "displayName": "Administrator name",
+      "description": "Administrator name.",
+      "value": ""
+    },
+    {
+      "name": "EGO_ADMINISTRATOR_EMAIL",
+      "displayName": "Administator email",
+      "description": "Email of administator. For error notifications.",
       "value": ""
     },
     {
