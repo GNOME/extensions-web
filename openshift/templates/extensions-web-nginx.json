@@ -234,14 +234,6 @@
           },
           {
             "type": "ConfigChange"
-          },
-          {
-            "type": "GitLab",
-            "gitlab": {
-              "secretReference": {
-                "name": "gnome-gitlab"
-              }
-            }
           }
         ]
       }
