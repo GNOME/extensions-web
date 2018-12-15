@@ -12,10 +12,10 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'sweettooth.settings'
 sys.path.extend([os.path.join(_path, '..'),
                  os.path.join(_path, '..', 'sweettooth')])
 
+django.setup()
+
 from django.db.models import Sum
 from sweettooth.extensions.models import Extension
-
-django.setup()
 
 for ext in Extension.objects.all():
     date = datetime.datetime.now()-datetime.timedelta(days=7)

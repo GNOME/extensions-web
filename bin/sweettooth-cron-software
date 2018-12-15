@@ -12,10 +12,10 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'sweettooth.settings'
 sys.path.extend([os.path.join(_path, '..'),
                  os.path.join(_path, '..', 'sweettooth')])
 
+django.setup()
+
 from django.contrib.staticfiles.storage import staticfiles_storage
 from sweettooth.extensions import models, views
-
-django.setup()
 
 version_qs = models.ExtensionVersion.objects.visible()
 queryset = models.Extension.objects.distinct().filter(versions__in=version_qs)[:1000]
