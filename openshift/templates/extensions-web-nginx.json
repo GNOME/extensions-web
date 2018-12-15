@@ -108,6 +108,54 @@
       }
     },
     {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "nginx",
+        "annotations": {
+          "description": "Keeps track of changes in the nginx:stable image"
+        }
+      },
+      "spec": {
+        "tags": [
+          {
+            "name": "stable",
+            "from": {
+              "kind": "DockerImage",
+              "name": "nginx:stable"
+            },
+            "importPolicy": {
+              "scheduled": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python",
+        "annotations": {
+          "description": "Keeps track of changes in the python image"
+        }
+      },
+      "spec": {
+        "tags": [
+          {
+            "name": "2.7-stretch",
+            "from": {
+              "kind": "DockerImage",
+              "name": "python:2.7-stretch"
+            },
+            "importPolicy": {
+              "scheduled": true
+            }
+          }
+        ]
+      }
+    },
+    {
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
@@ -131,6 +179,11 @@
         "strategy": {
           "type": "Docker",
           "dockerStrategy": {
+            "forcePull": true,
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "python:2.7-stretch"
+            },
             "env": [
                 {
                     "name": "EGO_SECRET_KEY",
@@ -211,7 +264,7 @@
           "dockerStrategy": {
             "forcePull": true,
             "from": {
-              "kind": "DockerImage",
+              "kind": "ImageStreamTag",
               "name": "nginx:stable"
             },
             "env": [
