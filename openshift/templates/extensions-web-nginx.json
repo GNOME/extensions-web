@@ -71,7 +71,7 @@
           }
         ],
         "selector": {
-          "name": "extensions-web"
+          "name": "${NAME}"
         }
       }
     },
@@ -132,7 +132,7 @@
                     "name": "EGO_SECRET_KEY",
                     "valueFrom": {
                         "secretKeyRef": {
-                            "name": "extensions-web",
+                            "name": "${NAME}",
                             "key": "secret-key"
                         }
                     }
@@ -141,7 +141,7 @@
                     "name": "EGO_MEDIA_ROOT",
                     "valueFrom": {
                         "configMapKeyRef": {
-                            "name": "extensions-web",
+                            "name": "${NAME}",
                             "key": "media-root"
                         }
                     }
@@ -150,7 +150,7 @@
                     "name": "EGO_STATIC_ROOT",
                     "valueFrom": {
                         "configMapKeyRef": {
-                            "name": "extensions-web",
+                            "name": "${NAME}",
                             "key": "static-root"
                         }
                     }
@@ -361,7 +361,7 @@
                     "name": "EGO_MEDIA_ROOT",
                     "valueFrom": {
                         "configMapKeyRef": {
-                            "name": "extensions-web",
+                            "name": "${NAME}",
                             "key": "media-root"
                         }
                     }
@@ -370,7 +370,7 @@
                     "name": "EGO_STATIC_ROOT",
                     "valueFrom": {
                         "configMapKeyRef": {
-                            "name": "extensions-web",
+                            "name": "${NAME}",
                             "key": "static-root"
                         }
                     }
