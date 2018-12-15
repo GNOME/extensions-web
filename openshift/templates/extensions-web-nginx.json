@@ -710,7 +710,7 @@
     {
       "name": "DEFAULT_DOCKER_REGISTRY",
       "displayName": "Docker registry.",
-      "description": "URL of private docker registry. Usually docker-registry.default.svc:5000",
+      "description": "URL of private docker registry. Usually docker-registry.default.svc:5000.",
       "value": "docker-registry.default.svc:5000"
     }
   ]
