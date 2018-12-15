@@ -466,11 +466,31 @@
           "spec": {
             "template": {
               "spec": {
+                "volumes": [
+                  {
+                    "name": "data-volume",
+                    "persistentVolumeClaim": {
+                      "claimName": "extensions-claim"
+                    }
+                  }
+                ],
                 "containers": [
                   {
                     "name": "update-software",
                     "image": "${NAME}:latest",
-                    "command": ["/extensions-web/app/bin/sweettooth-cron-software"]
+                    "command": ["/extensions-web/app/bin/sweettooth-cron-software"],
+                    "volumeMounts": [
+                      {
+                        "name": "data-volume",
+                        "mountPath": "/extensions-web/www",
+                        "subPath": "www"
+                      },
+                      {
+                        "mountPath": "/extensions-web/data",
+                        "name": "data-volume",
+                        "subPath": "data"
+                      }
+                    ]
                   }
                 ],
                 "restartPolicy": "Never"
