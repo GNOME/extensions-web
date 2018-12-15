@@ -462,7 +462,53 @@
                   {
                     "name": "update-popularity",
                     "image": "${NAME}:latest",
-                    "command": ["/extensions-web/app/bin/sweettooth-cron-update"]
+                    "command": ["/extensions-web/app/bin/sweettooth-cron-update"],
+                    "env": [
+                      {
+                        "name": "EGO_DATABASE_URL",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "database-url"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_SECRET_KEY",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "secret-key"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_MEDIA_ROOT",
+                        "valueFrom": {
+                            "configMapKeyRef": {
+                              "name": "extensions-web",
+                              "key": "media-root"
+                            }
+                        }
+                      },
+                      {
+                        "name": "EGO_STATIC_ROOT",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "extensions-web",
+                            "key": "static-root"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ALLOWED_HOST",
+                        "value": "${APPLICATION_DOMAIN}"
+                      },
+                      {
+                        "name": "EGO_XAPIAN_DB",
+                        "value": "${EGO_XAPIAN_DB}"
+                      }
+                    ]
                   }
                 ],
                 "restartPolicy": "Never"
@@ -497,6 +543,52 @@
                     "name": "update-software",
                     "image": "${NAME}:latest",
                     "command": ["/extensions-web/app/bin/sweettooth-cron-software"],
+                    "env": [
+                      {
+                        "name": "EGO_DATABASE_URL",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "database-url"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_SECRET_KEY",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "secret-key"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_MEDIA_ROOT",
+                        "valueFrom": {
+                            "configMapKeyRef": {
+                              "name": "extensions-web",
+                              "key": "media-root"
+                            }
+                        }
+                      },
+                      {
+                        "name": "EGO_STATIC_ROOT",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "extensions-web",
+                            "key": "static-root"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ALLOWED_HOST",
+                        "value": "${APPLICATION_DOMAIN}"
+                      },
+                      {
+                        "name": "EGO_XAPIAN_DB",
+                        "value": "${EGO_XAPIAN_DB}"
+                      }
+                    ],
                     "volumeMounts": [
                       {
                         "name": "data-volume",
