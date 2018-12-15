@@ -311,7 +311,7 @@
             "containers": [
               {
                 "name": "${NAME}",
-                "image": " ",
+                "image": "${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest",
                 "command": [
                     "bash"
                 ],
@@ -416,7 +416,7 @@
               },
               {
                 "name": "frontend",
-                "image": " ",
+                "image": "${DEFAULT_DOCKER_REGISTRY}/${NAME}/frontend:latest",
                 "ports": [
                   {
                     "containerPort": 8080
@@ -473,7 +473,7 @@
                 "containers": [
                   {
                     "name": "update-popularity",
-                    "image": "${NAME}:latest",
+                    "image": "${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest",
                     "command": ["/extensions-web/app/bin/sweettooth-cron-update"],
                     "env": [
                       {
@@ -563,7 +563,7 @@
                 "containers": [
                   {
                     "name": "update-software",
-                    "image": "${NAME}:latest",
+                    "image": "${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest",
                     "command": ["/extensions-web/app/bin/sweettooth-cron-software"],
                     "env": [
                       {
@@ -706,6 +706,12 @@
       "displayName": "WebHook secret key",
       "description": "Secret key for GNOME Gitlab.",
       "value": ""
+    },
+    {
+      "name": "DEFAULT_DOCKER_REGISTRY",
+      "displayName": "Docker registry.",
+      "description": "URL of private docker registry. Usually docker-registry.default.svc:5000",
+      "value": "docker-registry.default.svc:5000"
     }
   ]
 }
