@@ -358,6 +358,24 @@
                     }
                   },
                   {
+                    "name": "EGO_MEDIA_ROOT",
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "extensions-web",
+                            "key": "media-root"
+                        }
+                    }
+                  },
+                  {
+                    "name": "EGO_STATIC_ROOT",
+                    "valueFrom": {
+                        "configMapKeyRef": {
+                            "name": "extensions-web",
+                            "key": "static-root"
+                        }
+                    }
+                  },
+                  {
                     "name": "EGO_ALLOWED_HOST",
                     "value": "${APPLICATION_DOMAIN}"
                   },
