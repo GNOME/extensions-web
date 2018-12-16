@@ -810,8 +810,8 @@
     {
       "name": "EGO_NODE_ADDRESS",
       "displayName": "Address of extensions-web container",
-      "description": "Either DNS name or IP address. Should be localhost for Openshift.",
-      "value": "localhost"
+      "description": "Either DNS name or IP address. Should be 127.0.0.1 for Openshift.",
+      "value": "127.0.0.1"
     },
     {
       "name": "EGO_SECRET_KEY",
