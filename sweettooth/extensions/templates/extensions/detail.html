@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ extension.name }} - {{ block.super }}{% endblock %}
 
+{% load extension_icon %}
 {% block body %}
     <div class="extension single-page {% block extra-ext-class %}{% endblock %}"
          data-epk="{{ extension.pk }}"
@@ -10,7 +11,7 @@
       <div class="extension-header col-xs-12 col-sm-8 col-md-8 col-lg-8 no-padding">
         {% spaceless %}
         {% block icon %}
-        <img src="{{ extension.icon.url }}" class="icon">
+        <img src="{% extension_icon extension.icon %}" class="icon">
         {% endblock icon %}
         <h3 class="extension-name" id="extension_name">{{ extension.name }}</h3>
         {% endspaceless %}

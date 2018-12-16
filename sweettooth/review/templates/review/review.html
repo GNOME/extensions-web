@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
+{% load extension_icon %}
 
 {% block title %}Review "{{ extension.name }}" - {{ block.super }}{% endblock %}
 
@@ -11,7 +12,7 @@
         {% spaceless %}
             <h3 class="extension-name">
                 <a href="{{ extension.get_absolute_url }}">
-                    <img src="{{ extension.icon.url }}" class="icon">{{ extension.name }}
+                    <img src="{% extension_icon extension.icon %}" class="icon">{{ extension.name }}
                 </a>
             </h3>
 

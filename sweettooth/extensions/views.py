@@ -18,6 +18,7 @@ from sweettooth.extensions import models, search
 from sweettooth.extensions.forms import UploadForm
 
 from sweettooth.decorators import ajax_view, model_view
+from sweettooth.extensions.templatetags.extension_icon import extension_icon
 
 def get_versions_for_version_strings(version_strings):
     def get_version(major, minor, point):
@@ -358,7 +359,7 @@ def ajax_details(extension, version=None):
                    pk = extension.pk,
                    description = extension.description,
                    link = extension.get_absolute_url(),
-                   icon = extension.icon.url,
+                   icon = extension_icon(extension.icon),
                    screenshot = extension.screenshot.url if extension.screenshot else None,
                    shell_version_map = extension.visible_shell_version_map)
 

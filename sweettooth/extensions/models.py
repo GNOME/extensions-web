@@ -105,7 +105,7 @@ class Extension(models.Model):
         )
 
     screenshot = models.ImageField(upload_to=make_screenshot_filename, blank=True)
-    icon = models.ImageField(upload_to=make_icon_filename, blank=True, default="/static/images/plugin.png")
+    icon = models.ImageField(upload_to=make_icon_filename, blank=True, default="")
 
     objects = ExtensionManager()
 

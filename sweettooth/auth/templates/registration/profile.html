@@ -2,7 +2,7 @@
 {% block title %}{{ display_name }}'s Profile - {{ block.super }}{% endblock %}
 
 {% block body %}
-{% load gravatar %}
+{% load gravatar extension_icon %}
 <div class="profile">
   {% if is_editable %}
   <h2 class="editable" data-pk="{{ user.pk }}" id="new_display_name">{{ display_name }}</h2>
@@ -19,7 +19,7 @@
     {% for extension in extensions %}
     <li class="extension profile">
       <h4 class="extension-name"><a href="{{ extension.get_absolute_url }}">
-          <img src="{{ extension.icon.url }}" class="icon"> {{ extension.name }}
+          <img src="{% extension_icon extension.icon %}" class="icon"> {{ extension.name }}
       </a></h4>
 
       <p class="description">{{ extension.first_line_of_description }}</p>
@@ -32,7 +32,7 @@
   {% with version.extension as extension %}
   <li class="extension profile">
     <h4 class="extension-name"><a href="{% url 'review-version' pk=version.pk %}">
-        <img src="{{ extension.icon.url }}" class="icon"> {{ extension.name }}
+        <img src="{% extension_icon extension.icon %}" class="icon"> {{ extension.name }}
     </a></h4>
     <span class="version">(v{{ version.version }})</span>
 
@@ -46,7 +46,7 @@
   {% with version.extension as extension %}
   <li class="extension profile">
     <h4 class="extension-name"><a href="{% url 'review-version' pk=version.pk %}">
-        <img src="{{ extension.icon.url }}" class="icon"> {{ extension.name }}
+        <img src="{% extension_icon extension.icon %}" class="icon"> {{ extension.name }}
     </a></h4>
     <span class="version">(v{{ version.version }})</span>
 
