@@ -4,7 +4,7 @@
           {% csrf_token %}
           {{ login_popup_form.as_plain }}
             <div class="form-group">
-                <input type="hidden" name="next" id="id_username" class="form-control" value="{{ request.path }}"/>
+                <input type="hidden" name="next" class="form-control" value="{{ request.path }}"/>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Log in</button>
