@@ -2,8 +2,6 @@ FROM nginx:stable
 
 MAINTAINER Yuri Konotopov <ykonotopov@gnome.org>
 
-ENV EGO_NODE_ADDRESS=extensions-web
-
 COPY nginx.conf /tmp
 
 RUN set -ex \
