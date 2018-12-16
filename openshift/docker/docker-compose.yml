@@ -44,7 +44,7 @@ services:
     links:
       - extensions-web
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
       - "static:/extensions-web/www"
 
