@@ -196,6 +196,9 @@ LOGGING = {
 }
 
 DEFAULT_FROM_EMAIL = "noreply@gnome.org"
+if os.getenv('EGO_EMAIL_URL'):
+    import dj_email_url
+    vars().update(dj_email_url.parse(os.getenv('EGO_EMAIL_URL')))
 
 
 NO_SECURE_SETTINGS = False

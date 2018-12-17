@@ -44,6 +44,7 @@
       },
       "stringData": {
         "database-url": "${EGO_DATABASE_URL}",
+        "email-url": "${EGO_EMAIL_URL}",
         "secret-key": "${EGO_SECRET_KEY}"
       }
     },
@@ -403,6 +404,15 @@
                     }
                   },
                   {
+                    "name": "EGO_EMAIL_URL",
+                    "valueFrom": {
+                      "secretKeyRef" : {
+                        "name" : "${NAME}",
+                        "key" : "email-url"
+                      }
+                    }
+                  },
+                  {
                     "name": "EGO_SECRET_KEY",
                     "valueFrom": {
                       "secretKeyRef" : {
@@ -556,6 +566,15 @@
                         }
                       },
                       {
+                        "name": "EGO_EMAIL_URL",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "email-url"
+                          }
+                        }
+                      },
+                      {
                         "name": "EGO_SECRET_KEY",
                         "valueFrom": {
                           "secretKeyRef" : {
@@ -660,6 +679,15 @@
                           "secretKeyRef" : {
                             "name" : "${NAME}",
                             "key" : "database-url"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_EMAIL_URL",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "email-url"
                           }
                         }
                       },
@@ -805,6 +833,12 @@
       "name": "EGO_DATABASE_URL",
       "displayName": "Database URL",
       "description": "Database URL in format suitable for dj-database-url",
+      "value": ""
+    },
+    {
+      "name": "EGO_EMAIL_URL",
+      "displayName": "Email URL",
+      "description": "Email URL in format suitable for dj-email-url",
       "value": ""
     },
     {

@@ -6,3 +6,4 @@ Pygments >= 1.4
 pillow >= 2.0.0
 chardet >= 2.2.1
 dj-database-url
+dj-email-url
