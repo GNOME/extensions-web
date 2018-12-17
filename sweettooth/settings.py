@@ -163,15 +163,35 @@ COMMENTS_APP = 'sweettooth.ratings'
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
     'handlers': {
         'console': {
-            'filters': None
+            'level': 'DEBUG',
+            'filters': None,
+            'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
         'django': {
-            'level': os.getenv('EGO_LOG_LEVEL', 'WARN')
-        }
+            'handlers': ['console'],
+            'level': os.getenv('EGO_LOG_LEVEL', 'WARN'),
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
     }
 }
 
