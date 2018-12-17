@@ -174,6 +174,7 @@ LOGGING["loggers"] = {
 
 
 DEFAULT_FROM_EMAIL = "noreply@gnome.org"
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 if os.getenv('EGO_EMAIL_URL'):
     import dj_email_url
     vars().update(dj_email_url.parse(os.getenv('EGO_EMAIL_URL')))
