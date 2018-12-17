@@ -164,19 +164,34 @@ COMMENTS_APP = 'sweettooth.ratings'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
     'handlers': {
         'console': {
             'level': 'DEBUG',
             'filters': None,
             'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'mail_admins'],
+            'handlers': ['console'],
             'level': os.getenv('EGO_LOG_LEVEL', 'WARN'),
             'propagate': True,
-        }
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
     }
 }
 
