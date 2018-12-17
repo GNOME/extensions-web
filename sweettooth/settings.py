@@ -164,7 +164,7 @@ COMMENTS_APP = 'sweettooth.ratings'
 from django.utils.log import DEFAULT_LOGGING as LOGGING
 
 LOGGING["handlers"]["console"]["filters"] = None
-LOGGING["handlers"]["console"]["level"] = "Debug"
+LOGGING["handlers"]["console"]["level"] = "DEBUG"
 LOGGING["loggers"]["django"]["level"] = os.getenv('EGO_LOG_LEVEL', 'WARN')
 
 
