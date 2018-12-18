@@ -167,7 +167,7 @@ LOGGING["handlers"]["console"]["filters"] = None
 LOGGING["handlers"]["console"]["level"] = "DEBUG"
 LOGGING["loggers"] = {
     'django': {
-        'handlers': ['console'],
+        'handlers': ['console', 'mail_admins'],
         'level': os.getenv('EGO_LOG_LEVEL', 'WARN'),
     }
 }
