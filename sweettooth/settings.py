@@ -161,41 +161,20 @@ COMMENTS_APP = 'sweettooth.ratings'
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-         'require_debug_false': {
-             '()': 'django.utils.log.RequireDebugFalse'
-         }
-     },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'filters': None,
-            'class': 'logging.StreamHandler',
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('EGO_LOG_LEVEL', 'WARN'),
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
+from django.utils.log import DEFAULT_LOGGING as LOGGING
+
+LOGGING["handlers"]["console"]["filters"] = None
+LOGGING["handlers"]["console"]["level"] = "DEBUG"
+LOGGING["loggers"] = {
+    'django': {
+        'handlers': ['console', 'mail_admins'],
+        'level': os.getenv('EGO_LOG_LEVEL', 'WARN'),
     }
 }
 
+
 DEFAULT_FROM_EMAIL = "noreply@gnome.org"
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 if os.getenv('EGO_EMAIL_URL'):
     import dj_email_url
     vars().update(dj_email_url.parse(os.getenv('EGO_EMAIL_URL')))
