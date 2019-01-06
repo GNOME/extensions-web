@@ -7,6 +7,6 @@
 @font-face {
   font-family: 'Cantarell';
   font-weight: bold;
-  src: local('Cantarell'), local('Cantarell Bold'), local('Cantarell-Bold'),
+  src: local('Cantarell Bold'), local('Cantarell-Bold'),
   url(../fonts/Cantarell-Bold.otf);
 }
