@@ -42,6 +42,11 @@ venv
 *.tar.xz
 *.db
 
+# Eclipse
+.project
+.pydevproject
+.settings/
+
 # sweettooth-specific
 Demos
 uploaded-files
