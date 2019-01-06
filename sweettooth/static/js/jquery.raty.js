@@ -3,13 +3,12 @@
  *
  * The MIT License
  *
- * @author  : Washington Botelho
- * @doc     : http://wbotelhos.com/raty
- * @version : 2.7.1
+ * author:  Washington Botelho
+ * github:  wbotelhos/raty
+ * version: 2.8.0
  *
  */
 
-;
 (function($) {
   'use strict';
 
@@ -20,7 +19,7 @@
 
         methods.destroy.call(this.self);
 
-        this.opt = $.extend(true, {}, $.fn.raty.defaults, options);
+        this.opt = $.extend(true, {}, $.fn.raty.defaults, options, this.self.data());
 
         methods._adjustCallback.call(this);
         methods._adjustNumber.call(this);
@@ -235,8 +234,9 @@
     },
 
     _bindOver: function() {
-      var that   = this,
-          action = that.opt.half ? 'mousemove.raty' : 'mouseover.raty';
+      var
+        that   = this,
+        action = that.opt.half ? 'mousemove.raty' : 'mouseover.raty';
 
       that.stars.on(action, function(evt) {
         var score = methods._getScoreByPosition.call(that, evt, this);
@@ -288,8 +288,9 @@
     },
 
     _createCancel: function() {
-      var icon   = this.opt.path + this.opt.cancelOff,
-          cancel = $('<' + this.opt.starType + ' />', { title: this.opt.cancelHint, 'class': this.opt.cancelClass });
+      var
+        icon   = this.opt.path + this.opt.cancelOff,
+        cancel = $('<' + this.opt.starType + ' />', { title: this.opt.cancelHint, 'class': this.opt.cancelClass });
 
       if (this.opt.starType === 'img') {
         cancel.attr({ src: icon, alt: 'x' });
@@ -461,15 +462,16 @@
       return this.opt.score && this.opt.score >= i ? 'starOn' : 'starOff';
     },
 
-    _resetTitle: function(star) {
+    _resetTitle: function() {
       for (var i = 0; i < this.opt.number; i++) {
         this.stars[i].title = methods._getHint.call(this, i + 1);
       }
     },
 
-     _roundHalfScore: function(score) {
-      var integer = parseInt(score, 10),
-          decimal = methods._getFirstDecimal.call(this, score);
+    _roundHalfScore: function(score) {
+      var
+        integer = parseInt(score, 10),
+        decimal = methods._getFirstDecimal.call(this, score);
 
       if (decimal !== 0) {
         decimal = decimal > 5 ? 1 : 0.5;
@@ -481,16 +483,16 @@
     _roundStars: function(score, evt) {
       var
         decimal = (score % 1).toFixed(2),
-        name    ;
+        name ;
 
       if (evt || this.move) {
         name = decimal > 0.5 ? 'starOn' : 'starHalf';
-      } else if (decimal > this.opt.round.down) {               // Up:   [x.76 .. x.99]
+      } else if (decimal > this.opt.round.down) { // Up: [x.76 .. x.99]
         name = 'starOn';
 
         if (this.opt.halfShow && decimal < this.opt.round.up) { // Half: [x.26 .. x.75]
           name = 'starHalf';
-        } else if (decimal < this.opt.round.full) {             // Down: [x.00 .. x.5]
+        } else if (decimal < this.opt.round.full) { // Down: [x.00 .. x.5]
           name = 'starOff';
         }
       }
@@ -501,7 +503,7 @@
           star = this.stars[Math.ceil(score) - 1];
 
         methods._setIcon.call(this, star, icon);
-      }                                                         // Full down: [x.00 .. x.25]
+      } // Full down: [x.00 .. x.25]
     },
 
     _setIcon: function(star, icon) {
@@ -613,8 +615,9 @@
 
     destroy: function() {
       return this.each(function() {
-        var self = $(this),
-            raw  = self.data('raw');
+        var
+          self = $(this),
+          raw  = self.data('raw');
 
         if (raw) {
           self.off('.raty').empty().css({ cursor: raw.style.cursor }).removeData('readonly');
@@ -625,8 +628,9 @@
     },
 
     getScore: function() {
-      var score = [],
-          value ;
+      var
+        score = [],
+        value ;
 
       this.each(function() {
         value = this.score.val();
@@ -721,40 +725,39 @@
   };
 
   $.fn.raty.defaults = {
-    cancel       : false,
-    cancelClass  : 'raty-cancel',
-    cancelHint   : 'Cancel this rating!',
-    cancelOff    : 'cancel-off.png',
-    cancelOn     : 'cancel-on.png',
-    cancelPlace  : 'left',
-    click        : undefined,
-    half         : false,
-    halfShow     : true,
-    hints        : ['bad', 'poor', 'regular', 'good', 'gorgeous'],
-    iconRange    : undefined,
-    mouseout     : undefined,
-    mouseover    : undefined,
-    noRatedMsg   : 'Not rated yet!',
-    number       : 5,
-    numberMax    : 20,
-    path         : undefined,
-    precision    : false,
-    readOnly     : false,
-    round        : { down: 0.25, full: 0.6, up: 0.76 },
-    score        : undefined,
-    scoreName    : 'score',
-    single       : false,
-    space        : true,
-    starHalf     : 'star-half.png',
-    starOff      : 'star-off.png',
-    starOn       : 'star-on.png',
-    starType     : 'img',
-    target       : undefined,
-    targetFormat : '{score}',
-    targetKeep   : false,
-    targetScore  : undefined,
-    targetText   : '',
-    targetType   : 'hint'
+    cancel:       false,
+    cancelClass:  'raty-cancel',
+    cancelHint:   'Cancel this rating!',
+    cancelOff:    'cancel-off.png',
+    cancelOn:     'cancel-on.png',
+    cancelPlace:  'left',
+    click:        undefined,
+    half:         false,
+    halfShow:     true,
+    hints:        ['bad', 'poor', 'regular', 'good', 'gorgeous'],
+    iconRange:    undefined,
+    mouseout:     undefined,
+    mouseover:    undefined,
+    noRatedMsg:   'Not rated yet!',
+    number:       5,
+    numberMax:    20,
+    path:         undefined,
+    precision:    false,
+    readOnly:     false,
+    round:        { down: 0.25, full: 0.6, up: 0.76 },
+    score:        undefined,
+    scoreName:    'score',
+    single:       false,
+    space:        true,
+    starHalf:     'star-half.png',
+    starOff:      'star-off.png',
+    starOn:       'star-on.png',
+    starType:     'img',
+    target:       undefined,
+    targetFormat: '{score}',
+    targetKeep:   false,
+    targetScore:  undefined,
+    targetText:   '',
+    targetType:   'hint'
   };
-
 })(jQuery);

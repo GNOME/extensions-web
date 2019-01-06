@@ -1,16 +1,15 @@
 // -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
 
 define(['jquery', 'messages', 'modal', 'hashParamUtils',
-        'templates', 'staticfiles', 'extensions', 'uploader', 'fsui',
-        'jquery.cookie', 'jquery.jeditable',
-        'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
-function($, messages, modal, hashParamUtils, templates, staticfiles) {
+        'templates', 'staticfiles', 'js.cookie', 'extensions', 'uploader', 'fsui',
+        'jquery.jeditable', 'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
+function($, messages, modal, hashParamUtils, templates, staticfiles, cookie) {
     "use strict";
 
     if (!$.ajaxSettings.headers)
         $.ajaxSettings.headers = {};
 
-    $.ajaxSettings.headers['X-CSRFToken'] = $.cookie('csrftoken');
+    $.ajaxSettings.headers['X-CSRFToken'] = cookie.get('csrftoken');
 
     $.fn.csrfEditable = function(url, options) {
         return $(this).each(function() {
@@ -66,9 +65,7 @@ function($, messages, modal, hashParamUtils, templates, staticfiles) {
         $('.extension.single-page').addDownloadOptions();
 
         $.extend($.fn.raty.defaults, {
-            path: '/static/images/',
-            starOff: 'star-empty.png',
-            starOn: 'star-full.png',
+            starType: 'i',
             size: 25
         });
 
