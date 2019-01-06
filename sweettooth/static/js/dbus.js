@@ -19,6 +19,7 @@
 define(['jquery'], function ($) {
 	"use strict";
 
+	const SUPPORTED_APIS = [5];
 	var exports = {};
 
 	var load = exports.load = function (name, req, onLoad, config) {
@@ -40,7 +41,7 @@ define(['jquery'], function ($) {
 			}
 			catch (e) { }
 
-			if (!apiVersion)
+			if (!apiVersion || SUPPORTED_APIS.indexOf(apiVersion) === -1)
 			{
 				apiVersion = 'dummy';
 			}
