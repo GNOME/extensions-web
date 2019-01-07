@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+._gnome-switch.disabled {
+    opacity: 0.3;
+}
+
 ._gnome-switch.outdated,
 ._gnome-switch.incompatible {
     width: auto;

@@ -35,6 +35,11 @@ define(['jquery'], function ($) {
 				}
 
 				function mouseup(e) {
+					if($(this).hasClass('disabled'))
+					{
+						return false;
+					}
+
 					$slider.addClass('not-dragging');
 					$(document).off('mousemove.slider').off('mouseup.slider');
 					var s = getSides($elem, $slider);
@@ -47,6 +52,11 @@ define(['jquery'], function ($) {
 				}
 
 				function mousemove(e) {
+					if($(this).hasClass('disabled'))
+					{
+						return false;
+					}
+
 					var s = getSides($elem, $slider);
 					var x = e.pageX - data.initialPageX + data.initialLeft;
 					if (x < s.left)
@@ -95,7 +105,12 @@ define(['jquery'], function ($) {
 				}
 				methods.activate.call($elem, activated);
 
-				$slider.on('mousedown', function (e) {
+				$slider.on('mousedown', (e) => {
+					if($elem.hasClass('disabled'))
+					{
+						return false;
+					}
+
 					data.initialActivated = data.activated;
 					data.initialPageX = e.pageX;
 					var left = $slider.position().left;
@@ -110,6 +125,11 @@ define(['jquery'], function ($) {
 				});
 
 				$elem.on('click', function (e) {
+					if($(this).hasClass('disabled'))
+					{
+						return false;
+					}
+
 					var doToggle;
 					var isActivated = !!data.activated;
 
@@ -193,17 +213,31 @@ define(['jquery'], function ($) {
 					$elem.prop('title', title);
 				}
 			});
+		},
+
+		disable: function() {
+			return this.addClass('disabled');
+		},
+
+		enable: function() {
+			return this.removeClass('disabled');
 		}
 	};
 
 	$.fn.switchify = function (method) {
+		if(!method || typeof method === 'object')
+		{
+			return methods.init.apply(this, arguments);
+		}
+
+		if(!$(this).data('switch'))
+		{
+			methods.init.apply(this);
+		}
+
 		if (methods[method])
 		{
 			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-		}
-		else if (typeof method === 'object' || !method)
-		{
-			return methods.init.apply(this, arguments);
 		}
 		else
 		{
