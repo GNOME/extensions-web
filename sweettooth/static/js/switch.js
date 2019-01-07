@@ -81,6 +81,7 @@ define(['jquery'], function ($) {
 
 					// Disable selection.
 					.css({
+						'user-select': 'none',
 						'-moz-user-select': 'none'
 					})
 					.attr('unselectable', 'on')
