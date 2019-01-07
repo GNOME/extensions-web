@@ -1,7 +1,6 @@
 /*
     GNOME Shell extensions repository
-    Copyright (C) 2012  Jasper St. Pierre <jstpierre@mecheye.net>
-    Copyright (C) 2017-2019  Yuri Konotopov <ykonotopov@gnome.org>
+    Copyright (C) 2019  Yuri Konotopov <ykonotopov@gnome.org>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -26,18 +25,21 @@ define(['jquery', 'dbus!API', 'versions/common/common'], function($, API, common
 
         GetUserExtensionsDisabled: common.GetUserExtensionsDisabled,
         GetVersionValidationDisabled: common.GetVersionValidationDisabled,
-        SetUserExtensionsDisabled: common.Reject,
-        SetVersionValidationDisabled: common.Reject,
+        SetUserExtensionsDisabled: common.SetUserExtensionsDisabled,
+        SetVersionValidationDisabled: common.SetVersionValidationDisabled,
 
         ShellVersion: API.shellVersion,
         VersionValidationEnabled: typeof(API.versionValidationEnabled) == 'undefined' || API.versionValidationEnabled,
+        UserExtensionsDisabled: API.userExtensionsDisabled,
 
         extensionStateChangedHandler: null,
-        shellRestartHandler: null
+        shellRestartHandler: null,
+        shellSettingChangedHandler: null
     };
 
     API.onchange = common.API_onchange(proxy);
     API.onshellrestart = common.API_onshellrestart(proxy);
+    API.onShellSettingChanged = common.API_onShellSettingChanged(proxy);
 
     return proxy;
 });
