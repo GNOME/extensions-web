@@ -375,6 +375,8 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 					$elem.addClass('out-of-date');
 					$switch.switchify('customize', "OUTDATED", 'outdated');
 				}
+
+				$switch.switchify(dbusProxy.GetUserExtensionsDisabled() ? 'disable' : 'enable');
 			});
 
 			$elem.on('type-changed', function (e, newType) {

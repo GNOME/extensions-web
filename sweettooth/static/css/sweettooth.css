@@ -224,12 +224,14 @@ li.extension {
     margin-left: 0px;
 }
 
-li.extension, #local_extensions div.extension {
+li.extension, #local_extensions div.extension, #shell_settings div.setting {
     border-bottom: 1px solid #ccc;
     border-bottom-color: rgba(0, 0, 0, 0.2);
 }
 
-li.extension:last-child, #local_extensions div.extension:last-child {
+li.extension:last-child,
+#local_extensions div.extension:last-child,
+#shell_settings div.setting:last-child {
     border-bottom: 0;
 }
 
@@ -247,12 +249,12 @@ li.extension:last-child, #local_extensions div.extension:last-child {
     opacity: 1.0;
 }
 
-.extension .extension-name a {
+.extension .extension-name a, .setting .setting-name a {
     color: #000;
     text-decoration: none;
 }
 
-.extension .extension-name {
+.extension .extension-name, .setting .setting-name {
     display: inline-block;
     line-height: 32px;
     margin: 0;
@@ -306,7 +308,7 @@ li.extension:last-child, #local_extensions div.extension:last-child {
 
 /* Upgrade, Configure, Uninstall buttons */
 
-.extension .controls {
+.extension .controls, .setting .controls {
     float: right;
     width: 180px;
 }
@@ -841,4 +843,18 @@ textarea:focus {
 
 .expandy_header.expanded:before {
     transform: rotate(90deg);
+}
+
+/* Settings */
+/* ==================================================================== */
+
+.setting .description {
+    margin: 0.5em 32px 0.5em 0em;
+    font-size: 1.2em;
+    overflow: auto;
+    white-space: pre-line;
+}
+
+#shell_settings .form-horizontal .form-group label {
+	text-align: left;
 }

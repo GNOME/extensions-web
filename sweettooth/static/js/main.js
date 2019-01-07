@@ -1,7 +1,16 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2011-2013  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2016-2019  Yuri Konotopov <ykonotopov@gnome.org>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
 define(['jquery', 'messages', 'modal', 'hashParamUtils',
-        'templates', 'staticfiles', 'js.cookie', 'extensions', 'uploader', 'fsui',
+        'templates', 'staticfiles', 'js.cookie', 'extensions', 'uploader', 'fsui', 'settings',
         'jquery.jeditable', 'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
 function($, messages, modal, hashParamUtils, templates, staticfiles, cookie) {
     "use strict";
@@ -60,6 +69,7 @@ function($, messages, modal, hashParamUtils, templates, staticfiles, cookie) {
             $(this).csrfEditable('/accounts/change_display_name/' + pk);
         });
 
+        $('#shell_settings').addShellSettings();
         $('#local_extensions').addLocalExtensions();
         $('.extension.single-page').addExtensionSwitch();
         $('.extension.single-page').addDownloadOptions();
