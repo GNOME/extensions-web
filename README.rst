@@ -16,6 +16,7 @@ must go through code review and testing.
 
 Getting Started
 ---------------
+Make sure that you have xapian (xapian-core and xapian-bindings) installed in your system.
 
 You can get started developing the website with::
 
@@ -29,22 +30,37 @@ its Python bindings in PyPI.
 
   $ . ./venv/bin/activate
   $ pip install -r ../requirements.txt
-  $ python manage.py syncdb
 
-You should be asked to create superuser account. Provide some login and password.
+This will get all the needed PyPi packages in our virtual environment.
+
+Create file "local_settings.py" (inside the sweettooth folder) with line and add the following settings:
 ::
+    SECRET_KEY='super-random-secret-passphrase'
+    ALLOWED_HOSTS = ['*']
+    DEBUG = True
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test.db'
+      }
+    }
 
+And create an empty test.db file in the project folder (same level as the manage.py).
+Once you've done that, proceed with the database migrations:
+::
+  $ python mange.py createsuperuser --username=joe --email=joe@email.com
+  $ python manage.py makemigrations
   $ python manage.py migrate
 
 After above steps your database should be initialized and almost ready to run.
-You should manualy specify your site's domain with SQL update::
+You should manually specify your site's domain with SQL update (this is an optional step)::
 
   UPDATE `django_site`
   SET `domain` = 'your.domain.name',
       `name` = 'your.domain.name'
   WHERE `django_site`.`id` = 1;
 
-Create file "local_settings.py" with line "Debug = True". Then start your website:
+And to start the webserver:
 ::
 
   $ python manage.py runserver
