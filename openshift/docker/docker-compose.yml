@@ -39,6 +39,7 @@ services:
     build:
       context: nginx
       dockerfile: Dockerfile
+    command: bash -c "envsubst '$$EGO_NODE_ADDRESS' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     environment:
       EGO_NODE_ADDRESS: extensions-web
     restart: always
