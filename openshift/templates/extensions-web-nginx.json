@@ -267,13 +267,7 @@
             "from": {
               "kind": "ImageStreamTag",
               "name": "nginx:stable"
-            },
-            "env": [
-              {
-                "name": "EGO_NODE_ADDRESS",
-                "value": "${EGO_NODE_ADDRESS}"
-              }
-            ]
+            }
           }
         },
         "output": {
@@ -497,6 +491,19 @@
               {
                 "name": "frontend",
                 "image": "${DEFAULT_DOCKER_REGISTRY}/${NAME}/frontend:latest",
+                "command": [
+                    "bash"
+                ],
+                "args": [
+                    "-c",
+                    "envsubst '$EGO_NODE_ADDRESS' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+                ],
+                "env": [
+                  {
+                    "name": "EGO_NODE_ADDRESS",
+                    "value": "${EGO_NODE_ADDRESS}"
+                  }
+                ],
                 "ports": [
                   {
                     "containerPort": 8080
