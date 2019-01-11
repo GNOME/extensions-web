@@ -470,7 +470,7 @@ class UpdateVersionTest(TestCase):
         response = self.client.get(reverse('extensions-shell-update'),
                                    dict(installed=json.dumps(installed), shell_version='3.2.0'))
 
-        return json.loads(response.content.decode('utf-8'))
+        return json.loads(response.content.decode(response.charset))
 
     def test_upgrade_me(self):
         uuid = self.upgrade_uuid
@@ -537,7 +537,7 @@ class UpdateVersionTest(TestCase):
 class QueryExtensionsTest(BasicUserTestCase, TestCase):
     def get_response(self, params):
         response = self.client.get(reverse('extensions-query'), params)
-        return json.loads(response.content.decode('utf-8'))
+        return json.loads(response.content.decode(response.charset))
 
     def gather_uuids(self, params):
         if 'sort' not in params:
