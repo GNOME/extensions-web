@@ -1,4 +1,4 @@
-FROM python:2
+FROM python:3.6-stretch
 
 MAINTAINER Yuri Konotopov <ykonotopov@gnome.org>
 
@@ -43,7 +43,7 @@ RUN set -ex \
 	&& rm -r /usr/src/xapian-core \
 	&& cd /usr/src/xapian-bindings \
 	&& ./configure \
-		--with-python \
+		--with-python3 \
 	&& make -j "$(nproc)" \
 	&& make install \
 	&& find /usr/local -depth \
