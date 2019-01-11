@@ -5,7 +5,7 @@ from django.forms import fields, widgets
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django_comments.forms import CommentForm
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from sweettooth.ratings.models import RatingComment
@@ -32,7 +32,7 @@ class RatingCommentForm(CommentForm):
     def get_comment_create_data(self):
         return dict(
             content_type = ContentType.objects.get_for_model(self.target_object),
-            object_pk    = force_unicode(self.target_object._get_pk_val()),
+            object_pk    = force_text(self.target_object._get_pk_val()),
             comment      = self.cleaned_data["comment"],
             rating       = self.cleaned_data["rating"],
             submit_date  = datetime.datetime.now(),
