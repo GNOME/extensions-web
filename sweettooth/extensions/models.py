@@ -265,7 +265,7 @@ def parse_zipfile_metadata(uploaded_file):
         raise InvalidExtensionData("Zip file is too large")
 
     try:
-        metadata = json.loads(zipfile.open('metadata.json', 'r'))
+        metadata = json.load(zipfile.open('metadata.json', 'r'))
     except KeyError:
         # no metadata.json in archive, raise error
         raise InvalidExtensionData("Missing metadata.json")
