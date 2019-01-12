@@ -1,0 +1,400 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-12 14:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: sweettooth/auth/forms.py:39
+msgid "Username"
+msgstr ""
+
+#: sweettooth/auth/forms.py:40
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+
+#: sweettooth/auth/forms.py:41
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr ""
+
+#: sweettooth/auth/forms.py:43
+msgid "Email"
+msgstr ""
+
+#: sweettooth/auth/forms.py:44
+msgid "Password"
+msgstr ""
+
+#: sweettooth/auth/forms.py:45
+msgid "Password confirmation"
+msgstr ""
+
+#: sweettooth/auth/forms.py:46
+msgid "Enter the same password as above, for verification."
+msgstr ""
+
+#: sweettooth/auth/templates/registration/login.html:6
+msgid "User Login"
+msgstr ""
+
+#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/registration/login_popup_form.html:14
+msgid "Forgot your password?"
+msgstr ""
+
+#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login_popup_form.html:11
+#: sweettooth/templates/base.html:72
+msgid "Log in"
+msgstr ""
+
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:17
+msgid "Don't have an account?"
+msgstr ""
+
+#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+msgid "Register"
+msgstr ""
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
+#: sweettooth/auth/templates/registration/password_reset_form.html:7
+msgid "Password reset"
+msgstr ""
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:12
+#: sweettooth/auth/templates/registration/password_reset_form.html:12
+msgid "Reset your password"
+msgstr ""
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:15
+msgid ""
+"The token for the password reset is incorrect. Please check your link and "
+"try again."
+msgstr ""
+
+#: sweettooth/auth/templates/registration/password_reset_form.html:8
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we’ll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: sweettooth/context_processors.py:9
+msgid "Extensions"
+msgstr ""
+
+#: sweettooth/context_processors.py:13
+msgid "Add yours"
+msgstr ""
+
+#: sweettooth/context_processors.py:17
+msgid "Installed extensions"
+msgstr ""
+
+#: sweettooth/context_processors.py:21
+msgid "About"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:3
+msgid "What's this?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:5
+msgid "What is GNOME Shell?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:7
+msgid ""
+"GNOME Shell provides core user interface functions for GNOME, like switching "
+"to windows and launching applications. User interface elements provided by "
+"GNOME Shell include the Panel at the top of the screen, the Activities "
+"Overview, and Message Tray at the bottom of the screen."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:15
+msgid "What are GNOME Shell Extensions?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:17
+msgid ""
+"GNOME Shell extensions are small pieces of code written by third party "
+"developers that modify the way GNOME works. (If you are familiar with Chrome "
+"Extensions or Firefox Addons, GNOME Shell extensions are similar to them.) "
+"You can find and install GNOME Shell extensions using this website."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:26
+msgid ""
+"Since extensions are created outside of the normal GNOME design and "
+"development process, they are supported by their authors, rather than by the "
+"GNOME community. Some features first implemented as extensions might find "
+"their way into future versions of GNOME."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:33
+msgid "What can GNOME Shell Extensions do?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:35
+msgid ""
+"Extensions may make small changes, like moving your clock to the right-hand "
+"side of the screen, or make big changes, like arranging the windows in the "
+"Activities Overview in a different way."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:41
+msgid "Are GNOME Shell Extensions safe?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:43
+msgid ""
+"The code in a GNOME Shell extension becomes part of the core operating "
+"system. For this reason, the potential exists for an extension to cause "
+"system misbehavior, crashes, or even to have malicious behavior like spying "
+"on the user or displaying unwanted advertisements. All extensions uploaded "
+"to this site are carefully reviewed for malicious behavior before they are "
+"made available for download. This process of code review is similar to the "
+"process for Firefox add-ons submitted to <a href=\"http://addons.mozilla.org"
+"\"> addons.mozilla.org</a>."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:56
+msgid ""
+"If you encounter problems with an extension, such as a crash, make sure to "
+"report the problem using the Bug Report link on the extension's page."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:62
+msgid "I don't think I have GNOME Shell. What can I do to get it?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:64
+msgid ""
+"The easiest way to get GNOME Shell is to install a Linux distribution that "
+"provides GNOME 3. See the <a href=\"http://www.gnome.org/getting-gnome/"
+"\">Getting GNOME</a> page on the main GNOME site to learn how to grab a "
+"Linux distribution with GNOME 3."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:72
+msgid "I'm using GNOME 3. Why can't I install extensions?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:74
+msgid ""
+"If you are using GNOME 3.4 or newer and installation still doesn't work, "
+"check to make sure that the \"GNOME Shell Integration\" plugin is installed "
+"and enabled in your browser preferences. Some browsers have a feature, click-"
+"to-play, which make it so the plugin cannot start without user intervention. "
+"Make sure that either <code>http://extensions.gnome.org</code> is "
+"whitelisted for the click-to-play feature, or click-to-play is turned off "
+"entirely. Check your browser's help for more details."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:85
+msgid ""
+"If you are behind a proxy, make sure you have configured your proxy in both "
+"your browser's configuration dialog as well as GNOME's Network panel under "
+"System Settings. GNOME Shell Extensions needs both settings panels "
+"configured for the one-click installation to work."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:93
+msgid ""
+"Some distributions don't quite package GNOME correctly. Make sure that you "
+"have the <code>unzip</code> package installed."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:99
+msgid ""
+"If you have checked all of these solutions and are still having trouble "
+"installing extensions, please file a bug report using the link in the footer "
+"of the page, giving your GNOME version, distribution and version, what "
+"solutions you have already tried, as well as what the Looking Glass says in "
+"both the Extensions and Errors tabs. It's also helpful to have a copy of the "
+"<code>~/.xsession-errors</code> file from the session that you installed "
+"extensions from."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:109
+msgid "How do I update my extensions?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:111
+msgid ""
+"To update your extension to the latest version, go to the extension's page, "
+"or the \"Installed Extensions\" page, and click the green update arrow. If "
+"there is no arrow, your extensions should be fully up to date."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:118
+msgid "What is «System extension»? How to uninstall it?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/about.html:120
+msgid ""
+"System extension is installed to system-wide location (usually «/usr/share/"
+"gnome-shell/extensions»). Such extension may be used by any PC user, however "
+"it can be uninstalled only by system administrator (root). To uninstall "
+"system extension use your distro's package manager or ask your system "
+"administrator."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:3
+msgid "Your opinion"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:6
+msgid "Leave a…"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:7
+msgid "Comment"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:8
+msgid "Rating"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:9
+msgid "Bug report"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:18
+#, python-format
+msgid ""
+"Unfortunately, to help prevent spam, we require that you <a href="
+"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
+"comment or report an error. You understand, right?"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:23
+msgid "User Reviews"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/comments.html:25
+msgid "Loading reviews…"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
+msgid "Upgrade this extension"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:26
+msgid "Configure this extension"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:27
+msgid "Uninstall this extension"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:53
+msgid "Extension Homepage"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:58
+msgid "Download"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+msgid "Shell version…"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:65
+msgid "Extension version…"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:74
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/list.html:13
+msgid "Search for extensions…"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/local.html:3
+#: sweettooth/extensions/templates/extensions/local.html:8
+msgid "Installed Extensions"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/local.html:5
+msgid "Shell settings"
+msgstr ""
+
+#: sweettooth/ratings/admin.py:13
+msgid "Content"
+msgstr ""
+
+#: sweettooth/ratings/admin.py:16
+msgid "Metadata"
+msgstr ""
+
+#: sweettooth/ratings/templates/comments/form.html:8
+#: sweettooth/ratings/templates/comments/preview.html:27
+msgid "What do you think about this GNOME extension?"
+msgstr ""
+
+#: sweettooth/ratings/templates/comments/form.html:26
+#: sweettooth/ratings/templates/comments/preview.html:45
+msgid "Post"
+msgstr ""
+
+#: sweettooth/ratings/templates/comments/form.html:27
+#: sweettooth/ratings/templates/comments/preview.html:46
+msgid "Preview"
+msgstr ""
+
+#: sweettooth/ratings/templates/comments/preview.html:4
+#: sweettooth/ratings/templates/comments/preview.html:15
+msgid "Preview your comment"
+msgstr ""
+
+#: sweettooth/ratings/templates/comments/preview.html:13
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] ""
+msgstr[1] ""
+
+#: sweettooth/ratings/templates/comments/preview.html:18
+msgid "Post Comment"
+msgstr ""
+
+#: sweettooth/ratings/templates/comments/preview.html:21
+msgid "Edit your comment"
+msgstr ""
+
+#: sweettooth/templates/base.html:16
+msgid "Latest extensions in GNOME Shell Extensions"
+msgstr ""
+
+#: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
+msgid "GNOME Shell Extensions"
+msgstr ""
+
+#: sweettooth/templates/usermenu.html:5
+msgid "User Profile"
+msgstr ""
+
+#: sweettooth/templates/usermenu.html:6
+msgid "User Settings"
+msgstr ""
+
+#: sweettooth/templates/usermenu.html:7
+msgid "Log out"
+msgstr ""

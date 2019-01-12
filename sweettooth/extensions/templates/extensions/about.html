@@ -1,36 +1,46 @@
 {% extends "base.html" %}
-{% block title %}What's this? - {{ block.super }}{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "What's this?" %} - {{ block.super }}{% endblock %}
 {% block body %}
-<h2> What is GNOME Shell? </h2>
+<h2>{% trans "What is GNOME Shell?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 GNOME Shell provides core user interface functions for GNOME,
 like switching to windows and launching applications. User
 interface elements provided by GNOME Shell include the Panel
 at the top of the screen, the Activities Overview, and Message Tray
 at the bottom of the screen.
+{% endblocktrans %}
 </p>
-<h2> What are GNOME Shell Extensions? </h2>
+<h2>{% trans "What are GNOME Shell Extensions?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 GNOME Shell extensions are small pieces of code written by third party
 developers that modify the way GNOME works. (If you are familiar
 with Chrome Extensions or Firefox Addons, GNOME Shell extensions
 are similar to them.) You can find and install GNOME Shell
 extensions using this website.
+{% endblocktrans %}
 </p>
 <p>
+{% blocktrans trimmed %}
 Since extensions are created outside of the normal GNOME design and
 development process, they are supported by their authors, rather
 than by the GNOME community. Some features first implemented as
 extensions might find their way into future versions of GNOME.
+{% endblocktrans %}
 </p>
-<h2> What can GNOME Shell Extensions do? </h2>
+<h2>{% trans "What can GNOME Shell Extensions do?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 Extensions may make small changes, like moving your clock
 to the right-hand side of the screen, or make big changes, like
 arranging the windows in the Activities Overview in a different way.
+{% endblocktrans %}
 </p>
-<h2> Are GNOME Shell Extensions safe? </h2>
+<h2>{% trans "Are GNOME Shell Extensions safe?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 The code in a GNOME Shell extension becomes part of the core operating
 system. For this reason, the potential exists for an extension to
 cause system misbehavior, crashes, or even to have malicious
@@ -40,22 +50,28 @@ reviewed for malicious behavior before they are made available for
 download. This process of code review is similar to the process for
 Firefox add-ons submitted to <a href="http://addons.mozilla.org">
 addons.mozilla.org</a>.
+{% endblocktrans %}
 </p>
 <p>
+{% blocktrans trimmed %}
 If you encounter problems with an extension, such as a crash, make
 sure to report the problem using the Bug Report link on the extension's
 page.
+{% endblocktrans %}
 </p>
-<h2> I don't think I have GNOME Shell. What can I do to get it? </h2>
+<h2>{% trans "I don't think I have GNOME Shell. What can I do to get it?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 The easiest way to get GNOME Shell is to install a Linux distribution
 that provides GNOME 3. See the
 <a href="http://www.gnome.org/getting-gnome/">Getting GNOME</a> page on
 the main GNOME site to learn how to grab a Linux distribution with
 GNOME 3.
+{% endblocktrans %}
 </p>
-<h2 id="no-detection"> I'm using GNOME 3. Why can't I install extensions? </h2>
+<h2 id="no-detection">{% trans "I'm using GNOME 3. Why can't I install extensions?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 If you are using GNOME 3.4 or newer and installation still doesn't work,
 check to make sure that the "GNOME Shell Integration" plugin is installed
 and enabled in your browser preferences. Some browsers have a feature,
@@ -63,18 +79,24 @@ click-to-play, which make it so the plugin cannot start without user
 intervention. Make sure that either <code>http://extensions.gnome.org</code>
 is whitelisted for the click-to-play feature, or click-to-play is turned
 off entirely. Check your browser's help for more details.
+{% endblocktrans %}
 </p>
 <p>
+{% blocktrans trimmed %}
 If you are behind a proxy, make sure you have configured your proxy in
 both your browser's configuration dialog as well as GNOME's Network panel
 under System Settings. GNOME Shell Extensions needs both settings panels
 configured for the one-click installation to work.
+{% endblocktrans %}
 </p>
 <p>
+{% blocktrans trimmed %}
 Some distributions don't quite package GNOME correctly. Make sure that you
 have the <code>unzip</code> package installed.
+{% endblocktrans %}
 </p>
 <p>
+{% blocktrans trimmed %}
 If you have checked all of these solutions and are still having trouble
 installing extensions, please file a bug report using the link in the footer
 of the page, giving your GNOME version, distribution and version, what
@@ -82,19 +104,24 @@ solutions you have already tried, as well as what the Looking Glass says
 in both the Extensions and Errors tabs. It's also helpful to have a copy of
 the <code>~/.xsession-errors</code> file from the session that you installed
 extensions from.
+{% endblocktrans %}
 </p>
-<h2> How do I update my extensions? </h2>
+<h2>{% trans "How do I update my extensions?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 To update your extension to the latest version, go to the extension's page,
 or the "Installed Extensions" page, and click the green update arrow. If
 there is no arrow, your extensions should be fully up to date.
+{% endblocktrans %}
 </p>
 
-<h2> What is «System extension»? How to uninstall it? </h2>
+<h2>{% trans "What is «System extension»? How to uninstall it?" %}</h2>
 <p>
+{% blocktrans trimmed %}
 System extension is installed to system-wide location (usually «/usr/share/gnome-shell/extensions»).
 Such extension may be used by any PC user, however it can be uninstalled only by system administrator (root).
 To uninstall system extension use your distro's package manager or ask your system administrator.
+{% endblocktrans %}
 </p>
 
 {% endblock %}

@@ -1,21 +1,24 @@
+from django.utils.translation import gettext as _
+
+
 def navigation(request):
     return {
         'global_menu': [
             {
                 'id': 'extensions-index',
-                'name': 'Extensions'
+                'name': _('Extensions')
             },
             {
                 'id': 'extensions-upload-file',
-                'name': 'Add yours'
+                'name': _('Add yours')
             },
             {
                 'id': 'extensions-local',
-                'name': 'Installed extensions'
+                'name': _('Installed extensions')
             },
             {
                 'id': 'extensions-about',
-                'name': 'About'
+                'name': _('About')
             }
         ]
     }
