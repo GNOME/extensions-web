@@ -20,7 +20,7 @@ def report_error(request, extension):
     if request.method == 'POST':
         form = ErrorReportForm(data=request.POST)
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return HttpResponseForbidden()
 
         if form.is_valid():
