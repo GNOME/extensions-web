@@ -58,6 +58,7 @@ INSTALLED_APPS = (
 MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -108,6 +109,8 @@ DATABASES = {
 # https://docs.djangoproject.com/en/stable/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'sweettooth', 'locale')]
 
 TIME_ZONE = 'UTC'
 
