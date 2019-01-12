@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('popularity', models.IntegerField(default=0)),
                 ('screenshot', models.ImageField(upload_to=sweettooth.extensions.models.make_screenshot_filename, blank=True)),
                 ('icon', models.ImageField(default=b'/static/images/plugin.png', upload_to=sweettooth.extensions.models.make_icon_filename, blank=True)),
-                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('creator', models.ForeignKey(on_delete=models.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'permissions': (('can-modify-data', 'Can modify extension data'),),
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('offset', models.IntegerField()),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('extension', models.ForeignKey(related_name='popularity_items', to='extensions.Extension')),
+                ('extension', models.ForeignKey(on_delete=models.CASCADE, related_name='popularity_items', to='extensions.Extension')),
             ],
             options={
             },
@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
                 ('extra_json_fields', models.TextField()),
                 ('status', models.PositiveIntegerField(choices=[(0, 'Unreviewed'), (1, 'Rejected'), (2, 'Inactive'), (3, 'Active'), (4, 'Waiting for author')])),
                 ('source', models.FileField(max_length=223, upload_to=sweettooth.extensions.models.make_filename)),
-                ('extension', models.ForeignKey(related_name='versions', to='extensions.Extension')),
+                ('extension', models.ForeignKey(on_delete=models.CASCADE, related_name='versions', to='extensions.Extension')),
             ],
             options={
                 'get_latest_by': 'version',

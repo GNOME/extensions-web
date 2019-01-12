@@ -18,8 +18,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('comment', models.TextField(blank=True)),
-                ('extension', models.ForeignKey(to='extensions.Extension', null=True)),
-                ('user', models.ForeignKey(related_name='+', to=settings.AUTH_USER_MODEL)),
+                ('extension', models.ForeignKey(on_delete=models.CASCADE, to='extensions.Extension', null=True)),
+                ('user', models.ForeignKey(on_delete=models.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
