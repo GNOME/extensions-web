@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from sweettooth.auth import views, forms
-from registration.backends.default.views import RegistrationView
+from registration.backends.model_activation.views import RegistrationView
 
 urlpatterns = [
     url(r'^login/', auth_views.login,
@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'settings/(?P<user>.+)', TemplateView.as_view(template_name='registration/settings.html'),
         name='auth-settings'),
 
-    url(r'', include('registration.backends.default.urls')),
+    url(r'', include('registration.backends.model_activation.urls')),
     url(r'^profile/(?P<user>.+)', views.profile, name='auth-profile'),
     url(r'^profile/', views.profile_redirect, name='auth-profile'),
 ]
