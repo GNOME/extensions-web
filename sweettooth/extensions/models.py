@@ -92,7 +92,7 @@ class Extension(models.Model):
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
-    creator = models.ForeignKey(User, db_index=True)
+    creator = models.ForeignKey(User, db_index=True, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     url = models.URLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -173,7 +173,7 @@ class Extension(models.Model):
 
 class ExtensionPopularityItem(models.Model):
     extension = models.ForeignKey(Extension, db_index=True,
-                                  related_name='popularity_items')
+                                  on_delete=models.CASCADE, related_name='popularity_items')
     offset = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
 
@@ -295,7 +295,7 @@ def make_filename(obj, filename=None):
 
 
 class ExtensionVersion(models.Model):
-    extension = models.ForeignKey(Extension, related_name="versions")
+    extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
     version = models.IntegerField(default=0)
     extra_json_fields = models.TextField()
     status = models.PositiveIntegerField(choices=STATUSES.items())
