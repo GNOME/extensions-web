@@ -53,7 +53,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
 
         metadata = {"uuid": "test-metadata-2@mecheye.net",
                     "name": "Test Metadata",
-                    "description": "First line\n\Second line"}
+                    "description": "First line\nSecond line"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         self.assertEqual(extension.first_line_of_description, "First line")
