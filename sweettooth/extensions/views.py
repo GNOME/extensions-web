@@ -108,7 +108,11 @@ def shell_download(request, uuid):
 @ajax_view
 def shell_update(request):
     try:
-        installed = json.loads(request.GET['installed'])
+        if request.method == 'POST':
+            installed = json.load(request)
+        # TODO: drop GET request support at year after chrome-gnome-shell 11 release
+        else:
+            installed = json.loads(request.GET['installed'])
         shell_version = request.GET['shell_version']
         disable_version_validation = request.GET.get('disable_version_validation', False)
     except (KeyError, ValueError):

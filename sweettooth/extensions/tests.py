@@ -472,6 +472,14 @@ class UpdateVersionTest(TestCase):
 
         return json.loads(response.content.decode(response.charset))
 
+    def grab_post_response(self, installed):
+        installed = self.build_response(installed)
+        response = self.client.post(reverse('extensions-shell-update') + "?shell_version=3.2.0",
+                                   data=json.dumps(installed),
+                                   content_type='application/json')
+
+        return json.loads(response.content.decode(response.charset))
+
     def test_upgrade_me(self):
         uuid = self.upgrade_uuid
 
@@ -479,9 +487,13 @@ class UpdateVersionTest(TestCase):
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
+        response = self.grab_post_response({ uuid: 1 })
+        self.assertEqual(response, expected)
 
         # The user has a newer version on his machine.
         response = self.grab_response({ uuid: 2 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ uuid: 2 })
         self.assertEqual(response, {})
 
     def test_reject_me(self):
@@ -490,9 +502,13 @@ class UpdateVersionTest(TestCase):
         expected = {uuid: self.full_expected[self.reject_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
+        response = self.grab_post_response({ uuid: 1 })
+        self.assertEqual(response, expected)
 
         # The user has a newer version than what's on the site.
         response = self.grab_response({ uuid: 2 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ uuid: 2 })
         self.assertEqual(response, {})
 
     def test_downgrade_me(self):
@@ -502,14 +518,20 @@ class UpdateVersionTest(TestCase):
         expected = { uuid: self.full_expected[self.downgrade_uuid] }
         response = self.grab_response({ uuid: 2 })
         self.assertEqual(response, expected)
+        response = self.grab_post_response({ uuid: 2 })
+        self.assertEqual(response, expected)
 
         # The user has the appropriate version on his machine.
         response = self.grab_response({ uuid: 1 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ uuid: 1 })
         self.assertEqual(response, {})
 
     def test_nonexistent_uuid(self):
         # The user has an extension that's not on the site.
         response = self.grab_response({ self.nonexistant_uuid: 1 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ self.nonexistant_uuid: 1 })
         self.assertEqual(response, {})
 
     def test_multiple(self):
@@ -520,6 +542,8 @@ class UpdateVersionTest(TestCase):
 
         response = self.grab_response(installed)
         self.assertEqual(self.full_expected, response)
+        response = self.grab_post_response(installed)
+        self.assertEqual(self.full_expected, response)
 
     def test_wrong_version(self):
         uuid = self.upgrade_uuid
@@ -528,9 +552,13 @@ class UpdateVersionTest(TestCase):
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({uuid: ''})
         self.assertEqual(response, expected)
+        response = self.grab_post_response({uuid: ''})
+        self.assertEqual(response, expected)
 
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({uuid: '0.8.4'})
+        self.assertEqual(response, expected)
+        response = self.grab_post_response({uuid: '0.8.4'})
         self.assertEqual(response, expected)
 
 
