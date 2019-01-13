@@ -51,6 +51,12 @@ function($, messages, modal, hashParamUtils, templates, staticfiles, cookie) {
             return false;
         });
 
+        // Prevent double click on registration button
+        $('form#registration').on('submit', function(event) {
+        	$("form#registration button[type='submit']").prop('disabled', true);
+        	return true;
+        });
+
         // Add lightbox for screenshots
         $('div.extension-details').on('click', 'div.screenshot > a', function(event) {
             event.preventDefault();

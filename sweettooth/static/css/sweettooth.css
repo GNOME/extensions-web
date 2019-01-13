@@ -40,45 +40,45 @@ div.navbar-header a.unreviewed_counter:hover {
 /* Login Area */
 /* ==================================================================== */
 
-#auth_form  {
+.auth_form  {
     padding: 0;
     margin: 0;
 }
 
-#auth_form h3 {
+.auth_form h3 {
     color: #0489B7;
 }
 
-#auth_form li, #auth_form ol {
+.auth_form li, .auth_form ol {
     list-style-type: none;
 }
 
-#auth_form ul {
+.auth_form ul {
     padding: 0px;
 }
 
-#auth_form ul > li {
+.auth_form ul > li {
     margin-bottom: 15px;
 }
 
-#auth_form .helptext {
+.auth_form .helptext {
     display: block;
 }
 
-#auth_form label {
+.auth_form label {
     display: inline-block;
     line-height: 1.8;
     vertical-align: top;
 }
 
-#auth_form input {
+.auth_form input {
     width: 100%;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
 }
-#auth_form input:focus {
+.auth_form input:focus {
     border-color: #66afe9;
     outline: 0;
 }
