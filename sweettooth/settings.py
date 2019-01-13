@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'sweettooth.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/stable/ref/settings/#databases
 DATABASES = {
-    'default': dj_database_url.config(env="EGO_DATABASE_URL", default="sqlite://test.db")
+    'default': dj_database_url.config(env="EGO_DATABASE_URL", default="sqlite://./test.db")
 }
 
 
