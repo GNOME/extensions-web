@@ -33,19 +33,12 @@ its Python bindings in PyPI.
 
 This will get all the needed PyPi packages in our virtual environment.
 
-Create file "local_settings.py" (inside the sweettooth folder) with line and add the following settings:
+Create file "local_settings.py" (inside the sweettooth folder) and add the following settings:
 ::
-    SECRET_KEY='super-random-secret-passphrase'
+    SECRET_KEY = 'super-random-secret-passphrase'
     ALLOWED_HOSTS = ['*']
     DEBUG = True
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test.db'
-      }
-    }
 
-And create an empty test.db file in the project folder (same level as the manage.py).
 Once you've done that, proceed with the database migrations:
 ::
   $ python mange.py createsuperuser --username=joe --email=joe@email.com
@@ -53,7 +46,8 @@ Once you've done that, proceed with the database migrations:
   $ python manage.py migrate
 
 After above steps your database should be initialized and almost ready to run.
-You should manually specify your site's domain with SQL update (this is an optional step)::
+You should manually specify your site's domain with SQL update:
+::
 
   UPDATE `django_site`
   SET `domain` = 'your.domain.name',
