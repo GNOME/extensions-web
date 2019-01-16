@@ -14,6 +14,30 @@ must go through code review and testing.
 .. _NPAPI plugin: http://git.gnome.org/browse/gnome-shell/tree/browser-plugin
 .. _Browser extension: https://git.gnome.org/browse/chrome-gnome-shell/
 
+Requirements
+------------
+
+Python Requirements:
+  * django_
+  * django-autoslug_
+  * Pygments_
+  * django-registration_
+  * pillow_
+
+.. _django: http://www.djangoproject.com/
+.. _django-autoslug: http://packages.python.org/django-autoslug/
+.. _Pygments: http://www.pygments.org/
+.. _south: http://south.aeracode.org/
+.. _django-registration: http://pypi.python.org/pypi/django-registration
+.. _pillow: https://github.com/python-pillow/Pillow
+
+
+System-wide Requirements:
+  * `xapian (xapian-core and xapian-bindings)`_
+
+.. _xapian (xapian-core and xapian-bindings): http://www.xapian.org/ 
+
+
 Getting Started
 ---------------
 Make sure that you have xapian (xapian-core and xapian-bindings) installed in your system.
@@ -33,7 +57,7 @@ its Python bindings in PyPI.
 
 This will get all the needed PyPi packages in our virtual environment.
 
-Create file "local_settings.py" (inside the sweettooth folder) and add the following settings:
+Create file "local_settings.py" (in the project root folder) and add the following settings:
 ::
     SECRET_KEY = 'super-random-secret-passphrase'
     ALLOWED_HOSTS = ['*']
@@ -41,9 +65,8 @@ Create file "local_settings.py" (inside the sweettooth folder) and add the follo
 
 Once you've done that, proceed with the database migrations:
 ::
-  $ python mange.py createsuperuser --username=joe --email=joe@email.com
-  $ python manage.py makemigrations
   $ python manage.py migrate
+  $ python mange.py createsuperuser --username=joe --email=joe@email.com
 
 After above steps your database should be initialized and almost ready to run.
 
@@ -109,20 +132,3 @@ instructions above to get a proper SweetTooth checkout, and then::
   $ sudo tee -a /etc/hosts <<< 'extensions.gnome.org 127.0.0.1'
 
 
-Requirements
-------------
-
-  * django_
-  * django-autoslug_
-  * Pygments_
-  * django-registration_
-  * xapian_
-  * pillow_
-
-.. _django: http://www.djangoproject.com/
-.. _django-autoslug: http://packages.python.org/django-autoslug/
-.. _Pygments: http://www.pygments.org/
-.. _south: http://south.aeracode.org/
-.. _django-registration: http://pypi.python.org/pypi/django-registration
-.. _xapian: http://www.xapian.org/
-.. _pillow: https://github.com/python-pillow/Pillow
