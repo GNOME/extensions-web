@@ -14,9 +14,32 @@ must go through code review and testing.
 .. _NPAPI plugin: http://git.gnome.org/browse/gnome-shell/tree/browser-plugin
 .. _Browser extension: https://git.gnome.org/browse/chrome-gnome-shell/
 
+Requirements
+------------
+
+Python Requirements:
+  * django_
+  * django-autoslug_
+  * Pygments_
+  * django-registration_
+  * pillow_
+
+.. _django: http://www.djangoproject.com/
+.. _django-autoslug: http://packages.python.org/django-autoslug/
+.. _Pygments: http://www.pygments.org/
+.. _south: http://south.aeracode.org/
+.. _django-registration: http://pypi.python.org/pypi/django-registration
+.. _pillow: https://github.com/python-pillow/Pillow
+
+
+System-wide Requirements:
+  * `xapian (xapian-core and xapian-bindings)`_
+
+.. _xapian (xapian-core and xapian-bindings): http://www.xapian.org/ 
+
+
 Getting Started
 ---------------
-
 You can get started developing the website with::
 
   $ git clone https://git.gnome.org/browse/extensions-web
@@ -29,22 +52,31 @@ its Python bindings in PyPI.
 
   $ . ./venv/bin/activate
   $ pip install -r ../requirements.txt
-  $ python manage.py syncdb
 
-You should be asked to create superuser account. Provide some login and password.
+This will get all the needed PyPi packages in our virtual environment.
+
+Create file "local_settings.py" (in the project root folder) and add the following settings:
 ::
+    SECRET_KEY = 'super-random-secret-passphrase'
+    ALLOWED_HOSTS = ['*']
+    DEBUG = True
 
+Once you've done that, proceed with the database migrations:
+::
   $ python manage.py migrate
+  $ python mange.py createsuperuser --username=joe --email=joe@email.com
 
 After above steps your database should be initialized and almost ready to run.
-You should manualy specify your site's domain with SQL update::
+
+You should manually specify your site's domain with SQL update:
+::
 
   UPDATE `django_site`
   SET `domain` = 'your.domain.name',
       `name` = 'your.domain.name'
   WHERE `django_site`.`id` = 1;
 
-Create file "local_settings.py" with line "Debug = True". Then start your website:
+And to start the webserver:
 ::
 
   $ python manage.py runserver
@@ -98,20 +130,3 @@ instructions above to get a proper SweetTooth checkout, and then::
   $ sudo tee -a /etc/hosts <<< 'extensions.gnome.org 127.0.0.1'
 
 
-Requirements
-------------
-
-  * django_
-  * django-autoslug_
-  * Pygments_
-  * django-registration_
-  * xapian_
-  * pillow_
-
-.. _django: http://www.djangoproject.com/
-.. _django-autoslug: http://packages.python.org/django-autoslug/
-.. _Pygments: http://www.pygments.org/
-.. _south: http://south.aeracode.org/
-.. _django-registration: http://pypi.python.org/pypi/django-registration
-.. _xapian: http://www.xapian.org/
-.. _pillow: https://github.com/python-pillow/Pillow
