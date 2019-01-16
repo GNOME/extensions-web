@@ -40,8 +40,6 @@ System-wide Requirements:
 
 Getting Started
 ---------------
-Make sure that you have xapian (xapian-core and xapian-bindings) installed in your system.
-
 You can get started developing the website with::
 
   $ git clone https://git.gnome.org/browse/extensions-web
