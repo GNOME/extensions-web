@@ -39,8 +39,40 @@ Python Requirements:
 .. _Pygments: http://www.pygments.org/
 
 
-Getting Started
----------------
+Running with Docker
+-------------------
+
+Make sure you have both `Docker`_ and `Docker Compose`_ installed as well as runnning `Docker`_ instance.
+
+You can start website with commands:
+::
+
+  $ git clone https://git.gnome.org/browse/extensions-web
+  $ cd extensions-web/openshift/docker
+  $ MYSQL_USER=extensions-web \
+    MYSQL_PASSWORD=SOME_PASSWORD \
+    EGO_ALLOWED_HOST=* \
+    EGO_DATABASE_URL=mysql://extensions-web:SOME_PASSWORD@db/extensions-web \
+    EGO_NODE_ADDRESS=extensions-web \
+    EGO_SECRET_KEY=SOME_SECRET_KEY \
+    EGO_XAPIAN_DB=/extensions-web/data/xapian.db \
+    docker-compose up --build
+
+That's all! Website will be available as http://localhost:8080.
+
+Don't forget to substitute "SOME_PASSWORD" and "SOME_SECRET_KEY" with proper values.
+
+You also may want to create superuser account - look to virtualenv guide below for
+apropriate command and `Docker`_ documentation for a way running command within running
+`Docker`_ container.
+
+.. _Docker: https://www.docker.com/
+.. _Docker Compose: https://docs.docker.com/compose/
+
+
+Running with virtualenv
+-----------------------
+
 You can get started developing the website with::
 
   $ git clone https://git.gnome.org/browse/extensions-web
