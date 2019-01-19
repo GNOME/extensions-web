@@ -35,7 +35,7 @@ Python Requirements:
 System-wide Requirements:
   * `xapian (xapian-core and xapian-bindings)`_
 
-.. _xapian (xapian-core and xapian-bindings): http://www.xapian.org/ 
+.. _xapian (xapian-core and xapian-bindings): http://www.xapian.org/
 
 
 Getting Started
@@ -57,12 +57,14 @@ This will get all the needed PyPi packages in our virtual environment.
 
 Create file "local_settings.py" (in the project root folder) and add the following settings:
 ::
-    SECRET_KEY = 'super-random-secret-passphrase'
-    ALLOWED_HOSTS = ['*']
-    DEBUG = True
+
+  SECRET_KEY = 'super-random-secret-passphrase'
+  ALLOWED_HOSTS = ['*']
+  DEBUG = True
 
 Once you've done that, proceed with the database migrations:
 ::
+
   $ python manage.py migrate
   $ python mange.py createsuperuser --username=joe --email=joe@email.com
 
