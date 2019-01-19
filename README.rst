@@ -12,7 +12,7 @@ Since extensions can be dangerous, all extensions uploaded to the repository
 must go through code review and testing.
 
 .. _NPAPI plugin: https://gitlab.gnome.org/GNOME/gnome-shell/tree/gnome-3-30/browser-plugin
-.. _Browser extension: https://git.gnome.org/browse/chrome-gnome-shell/
+.. _Browser extension: https://gitlab.gnome.org/GNOME/chrome-gnome-shell/
 
 Requirements
 ------------
@@ -47,7 +47,7 @@ Make sure you have both `Docker`_ and `Docker Compose`_ installed as well as run
 You can start website with commands:
 ::
 
-  $ git clone https://git.gnome.org/browse/extensions-web
+  $ git clone https://gitlab.gnome.org/Infrastructure/extensions-web.git
   $ cd extensions-web/openshift/docker
   $ MYSQL_USER=extensions-web \
     MYSQL_PASSWORD=SOME_PASSWORD \
@@ -75,7 +75,7 @@ Running with virtualenv
 
 You can get started developing the website with::
 
-  $ git clone https://git.gnome.org/browse/extensions-web
+  $ git clone https://gitlab.gnome.org/Infrastructure/extensions-web.git
   $ cd extensions-web
   $ virtualenv --system-site-packages ./venv
 
