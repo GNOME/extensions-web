@@ -3,39 +3,40 @@ SweetTooth-Web
 ==============
 
 **SweetTooth-Web** is a Django-powered web application that, in co-operation
-with some GNOME Shell integration helper (`NPAPI plugin`_ or `Browser extension`_)
+with some GNOME Shell integration helper (deprecated `NPAPI plugin`_ or `Browser extension`_)
 allows users to install, upgrade and enable/disable their own Shell Extensions.
 All operations with the Shell are done through a special helper which proxies
-over to the Shell by DBus.
+over to the Shell by DBus. Please note that `NPAPI plugin`_ is deprecated and was removed from GNOME Shell codebase.
 
 Since extensions can be dangerous, all extensions uploaded to the repository
 must go through code review and testing.
 
-.. _NPAPI plugin: http://git.gnome.org/browse/gnome-shell/tree/browser-plugin
+.. _NPAPI plugin: https://gitlab.gnome.org/GNOME/gnome-shell/tree/gnome-3-30/browser-plugin
 .. _Browser extension: https://git.gnome.org/browse/chrome-gnome-shell/
 
 Requirements
 ------------
 
+
+System Requirements:
+  * `python`_ 3.6+
+  * `xapian (xapian-core and xapian-bindings)`_
+
+.. _python: https://www.python.org/
+.. _xapian (xapian-core and xapian-bindings): http://www.xapian.org/
+
 Python Requirements:
   * django_
   * django-autoslug_
-  * Pygments_
   * django-registration_
   * pillow_
+  * Pygments_
 
 .. _django: http://www.djangoproject.com/
 .. _django-autoslug: http://packages.python.org/django-autoslug/
-.. _Pygments: http://www.pygments.org/
-.. _south: http://south.aeracode.org/
 .. _django-registration: http://pypi.python.org/pypi/django-registration
 .. _pillow: https://github.com/python-pillow/Pillow
-
-
-System-wide Requirements:
-  * `xapian (xapian-core and xapian-bindings)`_
-
-.. _xapian (xapian-core and xapian-bindings): http://www.xapian.org/
+.. _Pygments: http://www.pygments.org/
 
 
 Getting Started
