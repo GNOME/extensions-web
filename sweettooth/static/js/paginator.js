@@ -1,7 +1,7 @@
 /*
     GNOME Shell extensions repository
     Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
-    Copyright (C) 2017  Yuri Konotopov <ykonotopov@gnome.org>
+    Copyright (C) 2017-2019  Yuri Konotopov <ykonotopov@gnome.org>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -9,7 +9,9 @@
     (at your option) any later version.
  */
 
-define(['jquery', 'hashParamUtils', 'paginatorUtils', 'dbus!_', 'templates', 'jquery.hashchange'], function ($, hashParamUtils, paginatorUtils, dbusProxy, templates) {
+define(['jquery', 'hashParamUtils', 'paginatorUtils', 'dbus!_',
+		'template!extensions/info_list', 'template!extensions/info_contents', 'jquery.hashchange'],
+		function ($, hashParamUtils, paginatorUtils, dbusProxy, infoTemplate, infoContentsTemplate) {
 	"use strict";
 
 	$.fn.paginatorify = function (context) {
@@ -97,7 +99,9 @@ define(['jquery', 'hashParamUtils', 'paginatorUtils', 'dbus!_', 'templates', 'jq
 					}
 				});
 
-				var $newContent = $(templates.get('extensions/info_list')(result));
+				var $newContent = $(infoTemplate.render(result, {
+					[infoContentsTemplate.name()]: infoContentsTemplate.template()
+				}));
 
 				$elem.removeClass('loading').empty().append($beforePaginator).append($newContent).append($afterPaginator).trigger('page-loaded');
 			});

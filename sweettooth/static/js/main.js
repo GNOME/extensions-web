@@ -10,9 +10,9 @@
  */
 
 define(['jquery', 'messages', 'modal', 'hashParamUtils',
-        'templates', 'staticfiles', 'js.cookie', 'extensions', 'uploader', 'fsui', 'settings',
+        'template!extensions/comments_list', 'staticfiles', 'js.cookie', 'extensions', 'uploader', 'fsui', 'settings',
         'jquery.jeditable', 'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
-function($, messages, modal, hashParamUtils, templates, staticfiles, cookie) {
+function($, messages, modal, hashParamUtils, commentsTemplate, staticfiles, cookie) {
     "use strict";
 
     if (!$.ajaxSettings.headers)
@@ -230,7 +230,7 @@ function($, messages, modal, hashParamUtils, templates, staticfiles, cookie) {
                         showAll = false;
 
                     var data = { comments: comments, show_all: showAll };
-                    var $newContent = $('<div>').append(templates.get('extensions/comments_list')(data));
+                    var $newContent = $('<div>').append(commentsTemplate.render(data));
                     $newContent.addClass('comments-holder');
 
                     $newContent.find('time').timeago();

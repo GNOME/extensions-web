@@ -9,8 +9,12 @@
     (at your option) any later version.
  */
 
-define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'voca' 'paginator', 'switch'],
-	function ($, messages, dbusProxy, extensionUtils, templates, voca) {
+define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
+	'template!extensions/uninstall', 'template!extensions/info',
+	'template!extensions/info_contents', 'template!extensions/error_report_template',
+	'voca', 'paginator', 'switch'],
+	function ($, messages, dbusProxy, extensionUtils, uninstallTemplate,
+			infoTemplate, infoContentsTemplate, reportTemplate, voca) {
 		"use strict";
 
 		var ExtensionState = extensionUtils.ExtensionState;
@@ -257,7 +261,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'voca' 'p
 						{
 							$elem.removeClass('installed upgradable configurable');
 						}
-						messages.addInfo(templates.get('extensions/uninstall')(meta));
+						messages.addInfo(uninstallTemplate.render(meta));
 					}
 				});
 			});
@@ -451,7 +455,9 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'voca' 'p
 									extension.first_line_of_description = extension.description.split('\n')[0];
 								}
 
-								$elem = $(templates.get('extensions/info')(extension)).replaceAll($elem);
+								$elem = $(infoTemplate.render(extension, {
+									[infoContentsTemplate.name()]: infoContentsTemplate.template()
+								})).replaceAll($elem);
 
 								addExtensionSwitch(uuid, $elem, extension);
 							}
@@ -497,7 +503,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'voca' 'p
 							errors: errors
 						};
 
-						$textarea.text(templates.get('extensions/error_report_template')(context));
+						$textarea.text(reportTemplate.render(context));
 					});
 				});
 			});

@@ -8,7 +8,7 @@
     (at your option) any later version.
  */
 
-define(['jquery', 'dbus!_', 'templates'], function ($, dbusProxy, templates) {
+define(['jquery', 'dbus!_', 'template!extensions/settings'], function ($, dbusProxy, settingsTemplate) {
 		"use strict";
 		const SETTINGS = [
 			{
@@ -72,7 +72,7 @@ define(['jquery', 'dbus!_', 'templates'], function ($, dbusProxy, templates) {
 
 				for(let setting of SETTINGS)
 				{
-					let $elem = $(templates.get('extensions/settings')(setting))
+					let $elem = $(settingsTemplate.render(setting))
 					$elem.data('value', setting.get());
 					$container.append($elem)
 
