@@ -8,7 +8,7 @@
     (at your option) any later version.
  */
 
-define(['mustache'], function(Mustache) {
+define(['jquery', 'mustache'], function($, Mustache) {
 	return {
 		load: (templateFile, parentRequire, onload, config) => {
 			parentRequire(['text!templates/' + templateFile + '.mst'], (loadedTemplate) => {
@@ -17,10 +17,15 @@ define(['mustache'], function(Mustache) {
 						return templateFile;
 					},
 					render: (model, partials) => {
-						return Mustache.render(loadedTemplate, model, partials);
+						let html = $(Mustache.render(loadedTemplate, model, partials));
+						// TODO: better/faster way to preparse templates?
+						html.find('x-gettext').replaceWith(function() {
+							return gettext($(this).text());
+						});
+						return html;
 					},
 					template: () => {
-						return loadedTemplate
+						return loadedTemplate;
 					}
 				});
 			});

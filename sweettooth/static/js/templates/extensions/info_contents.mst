@@ -18,5 +18,5 @@
   </div>
 </div>
 <div style="clear: both"></div>
-<div class='system-extension' title='System extension should be uninstalled using package manager. See «About» page for more details.'>System extension</div>
+<div class='system-extension' title='System extension should be uninstalled using package manager. See «About» page for more details.'><x-gettext>System extension</x-gettext></div>
 <p class="description">{{first_line_of_description}}</p>

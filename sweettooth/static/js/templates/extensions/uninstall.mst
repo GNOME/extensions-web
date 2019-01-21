@@ -1,1 +1,1 @@
-You uninstalled <b>{{name}}</b>.
+<x-gettext>You uninstalled</x-gettext> <b>{{name}}</b>.

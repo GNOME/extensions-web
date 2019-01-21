@@ -1,12 +1,12 @@
-What's wrong?
+<x-gettext>What's wrong?</x-gettext>
 
 
 
-What have you tried?
+<x-gettext>What have you tried?</x-gettext>
 
 
 
-Automatically detected errors:
+<x-gettext>Automatically detected errors</x-gettext>:
 
 {{#errors}}
   {{.}}
@@ -14,10 +14,10 @@ Automatically detected errors:
 ================
 {{/errors}}
 {{^errors}}
-GNOME Shell Extensions did not detect any errors with this extension.
+<x-gettext>GNOME Shell Extensions did not detect any errors with this extension.</x-gettext>
 {{/errors}}
 
-Version information:
+<x-gettext>Version information</x-gettext>:
 
-    Shell version: {{sv}}
-    Extension version: {{#ev}}{{ev}}{{/ev}}{{^ev}}Unknown{{/ev}}
+    <x-gettext>Shell version</x-gettext>: {{sv}}
+    <x-gettext>Extension version</x-gettext>: {{#ev}}{{ev}}{{/ev}}{{^ev}}<x-gettext>Unknown</x-gettext>{{/ev}}

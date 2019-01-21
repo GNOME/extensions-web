@@ -1,7 +1,7 @@
 {{#comments}}
   <div class="comment">
     {{#is_extension_creator}}
-    <div class="extension-creator-badge">Author</div>
+    <div class="extension-creator-badge"><x-gettext>Author</x-gettext></div>
     {{/is_extension_creator}}
     <img src="{{gravatar}}" class="gravatar">
     <div class="rating-author">
@@ -16,9 +16,9 @@
   <hr>
 {{/comments}}
 {{^show_all}}
-<p class="show-all">Show more reviews</p>
+<p class="show-all"><x-gettext>Show more reviews</x-gettext></p>
 {{/show_all}}
 
 {{^comments}}
-  <p>There are no comments. Be the first!</p>
+  <p><x-gettext>There are no comments. Be the first!</x-gettext></p>
 {{/comments}}
