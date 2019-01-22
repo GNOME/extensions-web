@@ -349,7 +349,7 @@ class ExtensionVersion(models.Model):
         """
 
         # We can't easily *replace* files in a zipfile
-        # archive. See http://bugs.python.org/issue6818.
+        # archive. See https://bugs.python.org/issue6818.
         # Just read all the contents from the old zipfile
         # into memory and then emit a new one with the
         # generated metadata.json
