@@ -23,7 +23,7 @@ System Requirements:
   * `xapian (xapian-core and xapian-bindings)`_
 
 .. _python: https://www.python.org/
-.. _xapian (xapian-core and xapian-bindings): http://www.xapian.org/
+.. _xapian (xapian-core and xapian-bindings): https://www.xapian.org/
 
 Python Requirements:
   * django_
@@ -32,11 +32,11 @@ Python Requirements:
   * pillow_
   * Pygments_
 
-.. _django: http://www.djangoproject.com/
+.. _django: https://www.djangoproject.com/
 .. _django-autoslug: http://packages.python.org/django-autoslug/
-.. _django-registration: http://pypi.python.org/pypi/django-registration
+.. _django-registration: https://pypi.org/project/django-registration
 .. _pillow: https://github.com/python-pillow/Pillow
-.. _Pygments: http://www.pygments.org/
+.. _Pygments: http://pygments.org/
 
 
 Running with Docker
