@@ -7,6 +7,10 @@ ENV PYTHONUNBUFFERED=1 \
 	GPG_KEY=08E2400FF7FE8FEDE3ACB52818147B073BAD2B07
 
 RUN set -ex \
+	&& apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
+		gettext \
+	&& rm -r /var/lib/apt/lists/* \
 	&& pip install Sphinx \
 	&& wget -O xapian-core.tar.xz "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-core-$XAPIAN_VERSION.tar.xz" \
 	&& wget -O xapian-core.tar.xz.asc "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-core-$XAPIAN_VERSION.tar.xz.asc" \
@@ -68,4 +72,5 @@ RUN set -ex \
 	&& chown www-data:root /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
 	&& pip install mysqlclient \
-	&& pip install uWSGI
+	&& pip install uWSGI \
+	&& EGO_SECRET_KEY=- python manage.py compilemessages

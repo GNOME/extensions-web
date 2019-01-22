@@ -48,6 +48,7 @@ INSTALLED_APPS = (
 
     'sweettooth.extensions',
     'sweettooth.auth',
+    'sweettooth.core',
     'sweettooth.review',
     'sweettooth.errorreports',
     'sweettooth.templates',
@@ -109,8 +110,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/stable/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-LOCALE_PATHS = [os.path.join(BASE_DIR, 'sweettooth', 'locale')]
 
 TIME_ZONE = 'UTC'
 
