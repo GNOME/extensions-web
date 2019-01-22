@@ -112,8 +112,9 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 						gettext('Install GNOME Shell integration browser extension'),
 						gettext('Click here to install browser extension'),
 						voca.sprintf(
-							gettext('See <a href="%s" onclick="window.open(this.href); return false;">wiki page</a> for native host connector installation instructions'),
-							'https://wiki.gnome.org/Projects/GnomeShellIntegrationForChrome/Installation'
+							gettext('See %swiki page%s for native host connector installation instructions'),
+							'<a href="https://wiki.gnome.org/Projects/GnomeShellIntegrationForChrome/Installation" onclick="window.open(this.href); return false;">',
+							'</a>'
 						)
 					));
 				}
