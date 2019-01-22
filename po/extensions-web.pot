@@ -93,7 +93,7 @@ msgstr ""
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we’ll e-mail "
+"Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
 
