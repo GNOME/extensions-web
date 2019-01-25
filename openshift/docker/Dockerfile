@@ -67,5 +67,5 @@ RUN set -ex \
 	&& chown www-data:root -R /extensions-web/app \
 	&& chown www-data:root /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
-	&& pip install mysqlclient \
+	&& pip install mysqlclient\<1.4 \
 	&& pip install uWSGI
