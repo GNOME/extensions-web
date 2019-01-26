@@ -1,14 +1,14 @@
 <Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
-         xmlns:gnome="https://api.gnome.org/doap-extensions#"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">extensions-web</name>
   <shortdesc xml:lang="en">GNOME Shell Extensions Repository</shortdesc>
   <description>GNOME Shell Extensions Repository</description>
   <homepage rdf:resource="https://extensions.gnome.org/" />
-  <category rdf:resource="https://api.gnome.org/doap-extensions#infrastructure" />
+  <category rdf:resource="http://api.gnome.org/doap-extensions#infrastructure" />
   <programming-language>Python</programming-language>
   <programming-language>JavaScript</programming-language>
   <programming-language>HTML</programming-language>
