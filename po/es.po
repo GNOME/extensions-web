@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2019-01-22 14:52+0000\n"
-"PO-Revision-Date: 2019-01-24 15:32+0100\n"
+"PO-Revision-Date: 2019-02-12 11:49+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.31.0\n"
+"X-Generator: Gtranslator 3.31.90\n"
 
 #: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 msgid "Username"
@@ -307,6 +307,9 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
+"Para controlar las extensiones de GNOME SHell usando esta página debe "
+"instalar la integración con GNOME Shell, que consiste en dos partes: una "
+"extensión del navegador y la aplicación de mensajería nativa del equipo"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
@@ -320,6 +323,8 @@ msgstr "Pulse aquí para instalar el complemento del navegador"
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
+"Consulte en %swiki page%s las instrucciones de instalación del conector del "
+"equipo nativo"
 
 #: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
 msgid ""
@@ -327,6 +332,10 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
+"No se ha detectado una copia de GNOME en este sistema, por lo que algunas "
+"partes de la interfaz pueden no estar disponibles. Consulte <a href=\"/about/"
+"#no-detection\">la guía de resolución de errores</a> para obtener más "
+"información."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
@@ -377,7 +386,7 @@ msgstr "Autor"
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "What's wrong?"
-msgstr ""
+msgstr "¿Qué ha fallado?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:17
 #: extensions-web-domain-djangojs:1
