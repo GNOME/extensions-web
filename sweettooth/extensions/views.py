@@ -63,6 +63,9 @@ def grab_proper_extension_version(extension, shell_version, disable_version_vali
                 supported_shell_versions[0].point), requested_shell_version) > 0:
             versions = visible_versions.filter(shell_versions=supported_shell_versions[0])
         else:
+            supported_shell_versions = list(shell_version
+                                           for shell_version in supported_shell_versions
+                                           if (shell_version.major, shell_version.minor, shell_version.point) <= requested_shell_version)
             versions = visible_versions.filter(shell_versions=supported_shell_versions[-1])
 
         return versions.order_by('-version')[0]
