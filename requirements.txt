@@ -36,3 +36,14 @@ dj-database-url==0.5.0 \
 dj-email-url==0.1.0 \
     --hash=sha256:84f32673156f58d740a14cab09f04ca92a65b2c8881b60e31e09e67d7853e544 \
     --hash=sha256:de8e062c1483d1bfc7a9a185c6601f9c822087bd529756989f81f1dc82855cee
+# Django dependencies
+pytz==2018.9 \
+    --hash=sha256:32b0891edff07e28efe91284ed9c31e123d84bea3fd98e1f72be2508f43ef8d9 \
+    --hash=sha256:d5f05e487007e29e03409f9398d074e158d920d36eb82eaf66fb1136b0c5374c
+sqlparse==0.3.0 \
+    --hash=sha256:40afe6b8d4b1117e7dff5504d7a8ce07d9a1b15aeeade8a2d10f130a834f8177 \
+    --hash=sha256:7c3dca29c022744e95b547e867cee89f4fce4373f3549ccd8797d8eb52cdb873
+# django-registration dependepcy
+confusable_homoglyphs==3.2.0 \
+    --hash=sha256:3b4a0d9fa510669498820c91a0bfc0c327568cecec90648cf3819d4a6fc6a751 \
+    --hash=sha256:e3ce611028d882b74a5faa69e3cbb5bd4dcd9f69936da6e73d33eda42c917944

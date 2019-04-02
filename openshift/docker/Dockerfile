@@ -3,7 +3,7 @@ FROM python:3.6-stretch
 MAINTAINER Yuri Konotopov <ykonotopov@gnome.org>
 
 ENV PYTHONUNBUFFERED=1 \
-	XAPIAN_VERSION=1.4.9 \
+	XAPIAN_VERSION=1.4.11 \
 	GPG_KEY=08E2400FF7FE8FEDE3ACB52818147B073BAD2B07
 
 RUN set -ex \
@@ -11,7 +11,6 @@ RUN set -ex \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 		gettext \
 	&& rm -r /var/lib/apt/lists/* \
-	&& pip install Sphinx \
 	&& wget -O xapian-core.tar.xz "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-core-$XAPIAN_VERSION.tar.xz" \
 	&& wget -O xapian-core.tar.xz.asc "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-core-$XAPIAN_VERSION.tar.xz.asc" \
 	&& wget -O xapian-bindings.tar.xz "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-bindings-$XAPIAN_VERSION.tar.xz" \
@@ -46,10 +45,14 @@ RUN set -ex \
 	&& ldconfig \
 	&& rm -r /usr/src/xapian-core \
 	&& cd /usr/src/xapian-bindings \
+	&& pip install Sphinx\<2.0.0 \
 	&& ./configure \
 		--with-python3 \
 	&& make -j "$(nproc)" \
 	&& make install \
+	&& pip freeze > /tmp/pip.txt \
+	&& pip uninstall -y -r /tmp/pip.txt \
+	&& rm /tmp/pip.txt \
 	&& find /usr/local -depth \
 		\( \
 			\( -type d -a \( -name test -o -name tests \) \) \
@@ -71,6 +74,5 @@ RUN set -ex \
 	&& chown www-data:root -R /extensions-web/app \
 	&& chown www-data:root /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
-	&& pip install mysqlclient\<1.4 \
-	&& pip install uWSGI \
+	&& pip install -r requirements.ego.txt \
 	&& EGO_SECRET_KEY=- python manage.py compilemessages
