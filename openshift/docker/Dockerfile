@@ -7,7 +7,6 @@ ENV PYTHONUNBUFFERED=1 \
 	GPG_KEY=08E2400FF7FE8FEDE3ACB52818147B073BAD2B07
 
 RUN set -ex \
-	&& pip install Sphinx \
 	&& wget -O xapian-core.tar.xz "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-core-$XAPIAN_VERSION.tar.xz" \
 	&& wget -O xapian-core.tar.xz.asc "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-core-$XAPIAN_VERSION.tar.xz.asc" \
 	&& wget -O xapian-bindings.tar.xz "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-bindings-$XAPIAN_VERSION.tar.xz" \
@@ -42,10 +41,14 @@ RUN set -ex \
 	&& ldconfig \
 	&& rm -r /usr/src/xapian-core \
 	&& cd /usr/src/xapian-bindings \
+	&& pip install Sphinx\<2.0.0 \
 	&& ./configure \
 		--with-python \
 	&& make -j "$(nproc)" \
 	&& make install \
+	&& pip freeze > /tmp/pip.txt \
+	&& pip uninstall -y -r /tmp/pip.txt \
+	&& rm /tmp/pip.txt \
 	&& find /usr/local -depth \
 		\( \
 			\( -type d -a \( -name test -o -name tests \) \) \
