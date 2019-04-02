@@ -100,7 +100,7 @@ Once you've done that, proceed with the database migrations:
 
   $ python manage.py migrate
   $ python manage.py compilemessages
-  $ python mange.py createsuperuser --username=joe --email=joe@email.com
+  $ python manage.py createsuperuser --username=joe --email=joe@email.com
 
 After above steps your database should be initialized and almost ready to run.
 
