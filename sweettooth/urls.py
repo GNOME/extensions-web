@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^errors/', include('sweettooth.errorreports.urls')),
 
     url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^comments/', include('sweettooth.ratings.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),

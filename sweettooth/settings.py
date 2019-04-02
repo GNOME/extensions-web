@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [os.getenv('EGO_ALLOWED_HOST') or "extensions.gnome.org"]
 INSTALLED_APPS = (
     'django.contrib.auth',
 
-    'registration',
+    'django_registration',
 
     # 'ratings' goes before django's comments
     # app so it will find our templates
@@ -64,7 +64,6 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 

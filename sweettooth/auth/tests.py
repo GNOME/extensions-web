@@ -1,14 +1,21 @@
-from registration import validators
-from registration.tests.base import RegistrationTestCase
+from django_registration import validators
 
 from django.contrib.auth import get_user_model
+from django.test.testcases import TestCase
 from django.utils.six import text_type
 from .forms import AutoFocusRegistrationForm
 
 User = get_user_model()
 
 # registration/tests/test_forms.py
-class AuthTests(RegistrationTestCase):
+class AuthTests(TestCase):
+    valid_data = {
+        User.USERNAME_FIELD: 'alice',
+        'email': 'alice@example.com',
+        'password1': 'swordfish',
+        'password2': 'swordfish',
+    }
+
     def test_email_uniqueness(self):
         User.objects.create(
             username='bob',

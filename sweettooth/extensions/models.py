@@ -3,10 +3,10 @@ import json
 
 from zipfile import ZipFile, BadZipfile
 
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db import models
 from django.dispatch import Signal
+from django.urls import reverse
 
 import autoslug
 import re

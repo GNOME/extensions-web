@@ -20,7 +20,7 @@
     </div>
 
     <div class="form-group has-error">
-      {{ form.password.label_tag }} <a class="right" href="{% url 'auth_password_reset' %}">{% trans "Forgot your password?" %}</a>
+      {{ form.password.label_tag }} <a class="right" href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a>
 
       {{ form.password }}
     {% for error in form.password.errors %}
@@ -32,7 +32,6 @@
       <button type="submit" class="btn btn-primary btn-block">{% trans "Log in" %}</button>
     </div>
 </form>
-<!--<a href="{% url 'auth_password_reset' %}">Forgot your password?</a>-->
 <hr>
 <p class="text-center main_feature" style="margin-bottom: 30px;">{% trans "Don't have an account?" %}</p>
 <a href="{% url 'registration_register' %}" class="btn btn-success btn-block no-decoration">{% trans "Register" %}</a>

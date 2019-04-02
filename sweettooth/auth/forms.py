@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import ugettext_lazy as _
-from registration.forms import RegistrationFormUniqueEmail
+from django_registration.forms import RegistrationFormUniqueEmail
 
 class PlainOutputForm(object):
     def as_plain(self):

@@ -26,7 +26,7 @@ def profile(request, user):
         waiting = []
 
     return render(request,
-                  'registration/profile.html',
+                  'profile/profile.html',
                   dict(user=userobj,
                        display_name=display_name,
                        extensions=extensions,

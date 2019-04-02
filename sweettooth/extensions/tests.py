@@ -9,7 +9,7 @@ from zipfile import ZipFile
 
 from django.test import TestCase, TransactionTestCase
 from django.core.files.base import File
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from sweettooth.extensions import models, views
 
 from sweettooth.testutils import BasicUserTestCase

@@ -4,7 +4,6 @@ from math import ceil
 
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, InvalidPage
-from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
@@ -12,6 +11,7 @@ from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpRespo
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
+from django.urls import reverse
 
 from sweettooth.exceptions import DatabaseErrorWithMessages
 from sweettooth.extensions import models, search

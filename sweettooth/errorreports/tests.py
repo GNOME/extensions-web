@@ -1,8 +1,8 @@
 
 from django.core import mail
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.urls import reverse
 
 from sweettooth.extensions.models import Extension, ExtensionVersion, STATUS_ACTIVE
 from sweettooth.errorreports import models, views

@@ -1,10 +1,38 @@
-Django >= 1.11,<1.12
-django-autoslug >= 1.9
-django-contrib-comments == 1.9.0
-django-registration == 2.5.2
-Pygments >= 1.4
-pillow >= 2.0.0
-polib >= 1.1.0
-chardet >= 2.2.1
-dj-database-url
-dj-email-url
+Django==2.2 \
+    --hash=sha256:7c3543e4fb070d14e10926189a7fcf42ba919263b7473dceaefce34d54e8a119 \
+    --hash=sha256:a2814bffd1f007805b19194eb0b9a331933b82bd5da1c3ba3d7b7ba16e06dc4b
+django-autoslug==1.9.4 \
+    --hash=sha256:08ba143ce5914d2689972c0adaea56abc37fb7175e9f6939fe0e3ac26374e7a0 \
+    --hash=sha256:aece8613eb173854462c656e91d81aa7ddfacaa49fb500d549f2143d1ce48721
+django-contrib-comments==1.9.1 \
+    --hash=sha256:61b051d7bc3ff593e86b41a1ed5e969423cf55cc92768598af3315e2528e0890 \
+    --hash=sha256:656aefe59798e5f7ef06af4bf34cf458962225bce93ca62630ba7dd97df9d81a
+django-registration==3.0 \
+    --hash=sha256:0527be82f3f62233c7b7a4fe6b0217832cbde2c6d8ea5008e8233a764f9a2543 \
+    --hash=sha256:8f1960d1780804b67afb6b202c98cdfaca030a202bc7a263bf80e32f9c8a6984
+Pygments==2.3.1 \
+    --hash=sha256:5ffada19f6203563680669ee7f53b64dabbeb100eb51b61996085e99c03b284a \
+    --hash=sha256:e8218dd399a61674745138520d0d4cf2621d7e032439341bc3f647bff125818d
+Pillow==6.0.0 \
+    --hash=sha256:258d886a49b6b058cd7abb0ab4b2b85ce78669a857398e83e8b8e28b317b5abb \
+    --hash=sha256:2ac36ec56727a95bd5a04dfca6abce1db8042c31ee73b65796a42f31fd52d009 \
+    --hash=sha256:33c79b6dd6bc7f65079ab9ca5bebffb5f5d1141c689c9c6a7855776d1b09b7e8 \
+    --hash=sha256:3c1884ff078fb8bf5f63d7d86921838b82ed4a7d0c027add773c2f38b3168754 \
+    --hash=sha256:44e5240e8f4f8861d748f2a58b3f04daadab5e22bfec896bf5434745f788f33f \
+    --hash=sha256:50fb9e25d25cfcb50b2e6842c4e104e4f0b424be4624e1724532bf005c67589a \
+    --hash=sha256:7eeac51fc37e6b19631a4b8e38b8261a074efcf7cc27fc16a6bee4697af7aaa5 \
+    --hash=sha256:809c0a2ce9032cbcd7b5313f71af4bdc5c8c771cb86eb7559afd954cab82ebb5 \
+    --hash=sha256:9319215530e236822169cbe92426cdc18d16b88c943fdf365a6309a89876e335 \
+    --hash=sha256:e6c0bbf8e277b74196e3140c35f9a1ae3eafd818f7f2d3a15819c49135d6c062
+polib==1.1.0 \
+    --hash=sha256:93b730477c16380c9a96726c54016822ff81acfa553977fdd131f2b90ba858d7 \
+    --hash=sha256:fad87d13696127ffb27ea0882d6182f1a9cf8a5e2b37a587751166c51e5a332a
+chardet==3.0.4 \
+    --hash=sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae \
+    --hash=sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691
+dj-database-url==0.5.0 \
+    --hash=sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163 \
+    --hash=sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9
+dj-email-url==0.1.0 \
+    --hash=sha256:84f32673156f58d740a14cab09f04ca92a65b2c8881b60e31e09e67d7853e544 \
+    --hash=sha256:de8e062c1483d1bfc7a9a185c6601f9c822087bd529756989f81f1dc82855cee
