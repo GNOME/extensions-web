@@ -24,7 +24,9 @@ services:
       EGO_ADMINISTRATOR_EMAIL: ykonotopov@gnome.org
       EGO_ALLOWED_HOST:
       EGO_DATABASE_URL:
+      EGO_DEBUG:
       EGO_EMAIL_URL:
+      EGO_NO_SECURE_SETTINGS:
       EGO_SECRET_KEY:
       EGO_XAPIAN_DB:
       EGO_MEDIA_ROOT: /extensions-web/www/uploaded-files

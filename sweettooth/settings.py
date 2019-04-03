@@ -23,7 +23,7 @@ XAPIAN_DB_PATH = os.getenv('EGO_XAPIAN_DB') or os.path.join(BASE_DIR, 'xapian.db
 SECRET_KEY = os.getenv('EGO_SECRET_KEY') or ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True if os.getenv('EGO_DEBUG') else False
 
 ALLOWED_HOSTS = [os.getenv('EGO_ALLOWED_HOST') or "extensions.gnome.org"]
 
@@ -173,7 +173,7 @@ if os.getenv('EGO_EMAIL_URL'):
     vars().update(dj_email_url.parse(os.getenv('EGO_EMAIL_URL')))
 
 
-NO_SECURE_SETTINGS = False
+NO_SECURE_SETTINGS = True if os.getenv('EGO_NO_SECURE_SETTINGS') else False
 NO_STATICFILES_SETTINGS = False
 
 try:

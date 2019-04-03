@@ -56,6 +56,7 @@ You can start website with commands:
     EGO_NODE_ADDRESS=extensions-web \
     EGO_SECRET_KEY=SOME_SECRET_KEY \
     EGO_XAPIAN_DB=/extensions-web/data/xapian.db \
+    EGO_NO_SECURE_SETTINGS=1 \
     docker-compose up --build
 
 That's all! Website will be available as http://localhost:8080.
