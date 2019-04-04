@@ -10,6 +10,7 @@ from django.urls import reverse
 
 import autoslug
 import re
+import zlib
 
 (STATUS_UNREVIEWED,
  STATUS_REJECTED,
@@ -131,7 +132,7 @@ class Extension(models.Model):
                 if version.source:
                     try:
                         version.replace_metadata_json()
-                    except BadZipfile:
+                    except (BadZipfile, zlib.error):
                         # Ignore bad zipfiles, we don't care
                         pass
 
@@ -254,7 +255,7 @@ def parse_zipfile_metadata(uploaded_file):
     """
     try:
         zipfile = ZipFile(uploaded_file, 'r')
-    except BadZipfile:
+    except (BadZipfile, zlib.error):
         raise InvalidExtensionData("Invalid zip file")
 
     if zipfile.testzip() is not None:
