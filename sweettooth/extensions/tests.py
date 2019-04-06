@@ -13,6 +13,7 @@ from django.urls import reverse
 from sweettooth.extensions import models, views
 
 from sweettooth.testutils import BasicUserTestCase
+from django.test.utils import override_settings
 
 testdata_dir = os.path.join(os.path.dirname(__file__), 'testdata')
 
@@ -137,7 +138,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
 
 
 class ReplaceMetadataTest(BasicUserTestCase, TestCase):
-    @unittest.expectedFailure
+    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_replace_metadata(self):
         old_zip_file = get_test_zipfile('LotsOfFiles')
 
@@ -145,16 +146,20 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
         old_zip_file.seek(0)
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version = models.ExtensionVersion(extension=extension,
-                                          source=File(old_zip_file))
+
+        version = models.ExtensionVersion.objects.create(extension=extension,
+                                          source=File(old_zip_file),
+                                          status=models.STATUS_UNREVIEWED)
 
         version.parse_metadata_json(metadata)
+        version.replace_metadata_json()
+        version.save()
 
         new_zip = version.get_zipfile('r')
 
-        old_zip = ZipFile(File(old_zip_file), 'r')
+        old_zip = ZipFile(old_zip_file, 'r')
         self.assertEqual(len(old_zip.infolist()), len(new_zip.infolist()))
-        self.assertEqual(new_zip.read("metadata.json"),
+        self.assertEqual(new_zip.read("metadata.json").decode('utf-8'),
                          version.make_metadata_json_string())
 
         for old_info in old_zip.infolist():
