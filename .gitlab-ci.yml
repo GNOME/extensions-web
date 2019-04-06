@@ -1,0 +1,18 @@
+image: docker:stable
+
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+
+test:
+  stage: test
+  script:
+    - docker build -f openshift/docker/Dockerfile -t extensions-web .
+    - docker run -e EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
+    - docker run extensions-web bash -c 'pip install safety && safety check -r requirements.txt && safety check -r requirements.ego.txt'
