@@ -17,6 +17,7 @@ RUN set -ex \
 	&& wget -O xapian-bindings.tar.xz.asc "https://oligarchy.co.uk/xapian/$XAPIAN_VERSION/xapian-bindings-$XAPIAN_VERSION.tar.xz.asc" \
 	&& export GNUPGHOME="$(mktemp -d)" \
 	&& \
+	{ \
 	found=''; \
 	for server in \
 		ha.pool.sks-keyservers.net \
@@ -27,8 +28,9 @@ RUN set -ex \
 		echo "Fetching GPG key $GPG_KEY from $server"; \
 		gpg --batch --keyserver $server --recv-keys "$GPG_KEY" && found=yes && break; \
 	done; \
-	test -z "$found" && echo >&2 "error: failed to fetch GPG key $GPG_KEY" && exit 1; \
-	gpg --batch --verify xapian-core.tar.xz.asc xapian-core.tar.xz \
+	test -z "$found" && { echo >&2 "error: failed to fetch GPG key $GPG_KEY" && exit 1; } || true; \
+	} \
+	&& gpg --batch --verify xapian-core.tar.xz.asc xapian-core.tar.xz \
 	&& gpg --batch --verify xapian-bindings.tar.xz.asc xapian-bindings.tar.xz \
 	&& { command -v gpgconf > /dev/null && gpgconf --kill all || :; } \
 	&& rm -r "$GNUPGHOME" xapian-core.tar.xz.asc xapian-bindings.tar.xz.asc \
