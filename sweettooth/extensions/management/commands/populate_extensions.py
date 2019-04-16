@@ -2,8 +2,7 @@ import uuid
 import random
 
 from django.contrib.auth.models import User
-from django.core.management.base import BaseCommand
-from sweettooth.extensions.models import Extension
+from django.core.management.base import BaseCommand, CommandError
 from sweettooth.extensions import models
 
 
@@ -13,12 +12,13 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('number_of_extensions', nargs='+', type=int)
         parser.add_argument(
-            '--creator_user_name',
+            '--user',
             type=str,
-            default=None
-            )
+            default=None,
+            help='Specify the User that creates the extension(s).'
+        )
 
-    def _create_extension(self, creator=None):
+    def _create_extension(self, creator=None, verbose=False):
         metadata = {}
 
         metadata.setdefault('uuid', str(uuid.uuid4()))
@@ -28,23 +28,41 @@ class Command(BaseCommand):
 
         if not creator:
             random_int = random.randint(1, 9999)
-            user = User.objects.create_user(username="randomuser{}".format(random_int),
-                                             email='randomuser{}@email.com'.format(random_int),
-                                             password='password')
+            user = User.objects.create_user(
+                username="randomuser{}".format(random_int),
+                email='randomuser{}@email.com'.format(random_int),
+                password='password'
+            )
         else:
             user = User.objects.filter(username=creator).first()
+
+            if not user:
+                raise CommandError('The specified username {} does not exist.'.format(creator))
 
         extension = models.Extension.objects.create_from_metadata(metadata,
                                                                   creator=user)
 
-        version = models.ExtensionVersion.objects.create(extension=extension,
+        extension_version = models.ExtensionVersion.objects.create(extension=extension,
                                                          status=models.STATUS_ACTIVE)
-        print("Created extension {}".format(metadata))
+        if verbose:
+            self.stdout.write("Created extension {}".format(metadata))
 
     def handle(self, *args, **options):
-        print("Options are: {}".format(options))
+        verbose = False
+        if options['verbosity'] >= 2:
+            verbose = True
+
+        if verbose:
+            self.stdout.write("Generating {} extensions.".format(options['number_of_extensions'][0]))
+
+        if options['number_of_extensions'][0] <= 0:
+            raise CommandError('The number of extensions ({}) provided is not valid.'.format(options['number_of_extensions'][0]))
+
         for extension in range(1, options['number_of_extensions'][0]):
-            if options['creator_user_name']:
-                self._create_extension(creator=options['creator_user_name'][0])
+            if options['user']:
+                self._create_extension(creator=options['user'], verbose=verbose)
             else:
-                self._create_extension()
+                self._create_extension(verbose=verbose)
+
+        if verbose:
+            self.stdout.write(self.style.SUCCESS("Done!"))
