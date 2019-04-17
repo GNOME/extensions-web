@@ -123,13 +123,13 @@ Log in using superuser account. You should be able to upload and review extensio
 
 If you want to quickly add extensions and/or reviews to them, there are two functions available:
 ::
-  python manage.py populate_extensions <number_of_extensions>
+  $ python manage.py populate_extensions <number_of_extensions>
 
 This function will create as many (very simple) extensions as you tell it to.
 
 Then to add random reviews to all the extensions, you can tell how many reviews to add to each extension:
 ::
-  python manage.py populate_reviews <number_of_reviews>
+  $ python manage.py populate_reviews <number_of_reviews>
 
 
 .. _virtualenv: http://www.virtualenv.org/
