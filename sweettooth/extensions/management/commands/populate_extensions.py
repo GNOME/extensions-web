@@ -18,7 +18,7 @@ class Command(BaseCommand):
             help='Specify the User that creates the extension(s).'
         )
 
-    def _create_extension(self, creator=None, verbose=False):
+    def _create_extension(self, user=None, verbose=False):
         metadata = {}
 
         metadata.setdefault('uuid', str(uuid.uuid4()))
@@ -26,7 +26,7 @@ class Command(BaseCommand):
         metadata.setdefault('description', 'Simple test metadata')
         metadata.setdefault('url', 'http://test-metadata.gnome.org')
 
-        if not creator:
+        if not user:
             random_int = random.randint(1, 9999)
             user = User.objects.create_user(
                 username="randomuser{}".format(random_int),
@@ -34,10 +34,10 @@ class Command(BaseCommand):
                 password='password'
             )
         else:
-            user = User.objects.filter(username=creator).first()
+            user = User.objects.filter(username=user).first()
 
             if not user:
-                raise CommandError('The specified username {} does not exist.'.format(creator))
+                raise CommandError('The specified username does not exist.')
 
         extension = models.Extension.objects.create_from_metadata(metadata,
                                                                   creator=user)
@@ -60,7 +60,7 @@ class Command(BaseCommand):
 
         for extension in range(1, options['number_of_extensions'][0]):
             if options['user']:
-                self._create_extension(creator=options['user'], verbose=verbose)
+                self._create_extension(user=options['user'], verbose=verbose)
             else:
                 self._create_extension(verbose=verbose)
 
