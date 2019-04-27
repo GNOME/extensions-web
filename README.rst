@@ -105,15 +105,13 @@ Once you've done that, proceed with the database migrations:
 
 After above steps your database should be initialized and almost ready to run.
 
-You should manually specify your site's domain with SQL update via `python manage.py dbshell`:
+You should manually specify your site's domain with SQL update:
 ::
 
   UPDATE `django_site`
-    SET `domain` = 'your.domain.name',
-        `name` = 'your.domain.name'
-    WHERE `django_site`.`id` = 1;
-
-
+  SET `domain` = 'your.domain.name',
+      `name` = 'your.domain.name'
+  WHERE `django_site`.`id` = 1;
 
 And to start the webserver:
 ::
