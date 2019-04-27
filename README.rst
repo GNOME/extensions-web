@@ -78,9 +78,9 @@ You can get started developing the website with::
 
   $ git clone https://gitlab.gnome.org/Infrastructure/extensions-web.git
   $ cd extensions-web
-  $ virtualenv -p python3 --system-site-packages ./venv
+  $ virtualenv --system-site-packages ./venv
 
-The `--system-site-packages` is needed because we require Xapian, which doesn't have
+I use `--system-site-packages` because we require Xapian, which doesn't have
 its Python bindings in PyPI.
 ::
 
@@ -108,10 +108,11 @@ After above steps your database should be initialized and almost ready to run.
 You should manually specify your site's domain with SQL update via `python manage.py dbshell`:
 ::
 
-  sqlite> UPDATE `django_site`
-     ...> SET `domain` = 'example.com',
-     ...>     `name` = 'example.com'
-     ...> WHERE `django_site`.`id` = 1;
+  UPDATE `django_site`
+    SET `domain` = 'your.domain.name',
+        `name` = 'your.domain.name'
+    WHERE `django_site`.`id` = 1;
+
 
 
 And to start the webserver:
@@ -121,15 +122,17 @@ And to start the webserver:
 
 Log in using superuser account. You should be able to upload and review extensions.
 
-If you want to quickly add extensions and/or reviews to them, there are two functions available:
+If you want to quickly add extensions and/or reviews to them, there are two functions available, the extensions will use boilerplate data:
 ::
   $ python manage.py populate_extensions <number_of_extensions>
 
 This function will create as many (very simple) extensions as you tell it to.
 
-Then to add random reviews to all the extensions, you can tell how many reviews to add to each extension:
+Then to add a given number of random ratings to all the extensions:
 ::
-  $ python manage.py populate_reviews <number_of_reviews>
+  $ python manage.py populate_reviews <number_of_ratings>
+
+This function will create as many ratings into each extension as you tell it to, in this case, the username and the rating content gets randomly picked from a "Lorem Ipsum" string.
 
 
 .. _virtualenv: http://www.virtualenv.org/

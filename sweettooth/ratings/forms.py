@@ -29,7 +29,7 @@ class RatingCommentForm(CommentForm):
     def get_comment_model(self):
         return RatingComment
 
-    def get_comment_create_data(self, **kwargs):
+    def get_comment_create_data(self):
         return dict(
             content_type = ContentType.objects.get_for_model(self.target_object),
             object_pk    = force_text(self.target_object._get_pk_val()),
