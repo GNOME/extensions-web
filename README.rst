@@ -120,6 +120,21 @@ And to start the webserver:
 
 Log in using superuser account. You should be able to upload and review extensions.
 
+If you want to quickly add extensions and/or reviews to them, there are two functions available, the extensions will use boilerplate data:
+::
+  $ python manage.py populate_extensions <number_of_extensions>
+
+This function will create as many (very simple) extensions as you tell it to.
+
+Then to add a given number of random ratings to all the extensions:
+::
+
+  $ python manage.py populate_reviews <number_of_ratings>
+
+This function will create as many ratings into each extension as you tell it to, in this case, the username and the rating content gets randomly picked from a "Lorem Ipsum" string.
+
+
+
 .. _virtualenv: http://www.virtualenv.org/
 .. _pip: http://www.pip-installer.org/
 
