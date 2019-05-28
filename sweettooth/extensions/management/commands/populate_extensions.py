@@ -43,7 +43,6 @@ class Command(BaseCommand):
 
         if not user:
             random_name = 'randomuser%d' % random.randint(1, 9999)
-            print('randomname is {}'.format(random_name))
 
             try:
                 user = models.User.objects.get(username=random_name)

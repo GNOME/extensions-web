@@ -40,8 +40,6 @@ class Command(BaseCommand):
         lorem_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         lorem_text_list = (lorem_text.replace(',', '')).split()
 
-        rating_text = lorem_text[:random.randint(1, len(lorem_text))]
-
         random_name = lorem_text_list[random.randint(0, len(lorem_text_list)-1)]
         current_site = Site.objects.get_current()
 
@@ -60,6 +58,8 @@ class Command(BaseCommand):
                     user = models.User.objects.get(username=user)
                 except ObjectDoesNotExist:
                     raise CommandError('The specified username (%s) does not exist.' % user)
+
+            rating_text = lorem_text[:random.randint(1, len(lorem_text))]
 
             comment = RatingComment(
                 user=user,
