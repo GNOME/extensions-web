@@ -220,7 +220,7 @@ def ajax_query_search_query(request, versions, n_per_page):
         mset = enquire.get_mset(offset, n_per_page)
         num_pages = int(ceil(float(mset.get_matches_estimated()) / n_per_page))
 
-    pks = [match.document.get_data() for match in mset]
+    pks = [match.document.get_data().decode('utf-8') for match in mset]
 
     # filter doesn't guarantee an order, so we need to get all the
     # possible models then look them up to get the ordering
