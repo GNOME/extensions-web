@@ -1,0 +1,78 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: reindex-extensions
+spec:
+  template:
+    metadata:
+      name: reindex-extensions
+    spec:
+      containers:
+      - command:
+        - bash
+        - -c
+        - |
+          ls -l /extensions-web/data/xapian.db;
+          rm -r /extensions-web/data/xapian.db/*;
+          python /extensions-web/app/manage.py indexextensions;
+          ls -l /extensions-web/data/xapian.db
+        env:
+        - name: EGO_ADMINISTRATOR_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: administrator-name
+              name: extensions-web
+        - name: EGO_ADMINISTRATOR_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              key: administrator-email
+              name: extensions-web
+        - name: EGO_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: extensions-web
+        - name: EGO_EMAIL_URL
+          valueFrom:
+            secretKeyRef:
+              key: email-url
+              name: extensions-web
+        - name: EGO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: extensions-web
+        - name: EGO_MEDIA_ROOT
+          valueFrom:
+            configMapKeyRef:
+              key: media-root
+              name: extensions-web
+        - name: EGO_STATIC_ROOT
+          valueFrom:
+            configMapKeyRef:
+              key: static-root
+              name: extensions-web
+        - name: EGO_ALLOWED_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: allowed-host
+              name: extensions-web
+        - name: EGO_XAPIAN_DB
+          valueFrom:
+            configMapKeyRef:
+              key: xapian-db
+              name: extensions-web
+        image: docker-registry.default.svc:5000/extensions-web/extensions-web:latest
+        name: check-files
+        volumeMounts:
+        - mountPath: /extensions-web/www
+          name: data-volume
+          subPath: www
+        - mountPath: /extensions-web/data
+          name: data-volume
+          subPath: data
+      restartPolicy: Never
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: extensions-claim
