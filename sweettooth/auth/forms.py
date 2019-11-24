@@ -20,6 +20,12 @@ class AutoFocusForm(object):
             self.fields[field].widget.attrs['autofocus'] = 'autofocus'
             break
 
+class LoginOrEmailAuthenticationForm(object):
+    def __init__(self, *a, **kw):
+        super().__init__(*a, **kw)
+        self.fields['username'].label = _('Username or email')
+
+
 class InlineForm(object):
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
@@ -28,10 +34,11 @@ class InlineForm(object):
             field.widget.attrs['class'] = 'form-control'
 
 class InlineAuthenticationForm(PlainOutputForm, AutoFocusForm,
-                               InlineForm, auth_forms.AuthenticationForm):
+                               InlineForm, LoginOrEmailAuthenticationForm, auth_forms.AuthenticationForm):
     pass
 
-class AuthenticationForm(AutoFocusForm, auth_forms.AuthenticationForm):
+class AuthenticationForm(LoginOrEmailAuthenticationForm, AutoFocusForm,
+                        auth_forms.AuthenticationForm):
     pass
 
 class RegistrationForm(RegistrationFormUniqueEmail):
