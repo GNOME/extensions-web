@@ -1,5 +1,4 @@
-
-from django.contrib.auth import models
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
@@ -11,7 +10,7 @@ from sweettooth.extensions.models import Extension, ExtensionVersion
 from sweettooth.decorators import ajax_view
 
 def profile(request, user):
-    userobj = get_object_or_404(models.User, username=user)
+    userobj = get_object_or_404(get_user_model(), username=user)
 
     is_editable = (request.user == userobj) or request.user.has_perm('review.can-review-extensions')
 
@@ -41,7 +40,7 @@ def ajax_change_display_name(request, pk):
     if request.POST['id'] != 'new_display_name':
         return HttpResponseForbidden()
 
-    userobj = get_object_or_404(models.User, pk=pk)
+    userobj = get_object_or_404(get_user_model(), pk=pk)
     is_editable = (request.user == userobj) or request.user.has_perm('review.can-review-extensions')
 
     if not is_editable:

@@ -3,7 +3,7 @@ import json
 
 from zipfile import ZipFile, BadZipfile
 
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from django.dispatch import Signal
 from django.urls import reverse
@@ -93,7 +93,7 @@ class Extension(models.Model):
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
-    creator = models.ForeignKey(User, db_index=True, on_delete=models.PROTECT)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT)
     description = models.TextField(blank=True)
     url = models.URLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)

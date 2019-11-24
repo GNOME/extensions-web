@@ -1,12 +1,11 @@
 import uuid
 import random
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ObjectDoesNotExist
 from sweettooth.extensions import models
 from django.contrib.sites.models import Site
-
 
 class Command(BaseCommand):
     help = 'Populates the database with randomly generated extensions.'
@@ -41,20 +40,21 @@ class Command(BaseCommand):
             'url': '%s' % current_site.domain
         }
 
+        UserModel = get_user_model()
         if not user:
             random_name = 'randomuser%d' % random.randint(1, 9999)
 
             try:
-                user = models.User.objects.get(username=random_name)
+                user = UserModel.objects.get(username=random_name)
             except ObjectDoesNotExist:
-                user = User.objects.create_user(
+                user = UserModel.objects.create_user(
                     username=random_name,
                     email='%s@%s' % (random_name, current_site.domain),
                     password='password'
                 )
         else:
             try:
-                user = models.User.objects.get(username=user)
+                user = UserModel.objects.get(username=user)
             except ObjectDoesNotExist:
                 raise CommandError('The specified username (%s) does not exist.' % user)
 

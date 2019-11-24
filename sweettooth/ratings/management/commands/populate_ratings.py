@@ -1,7 +1,7 @@
 import random
 import datetime
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.models import ContentType
@@ -10,7 +10,6 @@ from django.contrib.sites.models import Site
 
 from sweettooth.extensions import models
 from sweettooth.ratings.models import RatingComment
-
 
 class Command(BaseCommand):
     help = 'Populates all the Extensions with a number of randomly generated ratings.'
@@ -43,19 +42,20 @@ class Command(BaseCommand):
         random_name = lorem_text_list[random.randint(0, len(lorem_text_list)-1)]
         current_site = Site.objects.get_current()
 
+        UserModel = get_user_model()
         for extension in models.Extension.objects.all():
             if not user:
                 try:
-                    user = models.User.objects.get(username=random_name)
-                except ObjectDoesNotExist:
-                    user = User.objects.create_user(
+                    user = UserModel.objects.get(username=random_name)
+                except UserModel.DoesNotExists:
+                    user = UserModel.objects.create_user(
                         username=random_name,
                         email='%s@%s' % (random_name, current_site.domain),
                         password='password'
                     )
             else:
                 try:
-                    user = models.User.objects.get(username=user)
+                    user = UserModel.objects.get(username=user)
                 except ObjectDoesNotExist:
                     raise CommandError('The specified username (%s) does not exist.' % user)
 

@@ -15,9 +15,9 @@ sys.path.extend([os.path.join(_path, '..'),
 django.setup()
 
 from django.db.models import Count
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
-User.objects \
+get_user_model().objects \
     .filter(is_active=False) \
     .filter(date_joined__lte=datetime.date.today() - datetime.timedelta(days = 5)) \
     .annotate(extensions_count=Count('extension')).filter(extensions_count=0) \
