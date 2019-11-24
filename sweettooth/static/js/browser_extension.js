@@ -8,7 +8,11 @@
     (at your option) any later version.
  */
 
-IS_CHROME	= (typeof(chrome) !== 'undefined' && typeof(chrome.webstore) !== 'undefined');
+IS_CHROME	= (typeof(chrome) !== 'undefined' && (
+	typeof(chrome.webstore) !== 'undefined' ||
+	typeof(chrome.runtime) !== 'undefined' ||
+	typeof(chrome.csi) !== 'undefined'
+));
 IS_FIREFOX	= (typeof(InstallTrigger) !== 'undefined');
 IS_OPERA	= (typeof(opr) !== 'undefined');
 
@@ -39,10 +43,7 @@ function browser_extension_install() {
 	}
 	else if (IS_CHROME)
 	{
-		chrome.webstore.install(
-			undefined,
-			reload_page
-		);
+		window.open('https://chrome.google.com/webstore/detail/gphhapmejobijbbhgpjhcjognlahblep');
 	}
 
 	return false;
