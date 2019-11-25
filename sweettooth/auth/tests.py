@@ -13,12 +13,11 @@ from django_registration import validators
 from django.contrib.auth import get_user_model
 from django.test.testcases import TestCase
 from django.utils.six import text_type
-from .forms import AutoFocusRegistrationForm
+from .forms import AutoFocusRegistrationForm, RegistrationForm
 
 User = get_user_model()
 
-# registration/tests/test_forms.py
-class AuthTests(TestCase):
+class RegistrationDataTest(TestCase):
     registration_data = {
         User.USERNAME_FIELD: 'bob',
         'email': 'bob@example.com',
@@ -39,6 +38,8 @@ class AuthTests(TestCase):
             password=cls.registration_data['password']
         )
 
+# registration/tests/test_forms.py
+class AuthTests(RegistrationDataTest):
     def test_email_uniqueness(self):
         data = self.valid_data.copy()
         data.update(email = self.registration_data['email'])
@@ -72,3 +73,12 @@ class AuthTests(TestCase):
         self.assertFalse(self.client.login(
             username=self.registration_data['email'],
             password=self.valid_data['password1']))
+
+class RegistrationTests(RegistrationDataTest):
+    def test_username_case(self):
+        data = self.valid_data.copy()
+        data[User.USERNAME_FIELD] = self.registration_data[User.USERNAME_FIELD].swapcase()
+        self.assertTrue(data[User.USERNAME_FIELD] != self.registration_data[User.USERNAME_FIELD])
+
+        form = RegistrationForm(data=data)
+        self.assertFalse(form.is_valid())
