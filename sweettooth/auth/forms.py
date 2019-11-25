@@ -48,9 +48,6 @@ class RegistrationForm(RegistrationFormUniqueEmail):
         error_messages = {'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
     email = forms.EmailField(widget=forms.TextInput(attrs=dict(maxlength=75)),
                              label=_(u'Email'))
-    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Password confirmation"), widget=forms.PasswordInput,
-        help_text = _("Enter the same password as above, for verification."))
 
 
 class AutoFocusRegistrationForm(AutoFocusForm, RegistrationForm):
