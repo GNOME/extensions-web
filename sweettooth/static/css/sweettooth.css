@@ -626,6 +626,10 @@ li.extension:last-child,
     margin-top: 20px;
 }
 
+.preview blockquote {
+    font-size: inherit;
+}
+
 /* Errors & Messages */
 /* ==================================================================== */
 

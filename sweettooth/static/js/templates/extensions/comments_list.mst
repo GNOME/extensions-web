@@ -9,7 +9,9 @@
         <div class="rating" data-rating-value="{{rating}}"></div> by
       {{/rating}}
       <a class="comment-author" href="{{author.url}}">{{author.username}}</a>
-      <p>{{comment}}</p>
+      <div>
+        {{{comment}}}
+      </div>
       <time datetime="{{date.timestamp}}Z">{{date.standard}}</time>
     </div>
   </div>
