@@ -49,6 +49,13 @@ class RegistrationForm(RegistrationFormCaseInsensitive, RegistrationFormUniqueEm
     email = forms.EmailField(widget=forms.TextInput(attrs=dict(maxlength=75)),
                              label=_(u'Email'))
 
+    def clean(self):
+        cleaned_data = super().clean()
+
+        if cleaned_data.get('username') == cleaned_data.get('email'):
+            raise forms.ValidationError(_("You should not use email as username"))
+
+        return cleaned_data
 
 class AutoFocusRegistrationForm(AutoFocusForm, RegistrationForm):
     pass

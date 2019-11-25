@@ -75,6 +75,15 @@ class AuthTests(RegistrationDataTest):
             password=self.valid_data['password1']))
 
 class RegistrationTests(RegistrationDataTest):
+    def test_username_email(self):
+        form = RegistrationForm(data=self.valid_data)
+        self.assertTrue(form.is_valid())
+
+        data = self.valid_data.copy()
+        data[User.USERNAME_FIELD] = data['email']
+        form = RegistrationForm(data=data)
+        self.assertFalse(form.is_valid())
+
     def test_username_case(self):
         data = self.valid_data.copy()
         data[User.USERNAME_FIELD] = self.registration_data[User.USERNAME_FIELD].swapcase()
