@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-24 17:14+0000\n"
-"PO-Revision-Date: 2019-11-24 21:52-0300\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2019-11-26 16:59-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -19,7 +19,6 @@ msgstr ""
 "X-Generator: Gtranslator 3.32.0\n"
 
 #: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
-#| msgid "Username"
 msgid "Username or email"
 msgstr "Nome do usuário ou e-mail"
 
@@ -40,17 +39,9 @@ msgstr "Esse valor pode conter apenas letras, números e caracteres @/./+/-/_"
 msgid "Email"
 msgstr "E-mail"
 
-#: sweettooth/auth/forms.py:51 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Senha"
-
-#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Confirmação de senha"
-
-#: sweettooth/auth/forms.py:53 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Digite a mesma senha acima, para verificação."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Você não deve usar e-mail como nome de usuário"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -369,12 +360,12 @@ msgstr "Popularidade"
 msgid "Sort by"
 msgstr "Ordenar por"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Mostrar mais análise"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Não há comentários. Seja o primeiro!"
@@ -433,3 +424,12 @@ msgstr "Extensão de sistema"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Você desinstalou"
+
+#~ msgid "Password"
+#~ msgstr "Senha"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Confirmação de senha"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "Digite a mesma senha acima, para verificação."
