@@ -120,7 +120,7 @@ def grab_lines(zipfile, filename):
     except KeyError:
         return None
     else:
-        content = f.read()
+        content = f.read().decode('utf-8')
         f.close()
         return content.splitlines()
 
