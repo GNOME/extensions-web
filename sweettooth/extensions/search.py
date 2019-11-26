@@ -1,6 +1,7 @@
 
 import xapian
 
+from functools import reduce
 from django.conf import settings
 from django.db.models import signals
 
