@@ -6,6 +6,6 @@
     "3.2.0", 
     "3.2"
   ], 
-  "url": "http://git.gnome.org/extensions-web", 
+  "url": "https://gitlab.gnome.org/Infrastructure/extensions-web",
   "uuid": "reject-extension@testcases.sweettooth.mecheye.net"
 }

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}{{ extension.name }} - {{ block.super }}{% endblock %}
 
 {% load extension_icon %}
@@ -21,9 +22,9 @@
       <div class="controls col-xs-12 col-sm-4 col-md-4 col-lg-4">
         <div class="switch"></div>
         <div class="extra-buttons">
-          <div class="upgrade-button" title="Upgrade this extension"></div>
-          <div class="configure-button" title="Configure this extension"></div>
-          <div class="uninstall-button" title="Uninstall this extension"></div>
+          <div class="upgrade-button" title="{% trans 'Upgrade this extension' %}"></div>
+          <div class="configure-button" title="{% trans 'Configure this extension' %}"></div>
+          <div class="uninstall-button" title="{% trans 'Uninstall this extension' %}"></div>
         </div>
       </div>
 
@@ -49,19 +50,19 @@
 
             <dl>
               {% if extension.url %}
-              <dt>Extension Homepage</dt>
+              <dt>{% trans "Extension Homepage" %}</dt>
               <dd><a href="{{ extension.url }}" id="extension_url">{{ extension.url }}</a></dd>
               {% endif %}
             </dl>
             <dl>
-              <dt>Download</dt>
+              <dt>{% trans "Download" %}</dt>
               <dd class="extension-download">
                   <select class="shell-version form-control">
-                      <option>Shell version…</option>
+                      <option>{% trans "Shell version…" %}</option>
                   </select>
 
                   <select class="extension-version form-control">
-                      <option>Extension version…</option>
+                      <option>{% trans "Extension version…" %}</option>
                   </select>
               </dd>
             </dl>
@@ -70,8 +71,10 @@
 
       {% if not is_visible %}
       <p class="step">
+        {% blocktrans trimmed %}
         A reviewer will review the extension you submitted to make sure there's nothing too
         dangerous. You'll be emailed the result of the review.
+        {% endblocktrans %}
       </p>
       {% endif %}
 

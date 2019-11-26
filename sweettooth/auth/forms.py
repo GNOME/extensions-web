@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import ugettext_lazy as _
-from registration.forms import RegistrationFormUniqueEmail
+from django_registration.forms import RegistrationFormCaseInsensitive, RegistrationFormUniqueEmail
 
 class PlainOutputForm(object):
     def as_plain(self):
@@ -15,36 +15,47 @@ class PlainOutputForm(object):
 
 class AutoFocusForm(object):
     def __init__(self, *a, **kw):
-        super(AutoFocusForm, self).__init__(*a, **kw)
+        super().__init__(*a, **kw)
         for field in self.fields:
             self.fields[field].widget.attrs['autofocus'] = 'autofocus'
             break
 
+class LoginOrEmailAuthenticationForm(object):
+    def __init__(self, *a, **kw):
+        super().__init__(*a, **kw)
+        self.fields['username'].label = _('Username or email')
+
+
 class InlineForm(object):
     def __init__(self, *a, **kw):
-        super(InlineForm, self).__init__(*a, **kw)
-        for field in self.fields.itervalues():
+        super().__init__(*a, **kw)
+        for field in self.fields.values():
             field.widget.attrs['placeholder'] = field.label
             field.widget.attrs['class'] = 'form-control'
 
 class InlineAuthenticationForm(PlainOutputForm, AutoFocusForm,
-                               InlineForm, auth_forms.AuthenticationForm):
+                               InlineForm, LoginOrEmailAuthenticationForm, auth_forms.AuthenticationForm):
     pass
 
-class AuthenticationForm(AutoFocusForm, auth_forms.AuthenticationForm):
+class AuthenticationForm(LoginOrEmailAuthenticationForm, AutoFocusForm,
+                        auth_forms.AuthenticationForm):
     pass
 
-class RegistrationForm(RegistrationFormUniqueEmail):
+class RegistrationForm(RegistrationFormCaseInsensitive, RegistrationFormUniqueEmail):
     # Copies the standard setting from the django.contrib.auth.forms
     username = forms.RegexField(label=_("Username"), max_length=30, regex=r'^[\w.@+-]+$',
         help_text = _("Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."),
         error_messages = {'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
     email = forms.EmailField(widget=forms.TextInput(attrs=dict(maxlength=75)),
                              label=_(u'Email'))
-    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Password confirmation"), widget=forms.PasswordInput,
-        help_text = _("Enter the same password as above, for verification."))
 
+    def clean(self):
+        cleaned_data = super().clean()
+
+        if cleaned_data.get('username') == cleaned_data.get('email'):
+            raise forms.ValidationError(_("You should not use email as username"))
+
+        return cleaned_data
 
 class AutoFocusRegistrationForm(AutoFocusForm, RegistrationForm):
     pass

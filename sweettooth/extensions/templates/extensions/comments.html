@@ -1,11 +1,12 @@
+{% load i18n %}
 <div id="opinion_form" class="col-sm-6 col-sm-push-6">
-  <h4>Your opinion</h4>
+  <h4>{% trans "Your opinion" %}</h4>
   {% if request.user.is_authenticated %}
   <div class="comment_choice btn-group btn-group-justified">
-    Leave a…
-    <a class="btn btn-default" href="javascript:void 0" id="leave_comment">Comment</a>
-    <a class="btn btn-default" href="javascript:void 0" id="leave_rating">Rating</a>
-    <a class="btn btn-default" href="{% url 'report_error' pk=extension.pk %}">Bug report</a>
+    {% trans "Leave a…" %}
+    <a class="btn btn-default" href="javascript:void 0" id="leave_comment">{% trans "Comment" %}</a>
+    <a class="btn btn-default" href="javascript:void 0" id="leave_rating">{% trans "Rating" %}</a>
+    <a class="btn btn-default" href="{% url 'report_error' pk=extension.pk %}">{% trans "Bug report" %}</a>
   </div>
   <div id="rating_form">
     {% load comments %}
@@ -13,12 +14,13 @@
   </div>
   {% else %}
   <p class="unauthenticated">
-    Unfortunately, to help prevent spam, we require that you <a href="{% url 'auth-login' %}">log in to GNOME Shell Extensions</a> in order to post a comment or report an error. You understand, right?
+    {% url 'auth-login' as login_url %}
+    {% blocktrans %}Unfortunately, to help prevent spam, we require that you <a href="{{ login_url }}">log in to GNOME Shell Extensions</a> in order to post a comment or report an error. You understand, right?{% endblocktrans %}
   </p>
   {% endif %}
 </div>
 <div id="comments" class="col-sm-6 col-sm-pull-6 no-left-padding">
-  <h4>User Reviews</h4>
+  <h4>{% trans "User Reviews" %}</h4>
   <div class="comments-holder"></div>
-  <p class="loading">Loading reviews...</p>
+  <p class="loading">{% trans "Loading reviews…" %}</p>
 </div>

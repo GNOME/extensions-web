@@ -9,7 +9,7 @@
     (at your option) any later version.
  */
 
-define(['jquery', 'templates'], function ($, templates) {
+define(['jquery', 'template!diff/equals_chunk_row'], function ($, rowTemplate) {
 	"use strict";
 
 	var exports = {};
@@ -29,7 +29,7 @@ define(['jquery', 'templates'], function ($, templates) {
 
 			var contents = oldContents[line.oldindex];
 
-			var $row = $(templates.get('diff/equals_chunk_row')({
+			var $row = $(rowTemplate.render({
 				oldlinenum: line.oldlinenum,
 				newlinenum: line.newlinenum,
 				contents: contents

@@ -144,10 +144,10 @@
       "spec": {
         "tags": [
           {
-            "name": "2.7-stretch",
+            "name": "3.6-stretch",
             "from": {
               "kind": "DockerImage",
-              "name": "python:2.7-stretch"
+              "name": "python:3.6-stretch"
             },
             "importPolicy": {
               "scheduled": true
@@ -183,7 +183,7 @@
             "forcePull": true,
             "from": {
               "kind": "ImageStreamTag",
-              "name": "python:2.7-stretch"
+              "name": "python:3.6-stretch"
             },
             "env": [
                 {

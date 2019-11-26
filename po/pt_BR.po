@@ -1,0 +1,435 @@
+# Brazilian Portuguese translation for extensions-web.
+# Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
+# This file is distributed under the same license as the extensions-web package.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extensions-web master\n"
+"Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
+"POT-Creation-Date: 2019-11-24 17:14+0000\n"
+"PO-Revision-Date: 2019-11-24 21:52-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 3.32.0\n"
+
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#| msgid "Username"
+msgid "Username or email"
+msgstr "Nome do usuário ou e-mail"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+msgid "Username"
+msgstr "Nome do usuário"
+
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+"Obrigatório. 30 caracteres ou menos. Letras, dígitos e @/./+/-/_ apenas."
+
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr "Esse valor pode conter apenas letras, números e caracteres @/./+/-/_"
+
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+msgid "Email"
+msgstr "E-mail"
+
+#: sweettooth/auth/forms.py:51 extensions-web-domain-django:1
+msgid "Password"
+msgstr "Senha"
+
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+msgid "Password confirmation"
+msgstr "Confirmação de senha"
+
+#: sweettooth/auth/forms.py:53 extensions-web-domain-django:1
+msgid "Enter the same password as above, for verification."
+msgstr "Digite a mesma senha acima, para verificação."
+
+#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/registration/login_popup_form.html:14
+#: extensions-web-domain-django:1
+msgid "Forgot your password?"
+msgstr "Esqueceu sua senha?"
+
+#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login_popup_form.html:11
+#: sweettooth/templates/base.html:72 extensions-web-domain-django:1
+msgid "Log in"
+msgstr "Conectar"
+
+#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login_popup_form.html:17
+#: extensions-web-domain-django:1
+msgid "Don't have an account?"
+msgstr "Não tem uma conta?"
+
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Registrar"
+
+#: sweettooth/auth/templates/registration/login.html:6
+#: extensions-web-domain-django:1
+msgid "User Login"
+msgstr "Login de usuário"
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:12
+#: sweettooth/auth/templates/registration/password_reset_form.html:12
+#: extensions-web-domain-django:1
+msgid "Reset your password"
+msgstr "Redefinir sua senha"
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:15
+#: extensions-web-domain-django:1
+msgid ""
+"The token for the password reset is incorrect. Please check your link and "
+"try again."
+msgstr ""
+"O token para a redefinição de senha está incorreto. Por favor, verifique seu "
+"link e tente novamente."
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
+#: sweettooth/auth/templates/registration/password_reset_form.html:7
+#: extensions-web-domain-django:1
+msgid "Password reset"
+msgstr "Redefinir senha"
+
+#: sweettooth/auth/templates/registration/password_reset_form.html:8
+#: extensions-web-domain-django:1
+msgid ""
+"Forgot your password? Enter your e-mail address below, and we’ll e-mail "
+"instructions for setting a new one."
+msgstr ""
+"Escreveu sua senha? Digite seu endereço de e-mail abaixo e vamos enviar as "
+"instruções pelo e-mail para definir uma nova."
+
+#: sweettooth/context_processors.py:13 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "Adicione suas"
+
+#: sweettooth/context_processors.py:17 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "Extensões instaladas"
+
+#: sweettooth/context_processors.py:21 extensions-web-domain-django:1
+msgid "About"
+msgstr "Sobre"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Extensions"
+msgstr "Extensões"
+
+#: sweettooth/extensions/templates/extensions/comments.html:18
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Unfortunately, to help prevent spam, we require that you <a href="
+"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
+"comment or report an error. You understand, right?"
+msgstr ""
+"Infelizmente, para ajudar a evitar spam, nós precisamos que você se <a href="
+"\"%(login_url)s\">conecte no GNOME Shell Extensions</a> para publicar um "
+"comentário ou relatar um erro. Você compreende, certo?"
+
+#: sweettooth/extensions/templates/extensions/comments.html:23
+#: extensions-web-domain-django:1
+msgid "User Reviews"
+msgstr "Análises de usuários"
+
+#: sweettooth/extensions/templates/extensions/comments.html:25
+#: extensions-web-domain-django:1
+msgid "Loading reviews…"
+msgstr "Carregando análises…"
+
+#: sweettooth/extensions/templates/extensions/comments.html:3
+#: extensions-web-domain-django:1
+msgid "Your opinion"
+msgstr "Sua opinião"
+
+#: sweettooth/extensions/templates/extensions/comments.html:6
+#: extensions-web-domain-django:1
+msgid "Leave a…"
+msgstr "Deixar um(a)…"
+
+#: sweettooth/extensions/templates/extensions/comments.html:7
+#: extensions-web-domain-django:1
+msgid "Comment"
+msgstr "Comentário"
+
+#: sweettooth/extensions/templates/extensions/comments.html:8
+#: extensions-web-domain-django:1
+msgid "Rating"
+msgstr "Classificação"
+
+#: sweettooth/extensions/templates/extensions/comments.html:9
+#: extensions-web-domain-django:1
+msgid "Bug report"
+msgstr "Relatório de erro"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "Atualizar essa extensão"
+
+#: sweettooth/extensions/templates/extensions/detail.html:26
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "Configurar essa extensão"
+
+#: sweettooth/extensions/templates/extensions/detail.html:27
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "Desinstalar essa extensão"
+
+#: sweettooth/extensions/templates/extensions/detail.html:53
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "Site da extensão"
+
+#: sweettooth/extensions/templates/extensions/detail.html:58
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "Baixar"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Versão do shell…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:65
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "Versão da extensão…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:74
+#: extensions-web-domain-django:1
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+"Um revisor analisará a extensão que você enviou para garantir que não haja "
+"nada muito perigoso. Você receberá um e-mail com o resultado da análise."
+
+#: sweettooth/extensions/templates/extensions/list.html:13
+#: extensions-web-domain-django:1
+msgid "Search for extensions…"
+msgstr "Pesquisar por extensões…"
+
+#: sweettooth/extensions/templates/extensions/local.html:3
+#: sweettooth/extensions/templates/extensions/local.html:8
+#: extensions-web-domain-django:1
+msgid "Installed Extensions"
+msgstr "Extensões instaladas"
+
+#: sweettooth/extensions/templates/extensions/local.html:5
+#: extensions-web-domain-django:1
+msgid "Shell settings"
+msgstr "Configurações do shell"
+
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+msgid "Content"
+msgstr "Conteúdo"
+
+#: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
+msgid "Metadata"
+msgstr "Metadados"
+
+#: sweettooth/ratings/templates/comments/form.html:26
+#: sweettooth/ratings/templates/comments/preview.html:45
+#: extensions-web-domain-django:1
+msgid "Post"
+msgstr "Publicar"
+
+#: sweettooth/ratings/templates/comments/form.html:27
+#: sweettooth/ratings/templates/comments/preview.html:46
+#: extensions-web-domain-django:1
+msgid "Preview"
+msgstr "Visualizar"
+
+#: sweettooth/ratings/templates/comments/form.html:8
+#: sweettooth/ratings/templates/comments/preview.html:27
+#: extensions-web-domain-django:1
+msgid "What do you think about this GNOME extension?"
+msgstr "O que você pensa sobre essa extensão do GNOME?"
+
+#: sweettooth/ratings/templates/comments/preview.html:13
+#: extensions-web-domain-django:1
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] "Por favor, corrija o erro abaixo"
+msgstr[1] "Por favor, corrija os erros abaixo"
+
+#: sweettooth/ratings/templates/comments/preview.html:4
+#: sweettooth/ratings/templates/comments/preview.html:15
+#: extensions-web-domain-django:1
+msgid "Preview your comment"
+msgstr "Visualize seu comentário"
+
+#: sweettooth/ratings/templates/comments/preview.html:18
+#: extensions-web-domain-django:1
+msgid "Post Comment"
+msgstr "Publica seu comentário"
+
+#: sweettooth/ratings/templates/comments/preview.html:21
+#: extensions-web-domain-django:1
+msgid "Edit your comment"
+msgstr "Edite seu comentário"
+
+#: sweettooth/templates/base.html:16 extensions-web-domain-django:1
+msgid "Latest extensions in GNOME Shell Extensions"
+msgstr "Últimas extensões no GNOME Shell Extensions"
+
+#: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
+#: extensions-web-domain-django:1
+msgid "GNOME Shell Extensions"
+msgstr "GNOME Shell Extensions"
+
+#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+msgid "User Profile"
+msgstr "Perfil do usuário"
+
+#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+msgid "User Settings"
+msgstr "Configurações do usuário"
+
+#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "Encerrar sessão"
+
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+msgid ""
+"To control GNOME Shell extensions using this site you must install GNOME "
+"Shell integration that consists of two parts: browser extension and native "
+"host messaging application"
+msgstr ""
+"Para controlar as extensões do GNOME Shell usando este site, você deve "
+"instalar a integração do GNOME Shell que consiste em duas partes: extensão "
+"do navegador e aplicativo de mensagens do host nativo"
+
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+msgid "Install GNOME Shell integration browser extension"
+msgstr "Instalar a extensão do navegador de integração do GNOME Shell"
+
+#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+msgid "Click here to install browser extension"
+msgstr "Clique aqui para instalar a extensão do navegador"
+
+#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#, javascript-format
+msgid "See %swiki page%s for native host connector installation instructions"
+msgstr ""
+"Veja a %spágina wiki%s para instruções de instalação do conector do host "
+"nativo"
+
+#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+msgid ""
+"We cannot detect a running copy of GNOME on this system, so some parts of "
+"the interface may be disabled. See <a href=\"/about/#no-detection\">our "
+"troubleshooting entry</a> for more information."
+msgstr ""
+"Não conseguimos detectar uma cópia em execução do GNOME neste sistema, "
+"portanto, algumas partes da interface podem estar desabilitadas. Consulte <a "
+"href=\"/about/#no-detection\">nossa entrada de solução de problemas</a> para "
+"obter mais informações."
+
+#: sweettooth/static/js/extensions.js:136
+#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+msgid "GNOME Shell Extensions cannot list your installed extensions."
+msgstr "GNOME Shell Extensions não consegue listar suas extensões instaladas."
+
+#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+msgid "Compatible with"
+msgstr "Compatível com"
+
+#: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
+msgid "Name"
+msgstr "Nome"
+
+#: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
+msgid "Recent"
+msgstr "Recentes"
+
+#: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
+msgid "Downloads"
+msgstr "Downloads"
+
+#: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
+msgid "Popularity"
+msgstr "Popularidade"
+
+#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+msgid "Sort by"
+msgstr "Ordenar por"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: extensions-web-domain-djangojs:1
+msgid "Show more reviews"
+msgstr "Mostrar mais análise"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: extensions-web-domain-djangojs:1
+msgid "There are no comments. Be the first!"
+msgstr "Não há comentários. Seja o primeiro!"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:4
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "Autor"
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
+#: extensions-web-domain-djangojs:1
+msgid "What's wrong?"
+msgstr "O que há de errado?"
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
+#: extensions-web-domain-djangojs:1
+msgid "GNOME Shell Extensions did not detect any errors with this extension."
+msgstr "GNOME Shell Extensions não conseguiu detectar erros com essa extensão."
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
+#: extensions-web-domain-djangojs:1
+msgid "Version information"
+msgstr "Informações da versão"
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
+#: extensions-web-domain-djangojs:1
+msgid "Shell version"
+msgstr "Versão do shell"
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
+#: extensions-web-domain-djangojs:1
+msgid "Extension version"
+msgstr "Versão da extensão"
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
+#: extensions-web-domain-djangojs:1
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
+#: extensions-web-domain-djangojs:1
+msgid "What have you tried?"
+msgstr "O que você tentou fazer?"
+
+#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
+#: extensions-web-domain-djangojs:1
+msgid "Automatically detected errors"
+msgstr "Erros detectados automaticamente"
+
+#: sweettooth/static/js/templates/extensions/info_contents.mst:21
+#: extensions-web-domain-djangojs:1
+msgid "System extension"
+msgstr "Extensão de sistema"
+
+#: sweettooth/static/js/templates/extensions/uninstall.mst:1
+#: extensions-web-domain-djangojs:1
+msgid "You uninstalled"
+msgstr "Você desinstalou"

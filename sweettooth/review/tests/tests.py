@@ -7,7 +7,7 @@ from sweettooth.review.views import get_old_version, should_auto_approve_changes
 
 from sweettooth.testutils import BasicUserTestCase
 
-from tests_diff import DiffTest
+from .tests_diff import DiffTest
 
 class DiffViewTest(BasicUserTestCase, TestCase):
     def test_get_zipfiles(self):

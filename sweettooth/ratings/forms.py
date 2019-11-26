@@ -1,12 +1,11 @@
 
-import datetime
-
 from django.forms import fields, widgets
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django_comments.forms import CommentForm
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
+from django.utils import timezone
 
 from sweettooth.ratings.models import RatingComment
 
@@ -29,14 +28,14 @@ class RatingCommentForm(CommentForm):
     def get_comment_model(self):
         return RatingComment
 
-    def get_comment_create_data(self):
+    def get_comment_create_data(self, site_id=None):
         return dict(
             content_type = ContentType.objects.get_for_model(self.target_object),
-            object_pk    = force_unicode(self.target_object._get_pk_val()),
+            object_pk    = force_text(self.target_object._get_pk_val()),
             comment      = self.cleaned_data["comment"],
             rating       = self.cleaned_data["rating"],
-            submit_date  = datetime.datetime.now(),
-            site_id      = settings.SITE_ID,
+            submit_date  = timezone.now(),
+            site_id      = site_id or getattr(settings, "SITE_ID", None),
             is_public    = True,
             is_removed   = False,
         )

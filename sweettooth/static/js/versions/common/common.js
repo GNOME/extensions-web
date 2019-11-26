@@ -84,6 +84,26 @@ define(['jquery', 'dbus!API'], function ($, API) {
 			return _makePromise(API.uninstallExtension(uuid));
 		},
 
+		GetUserExtensionsDisabled: function(disabled) {
+			return API.userExtensionsDisabled;
+		},
+
+		GetVersionValidationDisabled: function(disabled) {
+			return !API.versionValidationEnabled;
+		},
+
+		SetUserExtensionsDisabled: function(disabled) {
+			return API.setUserExtensionsDisabled(disabled);
+		},
+
+		SetVersionValidationDisabled: function(disabled) {
+			return API.setVersionValidationDisabled(disabled);
+		},
+
+		Reject: function() {
+			return Promise.reject();
+		},
+
 		API_onchange: function (proxy) {
 			return function (uuid, newState, error) {
 				if (proxy.extensionStateChangedHandler !== null)
@@ -98,6 +118,15 @@ define(['jquery', 'dbus!API'], function ($, API) {
 				if (proxy.shellRestartHandler !== null)
 				{
 					proxy.shellRestartHandler();
+				}
+			};
+		},
+
+		API_onShellSettingChanged: function (proxy) {
+			return function (key, value) {
+				if (proxy.shellSettingChangedHandler !== null)
+				{
+					proxy.shellSettingChangedHandler(key, value);
 				}
 			};
 		}

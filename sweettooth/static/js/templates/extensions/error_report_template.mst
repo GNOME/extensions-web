@@ -1,0 +1,23 @@
+<x-gettext>What's wrong?</x-gettext>
+
+
+
+<x-gettext>What have you tried?</x-gettext>
+
+
+
+<x-gettext>Automatically detected errors</x-gettext>:
+
+{{#errors}}
+  {{.}}
+
+================
+{{/errors}}
+{{^errors}}
+<x-gettext>GNOME Shell Extensions did not detect any errors with this extension.</x-gettext>
+{{/errors}}
+
+<x-gettext>Version information</x-gettext>:
+
+    <x-gettext>Shell version</x-gettext>: {{sv}}
+    <x-gettext>Extension version</x-gettext>: {{#ev}}{{ev}}{{/ev}}{{^ev}}<x-gettext>Unknown</x-gettext>{{/ev}}

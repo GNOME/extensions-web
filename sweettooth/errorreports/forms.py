@@ -15,7 +15,7 @@ class ErrorReportForm(forms.ModelForm):
         return self.cleaned_data['comment'].strip()
 
     def save(self, request, extension, commit=True):
-        report = super(ErrorReportForm, self).save(commit=False)
+        report = super().save(commit=False)
         report.user = request.user
         report.extension = extension
         if commit:

@@ -1,8 +1,9 @@
+{% load static from static %}
+{% load gravatar %}
+{% load i18n %}
 <!doctype html>
 <html>
   <head>
-    {% load static from staticfiles %}
-    {% load gravatar %}
     <meta charset="utf-8" />
     <meta name="google-site-verification" content="FqL97fLHaUM8zWWqkc4ZrvY-u9MikPkV0QshIzc-Bp8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +13,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
     <link rel="alternate" type="application/rss+xml"
-          href="{% url 'extensions-rss-feed' %}" title="Latest extensions in GNOME Shell Extensions" />
-    <title>{% block title %}GNOME Shell Extensions{% endblock %}</title>
+          href="{% url 'extensions-rss-feed' %}" title="{% trans 'Latest extensions in GNOME Shell Extensions' %}" />
+    <title>{% block title %}{% trans "GNOME Shell Extensions" %}{% endblock %}</title>
     <script>
         {% load static_paths %}
         var require = {
@@ -24,6 +25,7 @@
 
         var django_static_images = {% static_img_paths %};
     </script>
+    <script src="{% url 'javascript-catalog' %}"></script>
     <script src="{% static 'js/browser_extension.js' %}"></script>
     <script src="{% static 'js/require.js' %}"></script>
     <script src="{% static 'js/jquery.js' %}"></script>
@@ -45,7 +47,7 @@
                         <span class="icon-bar middle-bar"></span>
                         <span class="icon-bar bottom-bar"></span>
                     </button>
-                    <a class="gnome-navbar-brand" title="GNOME Shell Extensions" href="/"><img src="{% static 'images/gnome-extensions.svg' %}" alt="GNOME Shell Extensions" /></a>
+                    <a class="gnome-navbar-brand" title="{% trans 'GNOME Shell Extensions' %}" href="/"><img src="{% static 'images/gnome-extensions.svg' %}" alt="GNOME Shell Extensions" /></a>
                     <ul class="nav navbar-nav icons visible-xs">
                         {% if n_unreviewed_extensions %}
                         <li>
@@ -67,7 +69,7 @@
                     {% if request.user.is_authenticated %}
                         <a href="{% url 'auth-profile' user=request.user.username %}" class="dropdown-toggle hidden-xs avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% gravatar_url request request.user.email %}"></a>
                     {% else %}
-                        <a href="{% url 'auth-login' %}" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Log in <span class="caret"></span></a>
+                        <a href="{% url 'auth-login' %}" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Log in" %} <span class="caret"></span></a>
                     {% endif %}
                     {% endspaceless %}
                         <ul class="dropdown-menu login_popup_form">
@@ -136,7 +138,7 @@
                 <div class="col-sm-12">
                     <div id="footnotes" class="col-sm-9">
                         Copyright &copy; 2005&#8210;{% now "Y" %} <strong class="gnome_logo">The GNOME Project</strong><br>
-                        <small>Free to share and remix: <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC-BY</a>. Optimised for standards. Hosted by <a href="https://www.redhat.com/">Red Hat</a>. Powered by <a href="//www.djangoproject.com">Django</a> and <a href="//git.gnome.org/browse/extensions-web">SweetTooth</a></small>
+                        <small>Free to share and remix: <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons CC-BY</a>. Optimised for standards. Hosted by <a href="https://www.redhat.com/">Red Hat</a>. Powered by <a href="https://www.djangoproject.com">Django</a> and <a href="https://gitlab.gnome.org/Infrastructure/extensions-web">SweetTooth</a></small>
                     </div>
                 </div>
             </div>

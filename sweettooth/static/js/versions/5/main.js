@@ -1,4 +1,13 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2012  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2017-2019  Yuri Konotopov <ykonotopov@gnome.org>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
 define(['jquery', 'dbus!API', 'versions/common/common'], function($, API, common) {
     "use strict";
@@ -14,6 +23,11 @@ define(['jquery', 'dbus!API', 'versions/common/common'], function($, API, common
         InstallExtension: common.InstallExtensionAsync,
         UninstallExtension: common.UninstallExtension,
         LaunchExtensionPrefs: common.LaunchExtensionPrefs,
+
+        GetUserExtensionsDisabled: common.GetUserExtensionsDisabled,
+        GetVersionValidationDisabled: common.GetVersionValidationDisabled,
+        SetUserExtensionsDisabled: common.Reject,
+        SetVersionValidationDisabled: common.Reject,
 
         ShellVersion: API.shellVersion,
         VersionValidationEnabled: typeof(API.versionValidationEnabled) == 'undefined' || API.versionValidationEnabled,

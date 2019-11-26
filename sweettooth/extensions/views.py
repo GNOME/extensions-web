@@ -4,7 +4,6 @@ from math import ceil
 
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, InvalidPage
-from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
@@ -12,6 +11,7 @@ from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpRespo
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
+from django.urls import reverse
 
 from sweettooth.exceptions import DatabaseErrorWithMessages
 from sweettooth.extensions import models, search
@@ -59,8 +59,8 @@ def grab_proper_extension_version(extension, shell_version, disable_version_vali
         supported_shell_versions = sorted(supported_shell_versions, key=lambda x: (x.major, x.minor, x.point))
         requested_shell_version = models.parse_version_string(shell_version)
 
-        if cmp((supported_shell_versions[0].major, supported_shell_versions[0].minor,
-                supported_shell_versions[0].point), requested_shell_version) > 0:
+        if (supported_shell_versions[0].major, supported_shell_versions[0].minor,
+                supported_shell_versions[0].point) > requested_shell_version:
             versions = visible_versions.filter(shell_versions=supported_shell_versions[0])
         else:
             supported_shell_versions = list(shell_version
@@ -111,7 +111,11 @@ def shell_download(request, uuid):
 @ajax_view
 def shell_update(request):
     try:
-        installed = json.loads(request.GET['installed'])
+        if request.method == 'POST':
+            installed = json.load(request)
+        # TODO: drop GET request support at year after chrome-gnome-shell 11 release
+        else:
+            installed = json.loads(request.GET['installed'])
         shell_version = request.GET['shell_version']
         disable_version_validation = request.GET.get('disable_version_validation', False)
     except (KeyError, ValueError):
@@ -119,7 +123,7 @@ def shell_update(request):
 
     operations = {}
 
-    for uuid, meta in installed.iteritems():
+    for uuid, meta in installed.items():
         try:
             version = int(meta['version'])
         except (KeyError, TypeError):
@@ -216,7 +220,7 @@ def ajax_query_search_query(request, versions, n_per_page):
         mset = enquire.get_mset(offset, n_per_page, 5 * n_per_page)
         num_pages = int(ceil(float(mset.get_matches_lower_bound()) / n_per_page))
 
-    pks = [match.document.get_data() for match in mset]
+    pks = [match.document.get_data().decode('utf-8') for match in mset]
 
     # filter doesn't guarantee an order, so we need to get all the
     # possible models then look them up to get the ordering
@@ -240,7 +244,7 @@ def ajax_query_view(request):
             return redirect((settings.STATIC_URL + "extensions.json"), permanent=True)
 
         n_per_page = min(n_per_page, 25)
-    except (KeyError, ValueError), e:
+    except (KeyError, ValueError):
         n_per_page = 10
 
     version_strings = request.GET.getlist('shell_version')
@@ -420,7 +424,7 @@ def create_version(request, file_source):
             try:
                 metadata = models.parse_zipfile_metadata(file_source)
                 uuid = metadata['uuid']
-            except (models.InvalidExtensionData, KeyError), e:
+            except (models.InvalidExtensionData, KeyError) as e:
                 messages.error(request, "Invalid extension data: %s" % (e.message,))
                 raise DatabaseErrorWithMessages
 
@@ -438,7 +442,7 @@ def create_version(request, file_source):
 
             try:
                 extension.full_clean()
-            except ValidationError, e:
+            except ValidationError as e:
                 raise DatabaseErrorWithMessages(e.messages)
 
             version = models.ExtensionVersion.objects.create(extension=extension,
@@ -449,7 +453,7 @@ def create_version(request, file_source):
             version.save()
 
             return version, []
-    except DatabaseErrorWithMessages, e:
+    except DatabaseErrorWithMessages as e:
         return None, e.messages
 
 @login_required

@@ -9,11 +9,11 @@ import pygments.lexers
 import pygments.formatters
 
 from django.core.mail import EmailMessage
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, get_object_or_404, render
 from django.template import Context
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from sweettooth.review.diffutils import get_chunks

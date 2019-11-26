@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% load static from staticfiles %}
+{% load static from static %}
+{% load i18n %}
 
 {% block body %}
   <div id="extensions-list">
@@ -9,7 +10,7 @@
 {% block search-bar %}
 <div id="search-bar">
     <div class="form-group has-feedback has-feedback-left">
-        <input id="search_input" class="form-control input-lg" type="text" placeholder="Search for extensions…">
+        <input id="search_input" class="form-control input-lg" type="text" placeholder="{% trans 'Search for extensions…' %}">
                 <span class="form-control-feedback"><img src="{% static 'images/search.svg' %}"></span>
         </input>
     </div>

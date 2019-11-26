@@ -3,10 +3,10 @@ import json
 
 from zipfile import ZipFile, BadZipfile
 
-from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from django.dispatch import Signal
+from django.urls import reverse
 
 import autoslug
 import re
@@ -16,7 +16,7 @@ import zlib
  STATUS_REJECTED,
  STATUS_INACTIVE,
  STATUS_ACTIVE,
- STATUS_WAITING) = xrange(5)
+ STATUS_WAITING) = range(5)
 
 STATUSES = {
     STATUS_UNREVIEWED: u"Unreviewed",
@@ -58,7 +58,7 @@ def build_shell_version_map(versions):
             if version.version > shell_version_map[key].version:
                 shell_version_map[key] = version
 
-    for key, version in shell_version_map.iteritems():
+    for key, version in shell_version_map.items():
         shell_version_map[key] = dict(pk = version.pk,
                                       version = version.version)
 
@@ -93,7 +93,7 @@ class Extension(models.Model):
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
-    creator = models.ForeignKey(User, db_index=True)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT)
     description = models.TextField(blank=True)
     url = models.URLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -110,7 +110,7 @@ class Extension(models.Model):
 
     objects = ExtensionManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.uuid
 
     def parse_metadata_json(self, metadata):
@@ -126,7 +126,7 @@ class Extension(models.Model):
             raise ValidationError("Your extension has an invalid UUID")
 
     def save(self, replace_metadata_json=True, *args, **kwargs):
-        super(Extension, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
         if replace_metadata_json:
             for version in self.versions.all():
                 if version.source:
@@ -174,7 +174,7 @@ class Extension(models.Model):
 
 class ExtensionPopularityItem(models.Model):
     extension = models.ForeignKey(Extension, db_index=True,
-                                  related_name='popularity_items')
+                                  on_delete=models.CASCADE, related_name='popularity_items')
     offset = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
 
@@ -188,14 +188,14 @@ def parse_version_string(version_string):
     try:
         major, minor = version[:2]
         major, minor = int(major), int(minor)
-    except ValueError, e:
+    except ValueError:
         raise InvalidShellVersion()
 
     if len(version) in (3, 4):
         # 3.0.1, 3.1.4
         try:
             point = int(version[2])
-        except ValueError, e:
+        except ValueError:
             raise InvalidShellVersion()
 
     elif len(version) == 2 and minor % 2 == 0:
@@ -233,7 +233,7 @@ class ShellVersion(models.Model):
 
     objects = ShellVersionManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.version_string
 
     @property
@@ -296,7 +296,7 @@ def make_filename(obj, filename=None):
 
 
 class ExtensionVersion(models.Model):
-    extension = models.ForeignKey(Extension, related_name="versions")
+    extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
     version = models.IntegerField(default=0)
     extra_json_fields = models.TextField()
     status = models.PositiveIntegerField(choices=STATUSES.items())
@@ -306,7 +306,7 @@ class ExtensionVersion(models.Model):
         unique_together = ('extension', 'version'),
         get_latest_by = 'version'
 
-    def __unicode__(self):
+    def __str__(self):
         return "Version %d of %s" % (self.version, self.extension)
 
     source = models.FileField(upload_to=make_filename,
@@ -350,7 +350,7 @@ class ExtensionVersion(models.Model):
         """
 
         # We can't easily *replace* files in a zipfile
-        # archive. See http://bugs.python.org/issue6818.
+        # archive. See https://bugs.python.org/issue6818.
         # Just read all the contents from the old zipfile
         # into memory and then emit a new one with the
         # generated metadata.json
@@ -365,7 +365,7 @@ class ExtensionVersion(models.Model):
             filemap[info] = contents
 
         zipfile = self.get_zipfile("w")
-        for info, contents in filemap.iteritems():
+        for info, contents in filemap.items():
             zipfile.writestr(info, contents)
 
         metadata = self.make_metadata_json()
@@ -384,7 +384,7 @@ class ExtensionVersion(models.Model):
             except self.DoesNotExist:
                 self.version = 1
 
-        super(ExtensionVersion, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def parse_metadata_json(self, metadata):
         """

@@ -1,9 +1,45 @@
-Django >= 1.11,<1.12
-django-autoslug >= 1.4.1
-django-contrib-comments == 1.7.3
-django-registration == 2.1.2
-Pygments >= 1.4
-pillow >= 2.0.0
-chardet >= 2.2.1
-dj-database-url
-dj-email-url
+Django==2.2.7 \
+    --hash=sha256:16040e1288c6c9f68c6da2fe75ebde83c0a158f6f5d54f4c5177b0c1478c5b86 \
+    --hash=sha256:89c2007ca4fa5b351a51a279eccff298520783b713bf28efb89dfb81c80ea49b
+django-autoslug==1.9.6 \
+    --hash=sha256:3c55c18e2a5aab67c3a8d488056422b93c1984a197387c97952e92836f98c73c \
+    --hash=sha256:f9d2ef0d98dd97ba4d5ea358cc74bfee3e3498e2dee29f396d604173eaf07e47
+django-contrib-comments==1.9.1 \
+    --hash=sha256:61b051d7bc3ff593e86b41a1ed5e969423cf55cc92768598af3315e2528e0890 \
+    --hash=sha256:656aefe59798e5f7ef06af4bf34cf458962225bce93ca62630ba7dd97df9d81a
+django-registration==3.0.1 \
+    --hash=sha256:5193f8a8f8b5ee9f3cc6ae3b561739d17f69759b9abe72f33aec07467a99eeff \
+    --hash=sha256:88673ceecb09413493f78a2847cb78da8df47d4d6629aee6a17d9e3c6c66c444
+Pygments==2.4.2 \
+    --hash=sha256:71e430bc85c88a430f000ac1d9b331d2407f681d6f6aec95e8bcfbc3df5b0127 \
+    --hash=sha256:881c4c157e45f30af185c1ffe8d549d48ac9127433f2c380c24b84572ad66297
+Pillow==6.2.1 \
+    --hash=sha256:047d9473cf68af50ac85f8ee5d5f21a60f849bc17d348da7fc85711287a75031 \
+    --hash=sha256:7ce80c0a65a6ea90ef9c1f63c8593fcd2929448613fc8da0adf3e6bfad669d08 \
+    --hash=sha256:83792cb4e0b5af480588601467c0764242b9a483caea71ef12d22a0d0d6bdce2 \
+    --hash=sha256:846fa202bd7ee0f6215c897a1d33238ef071b50766339186687bd9b7a6d26ac5 \
+    --hash=sha256:bf4e972a88f8841d8fdc6db1a75e0f8d763e66e3754b03006cbc3854d89f1cb1 \
+    --hash=sha256:e0697b826da6c2472bb6488db4c0a7fa8af0d52fa08833ceb3681358914b14e5
+polib==1.1.0 \
+    --hash=sha256:93b730477c16380c9a96726c54016822ff81acfa553977fdd131f2b90ba858d7 \
+    --hash=sha256:fad87d13696127ffb27ea0882d6182f1a9cf8a5e2b37a587751166c51e5a332a
+chardet==3.0.4 \
+    --hash=sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae \
+    --hash=sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691
+dj-database-url==0.5.0 \
+    --hash=sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163 \
+    --hash=sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9
+dj-email-url==0.2.0 \
+    --hash=sha256:0362e390c17cc377f03bcbf6daf3f671797c929c1bf78a9f439d78f215ebe3fd \
+    --hash=sha256:136ac43c7f29022130fc4769b4ca8b01cd1c39fedf1659c641c143808182a084
+# Django dependencies
+pytz==2019.3 \
+    --hash=sha256:1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d \
+    --hash=sha256:b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be
+sqlparse==0.3.0 \
+    --hash=sha256:40afe6b8d4b1117e7dff5504d7a8ce07d9a1b15aeeade8a2d10f130a834f8177 \
+    --hash=sha256:7c3dca29c022744e95b547e867cee89f4fce4373f3549ccd8797d8eb52cdb873
+# django-registration dependepcy
+confusable_homoglyphs==3.2.0 \
+    --hash=sha256:3b4a0d9fa510669498820c91a0bfc0c327568cecec90648cf3819d4a6fc6a751 \
+    --hash=sha256:e3ce611028d882b74a5faa69e3cbb5bd4dcd9f69936da6e73d33eda42c917944

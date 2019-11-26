@@ -3,11 +3,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.template import Context
 from django.template.loader import render_to_string
+from django.urls import reverse
 
 from sweettooth.errorreports.models import ErrorReport, error_reported
 from sweettooth.errorreports.forms import ErrorReportForm
@@ -20,7 +20,7 @@ def report_error(request, extension):
     if request.method == 'POST':
         form = ErrorReportForm(data=request.POST)
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return HttpResponseForbidden()
 
         if form.is_valid():

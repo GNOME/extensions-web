@@ -42,6 +42,14 @@ venv
 *.tar.xz
 *.db
 
+# Eclipse
+.project
+.pydevproject
+.settings/
+
+# VSCode
+.vscode
+
 # sweettooth-specific
 Demos
 uploaded-files

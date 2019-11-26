@@ -2,9 +2,10 @@
 import json
 
 import django_comments as comments
-from django.core.urlresolvers import reverse
 from django.contrib.messages import info
 from django.shortcuts import redirect
+from django.template.defaultfilters import linebreaks
+from django.urls import reverse
 from django.utils.dateformat import format as format_date
 
 from sweettooth.extensions import models
@@ -25,7 +26,7 @@ def comment_details(request, comment):
 
     details = dict(gravatar = gravatar,
                    is_extension_creator = is_extension_creator,
-                   comment = comment.comment,
+                   comment = linebreaks(comment.comment, autoescape=True),
                    author = dict(username=username,
                                  url=reverse('auth-profile', kwargs=dict(user=username))),
                    date = dict(timestamp = comment.submit_date.isoformat(),

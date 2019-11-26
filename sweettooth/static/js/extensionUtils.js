@@ -16,7 +16,7 @@ define([], function () {
 
 	// ExtensionState is stolen and should be kept in sync with the Shell.
 	// Licensed under GPL2+
-	// See: http://git.gnome.org/browse/gnome-shell/tree/js/ui/extensionSystem.js
+	// See: https://gitlab.gnome.org/GNOME/gnome-shell/blob/master/js/ui/extensionSystem.js
 
 	exports.ExtensionState = {
 		ENABLED: 1,
@@ -31,7 +31,7 @@ define([], function () {
 		UNINSTALLED: 99
 	};
 
-	// https://git.gnome.org/browse/gnome-shell/tree/js/misc/extensionUtils.js
+	// https://gitlab.gnome.org/GNOME/gnome-shell/blob/master/js/misc/extensionUtils.js
 	exports.ExtensionType = {
 		SYSTEM: 1,
 		PER_USER: 2

@@ -1,5 +1,6 @@
-
-from django.contrib.auth.models import User, Permission, Group
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission, Group
 from django.db import models
 from django.db.models import Q
 
@@ -11,13 +12,13 @@ def get_all_reviewers():
     # Dark magic to get all the users with a specific permission
     # Thanks to <schinckel> in #django
     groups = Group.objects.filter(permissions=perm)
-    return User.objects.filter(Q(is_superuser=True)|Q(user_permissions=perm)|Q(groups__in=groups)).distinct()
+    return get_user_model().objects.filter(Q(is_superuser=True)|Q(user_permissions=perm)|Q(groups__in=groups)).distinct()
 
 class CodeReview(models.Model):
-    reviewer = models.ForeignKey(User)
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     comments = models.TextField(blank=True)
-    version = models.ForeignKey(ExtensionVersion, related_name="reviews")
+    version = models.ForeignKey(ExtensionVersion, on_delete=models.CASCADE, related_name="reviews")
     new_status = models.PositiveIntegerField(choices=STATUSES.items(), null=True)
     auto = models.BooleanField(default=False)
 

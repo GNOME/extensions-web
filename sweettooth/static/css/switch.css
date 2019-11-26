@@ -1,3 +1,6 @@
+._gnome-switch, ._gnome-switch * {
+    box-sizing: content-box;
+}
 
 ._gnome-switch {
     color: white;
@@ -6,6 +9,11 @@
     margin-top: 10px;
     font-size: 14px;
     line-height: 1.6;
+    cursor: pointer;
+}
+
+._gnome-switch.disabled {
+    opacity: 0.3;
 }
 
 ._gnome-switch.outdated,

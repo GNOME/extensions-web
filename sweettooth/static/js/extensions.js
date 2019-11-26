@@ -1,7 +1,7 @@
 /*
     GNOME Shell extensions repository
     Copyright (C) 2011-2012  Jasper St. Pierre <jstpierre@mecheye.net>
-    Copyright (C) 2016-2017  Yuri Konotopov <ykonotopov@gnome.org>
+    Copyright (C) 2016-2019  Yuri Konotopov <ykonotopov@gnome.org>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -9,8 +9,12 @@
     (at your option) any later version.
  */
 
-define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginator', 'switch'],
-	function ($, messages, dbusProxy, extensionUtils, templates) {
+define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
+	'template!extensions/uninstall', 'template!extensions/info',
+	'template!extensions/info_contents', 'template!extensions/error_report_template',
+	'voca', 'paginator', 'switch'],
+	function ($, messages, dbusProxy, extensionUtils, uninstallTemplate,
+			infoTemplate, infoContentsTemplate, reportTemplate, voca) {
 		"use strict";
 
 		var ExtensionState = extensionUtils.ExtensionState;
@@ -102,11 +106,23 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 				if (IS_CHROME || IS_FIREFOX || IS_OPERA) // browser_extension.js should be included globally
 				{
 					// Help user to install browser extension for supported browsers
-					messages.addInfo(templates.get('messages/browser_extension')());
+					messages.addInfo(voca.sprintf(
+						'%s.<br /><a href="#" title="%s" onclick="return browser_extension_install();">%s</a>. %s.',
+						gettext('To control GNOME Shell extensions using this site you must install GNOME Shell integration that consists of two parts: browser extension and native host messaging application'),
+						gettext('Install GNOME Shell integration browser extension'),
+						gettext('Click here to install browser extension'),
+						voca.sprintf(
+							gettext('See %swiki page%s for native host connector installation instructions'),
+							'<a href="https://wiki.gnome.org/Projects/GnomeShellIntegrationForChrome/Installation" onclick="window.open(this.href); return false;">',
+							'</a>'
+						)
+					));
 				}
 				else
 				{
-					messages.addError(templates.get('messages/dummy_proxy')());
+					messages.addError(
+						gettext('We cannot detect a running copy of GNOME on this system, so some parts of the interface may be disabled. See <a href="/about/#no-detection">our troubleshooting entry</a> for more information.')
+					);
 				}
 			}
 
@@ -117,13 +133,13 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 			};
 
 			$.fn.addLocalExtensions = function () {
-				return this.append(templates.get('messages/cannot_list_local')());
+				return this.append(gettext('GNOME Shell Extensions cannot list your installed extensions.'));
 			};
 
 			$.fn.fillInErrors = function () {
 				var $textarea = this.find('textarea[name=error]');
 				var $hidden = this.find('input:hidden[name=has_errors]');
-				$textarea.text(templates.get('messages/cannot_list_errors')()).addClass('no-errors').attr('disabled', 'disabled');
+				$textarea.text(gettext('GNOME Shell Extensions cannot list your installed extensions.')).addClass('no-errors').attr('disabled', 'disabled');
 				$hidden.val('');
 				return this;
 			};
@@ -246,7 +262,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 						{
 							$elem.removeClass('installed upgradable configurable');
 						}
-						messages.addInfo(templates.get('extensions/uninstall')(meta));
+						messages.addInfo(uninstallTemplate.render(meta));
 					}
 				});
 			});
@@ -375,6 +391,8 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 					$elem.addClass('out-of-date');
 					$switch.switchify('customize', "OUTDATED", 'outdated');
 				}
+
+				$switch.switchify(dbusProxy.GetUserExtensionsDisabled() ? 'disable' : 'enable');
 			});
 
 			$elem.on('type-changed', function (e, newType) {
@@ -438,7 +456,9 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 									extension.first_line_of_description = extension.description.split('\n')[0];
 								}
 
-								$elem = $(templates.get('extensions/info')(extension)).replaceAll($elem);
+								$elem = $(infoTemplate.render(extension, {
+									[infoContentsTemplate.name()]: infoContentsTemplate.template()
+								})).replaceAll($elem);
 
 								addExtensionSwitch(uuid, $elem, extension);
 							}
@@ -484,7 +504,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils', 'templates', 'paginato
 							errors: errors
 						};
 
-						$textarea.text(templates.get('extensions/error_report_template')(context));
+						$textarea.text(reportTemplate.render(context));
 					});
 				});
 			});

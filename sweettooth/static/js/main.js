@@ -1,16 +1,24 @@
-// -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
+/*
+    GNOME Shell extensions repository
+    Copyright (C) 2011-2013  Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2016-2019  Yuri Konotopov <ykonotopov@gnome.org>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ */
 
 define(['jquery', 'messages', 'modal', 'hashParamUtils',
-        'templates', 'staticfiles', 'extensions', 'uploader', 'fsui',
-        'jquery.cookie', 'jquery.jeditable',
-        'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
-function($, messages, modal, hashParamUtils, templates, staticfiles) {
+        'template!extensions/comments_list', 'staticfiles', 'js.cookie', 'extensions', 'uploader', 'fsui', 'settings',
+        'jquery.jeditable', 'jquery.timeago', 'jquery.raty', 'jquery.colorbox'],
+function($, messages, modal, hashParamUtils, commentsTemplate, staticfiles, cookie) {
     "use strict";
 
     if (!$.ajaxSettings.headers)
         $.ajaxSettings.headers = {};
 
-    $.ajaxSettings.headers['X-CSRFToken'] = $.cookie('csrftoken');
+    $.ajaxSettings.headers['X-CSRFToken'] = cookie.get('csrftoken');
 
     $.fn.csrfEditable = function(url, options) {
         return $(this).each(function() {
@@ -43,6 +51,12 @@ function($, messages, modal, hashParamUtils, templates, staticfiles) {
             return false;
         });
 
+        // Prevent double click on registration button
+        $('form#registration').on('submit', function(event) {
+        	$("form#registration button[type='submit']").prop('disabled', true);
+        	return true;
+        });
+
         // Add lightbox for screenshots
         $('div.extension-details').on('click', 'div.screenshot > a', function(event) {
             event.preventDefault();
@@ -61,14 +75,13 @@ function($, messages, modal, hashParamUtils, templates, staticfiles) {
             $(this).csrfEditable('/accounts/change_display_name/' + pk);
         });
 
+        $('#shell_settings').addShellSettings();
         $('#local_extensions').addLocalExtensions();
         $('.extension.single-page').addExtensionSwitch();
         $('.extension.single-page').addDownloadOptions();
 
         $.extend($.fn.raty.defaults, {
-            path: '/static/images/',
-            starOff: 'star-empty.png',
-            starOn: 'star-full.png',
+            starType: 'i',
             size: 25
         });
 
@@ -217,7 +230,7 @@ function($, messages, modal, hashParamUtils, templates, staticfiles) {
                         showAll = false;
 
                     var data = { comments: comments, show_all: showAll };
-                    var $newContent = $('<div>').append(templates.get('extensions/comments_list')(data));
+                    var $newContent = $('<div>').append(commentsTemplate.render(data));
                     $newContent.addClass('comments-holder');
 
                     $newContent.find('time').timeago();

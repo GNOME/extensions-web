@@ -1,0 +1,22 @@
+<h3 class="extension-name">
+  {{#link}}
+    <a href="{{link}}" class="title-link"><img src="{{icon}}" class="icon">{{name}}</a>
+  {{/link}}
+  {{^link}}
+    <span class="icon plugin-unknown"></span>{{name}}
+  {{/link}}
+</h3>
+{{#creator}}
+  <span class="author">by <a href="{{creator_url}}">{{creator}}</a></span>
+{{/creator}}
+<div class="controls">
+  <div class="switch"></div>
+  <div class="extra-buttons">
+    <div class="upgrade-button" title="Upgrade this extension"></div>
+    <div class="configure-button" title="Configure this extension"></div>
+    <div class="uninstall-button" title="Uninstall this extension"></div>
+  </div>
+</div>
+<div style="clear: both"></div>
+<div class='system-extension' title='System extension should be uninstalled using package manager. See «About» page for more details.'><x-gettext>System extension</x-gettext></div>
+<p class="description">{{first_line_of_description}}</p>

@@ -1,3 +1,4 @@
+{% load i18n %}
 <div class="row">
     <div class="col-sm-12">
         <form action="{% url 'auth-login' %}" method="POST" class="form">
@@ -7,15 +8,15 @@
                 <input type="hidden" name="next" class="form-control" value="{{ request.path }}"/>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                <button type="submit" class="btn btn-primary btn-block">{% trans "Log in" %}</button>
             </div>
             <div class="form-group">
-                <a href="{% url 'auth_password_reset' %}" class="">Forgot your password?</a>
+                <a href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a>
             </div>
             <li class="divider"></li>
-            <p>Don't have an account?</p>
+            <p>{% trans "Don't have an account?" %}</p>
             <div class="form-group">
-                <a href="{% url 'registration_register' %}" class="btn btn-success btn-block no-decoration">Register</a>
+                <a href="{% url 'registration_register' %}" class="btn btn-success btn-block no-decoration">{% trans "Register" %}</a>
             </div>
         </form>
     </div>

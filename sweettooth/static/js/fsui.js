@@ -37,10 +37,10 @@ define(['jquery', 'dbus!_', 'hashParamUtils', 'modal'],
 		}
 
 		var sortCriteria = {
-			'name': "Name",
-			'recent': "Recent",
-			'downloads': "Downloads",
-			'popularity': "Popularity"
+			'name': gettext("Name"),
+			'recent': gettext("Recent"),
+			'downloads': gettext("Downloads"),
+			'popularity': gettext("Popularity")
 		};
 
 		$.fn.fsUIify = function () {
@@ -70,7 +70,7 @@ define(['jquery', 'dbus!_', 'hashParamUtils', 'modal'],
 
 				var $fsui = $('<div>', {'class': 'fsui'}).appendTo($elem);
 
-				$fsui.append('<span>Sort by</span>');
+				$fsui.append('<span>' + gettext('Sort by') + '</span>');
 
 				var $link;
 
@@ -121,7 +121,7 @@ define(['jquery', 'dbus!_', 'hashParamUtils', 'modal'],
 					}
 				}
 
-				$fsui.append('<span>Compatible with</span>');
+				$fsui.append('<span>' + gettext('Compatible with') + '</span>');
 
 				$link = makeDropdownLink(textForFilterValue(shellVersion)).click(function () {
 					var $dropdown = makeDropdown($fsui, $(this));

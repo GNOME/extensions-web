@@ -3,20 +3,17 @@ import os.path
 import json
 import tempfile
 import unittest
+from io import BytesIO
 from uuid import uuid4
 from zipfile import ZipFile
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
-
 from django.test import TestCase, TransactionTestCase
 from django.core.files.base import File
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from sweettooth.extensions import models, views
 
 from sweettooth.testutils import BasicUserTestCase
+from django.test.utils import override_settings
 
 testdata_dir = os.path.join(os.path.dirname(__file__), 'testdata')
 
@@ -36,7 +33,7 @@ class UUIDPolicyTest(TestCase):
         self.assertTrue(models.validate_uuid("foo-3@mecheye.net"))
         self.assertTrue(models.validate_uuid("Foo4@mecheye.net"))
 
-        for i in xrange(10):
+        for i in range(10):
             self.assertTrue(models.validate_uuid(str(uuid4())))
 
         self.assertFalse(models.validate_uuid("<Wonderful>"))
@@ -57,7 +54,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
 
         metadata = {"uuid": "test-metadata-2@mecheye.net",
                     "name": "Test Metadata",
-                    "description": "First line\n\Second line"}
+                    "description": "First line\nSecond line"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         self.assertEqual(extension.first_line_of_description, "First line")
@@ -124,26 +121,24 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         self.assertTrue("url" not in extra)
 
     def test_bad_zipfile_metadata(self):
-        bad_data = StringIO("deadbeef")
+        bad_data = BytesIO(b"deadbeef")
         self.assertRaises(models.InvalidExtensionData, models.parse_zipfile_metadata, bad_data)
 
         with get_test_zipfile('TooLarge') as f:
-            with self.assertRaises(models.InvalidExtensionData) as cm:
+            with self.assertRaisesMessage(models.InvalidExtensionData, "Zip file is too large"):
                 models.parse_zipfile_metadata(f)
-            self.assertEqual(cm.exception.message, "Zip file is too large")
 
         with get_test_zipfile('NoMetadata') as f:
-            with self.assertRaises(models.InvalidExtensionData) as cm:
+            with self.assertRaisesMessage(models.InvalidExtensionData, "Missing metadata.json"):
                 models.parse_zipfile_metadata(f)
-            self.assertEqual(cm.exception.message, "Missing metadata.json")
 
         with get_test_zipfile('BadMetadata') as f:
-            with self.assertRaises(models.InvalidExtensionData) as cm:
+            with self.assertRaisesMessage(models.InvalidExtensionData, "Invalid JSON data"):
                 models.parse_zipfile_metadata(f)
-            self.assertEqual(cm.exception.message, "Invalid JSON data")
+
 
 class ReplaceMetadataTest(BasicUserTestCase, TestCase):
-    @unittest.expectedFailure
+    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_replace_metadata(self):
         old_zip_file = get_test_zipfile('LotsOfFiles')
 
@@ -151,16 +146,20 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
         old_zip_file.seek(0)
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version = models.ExtensionVersion(extension=extension,
-                                          source=File(old_zip_file))
+
+        version = models.ExtensionVersion.objects.create(extension=extension,
+                                          source=File(old_zip_file),
+                                          status=models.STATUS_UNREVIEWED)
 
         version.parse_metadata_json(metadata)
+        version.replace_metadata_json()
+        version.save()
 
         new_zip = version.get_zipfile('r')
 
-        old_zip = ZipFile(File(old_zip_file), 'r')
+        old_zip = ZipFile(old_zip_file, 'r')
         self.assertEqual(len(old_zip.infolist()), len(new_zip.infolist()))
-        self.assertEqual(new_zip.read("metadata.json"),
+        self.assertEqual(new_zip.read("metadata.json").decode('utf-8'),
                          version.make_metadata_json_string())
 
         for old_info in old_zip.infolist():
@@ -469,14 +468,22 @@ class UpdateVersionTest(TestCase):
         reject_uuid: u'blacklist'}
 
     def build_response(self, installed):
-        return dict((k, dict(version=v)) for k, v in installed.iteritems())
+        return dict((k, dict(version=v)) for k, v in installed.items())
 
     def grab_response(self, installed):
         installed = self.build_response(installed)
         response = self.client.get(reverse('extensions-shell-update'),
                                    dict(installed=json.dumps(installed), shell_version='3.2.0'))
 
-        return json.loads(response.content)
+        return json.loads(response.content.decode(response.charset))
+
+    def grab_post_response(self, installed):
+        installed = self.build_response(installed)
+        response = self.client.post(reverse('extensions-shell-update') + "?shell_version=3.2.0",
+                                   data=json.dumps(installed),
+                                   content_type='application/json')
+
+        return json.loads(response.content.decode(response.charset))
 
     def test_upgrade_me(self):
         uuid = self.upgrade_uuid
@@ -485,9 +492,13 @@ class UpdateVersionTest(TestCase):
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
+        response = self.grab_post_response({ uuid: 1 })
+        self.assertEqual(response, expected)
 
         # The user has a newer version on his machine.
         response = self.grab_response({ uuid: 2 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ uuid: 2 })
         self.assertEqual(response, {})
 
     def test_reject_me(self):
@@ -496,9 +507,13 @@ class UpdateVersionTest(TestCase):
         expected = {uuid: self.full_expected[self.reject_uuid]}
         response = self.grab_response({ uuid: 1 })
         self.assertEqual(response, expected)
+        response = self.grab_post_response({ uuid: 1 })
+        self.assertEqual(response, expected)
 
         # The user has a newer version than what's on the site.
         response = self.grab_response({ uuid: 2 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ uuid: 2 })
         self.assertEqual(response, {})
 
     def test_downgrade_me(self):
@@ -508,14 +523,20 @@ class UpdateVersionTest(TestCase):
         expected = { uuid: self.full_expected[self.downgrade_uuid] }
         response = self.grab_response({ uuid: 2 })
         self.assertEqual(response, expected)
+        response = self.grab_post_response({ uuid: 2 })
+        self.assertEqual(response, expected)
 
         # The user has the appropriate version on his machine.
         response = self.grab_response({ uuid: 1 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ uuid: 1 })
         self.assertEqual(response, {})
 
     def test_nonexistent_uuid(self):
         # The user has an extension that's not on the site.
         response = self.grab_response({ self.nonexistant_uuid: 1 })
+        self.assertEqual(response, {})
+        response = self.grab_post_response({ self.nonexistant_uuid: 1 })
         self.assertEqual(response, {})
 
     def test_multiple(self):
@@ -526,6 +547,8 @@ class UpdateVersionTest(TestCase):
 
         response = self.grab_response(installed)
         self.assertEqual(self.full_expected, response)
+        response = self.grab_post_response(installed)
+        self.assertEqual(self.full_expected, response)
 
     def test_wrong_version(self):
         uuid = self.upgrade_uuid
@@ -534,16 +557,20 @@ class UpdateVersionTest(TestCase):
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({uuid: ''})
         self.assertEqual(response, expected)
+        response = self.grab_post_response({uuid: ''})
+        self.assertEqual(response, expected)
 
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
         response = self.grab_response({uuid: '0.8.4'})
+        self.assertEqual(response, expected)
+        response = self.grab_post_response({uuid: '0.8.4'})
         self.assertEqual(response, expected)
 
 
 class QueryExtensionsTest(BasicUserTestCase, TestCase):
     def get_response(self, params):
         response = self.client.get(reverse('extensions-query'), params)
-        return json.loads(response.content)
+        return json.loads(response.content.decode(response.charset))
 
     def gather_uuids(self, params):
         if 'sort' not in params:

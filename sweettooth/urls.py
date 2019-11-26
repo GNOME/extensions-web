@@ -8,6 +8,8 @@ from django.http import HttpResponse
 from django.contrib import admin
 from django.views import static
 from django.views.generic.base import TemplateView
+from django.views.i18n import JavaScriptCatalog
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -18,7 +20,8 @@ urlpatterns = [
     url(r'^review/', include('sweettooth.review.urls')),
     url(r'^errors/', include('sweettooth.errorreports.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    url(r'^admin/', admin.site.urls),
     url(r'^comments/', include('sweettooth.ratings.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),

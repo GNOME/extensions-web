@@ -1,7 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Installed Extensions - {{ block.super }}{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Installed Extensions" %} - {{ block.super }}{% endblock %}
 {% block body %}
-<h2> Installed Extensions </h2>
+<h2 class='v6-wip'>{% trans "Shell settings" %}</h2>
+<div id='shell_settings' class='v6-wip></div>
+
+<h2>{% trans "Installed Extensions" %}</h2>
 <div id="local_extensions">
 </div>
 {% endblock %}
