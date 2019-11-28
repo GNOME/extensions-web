@@ -1,15 +1,14 @@
 # Japanese translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Takashi Matsuo <matsuo.takashi@gmail.com>, 2010.
 # sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
-"PO-Revision-Date: 2019-01-31 22:40+0900\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2019-11-27 21:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -18,36 +17,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "ユーザー名またはメールアドレス"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "ユーザー名"
 
-# Copyright (C) 2010 Takashi Matsuo <matsuo.takashi@gmail.com>, Originally under New BSD License in ja/LC_MESSAGES/django.po
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
-"この項目は必須です。半角アルファベット、半角数字、@/./+/-/_ で 30 文字以下に"
-"してください。"
+"この項目は必須です。半角英数字と @/./+/-/_ で 30 文字以内にしてください。"
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr "この項目は、半角アルファベット、半角数字、@/./+/-/_ のみ有効です。"
+msgstr "この項目は、半角英数字と @/./+/-/_ のみ有効です。"
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "メール"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "パスワード"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "パスワードの確認"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "確認のため、再度パスワードを入力してください。"
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "ユーザー名にメールアドレスを使わないでください"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -61,13 +54,13 @@ msgstr "パスワードをお忘れですか?"
 msgid "Log in"
 msgstr "ログイン"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "アカウントをお持ちではありませんか?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -110,7 +103,7 @@ msgstr ""
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
-msgstr ""
+msgstr "アップロード"
 
 #: sweettooth/context_processors.py:17 extensions-web-domain-django:1
 msgid "Installed extensions"
@@ -139,7 +132,7 @@ msgstr ""
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr "ユーザーのレビュー"
+msgstr "ユーザーレビュー"
 
 #: sweettooth/extensions/templates/extensions/comments.html:25
 #: extensions-web-domain-django:1
@@ -359,12 +352,12 @@ msgstr "人気"
 msgid "Sort by"
 msgstr "並び替え"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "さらにレビューを表示"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "コメントはありません。最初の投稿者になってください!"
@@ -423,3 +416,12 @@ msgstr "システムの拡張機能"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "アンインストールしました"
+
+#~ msgid "Password"
+#~ msgstr "パスワード"
+
+#~ msgid "Password confirmation"
+#~ msgstr "パスワードの確認"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "確認のため、再度パスワードを入力してください。"
