@@ -8,50 +8,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-01-26 11:42+0100\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2019-12-02 13:57+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Nazwa użytkownika lub adres e-mail"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nazwa użytkownika"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Wymagane. 30 znaków lub mniej. Tylko litery, cyfry i znaki @/./+/-/_."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Ta wartość może zawierać tylko litery, liczby i znaki @/./+/-/_."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Adres e-mail"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Hasło"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Potwierdzenie hasła"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Proszę podać to samo hasło co powyżej w celu sprawdzenia poprawności."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Nie należy używać adresu e-mail jako nazwy użytkownika"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
-msgstr "Zapomniano hasła?"
+msgstr "Nie pamiętasz hasła?"
 
 #: sweettooth/auth/templates/registration/login.html:32
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
@@ -59,13 +55,13 @@ msgstr "Zapomniano hasła?"
 msgid "Log in"
 msgstr "Zaloguj się"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr "Brak konta?"
+msgstr "Nie masz konta?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -103,7 +99,7 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Zapomniano hasła? Proszę podać adres e-mail poniżej, a wyślemy instrukcje "
+"Nie pamiętasz hasła? Proszę podać adres e-mail poniżej, a wyślemy instrukcje "
 "ustawienia nowego pocztą."
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
@@ -362,12 +358,12 @@ msgstr "Popularność"
 msgid "Sort by"
 msgstr "Porządkowanie według"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Więcej recenzji"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Nie ma żadnych komentarzy. Napisz pierwszy!"
