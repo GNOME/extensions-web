@@ -782,6 +782,115 @@
           }
         }
       }
+    },
+    {
+      "kind": "CronJob",
+      "apiVersion": "batch/v1beta1",
+      "metadata": {
+        "name": "job-clean-users"
+      },
+      "spec": {
+        "schedule": "20 0 * * *",
+        "jobTemplate": {
+          "spec": {
+            "template": {
+              "spec": {
+                "containers": [
+                  {
+                    "name": "clean-users",
+                    "image": "${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest",
+                    "command": ["/extensions-web/app/bin/sweettooth-clean-users"],
+                    "env": [
+                      {
+                        "name": "EGO_DATABASE_URL",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "database-url"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_EMAIL_URL",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "email-url"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_SECRET_KEY",
+                        "valueFrom": {
+                          "secretKeyRef" : {
+                            "name" : "${NAME}",
+                            "key" : "secret-key"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ADMINISTRATOR_NAME",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-name"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ADMINISTRATOR_EMAIL",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "administrator-email"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_MEDIA_ROOT",
+                        "valueFrom": {
+                            "configMapKeyRef": {
+                              "name": "extensions-web",
+                              "key": "media-root"
+                            }
+                        }
+                      },
+                      {
+                        "name": "EGO_STATIC_ROOT",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "extensions-web",
+                            "key": "static-root"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_ALLOWED_HOST",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "allowed-host"
+                          }
+                        }
+                      },
+                      {
+                        "name": "EGO_XAPIAN_DB",
+                        "valueFrom": {
+                          "configMapKeyRef": {
+                            "name": "${NAME}",
+                            "key": "xapian-db"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "restartPolicy": "Never"
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "parameters": [

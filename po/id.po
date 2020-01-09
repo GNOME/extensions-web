@@ -2,49 +2,46 @@
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2019.
+# Andika Triwidada <andika@gmail.com>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2019-12-31 09:13+0700\n"
+"Last-Translator: Andika Triwidada <atriwidada@gnome.org>\n"
+"Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-02-17 05:10+0700\n"
-"Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
-"Language: id\n"
 "Plural-Forms: nplurals=2; plural= n!=1;\n"
-"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Nama pengguna atau surel"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nama pengguna"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Wajib. 30 karakter atau kurang. Hanya huruf, angka, dan @/./+/-/_."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Nilai ini hanya boleh berisi huruf, angka dan karakter @/./+/-/_."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Surel"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Kata Sandi"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Konfirmasi Kata Sandi"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Masukkan kata sandi yang sama seperti di atas, untuk verifikasi."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Anda tidak boleh memakai surel sebagai nama pengguna"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -58,13 +55,13 @@ msgstr "Lupa kata sandi?"
 msgid "Log in"
 msgstr "Masuk"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Belum punya akun?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -102,8 +99,8 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Lupa kata sandi Anda? Masukkan alamat surel Anda di bawah ini, dan kami "
-"akan mengirim surel instruksi untuk mengatur yang baru."
+"Lupa kata sandi Anda? Masukkan alamat surel Anda di bawah ini, dan kami akan "
+"mengirim surel instruksi untuk mengatur yang baru."
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -130,8 +127,8 @@ msgid ""
 "comment or report an error. You understand, right?"
 msgstr ""
 "Sayangnya, untuk membantu mencegah spam, kami mengharuskan Anda <a href="
-"\"%(login_url)s\">masuk ke Ekstensi  GNOME Shell</a> untuk mengirim "
-"komentar atau melaporkan galat. Anda mengerti kan?"
+"\"%(login_url)s\">masuk ke Ekstensi  GNOME Shell</a> untuk mengirim komentar "
+"atau melaporkan galat. Anda mengerti kan?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
@@ -329,8 +326,8 @@ msgid ""
 msgstr ""
 "Kami tidak dapat mendeteksi salinan GNOME yang berjalan pada sistem ini, "
 "sehingga beberapa bagian antarmuka mungkin dinonaktifkan. Lihat <a href=\"/"
-"about/#no-detection\">entri pemecahan masalah kami</a> untuk informasi "
-"lebih lanjut."
+"about/#no-detection\">entri pemecahan masalah kami</a> untuk informasi lebih "
+"lanjut."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
@@ -362,12 +359,12 @@ msgstr "Popularitas"
 msgid "Sort by"
 msgstr "Urut berdasarkan"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Tampilkan lebih banyak ulasan"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Tidak ada komentar. Jadilah yang pertama!"
