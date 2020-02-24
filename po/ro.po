@@ -7,48 +7,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-02-13 12:23+0100\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2020-02-24 19:43+0100\n"
+"Last-Translator: Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
 "Language-Team: Gnome Romanian Translation Team <gnomero-list@lists."
 "sourceforge.net>\n"
 "Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"Last-Translator: \n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Nume de utilizator sau email"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nume de utilizator"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Necesar. 30 de caractere sau mai puține. Numai litere, cifre și @/./+/-/_."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Această valoare poate conține doar litere, numere și caracterele @/./+/-/_."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Email"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Parolă"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Confirmarea parolei"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Introduceți aceeași parolă ca mai sus pentru verificare."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Nu ar trebui să utilizați adresa de email ca nume de utilizator"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -62,13 +58,13 @@ msgstr "Ați uitat parola?"
 msgid "Log in"
 msgstr "Autentificare"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Nu aveți un cont?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -369,12 +365,12 @@ msgstr "Popularitate"
 msgid "Sort by"
 msgstr "Sortează după"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Arată mai multe recenzii"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Nu sunt comentarii. Fi-ți primul!"
@@ -435,3 +431,12 @@ msgstr "Extensie de sistem"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Instalate de dumneavoastră"
+
+#~ msgid "Password"
+#~ msgstr "Parolă"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Confirmarea parolei"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "Introduceți aceeași parolă ca mai sus pentru verificare."
