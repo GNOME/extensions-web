@@ -33,6 +33,7 @@ local_settings.py
 contrib/
 openshift/docker/
 !openshift/docker/nginx.conf
+!openshift/docker/scripts
 !openshift/docker/wsgi.ini
 static/
 uploaded-files/

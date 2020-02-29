@@ -1,17 +1,23 @@
-image: docker:stable
-
+---
 variables:
-  DOCKER_TLS_CERTDIR: ""
+  PYTHONUNBUFFERED: 1
+  XAPIAN_VERSION: 1.4.11
+  GPG_KEY: 08E2400FF7FE8FEDE3ACB52818147B073BAD2B07
 
-services:
-  - docker:dind
-
-before_script:
-  - docker info
+stages:
+  - test
 
 test:
+  image: python:3.6-stretch
   stage: test
   script:
-    - docker build -f openshift/docker/Dockerfile -t extensions-web .
-    - docker run -e EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
-    - docker run extensions-web bash -c 'pip install safety && safety check -r requirements.txt && safety check -r requirements.ego.txt'
+    - openshift/docker/scripts/build_xapian.sh
+    - openshift/docker/scripts/prepare_dirs.sh
+    - cp -r . /extensions-web/app
+    - cp openshift/docker/wsgi.ini /extensions-web/
+    - openshift/docker/scripts/prepare_ego.sh
+    - cd /extensions-web/app
+    - EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
+    - pip install safety
+    - safety check -r requirements.txt
+    - safety check -r requirements.ego.txt
