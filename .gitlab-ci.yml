@@ -1,16 +1,15 @@
-image: docker:stable
-
+---
 variables:
-  DOCKER_TLS_CERTDIR: ""
-
-services:
-  - docker:dind
-
-before_script:
-  - docker info
+  STORAGE_DRIVER: vfs
 
 test:
+  image: fedora:32
   stage: test
+  before_script:
+    - dnf -y install podman-docker crun fuse-overlayfs slirp4netns
+    - |
+      > /etc/containers/nodocker
+    - docker info
   script:
     - docker build -f openshift/docker/Dockerfile -t extensions-web .
     - docker run -e EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
