@@ -1,51 +1,47 @@
 # Korean translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Seong-ho Cho <shcho@gnome.org>, 2019.
+# Seong-ho Cho <shcho@gnome.org>, 2019-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2020-02-18 16:30+0900\n"
+"Last-Translator: \n"
+"Language-Team: Korean <gnome-kr@googlegroups.com>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-02-23 14:55+0900\n"
-"Language-Team: Korean <gnome-kr@googlegroups.com>\n"
-"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Last-Translator: \n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "사용자 이름 또는 전자메일"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "사용자 이름"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "필수. 30글자 이하. 영문자, 숫자 또는 @/./+/-/_ 특수 문자만 쓸 수 있습니다."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "이 값에는 영문자, 숫자 또는 @/./+/-/_ 특수 문자만 들어가야합니다."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "전자메일 주소"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "암호"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "암호 확인"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "확인을 위해 위 내용과 같은 암호를 입력하십시오."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "전자메일 주소를 사용자 이름으로 사용하면 안됩니다"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -59,13 +55,13 @@ msgstr "암호를 잊으셨습니까?"
 msgid "Log in"
 msgstr "로그인"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "계정이 없으십니까?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -300,8 +296,9 @@ msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
-msgstr "이 사이트에서 그놈 쉘 확장을 다루려면 브라우저 확장 기능과 네이티브"
-" 호스트 메시징 프로그램으로 이루어진 그놈 쉘 통합을 설치해야합니다"
+msgstr ""
+"이 사이트에서 그놈 쉘 확장을 다루려면 브라우저 확장 기능과 네이티브 호스트 "
+"메시징 프로그램으로 이루어진 그놈 쉘 통합을 설치해야합니다"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
@@ -356,12 +353,12 @@ msgstr "인기도"
 msgid "Sort by"
 msgstr "정렬순"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "더 많은 평가 보기"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "댓글이 없습니다. 첫 댓글을 달아보세요!"
@@ -420,3 +417,12 @@ msgstr "시스템 확장"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "제거했습니다"
+
+#~ msgid "Password"
+#~ msgstr "암호"
+
+#~ msgid "Password confirmation"
+#~ msgstr "암호 확인"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "확인을 위해 위 내용과 같은 암호를 입력하십시오."
