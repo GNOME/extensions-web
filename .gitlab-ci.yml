@@ -11,6 +11,8 @@ before_script:
 
 test:
   stage: test
+  tags:
+    - privileged
   script:
     - docker build -f openshift/docker/Dockerfile -t extensions-web .
     - docker run -e EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
