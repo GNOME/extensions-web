@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
 "PO-Revision-Date: 2019-02-26 19:24+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
@@ -19,36 +19,32 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 3.30.1\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Kullanıcı adı ya da e-posta"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Gerekli. 30 karakter veya daha az olmalı. Yalnızca harfler, rakamlar ve @/./"
 "+/-/_"
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Bu giriş yalnızca harfler, sayılar ve @/./+/-/_ karakterlerini içerebilir."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-posta"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Parola"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Parola doğrulama"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Doğrulama için yukarıdaki parolayı girin."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "E-posta adresini kullanıcı adı olarak kullanmayınız"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -62,13 +58,13 @@ msgstr "Parolanızı mı unuttunuz?"
 msgid "Log in"
 msgstr "Giriş"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Hesabınız yok mu?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -364,12 +360,12 @@ msgstr "Çok oylananlar"
 msgid "Sort by"
 msgstr "Sıralama biçimi"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Tüm yorumları göster"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Yorum yok. İlk olun!"
@@ -429,3 +425,12 @@ msgstr "Sistem eklentisi"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Eklenti kaldırıldı"
+
+#~ msgid "Password"
+#~ msgstr "Parola"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Parola doğrulama"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "Doğrulama için yukarıdaki parolayı girin."

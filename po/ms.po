@@ -1,83 +1,81 @@
-# Dutch translation for extensions-web.
-# Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
+# Malay translation for extensions-web.
+# Copyright (C) 2020 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Nathan Follens <nthn@unseen.is>, 2019-2020.
+# abuyop <abuyop@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2020-03-07 22:53+0100\n"
-"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
-"Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"PO-Revision-Date: 2020-01-09 00:24+0800\n"
+"Language-Team: Malay <ms@li.org>\n"
+"Language: ms\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
 msgid "Username or email"
-msgstr "Gebruikersnaam of e-mailadres"
+msgstr "Nama pengguna atau emel"
 
 #: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
-msgstr "Gebruikersnaam"
+msgstr "Nama Pengguna"
 
 #: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Vereist. 30 tekens of minder. Enkel letters, cijfers en @/./+/-/_."
+msgstr "Diperlukan. 30 aksara atau kurang. Abjad, digit dan @/./+/-/_ sahaja."
 
 #: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
-"Deze waarde mag alleen letters, cijfers of de volgende tekens bevatten: @ . "
-"+ - _"
+msgstr "Nilai ini hanya boleh mengandungi abjad, angka dan aksara @/./+/-/_."
 
 #: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
-msgstr "E-mailadres"
+msgstr "Emel"
 
 #: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "You should not use email as username"
-msgstr "U gebruikt beter geen e-mailadres als gebruikersnaam"
+msgstr "Anda sepatutnya tidak menggunakan emel sebagai nama pengguna"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
-msgstr "Wachtwoord vergeten?"
+msgstr "Lupa kata laluan anda?"
 
 #: sweettooth/auth/templates/registration/login.html:32
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
-msgstr "Aanmelden"
+msgstr "Daftar masuk"
 
 #: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr "Heeft u geen account?"
+msgstr "Masih tiada akaun?"
 
 #: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
-msgstr "Registreren"
+msgstr "Daftar"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
 msgid "User Login"
-msgstr "Gebruiker aanmelden"
+msgstr "Daftar Masuk Pengguna"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:12
 #: sweettooth/auth/templates/registration/password_reset_form.html:12
 #: extensions-web-domain-django:1
 msgid "Reset your password"
-msgstr "Wachtwoord opnieuw instellen"
+msgstr "Tetap semula kata laluan anda"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
@@ -85,14 +83,14 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
-"Het token voor het opnieuw instellen van het wachtwoord is onjuist. "
-"Controleer uw verwijzing en probeer het opnieuw."
+"Token untuk tetap semula kata laluan adalah salah. Sila periksa pautan anda "
+"dan cuba lagi."
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr "Wachtwoord opnieuw instellen"
+msgstr "Tetap semula kata laluan"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
@@ -100,26 +98,25 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Wachtwoord vergeten? Voer hieronder uw e-mailadres in en wij sturen u per e-"
-"mail instructies om een nieuw wachtwoord in te stellen."
+"Lupa kata laluan anda? Masukkan alamat emel anda di bawah, dan kami akan "
+"emelkan arahan untuk menetapkan yang baharu."
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
-msgstr "Uw uitbreidingen toevoegen"
+msgstr "Tambah"
 
 #: sweettooth/context_processors.py:17 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr "Geïnstalleerde uitbreidingen"
+msgstr "Sambungan terpasang anda"
 
 #: sweettooth/context_processors.py:21 extensions-web-domain-django:1
 msgid "About"
-msgstr "Info"
+msgstr "Perihal"
 
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Extensions"
-msgstr "Uitbreidingen"
+msgstr "Sambungan"
 
-# You understand, right? zou ik niet vertalen, komt nogal onbeleefd over - Nathan
 #: sweettooth/extensions/templates/extensions/comments.html:18
 #: extensions-web-domain-django:1
 #, python-format
@@ -128,80 +125,79 @@ msgid ""
 "\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
 "comment or report an error. You understand, right?"
 msgstr ""
-"Om spam tegen te gaan, vragen we u om u <a href=\"%(login_url)s\">aan te "
-"melden bij Gnome-shelluitbreidingen</a> om een reactie te kunnen plaatsen of "
-"een fout te melden."
+"Malangnya, untuk menghindari spam, kami mohon anda <a href=\"%(login_url)s"
+"\">daftar masuk ke Sambungan Shell GNOME</a> dahulu supaya dapat mengepos "
+"satu ulasan atau melaporkan satu ralat. Diharap anda memahaminya?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr "Beoordelingen van gebruikers"
+msgstr "Penilaian Pengguna"
 
 #: sweettooth/extensions/templates/extensions/comments.html:25
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr "Beoordelingen worden geladen…"
+msgstr "Memuatkan penilaian…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
 msgid "Your opinion"
-msgstr "Uw mening"
+msgstr "Pendapat anda"
 
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr "Plaats een…"
+msgstr "Tinggalkan satu…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
 msgid "Comment"
-msgstr "Reactie"
+msgstr "Ulasan"
 
 #: sweettooth/extensions/templates/extensions/comments.html:8
 #: extensions-web-domain-django:1
 msgid "Rating"
-msgstr "Beoordeling"
+msgstr "Penarafan"
 
 #: sweettooth/extensions/templates/extensions/comments.html:9
 #: extensions-web-domain-django:1
 msgid "Bug report"
-msgstr "Foutrapport"
+msgstr "Laporan pepijat"
 
-# niet opwaarderen - Nathan
 #: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
-msgstr "Deze uitbreiding bijwerken"
+msgstr "Tatar sambungan ini"
 
 #: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
-msgstr "Deze uitbreiding configureren"
+msgstr "Konfigur sambungan ini"
 
 #: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
-msgstr "Deze uitbreiding verwijderen"
+msgstr "Nyahpasang sambungan ini"
 
 #: sweettooth/extensions/templates/extensions/detail.html:53
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
-msgstr "Website van uitbreiding"
+msgstr "Laman Sesawang Sambungan"
 
 #: sweettooth/extensions/templates/extensions/detail.html:58
 #: extensions-web-domain-django:1
 msgid "Download"
-msgstr "Downloaden"
+msgstr "Muat Turun"
 
 #: sweettooth/extensions/templates/extensions/detail.html:61
 #: extensions-web-domain-django:1
 msgid "Shell version…"
-msgstr "Shell-versie…"
+msgstr "Versi Shell…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr "Uitbreidingsversie…"
+msgstr "Versi Sambungan…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
@@ -209,95 +205,94 @@ msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"De uitbreiding die u heeft ingediend zal nagekeken worden om zeker te zijn "
-"dat ze geen gevaar stelt. U krijgt de resultaten van deze controle per e-"
-"mail opgestuurd."
+"Seorang penilai semula akan menilai sambungan yang anda serahkan untuk "
+"memastikan ia tidak merbahaya. Keputusan penilaian akan diemelkan kepada "
+"anda kelak."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr "Zoeken naar uitbreidingen…"
+msgstr "Gelintar sambungan…"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
 #: extensions-web-domain-django:1
 msgid "Installed Extensions"
-msgstr "Geïnstalleerde uitbreidingen"
+msgstr "Sambungan Terpasang"
 
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
 msgid "Shell settings"
-msgstr "Shell-instellingen"
+msgstr "Tetapan Shell"
 
 #: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Content"
-msgstr "Inhoud"
+msgstr "Kandungan"
 
 #: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
 msgid "Metadata"
-msgstr "Metadata"
+msgstr "Data Meta"
 
 #: sweettooth/ratings/templates/comments/form.html:26
 #: sweettooth/ratings/templates/comments/preview.html:45
 #: extensions-web-domain-django:1
 msgid "Post"
-msgstr "Post"
+msgstr "Kiriman"
 
 #: sweettooth/ratings/templates/comments/form.html:27
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr "Voorbeeld"
+msgstr "Pratonton"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr "Wat vindt u van deze Gnome-uitbreiding?"
+msgstr "Apa pendapat anda mengenai sambungan GNOME ini?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Corrigeer de fout hieronder"
-msgstr[1] "Corrigeer de fouten hieronder"
+msgstr[0] "Sila betulkan ralat di bawah"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr "Bekijk een voorbeeld van uw reactie"
+msgstr "Pratonton ulasan anda"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr "Reactie plaatsen"
+msgstr "Kirim Ulasan"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr "Uw reactie bewerken"
+msgstr "Sunting ulasan anda"
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr "Laatste nieuwe uitbreidingen bij Gnome-shelluitbreidingen"
+msgstr "Sambungan terkini dalam Sambungan Shell GNOME"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "Gnome-shelluitbreidingen"
+msgstr "Sambungan Shell GNOME"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
-msgstr "Gebruikersprofiel"
+msgstr "Profil Pengguna"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
-msgstr "Gebruikersinstellingen"
+msgstr "Tetapan Pengguna"
 
 #: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
 msgid "Log out"
-msgstr "Afmelden"
+msgstr "Daftar keluar"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid ""
@@ -305,24 +300,24 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"Om via deze site Gnome-shelluitbreidingen te beheren, dient u de Gnome-"
-"shellintegratie te installeren, bestaande uit twee delen: een "
-"browserextensie en een native-host-messaging-toepassing"
+"Untuk mengawal sambungan Shell GNOME yang menggunakan tapak ini, anda mesti "
+"memasang penyepaduan Shell GNOME yang terdiri dari dua bahagian: sambungan "
+"pelayar dan aplikasi pemesejan hos tabii"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr "Browserextensie voor Gnome-shellintegratie installeren"
+msgstr "Pasang sambungan pelayar penyepaduan Shell GNOME"
 
 #: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr "Klik hier om de browserextensie te installeren"
+msgstr "Klik di sini untuk memasang sambungan pelayar"
 
 #: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Bekijk %sde wiki-pagina%s voor installatie-instructies voor de native-host-"
-"connector"
+"Sila rujuk %slaman wiki %s untuk mengetahui arahan pemasangan penyambung "
+"hos tabii"
 
 #: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
 msgid ""
@@ -330,111 +325,104 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"We konden niet detecteren dat Gnome op uw ssyteem draait, dus sommige "
-"onderdelen van de interface zijn mogelijk uitgeschakeld. Bekijk onze <a href="
-"\"/about/#no-detection\">probleemoplossingshulp</a> voor meer informatie."
+"Kami tidak dapat mengesan satu salinan GNOME yang berjalan dalam sistem "
+"ini, jadi sesetengah bahagian antara muka mungkin dilumpuhkan. Sila rujuk "
+"<a href=\"/about/#no-detection\">masukan pencarisilapan kami</a> untuk "
+"maklumat lanjut."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
-"Gnome-shelluitbreidingen kan uw geïnstalleerde uitbreidingen niet oplijsten."
+"Sambungan Shell GNOME tidak dapat menyenaraikan sambungan terpasang anda."
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
-msgstr "Compatibel met"
+msgstr "Serasi dengan"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
-msgstr "Naam"
+msgstr "Nama"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr "Recent"
+msgstr "Baru-baru Ini"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
-msgstr "Downloads"
+msgstr "Muat Turun"
 
 #: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
 msgid "Popularity"
-msgstr "Populariteit"
+msgstr "Populariti"
 
 #: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
 msgid "Sort by"
-msgstr "Sorteren op"
+msgstr "Isih mengikut"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr "Meer beoordelingen tonen"
+msgstr "Tunjuk lagi penilaian"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr "Er zijn nog geen reacties. Plaats de eerste!"
+msgstr "Masih tiada ulasan. Jadilah orang pertama!"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:4
 #: extensions-web-domain-djangojs:1
 msgid "Author"
-msgstr "Auteur"
+msgstr "Pengarang"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "What's wrong?"
-msgstr "Wat is er mis?"
+msgstr "Apa masalahnya?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:17
 #: extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions did not detect any errors with this extension."
 msgstr ""
-"Gnome-shelluitbreidingen heeft geen fouten in deze uitbreiding gedetecteerd."
+"Sambungan Shell GNOME tidak dapat mengesan sebarang ralat dengan sambungan "
+"ini."
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
 msgid "Version information"
-msgstr "Versie-informatie"
+msgstr "Maklumat versi"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:22
 #: extensions-web-domain-djangojs:1
 msgid "Shell version"
-msgstr "Shell-versie"
+msgstr "Versi Shell"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Extension version"
-msgstr "Uitbreidingsversie"
+msgstr "Versi sambungan"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Unknown"
-msgstr "Onbekend"
+msgstr "Tidak diketahui"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:5
 #: extensions-web-domain-djangojs:1
 msgid "What have you tried?"
-msgstr "Wat hebt u geprobeerd?"
+msgstr "Apa yang anda cuba lakukan?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:9
 #: extensions-web-domain-djangojs:1
 msgid "Automatically detected errors"
-msgstr "Automatisch gedetecteerde fouten"
+msgstr "Ralat dikesan secara automatik"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr "Systeemuitbreiding"
+msgstr "Sambungan sistem"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
-msgstr "U verwijderde"
-
-#~ msgid "Password"
-#~ msgstr "Wachtwoord"
-
-#~ msgid "Password confirmation"
-#~ msgstr "Wachtwoordbevestiging"
-
-#~ msgid "Enter the same password as above, for verification."
-#~ msgstr "Voer ter verificatie hetzelfde wachtwoord als hierboven in."
+msgstr "Anda menyahpasang"
