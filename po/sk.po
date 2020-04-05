@@ -11,7 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-04-05 13:25+0200\n"
+"PO-Revision-Date: 2020-04-05 13:45+0200\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
@@ -20,19 +20,20 @@ msgstr ""
 
 #: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
 msgid "Username or email"
-msgstr ""
+msgstr "Meno používateľa alebo e-mail"
 
 #: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
-msgstr ""
+msgstr "Meno používateľa"
 
 #: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
+"Potrebné. 30 znakov alebo menej. Iba písmená, číslice a znaky @/./+/-/_."
 
 #: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
+msgstr "Táto hodnota môže obsahovať iba písmená, číslice a znaky @/./+/-/_."
 
 #: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
@@ -40,7 +41,7 @@ msgstr "E-Mail"
 
 #: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "You should not use email as username"
-msgstr ""
+msgstr "Nemali by ste používať e-mail ako meno používateľa"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -52,7 +53,7 @@ msgstr "Zabudli ste heslo?"
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
-msgstr ""
+msgstr "Prihlásiť sa"
 
 #: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
@@ -69,13 +70,13 @@ msgstr "Zaregistrovať"
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
 msgid "User Login"
-msgstr ""
+msgstr "Prihlásenie používateľa"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:12
 #: sweettooth/auth/templates/registration/password_reset_form.html:12
 #: extensions-web-domain-django:1
 msgid "Reset your password"
-msgstr ""
+msgstr "Obnoviť vaše heslo"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
@@ -88,7 +89,7 @@ msgstr ""
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr ""
+msgstr "Obnovenie hesla"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
@@ -103,11 +104,11 @@ msgstr "Pridajte svoje"
 
 #: sweettooth/context_processors.py:17 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr ""
+msgstr "Nainštalované rozšírenia"
 
 #: sweettooth/context_processors.py:21 extensions-web-domain-django:1
 msgid "About"
-msgstr ""
+msgstr "O webe"
 
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Extensions"
@@ -125,27 +126,27 @@ msgstr ""
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr ""
+msgstr "Recenzie používateľov"
 
 #: sweettooth/extensions/templates/extensions/comments.html:25
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr ""
+msgstr "Načítavajú sa recenzie…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
 msgid "Your opinion"
-msgstr ""
+msgstr "Váš názor"
 
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr ""
+msgstr "Zanechajte…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
 msgid "Comment"
-msgstr ""
+msgstr "Komentár"
 
 #: sweettooth/extensions/templates/extensions/comments.html:8
 #: extensions-web-domain-django:1
@@ -155,22 +156,22 @@ msgstr "Hodnotenie"
 #: sweettooth/extensions/templates/extensions/comments.html:9
 #: extensions-web-domain-django:1
 msgid "Bug report"
-msgstr ""
+msgstr "Hlásenie o chybe"
 
 #: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
-msgstr ""
+msgstr "Aktualizovať toto rozšírenie"
 
 #: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
-msgstr ""
+msgstr "Nastaviť toto rozšírenie"
 
 #: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
-msgstr ""
+msgstr "Odinštalovať toto rozšírenie"
 
 #: sweettooth/extensions/templates/extensions/detail.html:53
 #: extensions-web-domain-django:1
@@ -180,17 +181,17 @@ msgstr "Domovská stránka rozšírenia"
 #: sweettooth/extensions/templates/extensions/detail.html:58
 #: extensions-web-domain-django:1
 msgid "Download"
-msgstr ""
+msgstr "Prevziať"
 
 #: sweettooth/extensions/templates/extensions/detail.html:61
 #: extensions-web-domain-django:1
 msgid "Shell version…"
-msgstr ""
+msgstr "Verzia Shellu…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr ""
+msgstr "Verzia rozšírenia…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
@@ -208,12 +209,12 @@ msgstr "Vyhľadajte rozšírenie…"
 #: sweettooth/extensions/templates/extensions/local.html:8
 #: extensions-web-domain-django:1
 msgid "Installed Extensions"
-msgstr ""
+msgstr "Nainštalované rozšírenia"
 
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
 msgid "Shell settings"
-msgstr ""
+msgstr "Nastavenia Shellu"
 
 #: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Content"
@@ -221,53 +222,53 @@ msgstr "Obsah"
 
 #: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
 msgid "Metadata"
-msgstr ""
+msgstr "Metaúdaje"
 
 #: sweettooth/ratings/templates/comments/form.html:26
 #: sweettooth/ratings/templates/comments/preview.html:45
 #: extensions-web-domain-django:1
 msgid "Post"
-msgstr ""
+msgstr "Príspevok"
 
 #: sweettooth/ratings/templates/comments/form.html:27
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr ""
+msgstr "Náhľad"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr ""
+msgstr "Čo si myslíte o tomto rozšírení prostredia GNOME?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Prosím, napravte nasledovné chyby"
+msgstr[1] "Prosím, napravte nasledovnú chybu"
+msgstr[2] "Prosím, napravte nasledovné chyby"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr ""
+msgstr "Náhľad vášho komentára"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr ""
+msgstr "Odovzdať komentár"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr ""
+msgstr "Upraviť váš komentár"
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr ""
+msgstr "Najnovšie rozšírenia na webe rozšírení prostredia GNOME Shell"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
@@ -276,15 +277,15 @@ msgstr "Rozšírenia prostredia GNOME Shell"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
-msgstr ""
+msgstr "Profil používateľa"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
-msgstr ""
+msgstr "Nastavenia používateľa"
 
 #: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
 msgid "Log out"
-msgstr ""
+msgstr "Odhlásiť sa"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid ""
@@ -299,7 +300,7 @@ msgstr ""
 
 #: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr ""
+msgstr "Kliknutím sem nainštalujete rozšírenie prehliadača"
 
 #: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
 #, javascript-format
@@ -320,7 +321,7 @@ msgstr ""
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
-msgstr ""
+msgstr "Kompatibilné s"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
@@ -340,17 +341,17 @@ msgstr ""
 
 #: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
 msgid "Sort by"
-msgstr ""
+msgstr "Usporiadať podľa"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr ""
+msgstr "Zobraziť viac recenzií"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr ""
+msgstr "Zatiaľ bez komentárov. Buďte prvý!"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:4
 #: extensions-web-domain-djangojs:1
@@ -360,7 +361,7 @@ msgstr "Autor"
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "What's wrong?"
-msgstr ""
+msgstr "Kde je chyba?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:17
 #: extensions-web-domain-djangojs:1
@@ -370,12 +371,12 @@ msgstr ""
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
 msgid "Version information"
-msgstr ""
+msgstr "Informácie o verzii"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:22
 #: extensions-web-domain-djangojs:1
 msgid "Shell version"
-msgstr ""
+msgstr "Verzia Shellu"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
@@ -390,19 +391,19 @@ msgstr ""
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:5
 #: extensions-web-domain-djangojs:1
 msgid "What have you tried?"
-msgstr ""
+msgstr "O čo ste sa pokúšali?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:9
 #: extensions-web-domain-djangojs:1
 msgid "Automatically detected errors"
-msgstr ""
+msgstr "Automaticky zistené chyby"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr ""
+msgstr "Systémové rozšírenie"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
-msgstr ""
+msgstr "Odinštalovali ste"
