@@ -17,6 +17,7 @@ import os
 import re
 import zlib
 
+from datetime import datetime
 from zipfile import ZipFile, BadZipfile
 
 from django.conf import settings
@@ -154,16 +155,8 @@ class Extension(models.Model):
         if not validate_uuid(self.uuid):
             raise ValidationError("Your extension has an invalid UUID")
 
-    def save(self, replace_metadata_json=True, *args, **kwargs):
+    def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        if replace_metadata_json:
-            for version in self.versions.all():
-                if version.source:
-                    try:
-                        version.replace_metadata_json()
-                    except (BadZipfile, zlib.error):
-                        # Ignore bad zipfiles, we don't care
-                        pass
 
     def get_absolute_url(self):
         return reverse('extensions-detail', kwargs=dict(pk=self.pk,
