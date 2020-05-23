@@ -27,11 +27,11 @@ class Command(BaseCommand):
                     else:
                         badversion = False
 
-            except IOError, e:
+            except IOError as e:
                 self.error("[%s: %d] Unable to find zip file: %s" % (version.extension.name, version.version, str(e)))
-            except BadZipfile, e:
+            except BadZipfile as e:
                 self.error("[%s: %d] Bad zip file: %s" % (version.extension.name, version.version, version.source.name))
-            except ZlibError, e:
+            except ZlibError as e:
                 self.error("[%s: %d] Zlib error: %s" % (version.extension.name, version.version, str(e)))
 
             if badversion:
