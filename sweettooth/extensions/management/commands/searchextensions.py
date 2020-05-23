@@ -35,4 +35,4 @@ class Command(BaseCommand):
 
         extensions = [extension_lookup[pk] for pk in pks]
         for ext in extensions:
-            print ext.name
+            print(ext.name)
