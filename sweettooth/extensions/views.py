@@ -346,6 +346,9 @@ def ajax_inline_edit_view(request, extension):
 @require_POST
 @model_view(models.Extension)
 def ajax_upload_screenshot_view(request, extension):
+    if not extension.user_can_edit(request.user):
+        return HttpResponseForbidden()
+
     extension.screenshot = request.FILES['file']
     extension.save(replace_metadata_json=False)
     return extension.screenshot.url
@@ -354,6 +357,9 @@ def ajax_upload_screenshot_view(request, extension):
 @require_POST
 @model_view(models.Extension)
 def ajax_upload_icon_view(request, extension):
+    if not extension.user_can_edit(request.user):
+        return HttpResponseForbidden()
+
     extension.icon = request.FILES['file']
     extension.save(replace_metadata_json=False)
     return extension.icon.url
