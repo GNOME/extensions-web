@@ -1,5 +1,20 @@
+"""
+    GNOME Shell Extensions Repository
+    Copyright (C) 2011-2013 Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2019 Claude Paroz <claude@2xlibre.net>
+    Copyright (C) 2016-2020 Yuri Konotopov <ykonotopov@gnome.org>
 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+"""
+
+import autoslug
 import json
+import os
+import re
+import zlib
 
 from zipfile import ZipFile, BadZipfile
 
@@ -7,10 +22,6 @@ from django.conf import settings
 from django.db import models
 from django.dispatch import Signal
 from django.urls import reverse
-
-import autoslug
-import re
-import zlib
 
 (STATUS_UNREVIEWED,
  STATUS_REJECTED,
@@ -82,11 +93,13 @@ def build_shell_version_array(versions):
 
 
 def make_screenshot_filename(obj, filename=None):
-    return "screenshots/screenshot_%d.png" % (obj.pk,)
+    ext = os.path.splitext(filename)[1].lower()
+    return "screenshots/screenshot_%d%s" % (obj.pk, ext)
 
 
 def make_icon_filename(obj, filename=None):
-    return "icons/icon_%d.png" % (obj.pk,)
+    ext = os.path.splitext(filename)[1].lower()
+    return "icons/icon_%d%s" % (obj.pk, ext)
 
 
 class Extension(models.Model):
