@@ -1,3 +1,13 @@
+"""
+    GNOME Shell Extensions Repository
+    Copyright (C) 2011-2016 Jasper St. Pierre <jstpierre@mecheye.net>
+    Copyright (C) 2016-2020 Yuri Konotopov <ykonotopov@gnome.org>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+"""
 
 import json
 from math import ceil
@@ -7,7 +17,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
@@ -348,8 +358,11 @@ def validate_uploaded_image(request, extension):
 
     form = ImageUploadForm(request.POST, request.FILES)
 
-    if not form.is_valid() or form.cleaned_data['file'].size > 2*1024*1024:
-        return HttpResponseForbidden()
+    if not form.is_valid():
+        return JsonResponse(form.errors.get_json_data(), status=403)
+
+    if form.cleaned_data['file'].size > 2*1024*1024:
+        return HttpResponseForbidden(content="Too big image")
 
     return form.cleaned_data['file']
 
