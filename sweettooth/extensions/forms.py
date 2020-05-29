@@ -22,3 +22,6 @@ I agree that GNOME Shell Extensions can remove, modify or reassign maintainershi
         if not tos_compliant:
             raise forms.ValidationError("You must agree to the GNOME Shell Extensions terms of service.")
         return tos_compliant
+
+class ImageUploadForm(forms.Form):
+    file = forms.ImageField(required=True)

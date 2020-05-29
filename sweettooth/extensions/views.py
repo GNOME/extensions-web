@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
-from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
@@ -15,7 +15,7 @@ from django.urls import reverse
 
 from sweettooth.exceptions import DatabaseErrorWithMessages
 from sweettooth.extensions import models, search
-from sweettooth.extensions.forms import UploadForm
+from sweettooth.extensions.forms import ImageUploadForm, UploadForm
 
 from sweettooth.decorators import ajax_view, model_view
 from sweettooth.extensions.templatetags.extension_icon import extension_icon
@@ -342,14 +342,28 @@ def ajax_inline_edit_view(request, extension):
 
     return value
 
+def validate_uploaded_image(request, extension):
+    if not extension.user_can_edit(request.user):
+        return HttpResponseForbidden()
+
+    form = ImageUploadForm(request.POST, request.FILES)
+
+    if not form.is_valid() or form.cleaned_data['file'].size > 2*1024*1024:
+        return HttpResponseForbidden()
+
+    return form.cleaned_data['file']
+
+
 @ajax_view
 @require_POST
 @model_view(models.Extension)
 def ajax_upload_screenshot_view(request, extension):
-    if not extension.user_can_edit(request.user):
-        return HttpResponseForbidden()
+    data = validate_uploaded_image(request, extension)
+    if isinstance(data, HttpResponse):
+        return data
 
-    extension.screenshot = request.FILES['file']
+    extension.screenshot = data
+    extension.full_clean()
     extension.save(replace_metadata_json=False)
     return extension.screenshot.url
 
@@ -357,10 +371,12 @@ def ajax_upload_screenshot_view(request, extension):
 @require_POST
 @model_view(models.Extension)
 def ajax_upload_icon_view(request, extension):
-    if not extension.user_can_edit(request.user):
-        return HttpResponseForbidden()
+    data = validate_uploaded_image(request, extension)
+    if isinstance(data, HttpResponse):
+        return data
 
-    extension.icon = request.FILES['file']
+    extension.icon = data
+    extension.full_clean()
     extension.save(replace_metadata_json=False)
     return extension.icon.url
 
