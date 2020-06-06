@@ -250,6 +250,8 @@ def submit_review_view(request, obj):
     if newstatus is not None:
         if newstatus == models.STATUS_ACTIVE and not can_approve:
             return HttpResponseForbidden()
+        elif newstatus == models.STATUS_REJECTED and not can_approve:
+            return HttpResponseForbidden()
 
         review.new_status = newstatus
         version.status = newstatus
