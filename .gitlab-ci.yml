@@ -1,19 +1,12 @@
-image: docker:stable
-
-variables:
-  DOCKER_TLS_CERTDIR: ""
-
-services:
-  - docker:dind
-
-before_script:
-  - docker info
-
 test:
-  stage: test
-  tags:
-    - privileged
+  stage: build
+  image: python:3.6-stretch
   script:
-    - docker build -f openshift/docker/Dockerfile -t extensions-web .
-    - docker run -e EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
-    - docker run extensions-web bash -c 'pip install safety && safety check -r requirements.txt && safety check -r requirements.ego.txt'
+    - openshift/docker/build.sh
+    - pip install -r requirements.txt
+    - pip install -r requirements.ego.txt
+    - EGO_SECRET_KEY=- python manage.py compilemessages
+    - EGO_SECRET_KEY=. EGO_DEBUG=1 python manage.py test
+    - pip install safety 
+    - safety check -r requirements.txt 
+    - safety check -r requirements.ego.txt
