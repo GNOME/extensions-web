@@ -1,12 +1,19 @@
 test:
-  stage: build
-  image: python:3.6-stretch
+  image: 'registry.fedoraproject.org/fedora:30'
+  stage: test
+  variables:
+    STORAGE_DRIVER: 'vfs'
+    BUILDAH_FORMAT: 'docker'
+    BUILDAH_ISOLATION: 'chroot'
   script:
-    - openshift/docker/build.sh
-    - pip install -r requirements.txt
-    - pip install -r requirements.ego.txt
-    - EGO_SECRET_KEY=- python manage.py compilemessages
-    - EGO_SECRET_KEY=. EGO_DEBUG=1 python manage.py test
-    - pip install safety 
-    - safety check -r requirements.txt 
-    - safety check -r requirements.ego.txt
+    - dnf install -y buildah podman runc
+    - sed -i '/^mountopt =.*/d' /etc/containers/storage.conf
+    - |
+      cat >> /etc/containers/libpod.conf << END
+      cgroup_manager = "cgroupfs"
+      events_logger = "file"
+      END
+
+    - buildah bud -f openshift/docker/Dockerfile -t extensions-web .
+    - podman run -e EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
+    - podman run extensions-web bash -c 'pip install safety && safety check -r requirements.txt && safety check -r requirements.ego.txt'
