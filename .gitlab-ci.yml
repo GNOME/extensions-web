@@ -2,7 +2,7 @@ test:
   stage: build
   image: python:3.6-stretch
   script:
-    - openshift/docker/build.sh
+    - build.sh
     - pip install -r requirements.txt
     - pip install -r requirements.ego.txt
     - EGO_SECRET_KEY=- python manage.py compilemessages
