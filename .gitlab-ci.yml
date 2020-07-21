@@ -15,5 +15,7 @@ test:
       END
 
     - buildah bud -f openshift/docker/Dockerfile -t extensions-web .
-    - podman run -e EGO_SECRET_KEY=. -e EGO_DEBUG=1 extensions-web python manage.py test
-    - podman run extensions-web bash -c 'pip install safety && safety check -r requirements.txt && safety check -r requirements.ego.txt'
+    - CONTAINER=$(buildah from extensions-web)
+    - buildah config --env EGO_SECRET_KEY=. --env EGO_DEBUG=1 $CONTAINER
+    - buildah run $CONTAINER python manage.py test
+    - buildah run $CONTAINER bash -c 'pip install safety && safety check -r requirements.txt && safety check -r requirements.ego.txt'
