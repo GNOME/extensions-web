@@ -2,50 +2,46 @@
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
 # Zander Brown <zbrown@gnome.org>, 2019.
-# Bruce Cowan <bruce@bcowan.me.uk>, 2019.
+# Bruce Cowan <bruce@bcowan.me.uk>, 2019-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
-"PO-Revision-Date: 2019-08-27 18:39+0100\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2020-09-16 21:19+0100\n"
 "Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
-"Language-Team: English - United Kingdom <en_GB@li.org>\n"
+"Language-Team: English - United Kingdom <en@li.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.32.1\n"
+"X-Generator: Gtranslator 3.36.0\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Username or e-mail"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Username"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "This value may contain only letters, numbers and @/./+/-/_ characters."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-mail"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Password"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Password confirmation"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Enter the same password as above, for verification."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "You should not use e-mail as username"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -59,13 +55,13 @@ msgstr "Forgot your password?"
 msgid "Log in"
 msgstr "Log in"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Don't have an account?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -361,12 +357,12 @@ msgstr "Popularity"
 msgid "Sort by"
 msgstr "Sort by"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Show more reviews"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "There are no comments. Be the first!"
@@ -425,3 +421,12 @@ msgstr "System extension"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "You uninstalled"
+
+#~ msgid "Password"
+#~ msgstr "Password"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Password confirmation"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "Enter the same password as above, for verification."
