@@ -15,4 +15,9 @@ from sweettooth.users.views import UserProfileDetailView
 
 urlpatterns = [
     path("v1/hello/", HelloView.as_view()),
+    path(
+        "v1/profile/<int:pk>/",
+        UserProfileDetailView.as_view(),
+        name="userprofile-detail",
+    ),
 ]
