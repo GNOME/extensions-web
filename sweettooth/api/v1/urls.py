@@ -13,7 +13,11 @@ from django.urls import path
 from rest_framework.routers import SimpleRouter
 
 from sweettooth.api.v1.views import HelloView
+from sweettooth.users.views import UserProfileDetailView
 
 urlpatterns = [
     path('v1/hello/', HelloView.as_view()),
+    path('v1/profile/<int:pk>/',
+         UserProfileDetailView.as_view(),
+         name='userprofile-detail'),
 ]
