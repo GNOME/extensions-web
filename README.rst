@@ -1,4 +1,10 @@
 ==============
+WIP branch
+==============
+
+This is work in progress branch. Please note that git history will be overwritten.
+
+==============
 SweetTooth-Web
 ==============
 
