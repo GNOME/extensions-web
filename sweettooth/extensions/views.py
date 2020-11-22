@@ -65,7 +65,7 @@ class ExtensionsViewSet(
     serializer_class = serializers.ExtensionSerializer
     pagination_class = ExtensionsPagination
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    ordering_fields = ["created", "downloads", "popularity", "?"]
+    ordering_fields = ["created", "updated", "downloads", "popularity", "?"]
     page_size = 25
     page_size_query_param = "page_size"
     max_page_size = 100
