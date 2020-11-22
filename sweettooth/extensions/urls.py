@@ -1,6 +1,6 @@
 
 from django.conf.urls import include, url
-from django.views.generic.base import TemplateView
+from django.views.generic.base import RedirectView, TemplateView
 
 from sweettooth.extensions import views, models, feeds
 
@@ -18,8 +18,6 @@ ajax_patterns = [
 ]
 
 shell_patterns = [
-    url(r'^extension-query/', views.ajax_query_view, name='extensions-query'),
-
     url(r'^extension-info/', views.ajax_details_view),
 
     url(r'^download-extension/(?P<uuid>.+)\.shell-extension\.zip$',
@@ -29,7 +27,7 @@ shell_patterns = [
 ]
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='extensions/list.html'), name='extensions-index'),
+    url(r'^$', RedirectView.as_view(url='/', permanent=False), name='extensions-index'),
 
     url(r'^about/$', TemplateView.as_view(template_name='extensions/about.html'), name='extensions-about'),
 

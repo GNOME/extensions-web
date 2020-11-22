@@ -38,8 +38,10 @@ services:
       EGO_STATIC_ROOT: /extensions-web/www/static-files
     depends_on:
       - db
+      - search
     links:
       - db
+      - search
     volumes:
       - "static:/extensions-web/www"
   frontend:
@@ -56,7 +58,17 @@ services:
       - "8080:8080"
     volumes:
       - "static:/extensions-web/www"
+  search:
+    image: elasticsearch:7.9.1
+    restart: always
+    environment:
+      "discovery.type": single-node
+    ports:
+      - "127.0.0.1:49200:9200"
+    volumes:
+      - search:/usr/share/elasticsearch/data
 
 volumes:
   database:
+  search:
   static:

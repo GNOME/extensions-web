@@ -7,12 +7,18 @@ djangorestframework==3.11.0 \
 django-autoslug==1.9.8 \
     --hash=sha256:26459eeddec207e307c55777a10fc25d17f4978753695340b16a17ed248a6f70 \
     --hash=sha256:bae66c27d35615f472865b99c4d107f3b3add3d22ee337e84960fc07694abd45
+django-filter==2.2.0 \
+    --hash=sha256:558c727bce3ffa89c4a7a0b13bc8976745d63e5fd576b3a9a851650ef11c401b \
+    --hash=sha256:c3deb57f0dd7ff94d7dce52a047516822013e2b441bed472b722a317658cfd14
 django-contrib-comments==1.9.2 \
     --hash=sha256:b83320a86081a76bc0570e6cc0f924c0ced40b46ae9f5dd783ab2c745b449529 \
     --hash=sha256:d1232bade3094de07dcc205fc833204384e71ba9d30caadcb5bb2882ce8e8d31
 django-registration==3.1.1 \
     --hash=sha256:44ca3d63869c91174cef9ccf244ec87ad296e3d705983e9e98150cee03938dda \
     --hash=sha256:88e6c2aa698320b87c5d3cbb941ef7acde69ced109bc00ce35acfccfbf00ab71
+django-elasticsearch-dsl==7.1.4 \
+    --hash=sha256:5bbd49a9acb51c08fbbb7fba9beee7c9ce73b481af718cc57e4c8ac3d561888f \
+    --hash=sha256:e733ccfd0e8b83ad6896d812a2c15ccbd563caf4ebf30fd31640538ad2de8e26
 Pygments==2.7.3 \
     --hash=sha256:ccf3acacf3782cbed4a989426012f1c535c9a90d3a7fc3f16d231b9372d2b716 \
     --hash=sha256:f275b6c0909e5dafd2d6269a656aa90fa58ebf4a74f8fcf9053195d226b24a08
@@ -51,3 +57,20 @@ confusable_homoglyphs==3.2.0 \
 six==1.15.0 \
     --hash=sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259 \
     --hash=sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced
+# django-elasticsearch-dsl
+elasticsearch-dsl==7.2.1 \
+    --hash=sha256:1e345535164cb684de4b825e1d0daf81b75554b30d3905446584a9e4af0cc3e7 \
+    --hash=sha256:593c01822a03e3e84b87753c78edb833f4b2bfafcd52089841bd8f99b7e74ccd
+python-dateutil==2.8.1 \
+    --hash=sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c \
+    --hash=sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a
+elasticsearch==7.9.1 \
+    --hash=sha256:5e08776fbb30c6e92408c7fa8c37d939210d291475ae2f364f0497975918b6fe \
+    --hash=sha256:8c7e2374f53ee1b891ff2804116e0c7fb517585d6d5788ba668686bbc9d82e2d
+# elasticsearch
+certifi==2020.6.20 \
+    --hash=sha256:5930595817496dd21bb8dc35dad090f1c2cd0adfaf21204bf6732ca5d8ee34d3 \
+    --hash=sha256:8fc0819f1f30ba15bdb34cceffb9ef04d99f420f68eb75d901e9560b8749fc41
+urllib3==1.25.10 \
+    --hash=sha256:91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a \
+    --hash=sha256:e7983572181f5e1522d9c98453462384ee92a0be7fac5f1413a1e35c56cc0461
