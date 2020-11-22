@@ -182,11 +182,18 @@ if os.getenv('EGO_EMAIL_URL'):
 NO_SECURE_SETTINGS = True if os.getenv('EGO_NO_SECURE_SETTINGS') else False
 NO_STATICFILES_SETTINGS = False
 
+APPEND_INSTALLED_APPS = PREPEND_MIDDLEWARE = ()
+
 try:
     from local_settings import *
 except ImportError:
     pass
 
+if APPEND_INSTALLED_APPS:
+    INSTALLED_APPS += APPEND_INSTALLED_APPS
+
+if PREPEND_MIDDLEWARE:
+    MIDDLEWARE = PREPEND_MIDDLEWARE + MIDDLEWARE
 
 # Enable secure settings in case DEBUG is disabled and NO_SECURE_SETTINGS is not set to True
 if not DEBUG and not NO_SECURE_SETTINGS:
