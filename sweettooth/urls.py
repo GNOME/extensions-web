@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import include
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import re_path
+from django.urls import path, re_path
 from django.views import static
 from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
@@ -10,6 +10,7 @@ from django.views.i18n import JavaScriptCatalog
 admin.autodiscover()
 
 urlpatterns = [
+    path("api/", include("sweettooth.api.v1.urls")),
     # 'login' and 'register'
     re_path(r"^accounts/", include("sweettooth.auth.urls")),
     re_path(r"^", include("sweettooth.extensions.urls"), name="index"),

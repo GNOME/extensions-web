@@ -163,6 +163,7 @@ django==4.2.7 \
     #   django-cors-headers
     #   django-recaptcha
     #   django-registration
+    #   djangorestframework
 django-autoslug==1.9.9 \
     --hash=sha256:79f88e9433c1c88d8d3f2bec60d65ca98bffaff6c072b78aa5fd99d0e84a13dd \
     --hash=sha256:81cb018944498f27f439d439687cf902212cafbdb8c74c8ca0307543a3d82907
@@ -185,6 +186,10 @@ django-recaptcha==3.0.0 \
 django-registration==3.4 \
     --hash=sha256:1a0ccef7ef71e67a78a551abd8ad378977dc14a036f1fcd8be422a68bd5254a9 \
     --hash=sha256:fa76df481189794f47eb73043ee5cc9bfb0963194b901d7bd8cf914beab1ddd0
+    # via -r requirements.in
+djangorestframework==3.14.0 \
+    --hash=sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8 \
+    --hash=sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08
     # via -r requirements.in
 flake8==6.0.0 \
     --hash=sha256:3833794e27ff64ea4e9cf5d410082a8b97ff1a06c16aa3d2027339cd0f1195c7 \
@@ -380,7 +385,9 @@ python-dateutil==2.8.2 \
 pytz==2023.3 \
     --hash=sha256:1d8ce29db189191fb55338ee6d0387d82ab59f3d00eac103412d64e0ebd0c588 \
     --hash=sha256:a151b3abb88eda1d4e34a9814df37de2a80e301e68ba0fd856fb9b46bfbbbffb
-    # via dateutils
+    # via
+    #   dateutils
+    #   djangorestframework
 requests==2.31.0 \
     --hash=sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f \
     --hash=sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1

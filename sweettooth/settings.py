@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
     "django.contrib.messages",
+    "rest_framework",
     "django_opensearch_dsl",
     "sweettooth.extensions",
     "sweettooth.auth",
@@ -183,6 +184,15 @@ ACCOUNT_ACTIVATION_DAYS = 5
 LOGIN_URL = "/accounts/login/"
 
 COMMENTS_APP = "sweettooth.ratings"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
 
 RECAPTCHA_PUBLIC_KEY = os.getenv(
     "EGO_RECAPTCHA_PUBLIC_KEY", captcha_constants.TEST_PUBLIC_KEY
