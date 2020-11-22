@@ -45,6 +45,7 @@ class ExtensionSerializer(serializers.ModelSerializer):
             "creator",
             "description",
             "created",
+            "updated",
             "downloads",
             "popularity",
             "screenshot",

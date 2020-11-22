@@ -149,6 +149,7 @@ class Extension(models.Model):
     description = models.TextField(blank=True)
     url = HttpURLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(default=None, blank=True, null=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
     allow_comments = models.BooleanField(default=True)
@@ -505,6 +506,7 @@ class ExtensionVersion(models.Model):
     status = models.PositiveIntegerField(choices=STATUSES.items())
     shell_versions = models.ManyToManyField(ShellVersion)
     session_modes = models.ManyToManyField(SessionMode)
+    created = models.DateTimeField(auto_now_add=True, null=True)
 
     source = models.FileField(upload_to=make_filename, max_length=filename_max_length)
 

@@ -48,6 +48,7 @@ class ExtensionDocument(Document):
             "uuid",
             "description",
             "created",
+            "updated",
             "downloads",
             "popularity",
         ]
