@@ -4,6 +4,7 @@ import os.path
 from django.conf.urls import include
 from django.conf import settings
 from django.http import HttpResponse
+from django.urls import path
 
 from django.contrib import admin
 from django.urls import re_path
@@ -14,6 +15,8 @@ from django.views.i18n import JavaScriptCatalog
 admin.autodiscover()
 
 urlpatterns = [
+    path('api/', include('sweettooth.api.v1.urls')),
+
     # 'login' and 'register'
     re_path(r'^accounts/', include('sweettooth.auth.urls')),
 

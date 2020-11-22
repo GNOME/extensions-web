@@ -31,6 +31,7 @@ django==3.2.13 \
     #   -r requirements.in
     #   django-contrib-comments
     #   django-registration
+    #   djangorestframework
 django-autoslug==1.9.8 \
     --hash=sha256:26459eeddec207e307c55777a10fc25d17f4978753695340b16a17ed248a6f70 \
     --hash=sha256:bae66c27d35615f472865b99c4d107f3b3add3d22ee337e84960fc07694abd45
@@ -42,6 +43,10 @@ django-contrib-comments==2.1.0 \
 django-registration==3.2 \
     --hash=sha256:2ea8c7d89a8760ccde41dfd335aa28ba89073d09aab5a0f5f3d7c8c148fcc518 \
     --hash=sha256:e79fdbfa22bfaf4182efccb6604391391a7de19438d2669c5b9520a7708efbd2
+    # via -r requirements.in
+djangorestframework==3.13.1 \
+    --hash=sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee \
+    --hash=sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa
     # via -r requirements.in
 pillow==9.0.1 \
     --hash=sha256:011233e0c42a4a7836498e98c1acf5e744c96a67dd5032a6f666cc1fb97eab97 \
@@ -91,7 +96,9 @@ pygments==2.11.2 \
 pytz==2022.1 \
     --hash=sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7 \
     --hash=sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c
-    # via django
+    # via
+    #   django
+    #   djangorestframework
 sqlparse==0.4.2 \
     --hash=sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae \
     --hash=sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d
