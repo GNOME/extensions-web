@@ -36,6 +36,7 @@ class ExtensionDocument(Document):
             'updated',
             'downloads',
             'popularity',
+            'recommended',
         ]
 
     def get_queryset(self):

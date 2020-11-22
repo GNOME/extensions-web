@@ -130,6 +130,7 @@ class Extension(models.Model):
     updated = models.DateTimeField(default=None, null=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
+    recommended = models.BooleanField(default=False)
 
     class Meta:
         permissions = (
