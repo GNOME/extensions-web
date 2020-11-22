@@ -33,6 +33,7 @@ class ExtensionDocument(Document):
             'name',
             'description',
             'created',
+            'updated',
             'downloads',
             'popularity',
         ]

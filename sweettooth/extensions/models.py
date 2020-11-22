@@ -127,6 +127,7 @@ class Extension(models.Model):
     description = models.TextField(blank=True)
     url = HttpURLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(default=None, null=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
 
@@ -156,6 +157,17 @@ class Extension(models.Model):
             raise ValidationError("Your extension has an invalid UUID")
 
     def save(self, *args, **kwargs):
+        versions = self.visible_versions.order_by('-version')
+        self.updated = (
+            versions[0].created
+            if len(versions) > 0
+            else (
+                self.created
+                if self.created
+                else datetime.now()
+            )
+        )
+
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -367,6 +379,7 @@ class ExtensionVersion(models.Model):
     status = models.PositiveIntegerField(choices=STATUSES.items())
     shell_versions = models.ManyToManyField(ShellVersion)
     session_modes = models.ManyToManyField(SessionMode)
+    created = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:
         unique_together = ('extension', 'version'),
