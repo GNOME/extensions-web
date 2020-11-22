@@ -152,6 +152,7 @@ class Extension(models.Model):
     updated = models.DateTimeField(default=None, blank=True, null=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
+    recommended = models.BooleanField(default=False)
     allow_comments = models.BooleanField(default=True)
     donation_json_field = None
 

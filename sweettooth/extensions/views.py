@@ -65,6 +65,7 @@ class ExtensionsViewSet(
     serializer_class = serializers.ExtensionSerializer
     pagination_class = ExtensionsPagination
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ["recommended"]
     ordering_fields = ["created", "updated", "downloads", "popularity", "?"]
     page_size = 25
     page_size_query_param = "page_size"
@@ -163,6 +164,9 @@ class ExtensionsViewSet(
         queryset = ExtensionDocument.search().query(
             "multi_match", query=query, fields=ExtensionDocument.document_fields()
         )
+
+        if self.request.query_params.get("recommended") in ("true", "1"):
+            queryset = queryset.filter("term", recommended=True)
 
         ordering = self.request.query_params.get("ordering")
         ordering_field = (

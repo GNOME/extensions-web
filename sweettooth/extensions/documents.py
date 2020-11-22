@@ -51,6 +51,7 @@ class ExtensionDocument(Document):
             "updated",
             "downloads",
             "popularity",
+            "recommended",
         ]
 
     name = fields.TextField(
