@@ -18,6 +18,7 @@ urlpatterns = [
 
     # 'login' and 'register'
     url(r'^accounts/', include('sweettooth.auth.urls')),
+
     url(r'^', include('sweettooth.extensions.urls'), name='index'),
 
     url(r'^review/', include('sweettooth.review.urls')),
