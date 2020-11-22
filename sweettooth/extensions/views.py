@@ -10,26 +10,176 @@
 """
 
 import json
-from math import ceil
+from functools import reduce
 
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, InvalidPage
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
-from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
+from django.http import (
+    JsonResponse,
+    HttpResponse,
+    HttpResponseBadRequest,
+    HttpResponseForbidden,
+    HttpResponseServerError,
+    Http404
+)
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.urls import reverse
 
-from sweettooth.exceptions import DatabaseErrorWithMessages
-from sweettooth.extensions import models, search
-from sweettooth.extensions.forms import ImageUploadForm, UploadForm
+from django_filters.rest_framework import DjangoFilterBackend
+
+from rest_framework import filters, mixins, viewsets, status
+from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
+
 
 from sweettooth.decorators import ajax_view, model_view
+from sweettooth.exceptions import DatabaseErrorWithMessages
+from sweettooth.extensions import models, serializers
+from sweettooth.extensions.documents import ExtensionDocument
+from sweettooth.extensions.forms import ImageUploadForm, UploadForm
 from sweettooth.extensions.templatetags.extension_icon import extension_icon
+from sweettooth import settings
+
+
+class ExtensionsPagination(PageNumberPagination):
+    page_size = settings.REST_FRAMEWORK['PAGE_SIZE']
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+class ExtensionsViewSet(mixins.ListModelMixin,
+                        mixins.RetrieveModelMixin,
+                        viewsets.GenericViewSet):
+    lookup_field = 'uuid'
+    lookup_value_regex = '[-a-zA-Z0-9@._]+'
+    serializer_class = serializers.ExtensionSerializer
+    pagination_class = ExtensionsPagination
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    ordering_fields = ['created', 'downloads', 'popularity', '?']
+    page_size = 25
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+    def get_queryset(self):
+        uuids = self.request.query_params.getlist('uuid[]')
+        status = self.request.query_params.get('status')
+        queryset = models.Extension.objects.all()
+
+        if uuids:
+            queryset = queryset.filter(uuid__in=uuids)
+
+        if status is not None and status.isnumeric():
+            status = int(status)
+
+        if status in models.STATUSES:
+            queryset = queryset.filter(versions__status=status).distinct()
+
+        return queryset
+
+    @action(methods=['post'], detail=False, parser_classes=[JSONParser])
+    def updates(self, request):
+        installed = self.request.data.get('installed')
+        shell_version = self.request.data.get('shell_version')
+        version_validation_enabled = self.request.data.get('version_validation_enabled', False)
+
+        if not installed:
+            return Response()
+
+        extensions = models.Extension.objects.filter(uuid__in=installed.keys())
+
+        result = {}
+        for uuid, version in installed.items():
+            try:
+                version = int(version)
+            except (KeyError, TypeError):
+                continue
+            except ValueError:
+                version = 1
+
+            extension = reduce(
+                lambda x, y, uuid=uuid: (
+                    x if x and x.uuid == uuid else
+                    y if y and y.uuid == uuid else
+                    None
+                ),
+                list(extensions)
+            )
+
+            if not extension:
+                continue
+
+            try:
+                version = extension.versions.get(version=version)
+            except models.ExtensionVersion.DoesNotExist:
+                # Skip unknown versions
+                continue
+
+            proper_version = grab_proper_extension_version(
+                extension,
+                shell_version,
+                version_validation_enabled
+            )
+
+            if proper_version is not None and proper_version.version != version.version:
+                result[uuid] = {
+                    'action': 'change',
+                    'version': proper_version.version,
+                }
+
+        return Response(result)
+
+    @action(methods=['get'], detail=False, url_path='search/(?P<query>[^/.]+)')
+    def search(self, request, query=None):
+        try:
+            page = int(self.request.query_params.get(self.pagination_class.page_query_param, 1))
+            page_size = max(
+                1,
+                min(
+                    self.max_page_size,
+                    int(self.request.query_params.get(self.page_size_query_param, self.page_size))
+                )
+            )
+        except Exception as ex:
+            print(ex)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        if not query:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        queryset = ExtensionDocument.search().query(
+            "multi_match",
+            query=query,
+            fields=ExtensionDocument.document_fields()
+        )
+
+        ordering = self.request.query_params.get('ordering')
+        ordering_field = (
+            ordering
+            if not ordering or ordering[0] != '-'
+            else ordering[1:]
+        )
+        if ordering and ordering_field in self.ordering_fields:
+            queryset = queryset.sort(ordering)
+
+        paginator = Paginator(queryset.to_queryset(), page_size)
+
+        return Response({
+            'count': paginator.count,
+            'results': self.serializer_class(
+                [sr for sr in paginator.page(page).object_list],
+                many=True,
+                context={'request': request}
+            ).data
+        })
+
 
 def get_versions_for_version_strings(version_strings):
     def get_version(major, minor, point):
@@ -62,7 +212,7 @@ def get_versions_for_version_strings(version_strings):
                 yield base_version
 
 
-def grab_proper_extension_version(extension, shell_version, disable_version_validation=False):
+def grab_proper_extension_version(extension, shell_version, version_validation_enabled=False):
     def get_best_shell_version():
         visible_versions = extension.visible_versions
 
@@ -89,13 +239,13 @@ def grab_proper_extension_version(extension, shell_version, disable_version_vali
 
     shell_versions = set(get_versions_for_version_strings([shell_version]))
     if not shell_versions:
-        return get_best_shell_version() if disable_version_validation else None
+        return get_best_shell_version() if not version_validation_enabled else None
 
     versions = extension.visible_versions.filter(shell_versions__in=shell_versions)
     if versions.count() < 1:
-        return get_best_shell_version() if disable_version_validation else None
-    else:
-        return versions.order_by('-version')[0]
+        return get_best_shell_version() if not version_validation_enabled else None
+
+    return versions.order_by('-version')[0]
 
 def find_extension_version_from_params(extension, params):
     vpk = params.get('version_tag', '')
@@ -104,7 +254,7 @@ def find_extension_version_from_params(extension, params):
                                                                                                     "false"] else True
 
     if shell_version:
-        return grab_proper_extension_version(extension, shell_version, disable_version_validation)
+        return grab_proper_extension_version(extension, shell_version, not disable_version_validation)
     elif vpk:
         try:
             return extension.visible_versions.get(pk=int(vpk))
@@ -163,7 +313,7 @@ def shell_update(request):
             continue
 
         try:
-            proper_version = grab_proper_extension_version(extension, shell_version, disable_version_validation)
+            proper_version = grab_proper_extension_version(extension, shell_version, not disable_version_validation)
         except models.InvalidShellVersion:
             return HttpResponseBadRequest()
 
@@ -222,68 +372,6 @@ def ajax_query_params_query(request, versions, n_per_page):
         raise Http404()
 
     return page_obj.object_list, paginator.num_pages
-
-def ajax_query_search_query(request, versions, n_per_page):
-    querystring = request.GET.get('search', '')
-
-    database, enquire = search.enquire(querystring, versions)
-
-    page = request.GET.get('page', 1)
-    try:
-        offset = (int(page) - 1) * n_per_page
-    except ValueError:
-        raise Http404()
-
-    if n_per_page == -1:
-        mset = enquire.get_mset(offset, database.get_doccount())
-        num_pages = 1
-    else:
-        mset = enquire.get_mset(offset, n_per_page, 5 * n_per_page)
-        num_pages = int(ceil(float(mset.get_matches_lower_bound()) / n_per_page))
-
-    pks = [match.document.get_data().decode('utf-8') for match in mset]
-
-    # filter doesn't guarantee an order, so we need to get all the
-    # possible models then look them up to get the ordering
-    # returned by xapian. This hits the database all at once, rather
-    # than pagesize times.
-    extension_lookup = {}
-    for extension in models.Extension.objects.filter(pk__in=pks):
-        extension_lookup[str(extension.pk)] = extension
-
-    extensions = [extension_lookup[pk] for pk in pks]
-
-    return extensions, num_pages
-
-@ajax_view
-def ajax_query_view(request):
-    try:
-        n_per_page = int(request.GET['n_per_page'])
-        if n_per_page == 1000:
-            from django.conf import settings
-            # This is GNOME Software request. Let's redirect it to static file
-            return redirect((settings.STATIC_URL + "extensions.json"), permanent=True)
-
-        n_per_page = min(n_per_page, 25)
-    except (KeyError, ValueError):
-        n_per_page = 10
-
-    version_strings = request.GET.getlist('shell_version')
-    if version_strings and version_strings not in (['all'], ['-1']):
-        versions = set(get_versions_for_version_strings(version_strings))
-    else:
-        versions = None
-
-    if request.GET.get('search',  ''):
-        func = ajax_query_search_query
-    else:
-        func = ajax_query_params_query
-
-    object_list, num_pages = func(request, versions, n_per_page)
-
-    return dict(extensions=[ajax_details(e) for e in object_list],
-                total=len(object_list),
-                numpages=num_pages)
 
 @model_view(models.Extension)
 def extension_view(request, obj, **kwargs):

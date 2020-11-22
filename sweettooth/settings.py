@@ -13,8 +13,6 @@ SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(SITE_ROOT)
 
-XAPIAN_DB_PATH = os.getenv('EGO_XAPIAN_DB') or os.path.join(BASE_DIR, 'xapian.db')
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
 
@@ -47,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     'rest_framework',
+    'django_filters',
+
+    'django_elasticsearch_dsl',
 
     'sweettooth.api',
     'sweettooth.extensions',
@@ -116,6 +117,13 @@ DATABASES = {
     'default': dj_database_url.config(env="EGO_DATABASE_URL", default="sqlite://./test.db")
 }
 
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': os.getenv('EGO_ELASTIC_ADDRESS') or 'localhost:9200'
+    },
+}
+
+ELASTICSEARCH_DSL_AUTOSYNC = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/stable/topics/i18n/

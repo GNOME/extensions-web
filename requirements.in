@@ -2,6 +2,8 @@ Django==3.2.13
 djangorestframework==3.13.1
 django-autoslug==1.9.8
 django-contrib-comments==2.1.0
+django-elasticsearch-dsl==7.2.2
+django-filter==21.1
 django-registration==3.2
 Pygments==2.11.2
 Pillow==9.0.1
