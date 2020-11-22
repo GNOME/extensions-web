@@ -30,6 +30,13 @@ services:
     ports:
       - '127.0.0.1:8088:80'
 
+  search:
+    image: elasticsearch:7.9.1
+    environment:
+      "discovery.type": single-node
+    volumes:
+      - "ego-search:/usr/share/elasticsearch/data"
+
   extensions-web:
     build:
       context: ../../
@@ -61,12 +68,14 @@ services:
       EGO_STATIC_ROOT: /extensions-web/www/static-files
     depends_on:
       - db
+      - search
     volumes:
       - "ego-data:/extensions-web/data"
       - "ego-static:/extensions-web/www"
     networks:
       - frontend
       - db
+      - search
 
   frontend:
     image: nginx:stable
@@ -83,8 +92,10 @@ services:
 volumes:
   ego-database:
   ego-data:
+  ego-search:
   ego-static:
 
 networks:
   frontend:
   db:
+  search:

@@ -10,7 +10,6 @@
 """
 
 import json
-from math import ceil
 from typing import Any
 from urllib.parse import unquote
 
@@ -32,7 +31,8 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from sweettooth.exceptions import DatabaseErrorWithMessages
-from sweettooth.extensions import models, search
+from sweettooth.extensions import models
+from sweettooth.extensions.documents import ExtensionDocument
 from sweettooth.extensions.forms import ImageUploadForm, UploadForm
 
 from sweettooth.decorators import ajax_view, model_view
@@ -248,37 +248,50 @@ def ajax_query_params_query(request, versions, n_per_page):
 
     return page_obj.object_list, paginator.num_pages
 
+
 def ajax_query_search_query(request, versions, n_per_page):
-    querystring = request.GET.get('search', '')
-
-    database, enquire = search.enquire(querystring, versions)
-
-    page = request.GET.get('page', 1)
+    max_page_size = 100
+    ordering_fields = ['name', 'created', 'downloads', 'popularity']
     try:
-        offset = (int(page) - 1) * n_per_page
-    except ValueError:
-        raise Http404()
+        page = int(request.GET.get('page', 1))
+        page_size = max(
+            1,
+            min(
+                max_page_size,
+                int(n_per_page)
+            )
+        )
+    except Exception:
+        return HttpResponseBadRequest()
 
-    if n_per_page == -1:
-        mset = enquire.get_mset(offset, database.get_doccount())
-        num_pages = 1
-    else:
-        mset = enquire.get_mset(offset, n_per_page, 5 * n_per_page)
-        num_pages = int(ceil(float(mset.get_matches_lower_bound()) / n_per_page))
+    query = request.GET.get('search', '')
+    if not query:
+        return HttpResponseBadRequest()
 
-    pks = [match.document.get_data().decode('utf-8') for match in mset]
+    queryset = ExtensionDocument.search().extra(size=5000).query(
+        "multi_match",
+        query=query,
+    )
 
-    # filter doesn't guarantee an order, so we need to get all the
-    # possible models then look them up to get the ordering
-    # returned by xapian. This hits the database all at once, rather
-    # than pagesize times.
-    extension_lookup = {}
-    for extension in models.Extension.objects.filter(pk__in=pks):
-        extension_lookup[str(extension.pk)] = extension
+    ordering = request.GET.get('sort')
+    ordering = (
+        ordering
+        if not ordering or ordering[0] != '-'
+        else ordering[1:]
+    )
 
-    extensions = [extension_lookup[pk] for pk in pks]
+    if ordering not in ordering_fields:
+        ordering = 'popularity'
 
-    return extensions, num_pages
+    if ordering in ('name',):
+        ordering = f"{ordering}.keyword"
+
+    queryset = queryset.sort(ordering)
+
+    paginator = Paginator(queryset.to_queryset(keep_order=True), page_size)
+
+    return ([sr for sr in paginator.page(page).object_list], paginator.num_pages)
+
 
 @ajax_view
 def ajax_query_view(request):
@@ -309,6 +322,7 @@ def ajax_query_view(request):
     return dict(extensions=[ajax_details(e) for e in object_list],
                 total=len(object_list),
                 numpages=num_pages)
+
 
 @model_view(models.Extension)
 def extension_view(request, obj, **kwargs):

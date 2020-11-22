@@ -1,6 +1,7 @@
 Django==3.2.19
 django-autoslug==1.9.8
 django-contrib-comments==2.1.0
+django-opensearch-dsl==0.4.1
 django-recaptcha==3.0.0
 django-registration==3.2
 Pygments==2.11.2
