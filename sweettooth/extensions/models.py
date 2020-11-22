@@ -141,7 +141,10 @@ class Extension(models.Model):
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
     creator = models.ForeignKey(
-        settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT
+        settings.AUTH_USER_MODEL,
+        related_name="extensions",
+        db_index=True,
+        on_delete=models.PROTECT,
     )
     description = models.TextField(blank=True)
     url = HttpURLField(blank=True)
