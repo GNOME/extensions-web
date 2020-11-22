@@ -10,9 +10,11 @@
 """
 
 import json
+from functools import reduce
 from typing import Any
 from urllib.parse import unquote
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import BadRequest
@@ -34,13 +36,153 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, mixins, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
 
 from sweettooth.decorators import ajax_view, model_view
 from sweettooth.exceptions import DatabaseErrorWithMessages
-from sweettooth.extensions import models
+from sweettooth.extensions import models, serializers
 from sweettooth.extensions.documents import ExtensionDocument
 from sweettooth.extensions.forms import ImageUploadForm, UploadForm
 from sweettooth.extensions.templatetags.extension_icon import extension_icon
+
+
+class ExtensionsPagination(PageNumberPagination):
+    page_size = settings.REST_FRAMEWORK["PAGE_SIZE"]
+    page_size_query_param = "page_size"
+    max_page_size = 100
+
+
+class ExtensionsViewSet(
+    mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
+):
+    lookup_field = "uuid"
+    lookup_value_regex = "[-a-zA-Z0-9@._]+"
+    serializer_class = serializers.ExtensionSerializer
+    pagination_class = ExtensionsPagination
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    ordering_fields = ["created", "downloads", "popularity", "?"]
+    page_size = 25
+    page_size_query_param = "page_size"
+    max_page_size = 100
+
+    def get_queryset(self):
+        uuids = self.request.query_params.getlist("uuid[]")
+        status = self.request.query_params.get("status")
+        queryset = models.Extension.objects.all()
+
+        if uuids:
+            queryset = queryset.filter(uuid__in=uuids)
+
+        if status is not None and status.isnumeric():
+            status = int(status)
+
+        if status in models.STATUSES:
+            queryset = queryset.filter(versions__status=status).distinct()
+
+        return queryset
+
+    @action(methods=["post"], detail=False, parser_classes=[JSONParser])
+    def updates(self, request):
+        installed = self.request.data.get("installed")
+        shell_version = self.request.data.get("shell_version")
+        version_validation_disabled = self.request.data.get(
+            "version_validation_disabled", False
+        )
+
+        if not installed:
+            return Response()
+
+        extensions = models.Extension.objects.filter(uuid__in=installed.keys())
+
+        result = {}
+        for uuid, version in installed.items():
+            try:
+                version = int(version)
+            except (KeyError, TypeError):
+                continue
+            except ValueError:
+                version = 1
+
+            extension = reduce(
+                lambda x, y, uuid=uuid: (
+                    x if x and x.uuid == uuid else y if y and y.uuid == uuid else None
+                ),
+                list(extensions),
+            )
+
+            if not extension:
+                continue
+
+            try:
+                version = extension.versions.get(version=version)
+            except models.ExtensionVersion.DoesNotExist:
+                # Skip unknown versions
+                continue
+
+            proper_version = grab_proper_extension_version(
+                extension, shell_version, version_validation_disabled
+            )
+
+            if proper_version is not None and proper_version.version != version.version:
+                result[uuid] = {
+                    "action": "change",
+                    "version": proper_version.version,
+                }
+
+        return Response(result)
+
+    @action(methods=["get"], detail=False, url_path="search/(?P<query>[^/.]+)")
+    def search(self, request, query=None):
+        try:
+            page = int(
+                self.request.query_params.get(self.pagination_class.page_query_param, 1)
+            )
+            page_size = max(
+                1,
+                min(
+                    self.max_page_size,
+                    int(
+                        self.request.query_params.get(
+                            self.page_size_query_param, self.page_size
+                        )
+                    ),
+                ),
+            )
+        except Exception as ex:
+            print(ex)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        if not query:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        queryset = ExtensionDocument.search().query(
+            "multi_match", query=query, fields=ExtensionDocument.document_fields()
+        )
+
+        ordering = self.request.query_params.get("ordering")
+        ordering_field = (
+            ordering if not ordering or ordering[0] != "-" else ordering[1:]
+        )
+        if ordering and ordering_field in self.ordering_fields:
+            queryset = queryset.sort(ordering)
+
+        paginator = Paginator(queryset.to_queryset(), page_size)
+
+        return Response(
+            {
+                "count": paginator.count,
+                "results": self.serializer_class(
+                    [sr for sr in paginator.page(page).object_list],
+                    many=True,
+                    context={"request": request},
+                ).data,
+            }
+        )
 
 
 def get_versions_for_version_strings(version_strings):
@@ -77,8 +219,8 @@ def get_versions_for_version_strings(version_strings):
 
 
 def grab_proper_extension_version(
-    extension, shell_version, disable_version_validation=False
-):
+    extension, shell_version, disable_version_validation: bool = False
+) -> models.ExtensionVersion | None:
     def get_best_shell_version():
         visible_versions = extension.visible_versions
 

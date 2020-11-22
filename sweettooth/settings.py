@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.messages",
     "rest_framework",
+    "django_filters",
     "django_opensearch_dsl",
     "sweettooth.extensions",
     "sweettooth.auth",
