@@ -6,8 +6,8 @@ https://docs.djangoproject.com/en/stable/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import dj_database_url
 import os
+import dj_database_url
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -122,7 +122,10 @@ USE_L10N = True
 USE_TZ = False
 
 ADMINS = (
-    (os.getenv('EGO_ADMINISTRATOR_NAME') or 'Administrator', os.getenv('EGO_ADMINISTRATOR_EMAIL') or 'admin@localhost.local'),
+    (
+        os.getenv('EGO_ADMINISTRATOR_NAME') or 'Administrator',
+        os.getenv('EGO_ADMINISTRATOR_EMAIL') or 'admin@localhost.local'
+    ),
 )
 
 MANAGERS = ADMINS
@@ -197,5 +200,5 @@ if not DEBUG and not NO_SECURE_SETTINGS:
 if DEBUG and not NO_STATICFILES_SETTINGS:
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
     STATIC_ROOT = None
-elif not 'STATIC_ROOT' in locals():
+elif 'STATIC_ROOT' not in locals():
     STATIC_ROOT = os.getenv('EGO_STATIC_ROOT')

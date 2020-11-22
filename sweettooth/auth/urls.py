@@ -1,10 +1,12 @@
 
-from django.views.generic.base import TemplateView
 from django.conf.urls import include
-from django_registration.backends.activation.views import RegistrationView
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import re_path
+from django.views.generic.base import TemplateView
+
+from django_registration.backends.activation.views import RegistrationView
+
 from sweettooth.auth import views, forms
 
 urlpatterns = [
