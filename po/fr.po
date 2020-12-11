@@ -2,53 +2,52 @@
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
 # Claude Paroz <claude@2xlibre.net>, 2019.
+# Guillaume Bernard <associations@guillaume-bernard.fr>, 2020.
+# Charles Monzat <charles.monzat@free.fr>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
-"PO-Revision-Date: 2019-03-16 19:02+0100\n"
-"Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
+"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2020-12-11 11:56+0100\n"
+"Last-Translator: Charles Monzat <charles.monzat@free.fr>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#| msgid "Username"
+msgid "Username or email"
+msgstr "Nom d’utilisateur ou courriel"
+
+#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nom d’utilisateur"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Obligatoire. 30 caractères au plus. Seulement des lettres, des chiffres et "
 "@/./+/-/_."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Cette valeur ne peut contenir que des lettres, des chiffres et les "
 "caractères @/./+/-/_."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Courriel"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Mot de passe"
-
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Confirmation du mot de passe"
-
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Saisissez le même mot de passe que ci-dessus, pour vérification."
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Vous ne devriez pas utiliser de courriel comme nom d’utilisateur"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -62,13 +61,13 @@ msgstr "Mot de passe oublié ?"
 msgid "Log in"
 msgstr "Se connecter"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Pas encore de compte ?"
 
-#: sweettooth/auth/templates/registration/login.html:38
+#: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -206,7 +205,7 @@ msgstr "Version du shell…"
 #: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr "Version de l´extension…"
+msgstr "Version de l’extension…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
@@ -298,7 +297,7 @@ msgstr "Profil utilisateur"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
-msgstr "Paramètres utilisateurs"
+msgstr "Paramètres utilisateur"
 
 #: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
 msgid "Log out"
@@ -371,12 +370,12 @@ msgstr "Popularité"
 msgid "Sort by"
 msgstr "Trier par"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Afficher plus de commentaires"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Aucun commentaire. Pourquoi pas le vôtre ?"
@@ -436,3 +435,12 @@ msgstr "Extension du système"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Vous avez désinstallé"
+
+#~ msgid "Password"
+#~ msgstr "Mot de passe"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Confirmation du mot de passe"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "Saisissez le même mot de passe que ci-dessus, pour vérification."
