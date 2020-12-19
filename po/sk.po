@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2020-09-10 09:45+0200\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-04-05 13:45+0200\n"
-"Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
-"Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
 msgid "Username or email"
@@ -84,6 +84,8 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
+"Token pre obnovenie hesla nie je správny. Prosím, skontrolujte váš odkaz a "
+"skúste to znovu."
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
@@ -97,6 +99,8 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
+"Zabudli ste svoje heslo? Nižšie zadajte vašu e-mailovú adresu, na ktorú vám "
+"zašleme inštrukcie k nastaveniu nového hesla."
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -122,6 +126,9 @@ msgid ""
 "\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
 "comment or report an error. You understand, right?"
 msgstr ""
+"Žiaľ, aby sme predišli spamu, vyžadujeme vaše <a href=\"%(login_url)s"
+"\">prihlásenie do Rozšírení Shellu prostredia GNOME</a>, aby ste mohli "
+"zverejniť komentár alebo nahlásiť chybu. Rozumiete tomu, však?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
@@ -199,6 +206,9 @@ msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
+"Kontrolór skontroluje od vás prijaté rozšírenie, aby sme sa uistili, že nie "
+"je príliš nebezpečné. O výsledku kontroly vás budeme informovať "
+"prostredníctvom e-mailu."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -259,7 +269,7 @@ msgstr "Náhľad vášho komentára"
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr "Odovzdať komentár"
+msgstr "Zverejniť komentár"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
@@ -268,12 +278,12 @@ msgstr "Upraviť váš komentár"
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr "Najnovšie rozšírenia na webe rozšírení prostredia GNOME Shell"
+msgstr "Najnovšie rozšírenia na webe rozšírení Shellu prostredia GNOME"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "Rozšírenia prostredia GNOME Shell"
+msgstr "Rozšírenia Shellu prostredia GNOME"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -293,10 +303,15 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
+"Na ovládanie rozšírení Shellu prostredia GNOME pomocou tejto stránky, "
+"musíte nainštalovať integráciu do Shellu prostredia GNOME, ktorá pozostáva "
+"z dvoch častí: rozšírenia prehliadača a aplikácie na zasielanie správ "
+"natívnemu hostiteľovi"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr ""
+"Nainštalujte rozšírenie prehliadača na integráciu do Shellu prostredia GNOME"
 
 #: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
@@ -306,6 +321,8 @@ msgstr "Kliknutím sem nainštalujete rozšírenie prehliadača"
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
+"Prezrite si %sstránku na wiki%s pre inštrukcie k inštalácii konektoru "
+"natívneho hostiteľa"
 
 #: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
 msgid ""
@@ -313,11 +330,17 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
+"Neodkážeme rozpoznať spustenú kópiu prostredia GNOME v tomto systéme, takže "
+"niektoré súčasti tohto rozhrania môžu byť zakázané. Pre viac informácií si "
+"prezrite <a href=\"/about/#no-detection\">našu pomoc pri riešení problémov</"
+"a>."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
+"Rozšírenia prostredia GNOME nedokážu získať zoznam vašich nainštalovaných "
+"rozšírení."
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
@@ -325,19 +348,19 @@ msgstr "Kompatibilné s"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
-msgstr ""
+msgstr "Názov"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr ""
+msgstr "Najnovšie"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
-msgstr ""
+msgstr "Preberania"
 
 #: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
 msgid "Popularity"
-msgstr ""
+msgstr "Obľúbenosť"
 
 #: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
 msgid "Sort by"
@@ -367,6 +390,8 @@ msgstr "Kde je chyba?"
 #: extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions did not detect any errors with this extension."
 msgstr ""
+"Rozšírenia Shellu prostredia GNOME nezistili žiadne chyby s týmto "
+"rozšírením."
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
@@ -383,10 +408,11 @@ msgstr "Verzia Shellu"
 msgid "Extension version"
 msgstr "Verzia rozšírenia"
 
+# verzia shellu
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Unknown"
-msgstr ""
+msgstr "Neznáma"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:5
 #: extensions-web-domain-djangojs:1
