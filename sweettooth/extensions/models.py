@@ -196,27 +196,41 @@ class InvalidShellVersion(Exception):
 
 
 def parse_version_string(version_string):
+    prerelease_versions = {
+        'alpha': -3,
+        'beta': -2,
+        'rc': -1,
+    }
     version = version_string.split('.')
+    version_parts = len(version)
+
+    if version_parts < 2 or version_parts > 4:
+        raise InvalidShellVersion()
 
     try:
         major, minor = version[:2]
-        major, minor = int(major), int(minor)
+        major = int(major)
+        # GNOME 40+
+        # https://discourse.gnome.org/t/new-gnome-versioning-scheme/4235
+        if major >= 40 and minor in prerelease_versions.keys():
+            minor = prerelease_versions.get(minor)
+        else:
+            minor = int(minor)
     except ValueError:
         raise InvalidShellVersion()
 
-    if len(version) in (3, 4):
+    if version_parts in (3, 4):
         # 3.0.1, 3.1.4
         try:
             point = int(version[2])
         except ValueError:
             raise InvalidShellVersion()
 
-    elif len(version) == 2 and minor % 2 == 0:
-        # 3.0, 3.2
-        point = -1
     else:
-        # Two-digit odd versions are illegal: 3.1, 3.3
-        raise InvalidShellVersion()
+        point = -1
+        if major < 40 and minor % 2 != 0:
+            # Two-digit pre-40 odd versions are illegal: 3.1, 3.3
+            raise InvalidShellVersion()
 
     return major, minor, point
 
@@ -239,7 +253,8 @@ class ShellVersionManager(models.Manager):
 
 class ShellVersion(models.Model):
     major = models.PositiveIntegerField()
-    minor = models.PositiveIntegerField()
+    # -3: alpha, -2: beta, -1: rc
+    minor = models.IntegerField()
 
     # -1 is a flag for the stable release matching
     point = models.IntegerField()
