@@ -266,6 +266,20 @@ class ShellVersion(models.Model):
 
     @property
     def version_string(self):
+        prerelease_versions = {
+            -3: 'alpha',
+            -2: 'beta',
+            -1: 'rc'
+        }
+
+        # GNOME 40+: unstable versions
+        # https://discourse.gnome.org/t/new-gnome-versioning-scheme/4235
+        if self.major >= 40 and self.minor < 0:
+            return "%d.%s" % (
+                self.major,
+                prerelease_versions.get(self.minor, 'unknown')
+            )
+
         if self.point == -1:
             return "%d.%d" % (self.major, self.minor)
 

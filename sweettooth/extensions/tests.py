@@ -302,7 +302,10 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
                     "uuid": "test-4@mecheye.net",
                     "description": "Simple test metadata",
                     "url": "http://test-metadata.gnome.org",
-                    "shell-version": ["3.0.0", "3.0.1", "3.0.2"]}
+                    "shell-version": [
+                        "3.0.0", "3.0.1", "3.0.2",
+                        "40.alpha", "49.beta", "67.rc"
+                    ]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion.objects.create(extension=extension,
@@ -310,14 +313,17 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         version.parse_metadata_json(metadata)
 
         shell_versions = sorted(sv.version_string for sv in version.shell_versions.all())
-        self.assertEqual(shell_versions, ["3.0.0", "3.0.1", "3.0.2"])
+        self.assertEqual(shell_versions, [
+            "3.0.0", "3.0.1", "3.0.2",
+            "40.alpha", "49.beta", "67.rc"
+        ])
 
     def test_shell_versions_stable(self):
         metadata = {"name": "Test Metadata 5",
                     "uuid": "test-5@mecheye.net",
                     "description": "Simple test metadata",
                     "url": "http://test-metadata.gnome.org",
-                    "shell-version": ["3.0", "3.2"]}
+                    "shell-version": ["3.0", "3.2", "40.0", "56.5"]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
@@ -326,7 +332,7 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         version.parse_metadata_json(metadata)
 
         shell_versions = sorted(sv.version_string for sv in version.shell_versions.all())
-        self.assertEqual(shell_versions, ["3.0", "3.2"])
+        self.assertEqual(shell_versions, ["3.0", "3.2", "40.0", "56.5"])
 
 class ShellVersionTest(TestCase):
     def test_shell_version_parsing(self):
