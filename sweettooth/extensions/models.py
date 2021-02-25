@@ -23,6 +23,8 @@ from django.db import models
 from django.dispatch import Signal
 from django.urls import reverse
 
+from .fields import HttpURLField
+
 (STATUS_UNREVIEWED,
  STATUS_REJECTED,
  STATUS_INACTIVE,
@@ -108,7 +110,7 @@ class Extension(models.Model):
     slug = autoslug.AutoSlugField(populate_from="name")
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT)
     description = models.TextField(blank=True)
-    url = models.URLField(blank=True)
+    url = HttpURLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
