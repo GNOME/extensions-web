@@ -37,8 +37,18 @@ define([], function () {
 		PER_USER: 2
 	};
 
+	let prerelease_versions = {
+		'alpha': -3,
+		'beta': -2,
+		'rc': -1,
+	};
+
 	function versionCompare(a, b) {
 		function toInt(value) {
+			if(value in Object.keys(prerelease_versions)) {
+				return prerelease_versions[value];
+			}
+
 			return parseInt(value);
 		}
 
@@ -92,58 +102,38 @@ define([], function () {
 			}
 		}
 
-
 		if (!map || !current)
 		{
 			return null;
 		}
 
-		// Only care about the first three parts -- look up
-		// "3.2.2" when given "3.2.2.1"
-
 		var parts = current.split('.');
+		// Don't use destruction assigment for now
+		// We need new Vue frontend with babel....
+		let major = parts[0];
+		let minor = parts[1];
+		let point = parts[2];
 
-		var versionA = map[(parts[0] + '.' + parts[1] + '.' + parts[2])];
-
-		// Unstable releases
-		if (parseInt(parts[1]) % 2 != 0)
+		let mappedVersion = null;
+		if (major >= 40 || (major < 40 && minor % 2))
 		{
-			if (versionA !== undefined)
-			{
-				return versionA;
-			}
-			else if(findBestVersion)
-			{
-				return map[getBestShellVersion()];
-			}
-			else
-			{
-				return null;
-			}
-		}
-
-		var versionB = map[(parts[0] + '.' + parts[1])];
-
-		if (versionA !== undefined && versionB !== undefined)
-		{
-			return (versionA.version > versionB.version) ? versionA : versionB;
-		}
-		else if (versionA !== undefined)
-		{
-			return versionA;
-		}
-		else if (versionB !== undefined)
-		{
-			return versionB;
-		}
-		else if(findBestVersion)
-		{
-			return map[getBestShellVersion()];
+			mappedVersion = map[`${major}.${minor}`]
 		}
 		else
 		{
-			return null;
+			mappedVersion = map[`${major}.${minor}.${point}`]
 		}
+
+		if(mappedVersion) {
+			return mappedVersion;
+		}
+
+		if(findBestVersion)
+		{
+			return map[getBestShellVersion()];
+		}
+
+		return null;
 	};
 
 	exports.findNextHighestVersion = function (map, current) {
