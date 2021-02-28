@@ -192,7 +192,7 @@ function($, messages, modal, hashParamUtils, commentsTemplate, staticfiles, cook
             });
 
             req.done(function(data) {
-                $ext.data('svm', data.svm);
+                $ext.data('svm', JSON.parse(data.svm));
                 $('#extension_shell_versions_info').buildShellVersionsInfo();
                 $tr.find('.mvs').html(data.mvs);
                 $tr.find('.extension_status_toggle').toggleClass('visible');
