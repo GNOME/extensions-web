@@ -115,7 +115,7 @@ define([], function () {
 		let point = parts[2];
 
 		let mappedVersion = null;
-		if (major >= 40 || (major < 40 && minor % 2))
+		if (major >= 40 || (major < 40 && minor % 2 === 0))
 		{
 			mappedVersion = map[`${major}.${minor}`]
 		}
