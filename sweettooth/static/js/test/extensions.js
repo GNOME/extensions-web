@@ -14,7 +14,7 @@ require(['extensionUtils', 'jquery', 'test/qunit'], function(extensionUtils) {
         equal(grabProperExtensionVersion(map, "3.0.0").version, 1);
         equal(grabProperExtensionVersion(map, "3.0.1").version, 2);
         equal(grabProperExtensionVersion(map, "3.2.0").version, 4);
-        equal(grabProperExtensionVersion(map, "3.2.1").version, 4);
+        equal(grabProperExtensionVersion(map, "3.2.1").version, 3);
         equal(grabProperExtensionVersion(map, "3.3.0"), null, "stable release checking");
         equal(grabProperExtensionVersion(map, "3.3.1").version, 6);
         equal(grabProperExtensionVersion(map, "3.4.1.1").version, 7);

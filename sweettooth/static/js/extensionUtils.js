@@ -115,13 +115,17 @@ define([], function () {
 		let point = parts[2];
 
 		let mappedVersion = null;
-		if (major >= 40 || (major < 40 && minor % 2 === 0))
+		if (major >= 40)
 		{
 			mappedVersion = map[`${major}.${minor}`]
 		}
 		else
 		{
-			mappedVersion = map[`${major}.${minor}.${point}`]
+			mappedVersion = map[`${major}.${minor}.${point}`];
+			if (minor % 2 === 0 && !mappedVersion)
+			{
+				mappedVersion = map[`${major}.${minor}`];
+			}
 		}
 
 		if(mappedVersion) {
