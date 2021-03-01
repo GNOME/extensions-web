@@ -35,10 +35,9 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 						continue;
 					}
 
-					var vpk = extensionUtils.grabProperExtensionVersion(svm, version);
 					var $tr = $('<tr>').appendTo($tbody);
 					$('<td>').append($('<code>').text(version)).appendTo($tr);
-					$('<td>').text(vpk.version).appendTo($tr);
+					$('<td>').text(svm[version].version).appendTo($tr);
 				}
 			});
 		};
