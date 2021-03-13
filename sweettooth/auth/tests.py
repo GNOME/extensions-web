@@ -8,8 +8,6 @@
     (at your option) any later version.
 """
 
-from six import text_type
-
 from django_registration import validators
 
 from django.contrib.auth import get_user_model
@@ -50,7 +48,7 @@ class AuthTests(RegistrationDataTest):
         self.assertFalse(form.is_valid())
         self.assertEqual(
             form.errors['email'],
-            [text_type(validators.DUPLICATE_EMAIL)]
+            [str(validators.DUPLICATE_EMAIL)]
         )
 
         form = AutoFocusRegistrationForm(
