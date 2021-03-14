@@ -47,4 +47,6 @@ class ExtensionSerializer(serializers.ModelSerializer):
             'popularity',
             'screenshot',
             'icon',
+            'rating',
+            'rated',
         ]

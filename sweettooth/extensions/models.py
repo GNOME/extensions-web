@@ -131,6 +131,8 @@ class Extension(models.Model):
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
     recommended = models.BooleanField(default=False)
+    rating = models.FloatField(default=0)
+    rated = models.IntegerField(default=0)
 
     class Meta:
         permissions = (
