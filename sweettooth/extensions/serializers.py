@@ -24,15 +24,6 @@ class ShellVersionSerializer(serializers.ModelSerializer):
         ]
 
 
-class ExtensionVersionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExtensionVersion
-        fields = [
-            "version",
-            "status",
-        ]
-
-
 class ExtensionSerializer(serializers.ModelSerializer):
     creator = BaseUserProfileSerializer(many=False, read_only=True)
 
@@ -52,4 +43,22 @@ class ExtensionSerializer(serializers.ModelSerializer):
             "icon",
             "rating",
             "rated",
+        ]
+
+
+class ExtensionVersionSerializer(serializers.ModelSerializer):
+    # TODO: change primary key to UUID
+    extension = serializers.SlugRelatedField(
+        many=False, read_only=True, slug_field="uuid"
+    )
+    shell_versions = ShellVersionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ExtensionVersion
+        fields = [
+            "extension",
+            "version",
+            "status",
+            "shell_versions",
+            "created",
         ]

@@ -189,6 +189,17 @@ class ExtensionsViewSet(
         )
 
 
+class ExtensionsVersionsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = models.ExtensionVersion.objects.order_by("extension", "version")
+    serializer_class = serializers.ExtensionVersionSerializer
+    pagination_class = ExtensionsPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["extension__uuid"]
+    page_size = 25
+    page_size_query_param = "page_size"
+    max_page_size = 100
+
+
 def get_versions_for_version_strings(version_strings):
     def get_version(major, minor, point):
         try:
