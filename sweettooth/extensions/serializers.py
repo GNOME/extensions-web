@@ -13,6 +13,7 @@ from rest_framework import serializers
 from sweettooth.extensions.models import Extension, ExtensionVersion, ShellVersion
 from sweettooth.users.serializers import BaseUserProfileSerializer
 
+
 class ShellVersionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShellVersion
@@ -22,13 +23,6 @@ class ShellVersionSerializer(serializers.ModelSerializer):
             'point',
         ]
 
-class ExtensionVersionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExtensionVersion
-        fields = [
-            'version',
-            'status',
-        ]
 
 class ExtensionSerializer(serializers.ModelSerializer):
     creator = BaseUserProfileSerializer(many=False, read_only=True)
@@ -49,4 +43,24 @@ class ExtensionSerializer(serializers.ModelSerializer):
             'icon',
             'rating',
             'rated',
+        ]
+
+
+class ExtensionVersionSerializer(serializers.ModelSerializer):
+    # TODO: change primary key to UUID
+    extension = serializers.SlugRelatedField(
+        many=False,
+        read_only=True,
+        slug_field='uuid'
+     )
+    shell_versions = ShellVersionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ExtensionVersion
+        fields = [
+            'extension',
+            'version',
+            'status',
+            'shell_versions',
+            'created',
         ]

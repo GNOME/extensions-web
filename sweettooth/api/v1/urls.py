@@ -13,7 +13,7 @@ from django.urls import path
 from rest_framework.routers import SimpleRouter
 
 from sweettooth.api.v1.views import HelloView
-from sweettooth.extensions.views import ExtensionsViewSet
+from sweettooth.extensions.views import ExtensionsViewSet, ExtensionsVersionsViewSet
 from sweettooth.users.views import UserProfileDetailView
 
 # Create a router and register our viewsets with it.
@@ -22,6 +22,11 @@ router.register(
     r'v1/extensions',
     ExtensionsViewSet,
     basename='extension',
+)
+router.register(
+    r'v1/extensions-versions',
+    ExtensionsVersionsViewSet,
+    basename='extensions-versions',
 )
 
 urlpatterns = router.urls
