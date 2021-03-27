@@ -354,11 +354,18 @@ class ShellVersionTest(TestCase):
         self.assertEqual(version.minor, 2)
         self.assertEqual(version.point, -1)
 
+        self.assertEqual(lookup_version("40"), None)
+        version = get_version("40")
+        self.assertEqual(lookup_version("40"), version)
+        self.assertEqual(version.major, 40)
+        self.assertEqual(version.minor, -1)
+        self.assertEqual(version.point, -1)
+
         self.assertEqual(lookup_version("40.alpha"), None)
         version = get_version("40.alpha")
         self.assertEqual(lookup_version("40.alpha"), version)
         self.assertEqual(version.major, 40)
-        self.assertEqual(version.minor, -3)
+        self.assertEqual(version.minor, -4)
         self.assertEqual(version.point, -1)
 
         self.assertEqual(lookup_version("51.6"), None)
@@ -372,7 +379,7 @@ class ShellVersionTest(TestCase):
         version = get_version("123.rc")
         self.assertEqual(lookup_version("123.rc"), version)
         self.assertEqual(version.major, 123)
-        self.assertEqual(version.minor, -1)
+        self.assertEqual(version.minor, -2)
         self.assertEqual(version.point, -1)
 
         self.assertEqual(lookup_version("41.3"), None)
@@ -409,6 +416,12 @@ class ShellVersionTest(TestCase):
 
         with self.assertRaises(models.InvalidShellVersion):
             models.parse_version_string("40.teta")
+
+        with self.assertRaises(models.InvalidShellVersion):
+            models.parse_version_string("40.0.1")
+
+        with self.assertRaises(models.InvalidShellVersion):
+            models.parse_version_string("51.0.1.2")
 
 class DownloadExtensionTest(BasicUserTestCase, TestCase):
     def download(self, uuid, shell_version):
@@ -738,6 +751,9 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
         v.parse_metadata_json({"shell-version": ["3.38.0", "40.alpha", "42.3"]})
 
+        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
+        v.parse_metadata_json({"shell-version": ["40"]})
+
         self.assertEqual(views.grab_proper_extension_version(extension, "3.17.1").version, 3)
         self.assertEqual(views.grab_proper_extension_version(extension, "3.20.0").version, 4)
         self.assertEqual(views.grab_proper_extension_version(extension, "3.2.0"), None)
@@ -758,6 +774,8 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         self.assertEqual(views.grab_proper_extension_version(extension, "3.18.3", True).version, 3)
         self.assertEqual(views.grab_proper_extension_version(extension, "3.20.0", True).version, 4)
         self.assertEqual(views.grab_proper_extension_version(extension, "3.24.0", True).version, 4)
+        self.assertEqual(views.grab_proper_extension_version(extension, "40.alpha", True).version, 5)
         self.assertEqual(views.grab_proper_extension_version(extension, "40.beta", True).version, 5)
+        self.assertEqual(views.grab_proper_extension_version(extension, "40.2", True).version, 6)
         self.assertEqual(views.grab_proper_extension_version(extension, "44.2", True).version, 5)
         self.assertEqual(views.grab_proper_extension_version(extension, "129.rc", True).version, 5)

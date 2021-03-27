@@ -38,9 +38,9 @@ define([], function () {
 	};
 
 	let prerelease_versions = {
-		'alpha': -3,
-		'beta': -2,
-		'rc': -1,
+		'alpha': -4,
+		'beta': -3,
+		'rc': -2,
 	};
 
 	function versionCompare(a, b) {

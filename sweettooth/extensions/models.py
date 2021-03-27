@@ -199,19 +199,20 @@ class InvalidShellVersion(Exception):
 
 def parse_version_string(version_string):
     prerelease_versions = {
-        'alpha': -3,
-        'beta': -2,
-        'rc': -1,
+        'alpha': -4,
+        'beta': -3,
+        'rc': -2,
     }
     version = version_string.split('.')
     version_parts = len(version)
 
-    if version_parts < 2 or version_parts > 4:
+    if version_parts < 1 or version_parts > 4:
         raise InvalidShellVersion()
 
     try:
-        major, minor = version[:2]
-        major = int(major)
+        major = int(version[0])
+        minor = version[1] if version_parts > 1 else -1
+
         # GNOME 40+
         # https://discourse.gnome.org/t/new-gnome-versioning-scheme/4235
         if major >= 40 and minor in prerelease_versions.keys():
@@ -221,16 +222,18 @@ def parse_version_string(version_string):
     except ValueError:
         raise InvalidShellVersion()
 
-    if version_parts in (3, 4):
-        # 3.0.1, 3.1.4
-        try:
-            point = int(version[2])
-        except ValueError:
+    point = -1
+    if version_parts > 2:
+        if major >= 40:
             raise InvalidShellVersion()
-
+        else:
+            # 3.0.1, 3.1.4
+            try:
+                point = int(version[2])
+            except ValueError:
+                raise InvalidShellVersion()
     else:
-        point = -1
-        if major < 40 and minor % 2 != 0:
+        if major < 40 and (version_parts < 2 or minor % 2 != 0):
             # Two-digit pre-40 odd versions are illegal: 3.1, 3.3
             raise InvalidShellVersion()
 
@@ -269,18 +272,21 @@ class ShellVersion(models.Model):
     @property
     def version_string(self):
         prerelease_versions = {
-            -3: 'alpha',
-            -2: 'beta',
-            -1: 'rc'
+            -4: 'alpha',
+            -3: 'beta',
+            -2: 'rc'
         }
 
         # GNOME 40+: unstable versions
         # https://discourse.gnome.org/t/new-gnome-versioning-scheme/4235
-        if self.major >= 40 and self.minor < 0:
-            return "%d.%s" % (
-                self.major,
-                prerelease_versions.get(self.minor, 'unknown')
-            )
+        if self.major >= 40:
+            if self.minor < -1:
+                return "%d.%s" % (
+                    self.major,
+                    prerelease_versions.get(self.minor, 'unknown')
+                )
+            elif self.minor == -1:
+                return "%d" % (self.major)
 
         if self.point == -1:
             return "%d.%d" % (self.major, self.minor)
