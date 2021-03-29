@@ -20,6 +20,7 @@ from django.db import transaction
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.urls import reverse
 
@@ -119,6 +120,7 @@ def shell_download(request, uuid):
     return redirect(version.source.url)
 
 @ajax_view
+@csrf_exempt
 def shell_update(request):
     try:
         if request.method == 'POST':
