@@ -49,12 +49,18 @@ def get_versions_for_version_strings(version_strings):
             yield version
 
         # If we already have a base version, don't bother querying it again...
-        if point == -1:
+        if (major < 40 and point == -1) or minor == -1:
             continue
 
         base_version = get_version(major, minor, -1)
         if base_version:
             yield base_version
+
+        if major >= 40:
+            base_version = get_version(major, -1, -1)
+            if base_version:
+                yield base_version
+
 
 def grab_proper_extension_version(extension, shell_version, disable_version_validation=False):
     def get_best_shell_version():

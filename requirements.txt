@@ -10,9 +10,9 @@ django-contrib-comments==1.9.2 \
 django-registration==3.1.1 \
     --hash=sha256:44ca3d63869c91174cef9ccf244ec87ad296e3d705983e9e98150cee03938dda \
     --hash=sha256:88e6c2aa698320b87c5d3cbb941ef7acde69ced109bc00ce35acfccfbf00ab71
-Pygments==2.7.3 \
-    --hash=sha256:ccf3acacf3782cbed4a989426012f1c535c9a90d3a7fc3f16d231b9372d2b716 \
-    --hash=sha256:f275b6c0909e5dafd2d6269a656aa90fa58ebf4a74f8fcf9053195d226b24a08
+Pygments==2.8.1 \
+    --hash=sha256:2656e1a6edcdabf4275f9a3640db59fd5de107d88e8663c5d4e9a0fa62f77f94 \
+    --hash=sha256:534ef71d539ae97d4c3a4cf7d6f110f214b0e687e92f9cb9d2a3b0d3101289c8
 Pillow==8.1.2 \
     --hash=sha256:5762ebb4436f46b566fc6351d67a9b5386b5e5de4e58fdaa18a1c83e0e20f1a8 \
     --hash=sha256:5cf03b9534aca63b192856aa601c68d0764810857786ea5da652581f3a44c2b0 \
