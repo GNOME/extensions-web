@@ -7,9 +7,9 @@ django-autoslug==1.9.8 \
 django-contrib-comments==1.9.2 \
     --hash=sha256:b83320a86081a76bc0570e6cc0f924c0ced40b46ae9f5dd783ab2c745b449529 \
     --hash=sha256:d1232bade3094de07dcc205fc833204384e71ba9d30caadcb5bb2882ce8e8d31
-django-registration==3.1.1 \
-    --hash=sha256:44ca3d63869c91174cef9ccf244ec87ad296e3d705983e9e98150cee03938dda \
-    --hash=sha256:88e6c2aa698320b87c5d3cbb941ef7acde69ced109bc00ce35acfccfbf00ab71
+django-registration==3.1.2 \
+    --hash=sha256:dde525b08880da1d72b556f19dfd1c6588233a43f8bc354481f2d3e8896c44f8 \
+    --hash=sha256:c9985f9ffd123534026bf5f39adb0b48fd7bf930b965f27f9a487d135f377ac6
 Pygments==2.8.1 \
     --hash=sha256:2656e1a6edcdabf4275f9a3640db59fd5de107d88e8663c5d4e9a0fa62f77f94 \
     --hash=sha256:534ef71d539ae97d4c3a4cf7d6f110f214b0e687e92f9cb9d2a3b0d3101289c8
