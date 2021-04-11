@@ -670,117 +670,11 @@ class UpdateVersionTest(TestCase):
 
 
 class QueryExtensionsTest(BasicUserTestCase, TestCase):
-    def get_response(self, params):
-        response = self.client.get(reverse('extensions-query'), params)
-        return json.loads(response.content.decode(response.charset))
-
-    def gather_uuids(self, params):
-        if 'sort' not in params:
-            params['sort'] = 'name'
-
-        response = self.get_response(params)
-        extensions = response['extensions']
-        return [details['uuid'] for details in extensions]
-
     def create_extension(self, name, **kwargs):
         metadata = dict(uuid=name + "@mecheye.net", name=name)
         return models.Extension.objects.create_from_metadata(metadata,
                                                              creator=self.user,
                                                              **kwargs)
-
-    def test_basic(self):
-        one = self.create_extension("one")
-        two = self.create_extension("two")
-
-        models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
-        models.ExtensionVersion.objects.create(extension=two, status=models.STATUS_ACTIVE)
-
-        uuids = self.gather_uuids(dict(uuid=one.uuid))
-        self.assertEqual(uuids, [one.uuid])
-
-        uuids = self.gather_uuids(dict(uuid=[one.uuid, two.uuid]))
-        self.assertEqual(uuids, [one.uuid, two.uuid])
-
-    def test_basic_visibility(self):
-        one = self.create_extension("one")
-        two = self.create_extension("two")
-
-        models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
-        models.ExtensionVersion.objects.create(extension=two, status=models.STATUS_UNREVIEWED)
-
-        # Since two is new, it shouldn't be visible.
-        uuids = self.gather_uuids(dict(uuid=[one.uuid, two.uuid]))
-        self.assertEqual(uuids, [one.uuid])
-
-        models.ExtensionVersion.objects.create(extension=two, status=models.STATUS_ACTIVE)
-
-        # And now that we have a new version on two, we should have both...
-        uuids = self.gather_uuids(dict(uuid=[one.uuid, two.uuid]))
-        self.assertEqual(uuids, [one.uuid, two.uuid])
-
-    def test_shell_versions(self):
-        one = self.create_extension("one")
-        two = self.create_extension("two")
-
-        v = models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.2"]})
-
-        v = models.ExtensionVersion.objects.create(extension=two, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.3.90"]})
-
-        # Basic querying...
-        uuids = self.gather_uuids(dict(shell_version="3.2"))
-        self.assertEqual(uuids, [one.uuid])
-
-        uuids = self.gather_uuids(dict(shell_version="3.3.90"))
-        self.assertEqual(uuids, [two.uuid])
-
-        # Base version querying.
-        uuids = self.gather_uuids(dict(shell_version="3.2.2"))
-        self.assertEqual(uuids, [one.uuid])
-
-    def test_complex_visibility(self):
-        one = self.create_extension("one")
-
-        v = models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.2"]})
-
-        v = models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_UNREVIEWED)
-        v.parse_metadata_json({"shell-version": ["3.3.90"]})
-
-        # Make sure that we don't see one, here - the version that
-        # has this shell version is NEW.
-        uuids = self.gather_uuids(dict(shell_version="3.3.90"))
-        self.assertEqual(uuids, [])
-
-    def test_sort(self):
-        one = self.create_extension("one", downloads=50, popularity=15)
-        models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
-
-        two = self.create_extension("two", downloads=40, popularity=20)
-        models.ExtensionVersion.objects.create(extension=two, status=models.STATUS_ACTIVE)
-
-        uuids = self.gather_uuids(dict(sort="name"))
-        self.assertEqual(uuids, [one.uuid, two.uuid])
-        # name gets asc sort by default
-        uuids = self.gather_uuids(dict(sort="name", order="asc"))
-        self.assertEqual(uuids, [one.uuid, two.uuid])
-        uuids = self.gather_uuids(dict(sort="name", order="desc"))
-        self.assertEqual(uuids, [two.uuid, one.uuid])
-
-        uuids = self.gather_uuids(dict(sort="popularity"))
-        self.assertEqual(uuids, [two.uuid, one.uuid])
-        uuids = self.gather_uuids(dict(sort="popularity", order="desc"))
-        self.assertEqual(uuids, [two.uuid, one.uuid])
-        uuids = self.gather_uuids(dict(sort="popularity", order="asc"))
-        self.assertEqual(uuids, [one.uuid, two.uuid])
-
-        uuids = self.gather_uuids(dict(sort="downloads"))
-        self.assertEqual(uuids, [one.uuid, two.uuid])
-        uuids = self.gather_uuids(dict(sort="downloads", order="desc"))
-        self.assertEqual(uuids, [one.uuid, two.uuid])
-        uuids = self.gather_uuids(dict(sort="downloads", order="asc"))
-        self.assertEqual(uuids, [two.uuid, one.uuid])
 
     def test_grab_proper_extension_version(self):
         extension = self.create_extension("extension")
