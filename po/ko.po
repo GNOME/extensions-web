@@ -125,7 +125,7 @@ msgid ""
 "comment or report an error. You understand, right?"
 msgstr ""
 "안타깝게도, 댓글을 달거나 오류를 보고하려면 스팸을 막을 목적으로 <a "
-"href=“%(login_url)s”>그놈 쉘에 로그인</a>해야 합니다. 이해하셨죠?"
+"href=\"%(login_url)s\">그놈 쉘에 로그인</a>해야 합니다. 이해하셨죠?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
@@ -321,7 +321,7 @@ msgid ""
 "troubleshooting entry</a> for more information."
 msgstr ""
 "이 시스템에서 실행 중인 그놈 사본을 찾을 수 없어 인터페이스 일부 기능을 사용"
-"할 수 없습니다. 자세한 내용은 <a href=“/about/#no-detection”>문제 해결 항목"
+"할 수 없습니다. 자세한 내용은 <a href=\"/about/#no-detection\">문제 해결 항목"
 "</a>을 참고하십시오."
 
 #: sweettooth/static/js/extensions.js:136
