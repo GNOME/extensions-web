@@ -162,7 +162,10 @@ def shell_update(request):
             # The user may have a newer version than what's on the site.
             continue
 
-        proper_version = grab_proper_extension_version(extension, shell_version, disable_version_validation)
+        try:
+            proper_version = grab_proper_extension_version(extension, shell_version, disable_version_validation)
+        except models.InvalidShellVersion:
+            return HttpResponseBadRequest()
 
         if proper_version is not None:
             if version < proper_version.version:
