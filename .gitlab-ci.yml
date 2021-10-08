@@ -1,5 +1,5 @@
 test:
-  image: 'registry.fedoraproject.org/fedora:30'
+  image: 'registry.fedoraproject.org/fedora:34'
   stage: test
   variables:
     STORAGE_DRIVER: 'vfs'
