@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"PO-Revision-Date: 2021-12-06 20:35+0100\n"
+"Last-Translator: Quentin PAGÈS\n"
+"Language-Team: Occitan <totenoc@gmail.com>\n"
+"Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2021-08-30 18:45+0200\n"
-"Language-Team: Occitan <totenoc@gmail.com>\n"
-"Language: oc\n"
-"Last-Translator: Quentin PAGÈS\n"
 "X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
 msgid "Username or email"
@@ -35,7 +36,7 @@ msgstr ""
 
 #: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
-msgstr ""
+msgstr "Corrièl"
 
 #: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "You should not use email as username"
@@ -87,7 +88,7 @@ msgstr ""
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr ""
+msgstr "Reïnicializacion del senhal"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
@@ -102,7 +103,7 @@ msgstr ""
 
 #: sweettooth/context_processors.py:17 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr ""
+msgstr "Extensions installadas"
 
 #: sweettooth/context_processors.py:21 extensions-web-domain-django:1
 msgid "About"
@@ -124,7 +125,7 @@ msgstr ""
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr ""
+msgstr "Avises dels utilizaires"
 
 #: sweettooth/extensions/templates/extensions/comments.html:25
 #: extensions-web-domain-django:1
@@ -159,17 +160,17 @@ msgstr "Senhalament d’avaria"
 #: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
-msgstr ""
+msgstr "Metre a nivèl aquesta extension"
 
 #: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
-msgstr ""
+msgstr "Configurar aquesta extension"
 
 #: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
-msgstr ""
+msgstr "Desinstallar aquesta extension"
 
 #: sweettooth/extensions/templates/extensions/detail.html:53
 #: extensions-web-domain-django:1
@@ -184,12 +185,12 @@ msgstr "Telecargar"
 #: sweettooth/extensions/templates/extensions/detail.html:61
 #: extensions-web-domain-django:1
 msgid "Shell version…"
-msgstr ""
+msgstr "Version del Shell…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr ""
+msgstr "Version d’extension…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
@@ -201,13 +202,13 @@ msgstr ""
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr ""
+msgstr "Cercar d’extensions…"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
 #: extensions-web-domain-django:1
 msgid "Installed Extensions"
-msgstr ""
+msgstr "Extensions installadas"
 
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
@@ -216,11 +217,11 @@ msgstr ""
 
 #: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Content"
-msgstr ""
+msgstr "Contengut"
 
 #: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
 msgid "Metadata"
-msgstr ""
+msgstr "Metadonadas"
 
 #: sweettooth/ratings/templates/comments/form.html:26
 #: sweettooth/ratings/templates/comments/preview.html:45
@@ -238,30 +239,30 @@ msgstr "Apercebut"
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr ""
+msgstr "De qué pensatz d’aquesta extension GNOME  ?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Mercés de corregir l'error çai-jos."
+msgstr[1] "Mercés de corregir las errors çai-jos."
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr ""
+msgstr "Apercebut de vòstre comentari"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr ""
+msgstr "Publicar lo comentari"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr ""
+msgstr "Modificar lo comentari"
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
@@ -274,15 +275,15 @@ msgstr ""
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
-msgstr ""
+msgstr "Perfil de l’utilizaire"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
-msgstr ""
+msgstr "Paramètres de l’utilizaire"
 
 #: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
 msgid "Log out"
-msgstr ""
+msgstr "Se desconnectar"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid ""
@@ -297,7 +298,7 @@ msgstr ""
 
 #: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr ""
+msgstr "Clicar aquí per installar l’extension del navegador"
 
 #: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
 #, javascript-format
@@ -318,7 +319,7 @@ msgstr ""
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
-msgstr ""
+msgstr "Compatible amb"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
@@ -326,7 +327,7 @@ msgstr "Nom"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr ""
+msgstr "Recents"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
@@ -343,12 +344,12 @@ msgstr "Triar per"
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr ""
+msgstr "Afichar mai d’avises"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr ""
+msgstr "I a pas cap de comentari. Siatz lo primièr !"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:4
 #: extensions-web-domain-djangojs:1
@@ -358,7 +359,7 @@ msgstr "L’autor"
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "What's wrong?"
-msgstr ""
+msgstr "Qué truca ?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:17
 #: extensions-web-domain-djangojs:1
@@ -368,27 +369,27 @@ msgstr ""
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
 msgid "Version information"
-msgstr ""
+msgstr "Informacions sus la version"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:22
 #: extensions-web-domain-djangojs:1
 msgid "Shell version"
-msgstr ""
+msgstr "Version del Shell"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Extension version"
-msgstr ""
+msgstr "Version d’extension"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Unknown"
-msgstr ""
+msgstr "Desconeguda"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:5
 #: extensions-web-domain-djangojs:1
 msgid "What have you tried?"
-msgstr ""
+msgstr "Qu’avètz ensajat ?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:9
 #: extensions-web-domain-djangojs:1
@@ -398,7 +399,7 @@ msgstr ""
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr ""
+msgstr "Extension sistèma"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1

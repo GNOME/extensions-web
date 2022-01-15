@@ -8,11 +8,12 @@
     (at your option) any later version.
 """
 
+from six import text_type
+
 from django_registration import validators
 
 from django.contrib.auth import get_user_model
 from django.test.testcases import TestCase
-from django.utils.six import text_type
 from .forms import AutoFocusRegistrationForm, RegistrationForm
 
 User = get_user_model()

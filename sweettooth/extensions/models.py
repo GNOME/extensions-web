@@ -472,6 +472,9 @@ class ExtensionVersion(models.Model):
     def is_inactive(self):
         return self.status == STATUS_INACTIVE
 
-submitted_for_review = Signal(providing_args=["request", "version"])
-reviewed = Signal(providing_args=["request", "version", "review"])
-extension_updated = Signal(providing_args=["extension"])
+# providing_args=["request", "version"]
+submitted_for_review = Signal()
+# providing_args=["request", "version", "review"]
+reviewed = Signal()
+# providing_args=["extension"]
+extension_updated = Signal()
