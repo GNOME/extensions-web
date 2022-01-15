@@ -103,10 +103,10 @@ objects:
     tags:
     - from:
         kind: DockerImage
-        name: python:3.6-stretch
+        name: python:3.9
       importPolicy:
         scheduled: true
-      name: 3.6-stretch
+      name: '3.9'
 - apiVersion: v1
   kind: BuildConfig
   metadata:
@@ -149,7 +149,7 @@ objects:
         forcePull: true
         from:
           kind: ImageStreamTag
-          name: python:3.6-stretch
+          name: python:3.9
       type: Docker
     triggers:
     - type: ImageChange
