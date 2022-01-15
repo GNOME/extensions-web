@@ -9,4 +9,5 @@ class ErrorReport(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="+")
     extension = models.ForeignKey(Extension, null=True, on_delete=models.CASCADE)
 
-error_reported = Signal(providing_args=["request", "version", "report"])
+# providing_args=["request", "version", "report"]
+error_reported = Signal()

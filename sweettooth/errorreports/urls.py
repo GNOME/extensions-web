@@ -1,9 +1,9 @@
 
-from django.conf.urls import url
+from django.urls import re_path
 
 from sweettooth.errorreports import views
 
 urlpatterns = [
-    url(r'^report/(?P<pk>\d+)', views.report_error, name='report_error'),
-    url(r'^view/(?P<pk>\d+)', views.view_error_report),
+    re_path(r'^report/(?P<pk>\d+)', views.report_error, name='report_error'),
+    re_path(r'^view/(?P<pk>\d+)', views.view_error_report),
 ]

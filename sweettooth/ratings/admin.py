@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django_comments.admin import CommentsAdmin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from sweettooth.ratings.models import RatingComment
 
