@@ -1,7 +1,4 @@
-ARG PYTHON_IMAGE=python
-ARG PYTHON_VERSION=3.9
-
-FROM $PYTHON_IMAGE:$PYTHON_VERSION as xapian
+FROM python:3.9 as xapian
 
 ARG XAPIAN_VERSION=1.4.19
 ENV PYTHONUNBUFFERED=1
@@ -9,7 +6,7 @@ ENV PYTHONUNBUFFERED=1
 COPY openshift/docker/scripts/ /tmp/scripts/
 RUN /tmp/scripts/install-xapian.sh
 
-FROM $PYTHON_IMAGE:$PYTHON_VERSION
+FROM python:3.9
 
 LABEL author="Yuri Konotopov <ykonotopov@gnome.org>"
 
