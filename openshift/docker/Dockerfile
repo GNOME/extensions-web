@@ -11,7 +11,6 @@ FROM python:3.9
 LABEL author="Yuri Konotopov <ykonotopov@gnome.org>"
 
 RUN set -ex \
-	&& ldconfig \
 	&& apt-get update \
 	&& apt-get install \
 		--no-install-recommends \
@@ -32,6 +31,7 @@ COPY . /extensions-web/app
 COPY openshift/docker/wsgi.ini /extensions-web
 
 RUN set -ex \
+	&& ldconfig \
 	&& chown www-data:root -R /extensions-web/app \
 	&& chown www-data:root /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
