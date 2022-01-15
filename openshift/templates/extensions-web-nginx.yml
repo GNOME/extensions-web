@@ -1,0 +1,605 @@
+apiVersion: v1
+kind: Template
+labels:
+  app: extensions-web
+  template: extensions-web
+message: |
+  The following service(s) have been created in your project: ${NAME}.
+
+  For more information about using this template, see https://gitlab.gnome.org/Infrastructure/extensions-web.
+metadata:
+  annotations:
+    description: GNOME Shell extensions website. For more information about using
+      this template see https://gitlab.gnome.org/Infrastructure/extensions-web.
+    iconClass: icon-django
+    openshift.io/display-name: GNOME Shell extensions website
+    openshift.io/documentation-url: https://gitlab.gnome.org/Infrastructure/extensions-web
+    openshift.io/long-description: This template defines resources needed to run GNOME
+      Shell extensions repository website, including a build configuration and application
+      deployment configuration.  It does not include a database.
+    openshift.io/provider-display-name: GNOME
+    openshift.io/support-url: https://gitlab.gnome.org/Infrastructure/extensions-web/issues
+    tags: gnome,python,nginx,uwsgi,extensions-web
+    template.openshift.io/bindable: 'false'
+  name: extensions-web
+objects:
+- apiVersion: v1
+  data:
+    administrator-email: ${EGO_ADMINISTRATOR_EMAIL}
+    administrator-name: ${EGO_ADMINISTRATOR_NAME}
+    allowed-host: ${APPLICATION_DOMAIN}
+    media-root: /extensions-web/www/uploaded-files
+    static-root: /extensions-web/www/static-files
+    xapian-db: /extensions-web/data/xapian.db
+  kind: ConfigMap
+  metadata:
+    name: ${NAME}
+- apiVersion: v1
+  kind: Secret
+  metadata:
+    name: ${NAME}
+  stringData:
+    database-url: ${EGO_DATABASE_URL}
+    email-url: ${EGO_EMAIL_URL}
+    secret-key: ${EGO_SECRET_KEY}
+- apiVersion: v1
+  kind: Secret
+  metadata:
+    name: gnome-gitlab
+  stringData:
+    WebHookSecretKey: ${WEBHOOK_SECRET_KEY}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      description: Exposes and load balances the application pods
+    name: ${NAME}
+  spec:
+    ports:
+    - name: ${NAME}
+      port: 80
+      targetPort: 8080
+    selector:
+      name: ${NAME}
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: ${NAME}
+  spec:
+    host: ${APPLICATION_DOMAIN}
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge
+    to:
+      kind: Service
+      name: ${NAME}
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      description: Keeps track of changes in the application image
+    name: ${NAME}
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      description: Keeps track of changes in the nginx:stable image
+    name: nginx
+  spec:
+    tags:
+    - from:
+        kind: DockerImage
+        name: nginx:stable
+      importPolicy:
+        scheduled: true
+      name: stable
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      description: Keeps track of changes in the python image
+    name: python
+  spec:
+    tags:
+    - from:
+        kind: DockerImage
+        name: python:3.6-stretch
+      importPolicy:
+        scheduled: true
+      name: 3.6-stretch
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      description: Defines how to build the application
+      template.alpha.openshift.io/wait-for-ready: 'true'
+    name: ${NAME}
+  spec:
+    output:
+      to:
+        kind: ImageStreamTag
+        name: ${NAME}:latest
+    postCommit:
+      script: bash -c 'python manage.py collectstatic --noinput && python manage.py
+        test'
+    source:
+      git:
+        ref: ${SOURCE_REPOSITORY_REF}
+        uri: ${SOURCE_REPOSITORY_URL}
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: openshift/docker/Dockerfile
+        env:
+        - name: EGO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: ${NAME}
+        - name: EGO_MEDIA_ROOT
+          valueFrom:
+            configMapKeyRef:
+              key: media-root
+              name: ${NAME}
+        - name: EGO_STATIC_ROOT
+          valueFrom:
+            configMapKeyRef:
+              key: static-root
+              name: ${NAME}
+        forcePull: true
+        from:
+          kind: ImageStreamTag
+          name: python:3.6-stretch
+      type: Docker
+    triggers:
+    - type: ImageChange
+    - type: ConfigChange
+    - gitlab:
+        secretReference:
+          name: gnome-gitlab
+      type: GitLab
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      description: Defines how to build the frontend
+      template.alpha.openshift.io/wait-for-ready: 'true'
+    name: frontend
+  spec:
+    output:
+      to:
+        kind: ImageStreamTag
+        name: frontend:latest
+    source:
+      contextDir: openshift/docker/nginx
+      git:
+        ref: ${SOURCE_REPOSITORY_REF}
+        uri: ${SOURCE_REPOSITORY_URL}
+      type: Git
+    strategy:
+      dockerStrategy:
+        forcePull: true
+        from:
+          kind: ImageStreamTag
+          name: nginx:stable
+      type: Docker
+    triggers:
+    - type: ImageChange
+    - type: ConfigChange
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: extensions-claim
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 3096Mi
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      description: Defines how to deploy the application server
+      template.alpha.openshift.io/wait-for-ready: 'true'
+    name: ${NAME}
+  spec:
+    replicas: 1
+    selector:
+      name: ${NAME}
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          name: ${NAME}
+        name: ${NAME}
+      spec:
+        containers:
+        - args:
+          - -c
+          - python manage.py collectstatic --noinput && python manage.py migrate &&
+            uwsgi --enable-threads --ini /extensions-web/wsgi.ini
+          command:
+          - bash
+          env:
+          - name: EGO_DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                key: database-url
+                name: ${NAME}
+          - name: EGO_EMAIL_URL
+            valueFrom:
+              secretKeyRef:
+                key: email-url
+                name: ${NAME}
+          - name: EGO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secret-key
+                name: ${NAME}
+          - name: EGO_ADMINISTRATOR_NAME
+            valueFrom:
+              configMapKeyRef:
+                key: administrator-name
+                name: ${NAME}
+          - name: EGO_ADMINISTRATOR_EMAIL
+            valueFrom:
+              configMapKeyRef:
+                key: administrator-email
+                name: ${NAME}
+          - name: EGO_MEDIA_ROOT
+            valueFrom:
+              configMapKeyRef:
+                key: media-root
+                name: ${NAME}
+          - name: EGO_STATIC_ROOT
+            valueFrom:
+              configMapKeyRef:
+                key: static-root
+                name: ${NAME}
+          - name: EGO_ALLOWED_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: allowed-host
+                name: ${NAME}
+          - name: EGO_XAPIAN_DB
+            valueFrom:
+              configMapKeyRef:
+                key: xapian-db
+                name: ${NAME}
+          image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            tcpSocket:
+              port: 8001
+            timeoutSeconds: 3
+          name: ${NAME}
+          ports:
+          - containerPort: 8001
+          readinessProbe:
+            initialDelaySeconds: 3
+            periodSeconds: 60
+            tcpSocket:
+              port: 8001
+            timeoutSeconds: 3
+          resources:
+            limits:
+              memory: ${MEMORY_LIMIT}
+          volumeMounts:
+          - mountPath: /extensions-web/www
+            name: data-volume
+            subPath: www
+          - mountPath: /extensions-web/data
+            name: data-volume
+            subPath: data
+        - args:
+          - -c
+          - envsubst '$EGO_NODE_ADDRESS' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+            && nginx -g 'daemon off;'
+          command:
+          - bash
+          env:
+          - name: EGO_NODE_ADDRESS
+            value: ${EGO_NODE_ADDRESS}
+          image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/frontend:latest
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 60
+            timeoutSeconds: 3
+          name: frontend
+          ports:
+          - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            timeoutSeconds: 3
+          resources:
+            limits:
+              memory: 512Mi
+          volumeMounts:
+          - mountPath: /extensions-web/www
+            name: data-volume
+            subPath: www
+        volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: extensions-claim
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - ${NAME}
+        from:
+          kind: ImageStreamTag
+          name: ${NAME}:latest
+      type: ImageChange
+    - type: ConfigChange
+- apiVersion: batch/v1beta1
+  kind: CronJob
+  metadata:
+    name: job-update-popularity
+  spec:
+    jobTemplate:
+      spec:
+        template:
+          spec:
+            containers:
+            - command:
+              - /extensions-web/app/bin/sweettooth-cron-update
+              env:
+              - name: EGO_DATABASE_URL
+                valueFrom:
+                  secretKeyRef:
+                    key: database-url
+                    name: ${NAME}
+              - name: EGO_EMAIL_URL
+                valueFrom:
+                  secretKeyRef:
+                    key: email-url
+                    name: ${NAME}
+              - name: EGO_SECRET_KEY
+                valueFrom:
+                  secretKeyRef:
+                    key: secret-key
+                    name: ${NAME}
+              - name: EGO_ADMINISTRATOR_NAME
+                valueFrom:
+                  configMapKeyRef:
+                    key: administrator-name
+                    name: ${NAME}
+              - name: EGO_ADMINISTRATOR_EMAIL
+                valueFrom:
+                  configMapKeyRef:
+                    key: administrator-email
+                    name: ${NAME}
+              - name: EGO_MEDIA_ROOT
+                valueFrom:
+                  configMapKeyRef:
+                    key: media-root
+                    name: extensions-web
+              - name: EGO_STATIC_ROOT
+                valueFrom:
+                  configMapKeyRef:
+                    key: static-root
+                    name: extensions-web
+              - name: EGO_ALLOWED_HOST
+                valueFrom:
+                  configMapKeyRef:
+                    key: allowed-host
+                    name: ${NAME}
+              - name: EGO_XAPIAN_DB
+                valueFrom:
+                  configMapKeyRef:
+                    key: xapian-db
+                    name: ${NAME}
+              image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
+              name: update-popularity
+            restartPolicy: Never
+    schedule: 0 0 * * *
+- apiVersion: batch/v1beta1
+  kind: CronJob
+  metadata:
+    name: job-update-software
+  spec:
+    jobTemplate:
+      spec:
+        template:
+          spec:
+            containers:
+            - command:
+              - /extensions-web/app/bin/sweettooth-cron-software
+              env:
+              - name: EGO_DATABASE_URL
+                valueFrom:
+                  secretKeyRef:
+                    key: database-url
+                    name: ${NAME}
+              - name: EGO_EMAIL_URL
+                valueFrom:
+                  secretKeyRef:
+                    key: email-url
+                    name: ${NAME}
+              - name: EGO_SECRET_KEY
+                valueFrom:
+                  secretKeyRef:
+                    key: secret-key
+                    name: ${NAME}
+              - name: EGO_ADMINISTRATOR_NAME
+                valueFrom:
+                  configMapKeyRef:
+                    key: administrator-name
+                    name: ${NAME}
+              - name: EGO_ADMINISTRATOR_EMAIL
+                valueFrom:
+                  configMapKeyRef:
+                    key: administrator-email
+                    name: ${NAME}
+              - name: EGO_MEDIA_ROOT
+                valueFrom:
+                  configMapKeyRef:
+                    key: media-root
+                    name: extensions-web
+              - name: EGO_STATIC_ROOT
+                valueFrom:
+                  configMapKeyRef:
+                    key: static-root
+                    name: extensions-web
+              - name: EGO_ALLOWED_HOST
+                valueFrom:
+                  configMapKeyRef:
+                    key: allowed-host
+                    name: ${NAME}
+              - name: EGO_XAPIAN_DB
+                valueFrom:
+                  configMapKeyRef:
+                    key: xapian-db
+                    name: ${NAME}
+              image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
+              name: update-software
+              volumeMounts:
+              - mountPath: /extensions-web/www
+                name: data-volume
+                subPath: www
+              - mountPath: /extensions-web/data
+                name: data-volume
+                subPath: data
+            restartPolicy: Never
+            volumes:
+            - name: data-volume
+              persistentVolumeClaim:
+                claimName: extensions-claim
+    schedule: 10 0 * * *
+- apiVersion: batch/v1beta1
+  kind: CronJob
+  metadata:
+    name: job-clean-users
+  spec:
+    jobTemplate:
+      spec:
+        template:
+          spec:
+            containers:
+            - command:
+              - /extensions-web/app/bin/sweettooth-clean-users
+              env:
+              - name: EGO_DATABASE_URL
+                valueFrom:
+                  secretKeyRef:
+                    key: database-url
+                    name: ${NAME}
+              - name: EGO_EMAIL_URL
+                valueFrom:
+                  secretKeyRef:
+                    key: email-url
+                    name: ${NAME}
+              - name: EGO_SECRET_KEY
+                valueFrom:
+                  secretKeyRef:
+                    key: secret-key
+                    name: ${NAME}
+              - name: EGO_ADMINISTRATOR_NAME
+                valueFrom:
+                  configMapKeyRef:
+                    key: administrator-name
+                    name: ${NAME}
+              - name: EGO_ADMINISTRATOR_EMAIL
+                valueFrom:
+                  configMapKeyRef:
+                    key: administrator-email
+                    name: ${NAME}
+              - name: EGO_MEDIA_ROOT
+                valueFrom:
+                  configMapKeyRef:
+                    key: media-root
+                    name: extensions-web
+              - name: EGO_STATIC_ROOT
+                valueFrom:
+                  configMapKeyRef:
+                    key: static-root
+                    name: extensions-web
+              - name: EGO_ALLOWED_HOST
+                valueFrom:
+                  configMapKeyRef:
+                    key: allowed-host
+                    name: ${NAME}
+              - name: EGO_XAPIAN_DB
+                valueFrom:
+                  configMapKeyRef:
+                    key: xapian-db
+                    name: ${NAME}
+              image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
+              name: clean-users
+            restartPolicy: Never
+    schedule: 20 0 * * *
+parameters:
+- description: The name assigned to all of the application objects defined in this
+    template.
+  displayName: Name
+  name: NAME
+  required: true
+  value: extensions-web
+- description: The OpenShift Namespace where the ImageStream resides.
+  displayName: Namespace
+  name: NAMESPACE
+  required: true
+  value: openshift
+- description: Maximum amount of memory the container can use.
+  displayName: Memory Limit
+  name: MEMORY_LIMIT
+  required: true
+  value: 2048Mi
+- description: The URL of the repository with your application source code.
+  displayName: Git Repository URL
+  name: SOURCE_REPOSITORY_URL
+  required: true
+  value: https://gitlab.gnome.org/Infrastructure/extensions-web.git
+- description: Set this to a branch name, tag or other ref of your repository if you
+    are not using the default branch.
+  displayName: Git Reference
+  name: SOURCE_REPOSITORY_REF
+- description: The exposed hostname that will route to the extensions-web service,
+    if left blank a value will be defaulted.
+  displayName: Application Hostname
+  name: APPLICATION_DOMAIN
+  value: ''
+- description: Administrator name.
+  displayName: Administrator name
+  name: EGO_ADMINISTRATOR_NAME
+  value: ''
+- description: Email of administator. For error notifications.
+  displayName: Administator email
+  name: EGO_ADMINISTRATOR_EMAIL
+  value: ''
+- description: Database URL in format suitable for dj-database-url
+  displayName: Database URL
+  name: EGO_DATABASE_URL
+  value: ''
+- description: Email URL in format suitable for dj-email-url
+  displayName: Email URL
+  name: EGO_EMAIL_URL
+  value: ''
+- description: Either DNS name or IP address. Should be 127.0.0.1 for Openshift.
+  displayName: Address of extensions-web container
+  name: EGO_NODE_ADDRESS
+  value: 127.0.0.1
+- description: Django secret key.
+  displayName: Django secret key
+  name: EGO_SECRET_KEY
+  value: ''
+- description: Secret key for GNOME Gitlab.
+  displayName: WebHook secret key
+  name: WEBHOOK_SECRET_KEY
+  value: ''
+- description: URL of private docker registry. Usually docker-registry.default.svc:5000.
+  displayName: Docker registry.
+  name: DEFAULT_DOCKER_REGISTRY
+  value: docker-registry.default.svc:5000
+
