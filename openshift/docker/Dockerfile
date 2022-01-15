@@ -11,6 +11,7 @@ FROM python:3.9
 LABEL author="Yuri Konotopov <ykonotopov@gnome.org>"
 
 RUN set -ex \
+	&& ldconfig \
 	&& apt-get update \
 	&& apt-get install \
 		--no-install-recommends \
