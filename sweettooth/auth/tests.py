@@ -8,11 +8,15 @@
     (at your option) any later version.
 """
 
+import re
+
 from django_registration import validators
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.test.testcases import TestCase
 from .forms import AutoFocusRegistrationForm, RegistrationForm
+from .urls import PASSWORD_RESET_TOKEN_PATTERN
 
 User = get_user_model()
 
@@ -30,8 +34,9 @@ class RegistrationDataTest(TestCase):
     }
 
     @classmethod
-    def setUp(cls):
-        User.objects.create_user(
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.registered_user = User.objects.create_user(
             username=cls.registration_data[User.USERNAME_FIELD],
             email=cls.registration_data['email'],
             password=cls.registration_data['password']
@@ -90,3 +95,10 @@ class RegistrationTests(RegistrationDataTest):
 
         form = RegistrationForm(data=data)
         self.assertFalse(form.is_valid())
+
+class PasswordResetTests(RegistrationDataTest):
+    def test_reset_token_pattern(self):
+        token = PasswordResetTokenGenerator().make_token(self.registered_user)
+        pattern = re.compile(f'^{PASSWORD_RESET_TOKEN_PATTERN}$')
+
+        self.assertTrue(pattern.match(token))
