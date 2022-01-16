@@ -16,6 +16,7 @@ admin.autodiscover()
 urlpatterns = [
     # 'login' and 'register'
     re_path(r'^accounts/', include('sweettooth.auth.urls')),
+
     re_path(r'^', include('sweettooth.extensions.urls'), name='index'),
 
     re_path(r'^review/', include('sweettooth.review.urls')),

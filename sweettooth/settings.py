@@ -6,8 +6,8 @@ https://docs.djangoproject.com/en/stable/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import dj_database_url
 import os
+import dj_database_url
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -122,7 +122,10 @@ USE_L10N = True
 USE_TZ = False
 
 ADMINS = (
-    (os.getenv('EGO_ADMINISTRATOR_NAME') or 'Administrator', os.getenv('EGO_ADMINISTRATOR_EMAIL') or 'admin@localhost.local'),
+    (
+        os.getenv('EGO_ADMINISTRATOR_NAME') or 'Administrator',
+        os.getenv('EGO_ADMINISTRATOR_EMAIL') or 'admin@localhost.local'
+    ),
 )
 
 MANAGERS = ADMINS
@@ -179,11 +182,18 @@ if os.getenv('EGO_EMAIL_URL'):
 NO_SECURE_SETTINGS = True if os.getenv('EGO_NO_SECURE_SETTINGS') else False
 NO_STATICFILES_SETTINGS = False
 
+APPEND_INSTALLED_APPS = PREPEND_MIDDLEWARE = ()
+
 try:
     from local_settings import *
 except ImportError:
     pass
 
+if APPEND_INSTALLED_APPS:
+    INSTALLED_APPS += APPEND_INSTALLED_APPS
+
+if PREPEND_MIDDLEWARE:
+    MIDDLEWARE = PREPEND_MIDDLEWARE + MIDDLEWARE
 
 # Enable secure settings in case DEBUG is disabled and NO_SECURE_SETTINGS is not set to True
 if not DEBUG and not NO_SECURE_SETTINGS:
@@ -197,5 +207,5 @@ if not DEBUG and not NO_SECURE_SETTINGS:
 if DEBUG and not NO_STATICFILES_SETTINGS:
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
     STATIC_ROOT = None
-elif not 'STATIC_ROOT' in locals():
+elif 'STATIC_ROOT' not in locals():
     STATIC_ROOT = os.getenv('EGO_STATIC_ROOT')

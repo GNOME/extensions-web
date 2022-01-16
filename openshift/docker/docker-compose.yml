@@ -3,7 +3,6 @@ version: '3'
 services:
   db:
     image: mariadb:10.3
-    restart: always
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_DATABASE: extensions-web
@@ -49,7 +48,6 @@ services:
     command: bash -c "envsubst '$$EGO_NODE_ADDRESS' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     environment:
       EGO_NODE_ADDRESS: extensions-web
-    restart: always
     links:
       - extensions-web
     ports:

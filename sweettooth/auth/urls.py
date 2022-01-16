@@ -1,11 +1,15 @@
 
-from django.views.generic.base import TemplateView
 from django.conf.urls import include
-from django_registration.backends.activation.views import RegistrationView
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import re_path
+from django.views.generic.base import TemplateView
+
+from django_registration.backends.activation.views import RegistrationView
+
 from sweettooth.auth import views, forms
+
+PASSWORD_RESET_TOKEN_PATTERN = r'[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,32}'
 
 urlpatterns = [
     re_path(r'^login/', LoginView.as_view(form_class=forms.AuthenticationForm), name='auth-login'),
@@ -48,7 +52,7 @@ urlpatterns = [
         auth_views.PasswordResetDoneView.as_view(),
         name='password_reset_done'),
     re_path(r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/'
-        r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        rf'(?P<token>{PASSWORD_RESET_TOKEN_PATTERN})/$',
         auth_views.PasswordResetConfirmView.as_view(),
         name='password_reset_confirm'),
 ]

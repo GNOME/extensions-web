@@ -1,5 +1,5 @@
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from sweettooth.extensions.models import Extension
 
 class Command(BaseCommand):
@@ -15,7 +15,7 @@ class Command(BaseCommand):
                     try:
                         ext = Extension.objects.get(uuid=uuid)
                     except Extension.DoesNotExist:
-                        print "Skipping", uuid
+                        print("Skipping", uuid)
                     else:
                         ext.downloads = int(downloads, 10)
                         ext.save()
