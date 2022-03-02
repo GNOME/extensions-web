@@ -306,12 +306,23 @@ def extension_view(request, obj, **kwargs):
     else:
         template_name = "extensions/detail.html"
 
+    # Check if unlock-dialog session mode exists in latest version of extension
+    try:
+        session_info = json.loads(obj.latest_version.extra_json_fields)["session-modes"]
+        if "unlock-dialog" in session_info:
+            session_unlock_dialog = True
+        else:
+            session_unlock_dialog = False
+    except:
+        session_unlock_dialog = False
+
     context = dict(shell_version_map = json.dumps(extension.visible_shell_version_map),
                    extension = extension,
                    all_versions = extension.versions.order_by('-version'),
                    visible_versions=json.dumps(extension.visible_shell_version_array),
                    is_visible = extension.latest_version is not None,
-                   next=extension.get_absolute_url())
+                   next = extension.get_absolute_url(),
+                   session_unlock_dialog = session_unlock_dialog)
     return render(request, template_name, context)
 
 @require_POST
