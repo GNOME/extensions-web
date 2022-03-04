@@ -111,6 +111,7 @@ class Extension(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT)
     description = models.TextField(blank=True)
     url = HttpURLField(blank=True)
+    session_unlock_dialog = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
@@ -133,6 +134,12 @@ class Extension(models.Model):
         self.description = metadata.pop('description', "")
         self.url = metadata.pop('url', "")
         self.uuid = metadata['uuid']
+        try:
+            session_info = metadata.pop('session-modes', "")
+            if "unlock-dialog" in session_info or session_info is "unlock-dialog":
+                self.session_unlock_dialog = True
+        except:
+            pass
 
     def clean(self):
         from django.core.exceptions import ValidationError
