@@ -9,6 +9,7 @@ stages:
   cache:
     paths:
       - $PIP_CACHE_DIR
+    when: always
   variables:
     PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
 
