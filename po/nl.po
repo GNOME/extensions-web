@@ -1,22 +1,22 @@
 # Dutch translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Nathan Follens <nthn@unseen.is>, 2019-2020.
+# Nathan Follens <nfollens@gnome.org>, 2019-2020, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2020-03-07 22:53+0100\n"
-"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
+"PO-Revision-Date: 2022-03-25 11:20+0100\n"
+"Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
 msgid "Username or email"
@@ -330,7 +330,7 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"We konden niet detecteren dat Gnome op uw ssyteem draait, dus sommige "
+"We konden niet detecteren dat Gnome op uw systeem draait, dus sommige "
 "onderdelen van de interface zijn mogelijk uitgeschakeld. Bekijk onze <a href="
 "\"/about/#no-detection\">probleemoplossingshulp</a> voor meer informatie."
 
