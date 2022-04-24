@@ -1,83 +1,83 @@
-# Dutch translation for extensions-web.
-# Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
+# Russian translation for extensions-web.
+# Copyright (C) 2021 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Nathan Follens <nfollens@gnome.org>, 2019-2020, 2022.
+# Alexey Rubtsov <rushills@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2022-03-25 11:20+0100\n"
-"Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
-"Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
-"Language: nl\n"
+"PO-Revision-Date: 2022-02-11 18:45+0300\n"
+"Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
 msgid "Username or email"
-msgstr "Gebruikersnaam of e-mailadres"
+msgstr "Имя пользователя или email"
 
 #: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
 msgid "Username"
-msgstr "Gebruikersnaam"
+msgstr "Имя пользователя"
 
 #: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Vereist. 30 tekens of minder. Enkel letters, cijfers en @/./+/-/_."
+msgstr "Требуется. Не более 30 символов. Только буквы, цифры и @/./+/-/_."
 
 #: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
-"Deze waarde mag alleen letters, cijfers of de volgende tekens bevatten: @ . "
-"+ - _"
+msgstr "Это значение может содержать только буквы, цифры и символы @/./+/-/_."
 
 #: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
 msgid "Email"
-msgstr "E-mailadres"
+msgstr "Электронная почта"
 
 #: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "You should not use email as username"
-msgstr "U gebruikt beter geen e-mailadres als gebruikersnaam"
+msgstr ""
+"Вы не должны использовать электронную почту в качестве имени пользователя"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
-msgstr "Wachtwoord vergeten?"
+msgstr "Забыли пароль?"
 
 #: sweettooth/auth/templates/registration/login.html:32
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
-msgstr "Aanmelden"
+msgstr "Войти"
 
 #: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr "Heeft u geen account?"
+msgstr "Нет аккаунта?"
 
 #: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
-msgstr "Registreren"
+msgstr "Регистрация"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
 msgid "User Login"
-msgstr "Gebruiker aanmelden"
+msgstr "Логин пользователя"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:12
 #: sweettooth/auth/templates/registration/password_reset_form.html:12
 #: extensions-web-domain-django:1
 msgid "Reset your password"
-msgstr "Wachtwoord opnieuw instellen"
+msgstr "Сбросить пароль"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
@@ -85,14 +85,14 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
-"Het token voor het opnieuw instellen van het wachtwoord is onjuist. "
-"Controleer uw verwijzing en probeer het opnieuw."
+"Токен для сброса пароля неверен. Пожалуйста, проверьте свою ссылку и "
+"повторите попытку."
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr "Wachtwoord opnieuw instellen"
+msgstr "Сброс пароля"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
@@ -100,26 +100,25 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Wachtwoord vergeten? Voer hieronder uw e-mailadres in en wij sturen u per e-"
-"mail instructies om een nieuw wachtwoord in te stellen."
+"Забыли пароль? Введите свой адрес электронной почты ниже, и мы вышлем "
+"инструкции по установке нового пароля."
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
-msgstr "Uw uitbreidingen toevoegen"
+msgstr "Добавьте свой"
 
 #: sweettooth/context_processors.py:17 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr "Geïnstalleerde uitbreidingen"
+msgstr "Установленные расширения"
 
 #: sweettooth/context_processors.py:21 extensions-web-domain-django:1
 msgid "About"
-msgstr "Info"
+msgstr "О приложении"
 
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Extensions"
-msgstr "Uitbreidingen"
+msgstr "Расширения"
 
-# You understand, right? zou ik niet vertalen, komt nogal onbeleefd over - Nathan
 #: sweettooth/extensions/templates/extensions/comments.html:18
 #: extensions-web-domain-django:1
 #, python-format
@@ -128,80 +127,79 @@ msgid ""
 "\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
 "comment or report an error. You understand, right?"
 msgstr ""
-"Om spam tegen te gaan, vragen we u om u <a href=\"%(login_url)s\">aan te "
-"melden bij Gnome-shelluitbreidingen</a> om een reactie te kunnen plaatsen of "
-"een fout te melden."
+"К сожалению, чтобы предотвратить спам, мы требуем, чтобы вы <a href="
+"\"%(login_url)s\">вошли в GNOME Shell Extensions</a>, чтобы оставить "
+"комментарий или сообщить об ошибке. Вы понимаете, да?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr "Beoordelingen van gebruikers"
+msgstr "Отзывы пользователей"
 
 #: sweettooth/extensions/templates/extensions/comments.html:25
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr "Beoordelingen worden geladen…"
+msgstr "Загрузка отзывов…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
 msgid "Your opinion"
-msgstr "Uw mening"
+msgstr "Ваш комментарий"
 
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr "Plaats een…"
+msgstr "Оставить…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
 msgid "Comment"
-msgstr "Reactie"
+msgstr "Комментарий"
 
 #: sweettooth/extensions/templates/extensions/comments.html:8
 #: extensions-web-domain-django:1
 msgid "Rating"
-msgstr "Beoordeling"
+msgstr "Рейтинг"
 
 #: sweettooth/extensions/templates/extensions/comments.html:9
 #: extensions-web-domain-django:1
 msgid "Bug report"
-msgstr "Foutrapport"
+msgstr "Сообщение об ошибке"
 
-# niet opwaarderen - Nathan
 #: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
-msgstr "Deze uitbreiding bijwerken"
+msgstr "Обновить это расширение"
 
 #: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
-msgstr "Deze uitbreiding configureren"
+msgstr "Настроить это расширение"
 
 #: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
-msgstr "Deze uitbreiding verwijderen"
+msgstr "Удалить это расширение"
 
 #: sweettooth/extensions/templates/extensions/detail.html:53
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
-msgstr "Website van uitbreiding"
+msgstr "Домашняя страница расширения"
 
 #: sweettooth/extensions/templates/extensions/detail.html:58
 #: extensions-web-domain-django:1
 msgid "Download"
-msgstr "Downloaden"
+msgstr "Скачать"
 
 #: sweettooth/extensions/templates/extensions/detail.html:61
 #: extensions-web-domain-django:1
 msgid "Shell version…"
-msgstr "Shell-versie…"
+msgstr "Версия оболочки…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr "Uitbreidingsversie…"
+msgstr "Версия расширения…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
@@ -209,95 +207,96 @@ msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"De uitbreiding die u heeft ingediend zal nagekeken worden om zeker te zijn "
-"dat ze geen gevaar stelt. U krijgt de resultaten van deze controle per e-"
-"mail opgestuurd."
+"Рецензент проверит представленное вами расширение, чтобы убедиться, что в "
+"нем нет ничего слишком опасного. Результат проверки будет отправлен вам по "
+"электронной почте."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr "Zoeken naar uitbreidingen…"
+msgstr "Поиск расширений…"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
 #: extensions-web-domain-django:1
 msgid "Installed Extensions"
-msgstr "Geïnstalleerde uitbreidingen"
+msgstr "Установленные расширения"
 
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
 msgid "Shell settings"
-msgstr "Shell-instellingen"
+msgstr "Настройки оболочки"
 
 #: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Content"
-msgstr "Inhoud"
+msgstr "Содержимое"
 
 #: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
 msgid "Metadata"
-msgstr "Metadata"
+msgstr "Метаданные"
 
 #: sweettooth/ratings/templates/comments/form.html:26
 #: sweettooth/ratings/templates/comments/preview.html:45
 #: extensions-web-domain-django:1
 msgid "Post"
-msgstr "Post"
+msgstr "Отправить"
 
 #: sweettooth/ratings/templates/comments/form.html:27
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr "Voorbeeld"
+msgstr "Предпросмотр"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr "Wat vindt u van deze Gnome-uitbreiding?"
+msgstr "Что вы думаете об этом расширении GNOME?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Corrigeer de fout hieronder"
-msgstr[1] "Corrigeer de fouten hieronder"
+msgstr[0] "Пожалуйста, исправьте ошибку ниже"
+msgstr[1] "Пожалуйста, исправьте ошибки ниже"
+msgstr[2] "Пожалуйста, исправьте ошибок ниже"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr "Bekijk een voorbeeld van uw reactie"
+msgstr "Предварительный просмотр вашего комментария"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr "Reactie plaatsen"
+msgstr "Отправить комментарий"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr "Uw reactie bewerken"
+msgstr "Отредактируйте свой комментарий"
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr "Laatste nieuwe uitbreidingen bij Gnome-shelluitbreidingen"
+msgstr "Последние расширения в разделе Расширения GNOME Shell"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "Gnome-shelluitbreidingen"
+msgstr "Расширения оболочки GNOME"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
-msgstr "Gebruikersprofiel"
+msgstr "Профиль пользователя"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
-msgstr "Gebruikersinstellingen"
+msgstr "Настройки пользователя"
 
 #: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
 msgid "Log out"
-msgstr "Afmelden"
+msgstr "Завершить сеанс"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid ""
@@ -305,24 +304,23 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"Om via deze site Gnome-shelluitbreidingen te beheren, dient u de Gnome-"
-"shellintegratie te installeren, bestaande uit twee delen: een "
-"browserextensie en een native-host-messaging-toepassing"
+"Чтобы управлять расширениями GNOME Shell с помощью этого сайта, необходимо "
+"установить интеграцию GNOME Shell, которая состоит из двух частей: "
+"расширение браузера и родное приложение для обмена сообщениями на хосте"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr "Browserextensie voor Gnome-shellintegratie installeren"
+msgstr "Установите расширение браузера для интеграции GNOME Shell"
 
 #: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr "Klik hier om de browserextensie te installeren"
+msgstr "Нажмите здесь, чтобы установить расширение для браузера"
 
 #: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Bekijk %sde wiki-pagina%s voor installatie-instructies voor de native-host-"
-"connector"
+"Инструкции по установке родного хост-коннектора см. на странице %swiki page%s"
 
 #: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
 msgid ""
@@ -330,111 +328,102 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"We konden niet detecteren dat Gnome op uw systeem draait, dus sommige "
-"onderdelen van de interface zijn mogelijk uitgeschakeld. Bekijk onze <a href="
-"\"/about/#no-detection\">probleemoplossingshulp</a> voor meer informatie."
+"Мы не можем обнаружить запущенную копию GNOME на этой системе, поэтому "
+"некоторые части интерфейса могут быть отключены. Дополнительную информацию "
+"см. в <a href=\"/about/#no-detection\">статье об устранении неполадок</a>."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
-"Gnome-shelluitbreidingen kan uw geïnstalleerde uitbreidingen niet oplijsten."
+"Расширения GNOME Shell не могут вывести список установленных расширений."
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
-msgstr "Compatibel met"
+msgstr "Совместимо с"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
-msgstr "Naam"
+msgstr "Имени"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr "Recent"
+msgstr "Недавние"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
-msgstr "Downloads"
+msgstr "Загрузкам"
 
 #: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
 msgid "Popularity"
-msgstr "Populariteit"
+msgstr "Популярности"
 
 #: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
 msgid "Sort by"
-msgstr "Sorteren op"
+msgstr "Упорядочить по"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr "Meer beoordelingen tonen"
+msgstr "Показать больше отзывов"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr "Er zijn nog geen reacties. Plaats de eerste!"
+msgstr "Комментариев нет. Будьте первыми!"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:4
 #: extensions-web-domain-djangojs:1
 msgid "Author"
-msgstr "Auteur"
+msgstr "Автор"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "What's wrong?"
-msgstr "Wat is er mis?"
+msgstr "Что случилось?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:17
 #: extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions did not detect any errors with this extension."
 msgstr ""
-"Gnome-shelluitbreidingen heeft geen fouten in deze uitbreiding gedetecteerd."
+"Расширения GNOME Shell не обнаружили никаких ошибок с этим расширением."
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
 msgid "Version information"
-msgstr "Versie-informatie"
+msgstr "Информация о версии"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:22
 #: extensions-web-domain-djangojs:1
 msgid "Shell version"
-msgstr "Shell-versie"
+msgstr "Версия оболочки"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Extension version"
-msgstr "Uitbreidingsversie"
+msgstr "Версия расширения"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Unknown"
-msgstr "Onbekend"
+msgstr "Неизвестно"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:5
 #: extensions-web-domain-djangojs:1
 msgid "What have you tried?"
-msgstr "Wat hebt u geprobeerd?"
+msgstr "Что вы пробовали?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:9
 #: extensions-web-domain-djangojs:1
 msgid "Automatically detected errors"
-msgstr "Automatisch gedetecteerde fouten"
+msgstr "Автоматически обнаруженные ошибки"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr "Systeemuitbreiding"
+msgstr "Расширение системы"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
-msgstr "U verwijderde"
-
-#~ msgid "Password"
-#~ msgstr "Wachtwoord"
-
-#~ msgid "Password confirmation"
-#~ msgstr "Wachtwoordbevestiging"
-
-#~ msgid "Enter the same password as above, for verification."
-#~ msgstr "Voer ter verificatie hetzelfde wachtwoord als hierboven in."
+msgstr "Вы удалили"
