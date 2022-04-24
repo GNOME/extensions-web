@@ -32,7 +32,7 @@ test:
           - '3.9'
           - '3.10'
 
-security:
+security (trivy):
   stage: test
   image:
     name: aquasec/trivy
@@ -50,3 +50,16 @@ security:
     TRIVY_SECURITY_CHECKS: vuln,config
     # This is single-run job so we do not care of k8s recommendations
     TRIVY_SKIP_FILES: openshift/jobs/reindex-extensions.yml
+
+security (safety):
+  extends:
+    - .pip cache
+  stage: test
+  image:
+    name: python:$PYTHON_VERSION
+  before_script:
+    - pip install safety
+  script:
+    - safety check -r requirements.txt
+    - safety check -r requirements.ego.txt
+  allow_failure: true
