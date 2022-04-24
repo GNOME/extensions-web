@@ -10,6 +10,7 @@
     (at your option) any later version.
 """
 
+from typing import Any
 import autoslug
 import json
 import os
@@ -104,6 +105,19 @@ def make_icon_filename(obj, filename=None):
     return "icons/icon_%d%s" % (obj.pk, ext)
 
 
+class SessionMode(models.Model):
+    class SessionModes(models.TextChoices):
+        USER = 'user'
+        UNLOCK_DIALOG = 'unlock-dialog'
+        GDM = 'gdm'
+
+    mode = models.CharField(
+        primary_key=True,
+        max_length=16,
+        choices=SessionModes.choices,
+    )
+
+
 class Extension(models.Model):
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
@@ -111,7 +125,6 @@ class Extension(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT)
     description = models.TextField(blank=True)
     url = HttpURLField(blank=True)
-    session_unlock_dialog = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
@@ -134,12 +147,6 @@ class Extension(models.Model):
         self.description = metadata.pop('description', "")
         self.url = metadata.pop('url', "")
         self.uuid = metadata['uuid']
-        try:
-            session_info = metadata.pop('session-modes', "")
-            if "unlock-dialog" in session_info or session_info is "unlock-dialog":
-                self.session_unlock_dialog = True
-        except:
-            pass
 
     def clean(self):
         from django.core.exceptions import ValidationError
@@ -168,6 +175,14 @@ class Extension(models.Model):
         if user.has_perm('extensions.can-modify-data'):
             return True
         return False
+
+    def uses_session_mode(self, mode: str):
+        return any(
+            session_mode
+            for version in self.visible_versions.order_by('-pk')
+            for session_mode in version.session_modes.all()
+            if session_mode.mode == mode
+        )
 
     @property
     def first_line_of_description(self):
@@ -358,6 +373,7 @@ class ExtensionVersion(models.Model):
     extra_json_fields = models.TextField()
     status = models.PositiveIntegerField(choices=STATUSES.items())
     shell_versions = models.ManyToManyField(ShellVersion)
+    session_modes = models.ManyToManyField(SessionMode)
 
     class Meta:
         unique_together = ('extension', 'version'),
@@ -443,7 +459,7 @@ class ExtensionVersion(models.Model):
 
         super().save(*args, **kwargs)
 
-    def parse_metadata_json(self, metadata):
+    def parse_metadata_json(self, metadata: dict[str, Any]):
         """
         Given the contents of a metadata.json file, fill in the fields
         of the version and associated extension.
@@ -463,6 +479,12 @@ class ExtensionVersion(models.Model):
                 continue
             else:
                 self.shell_versions.add(sv)
+
+        if 'session-modes' in metadata:
+            self.session_modes.set([
+                SessionMode.objects.get(mode=mode)
+                for mode in metadata['session-modes']
+            ])
 
     def get_absolute_url(self):
         return self.extension.get_absolute_url()

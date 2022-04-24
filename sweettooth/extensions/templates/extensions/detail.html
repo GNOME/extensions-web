@@ -54,12 +54,12 @@
               <dd><a href="{{ extension.url }}" id="extension_url">{{ extension.url }}</a></dd>
               {% endif %}
             </dl>
+            {% if extension_uses_unlock_dialog %}
             <dl>
-              {% if extension.session_unlock_dialog %}
               <dt>{% trans "Session Mode(s)" %}</dt>
               <dd><button type="disabled" class="btn btn-info btn-sm" title="{% trans "This extension will run while the screen is locked" %}">{% trans "Unlock Dialog" %}</button></dd>
-              {% endif %}
             </dl>
+            {% endif %}
             <dl>
               <dt>{% trans "Download" %}</dt>
               <dd class="extension-download">
