@@ -37,6 +37,8 @@ security (trivy):
   image:
     name: aquasec/trivy
     entrypoint: [""]
+  before_script:
+    - cat requirements.ego.txt >> requirements.txt
   script:
     - trivy fs .
   allow_failure: true
