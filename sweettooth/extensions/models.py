@@ -10,6 +10,7 @@
     (at your option) any later version.
 """
 
+from typing import Any, Literal
 import autoslug
 import json
 import os
@@ -104,6 +105,19 @@ def make_icon_filename(obj, filename=None):
     return "icons/icon_%d%s" % (obj.pk, ext)
 
 
+class SessionMode(models.Model):
+    class SessionModes(models.TextChoices):
+        USER = 'user'
+        UNLOCK_DIALOG = 'unlock-dialog'
+        GDM = 'gdm'
+
+    mode = models.CharField(
+        primary_key=True,
+        max_length=16,
+        choices=SessionModes.choices,
+    )
+
+
 class Extension(models.Model):
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
@@ -161,6 +175,14 @@ class Extension(models.Model):
         if user.has_perm('extensions.can-modify-data'):
             return True
         return False
+
+    def uses_session_mode(self, mode: str):
+        return any(
+            session_mode
+            for version in self.visible_versions.order_by('-pk')
+            for session_mode in version.session_modes.all()
+            if session_mode.mode == mode
+        )
 
     @property
     def first_line_of_description(self):
@@ -346,11 +368,12 @@ def make_filename(obj, filename=None):
 
 
 class ExtensionVersion(models.Model):
-    extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
-    version = models.IntegerField(default=0)
+    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
+    version: int = models.IntegerField(default=0)
     extra_json_fields = models.TextField()
     status = models.PositiveIntegerField(choices=STATUSES.items())
     shell_versions = models.ManyToManyField(ShellVersion)
+    session_modes = models.ManyToManyField(SessionMode)
 
     class Meta:
         unique_together = ('extension', 'version'),
@@ -390,7 +413,7 @@ class ExtensionVersion(models.Model):
     def make_metadata_json_string(self):
         return json.dumps(self.make_metadata_json(), sort_keys=True, indent=2)
 
-    def get_zipfile(self, mode):
+    def get_zipfile(self, mode: Literal["r", "w", "x", "a"]) -> ZipFile:
         return ZipFile(self.source.storage.path(self.source.name), mode)
 
     def replace_metadata_json(self):
@@ -436,7 +459,7 @@ class ExtensionVersion(models.Model):
 
         super().save(*args, **kwargs)
 
-    def parse_metadata_json(self, metadata):
+    def parse_metadata_json(self, metadata: dict[str, Any]):
         """
         Given the contents of a metadata.json file, fill in the fields
         of the version and associated extension.
@@ -456,6 +479,12 @@ class ExtensionVersion(models.Model):
                 continue
             else:
                 self.shell_versions.add(sv)
+
+        if 'session-modes' in metadata:
+            self.session_modes.set([
+                SessionMode.objects.get(mode=mode)
+                for mode in metadata['session-modes']
+            ])
 
     def get_absolute_url(self):
         return self.extension.get_absolute_url()

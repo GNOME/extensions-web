@@ -2,7 +2,6 @@
 import os.path
 import json
 import tempfile
-import unittest
 from io import BytesIO
 from uuid import uuid4
 from zipfile import ZipFile
@@ -77,6 +76,55 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
         version.parse_metadata_json(metadata)
 
         self.assertEqual(version.shell_versions_json, '["3.2", "3.2.1"]')
+
+    def test_session_mode(self):
+        metadata = {"uuid": "something1@example.com",
+                    "name": "Test Metadata",
+                    "shell-version": ["42"],
+                    "session-modes": [
+                        'forbidden'
+                    ]}
+
+        extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
+        version = models.ExtensionVersion.objects.create(extension=extension,
+                                                         status=models.STATUS_UNREVIEWED)
+        with self.assertRaises(models.SessionMode.DoesNotExist):
+            version.parse_metadata_json(metadata)
+
+        metadata = {"uuid": "something2@example.com",
+                    "name": "Test Metadata",
+                    "session-modes": [
+                        'unlock-dialog'
+                    ]}
+        extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
+        version = models.ExtensionVersion.objects.create(extension=extension,
+                                                            status=models.STATUS_UNREVIEWED)
+        version.parse_metadata_json(metadata)
+        version.save()
+
+        self.assertEqual([mode.mode for mode in version.session_modes.all()], ['unlock-dialog'])
+        self.assertFalse(extension.uses_session_mode('unlock-dialog'))
+
+        version.status = models.STATUS_ACTIVE
+        version.save()
+        self.assertTrue(extension.uses_session_mode('unlock-dialog'))
+
+        metadata = {"uuid": "something3@example.com",
+                    "name": "Test Metadata",
+                    "session-modes": [
+                        'gdm',
+                        'unlock-dialog'
+                    ]}
+        extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
+        version = models.ExtensionVersion.objects.create(extension=extension,
+                                                            status=models.STATUS_ACTIVE)
+        version.parse_metadata_json(metadata)
+        version.save()
+
+        self.assertEqual([mode.mode for mode in version.session_modes.all()], ['gdm', 'unlock-dialog'])
+        self.assertTrue(extension.uses_session_mode('gdm'))
+        self.assertTrue(extension.uses_session_mode('unlock-dialog'))
+        self.assertFalse(extension.uses_session_mode('user'))
 
 class ParseZipfileTest(BasicUserTestCase, TestCase):
     def test_simple_metadata(self):

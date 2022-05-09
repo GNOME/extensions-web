@@ -75,4 +75,4 @@ spec:
       volumes:
       - name: data-volume
         persistentVolumeClaim:
-          claimName: extensions-claim
+          claimName: extensions

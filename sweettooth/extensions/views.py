@@ -308,10 +308,11 @@ def extension_view(request, obj, **kwargs):
 
     context = dict(shell_version_map = json.dumps(extension.visible_shell_version_map),
                    extension = extension,
+                   extension_uses_unlock_dialog = extension.uses_session_mode('unlock-dialog'),
                    all_versions = extension.versions.order_by('-version'),
                    visible_versions=json.dumps(extension.visible_shell_version_array),
                    is_visible = extension.latest_version is not None,
-                   next=extension.get_absolute_url())
+                   next = extension.get_absolute_url())
     return render(request, template_name, context)
 
 @require_POST
