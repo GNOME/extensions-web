@@ -3,15 +3,14 @@ SweetTooth-Web
 ==============
 
 **SweetTooth-Web** is a Django-powered web application that, in co-operation
-with some GNOME Shell integration helper (deprecated `NPAPI plugin`_ or `Browser extension`_)
+with some GNOME Shell integration helper (`Browser extension`_)
 allows users to install, upgrade and enable/disable their own Shell Extensions.
 All operations with the Shell are done through a special helper which proxies
-over to the Shell by DBus. Please note that `NPAPI plugin`_ is deprecated and was removed from GNOME Shell codebase.
+over to the Shell by DBus.
 
 Since extensions can be dangerous, all extensions uploaded to the repository
 must go through code review and testing.
 
-.. _NPAPI plugin: https://gitlab.gnome.org/GNOME/gnome-shell/tree/gnome-3-30/browser-plugin
 .. _Browser extension: https://gitlab.gnome.org/GNOME/chrome-gnome-shell/
 
 Requirements
@@ -19,7 +18,7 @@ Requirements
 
 
 System Requirements:
-  * `python`_ 3.6+
+  * `python`_ 3.9+
   * `xapian (xapian-core and xapian-bindings)`_
 
 .. _python: https://www.python.org/
@@ -49,19 +48,9 @@ You can start website with commands:
 
   $ git clone https://gitlab.gnome.org/Infrastructure/extensions-web.git
   $ cd extensions-web/openshift/docker
-  $ MYSQL_USER=extensions-web \
-    MYSQL_PASSWORD=SOME_PASSWORD \
-    EGO_ALLOWED_HOST=* \
-    EGO_DATABASE_URL=mysql://extensions-web:SOME_PASSWORD@db/extensions-web \
-    EGO_NODE_ADDRESS=extensions-web \
-    EGO_SECRET_KEY=SOME_SECRET_KEY \
-    EGO_XAPIAN_DB=/extensions-web/data/xapian.db \
-    EGO_NO_SECURE_SETTINGS=1 \
-    docker-compose up --build
+  $ docker-compose up --build
 
 That's all! Website will be available as http://localhost:8080.
-
-Don't forget to substitute "SOME_PASSWORD" and "SOME_SECRET_KEY" with proper values.
 
 You also may want to create superuser account - look to virtualenv guide below for
 apropriate command and `Docker`_ documentation for a way running command within running
