@@ -204,8 +204,8 @@ if not DEBUG and not NO_SECURE_SETTINGS:
     SECURE_PROXY_SSL_HEADER = ('HTTPS', 'https')
     SECURE_SSL_REDIRECT = False
 
-if DEBUG and not NO_STATICFILES_SETTINGS:
+if 'EGO_STATIC_ROOT' in os.environ:
+    STATIC_ROOT = os.getenv('EGO_STATIC_ROOT')
+elif DEBUG and not NO_STATICFILES_SETTINGS:
     STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
     STATIC_ROOT = None
-elif 'STATIC_ROOT' not in locals():
-    STATIC_ROOT = os.getenv('EGO_STATIC_ROOT')
