@@ -1,5 +1,6 @@
 
 import base64
+from collections import Counter
 import itertools
 import os.path
 
@@ -377,6 +378,15 @@ def should_auto_approve(version):
 
     old_version = version.extension.latest_version
     if old_version is None:
+        return False
+
+    old_session_modes = set(
+        x.mode
+        for x in old_version.session_modes.all()
+    )
+    session_modes = [x.mode for x in version.session_modes.all()]
+
+    if Counter(old_session_modes) != Counter(session_modes):
         return False
 
     old_zipfile, new_zipfile = get_zipfiles(old_version, version)
