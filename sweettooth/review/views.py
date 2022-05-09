@@ -108,7 +108,7 @@ def get_old_version(version):
 
     return old_version
 
-def get_zipfiles(*args):
+def get_zipfiles(*args: tuple[models.ExtensionVersion]):
     for version in args:
         if version is None:
             yield None
@@ -367,7 +367,7 @@ def should_auto_approve_changeset(changes):
 
     return True
 
-def should_auto_approve(version):
+def should_auto_approve(version: models.ExtensionVersion):
     extension = version.extension
     user = extension.creator
     can_review = can_approve_extension(user, extension)

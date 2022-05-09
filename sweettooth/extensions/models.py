@@ -10,7 +10,7 @@
     (at your option) any later version.
 """
 
-from typing import Any
+from typing import Any, Literal
 import autoslug
 import json
 import os
@@ -368,8 +368,8 @@ def make_filename(obj, filename=None):
 
 
 class ExtensionVersion(models.Model):
-    extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
-    version = models.IntegerField(default=0)
+    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
+    version: int = models.IntegerField(default=0)
     extra_json_fields = models.TextField()
     status = models.PositiveIntegerField(choices=STATUSES.items())
     shell_versions = models.ManyToManyField(ShellVersion)
@@ -413,7 +413,7 @@ class ExtensionVersion(models.Model):
     def make_metadata_json_string(self):
         return json.dumps(self.make_metadata_json(), sort_keys=True, indent=2)
 
-    def get_zipfile(self, mode):
+    def get_zipfile(self, mode: Literal["r", "w", "x", "a"]) -> ZipFile:
         return ZipFile(self.source.storage.path(self.source.name), mode)
 
     def replace_metadata_json(self):
