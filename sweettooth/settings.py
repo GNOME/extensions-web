@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'sweettooth.review',
     'sweettooth.errorreports',
     'sweettooth.templates',
+    'sweettooth.users',
 
     'django.contrib.admin',
 ]
