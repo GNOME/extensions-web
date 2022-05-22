@@ -1,8 +1,12 @@
 
 from django import forms
-from django.contrib.auth import forms as auth_forms
+from django.contrib.auth import forms as auth_forms, get_user_model
 from django.utils.translation import gettext_lazy as _
-from django_registration.forms import RegistrationFormCaseInsensitive, RegistrationFormUniqueEmail
+from django_registration.forms import (
+    RegistrationForm as BaseRegistrationForm,
+    RegistrationFormCaseInsensitive,
+    RegistrationFormUniqueEmail
+)
 
 class PlainOutputForm(object):
     def as_plain(self):
@@ -41,7 +45,11 @@ class AuthenticationForm(LoginOrEmailAuthenticationForm, AutoFocusForm,
                         auth_forms.AuthenticationForm):
     pass
 
+
 class RegistrationForm(RegistrationFormCaseInsensitive, RegistrationFormUniqueEmail):
+    class Meta(BaseRegistrationForm.Meta):
+        model = get_user_model()
+
     # Copies the standard setting from the django.contrib.auth.forms
     username = forms.RegexField(label=_("Username"), max_length=30, regex=r'^[\w.@+-]+$',
         help_text = _("Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."),
