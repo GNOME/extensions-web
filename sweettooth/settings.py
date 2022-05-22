@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [os.getenv('EGO_ALLOWED_HOST') or "extensions.gnome.org"]
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
 
     'django_registration',
@@ -54,9 +54,9 @@ INSTALLED_APPS = (
     'sweettooth.templates',
 
     'django.contrib.admin',
-)
+]
 
-MIDDLEWARE = (
+MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -65,7 +65,12 @@ MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-)
+]
+
+if 'EGO_CORS_ORIGINS' in os.environ:
+    MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
+    INSTALLED_APPS.append('corsheaders')
+    CORS_ORIGIN_WHITELIST = list(map(str.strip, os.environ['EGO_CORS_ORIGINS'].split(",")))
 
 AUTHENTICATION_BACKENDS = ['sweettooth.auth.backends.LoginEmailAuthentication']
 
@@ -182,18 +187,10 @@ if os.getenv('EGO_EMAIL_URL'):
 NO_SECURE_SETTINGS = True if os.getenv('EGO_NO_SECURE_SETTINGS') else False
 NO_STATICFILES_SETTINGS = False
 
-APPEND_INSTALLED_APPS = PREPEND_MIDDLEWARE = ()
-
 try:
     from local_settings import *
 except ImportError:
     pass
-
-if APPEND_INSTALLED_APPS:
-    INSTALLED_APPS += APPEND_INSTALLED_APPS
-
-if PREPEND_MIDDLEWARE:
-    MIDDLEWARE = PREPEND_MIDDLEWARE + MIDDLEWARE
 
 # Enable secure settings in case DEBUG is disabled and NO_SECURE_SETTINGS is not set to True
 if not DEBUG and not NO_SECURE_SETTINGS:
