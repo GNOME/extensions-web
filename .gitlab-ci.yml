@@ -4,6 +4,7 @@ variables:
 
 stages:
   - test
+  - deploy
 
 .pip cache:
   cache:
@@ -65,3 +66,20 @@ security (safety):
     - safety check -r requirements.txt
     - safety check -r requirements.ego.txt
   allow_failure: true
+
+buildah:
+  stage: test
+  image: quay.io/gnome_infrastructure/buildah:latest
+  script:
+    - buildah bud -t quay.io/gnome_infrastructure/extensions:latest -f openshift/docker/Dockerfile
+
+push-to-quay:
+  stage: deploy
+  image: quay.io/gnome_infrastructure/buildah:latest
+  rules:
+    - if: ($CI_COMMIT_REF_PROTECTED == "true")
+      when: manual
+  script:
+    - buildah bud -t quay.io/gnome_infrastructure/extensions:latest -f openshift/docker/Dockerfile
+    - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
+    - buildah push quay.io/gnome_infrastructure/extensions:latest
