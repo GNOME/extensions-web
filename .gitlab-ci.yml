@@ -73,7 +73,7 @@ buildah:
   script:
     - buildah bud -t quay.io/gnome_infrastructure/extensions:latest -f openshift/docker/Dockerfile
 
-push-to-quay:
+deploy-ego:
   stage: deploy
   image: quay.io/gnome_infrastructure/buildah:latest
   rules:
@@ -83,3 +83,14 @@ push-to-quay:
     - buildah bud -t quay.io/gnome_infrastructure/extensions:latest -f openshift/docker/Dockerfile
     - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
     - buildah push quay.io/gnome_infrastructure/extensions:latest
+
+deploy-frontend:
+  stage: deploy
+  image: quay.io/gnome_infrastructure/buildah:latest
+  rules:
+    - if: ($CI_COMMIT_REF_PROTECTED == "true")
+      when: manual
+  script:
+    - buildah bud -t quay.io/gnome_infrastructure/extensions:frontend -f openshift/docker/nginx/Dockerfile openshift/docker/nginx
+    - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
+    - buildah push quay.io/gnome_infrastructure/extensions:frontend
