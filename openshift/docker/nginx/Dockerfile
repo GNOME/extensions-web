@@ -1,4 +1,4 @@
-FROM nginx:stable
+FROM docker.io/library/nginx:stable
 
 LABEL author="Yuri Konotopov <ykonotopov@gnome.org>"
 
