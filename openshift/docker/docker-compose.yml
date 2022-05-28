@@ -68,23 +68,14 @@ services:
       - db
 
   frontend:
-    build:
-      context: nginx
-      dockerfile: Dockerfile
-    command:
-      - bash
-      - -c
-      - >-
-        envsubst '$$EGO_NODE_ADDRESS' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf &&
-        /docker-entrypoint.sh nginx -g "daemon off;"
+    image: nginx:stable
     environment:
       EGO_NODE_ADDRESS: extensions-web
-    links:
-      - extensions-web
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
       - "ego-static:/extensions-web/www"
+      - ./default.conf.template:/etc/nginx/templates/default.conf.template:ro
     networks:
       - frontend
 
