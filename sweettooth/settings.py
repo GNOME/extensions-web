@@ -13,6 +13,8 @@ SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(SITE_ROOT)
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
 
