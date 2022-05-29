@@ -2,6 +2,11 @@ variables:
   PYTHON_VERSION: '3.9'
   XAPIAN_VERSION: '1.4.19'
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_REF_PROTECTED == "true"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
 stages:
   - build and test
   - deploy
