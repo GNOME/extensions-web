@@ -20,6 +20,7 @@ from .urls import PASSWORD_RESET_TOKEN_PATTERN
 
 User = get_user_model()
 
+
 class RegistrationDataTest(TestCase):
     registration_data = {
         User.USERNAME_FIELD: 'bob',
@@ -36,17 +37,19 @@ class RegistrationDataTest(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
         cls.registered_user = User.objects.create_user(
             username=cls.registration_data[User.USERNAME_FIELD],
             email=cls.registration_data['email'],
             password=cls.registration_data['password']
         )
 
+
 # registration/tests/test_forms.py
 class AuthTests(RegistrationDataTest):
     def test_email_uniqueness(self):
         data = self.valid_data.copy()
-        data.update(email = self.registration_data['email'])
+        data.update(email=self.registration_data['email'])
         form = AutoFocusRegistrationForm(
             data=data
         )
@@ -78,6 +81,7 @@ class AuthTests(RegistrationDataTest):
             username=self.registration_data['email'],
             password=self.valid_data['password1']))
 
+
 class RegistrationTests(RegistrationDataTest):
     def test_username_email(self):
         form = RegistrationForm(data=self.valid_data)
@@ -95,6 +99,7 @@ class RegistrationTests(RegistrationDataTest):
 
         form = RegistrationForm(data=data)
         self.assertFalse(form.is_valid())
+
 
 class PasswordResetTests(RegistrationDataTest):
     def test_reset_token_pattern(self):

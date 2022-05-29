@@ -556,6 +556,7 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         self.assertRedirects(self.download(metadata['uuid'], '3.2.1'), v1.source.url)
         self.assertRedirects(self.download(metadata['uuid'], '3.2.2'), v2.source.url)
 
+
 class UpdateVersionTest(TestCase):
     fixtures = [os.path.join(testdata_dir, 'test_upgrade_data.json')]
 
