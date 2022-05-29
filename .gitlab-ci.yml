@@ -92,8 +92,7 @@ deploy:
     - .build image
   stage: deploy
   rules:
-    - if: ($CI_COMMIT_REF_PROTECTED == "true")
-      when: manual
+    - if: $CI_COMMIT_BRANCH == "deploy"
   script:
     - !reference [.build image, script]
     - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
