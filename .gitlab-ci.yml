@@ -3,7 +3,7 @@ variables:
   XAPIAN_VERSION: '1.4.19'
 
 stages:
-  - test
+  - build and test
   - deploy
 
 .pip cache:
@@ -17,7 +17,7 @@ stages:
 test:
   extends:
     - .pip cache
-  stage: test
+  stage: build and test
   image: python:$PYTHON_VERSION
   before_script:
     - 'openshift/docker/scripts/install-xapian.sh'
@@ -34,7 +34,7 @@ test:
           - '3.10'
 
 security (trivy):
-  stage: test
+  stage: build and test
   image:
     name: aquasec/trivy
     entrypoint: [""]
@@ -57,7 +57,7 @@ security (trivy):
 security (safety):
   extends:
     - .pip cache
-  stage: test
+  stage: build and test
   image:
     name: python:$PYTHON_VERSION
   before_script:
@@ -80,7 +80,7 @@ security (safety):
 buildah:
   extends:
     - .build image
-  stage: test
+  stage: build and test
 
 deploy:
   extends:
