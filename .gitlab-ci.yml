@@ -1,6 +1,6 @@
 variables:
   PYTHON_VERSION: '3.9'
-  XAPIAN_VERSION: 1.4.19
+  XAPIAN_VERSION: '1.4.19'
 
 stages:
   - test
@@ -73,6 +73,7 @@ security (safety):
     - >-
       buildah bud
       --build-arg PYTHON_VERSION="${PYTHON_VERSION}"
+      --build-arg XAPIAN_VERSION="${XAPIAN_VERSION}"
       -t quay.io/gnome_infrastructure/extensions:latest
       -f openshift/docker/Dockerfile
 

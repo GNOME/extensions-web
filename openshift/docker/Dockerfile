@@ -1,7 +1,7 @@
 ARG PYTHON_VERSION
 FROM python:$PYTHON_VERSION as xapian
 
-ARG XAPIAN_VERSION=1.4.19
+ARG XAPIAN_VERSION
 
 COPY openshift/docker/scripts/ /tmp/scripts/
 RUN /tmp/scripts/install-xapian.sh
