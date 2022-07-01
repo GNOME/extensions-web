@@ -13,7 +13,7 @@ IS_CHROME	= (typeof(chrome) !== 'undefined' && (
 	typeof(chrome.runtime) !== 'undefined' ||
 	typeof(chrome.csi) !== 'undefined'
 ));
-IS_FIREFOX	= (typeof(InstallTrigger) !== 'undefined');
+IS_FIREFOX	= CSS.supports("-moz-appearance: none");
 IS_OPERA	= (typeof(opr) !== 'undefined');
 
 function browser_extension_install() {
@@ -30,16 +30,7 @@ function browser_extension_install() {
 	}
 	else if(IS_FIREFOX)
 	{
-		// https://developer.mozilla.org/en-US/docs/Web/API/InstallTrigger/install
-		InstallTrigger.install({
-			'GNOME Shell integration': {
-				'URL':  'https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/platform:2/addon-751081-latest.xpi'
-			}
-		}, function(url, status) {
-			if (status == 0) {
-				reload_page();
-			}
-		});
+		window.location.assign('https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/platform:2/addon-751081-latest.xpi');
 	}
 	else if (IS_CHROME)
 	{
