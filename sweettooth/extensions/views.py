@@ -115,7 +115,10 @@ def find_extension_version_from_params(extension, params):
 
 def shell_download(request, uuid):
     extension = get_object_or_404(models.Extension.objects.visible(), uuid=uuid)
-    version = find_extension_version_from_params(extension, request.GET)
+    try:
+        version = find_extension_version_from_params(extension, request.GET)
+    except models.InvalidShellVersion:
+        return HttpResponseBadRequest()
 
     if version is None:
         raise Http404()
@@ -440,7 +443,11 @@ def ajax_details_view(request):
     else:
         raise Http404()
 
-    version = find_extension_version_from_params(extension, request.GET)
+    try:
+        version = find_extension_version_from_params(extension, request.GET)
+    except models.InvalidShellVersion:
+        return HttpResponseBadRequest()
+
     return ajax_details(extension, version)
 
 @ajax_view
