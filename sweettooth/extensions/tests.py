@@ -437,6 +437,24 @@ class ShellVersionTest(TestCase):
         self.assertEqual(version.minor, 3)
         self.assertEqual(version.point, -1)
 
+        self.assertEqual(lookup_version("42.3.1"), None)
+        self.assertEqual(lookup_version("42.3"), None)
+        version = get_version("42.3.1")
+        self.assertEqual(lookup_version("42.3.1"), version)
+        self.assertEqual(lookup_version("42.3"), version)
+        self.assertEqual(version.major, 42)
+        self.assertEqual(version.minor, 3)
+        self.assertEqual(version.point, -1)
+
+        self.assertEqual(lookup_version("51.0.1.2"), None)
+        version = get_version("51.0.1.2")
+        self.assertEqual(lookup_version("51.0.1.2"), version)
+        self.assertEqual(lookup_version("51.0.1"), version)
+        self.assertEqual(lookup_version("51.0"), version)
+        self.assertEqual(version.major, 51)
+        self.assertEqual(version.minor, 0)
+        self.assertEqual(version.point, -1)
+
         version1 = get_version("3.2.2")
         self.assertEqual(lookup_version("3.2.2.1"), version1)
 
@@ -464,12 +482,6 @@ class ShellVersionTest(TestCase):
 
         with self.assertRaises(models.InvalidShellVersion):
             models.parse_version_string("40.teta")
-
-        with self.assertRaises(models.InvalidShellVersion):
-            models.parse_version_string("40.0.1")
-
-        with self.assertRaises(models.InvalidShellVersion):
-            models.parse_version_string("51.0.1.2")
 
 class DownloadExtensionTest(BasicUserTestCase, TestCase):
     def download(self, uuid, shell_version):
