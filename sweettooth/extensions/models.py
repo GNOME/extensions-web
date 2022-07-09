@@ -246,14 +246,11 @@ def parse_version_string(version_string):
 
     point = -1
     if version_parts > 2:
-        if major >= 40:
+        # 3.0.1, 3.1.4, 40.3.1, see https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/5622
+        try:
+            point = int(version[2])
+        except ValueError:
             raise InvalidShellVersion()
-        else:
-            # 3.0.1, 3.1.4
-            try:
-                point = int(version[2])
-            except ValueError:
-                raise InvalidShellVersion()
     else:
         if major < 40 and (version_parts < 2 or minor % 2 != 0):
             # Two-digit pre-40 odd versions are illegal: 3.1, 3.3
