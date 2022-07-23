@@ -345,7 +345,8 @@ li.extension:last-child,
 
 .extension.configurable .configure-button,
 .extension.upgradable .upgrade-button,
-.extension.installed .uninstall-button {
+.extension.installed .uninstall-button,
+.extension.gnome-software-button {
     float: left;
 
     display: block;
@@ -399,6 +400,17 @@ li.extension:last-child,
 .extension .uninstall-button:hover {
     background-color: #f22c00;
     border-color: #d92400;
+}
+
+.extension .gnome-software-button {
+    background-color: #d9c128;
+    background-image: url(../images/gnome-software.png);
+    border-color: #a6921f;
+}
+
+.extension .gnome-software-button:hover {
+    background-color: #e6ca2e;
+    border-color: #bfa524;
 }
 
 /* Extension switch */
