@@ -35,7 +35,7 @@ define(['jquery', 'dbus!_', 'template!extensions/settings'], function ($, dbusPr
 				name: 'Disable version validation',
 				description: 'Allow to load extensions that do not claims to support running Shell version. Default to enabled for recent Shell versions.',
 				enabled: () => {
-					return typeof(dbusProxy.VersionValidationEnabled) !== 'undefined';
+					return dbusProxy.CanSetVersionValidationDisabled;
 				},
 				get: () => {
 					if(dbusProxy.IsDummy)

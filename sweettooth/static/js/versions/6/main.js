@@ -28,6 +28,8 @@ define(['jquery', 'dbus!API', 'versions/common/common'], function($, API, common
         SetUserExtensionsDisabled: common.SetUserExtensionsDisabled,
         SetVersionValidationDisabled: common.SetVersionValidationDisabled,
 
+        CanSetVersionValidationDisabled: true,
+
         ShellVersion: API.shellVersion,
         VersionValidationEnabled: typeof(API.versionValidationEnabled) == 'undefined' || API.versionValidationEnabled,
         UserExtensionsDisabled: API.userExtensionsDisabled,
