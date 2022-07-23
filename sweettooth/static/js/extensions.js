@@ -126,7 +126,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 			}
 
 			$.fn.addExtensionSwitch = function () {
-				enableSoftwareLink($(this), $(this).data('uuid'));
+				enableInstallButton($(this), $(this).data('uuid'));
 				// Don't show our switches -- CSS styles define a clickable
 				// area even with no content.
 				return this.find('.switch').hide();
@@ -412,15 +412,14 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 			elems[uuid] = $elem;
 		}
 
-
-		function enableSoftwareLink(extension, uuid)
+		function enableInstallButton(extension, uuid)
 		{
 			extension
-				.find('.gnome-software-button')
-				.prop('title', 'Open in GNOME Software')
+				.addClass('dummy')
+				.find('.install-button')
 				.on('click', event => {
 					event.preventDefault();
-					window.open('web+gnomeshellextension://' + encodeURIComponent(uuid), '_self');
+					window.open(`gnome-extensions://${encodeURIComponent(uuid)}?action=install`, '_self');
 				});
 		}
 
@@ -526,8 +525,6 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 			return this.each(function () {
 				var $extension = $(this);
 				var uuid = $extension.data('uuid');
-
-				enableSoftwareLink($extension, uuid);
 
 				$extension.on('out-of-date', function () {
 					var svm = $extension.data('svm');
