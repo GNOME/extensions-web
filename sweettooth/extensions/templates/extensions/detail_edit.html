@@ -1,8 +1,11 @@
 {% extends "extensions/detail.html" %}
+{% load i18n %}
 {% load extension_icon %}
 
 {% block comments %}
-  {% if is_visible %}
+  {% if not extension.allow_comments %}
+    <p style="text-align: center;">{% trans 'Comments are disabled for this extension.' %}</p>
+  {% elif is_visible %}
     {% include "extensions/comments.html" %}
   {% else %}
     <p style="text-align: center;">Comments will appear here after your extension is approved.</p>

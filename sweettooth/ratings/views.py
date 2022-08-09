@@ -3,6 +3,7 @@ import json
 
 import django_comments as comments
 from django.contrib.messages import info
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect
 from django.template.defaultfilters import linebreaks
 from django.urls import reverse
@@ -40,6 +41,10 @@ def comment_details(request, comment):
 @ajax_view
 def get_comments(request):
     extension = models.Extension.objects.get(pk=request.GET['pk'])
+
+    if not extension.allow_comments:
+        return HttpResponseForbidden()
+
     show_all = json.loads(request.GET.get('all', 'false'))
 
     comment_list = comments.get_model().objects.for_model(extension)
