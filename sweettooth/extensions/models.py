@@ -128,6 +128,7 @@ class Extension(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
+    allow_comments = models.BooleanField(default=True)
 
     class Meta:
         permissions = (

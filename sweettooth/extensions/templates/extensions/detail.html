@@ -88,7 +88,11 @@
       <hr style="clear: both;">
 
       {% block comments %}
+      {% if not extension.allow_comments %}
+        <p style="text-align: center;">{% trans 'Comments are disabled for this extension.' %}</p>
+      {% else %}
       {% include "extensions/comments.html" %}
+      {% endif %}
       {% endblock comments %}
 
       {% block extra %}
