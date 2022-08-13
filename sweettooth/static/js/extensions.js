@@ -126,6 +126,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 			}
 
 			$.fn.addExtensionSwitch = function () {
+				enableInstallButton($(this), $(this).data('uuid'));
 				// Don't show our switches -- CSS styles define a clickable
 				// area even with no content.
 				return this.find('.switch').hide();
@@ -409,6 +410,17 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 
 			$elem.trigger('state-changed', _state);
 			elems[uuid] = $elem;
+		}
+
+		function enableInstallButton(extension, uuid)
+		{
+			extension
+				.addClass('dummy')
+				.find('.install-button')
+				.on('click', event => {
+					event.preventDefault();
+					window.open(`gnome-extensions://${encodeURIComponent(uuid)}?action=install`, '_self');
+				});
 		}
 
 		$.fn.addLocalExtensions = function () {

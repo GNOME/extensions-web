@@ -20,6 +20,7 @@
       </div>
 
       <div class="controls col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-primary install-button">{% trans 'Install' %}</button>
         <div class="switch"></div>
         <div class="extra-buttons">
           <div class="upgrade-button" title="{% trans 'Upgrade this extension' %}"></div>
@@ -87,7 +88,11 @@
       <hr style="clear: both;">
 
       {% block comments %}
+      {% if not extension.allow_comments %}
+        <p style="text-align: center;">{% trans 'Comments are disabled for this extension.' %}</p>
+      {% else %}
       {% include "extensions/comments.html" %}
+      {% endif %}
       {% endblock comments %}
 
       {% block extra %}

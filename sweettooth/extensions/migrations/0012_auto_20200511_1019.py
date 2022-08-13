@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('extensions', '0010_session_modes'),
+        ('extensions', '0011_extension_allow_comments'),
     ]
 
     operations = [

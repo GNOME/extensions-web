@@ -133,6 +133,7 @@ class Extension(models.Model):
     recommended = models.BooleanField(default=False)
     rating = models.FloatField(default=0)
     rated = models.IntegerField(default=0)
+    allow_comments = models.BooleanField(default=True)
 
     class Meta:
         permissions = (
@@ -254,9 +255,7 @@ def parse_version_string(version_string):
 
     point = -1
     if version_parts > 2:
-        if major >= 40:
-            raise InvalidShellVersion()
-        else:
+        if major < 40:
             # 3.0.1, 3.1.4
             try:
                 point = int(version[2])

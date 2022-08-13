@@ -1,4 +1,4 @@
-Django==3.2.13
+Django==3.2.15
 djangorestframework==3.13.1
 django-autoslug==1.9.8
 django-contrib-comments==2.1.0
