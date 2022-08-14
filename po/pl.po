@@ -1,15 +1,15 @@
 # Polish translation for extensions-web.
-# Copyright © 2019 the extensions-web authors.
+# Copyright © 2019-2022 the extensions-web authors.
 # This file is distributed under the same license as the extensions-web package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2019.
-# Aviary.pl <community-poland@mozilla.org>, 2019.
+# Piotr Drąg <piotrdrag@gmail.com>, 2019-2022.
+# Aviary.pl <community-poland@mozilla.org>, 2019-2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2019-12-02 13:57+0200\n"
+"POT-Creation-Date: 2022-08-09 08:33+0000\n"
+"PO-Revision-Date: 2022-08-14 15:45+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -19,27 +19,27 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Nazwa użytkownika lub adres e-mail"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nazwa użytkownika"
 
-#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Wymagane. 30 znaków lub mniej. Tylko litery, cyfry i znaki @/./+/-/_."
 
-#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Ta wartość może zawierać tylko litery, liczby i znaki @/./+/-/_."
 
-#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Adres e-mail"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Nie należy używać adresu e-mail jako nazwy użytkownika"
 
@@ -164,42 +164,62 @@ msgstr "Ocena"
 msgid "Bug report"
 msgstr "Zgłoszenie błędu"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:23
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Zainstaluj"
+
+#: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Zaktualizuj to rozszerzenie"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Skonfiguruj to rozszerzenie"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Odinstaluj to rozszerzenie"
 
-#: sweettooth/extensions/templates/extensions/detail.html:53
+#: sweettooth/extensions/templates/extensions/detail.html:54
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Strona rozszerzenia"
 
-#: sweettooth/extensions/templates/extensions/detail.html:58
+#: sweettooth/extensions/templates/extensions/detail.html:60
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Tryby sesji"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "To rozszerzenie będzie działało, kiedy ekran jest zablokowany"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Ekran blokady"
+
+#: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Pobierz"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:68
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Wersja powłoki…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:72
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Wersja rozszerzenia…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -207,6 +227,12 @@ msgid ""
 msgstr ""
 "Recenzent przejrzy wysłane rozszerzenie, aby upewnić się, że nie ma w nim "
 "nic niebezpiecznego. Wyniki recenzji wyślemy pocztą."
+
+#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Komentarze dla tego rozszerzenia są wyłączone."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -295,7 +321,7 @@ msgstr "Ustawienia użytkownika"
 msgid "Log out"
 msgstr "Wyloguj się"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
@@ -305,21 +331,21 @@ msgstr ""
 "zainstalować integrację składającą się z dwóch części: rozszerzenia do "
 "przeglądarki i aplikacji natywnej komunikacji z serwerem"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr "Zainstaluj rozszerzenie integracji z powłoką GNOME w przeglądarce"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
 msgstr "Kliknij tutaj, aby zainstalować rozszerzenie do przeglądarki"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
 "%sStrona wiki%s zawiera instrukcje instalacji natywnego łącznika serwera"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
