@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-15 20:51+0200\n"
+"PO-Revision-Date: 2022-08-15 20:53+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -310,7 +310,7 @@ msgstr "Najnovija proširenja u Proširenjima GNOME ljuske"
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "Proširenjima GNOME ljuske"
+msgstr "Proširenja GNOME ljuske"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
