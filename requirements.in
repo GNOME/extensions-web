@@ -5,6 +5,7 @@ django-contrib-comments==2.1.0
 django-elasticsearch-dsl==7.2.2
 django-filter==21.1
 django-registration==3.2
+drf-spectacular[sidecar]==0.22.1
 Pygments==2.11.2
 Pillow==9.0.1
 polib==1.1.1
