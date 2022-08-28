@@ -6,6 +6,7 @@ django-filter==23.3
 django-opensearch-dsl==0.5.1
 django-recaptcha==3.0.0
 django-registration==3.4
+drf-spectacular[sidecar]==0.26.5
 Pygments==2.15.1
 Pillow==10.0.1
 polib==1.1.1
