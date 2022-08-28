@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
 
-    'django_elasticsearch_dsl',
+    'django_opensearch_dsl',
 
     'sweettooth.api',
     'sweettooth.extensions',
@@ -121,13 +121,13 @@ DATABASES = {
     'default': dj_database_url.config(env="EGO_DATABASE_URL", default="sqlite://./test.db")
 }
 
-ELASTICSEARCH_DSL = {
+OPENSEARCH_DSL = {
     'default': {
-        'hosts': os.getenv('EGO_ELASTIC_ADDRESS') or 'localhost:9200'
+        'hosts': os.getenv('EGO_OPENSEARCH_ADDRESS') or 'localhost:9200'
     },
 }
 
-ELASTICSEARCH_DSL_AUTOSYNC = False
+OPENSEARCH_DSL_AUTOSYNC = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/stable/topics/i18n/

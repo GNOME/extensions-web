@@ -8,15 +8,10 @@
     (at your option) any later version.
 """
 
-import logging
-
-from django_elasticsearch_dsl import Document
-from django_elasticsearch_dsl.registries import registry
+from django_opensearch_dsl import Document
+from django_opensearch_dsl.registries import registry
 
 from .models import Extension
-
-# Get an instance of a logger
-logger = logging.getLogger(__name__)
 
 
 @registry.register_document
@@ -27,7 +22,6 @@ class ExtensionDocument(Document):
     class Django:
         model = Extension
 
-        # The fields of the model you want to be indexed in Elasticsearch
         fields = [
             'uuid',
             'name',
@@ -39,8 +33,8 @@ class ExtensionDocument(Document):
             'recommended',
         ]
 
-    def get_queryset(self):
-        return super(ExtensionDocument, self).get_queryset().select_related(
+    def get_queryset(self, *args, **kwargs):
+        return super(ExtensionDocument, self).get_queryset(*args, **kwargs).select_related(
             'creator'
         )
 

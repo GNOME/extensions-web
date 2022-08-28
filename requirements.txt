@@ -15,15 +15,25 @@ attrs==21.4.0 \
 certifi==2021.10.8 \
     --hash=sha256:78884e7c1d4b00ce3cea67b44566851c4343c120abd683433ce934a68ea58872 \
     --hash=sha256:d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569
-    # via elasticsearch
+    # via
+    #   opensearch-py
+    #   requests
 chardet==4.0.0 \
     --hash=sha256:0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa \
     --hash=sha256:f864054d66fd9118f2e67044ac8981a54775ec5b67aed0441892edb553d21da5
     # via -r requirements.in
+charset-normalizer==2.1.1 \
+    --hash=sha256:5a3d016c7c547f69d6f81fb0db9449ce888b418b5b9952cc5e6e66843e9dd845 \
+    --hash=sha256:83e9a75d1911279afd89352c68b45348559d1fc0506b054b346651b5e7fee29f
+    # via requests
 confusable-homoglyphs==3.2.0 \
     --hash=sha256:3b4a0d9fa510669498820c91a0bfc0c327568cecec90648cf3819d4a6fc6a751 \
     --hash=sha256:e3ce611028d882b74a5faa69e3cbb5bd4dcd9f69936da6e73d33eda42c917944
     # via django-registration
+dateutils==0.6.12 \
+    --hash=sha256:03dd90bcb21541bd4eb4b013637e4f1b5f944881c46cc6e4b67a6059e370e3f1 \
+    --hash=sha256:f33b6ab430fa4166e7e9cb8b21ee9f6c9843c48df1a964466f52c79b2a8d53b3
+    # via django-opensearch-dsl
 dj-database-url==0.5.0 \
     --hash=sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163 \
     --hash=sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9
@@ -51,13 +61,12 @@ django-contrib-comments==2.1.0 \
     --hash=sha256:d82f1d04690550df026553053903deec0c52dc54212e1b79241b08f0355cff2c \
     --hash=sha256:e02c7341ea1f4bcdfa347851dbf5e632d3e591d84b4f77de2f90b93398897f3c
     # via -r requirements.in
-django-elasticsearch-dsl==7.2.2 \
-    --hash=sha256:3c58a254a6318b169eb904d41d802924b99ea8e53ddc2c596ebba90506cf47fa \
-    --hash=sha256:811d3909b3387fd55c19d9bbcf0e9a9b234f085df3f8422d59e7519a5f733e0e
-    # via -r requirements.in
 django-filter==21.1 \
     --hash=sha256:632a251fa8f1aadb4b8cceff932bb52fe2f826dd7dfe7f3eac40e5c463d6836e \
     --hash=sha256:f4a6737a30104c98d2e2a5fb93043f36dd7978e0c7ddc92f5998e85433ea5063
+    # via -r requirements.in
+django-opensearch-dsl==0.4.1 \
+    --hash=sha256:7c3cb4ca4cf8679a8cfef6f4073ab1679b71ee423627974ec42060a455b1d694
     # via -r requirements.in
 django-registration==3.2 \
     --hash=sha256:2ea8c7d89a8760ccde41dfd335aa28ba89073d09aab5a0f5f3d7c8c148fcc518 \
@@ -77,14 +86,10 @@ drf-spectacular-sidecar==2022.8.1 \
     --hash=sha256:369c1ccc0e037ca36c82844f05f4508519eac6fd27a6282ebf768b61901e091d \
     --hash=sha256:e7cf6a0896151ec141666e91d84e3768a10f33af4b74f09b3640a3b19271c539
     # via drf-spectacular
-elasticsearch==7.17.3 \
-    --hash=sha256:ccf5aaaaec7e7907abffe15a1b705ffacb8248a456c6ababd116bb58ebae2e2d \
-    --hash=sha256:e7a03ef9b37a569f4d228a583b8aad3cf99aaae72a53cfc7f1fee70c7fa05255
-    # via elasticsearch-dsl
-elasticsearch-dsl==7.4.0 \
-    --hash=sha256:046ea10820b94c075081b528b4526c5bc776bda4226d702f269a5f203232064b \
-    --hash=sha256:c4a7b93882918a413b63bed54018a1685d7410ffd8facbc860ee7fd57f214a6d
-    # via django-elasticsearch-dsl
+idna==3.3 \
+    --hash=sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff \
+    --hash=sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d
+    # via requests
 inflection==0.5.1 \
     --hash=sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417 \
     --hash=sha256:f38b2b640938a4f35ade69ac3d053042959b62a0f1076a5bbaa1b9526605a8a2
@@ -93,6 +98,14 @@ jsonschema==4.6.0 \
     --hash=sha256:1c92d2db1900b668201f1797887d66453ab1fbfea51df8e4b46236689c427baf \
     --hash=sha256:9d6397ba4a6c0bf0300736057f649e3e12ecbc07d3e81a0dacb72de4e9801957
     # via drf-spectacular
+opensearch-dsl==2.0.1 \
+    --hash=sha256:8226381665073f110ef3d3a5027e625255df55d91d302044999c590b4d662539 \
+    --hash=sha256:c233a9b6f35b401db3755dd3430e7a38b989433a50e7ceee2958521a9abf56a7
+    # via django-opensearch-dsl
+opensearch-py==2.0.0 \
+    --hash=sha256:1b7b451a54557de72faad004de9d338f613db3f38a78e9230105cf9fd8a81c52 \
+    --hash=sha256:a3e571555eda286c00facb2bff29bac3f776bdd48e8e44b56693a394e6b5199a
+    # via opensearch-dsl
 pillow==9.0.1 \
     --hash=sha256:011233e0c42a4a7836498e98c1acf5e744c96a67dd5032a6f666cc1fb97eab97 \
     --hash=sha256:0f29d831e2151e0b7b39981756d201f7108d3d215896212ffe2e992d06bfe049 \
@@ -164,11 +177,14 @@ pyrsistent==0.18.1 \
 python-dateutil==2.8.2 \
     --hash=sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86 \
     --hash=sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9
-    # via elasticsearch-dsl
+    # via
+    #   dateutils
+    #   opensearch-dsl
 pytz==2022.1 \
     --hash=sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7 \
     --hash=sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c
     # via
+    #   dateutils
     #   django
     #   djangorestframework
 pyyaml==6.0 \
@@ -206,12 +222,15 @@ pyyaml==6.0 \
     --hash=sha256:e61ceaab6f49fb8bdfaa0f92c4b57bcfbea54c09277b1b4f7ac376bfb7a7c174 \
     --hash=sha256:f84fbc98b019fef2ee9a1cb3ce93e3187a6df0b2538a651bfb890254ba9f90b5
     # via drf-spectacular
+requests==2.28.1 \
+    --hash=sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983 \
+    --hash=sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349
+    # via opensearch-py
 six==1.16.0 \
     --hash=sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926 \
     --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254
     # via
-    #   django-elasticsearch-dsl
-    #   elasticsearch-dsl
+    #   opensearch-dsl
     #   python-dateutil
 sqlparse==0.4.2 \
     --hash=sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae \
@@ -224,4 +243,6 @@ uritemplate==4.1.1 \
 urllib3==1.26.9 \
     --hash=sha256:44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14 \
     --hash=sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e
-    # via elasticsearch
+    # via
+    #   opensearch-py
+    #   requests
