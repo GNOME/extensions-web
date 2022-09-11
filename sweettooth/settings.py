@@ -182,6 +182,8 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = int(os.getenv('EGO_MAX_UPLOAD', 20 * 1024 * 1024))
+
 ACCOUNT_ACTIVATION_DAYS = 5
 
 LOGIN_URL = '/accounts/login/'
