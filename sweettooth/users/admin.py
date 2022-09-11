@@ -11,10 +11,8 @@ user_fieldsets[0] = (
 user_fieldsets[1] = (user_fieldsets[1][0], {"fields": ("display_name", "email")})
 
 
+@admin.register(User)
 class UserAdmin(DefaultUserAdmin):
     fieldsets = user_fieldsets
     list_display = ("username", "email", "display_name", "is_staff")
     search_fields = ("username", "display_name", "email")
-
-
-admin.site.register(User, UserAdmin)
