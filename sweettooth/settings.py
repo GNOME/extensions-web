@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'sweettooth.auth',
     'sweettooth.core',
     'sweettooth.review',
-    'sweettooth.errorreports',
     'sweettooth.templates',
     'sweettooth.users',
 
