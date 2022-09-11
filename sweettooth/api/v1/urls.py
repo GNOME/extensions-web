@@ -8,7 +8,7 @@
     (at your option) any later version.
 """
 
-from django.urls import path
+from django.urls import include, path
 
 from rest_framework.routers import SimpleRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
@@ -32,6 +32,8 @@ router.register(
 
 urlpatterns = router.urls
 urlpatterns += [
+    path('v1/accounts/', include('rest_registration.api.urls')),
+
     path('v1/hello/', HelloView.as_view()),
     path('v1/profile/<int:pk>/',
          UserProfileDetailView.as_view(),

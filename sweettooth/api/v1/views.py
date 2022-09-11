@@ -7,13 +7,12 @@
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 """
-
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from sweettooth.auth import forms
 from sweettooth.auth import serializers
 from sweettooth.utils import gravatar_url
+
 
 class HelloView(APIView):
     def get(self, request, format=None):
@@ -26,7 +25,4 @@ class HelloView(APIView):
 
         return Response({
             'user': serializers.UserSerializer(user).data,
-            'forms': {
-                'login_popup_form': forms.InlineAuthenticationForm().as_plain()
-            }
         })

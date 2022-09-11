@@ -6,7 +6,9 @@ https://docs.djangoproject.com/en/stable/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import datetime
 import os
+from urllib.parse import urljoin
 import dj_database_url
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -32,8 +34,6 @@ ALLOWED_HOSTS = [os.getenv('EGO_ALLOWED_HOST') or "extensions.gnome.org"]
 INSTALLED_APPS = [
     'django.contrib.auth',
 
-    'django_registration',
-
     # 'ratings' goes before django's comments
     # app so it will find our templates
     'sweettooth.ratings',
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
+    'knox',
+    'rest_registration',
 
     'django_opensearch_dsl',
 
@@ -82,11 +84,19 @@ if 'EGO_CORS_ORIGINS' in os.environ:
     CORS_ORIGIN_WHITELIST = list(map(str.strip, os.environ['EGO_CORS_ORIGINS'].split(",")))
 
 AUTH_USER_MODEL = 'users.User'
-AUTHENTICATION_BACKENDS = ['sweettooth.auth.backends.LoginEmailAuthentication']
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
+
+TOKEN_TTL_DAYS = 3
+REST_KNOX = {
+    'TOKEN_TTL': datetime.timedelta(days=TOKEN_TTL_DAYS),
+    'TOKEN_LIMIT_PER_USER': TOKEN_TTL_DAYS * 15,
+    'AUTO_REFRESH': True,
+}
+
+BASE_URL = os.getenv('EGO_BASE_URL', 'https://extensions.gnome.org')
 
 ROOT_URLCONF = 'sweettooth.urls'
 
@@ -104,7 +114,6 @@ TEMPLATES = [
                 "django.template.context_processors.media",
                 "django.template.context_processors.request",
                 "sweettooth.review.context_processors.n_unreviewed_extensions",
-                "sweettooth.auth.context_processors.login_form",
                 "sweettooth.context_processors.navigation",
             ],
             'debug': DEBUG,
@@ -181,13 +190,14 @@ LOGIN_URL = '/accounts/login/'
 COMMENTS_APP = 'sweettooth.ratings'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'knox.auth.TokenAuthentication',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'PAGE_SIZE': 10,
+
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 
 SPECTACULAR_SETTINGS = {
@@ -223,6 +233,25 @@ if os.getenv('EGO_EMAIL_URL'):
 
 NO_SECURE_SETTINGS = True if os.getenv('EGO_NO_SECURE_SETTINGS') else False
 NO_STATICFILES_SETTINGS = False
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': urljoin(BASE_URL, '/verify-user'),
+    'RESET_PASSWORD_VERIFICATION_URL': urljoin(BASE_URL, '/reset-password'),
+    'REGISTER_EMAIL_VERIFICATION_URL': urljoin(BASE_URL, '/verify-email'),
+
+    'VERIFICATION_FROM_EMAIL': DEFAULT_FROM_EMAIL,
+
+    'USER_LOGIN_FIELDS': ('username',),
+
+    'REGISTER_SERIALIZER_CLASS': 'sweettooth.auth.serializers.RegisterUserSerializer',
+
+    'REGISTER_VERIFICATION_PERIOD': datetime.timedelta(days=5),
+    'REGISTER_VERIFICATION_ONE_TIME_USE': True,
+    'REGISTER_VERIFICATION_AUTO_LOGIN': True,
+
+    'AUTH_TOKEN_MANAGER_CLASS': 'sweettooth.auth.authentication.KnoxAuthTokenManager',
+    'LOGIN_RETRIEVE_TOKEN': True,
+}
 
 try:
     from local_settings import *

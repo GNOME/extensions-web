@@ -63,22 +63,6 @@
                         </li>
                     </ul>
                 </div>
-                <ul class="nav navbar-nav navbar-right no-padding">
-                    <li id="userDropdownMenu" class="dropdown">
-                    {% spaceless %}
-                    {% if request.user.is_authenticated %}
-                        <a href="{% url 'auth-profile' user=request.user.username %}" class="dropdown-toggle hidden-xs avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% gravatar_url request request.user.email %}"></a>
-                    {% else %}
-                        <a href="{% url 'auth-login' %}" class="dropdown-toggle hidden-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Log in" %} <span class="caret"></span></a>
-                    {% endif %}
-                    {% endspaceless %}
-                        <ul class="dropdown-menu login_popup_form">
-                            <li>
-                                {% include "usermenu.html" %}
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
                 {% if n_unreviewed_extensions %}
                 <div class="nav navbar-nav navbar-right hidden-xs">
                     <li>

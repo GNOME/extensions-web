@@ -10,18 +10,21 @@
 
 import re
 
-from django_registration import validators
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.test.testcases import TestCase
-from .forms import AutoFocusRegistrationForm, RegistrationForm
-from .urls import PASSWORD_RESET_TOKEN_PATTERN
+from django.urls import reverse
+
+from rest_framework import status
+from rest_framework.test import APIRequestFactory, APITestCase
+
+from rest_registration.api.views import login, register
+
+from .serializers import RegisterUserSerializer
 
 User = get_user_model()
 
 
-class RegistrationDataTest(TestCase):
+class RegistrationDataTest(APITestCase):
     registration_data = {
         User.USERNAME_FIELD: 'bob',
         'email': 'bob@example.com',
@@ -30,8 +33,9 @@ class RegistrationDataTest(TestCase):
     valid_data = {
         User.USERNAME_FIELD: 'alice',
         'email': 'alice@example.com',
-        'password1': 'swordfish',
-        'password2': 'swordfish',
+        'password': 'swordfish',
+        'password_confirm': 'swordfish',
+        'display_name': 'Alice',
     }
 
     @classmethod
@@ -43,67 +47,64 @@ class RegistrationDataTest(TestCase):
             email=cls.registration_data['email'],
             password=cls.registration_data['password']
         )
+        cls.factory = APIRequestFactory()
 
 
 # registration/tests/test_forms.py
 class AuthTests(RegistrationDataTest):
     def test_email_uniqueness(self):
+        url = reverse('rest_registration:register')
+
         data = self.valid_data.copy()
         data.update(email=self.registration_data['email'])
-        form = AutoFocusRegistrationForm(
-            data=data
-        )
-        self.assertFalse(form.is_valid())
-        self.assertEqual(
-            form.errors['email'],
-            [str(validators.DUPLICATE_EMAIL)]
-        )
 
-        form = AutoFocusRegistrationForm(
-            data=self.valid_data.copy()
-        )
-        self.assertTrue(form.is_valid())
+        request = self.factory.post(url, data)
+        response = register(request)
 
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('email', response.data.keys())
+
+    # TODO: make email DB field unique and enable email login
     def test_auth_username_email(self):
-        self.assertTrue(self.client.login(
-            username=self.registration_data[User.USERNAME_FIELD],
-            password=self.registration_data['password']))
+        url = reverse('rest_registration:login')
 
-        self.assertTrue(self.client.login(
-            username=self.registration_data['email'],
-            password=self.registration_data['password']))
+        response = login(self.factory.post(url, {
+            'login': self.registration_data[User.USERNAME_FIELD],
+            'password': self.registration_data['password']
+        }))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        self.assertFalse(self.client.login(
-            username=self.registration_data[User.USERNAME_FIELD],
-            password=self.valid_data['password1']))
+        response = login(self.factory.post(url, {
+            'login': self.registration_data['email'],
+            'password': self.registration_data['password']
+        }))
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-        self.assertFalse(self.client.login(
-            username=self.registration_data['email'],
-            password=self.valid_data['password1']))
+        response = login(self.factory.post(url, {
+            'login': self.registration_data[User.USERNAME_FIELD],
+            'password': self.valid_data['password']
+        }))
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 class RegistrationTests(RegistrationDataTest):
     def test_username_email(self):
-        form = RegistrationForm(data=self.valid_data)
-        self.assertTrue(form.is_valid())
+        serializer = RegisterUserSerializer(data=self.valid_data.copy())
+        self.assertTrue(serializer.is_valid())
 
         data = self.valid_data.copy()
         data[User.USERNAME_FIELD] = data['email']
-        form = RegistrationForm(data=data)
-        self.assertFalse(form.is_valid())
+        serializer = RegisterUserSerializer(data=data)
+        self.assertFalse(serializer.is_valid())
 
     def test_username_case(self):
+        url = reverse('rest_registration:register')
+
         data = self.valid_data.copy()
         data[User.USERNAME_FIELD] = self.registration_data[User.USERNAME_FIELD].swapcase()
         self.assertTrue(data[User.USERNAME_FIELD] != self.registration_data[User.USERNAME_FIELD])
 
-        form = RegistrationForm(data=data)
-        self.assertFalse(form.is_valid())
+        request = self.factory.post(url, data)
+        response = register(request)
 
-
-class PasswordResetTests(RegistrationDataTest):
-    def test_reset_token_pattern(self):
-        token = PasswordResetTokenGenerator().make_token(self.registered_user)
-        pattern = re.compile(f'^{PASSWORD_RESET_TOKEN_PATTERN}$')
-
-        self.assertTrue(pattern.match(token))
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

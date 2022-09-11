@@ -1,9 +1,0 @@
-You have registered an account at GNOME Shell Extensions. Please activate
-your account by using the link below:
-
-    https://extensions.gnome.org/accounts/activate/{{ activation_key }}/
-
-You have {{ expiration_days }} days remaining to register your account.
-
-Thanks!
-  the GNOME Shell Extensions team
