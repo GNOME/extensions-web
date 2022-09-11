@@ -2,50 +2,52 @@
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, + 2019–2020.
+# Matej Urbančič <mateju@svn.gnome.org>, + 2019–2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2020-09-03 09:21+0200\n"
+"POT-Creation-Date: 2022-08-09 08:33+0000\n"
+"PO-Revision-Date: 2022-09-11 20:56+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Uporabniško ime ali elektronski naslov"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Zahtevan je vpis do 30 znakov, uporabiti pa je mogoče le črke, številke in "
 "znake @/./+/-/_."
 
-#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr "Vrednost lahko vsebuje le črke, številke, vezaj in znake @/./+/-/_."
+msgstr ""
+"Ta vrednost lahko vsebuje le črke, številke in znake »@«, ».«, »+«, »-« in "
+"»_«."
 
-#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Elektronski naslov"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "You should not use email as username"
-msgstr "Za uporabniško ime ni priporočljivo uporabiti elektronskega naslova"
+msgstr "Elektronskega naslova ni priporočljivo uporabiti kot uporabniško ime"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -88,7 +90,8 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
-"Žeton za ponastavitev gesla ni pravi. Preverite povezavo in poskusite znova."
+"Žeton za ponastavitev gesla je napačen. Preverite povezavo in poskusite "
+"znova."
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
@@ -102,8 +105,8 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Ali ste pozabili geslo? Vpišite elektronski naslov in poslali vam bomo "
-"navodila za nastavitev novega."
+"Ali ste pozabili geslo? Spodaj vpišite prijavni elektronski naslov in "
+"prejeli boste navodila za ponastavitev."
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -125,13 +128,13 @@ msgstr "Razširitve"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
-"Za preprečevanje neželenih objav se je treba najprej <a href=\"%(login_url)s"
-"\">prijaviti na spletno stran</a>. Prijava omogoča poročanje o napakah in "
-"objavljanje ocen in mnenj."
+"Za preprečevanje prejemanja neželenih sporočil je pred pošiljanjem opomb in "
+"poročil o napakah zahtevana <a href=\"%(login_url)s\">prijava na spletno "
+"stran razširitev Lupine GNOME</a>."
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
@@ -151,71 +154,97 @@ msgstr "Vaše mnenje"
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr "Objavite …"
+msgstr "Pošljite …"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
 msgid "Comment"
-msgstr "Opomba"
+msgstr "Opombo"
 
 #: sweettooth/extensions/templates/extensions/comments.html:8
 #: extensions-web-domain-django:1
 msgid "Rating"
-msgstr "Ocena"
+msgstr "Oceno"
 
 #: sweettooth/extensions/templates/extensions/comments.html:9
 #: extensions-web-domain-django:1
 msgid "Bug report"
 msgstr "Poročilo o hrošču"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:23
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Namesti"
+
+#: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Posodobi razširitev"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Nastavi razširitev"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Odstrani razširitev"
 
-#: sweettooth/extensions/templates/extensions/detail.html:53
+#: sweettooth/extensions/templates/extensions/detail.html:54
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Spletna stran razširitev"
 
-#: sweettooth/extensions/templates/extensions/detail.html:58
+#: sweettooth/extensions/templates/extensions/detail.html:60
 #: extensions-web-domain-django:1
-msgid "Download"
-msgstr "Prejmi za"
+msgid "Session Mode(s)"
+msgstr "Načini seje"
 
 #: sweettooth/extensions/templates/extensions/detail.html:61
 #: extensions-web-domain-django:1
-msgid "Shell version…"
-msgstr "različica lupine …"
+msgid "This extension will run while the screen is locked"
+msgstr "Razširitev je zagnana tudi, ko je zaslon zaklenjen."
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Pogovorno okno za odklep"
 
 #: sweettooth/extensions/templates/extensions/detail.html:65
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "Prejmi"
+
+#: sweettooth/extensions/templates/extensions/detail.html:68
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Različica lupine …"
+
+#: sweettooth/extensions/templates/extensions/detail.html:72
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Različica razširitve …"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"Pregledovalec bo preveril objavljeno razširitev za morebitno neželeno "
-"delovanje. Odziv boste prejeli na elektronski naslov."
+"Pregledovalec bo pregledal poslano razširitev in vam poslal rezultate "
+"pregleda po elektronski pošti."
+
+#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Za to razširitev so opombe onemogočene."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr "Poišči razširitve …"
+msgstr "Preišči razširitve …"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
@@ -258,16 +287,16 @@ msgstr "Kakšno je vaše mnenje o tej razširitvi GNOME?"
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Razrešiti je treba spodnje napake"
-msgstr[1] "Razrešiti je treba spodnjo napako"
-msgstr[2] "Razrešiti je treba spodnji napaki"
-msgstr[3] "Razrešiti je treba spodnje napake"
+msgstr[0] "Odpravite navedene napake, opisane spodaj."
+msgstr[1] "Odpravite navedeno napako, opisano spodaj."
+msgstr[2] "Odpravite navedeni napaki, opisani spodaj."
+msgstr[3] "Odpravite navedene napake, opisane spodaj."
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr "Predogled opombe"
+msgstr "Predogled mnenja ali opombe"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
@@ -286,11 +315,11 @@ msgstr "Najnovejše razširitve Lupine GNOME"
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "Razširitve Lupine Gnome"
+msgstr "Razširitve lupine Gnome"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
-msgstr "Uporabniški profil"
+msgstr "Profil uporabnika"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
@@ -300,45 +329,45 @@ msgstr "Uporabniške nastavitve"
 msgid "Log out"
 msgstr "Odjava"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"Za nadzor razširitev Lupine GNOME prek te spletne strani je treba namestiti "
-"program, ki vključuje dva dela: razširitev za brskalnik in gostiteljski "
-"program za sporočanje."
+"Za upravljanje z razširitvami Lupine GNOME je treba namestiti dve "
+"komponenti: razširitev brskalnika in izvorni gostiteljski program za "
+"povezovanje z lupino."
+
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+msgid "Install GNOME Shell integration browser extension"
+msgstr "Namesti razširitev brskalnika Lupine GNOME"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
-msgid "Install GNOME Shell integration browser extension"
-msgstr "Namesti razširitev Lupine GNOM za spletni brskalnik"
-
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr "Kliknite za namestitev razširitve za brskalnik"
+msgstr "Kliknite za namestitev razširitve brskalnika"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Oglejte si %sstrani Wiki%s za nastavitev povezovalnega gostiteljskega "
-"namiznega programa."
+"Oglejte si %sstrani wiki%s za podrobnosti o namestitvi programskega "
+"povezovalnika"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"Ni mogoče zaznati zagnane različice namizja GNOME na tem sistemu, zato so "
-"nekateri deli vmesnika morda onemogočeni. Za več podrobnosti si oglejte "
-"možnosti <a href=\"/about/#no-detection\">odpravljanja napak</a>."
+"Ni mogoče zaznati zagnane različice lupine GNOME, zato bodo nekateri deli "
+"vmesnika ostali onemogočeni. Za več podrobnosti si oglejte <a href=\"/about/"
+"#no-detection\">stran za razreševanje težav</a>."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
-msgstr "Ni mogoče izpisati nameščenih razširitev Lupine GNOME."
+msgstr "Na spletni strani so zbrani podatki nameščenih razširitev."
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
@@ -346,19 +375,19 @@ msgstr "Skladno z"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
-msgstr "Ime"
+msgstr "Imenu"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr "Nedavno"
+msgstr "nedavnosti objave"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
-msgstr "Prejeto"
+msgstr "številu prejemov"
 
 #: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
 msgid "Popularity"
-msgstr "Priljubljenost"
+msgstr "priljubljenosti"
 
 #: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
 msgid "Sort by"
@@ -387,7 +416,7 @@ msgstr "Kaj ne narobe?"
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:17
 #: extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr "Ni zaznanih napak pri tej razširitvi Lupine GNOME."
+msgstr "Za to razširitev ni zaznanih nobenih napak."
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
