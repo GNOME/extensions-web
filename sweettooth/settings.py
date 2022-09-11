@@ -205,6 +205,8 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'GNOME Extensions',
     'DESCRIPTION': 'extensions.gnome.org',
     'VERSION': '1',
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SORT_OPERATION_PARAMETERS': False,
     'SERVE_INCLUDE_SCHEMA': False,
     'SWAGGER_UI_DIST': 'SIDECAR',
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
@@ -234,6 +236,7 @@ if os.getenv('EGO_EMAIL_URL'):
 
 NO_SECURE_SETTINGS = True if os.getenv('EGO_NO_SECURE_SETTINGS') else False
 NO_STATICFILES_SETTINGS = False
+
 
 REST_REGISTRATION = {
     'REGISTER_VERIFICATION_URL': urljoin(BASE_URL, '/verify-user'),
