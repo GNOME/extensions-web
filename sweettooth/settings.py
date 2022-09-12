@@ -257,9 +257,9 @@ NO_SECURE_SETTINGS = True if os.getenv("EGO_NO_SECURE_SETTINGS") else False
 NO_STATICFILES_SETTINGS = False
 
 REST_REGISTRATION = {
+    "REGISTER_EMAIL_VERIFICATION_URL": urljoin(BASE_URL, "/verify-email"),
     "REGISTER_VERIFICATION_URL": urljoin(BASE_URL, "/verify-user"),
     "RESET_PASSWORD_VERIFICATION_URL": urljoin(BASE_URL, "/reset-password"),
-    "REGISTER_EMAIL_VERIFICATION_URL": urljoin(BASE_URL, "/verify-email"),
     "VERIFICATION_FROM_EMAIL": DEFAULT_FROM_EMAIL,
     "USER_LOGIN_FIELDS": ("username",),
     "REGISTER_SERIALIZER_CLASS": "sweettooth.auth.serializers.RegisterUserSerializer",
