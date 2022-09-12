@@ -9,44 +9,57 @@
     (at your option) any later version.
 """
 
-import json
 from functools import reduce
+import json
+from urllib.parse import urlencode, urlparse, urlunparse
 
-from django.core.exceptions import ValidationError
-from django.core.paginator import Paginator, InvalidPage
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.db import transaction
+from django.core.paginator import Paginator
+from django.forms import Field
 from django.http import (
-    JsonResponse,
-    HttpResponse,
     HttpResponseBadRequest,
-    HttpResponseForbidden,
-    HttpResponseServerError,
     Http404
 )
-from django.shortcuts import get_object_or_404, redirect, render
-from django.template.loader import render_to_string
+from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 from django.urls import reverse
 
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import CharFilter, ChoiceFilter, DjangoFilterBackend, FilterSet, MultipleChoiceFilter
 
-from rest_framework import filters, mixins, viewsets, status
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+
+from rest_framework import filters, mixins, parsers, permissions, renderers, viewsets, status
+from rest_framework.generics import CreateAPIView
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework.test import APIRequestFactory
 
-
-from sweettooth.decorators import ajax_view, model_view
-from sweettooth.exceptions import DatabaseErrorWithMessages
+from sweettooth import settings
+from sweettooth.api.widgets import QueryArrayWidget
+from sweettooth.decorators import ajax_view
 from sweettooth.extensions import models, serializers
 from sweettooth.extensions.documents import ExtensionDocument
-from sweettooth.extensions.forms import ImageUploadForm, UploadForm
-from sweettooth.extensions.templatetags.extension_icon import extension_icon
-from sweettooth import settings
+
+from .renderers import ExtensionVersionZipRenderer
+
+
+class UUIDFilter(MultipleChoiceFilter, CharFilter):
+    field_class = Field
+
+
+class ExtensionsFilter(FilterSet):
+    uuid = UUIDFilter(widget=QueryArrayWidget)
+    status = ChoiceFilter(
+        field_name='versions__status',
+        choices=list(models.STATUSES.items()),
+        distinct=True
+    )
+
+    class Meta:
+        model = models.Extension
+        fields = ('uuid', 'status', 'recommended')
 
 
 class ExtensionsPagination(PageNumberPagination):
@@ -58,48 +71,34 @@ class ExtensionsPagination(PageNumberPagination):
 class ExtensionsViewSet(mixins.ListModelMixin,
                         mixins.RetrieveModelMixin,
                         viewsets.GenericViewSet):
+    queryset = models.Extension.objects.all()
     lookup_field = 'uuid'
     lookup_value_regex = '[-a-zA-Z0-9@._]+'
     serializer_class = serializers.ExtensionSerializer
     pagination_class = ExtensionsPagination
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['recommended']
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_class = ExtensionsFilter
     ordering_fields = ['created', 'updated', 'downloads', 'popularity', '?']
     page_size = 25
     page_size_query_param = 'page_size'
     max_page_size = 100
 
-    def get_queryset(self):
-        uuids = self.request.query_params.getlist('uuid[]')
-        status = self.request.query_params.get('status')
-        queryset = models.Extension.objects.all()
-
-        if uuids:
-            queryset = queryset.filter(uuid__in=uuids)
-
-        if status is not None and status.isnumeric():
-            status = int(status)
-
-        if status in models.STATUSES:
-            queryset = queryset.filter(versions__status=status).distinct()
-
-        return queryset
-
+    @extend_schema(request=serializers.ExtensionsUpdatesSerializer)
     @action(methods=['post'], detail=False, parser_classes=[JSONParser])
     def updates(self, request):
-        installed = self.request.data.get('installed')
-        shell_version = self.request.data.get('shell_version')
-        version_validation_enabled = self.request.data.get('version_validation_enabled', False)
+        updates = serializers.ExtensionsUpdatesSerializer(data=request.data)
 
-        if not installed:
-            return Response()
+        if not updates.is_valid():
+            return HttpResponseBadRequest()
 
-        extensions = models.Extension.objects.filter(uuid__in=installed.keys())
+        extensions = models.Extension.objects.filter(uuid__in=updates.validated_data['installed'].keys())
+        if not extensions.exists():
+            return Response({})
 
         result = {}
-        for uuid, version in installed.items():
+        for uuid, update_data in updates.validated_data['installed'].items():
             try:
-                version = int(version)
+                version = int(update_data['version'])
             except (KeyError, TypeError):
                 continue
             except ValueError:
@@ -125,18 +124,28 @@ class ExtensionsViewSet(mixins.ListModelMixin,
 
             proper_version = grab_proper_extension_version(
                 extension,
-                shell_version,
-                version_validation_enabled
+                updates.validated_data['shell_version'],
+                updates.validated_data['version_validation_enabled']
             )
 
-            if proper_version is not None and proper_version.version != version.version:
-                result[uuid] = {
-                    'action': 'change',
-                    'version': proper_version.version,
-                }
+            if proper_version is not None:
+                if version.version < proper_version.version:
+                    result[uuid] = 'upgrade'
+                elif version.status == models.STATUS_REJECTED:
+                    result[uuid] = "downgrade"
+            else:
+                result[uuid] = "blacklist"
 
         return Response(result)
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(name=pagination_class.page_query_param, type=OpenApiTypes.INT),
+            OpenApiParameter(name=page_size_query_param, type=OpenApiTypes.INT),
+            OpenApiParameter(name='recommended', type=OpenApiTypes.BOOL),
+            OpenApiParameter(name='ordering', enum=['asc', 'desc']),
+        ]
+    )
     @action(methods=['get'], detail=False, url_path='search/(?P<query>[^/.]+)')
     def search(self, request, query=None):
         try:
@@ -175,26 +184,48 @@ class ExtensionsViewSet(mixins.ListModelMixin,
 
         paginator = Paginator(queryset.to_queryset(), page_size)
 
-        return Response({
-            'count': paginator.count,
-            'results': self.serializer_class(
-                [sr for sr in paginator.page(page).object_list],
-                many=True,
-                context={'request': request}
-            ).data
-        })
+        try:
+            return Response({
+                'count': paginator.count,
+                'results': self.serializer_class(
+                    [sr for sr in paginator.page(page).object_list],
+                    many=True,
+                    context={'request': request}
+                ).data
+            })
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class ExtensionsVersionsViewSet(mixins.ListModelMixin,
+                                mixins.RetrieveModelMixin,
                                 viewsets.GenericViewSet):
-    queryset = models.ExtensionVersion.objects.order_by('extension', 'version')
+    lookup_field = 'version'
     serializer_class = serializers.ExtensionVersionSerializer
     pagination_class = ExtensionsPagination
+    renderer_classes = [
+        renderers.JSONRenderer,
+        renderers.BrowsableAPIRenderer,
+        ExtensionVersionZipRenderer,
+    ]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['extension__uuid']
     page_size = 25
     page_size_query_param = 'page_size'
     max_page_size = 100
+
+    def get_queryset(self):
+        return models.ExtensionVersion.objects.filter(
+            extension__uuid=self.kwargs['extension_uuid']
+        ).order_by('version')
+
+
+class ExtensionUploadView(CreateAPIView):
+    parser_classes = [parsers.MultiPartParser]
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.ExtensionUploadSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 def get_versions_for_version_strings(version_strings):
@@ -263,6 +294,7 @@ def grab_proper_extension_version(extension, shell_version, version_validation_e
 
     return versions.order_by('-version')[0]
 
+
 def find_extension_version_from_params(extension, params):
     vpk = params.get('version_tag', '')
     shell_version = params.get('shell_version', '')
@@ -279,6 +311,7 @@ def find_extension_version_from_params(extension, params):
     else:
         return None
 
+
 def shell_download(request, uuid):
     extension = get_object_or_404(models.Extension.objects.visible(), uuid=uuid)
     try:
@@ -289,10 +322,17 @@ def shell_download(request, uuid):
     if version is None:
         raise Http404()
 
-    extension.downloads += 1
-    extension.save()
+    url = list(urlparse(reverse(
+        'extensions-versions-detail',
+        kwargs={
+            'extension_uuid': extension.uuid,
+            'version': version.version
+        }
+    )))
+    url[4] = urlencode({'format': 'zip'})
 
-    return redirect(version.source.url)
+    return redirect(urlunparse(url))
+
 
 @ajax_view
 @csrf_exempt
@@ -300,334 +340,24 @@ def shell_update(request):
     try:
         if request.method == 'POST':
             installed = json.load(request)
-        # TODO: drop GET request support at year after chrome-gnome-shell 11 release
         else:
-            installed = json.loads(request.GET['installed'])
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         shell_version = request.GET['shell_version']
         disable_version_validation = request.GET.get('disable_version_validation', False)
     except (KeyError, ValueError):
         return HttpResponseBadRequest()
 
-    operations = {}
-
-    for uuid, meta in installed.items():
-        try:
-            version = int(meta['version'])
-        except (KeyError, TypeError):
-            # XXX - if the user has a locally installed version of
-            # an extension on SweetTooth, what should we do?
-            continue
-        except ValueError:
-            version = 1
-
-        try:
-            extension = models.Extension.objects.get(uuid=uuid)
-        except models.Extension.DoesNotExist:
-            continue
-
-        try:
-            version_obj = extension.versions.get(version=version)
-        except models.ExtensionVersion.DoesNotExist:
-            # The user may have a newer version than what's on the site.
-            continue
-
-        try:
-            proper_version = grab_proper_extension_version(extension, shell_version, not disable_version_validation)
-        except models.InvalidShellVersion:
-            return HttpResponseBadRequest()
-
-        if proper_version is not None:
-            if version < proper_version.version:
-                operations[uuid] = "upgrade"
-            elif version_obj.status == models.STATUS_REJECTED:
-                operations[uuid] = "downgrade"
-        else:
-            operations[uuid] = "blacklist"
-
-    return operations
-
-def ajax_query_params_query(request, versions, n_per_page):
-    version_qs = models.ExtensionVersion.objects.visible()
-
-    if versions is not None:
-        version_qs = version_qs.filter(shell_versions__in=versions)
-
-    queryset = models.Extension.objects.distinct().filter(versions__in=version_qs)
-
-    uuids = request.GET.getlist('uuid')
-    if uuids:
-        queryset = queryset.filter(uuid__in=uuids)
-
-    sort = request.GET.get('sort', 'popularity')
-    sort = dict(recent='created').get(sort, sort)
-    if sort not in ('created', 'downloads', 'popularity', 'name'):
-        raise Http404()
-
-    queryset = queryset.order_by(sort)
-
-    # Sort by ASC for name, DESC for everything else.
-    if sort == 'name':
-        default_order = 'asc'
-    else:
-        default_order = 'desc'
-
-    order = request.GET.get('order', default_order)
-    queryset.query.standard_ordering = (order == 'asc')
-
-    if n_per_page == -1:
-        return queryset, 1
-
-    # Paginate the query
-    paginator = Paginator(queryset, n_per_page)
-    page = request.GET.get('page', 1)
-    try:
-        page_number = int(page)
-    except ValueError:
-        raise Http404()
-
-    try:
-        page_obj = paginator.page(page_number)
-    except InvalidPage:
-        raise Http404()
-
-    return page_obj.object_list, paginator.num_pages
-
-@model_view(models.Extension)
-def extension_view(request, obj, **kwargs):
-    extension, versions = obj, obj.visible_versions
-
-    if versions.count() == 0 and not extension.user_can_edit(request.user):
-        raise Http404()
-
-    # Redirect if we don't match the slug.
-    slug = kwargs.get('slug')
-
-    if slug != extension.slug:
-        kwargs.update(dict(slug=extension.slug,
-                           pk=extension.pk))
-        return redirect(extension)
-
-    # If the user can edit the model, let him do so.
-    if extension.user_can_edit(request.user):
-        template_name = "extensions/detail_edit.html"
-    else:
-        template_name = "extensions/detail.html"
-
-    context = dict(shell_version_map = json.dumps(extension.visible_shell_version_map),
-                   extension = extension,
-                   extension_uses_unlock_dialog = extension.uses_session_mode('unlock-dialog'),
-                   all_versions = extension.versions.order_by('-version'),
-                   visible_versions=json.dumps(extension.visible_shell_version_array),
-                   is_visible = extension.latest_version is not None,
-                   next = extension.get_absolute_url())
-    return render(request, template_name, context)
-
-@require_POST
-@ajax_view
-def ajax_adjust_popularity_view(request):
-    uuid = request.POST['uuid']
-    action = request.POST['action']
-
-    try:
-        extension = models.Extension.objects.get(uuid=uuid)
-    except models.Extension.DoesNotExist:
-        raise Http404()
-
-    pop = models.ExtensionPopularityItem(extension=extension)
-
-    if action == 'enable':
-        pop.offset = +1
-    elif action == 'disable':
-        pop.offset = -1
-    else:
-        return HttpResponseServerError()
-
-    pop.save()
-
-@ajax_view
-@require_POST
-@model_view(models.Extension)
-def ajax_inline_edit_view(request, extension):
-    if not extension.user_can_edit(request.user):
-        return HttpResponseForbidden()
-
-    key = request.POST['id']
-    value = request.POST['value']
-    if key.startswith('extension_'):
-        key = key[len('extension_'):]
-
-    if key == 'name':
-        extension.name = value
-    elif key == 'description':
-        extension.description = value
-    elif key == 'url':
-        extension.url = value
-    else:
-        return HttpResponseForbidden()
-
-    models.extension_updated.send(sender=extension, extension=extension)
-
-    extension.full_clean()
-    extension.save()
-
-    return value
-
-def validate_uploaded_image(request, extension):
-    if not extension.user_can_edit(request.user):
-        return HttpResponseForbidden()
-
-    form = ImageUploadForm(request.POST, request.FILES)
-
-    if not form.is_valid():
-        return JsonResponse(form.errors.get_json_data(), status=403)
-
-    if form.cleaned_data['file'].size > 2*1024*1024:
-        return HttpResponseForbidden(content="Too big image")
-
-    return form.cleaned_data['file']
-
-
-@ajax_view
-@require_POST
-@model_view(models.Extension)
-def ajax_upload_screenshot_view(request, extension):
-    data = validate_uploaded_image(request, extension)
-    if isinstance(data, HttpResponse):
-        return data
-
-    extension.screenshot = data
-    extension.full_clean()
-    extension.save()
-    return extension.screenshot.url
-
-@ajax_view
-@require_POST
-@model_view(models.Extension)
-def ajax_upload_icon_view(request, extension):
-    data = validate_uploaded_image(request, extension)
-    if isinstance(data, HttpResponse):
-        return data
-
-    extension.icon = data
-    extension.full_clean()
-    extension.save()
-    return extension.icon.url
-
-def ajax_details(extension, version=None):
-    details = dict(uuid = extension.uuid,
-                   name = extension.name,
-                   creator = extension.creator.username,
-                   creator_url = reverse('auth-profile', kwargs=dict(user=extension.creator.username)),
-                   pk = extension.pk,
-                   description = extension.description,
-                   link = extension.get_absolute_url(),
-                   icon = extension_icon(extension.icon),
-                   screenshot = extension.screenshot.url if extension.screenshot else None,
-                   shell_version_map = extension.visible_shell_version_map)
-
-    if version is not None:
-        download_url = reverse('extensions-shell-download', kwargs=dict(uuid=extension.uuid))
-        details['version'] = version.version
-        details['version_tag'] = version.pk
-        details['download_url'] = "%s?version_tag=%d" % (download_url, version.pk)
-    return details
-
-@ajax_view
-def ajax_details_view(request):
-    uuid = request.GET.get('uuid', None)
-    pk = request.GET.get('pk', None)
-
-    if uuid is not None:
-        extension = get_object_or_404(models.Extension.objects.visible(), uuid=uuid)
-    elif pk is not None:
-        try:
-            extension = get_object_or_404(models.Extension.objects.visible(), pk=pk)
-        except (TypeError, ValueError):
-            raise Http404()
-    else:
-        raise Http404()
-
-    try:
-        version = find_extension_version_from_params(extension, request.GET)
-    except models.InvalidShellVersion:
-        return HttpResponseBadRequest()
-
-    return ajax_details(extension, version)
-
-@ajax_view
-def ajax_set_status_view(request, newstatus):
-    pk = request.GET['pk']
-
-    version = get_object_or_404(models.ExtensionVersion, pk=pk)
-    extension = version.extension
-
-    if not extension.user_can_edit(request.user):
-        return HttpResponseForbidden()
-
-    if version.status not in (models.STATUS_ACTIVE, models.STATUS_INACTIVE):
-        return HttpResponseForbidden()
-
-    version.status = newstatus
-    version.save()
-
-    context = dict(version=version,
-                   extension=extension)
-
-    return dict(svm=json.dumps(extension.visible_shell_version_map),
-                mvs=render_to_string('extensions/multiversion_status.html', context))
-
-
-def create_version(request, file_source):
-    try:
-        with transaction.atomic():
-            try:
-                metadata = models.parse_zipfile_metadata(file_source)
-                uuid = metadata['uuid']
-            except (models.InvalidExtensionData, KeyError) as e:
-                messages.error(request, "Invalid extension data: %s" % (e.message,))
-                raise DatabaseErrorWithMessages
-
-            try:
-                extension = models.Extension.objects.get(uuid=uuid)
-            except models.Extension.DoesNotExist:
-                extension = models.Extension(creator=request.user)
-            else:
-                if request.user != extension.creator and not request.user.is_superuser:
-                    messages.error(request, "An extension with that UUID has already been added.")
-                    raise DatabaseErrorWithMessages
-
-            extension.parse_metadata_json(metadata)
-            extension.save()
-
-            try:
-                extension.full_clean()
-            except ValidationError as e:
-                raise DatabaseErrorWithMessages(e.messages)
-
-            version = models.ExtensionVersion.objects.create(extension=extension,
-                                                             source=file_source,
-                                                             status=models.STATUS_UNREVIEWED)
-            version.parse_metadata_json(metadata)
-            version.replace_metadata_json()
-            version.save()
-
-            return version, []
-    except DatabaseErrorWithMessages as e:
-        return None, e.messages
-
-@login_required
-def upload_file(request):
-    errors = []
-    if request.method == 'POST':
-        form = UploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            file_source = form.cleaned_data['source']
-            version, errors = create_version(request, file_source)
-            if version is not None:
-                models.submitted_for_review.send(sender=request, request=request, version=version)
-                return redirect(version.extension)
-    else:
-        form = UploadForm()
-
-    return render(request, 'extensions/upload.html', dict(form=form,
-                                                          errors=errors))
+    mocked_request = APIRequestFactory().post(
+        reverse('extension-updates'),
+        data={
+            'installed': {
+                uuid: data | {
+                    'uuid': uuid
+                }
+                for uuid, data in installed.items()
+            },
+            'shell_version': shell_version,
+            'version_validation_enabled': not disable_version_validation,
+        }
+    )
+    return ExtensionsViewSet.as_view({'post': 'updates'})(mocked_request)

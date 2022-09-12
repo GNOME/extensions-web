@@ -175,8 +175,8 @@ class Extension(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('extensions-detail', kwargs=dict(pk=self.pk,
-                                                        slug=self.slug))
+        # TODO: do we need urlencode here?
+        return f"/extension/{self.uuid}"
 
     def user_can_edit(self, user):
         if user == self.creator:

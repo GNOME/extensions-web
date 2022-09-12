@@ -3,12 +3,14 @@ import base64
 from collections import Counter
 import itertools
 import os.path
+from urllib.parse import urljoin
 
 import pygments
 import pygments.util
 import pygments.lexers
 import pygments.formatters
 
+from django.conf import settings
 from django.core.mail import EmailMessage
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, get_object_or_404, render
@@ -307,29 +309,28 @@ def render_mail(version, template, data):
 
     return EmailMessage(subject=subject.strip(), body=body.strip(), headers=headers)
 
-def send_email_submitted(request, version):
+def send_email_submitted(version):
     extension = version.extension
-
-    url = request.build_absolute_uri(reverse('review-version',
-                                             kwargs=dict(pk=version.pk)))
-
-    data = dict(url=url)
 
     recipient_list = list(get_all_reviewers().values_list('email', flat=True))
 
-    message = render_mail(version, 'submitted', data)
+    message = render_mail(version, 'submitted', {
+        'url': urljoin(
+            settings.BASE_URL,
+            reverse('review-version', kwargs=dict(pk=version.pk))
+        ),
+    })
     message.to = recipient_list
     message.extra_headers.update({'X-SweetTooth-Purpose': 'NewExtension',
                                   'X-SweetTooth-ExtensionCreator': extension.creator.username})
 
     message.send()
 
-def send_email_auto_approved(request, version):
+def send_email_auto_approved(version):
     extension = version.extension
 
-    review_url = request.build_absolute_uri(reverse('review-version',
-                                                    kwargs=dict(pk=version.pk)))
-    version_url = request.build_absolute_uri(version.get_absolute_url())
+    review_url = urljoin(settings.BASE_URL, f'/review/{version.pk}')
+    version_url = urljoin(settings.BASE_URL, version.get_absolute_url())
 
     recipient_list = list(get_all_reviewers().values_list('email', flat=True))
     recipient_list.append(extension.creator.email)
@@ -393,18 +394,18 @@ def should_auto_approve(version: models.ExtensionVersion):
     changeset = get_file_changeset(old_zipfile, new_zipfile)
     return should_auto_approve_changeset(changeset)
 
-def extension_submitted(sender, request, version, **kwargs):
+def extension_submitted(sender, version, **kwargs):
     if should_auto_approve(version):
         CodeReview.objects.create(version=version,
-                                  reviewer=request.user,
+                                  reviewer=sender,
                                   comments="",
                                   new_status=models.STATUS_ACTIVE,
                                   auto=True)
         version.status = models.STATUS_ACTIVE
         version.save()
-        send_email_auto_approved(request, version)
+        send_email_auto_approved(version)
     else:
-        send_email_submitted(request, version)
+        send_email_submitted(version)
 
 models.submitted_for_review.connect(extension_submitted)
 

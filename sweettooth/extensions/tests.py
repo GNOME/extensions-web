@@ -9,6 +9,10 @@ from zipfile import ZipFile
 from django.test import TestCase, TransactionTestCase
 from django.core.files.base import File
 from django.urls import reverse
+
+from rest_framework import status
+from rest_framework.test import APITestCase
+
 from sweettooth.extensions import models, views
 
 from sweettooth.testutils import BasicUserTestCase
@@ -221,17 +225,20 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
         old_zip.close()
         new_zip.close()
 
+
 class UploadTest(BasicUserTestCase, TransactionTestCase):
     def upload_file(self, zipfile):
         with get_test_zipfile(zipfile) as f:
-            return self.client.post(reverse('extensions-upload-file'),
-                                    dict(source=f,
-                                         gplv2_compliant=True,
-                                         tos_compliant=True), follow=True)
-
-    def test_upload_page_works(self):
-        response = self.client.get(reverse('extensions-upload-file'))
-        self.assertEqual(response.status_code, 200)
+            return self.client.post(
+                reverse('extension-upload'),
+                data={
+                    'source': f,
+                    'shell_license_compliant': True,
+                    'tos_compliant': True,
+                },
+                follow=True,
+                format='multipart'
+            )
 
     def test_upload_parsing(self):
         response = self.upload_file('SimpleExtension')
@@ -244,9 +251,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.assertEqual(extension.description, "Simple test metadata")
         self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
-        url = reverse('extensions-detail', kwargs=dict(pk=extension.pk,
-                                                       slug=extension.slug))
-        self.assertRedirects(response, url)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         version1.status = models.STATUS_ACTIVE
         version1.save()
@@ -483,7 +488,7 @@ class ShellVersionTest(TestCase):
         with self.assertRaises(models.InvalidShellVersion):
             models.parse_version_string("40.teta")
 
-class DownloadExtensionTest(BasicUserTestCase, TestCase):
+class DownloadExtensionTest(BasicUserTestCase, APITestCase):
     def download(self, uuid, shell_version):
         url = reverse('extensions-shell-download', kwargs=dict(uuid=uuid))
         return self.client.get(url, dict(shell_version=shell_version), follow=True)
@@ -584,18 +589,12 @@ class UpdateVersionTest(TestCase):
     def build_response(self, installed):
         return dict((k, dict(version=v)) for k, v in installed.items())
 
-    def grab_response(self, installed):
-        installed = self.build_response(installed)
-        response = self.client.get(reverse('extensions-shell-update'),
-                                   dict(installed=json.dumps(installed), shell_version='3.2.0'))
-
-        return json.loads(response.content.decode(response.charset))
-
     def grab_post_response(self, installed):
         installed = self.build_response(installed)
         response = self.client.post(reverse('extensions-shell-update') + "?shell_version=3.2.0",
                                    data=json.dumps(installed),
-                                   content_type='application/json')
+                                   content_type='application/json',
+                                   follow=True)
 
         return json.loads(response.content.decode(response.charset))
 
@@ -604,14 +603,10 @@ class UpdateVersionTest(TestCase):
 
         # The user has an old version, upgrade him
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
-        response = self.grab_response({ uuid: 1 })
-        self.assertEqual(response, expected)
         response = self.grab_post_response({ uuid: 1 })
         self.assertEqual(response, expected)
 
         # The user has a newer version on his machine.
-        response = self.grab_response({ uuid: 2 })
-        self.assertEqual(response, {})
         response = self.grab_post_response({ uuid: 2 })
         self.assertEqual(response, {})
 
@@ -619,14 +614,10 @@ class UpdateVersionTest(TestCase):
         uuid = self.reject_uuid
 
         expected = {uuid: self.full_expected[self.reject_uuid]}
-        response = self.grab_response({ uuid: 1 })
-        self.assertEqual(response, expected)
         response = self.grab_post_response({ uuid: 1 })
         self.assertEqual(response, expected)
 
         # The user has a newer version than what's on the site.
-        response = self.grab_response({ uuid: 2 })
-        self.assertEqual(response, {})
         response = self.grab_post_response({ uuid: 2 })
         self.assertEqual(response, {})
 
@@ -635,21 +626,15 @@ class UpdateVersionTest(TestCase):
 
         # The user has a rejected version, so downgrade.
         expected = { uuid: self.full_expected[self.downgrade_uuid] }
-        response = self.grab_response({ uuid: 2 })
-        self.assertEqual(response, expected)
         response = self.grab_post_response({ uuid: 2 })
         self.assertEqual(response, expected)
 
         # The user has the appropriate version on his machine.
-        response = self.grab_response({ uuid: 1 })
-        self.assertEqual(response, {})
         response = self.grab_post_response({ uuid: 1 })
         self.assertEqual(response, {})
 
     def test_nonexistent_uuid(self):
         # The user has an extension that's not on the site.
-        response = self.grab_response({ self.nonexistant_uuid: 1 })
-        self.assertEqual(response, {})
         response = self.grab_post_response({ self.nonexistant_uuid: 1 })
         self.assertEqual(response, {})
 
@@ -659,8 +644,6 @@ class UpdateVersionTest(TestCase):
                       self.downgrade_uuid: 2,
                       self.nonexistant_uuid: 2 }
 
-        response = self.grab_response(installed)
-        self.assertEqual(self.full_expected, response)
         response = self.grab_post_response(installed)
         self.assertEqual(self.full_expected, response)
 
@@ -669,14 +652,10 @@ class UpdateVersionTest(TestCase):
 
         # The user provided wrong version, upgrade him if we have version > 1
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
-        response = self.grab_response({uuid: ''})
-        self.assertEqual(response, expected)
         response = self.grab_post_response({uuid: ''})
         self.assertEqual(response, expected)
 
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
-        response = self.grab_response({uuid: '0.8.4'})
-        self.assertEqual(response, expected)
         response = self.grab_post_response({uuid: '0.8.4'})
         self.assertEqual(response, expected)
 

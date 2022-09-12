@@ -11,10 +11,11 @@
 from django.urls import include, path
 
 from rest_framework.routers import SimpleRouter
+from rest_framework_nested import routers
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from sweettooth.api.v1.views import HelloView
-from sweettooth.extensions.views import ExtensionsViewSet, ExtensionsVersionsViewSet
+from sweettooth.extensions.views import ExtensionsViewSet, ExtensionsVersionsViewSet, ExtensionUploadView
 from sweettooth.users.views import UserProfileDetailView
 
 # Create a router and register our viewsets with it.
@@ -24,15 +25,20 @@ router.register(
     ExtensionsViewSet,
     basename='extension',
 )
-router.register(
-    r'v1/extensions-versions',
+
+extension_router = routers.NestedSimpleRouter(router, r'v1/extensions', lookup='extension')
+extension_router.register(
+    r'versions',
     ExtensionsVersionsViewSet,
     basename='extensions-versions',
 )
 
 urlpatterns = router.urls
+urlpatterns += extension_router.urls
 urlpatterns += [
     path('v1/accounts/', include('rest_registration.api.urls')),
+
+    path('v1/extensions', ExtensionUploadView.as_view(), name='extension-upload'),
 
     path('v1/hello/', HelloView.as_view()),
     path('v1/profile/<int:pk>/',
