@@ -10,6 +10,7 @@
 """
 
 from functools import reduce
+from itertools import product
 import json
 from urllib.parse import urlencode, urlparse, urlunparse
 
@@ -140,10 +141,14 @@ class ExtensionsViewSet(mixins.ListModelMixin,
 
     @extend_schema(
         parameters=[
+            OpenApiParameter(name='recommended', type=OpenApiTypes.BOOL),
+            OpenApiParameter(name='ordering', enum=[
+                f"{order}{field}"
+                for field, order in product(ordering_fields, ('', '-'))
+                if field != '?'
+            ]),
             OpenApiParameter(name=pagination_class.page_query_param, type=OpenApiTypes.INT),
             OpenApiParameter(name=page_size_query_param, type=OpenApiTypes.INT),
-            OpenApiParameter(name='recommended', type=OpenApiTypes.BOOL),
-            OpenApiParameter(name='ordering', enum=['asc', 'desc']),
         ]
     )
     @action(methods=['get'], detail=False, url_path='search/(?P<query>[^/.]+)')
@@ -161,13 +166,12 @@ class ExtensionsViewSet(mixins.ListModelMixin,
             print(ex)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        if not query:
+        if not query or query == '-':
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        queryset = ExtensionDocument.search().query(
+        queryset = ExtensionDocument.search().extra(size=5000).query(
             "multi_match",
-            query=query,
-            fields=ExtensionDocument.document_fields()
+            query=query
         )
 
         if self.request.query_params.get('recommended') in ("true", "1"):
@@ -179,10 +183,11 @@ class ExtensionsViewSet(mixins.ListModelMixin,
             if not ordering or ordering[0] != '-'
             else ordering[1:]
         )
-        if ordering and ordering_field in self.ordering_fields:
+        if ordering and ordering_field in self.ordering_fields and ordering_field != '?':
             queryset = queryset.sort(ordering)
 
-        paginator = Paginator(queryset.to_queryset(), page_size)
+        # https://github.com/Codoc-os/django-opensearch-dsl/issues/27
+        paginator = Paginator(queryset.to_queryset(keep_order=True), page_size)
 
         try:
             return Response({
