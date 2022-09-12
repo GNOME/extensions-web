@@ -12,7 +12,7 @@
 import json
 from functools import reduce
 from typing import Any
-from urllib.parse import unquote
+from urllib.parse import unquote, urlencode, urlparse, urlunparse
 
 from django.conf import settings
 from django.contrib import messages
@@ -21,7 +21,7 @@ from django.core.exceptions import BadRequest
 from django.core.paginator import InvalidPage, Paginator
 from django.core.validators import URLValidator
 from django.db import transaction
-from django.forms import ValidationError
+from django.forms import Field, ValidationError
 from django.http import (
     Http404,
     HttpResponse,
@@ -36,19 +36,57 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, mixins, status, viewsets
+from django_filters.rest_framework import (
+    CharFilter,
+    ChoiceFilter,
+    DjangoFilterBackend,
+    FilterSet,
+    MultipleChoiceFilter,
+)
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter, extend_schema
+from rest_framework import (
+    filters,
+    mixins,
+    parsers,
+    permissions,
+    renderers,
+    status,
+    viewsets,
+)
 from rest_framework.decorators import action
+from rest_framework.generics import CreateAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework.test import APIRequestFactory
 
+from sweettooth.api.widgets import QueryArrayWidget
 from sweettooth.decorators import ajax_view, model_view
 from sweettooth.exceptions import DatabaseErrorWithMessages
 from sweettooth.extensions import models, serializers
 from sweettooth.extensions.documents import ExtensionDocument
 from sweettooth.extensions.forms import ImageUploadForm, UploadForm
 from sweettooth.extensions.templatetags.extension_icon import extension_icon
+
+from .renderers import ExtensionVersionZipRenderer
+
+
+class UUIDFilter(MultipleChoiceFilter, CharFilter):
+    field_class = Field
+
+
+class ExtensionsFilter(FilterSet):
+    uuid = UUIDFilter(widget=QueryArrayWidget)
+    status = ChoiceFilter(
+        field_name="versions__status",
+        choices=list(models.STATUSES.items()),
+        distinct=True,
+    )
+
+    class Meta:
+        model = models.Extension
+        fields = ("uuid", "status", "recommended")
 
 
 class ExtensionsPagination(PageNumberPagination):
@@ -60,50 +98,36 @@ class ExtensionsPagination(PageNumberPagination):
 class ExtensionsViewSet(
     mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
 ):
+    queryset = models.Extension.objects.all()
     lookup_field = "uuid"
     lookup_value_regex = "[-a-zA-Z0-9@._]+"
     serializer_class = serializers.ExtensionSerializer
     pagination_class = ExtensionsPagination
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ["recommended"]
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_class = ExtensionsFilter
     ordering_fields = ["created", "updated", "downloads", "popularity", "?"]
     page_size = 25
     page_size_query_param = "page_size"
     max_page_size = 100
 
-    def get_queryset(self):
-        uuids = self.request.query_params.getlist("uuid[]")
-        status = self.request.query_params.get("status")
-        queryset = models.Extension.objects.all()
-
-        if uuids:
-            queryset = queryset.filter(uuid__in=uuids)
-
-        if status is not None and status.isnumeric():
-            status = int(status)
-
-        if status in models.STATUSES:
-            queryset = queryset.filter(versions__status=status).distinct()
-
-        return queryset
-
+    @extend_schema(request=serializers.ExtensionsUpdatesSerializer)
     @action(methods=["post"], detail=False, parser_classes=[JSONParser])
     def updates(self, request):
-        installed = self.request.data.get("installed")
-        shell_version = self.request.data.get("shell_version")
-        version_validation_disabled = self.request.data.get(
-            "version_validation_disabled", False
+        updates = serializers.ExtensionsUpdatesSerializer(data=request.data)
+
+        if not updates.is_valid():
+            return HttpResponseBadRequest()
+
+        extensions = models.Extension.objects.filter(
+            uuid__in=updates.validated_data["installed"].keys()
         )
-
-        if not installed:
-            return Response()
-
-        extensions = models.Extension.objects.filter(uuid__in=installed.keys())
+        if not extensions.exists():
+            return Response({})
 
         result = {}
-        for uuid, version in installed.items():
+        for uuid, update_data in updates.validated_data["installed"].items():
             try:
-                version = int(version)
+                version = int(update_data["version"])
             except (KeyError, TypeError):
                 continue
             except ValueError:
@@ -126,17 +150,31 @@ class ExtensionsViewSet(
                 continue
 
             proper_version = grab_proper_extension_version(
-                extension, shell_version, version_validation_disabled
+                extension,
+                updates.validated_data["shell_version"],
+                updates.validated_data["version_validation_enabled"],
             )
 
-            if proper_version is not None and proper_version.version != version.version:
-                result[uuid] = {
-                    "action": "change",
-                    "version": proper_version.version,
-                }
+            if proper_version is not None:
+                if version.version < proper_version.version:
+                    result[uuid] = "upgrade"
+                elif version.status == models.STATUS_REJECTED:
+                    result[uuid] = "downgrade"
+            else:
+                result[uuid] = "blacklist"
 
         return Response(result)
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name=pagination_class.page_query_param, type=OpenApiTypes.INT
+            ),
+            OpenApiParameter(name=page_size_query_param, type=OpenApiTypes.INT),
+            OpenApiParameter(name="recommended", type=OpenApiTypes.BOOL),
+            OpenApiParameter(name="ordering", enum=["asc", "desc"]),
+        ]
+    )
     @action(methods=["get"], detail=False, url_path="search/(?P<query>[^/.]+)")
     def search(self, request, query=None):
         try:
@@ -177,27 +215,50 @@ class ExtensionsViewSet(
 
         paginator = Paginator(queryset.to_queryset(), page_size)
 
-        return Response(
-            {
-                "count": paginator.count,
-                "results": self.serializer_class(
-                    [sr for sr in paginator.page(page).object_list],
-                    many=True,
-                    context={"request": request},
-                ).data,
-            }
-        )
+        try:
+            return Response(
+                {
+                    "count": paginator.count,
+                    "results": self.serializer_class(
+                        [sr for sr in paginator.page(page).object_list],
+                        many=True,
+                        context={"request": request},
+                    ).data,
+                }
+            )
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class ExtensionsVersionsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
-    queryset = models.ExtensionVersion.objects.order_by("extension", "version")
+class ExtensionsVersionsViewSet(
+    mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
+):
+    lookup_field = "version"
     serializer_class = serializers.ExtensionVersionSerializer
     pagination_class = ExtensionsPagination
+    renderer_classes = [
+        renderers.JSONRenderer,
+        renderers.BrowsableAPIRenderer,
+        ExtensionVersionZipRenderer,
+    ]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["extension__uuid"]
     page_size = 25
     page_size_query_param = "page_size"
     max_page_size = 100
+
+    def get_queryset(self):
+        return models.ExtensionVersion.objects.filter(
+            extension__uuid=self.kwargs["extension_uuid"]
+        ).order_by("version")
+
+
+class ExtensionUploadView(CreateAPIView):
+    parser_classes = [parsers.MultiPartParser]
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.ExtensionUploadSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 def get_versions_for_version_strings(version_strings):
@@ -317,10 +378,17 @@ def shell_download(request, uuid):
     if version is None:
         raise Http404()
 
-    extension.downloads += 1
-    extension.save()
+    url = list(
+        urlparse(
+            reverse(
+                "extensions-versions-detail",
+                kwargs={"extension_uuid": extension.uuid, "version": version.version},
+            )
+        )
+    )
+    url[4] = urlencode({"format": "zip"})
 
-    return redirect(version.source.url)
+    return redirect(urlunparse(url))
 
 
 @ajax_view
@@ -329,9 +397,8 @@ def shell_update(request):
     try:
         if request.method == "POST":
             installed = json.load(request)
-        # TODO: drop GET request support at year after chrome-gnome-shell 11 release
         else:
-            installed = json.loads(request.GET["installed"])
+            return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         shell_version = request.GET["shell_version"]
         disable_version_validation = request.GET.get(
             "disable_version_validation", False
@@ -339,45 +406,17 @@ def shell_update(request):
     except (KeyError, ValueError):
         return HttpResponseBadRequest()
 
-    operations = {}
-
-    for uuid, meta in installed.items():
-        try:
-            version = int(meta["version"])
-        except (KeyError, TypeError):
-            # XXX - if the user has a locally installed version of
-            # an extension on SweetTooth, what should we do?
-            continue
-        except ValueError:
-            version = 1
-
-        try:
-            extension = models.Extension.objects.get(uuid=uuid)
-        except models.Extension.DoesNotExist:
-            continue
-
-        try:
-            version_obj = extension.versions.get(version=version)
-        except models.ExtensionVersion.DoesNotExist:
-            # The user may have a newer version than what's on the site.
-            continue
-
-        try:
-            proper_version = grab_proper_extension_version(
-                extension, shell_version, disable_version_validation
-            )
-        except models.InvalidShellVersion:
-            return HttpResponseBadRequest()
-
-        if proper_version is not None:
-            if version < proper_version.version:
-                operations[uuid] = "upgrade"
-            elif version_obj.status == models.STATUS_REJECTED:
-                operations[uuid] = "downgrade"
-        else:
-            operations[uuid] = "blacklist"
-
-    return operations
+    mocked_request = APIRequestFactory().post(
+        reverse("extension-updates"),
+        data={
+            "installed": {
+                uuid: data | {"uuid": uuid} for uuid, data in installed.items()
+            },
+            "shell_version": shell_version,
+            "version_validation_enabled": not disable_version_validation,
+        },
+    )
+    return ExtensionsViewSet.as_view({"post": "updates"})(mocked_request)
 
 
 def ajax_query_params_query(request, versions, n_per_page):

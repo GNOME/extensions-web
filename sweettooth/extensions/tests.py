@@ -1,5 +1,4 @@
 import json
-import logging
 import os.path
 import tempfile
 from io import BytesIO
@@ -14,7 +13,7 @@ from django.test.utils import override_settings
 from django.urls import reverse
 
 from sweettooth.extensions import models, views
-from sweettooth.testutils import BasicUserTestCase
+from sweettooth.testutils import BasicUserTestCase, SilentDjangoRequestTest
 
 testdata_dir = os.path.join(os.path.dirname(__file__), "testdata")
 
@@ -1151,7 +1150,7 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         self.assertRedirects(self.download(metadata["uuid"], "3.2.2"), v2.source.url)
 
 
-class UpdateVersionTest(TestCase):
+class UpdateVersionTest(SilentDjangoRequestTest):
     fixtures = [os.path.join(testdata_dir, "test_upgrade_data.json")]
 
     upgrade_uuid = "upgrade-extension@testcases.sweettooth.mecheye.net"
@@ -1167,15 +1166,6 @@ class UpdateVersionTest(TestCase):
     def build_response(self, installed):
         return dict((k, dict(version=v)) for k, v in installed.items())
 
-    def grab_response(self, installed):
-        installed = self.build_response(installed)
-        response = self.client.get(
-            reverse("extensions-shell-update"),
-            dict(installed=json.dumps(installed), shell_version="3.2.0"),
-        )
-
-        return json.loads(response.content.decode(response.charset))
-
     def grab_post_response(self, installed):
         installed = self.build_response(installed)
         response = self.client.post(
@@ -1186,19 +1176,25 @@ class UpdateVersionTest(TestCase):
 
         return json.loads(response.content.decode(response.charset))
 
+    def test_get_disallowed(self):
+        installed = self.build_response({self.upgrade_uuid: 1})
+        response = self.client.get(
+            reverse("extensions-shell-update"),
+            dict(installed=json.dumps(installed), shell_version="3.2.0"),
+        )
+
+        # Method not allowed
+        self.assertEqual(response.status_code, 405)
+
     def test_upgrade_me(self):
         uuid = self.upgrade_uuid
 
         # The user has an old version, upgrade him
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
-        response = self.grab_response({uuid: 1})
-        self.assertEqual(response, expected)
         response = self.grab_post_response({uuid: 1})
         self.assertEqual(response, expected)
 
         # The user has a newer version on his machine.
-        response = self.grab_response({uuid: 2})
-        self.assertEqual(response, {})
         response = self.grab_post_response({uuid: 2})
         self.assertEqual(response, {})
 
@@ -1206,14 +1202,10 @@ class UpdateVersionTest(TestCase):
         uuid = self.reject_uuid
 
         expected = {uuid: self.full_expected[self.reject_uuid]}
-        response = self.grab_response({uuid: 1})
-        self.assertEqual(response, expected)
         response = self.grab_post_response({uuid: 1})
         self.assertEqual(response, expected)
 
         # The user has a newer version than what's on the site.
-        response = self.grab_response({uuid: 2})
-        self.assertEqual(response, {})
         response = self.grab_post_response({uuid: 2})
         self.assertEqual(response, {})
 
@@ -1222,21 +1214,15 @@ class UpdateVersionTest(TestCase):
 
         # The user has a rejected version, so downgrade.
         expected = {uuid: self.full_expected[self.downgrade_uuid]}
-        response = self.grab_response({uuid: 2})
-        self.assertEqual(response, expected)
         response = self.grab_post_response({uuid: 2})
         self.assertEqual(response, expected)
 
         # The user has the appropriate version on his machine.
-        response = self.grab_response({uuid: 1})
-        self.assertEqual(response, {})
         response = self.grab_post_response({uuid: 1})
         self.assertEqual(response, {})
 
     def test_nonexistent_uuid(self):
         # The user has an extension that's not on the site.
-        response = self.grab_response({self.nonexistant_uuid: 1})
-        self.assertEqual(response, {})
         response = self.grab_post_response({self.nonexistant_uuid: 1})
         self.assertEqual(response, {})
 
@@ -1248,8 +1234,6 @@ class UpdateVersionTest(TestCase):
             self.nonexistant_uuid: 2,
         }
 
-        response = self.grab_response(installed)
-        self.assertEqual(self.full_expected, response)
         response = self.grab_post_response(installed)
         self.assertEqual(self.full_expected, response)
 
@@ -1258,14 +1242,10 @@ class UpdateVersionTest(TestCase):
 
         # The user provided wrong version, upgrade him if we have version > 1
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
-        response = self.grab_response({uuid: ""})
-        self.assertEqual(response, expected)
         response = self.grab_post_response({uuid: ""})
         self.assertEqual(response, expected)
 
         expected = {uuid: self.full_expected[self.upgrade_uuid]}
-        response = self.grab_response({uuid: "0.8.4"})
-        self.assertEqual(response, expected)
         response = self.grab_post_response({uuid: "0.8.4"})
         self.assertEqual(response, expected)
 
@@ -1540,21 +1520,7 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         )
 
 
-class ExtensionDetailsTest(BasicUserTestCase, TestCase):
-    def setUp(self) -> None:
-        super().setUp()
-
-        # Reduce the log level to avoid messages like 'bad request'
-        logger = logging.getLogger("django.request")
-        self.previous_level = logger.getEffectiveLevel()
-        logger.setLevel(logging.ERROR)
-
-    def tearDown(self) -> None:
-        super().tearDown()
-
-        logger = logging.getLogger("django.request")
-        logger.setLevel(self.previous_level)
-
+class ExtensionDetailsTest(BasicUserTestCase, SilentDjangoRequestTest):
     def test_extension_details(self):
         metadata = {
             "name": "Detail Test",
