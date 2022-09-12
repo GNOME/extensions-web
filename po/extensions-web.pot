@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-11 13:19+0000\n"
+"POT-Creation-Date: 2023-11-11 13:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -272,6 +272,25 @@ msgstr ""
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version"
 " name."
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:109 extensions-web-domain-django:1
+msgid ""
+"Extension can not be published without grant to use it with GNOME Shell "
+"compatible license"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid ""
+"Extension can not be published without grant to change extension maintainer"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:137 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
 msgstr ""
 
 #: sweettooth/extensions/templates/extensions/away.html:10

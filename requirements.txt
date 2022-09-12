@@ -252,6 +252,7 @@ django==4.2.7 \
     #   django-rest-knox
     #   django-rest-registration
     #   djangorestframework
+    #   drf-nested-routers
     #   drf-spectacular
     #   drf-spectacular-sidecar
 django-autoslug==1.9.9 \
@@ -296,7 +297,12 @@ djangorestframework==3.14.0 \
     #   -r requirements.in
     #   django-rest-knox
     #   django-rest-registration
+    #   drf-nested-routers
     #   drf-spectacular
+drf-nested-routers==0.93.4 \
+    --hash=sha256:01aa556b8c08608bb74fb34f6ca065a5183f2cda4dc0478192cc17a2581d71b0 \
+    --hash=sha256:996b77f3f4dfaf64569e7b8f04e3919945f90f95366838ca5b8bed9dd709d6c5
+    # via -r requirements.in
 drf-spectacular[sidecar]==0.26.5 \
     --hash=sha256:aee55330a774ba8a9cbdb125714d1c9ee05a8aafd3ce3be8bfd26527649aeb44 \
     --hash=sha256:c0002a820b11771fdbf37853deb371947caf0159d1afeeffe7598e964bc1db94
