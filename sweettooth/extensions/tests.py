@@ -235,6 +235,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
                     'source': f,
                     'shell_license_compliant': True,
                     'tos_compliant': True,
+                    'license': models.Licenses.GPL20.value,
                 },
                 follow=True,
                 format='multipart'

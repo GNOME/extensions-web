@@ -86,6 +86,7 @@ class ExtensionUploadSerializer(serializers.Serializer):
     source = serializers.FileField(required=True)
     shell_license_compliant = serializers.BooleanField(required=True)
     tos_compliant = serializers.BooleanField(required=True)
+    license = serializers.ChoiceField(choices=models.Licenses.values)
 
     def validate_source(self, value):
         try:

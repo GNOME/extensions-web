@@ -374,6 +374,19 @@ def make_filename(obj, filename=None):
     return "%s.v%d.shell-extension.zip" % (obj.extension.uuid, obj.version)
 
 
+class Licenses(models.TextChoices):
+    Apache20 = 'Apache-2.0', 'Apache 2.0'
+    BSD2Clause = 'BSD-2-Clause', '2-Clause BSD'
+    BSD3Clause = 'BSD-3-Clause', '3-Clause BSD'
+    EPL20 = 'EPL-2.0', 'EPL 2.0'
+    GPL20 = 'GPL-2.0', 'GPL 2.0'
+    GPL20OrLater = 'GPL-2.0 or later',
+    GPL30 = 'GPL-3.0', 'GPL 2.0 or later'
+    GPL30OrLater = 'GPL-3.0-or-later', 'GPL 3.0 or later',
+    MIT = 'MIT', 'MIT'
+    MPL20 = 'MPL-2.0', 'MPL 2.0'
+
+
 class ExtensionVersion(models.Model):
     extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
     version: int = models.IntegerField(default=0)
@@ -382,6 +395,11 @@ class ExtensionVersion(models.Model):
     shell_versions = models.ManyToManyField(ShellVersion)
     session_modes = models.ManyToManyField(SessionMode)
     created = models.DateTimeField(auto_now_add=True, null=True)
+    license = models.CharField(
+        choices=Licenses.choices,
+        default=Licenses.GPL20,
+        max_length=24
+    )
 
     class Meta:
         unique_together = ('extension', 'version'),
@@ -508,6 +526,7 @@ class ExtensionVersion(models.Model):
 
     def is_inactive(self):
         return self.status == STATUS_INACTIVE
+
 
 # providing_args=["request", "version"]
 submitted_for_review = Signal()
