@@ -106,6 +106,7 @@ class ExtensionUploadSerializer(serializers.Serializer):
             " reassign maintainership of uploaded by me extension"
         ),
     )
+    license = serializers.ChoiceField(choices=models.Licenses.values)
 
     def validate_source(self, value):
         try:

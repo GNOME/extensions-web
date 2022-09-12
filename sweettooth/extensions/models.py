@@ -483,6 +483,19 @@ def version_name_validator(value):
         )
 
 
+class Licenses(models.TextChoices):
+    # https://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses
+    Apache20 = "Apache-2.0", "Apache 2.0"
+    BSD2Clause = "BSD-2-Clause", "2-Clause BSD"
+    BSD3Clause = "BSD-3-Clause", "3-Clause BSD"
+    GPL20 = "GPL-2.0", "GPL 2.0"
+    GPL20OrLater = "GPL-2.0-or-later", "GPL-2.0 or later"
+    GPL30 = "GPL-3.0", "GPL 3.0"
+    GPL30OrLater = "GPL-3.0-or-later", "GPL 3.0 or later"
+    MIT = "MIT", "MIT"
+    MPL20 = "MPL-2.0", "MPL 2.0"
+
+
 class ExtensionVersion(models.Model):
     class Meta:
         unique_together = (("extension", "version"),)
@@ -510,6 +523,9 @@ class ExtensionVersion(models.Model):
     shell_versions = models.ManyToManyField(ShellVersion)
     session_modes = models.ManyToManyField(SessionMode)
     created = models.DateTimeField(auto_now_add=True, null=True)
+    license = models.CharField(
+        choices=Licenses.choices, default=Licenses.GPL20OrLater, max_length=24
+    )
 
     source = models.FileField(upload_to=make_filename, max_length=filename_max_length)
 
