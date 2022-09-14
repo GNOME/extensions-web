@@ -1,45 +1,45 @@
 # Indonesian translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2019.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2019. 2022.
 # Andika Triwidada <andika@gmail.com>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2019-12-31 09:13+0700\n"
-"Last-Translator: Andika Triwidada <atriwidada@gnome.org>\n"
+"POT-Creation-Date: 2022-08-09 08:33+0000\n"
+"PO-Revision-Date: 2022-08-11 10:52+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural= n!=1;\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Nama pengguna atau surel"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nama pengguna"
 
-#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Wajib. 30 karakter atau kurang. Hanya huruf, angka, dan @/./+/-/_."
 
-#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Nilai ini hanya boleh berisi huruf, angka dan karakter @/./+/-/_."
 
-#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Surel"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Anda tidak boleh memakai surel sebagai nama pengguna"
 
@@ -165,42 +165,62 @@ msgstr "Peringkat"
 msgid "Bug report"
 msgstr "Laporan kutu"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:23
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Pasang"
+
+#: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Tingkatkan ekstensi ini"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Konfigurasikan ekstensi ini"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Copot ekstensi ini"
 
-#: sweettooth/extensions/templates/extensions/detail.html:53
+#: sweettooth/extensions/templates/extensions/detail.html:54
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Halaman web ekstensi"
 
-#: sweettooth/extensions/templates/extensions/detail.html:58
+#: sweettooth/extensions/templates/extensions/detail.html:60
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Mode Sesi"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "Ekstensi ini akan berjalan saat layar terkunci"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Buka Kunci Dialog"
+
+#: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Unduh"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:68
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Versi Shell…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:72
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Versi Ekstensi…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -208,6 +228,12 @@ msgid ""
 msgstr ""
 "Peninjau akan meninjau ekstensi yang Anda kirim untuk memastikan tidak ada "
 "yang terlalu berbahaya. Anda akan dikirimkan surel hasil ulasan."
+
+#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Komentar dinonaktifkan untuk ekstensi ini."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -295,7 +321,7 @@ msgstr "Pengaturan Pengguna"
 msgid "Log out"
 msgstr "Keluar"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
@@ -305,20 +331,20 @@ msgstr ""
 "memasang integrasi GNOME Shell yang terdiri dari dua bagian: ekstensi "
 "peramban dan aplikasi perpesanan host native"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr "Pasang ekstensi integrasi peramban GNOME Shell"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
 msgstr "Klik di sini untuk memasang ekstensi peramban"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr "Lihat %swiki page%s untuk instruksi pemasangan konektor host native"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "

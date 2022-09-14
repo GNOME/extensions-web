@@ -2,14 +2,14 @@
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
 # Serdar Sağlam <teknomobil@msn.com>, 2019.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2019.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2019-02-26 19:24+0300\n"
+"POT-Creation-Date: 2022-08-09 08:33+0000\n"
+"PO-Revision-Date: 2022-09-04 22:55+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -19,30 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 3.30.1\n"
 
-#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Kullanıcı adı ya da e-posta"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Gerekli. 30 karakter veya daha az olmalı. Yalnızca harfler, rakamlar ve @/./"
 "+/-/_"
 
-#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Bu giriş yalnızca harfler, sayılar ve @/./+/-/_ karakterlerini içerebilir."
 
-#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-posta"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "E-posta adresini kullanıcı adı olarak kullanmayınız"
 
@@ -68,7 +68,7 @@ msgstr "Hesabınız yok mu?"
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
-msgstr "Kayıt Ol"
+msgstr "Kaydol"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -94,7 +94,7 @@ msgstr ""
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr "Parolalayı sıfırla"
+msgstr "Parolayı sıfırla"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
@@ -111,7 +111,7 @@ msgstr "Kendininkileri ekle"
 
 #: sweettooth/context_processors.py:17 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr "Kurulu eklentiler"
+msgstr "Kurulu uzantılar"
 
 #: sweettooth/context_processors.py:21 extensions-web-domain-django:1
 msgid "About"
@@ -119,7 +119,7 @@ msgstr "Hakkında"
 
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Extensions"
-msgstr "Eklentiler"
+msgstr "Uzantılar"
 
 #: sweettooth/extensions/templates/extensions/comments.html:18
 #: extensions-web-domain-django:1
@@ -168,61 +168,87 @@ msgstr "Oyla"
 msgid "Bug report"
 msgstr "Hata bildir"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:23
 #: extensions-web-domain-django:1
-msgid "Upgrade this extension"
-msgstr "Bu eklentiyi güncelle"
+msgid "Install"
+msgstr "Kur"
 
 #: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
-msgid "Configure this extension"
-msgstr "Bu eklentiyi yapılandır"
+msgid "Upgrade this extension"
+msgstr "Bu uzantıyı güncelle"
 
 #: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
-msgid "Uninstall this extension"
-msgstr "Bu eklentiyi kaldır"
+msgid "Configure this extension"
+msgstr "Bu uzantıyı yapılandır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:53
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "Bu uzantıyı kaldır"
+
+#: sweettooth/extensions/templates/extensions/detail.html:54
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
-msgstr "Eklenti Sayfası"
+msgstr "Uzantı Sayfası"
 
-#: sweettooth/extensions/templates/extensions/detail.html:58
+#: sweettooth/extensions/templates/extensions/detail.html:60
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Oturum Kip(ler)i"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "Bu uzantı ekran kilitliyken çalışacaktır"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Kilit Açma İletişim Penceresi"
+
+#: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "İndir"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:68
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Kabuk sürümü…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:72
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr "Eklenti sürümü…"
+msgstr "Uzantı sürümü…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
 "Bir gözlemci, çok tehlikeli bir şey olmadığından emin olmak için "
-"gönderdiğiniz eklentiyi inceler. İşlemin sonucu size e-posta ile "
+"gönderdiğiniz uzantıyı inceler. İşlemin sonucu size e-posta ile "
 "gönderilecektir."
+
+#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Bu uzantı yorumlara kapalıdır."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr "Eklenti ara…"
+msgstr "Uzantı ara…"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
 #: extensions-web-domain-django:1
 msgid "Installed Extensions"
-msgstr "Kurulu Eklentiler"
+msgstr "Kurulu Uzantılar"
 
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
@@ -235,7 +261,7 @@ msgstr "İçerik"
 
 #: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
 msgid "Metadata"
-msgstr "Üstveri"
+msgstr "Üst Veri"
 
 #: sweettooth/ratings/templates/comments/form.html:26
 #: sweettooth/ratings/templates/comments/preview.html:45
@@ -247,13 +273,13 @@ msgstr "Gönder"
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr "Önizle"
+msgstr "Ön İzle"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr "Bu GNOME eklentisi hakkında ne düşünüyorsunuz?"
+msgstr "Bu GNOME uzantısıyla ilgili ne düşünüyorsunuz?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
@@ -265,7 +291,7 @@ msgstr[0] "Lütfen aşağıdaki hatayı düzeltin"
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr "Yorumun önizlemesi"
+msgstr "Yorumun ön izlemesi"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
@@ -279,12 +305,12 @@ msgstr "Yorumu düzenle"
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr "GNOME Kabuk Eklentileriʼnde en son eklentiler"
+msgstr "GNOME Kabuk Uzantılarıʼnda en son uzantılar"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "GNOME Kabuk Eklentileri"
+msgstr "GNOME Kabuk Uzantıları"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -298,43 +324,43 @@ msgstr "Kullanıcı Ayarları"
 msgid "Log out"
 msgstr "Oturumu kapat"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"Bu siteyi kullanarak GNOME Kabuk eklentilerini denetlemek için iki bölümden "
-"oluşan GNOME Kabuk tümleşimini kurmalısınız: tarayıcı eklentisi ve yerli ana "
+"GNOME Kabuk uzantılarını bu siteyi kullanarak denetlemek için iki parçalık "
+"GNOME Kabuk tümleşimini kurmalısınız: tarayıcı uzantısı ve yerli ana "
 "makine iletişim uygulaması"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr "GNOME Kabuk için tarayıcı tümleşimi eklentisini yükleyin"
+msgstr "GNOME Kabuk için tarayıcı tümleşimi uzantısını kur"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr "Tarayıcı eklentisini kurmak için tıklayın"
+msgstr "Tarayıcı uzantısını kurmak için tıkla"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
-msgstr "Yerli ana makine bağlayıcı kurulumu için %swiki sayfasına%s göz atın"
+msgstr "Yerli ana makine bağlayıcı kurulumu için %swiki sayfasına%s göz at"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"Bu sistemde çalışan bir GNOME kopyası bulamıyoruz, bu nedenle arayüzün bazı "
+"Bu sistemde çalışan GNOME kopyası bulamıyoruz, bu nedenle arayüzün bazı "
 "bölümleri devre dışı bırakılabilir. Daha çok bilgi için <a href=\"/about/#no-"
 "detection\">sorun giderme girdimize</a> bakın."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
-msgstr "GNOME Kabuk Eklentileri, kurulu eklentilerinizi listeleyemez."
+msgstr "GNOME Kabuk Uzantıları, kurulu uzantılarınızı listeleyemez."
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
@@ -384,7 +410,7 @@ msgstr "Ne oldu?"
 #: extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions did not detect any errors with this extension."
 msgstr ""
-"GNOME Kabuk eklentileri bu eklenti ile ilgili herhangi bir hata saptamadı."
+"GNOME Kabuk Uzantıları, bu uzantıyla ilgili herhangi bir hata saptamadı."
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
@@ -399,7 +425,7 @@ msgstr "Kabuk sürümü"
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Extension version"
-msgstr "Eklenti sürümü"
+msgstr "Uzantı sürümü"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
@@ -419,18 +445,9 @@ msgstr "Kendiliğinden algılanan hatalar"
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr "Sistem eklentisi"
+msgstr "Sistem uzantısı"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
-msgstr "Eklenti kaldırıldı"
-
-#~ msgid "Password"
-#~ msgstr "Parola"
-
-#~ msgid "Password confirmation"
-#~ msgstr "Parola doğrulama"
-
-#~ msgid "Enter the same password as above, for verification."
-#~ msgstr "Doğrulama için yukarıdaki parolayı girin."
+msgstr "Uzantı kaldırıldı"
