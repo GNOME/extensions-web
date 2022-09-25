@@ -7,41 +7,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"POT-Creation-Date: 2022-08-09 08:33+0000\n"
+"PO-Revision-Date: 2022-09-14 17:00+0300\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-02-23 22:39+0200\n"
-"Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
-"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Käyttäjänimi tai sähköposti"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Käyttäjänimi"
 
-#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
-"Vaadittu. 30 merkkiä tai vähemmän. Vain kirjaimia, numeroita ja merkkejä "
-"@/./+/-/_"
+"Vaadittu. 30 merkkiä tai vähemmän. Vain kirjaimia, numeroita ja merkkejä @/./"
+"+/-/_"
 
-#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
-"Tämä arvo voi sisältää vain kirjaimia, numeroita ja merkkejä @/./+/-/_"
+msgstr "Tämä arvo voi sisältää vain kirjaimia, numeroita ja merkkejä @/./+/-/_"
 
-#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Sähköposti"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Vältä sähköpostiosoitteen käyttämistä käyttäjänimenä"
 
@@ -123,13 +122,13 @@ msgstr "Laajennukset"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
-"Vaadimme roskapostin estämiseksi <a href=\"%(login_url)s"
-"\">sisäänkirjautumista GNOME Shell Extensions -sivustolle</a>, jotta voit "
-"kommentoida tai ilmoittaa virheestä. Ymmärräthän?"
+"Vaadimme roskapostin estämiseksi <a "
+"href=\"%(login_url)s\">sisäänkirjautumista GNOME Shell Extensions -"
+"sivustolle</a>, jotta voit kommentoida tai ilmoittaa virheestä. Ymmärräthän?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
@@ -166,42 +165,62 @@ msgstr "Arvostelu"
 msgid "Bug report"
 msgstr "Vikailmoitus"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:23
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Asenna"
+
+#: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Päivitä tämä laajennus"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Muokkaa laajennuksen asetuksia"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Poista tämä laajennus"
 
-#: sweettooth/extensions/templates/extensions/detail.html:53
+#: sweettooth/extensions/templates/extensions/detail.html:54
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Laajennuksen sivusto"
 
-#: sweettooth/extensions/templates/extensions/detail.html:58
+#: sweettooth/extensions/templates/extensions/detail.html:60
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "Tämä laajennus on käynnissä näytön ollessa lukittu"
+
+#: sweettooth/extensions/templates/extensions/detail.html:61
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Lataa"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:68
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Shell-versio…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:72
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Laajennuksen versio…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -209,6 +228,12 @@ msgid ""
 msgstr ""
 "Tarkistaja katselmoi lähettämäsi laajennuksen varmistaakseen, ettei se ole "
 "vaarallinen. Katselmoinnin arvio lähetetään sinulle sähköpostitse."
+
+#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Kommentit on poistettu käytöstä tämän laajennuksen kohdalla."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -296,7 +321,7 @@ msgstr "Asetukset"
 msgid "Log out"
 msgstr "Kirjaudu ulos"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
@@ -306,28 +331,28 @@ msgstr ""
 "tulee asentaa GNOME Shell -integraatio, joka koostuu kahdesta osasta: "
 "selainlaajennuksesta ja native host messaging -sovelluksesta"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr "Asenna GNOME Shell integration -selainlaajennus"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
 msgstr "Napsauta tästä asentaaksesi selainlaajennuksen"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr "Lue %swikisivu%s natiivin host connectorin asennusohjeiksi"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
 "Emme havaitse käynnissä olevaa GNOME-asennusta järjestelmässäsi, joten "
-"jotkin osat käyttöliittymästä saattavat olla pois käytöstä. <a href=\"/"
-"about/#no-detection\">Lue ongelmanratkaisu</a> saadaksesi lisätietoja."
+"jotkin osat käyttöliittymästä saattavat olla pois käytöstä. <a href=\"/about/"
+"#no-detection\">Lue ongelmanratkaisu</a> saadaksesi lisätietoja."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
