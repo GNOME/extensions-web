@@ -378,6 +378,10 @@ class ExtensionVersion(models.Model):
         unique_together = ('extension', 'version'),
         get_latest_by = 'version'
 
+        indexes = (
+            models.Index(fields=('extension', 'status'), name='extension_id__status_idx'),
+        )
+
     def __str__(self):
         return "Version %d of %s" % (self.version, self.extension)
 

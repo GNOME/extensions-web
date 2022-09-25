@@ -186,6 +186,20 @@ def ajax_query_params_query(request, versions, n_per_page):
     if versions is not None:
         version_qs = version_qs.filter(shell_versions__in=versions)
 
+    '''
+    TODO: this is produces temporary table.
+    SELECT DISTINCT
+       `extensions_extension`.`id`, `extensions_extension`.`name`, `extensions_extension`.`uuid`, `extensions_extension`.`slug`,
+       `extensions_extension`.`creator_id`, `extensions_extension`.`description`, `extensions_extension`.`url`,
+       `extensions_extension`.`created`, `extensions_extension`.`downloads`, `extensions_extension`.`popularity`,
+       `extensions_extension`.`allow_comments`, `extensions_extension`.`screenshot`, `extensions_extension`.`icon`
+    FROM `extensions_extension`
+    INNER JOIN `extensions_extensionversion` ON (`extensions_extension`.`id` = `extensions_extensionversion`.`extension_id`)
+    WHERE `extensions_extensionversion`.`id` IN (SELECT U0.`id` FROM `extensions_extensionversion` U0 WHERE U0.`status` = 3)
+    ORDER BY `extensions_extension`.`popularity` DESC
+
+    We must cache "active" ExtensionVersion state in Extension model and use it in filter
+    '''
     queryset = models.Extension.objects.distinct().filter(versions__in=version_qs)
 
     uuids = request.GET.getlist('uuid')
@@ -197,7 +211,7 @@ def ajax_query_params_query(request, versions, n_per_page):
     if sort not in ('created', 'downloads', 'popularity', 'name'):
         raise Http404()
 
-    queryset = queryset.order_by(sort)
+    queryset = queryset.order_by(sort, 'uuid')
 
     # Sort by ASC for name, DESC for everything else.
     if sort == 'name':
