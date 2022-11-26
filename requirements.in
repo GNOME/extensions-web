@@ -1,4 +1,4 @@
-Django==3.2.15
+Django==3.2.16
 djangorestframework==3.13.1
 django-autoslug==1.9.8
 django-contrib-comments==2.1.0
@@ -9,7 +9,7 @@ django-rest-knox==4.2.0
 drf-nested-routers==0.93.4
 drf-spectacular[sidecar]==0.22.1
 Pygments==2.11.2
-Pillow==9.0.1
+Pillow==9.3.0
 polib==1.1.1
 chardet==4.0.0
 dj-database-url==0.5.0
