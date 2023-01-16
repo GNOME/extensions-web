@@ -1,84 +1,85 @@
-# Friulian translation for extensions-web.
-# Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
+# Belarusian translation for extensions-web.
+# Copyright (C) 2022 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Fabio Tomat <f.t.public@gmail.com>, 2019.
+# Yuras Shumovich <shumovichy@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-12-20 19:33+0000\n"
-"Last-Translator: Fabio T. <f.t.public@gmail.com>\n"
-"Language-Team: Friulian <f.t.public@gmail.com>\n"
-"Language: fur\n"
+"PO-Revision-Date: 2022-12-16 23:47+0300\n"
+"Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
+"Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
+"Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Editor: HaiPO 1.4 beta\n"
-"X-Generator: Poedit 2.2.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
-msgstr "Non utent o e-mail"
+msgstr "Імя карыстальніка або электронная пошта"
 
 #: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
 msgid "Username"
-msgstr "Non utent"
+msgstr "Імя карыстальніка"
 
 #: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
-"Necessari. 30 caratars o di mancul. Dome letaris, numars e @/./+/-/_ ."
+"Абавязкова. Не больш за 30 сімвалаў. Толькі літары, лічбы і сімвалы @/./+/-/"
+"_."
 
 #: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
-"Chest valôr al pues contignî dome letaris, numars e i caratars @/./+/-/_ ."
+msgstr "Гэта значэнне можа змяшчаць толькі літары, лічбы і сімвалы @/./+/-/_."
 
 #: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
 msgid "Email"
-msgstr "E-mail"
+msgstr "Электронная пошта"
 
 #: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "You should not use email as username"
-msgstr "Pal non utent no tu varessis di doprâ la e-mail"
+msgstr ""
+"Вы не павінны выкарыстоўваць у якасці імя карыстальніка электронную пошту"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
-msgstr "Password dismenteade?"
+msgstr "Забылі свой пароль?"
 
 #: sweettooth/auth/templates/registration/login.html:32
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
-msgstr "Jentre"
+msgstr "Увайсці"
 
 #: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr "No tu âs un account?"
+msgstr "Няма ўліковага запісу?"
 
 #: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
-msgstr "Regjistriti"
+msgstr "Зарэгістравацца"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
 msgid "User Login"
-msgstr "Acès utent"
+msgstr "Уваход карыстальніка"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:12
 #: sweettooth/auth/templates/registration/password_reset_form.html:12
 #: extensions-web-domain-django:1
 msgid "Reset your password"
-msgstr "Azere la password"
+msgstr "Скінуць пароль"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
@@ -86,14 +87,13 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
-"Il token pal azerament de password nol è just. Controle il colegament e "
-"torne prove."
+"Токен для скідання пароля няправільны. Праверце спасылку і паўтарыце спробу."
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr "Azerament password"
+msgstr "Скіданне пароля"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
@@ -101,126 +101,126 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Password dismenteade? Inserìs la tô direzion e-mail chi sot e ti inviarin "
-"une e-mail cun lis istruzions par creâ une gnove."
+"Забылі пароль? Увядзіце ніжэй свой адрас электроннай пошты, і мы вышлем "
+"інструкцыі, як вам задаць новы."
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
-msgstr "Zonte lis tôs"
+msgstr "Дадаць сваё"
 
 #: sweettooth/context_processors.py:17 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr "Estensions instaladis"
+msgstr "Усталяваныя пашырэнні"
 
 #: sweettooth/context_processors.py:21 extensions-web-domain-django:1
 msgid "About"
-msgstr "Informazions"
+msgstr "Пра нас"
 
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Extensions"
-msgstr "Estensions"
+msgstr "Пашырэнні"
 
 #: sweettooth/extensions/templates/extensions/comments.html:18
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
 "Unfortunately, to help prevent spam, we require that you <a "
-"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post"
-" a comment or report an error. You understand, right?"
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to "
+"post a comment or report an error. You understand, right?"
 msgstr ""
-"Par prevignî i messaçs di spam, al è necessari che tu <a "
-"href=\"%(login_url)s\">jentredis su Estensions di GNOME Shell</a> par podê "
-"publicâ un coment o segnalâ un erôr. Capît, no mo?"
+"На жаль, каб прадухіліць спам, мы патрабуем ад вас <a "
+"href=\"%(login_url)s\">ўвайсці ў GNOME Shell Extensions</a>, каб пакідаць "
+"каментарыі або паведамляць пра памылкі. Вы разумееце, праўда?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr "Recensions utents"
+msgstr "Водгукі карыстальнікаў"
 
 #: sweettooth/extensions/templates/extensions/comments.html:25
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr "Daûr a cjariâ lis recensions…"
+msgstr "Загрузка водгукаў…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
 msgid "Your opinion"
-msgstr "La tô opinion"
+msgstr "Ваша меркаванне"
 
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr "Lasse un…"
+msgstr "Пакінуць…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
 msgid "Comment"
-msgstr "Coment"
+msgstr "Каментарый"
 
 #: sweettooth/extensions/templates/extensions/comments.html:8
 #: extensions-web-domain-django:1
 msgid "Rating"
-msgstr "Valutazion"
+msgstr "Ацэнку"
 
 #: sweettooth/extensions/templates/extensions/comments.html:9
 #: extensions-web-domain-django:1
 msgid "Bug report"
-msgstr "Segnalazion erôr"
+msgstr "Справаздачу пра памылку"
 
 #: sweettooth/extensions/templates/extensions/detail.html:23
 #: extensions-web-domain-django:1
 msgid "Install"
-msgstr "Instale"
+msgstr "Усталяваць"
 
 #: sweettooth/extensions/templates/extensions/detail.html:26
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
-msgstr "Inzorne cheste estension"
+msgstr "Абнавіць пашырэнне"
 
 #: sweettooth/extensions/templates/extensions/detail.html:27
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
-msgstr "Configure cheste estension"
+msgstr "Наладзіць пашырэнне"
 
 #: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
-msgstr "Disinstale cheste estension"
+msgstr "Выдаліць пашырэнне"
 
 #: sweettooth/extensions/templates/extensions/detail.html:54
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
-msgstr "Pagjine principâl de estension"
+msgstr "Старонка пашырэння"
 
 #: sweettooth/extensions/templates/extensions/detail.html:60
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
-msgstr "Modalitât(s) de session"
+msgstr "Рэжым(ы) сеанса"
 
 #: sweettooth/extensions/templates/extensions/detail.html:61
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
-msgstr "Cheste estension no funzionarà intant che il schermi al sarà blocât"
+msgstr "Гэта пашырэнне будзе працаваць, калі экран заблакіраваны"
 
 #: sweettooth/extensions/templates/extensions/detail.html:61
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
-msgstr "Sbloche dialic"
+msgstr "Дыялогавае акно разблакіравання"
 
 #: sweettooth/extensions/templates/extensions/detail.html:65
 #: extensions-web-domain-django:1
 msgid "Download"
-msgstr "Discjarie"
+msgstr "Спампаваць"
 
 #: sweettooth/extensions/templates/extensions/detail.html:68
 #: extensions-web-domain-django:1
 msgid "Shell version…"
-msgstr "Version de shell…"
+msgstr "Версія абалонкі…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:72
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr "Version de estension…"
+msgstr "Версія пашырэння…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
@@ -228,101 +228,102 @@ msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"Un editôr al fasarà une recension su la estension cjariade par sigurâsi che "
-"nol è nuie di pericolôs. Ti vignarà mandade une e-mail cul risultât dal "
-"control."
+"Рэдактар разгледзіць адпраўленае пашырэнне, каб пераканацца, што яно не "
+"змяшчае чагосьці занадта небяспечнага. Вы атрымаеце вынік разгляду па "
+"электроннай пошце."
 
 #: sweettooth/extensions/templates/extensions/detail.html:92
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
-msgstr "I coments a son disabilitâts par cheste estension."
+msgstr "Для гэтага пашырэння каментарыі адключаны."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr "Cîr estensions…"
+msgstr "Пошук пашырэнняў…"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
 #: extensions-web-domain-django:1
 msgid "Installed Extensions"
-msgstr "Estensions instaladis"
+msgstr "Усталяваныя пашырэнні"
 
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
 msgid "Shell settings"
-msgstr "Impostazions Shell"
+msgstr "Налады абалонкі"
 
 #: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Content"
-msgstr "Contignût"
+msgstr "Змесціва"
 
 #: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
 msgid "Metadata"
-msgstr "Metadâts"
+msgstr "Метаданыя"
 
 #: sweettooth/ratings/templates/comments/form.html:26
 #: sweettooth/ratings/templates/comments/preview.html:45
 #: extensions-web-domain-django:1
 msgid "Post"
-msgstr "Publiche"
+msgstr "Апублікаваць"
 
 #: sweettooth/ratings/templates/comments/form.html:27
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr "Anteprime"
+msgstr "Перадпрагляд"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr "Ce pensistu di cheste estension GNOME?"
+msgstr "Што вы думаеце пра гэта пашырэнне GNOME?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Par plasê, comede l'erôr chi sot"
-msgstr[1] "Par plasê, comede i erôrs chi sot"
+msgstr[0] "Выпраўце памылку ніжэй"
+msgstr[1] "Выпраўце памылкі ніжэй"
+msgstr[2] "Выпраўце памылкі ніжэй"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr "Anteprime dal to coment"
+msgstr "Папярэдні прагляд каментарыя"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr "Publiche coment"
+msgstr "Апублікаваць каментарый"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr "Modifiche il to coment"
+msgstr "Рэдагаваць каментарый"
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr "Ultimis estensions in Estensions di GNOME Shell"
+msgstr "Апошнія пашырэнні на пляцоўцы Пашырэнні абалонкі GNOME"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "Estensions di GNOME Shell"
+msgstr "Пашырэнні абалонкі GNOME"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
-msgstr "Profîl utent"
+msgstr "Профіль карыстальніка"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
-msgstr "Impostazions utent"
+msgstr "Налады карыстальніка"
 
 #: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
 msgid "Log out"
-msgstr "Disconet"
+msgstr "Выйсці"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
@@ -330,25 +331,25 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"Par controlâ lis estensions di GNOME Shell doprant chest sît si scugne "
-"instalâ la integrazion di GNOME Shell, che e consist in doi parts: une "
-"estension pal navigadôr web e un program natîf pal sisteme operatîf pe "
-"gjestion dai messaçs"
+"Каб кіраваць пашырэннямі абалонкі GNOME праз гэты сайт, вы павінны "
+"ўсталяваць інтэграцыю з абалонкай GNOME, якая складаецца з дзвюх частак: "
+"пашырэнне браўзера і спецыялізаваная праграма хоста для абмену "
+"паведамленнямі"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr "Instale la estension dal navigadôr web pe integrazion di GNOME Shell"
+msgstr "Усталюйце пашырэнне браўзера для інтэграцыі з абалонкай GNOME"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr "Fâs clic achì par instalâ la estension dal navigadôr web"
+msgstr "Націсніце тут, каб усталяваць пашырэнне для браўзера"
 
 #: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Viôt la %swiki page%s pes istruzions di instalazion dal conetôr natîf par "
-"chest host"
+"Глядзіце %swiki page%s, каб атрымаць інструкцыі, як усталяваць "
+"спецыялізаваны злучальнік хоста"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
@@ -356,112 +357,102 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"No rivin a cjatâ su chest sisteme une copie in esecuzion di GNOME, duncje "
-"cualchi part de interface e podarès jessi disabilitade. Viôt <a "
-"href=\"/about/#no-detection\">la nestre vuide ae risoluzion dai "
-"problemis</a> par vê plui informazions."
+"Мы не можам выявіць запушчаную копію GNOME у гэтай сістэме, некаторыя "
+"часткі інтэрфейсу могуць быць адключаны. Каб атрымаць дадатковыя звесткі, "
+"глядзіце <a href=\"/about/#no-detection\">наш артыкул пра выпраўленне "
+"непаладак</a>."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
-"Estensions di GNOME Shell nol pues listâ lis tôs estensions instaladis."
+"Пашырэнні абалонкі GNOME не могуць вывесці спіс усталяваных пашырэнняў."
 
 #: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
 msgid "Compatible with"
-msgstr "Compatibile cun"
+msgstr "Сумяшчальна з"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
-msgstr "Non"
+msgstr "Назва"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr "Resint"
+msgstr "Нядаўнія"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
-msgstr "Discjariaments"
+msgstr "Спампоўванні"
 
 #: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
 msgid "Popularity"
-msgstr "Popolaritât"
+msgstr "Папулярнасць"
 
 #: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
 msgid "Sort by"
-msgstr "Ordene par"
+msgstr "Сартаванне"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr "Mostre plui recensions"
+msgstr "Паказаць больш водгукаў"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr "No'ndi son coments. Divente il prin!"
+msgstr "Няма каментарыяў. Станьце першым!"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:4
 #: extensions-web-domain-djangojs:1
 msgid "Author"
-msgstr "Autôr"
+msgstr "Аўтар"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "What's wrong?"
-msgstr "Ce isal che nol funzione?"
+msgstr "Што не так?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:17
 #: extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr ""
-"Estensions di GNOME Shell nol à cjatât nissun erôr cun cheste estension."
+msgstr "Пашырэнні абалонкі GNOME не выявілі праблем з гэтым пашырэннем."
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:20
 #: extensions-web-domain-djangojs:1
 msgid "Version information"
-msgstr "Informazions di version"
+msgstr "Інфармацыя пра версію"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:22
 #: extensions-web-domain-djangojs:1
 msgid "Shell version"
-msgstr "Version de shell"
+msgstr "Версія абалонкі"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Extension version"
-msgstr "Version de estension"
+msgstr "Версія пашырэння"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:23
 #: extensions-web-domain-djangojs:1
 msgid "Unknown"
-msgstr "No cognossude"
+msgstr "Невядома"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:5
 #: extensions-web-domain-djangojs:1
 msgid "What have you tried?"
-msgstr "Ce âstu provât a fâ?"
+msgstr "Што вы спрабавалі?"
 
 #: sweettooth/static/js/templates/extensions/error_report_template.mst:9
 #: extensions-web-domain-djangojs:1
 msgid "Automatically detected errors"
-msgstr "Erôrs rilevâts in automatic"
+msgstr "Аўтаматычна выяўленыя памылкі"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr "Estension di sisteme"
+msgstr "Пашырэнне сістэмы"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
-msgstr "Tu âs disinstalât"
-
-#~ msgid "Password"
-#~ msgstr "Password"
-
-#~ msgid "Password confirmation"
-#~ msgstr "Conferme password"
-
-#~ msgid "Enter the same password as above, for verification."
-#~ msgstr "Inserìs la stesse password di prime, pe verifiche."
+msgstr "Вы выдалілі"
