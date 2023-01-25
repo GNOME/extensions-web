@@ -1,22 +1,22 @@
 # Brazilian Portuguese translation for extensions-web.
-# Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
+# Copyright (C) 2023 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2022.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-15 15:45-0300\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-01-25 08:50-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
-"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Gtranslator 42.0\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -232,7 +232,6 @@ msgstr ""
 #: sweettooth/extensions/templates/extensions/detail.html:92
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
-#| msgid "Configure this extension"
 msgid "Comments are disabled for this extension."
 msgstr "Comentários estão desabilitados nessa extensão."
 
@@ -301,6 +300,51 @@ msgstr "Publica seu comentário"
 msgid "Edit your comment"
 msgstr "Edite seu comentário"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Você pode enviar a próxima versão pelo <a href='https://extensions.gnome.org/"
+"upload/'>mesmo formulário</a> que você publicou esta versão."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Você pode alterar o ícone da extensão clicando no ícone na página da "
+"extensão."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Caso você queira desativar uma versão aprovada, clique no link de inativação "
+"na sua página de extensão."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Você pode encontrar os guias do desenvolvedor em <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Se precisar de ajuda com sua extensão, você pode nos perguntar no <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>canal Matrix do GNOME</a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Últimas extensões no GNOME Shell Extensions"
@@ -309,6 +353,10 @@ msgstr "Últimas extensões no GNOME Shell Extensions"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "GNOME Shell Extensions"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Guia do desenvolvedor"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
