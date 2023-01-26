@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-09-11 20:56+0200\n"
-"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-01-26 19:27+0100\n"
+"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -308,6 +308,51 @@ msgstr "Objavi mnenje"
 msgid "Edit your comment"
 msgstr "Uredi mnenje"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Naslednjo različico lahko naložite z <a href='https://extensions.gnome.org/"
+"upload/'>istim obrazcem</a>, s katerim ste objavili to različico."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Ikono razširitve lahko spremenite, tako da kliknete ikono na strani "
+"razširitve."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"V primeru, da želite deaktivirati odobreno različico, kliknite na povezavo "
+"deaktivacije na strani razširitve."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Vodnike za razvijalce najdete na <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Če potrebujete pomoč za svoje razširitve, nas lahko vprašate na <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>kanalu GNOME Matrix</a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Najnovejše razširitve Lupine GNOME"
@@ -316,6 +361,10 @@ msgstr "Najnovejše razširitve Lupine GNOME"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Razširitve lupine Gnome"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Vodnik za razvijalce"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -457,6 +506,3 @@ msgstr "Sistemska razširitev"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Odstranili ste"
-
-#~ msgid "Password"
-#~ msgstr "Geslo"
