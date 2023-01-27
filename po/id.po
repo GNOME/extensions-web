@@ -1,23 +1,23 @@
 # Indonesian translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2019. 2022.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2019, 2022-2023.
 # Andika Triwidada <andika@gmail.com>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-11 10:52+0700\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-01-27 09:46+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural= n!=1;\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -282,7 +282,6 @@ msgstr "Apa pendapat Anda tentang ekstensi GNOME ini?"
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
 msgstr[0] "Mohon perbaiki kesalahan di bawah"
-msgstr[1] "Mohon perbaiki kesalahan di bawah"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
@@ -300,6 +299,53 @@ msgstr "Kirim Komentar"
 msgid "Edit your comment"
 msgstr "Sunting komentar Anda"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Anda dapat mengunggah versi berikutnya dengan <a href='https://extensions."
+"gnome.org/upload/'>formulir yang sama</a> dengan yang telah Anda posting "
+"versi ini."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Anda dapat mengubah ikon ekstensi dengan mengklik ikon di halaman ekstensi "
+"Anda."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Jika Anda ingin menonaktifkan versi yang disetujui, klik tautan nonaktifkan "
+"di halaman ekstensi Anda."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Anda dapat menemukan panduan pengembang di <a href='https://gjs.guide/"
+"extensions/'>gjs.guide.</a>"
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Jika Anda memerlukan bantuan dengan ekstensi Anda, Anda dapat bertanya "
+"kepada kami di <a href='https://matrix.to/#/#extensions:gnome.org'>Kanal "
+"Matrix GNOME</a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Ekstensi terbaru dalam Ekstensi GNOME Shell"
@@ -308,6 +354,10 @@ msgstr "Ekstensi terbaru dalam Ekstensi GNOME Shell"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Ekstensi GNOME Shell"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Panduan Pengembang"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
