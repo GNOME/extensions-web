@@ -47,7 +47,7 @@ class Command(BaseCommand):
             if not user:
                 try:
                     user = UserModel.objects.get(username=random_name)
-                except UserModel.DoesNotExists:
+                except UserModel.DoesNotExist:
                     user = UserModel.objects.create_user(
                         username=random_name,
                         email='%s@%s' % (random_name, current_site.domain),
