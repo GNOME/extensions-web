@@ -433,7 +433,8 @@ def ajax_details(extension, version=None):
                    link = extension.get_absolute_url(),
                    icon = extension_icon(extension.icon),
                    screenshot = extension.screenshot.url if extension.screenshot else None,
-                   shell_version_map = extension.visible_shell_version_map)
+                   shell_version_map = extension.visible_shell_version_map,
+                   downloads=extension.downloads)
 
     if version is not None:
         download_url = reverse('extensions-shell-download', kwargs=dict(uuid=extension.uuid))
