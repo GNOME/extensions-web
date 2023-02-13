@@ -4,15 +4,18 @@
 #
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2019.
 # Tim Sabsch <tim@sabsch.com>, 2019, 2022.
-# Christian Kirbach <christian.kirbach@gmail.com>, 2020
-# Jürgen Benvenuti <gastornis@posteo.org>, 2022
+# Christian Kirbach <christian.kirbach@gmail.com>, 2020.
+# Jürgen Benvenuti <gastornis@posteo.org>, 2022.
+# Philipp Kiemle <philipp.kiemle@gmail.com>, 2023.
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-09-17 11:37+0200\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-02-13 22:30+0100\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -127,9 +130,9 @@ msgstr "Erweiterungen"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Zur Vermeidung von Spam ist es leider notwendig, dass Sie sich bei den <a "
 "href=\"%(login_url)s\">GNOME Shell-Erweiterungen</a> anmelden, um einen "
@@ -311,6 +314,53 @@ msgstr "Kommentar abschicken"
 msgid "Edit your comment"
 msgstr "Ihren Kommentar bearbeiten"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Sie können die nächste Version über das <a href='https://extensions.gnome."
+"org/upload/'>gleiche Formular</a> hochladen, über das Sie diese Version "
+"hochgeladen haben."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Sie können das Erweiterungssymbol ändern, indem Sie auf das Symbol auf der "
+"Erweiterungsseite klicken."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Falls Sie eine genehmigte Version deaktivieren möchten, klicken Sie auf "
+"»Link deaktivieren« auf der Erweiterungsseite."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Sie finden Entwicklerhandbücher auf <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Wenn Sie Hilfe mit Ihrer Erweiterung benötigen, können Sie uns auf dem <a "
+"href='https://extensions.gnome.org/upload/'>GNOME Matrix-Kanal</a> "
+"kontaktieren."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Neueste GNOME Shell-Erweiterungen"
@@ -319,6 +369,10 @@ msgstr "Neueste GNOME Shell-Erweiterungen"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "GNOME Shell-Erweiterungen"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Entwicklerhandbuch"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
