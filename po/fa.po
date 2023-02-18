@@ -1,14 +1,14 @@
 # Persian translation for extensions-web.
 # Copyright (C) 2020 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Danial Behzadi <dani.behzi@ubuntu.com>, 2020.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2020-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-09 13:38+0430\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-02-18 18:14+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -297,6 +297,43 @@ msgstr "فرستادن نظر"
 msgid "Edit your comment"
 msgstr "ویرایش نظرتان"
 
+#: sweettooth/review/templates/review/review.html:63 extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"می‌توانید نگارش بعدی را با <a href='https://extensions.gnome.org/upload/'>همین "
+"فرمی</a> که این نگاش را فرستادید بارگذارید."
+
+#: sweettooth/review/templates/review/review.html:66 extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension page."
+msgstr "می‌توانید نقشک افزونه را با زدن روی نقشک در صفحهٔ افزونه‌تان عوض کنید."
+
+#: sweettooth/review/templates/review/review.html:69 extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link in "
+"your extension page."
+msgstr ""
+"اگر می‌خواهید نگارشی تأیید شده را فیرفعّال کنید، پیوند غیرفعّال کردن را در صفحهٔ "
+"افزونه‌تان بزنید."
+
+#: sweettooth/review/templates/review/review.html:72 extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"می‌ةوانید رهنمودهای توسعه‌دهنده را در <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a> بیابید."
+
+#: sweettooth/review/templates/review/review.html:75 extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"اگر برای افزونه‌تان نیاز به کمک داشتید می‌توانید روی <a href='https://matrix.to/#/"
+"#extensions:gnome.org'>کانال ماتریکس گنوم</a> از ما بپرسید"
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "جدیدترین افزونه‌ها دز افزونه‌های پوستهٔ گنوم"
@@ -305,6 +342,10 @@ msgstr "جدیدترین افزونه‌ها دز افزونه‌های پوست
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "افزونه‌های پوستهٔ گنوم"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "رهنمود توسعه‌دهندگان"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
