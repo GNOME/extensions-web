@@ -1,15 +1,15 @@
 # Hungarian translation for extensions-web.
-# Copyright (C) 2019, 2022 Free Software Foundation, Inc.
+# Copyright (C) 2019, 2022, 2023 Free Software Foundation, Inc.
 # This file is distributed under the same license as the extensions-web package.
 #
 # Balázs Meskó <mesko.balazs at fsf dot hu>, 2019.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2022.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-29 23:51+0200\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-02-21 01:15+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -235,7 +235,6 @@ msgstr ""
 #: sweettooth/extensions/templates/extensions/detail.html:92
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
-#| msgid "Configure this extension"
 msgid "Comments are disabled for this extension."
 msgstr "A hozzászólások le vannak tiltva ennél a kiterjesztésnél."
 
@@ -304,6 +303,52 @@ msgstr "Megjegyzés közzététele"
 msgid "Edit your comment"
 msgstr "Megjegyzés szerkesztése"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"A következő verziót <a href='https://extensions.gnome.org/upload/'>ugyanazzal"
+" az űrlappal</a> töltheti fel, mint amellyel ezt a verziót beküldte."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"A kiterjesztés ikonját a kiterjesztés oldalán lévő ikonra kattintva"
+" változtathatja meg."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Abban az esetben, ha inaktiválni szeretne egy jóváhagyott verziót, akkor"
+" kattintson a kiterjesztés oldalán lévő inaktiválási hivatkozásra."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Fejlesztői útmutatókat találhat a <a href='https://gjs.guide/extensions/'"
+">gjs.guide</a> oldalon."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Ha segítségre van szüksége a kiterjesztéssel kapcsolatban, kérdezzen minket a"
+" <a href='https://matrix.to/#/#extensions:gnome.org'>GNOME Matrix csatornán<"
+"/a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "A legfrissebb GNOME Shell kiterjesztések"
@@ -312,6 +357,10 @@ msgstr "A legfrissebb GNOME Shell kiterjesztések"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "GNOME Shell kiterjesztések"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Fejlesztői útmutató"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
