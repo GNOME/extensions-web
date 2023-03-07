@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -153,69 +153,82 @@ msgstr ""
 msgid "Bug report"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] ""
+msgstr[1] ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
