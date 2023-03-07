@@ -1,6 +1,6 @@
 variables:
   PYTHON_VERSION: '3.9'
-  XAPIAN_VERSION: '1.4.19'
+  XAPIAN_VERSION: '1.4.22'
 
 workflow:
   rules:
@@ -37,6 +37,7 @@ test:
       - PYTHON_VERSION:
           - '3.9'
           - '3.10'
+          - '3.11'
 
 security (trivy):
   stage: build and test
