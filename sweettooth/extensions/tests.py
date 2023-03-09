@@ -765,6 +765,16 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         uuids = self.gather_uuids(dict(shell_version="3.3.90"))
         self.assertEqual(uuids, [])
 
+    def test_downloads(self):
+        one = self.create_extension("one", downloads=450)
+        models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
+
+        response = self.get_response({"sort": "downloads"})
+        extension = response['extensions'][0]
+
+        self.assertEqual(extension["downloads"], 450)
+        
+
     def test_sort(self):
         one = self.create_extension("one", downloads=50, popularity=15)
         models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)

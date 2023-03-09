@@ -1,6 +1,6 @@
 variables:
   PYTHON_VERSION: '3.9'
-  XAPIAN_VERSION: '1.4.19'
+  XAPIAN_VERSION: '1.4.22'
 
 workflow:
   rules:
@@ -37,6 +37,7 @@ test:
       - PYTHON_VERSION:
           - '3.9'
           - '3.10'
+          - '3.11'
 
 security (trivy):
   stage: build and test
@@ -55,7 +56,7 @@ security (trivy):
   variables:
     TRIVY_CACHE_DIR: .trivy
     TRIVY_EXIT_CODE: 1
-    TRIVY_SECURITY_CHECKS: vuln,config
+    TRIVY_SCANNERS: vuln,config
     # This is single-run job so we do not care of k8s recommendations
     TRIVY_SKIP_FILES: openshift/jobs/reindex-extensions.yml
 

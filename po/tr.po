@@ -1,16 +1,17 @@
 # Turkish translation for extensions-web.
-# Copyright (C) 2019-2022 extensions-web's COPYRIGHT HOLDER
+# Copyright (C) 2019-2023 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
 #
 # Serdar Sağlam <teknomobil@msn.com>, 2019.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2022.
+# Sabri Ünal <libreajans@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-12-11 14:20+0300\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-02-17 04:46+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -302,7 +303,51 @@ msgstr "Yorumu Gönder"
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr "Yorumu düzenle"
+msgstr "Yorumunu düzenle"
+
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Sonraki sürümü, bu sürümü yayınladığınız <a href='https://extensions.gnome."
+"org/upload/'>aynı form ile</a> yükleyebilirsiniz."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Uzantı sayfanızdaki simgeye tıklayarak uzantı simgesini değiştirebilirsiniz."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Onaylanan bir sürümü devre dışı bırakmak isterseniz, uzantı sayfanızdaki "
+"devre dışı bırak bağlantısına tıklayın."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Geliştirici kılavuzunu <a href='https://gjs.guide/extensions/'>gjs.guide</"
+"a>ʼda bulabilirsiniz."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Uzantınızla ilgili yardım gerekirse, <a href='https://matrix.to/#/"
+"#extensions:gnome.org'>GNOME Matrix Kanalı</a> üzerinden bize sorabilirsiniz."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
@@ -312,6 +357,10 @@ msgstr "GNOME Kabuk Uzantılarıʼnda en son uzantılar"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "GNOME Kabuk Uzantıları"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Geliştirici Kılavuzu"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -390,7 +439,7 @@ msgstr "Sıralama biçimi"
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr "Tüm yorumları göster"
+msgstr "Daha çok yorum göster"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1

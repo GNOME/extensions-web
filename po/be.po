@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-12-16 23:47+0300\n"
+"PO-Revision-Date: 2023-01-24 17:21+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -125,8 +125,8 @@ msgstr "Пашырэнні"
 #, python-format
 msgid ""
 "Unfortunately, to help prevent spam, we require that you <a "
-"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to "
-"post a comment or report an error. You understand, right?"
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "На жаль, каб прадухіліць спам, мы патрабуем ад вас <a "
 "href=\"%(login_url)s\">ўвайсці ў GNOME Shell Extensions</a>, каб пакідаць "
@@ -333,12 +333,12 @@ msgid ""
 msgstr ""
 "Каб кіраваць пашырэннямі абалонкі GNOME праз гэты сайт, вы павінны "
 "ўсталяваць інтэграцыю з абалонкай GNOME, якая складаецца з дзвюх частак: "
-"пашырэнне браўзера і спецыялізаваная праграма хоста для абмену "
-"паведамленнямі"
+"пашырэнне браўзера і спецыялізаваная праграма для абмену паведамленнямі ў "
+"асноўнай сістэме"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr "Усталюйце пашырэнне браўзера для інтэграцыі з абалонкай GNOME"
+msgstr "Усталяваць пашырэнне браўзера для інтэграцыі з абалонкай GNOME"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
@@ -348,8 +348,8 @@ msgstr "Націсніце тут, каб усталяваць пашырэнн�
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Глядзіце %swiki page%s, каб атрымаць інструкцыі, як усталяваць "
-"спецыялізаваны злучальнік хоста"
+"Глядзіце %sстаронку wiki%s, каб атрымаць інструкцыі, як усталяваць "
+"спецыялізаваную праграму ў асноўнай сістэме"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
@@ -357,10 +357,9 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"Мы не можам выявіць запушчаную копію GNOME у гэтай сістэме, некаторыя "
-"часткі інтэрфейсу могуць быць адключаны. Каб атрымаць дадатковыя звесткі, "
-"глядзіце <a href=\"/about/#no-detection\">наш артыкул пра выпраўленне "
-"непаладак</a>."
+"Мы не можам выявіць запушчаную копію GNOME у гэтай сістэме, некаторыя часткі "
+"інтэрфейсу могуць быць адключаны. Каб атрымаць дадатковыя звесткі, глядзіце "
+"<a href=\"/about/#no-detection\">наш артыкул пра выпраўленне непаладак</a>."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1

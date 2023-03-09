@@ -1,15 +1,15 @@
 # Polish translation for extensions-web.
-# Copyright © 2019-2022 the extensions-web authors.
+# Copyright © 2019-2023 the extensions-web authors.
 # This file is distributed under the same license as the extensions-web package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2019-2022.
-# Aviary.pl <community-poland@mozilla.org>, 2019-2022.
+# Piotr Drąg <piotrdrag@gmail.com>, 2019-2023.
+# Aviary.pl <community-poland@mozilla.org>, 2019-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-14 15:45+0200\n"
+"POT-Creation-Date: 2023-01-14 10:10+0000\n"
+"PO-Revision-Date: 2023-03-05 14:01+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -300,6 +300,50 @@ msgstr "Wyślij komentarz"
 msgid "Edit your comment"
 msgstr "Modyfikuj komentarz"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Można przesłać następną wersję za pomocą <a href='https://extensions.gnome."
+"org/upload/'>tego samego formularza</a>, co przy tej wersji."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Można zmienić ikonę rozszerzenia klikając ikonę na stronie rozszerzenia."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Można wyłączyć zatwierdzoną wersję klikając odpowiedni odnośnik na stronie "
+"rozszerzenia."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Przewodniki dla programistów znajdują się na stronie <a href='https://gjs."
+"guide/extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Na <a href='https://matrix.to/#/#extensions:gnome.org'>kanale GNOME w sieci "
+"Matrix</a> można uzyskać pomoc z rozszerzeniem."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Najnowsze rozszerzenia w serwisie"
@@ -308,6 +352,10 @@ msgstr "Najnowsze rozszerzenia w serwisie"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Rozszerzenia powłoki GNOME"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Przewodnik dla programistów"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
