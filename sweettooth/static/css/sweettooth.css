@@ -806,6 +806,7 @@ textarea:focus {
     border: 1px solid #BABDB6;
     border-left: 1em solid #A5A5AF;
     border-radius: 2px 2px 2px 2px;
+    font-family: monospace;
 }
 
 .review blockquote.empty {
