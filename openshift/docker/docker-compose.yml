@@ -36,6 +36,7 @@ services:
       dockerfile: openshift/docker/Dockerfile
       args:
         PYTHON_VERSION: '3.9'
+        XAPIAN_VERSION: '1.4.22'
     command:
       - bash
       - -c

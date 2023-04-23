@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-01-14 10:10+0000\n"
-"PO-Revision-Date: 2023-02-17 04:46+0300\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-10 21:56+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -89,7 +89,7 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
-"Parola sıfırlama belirteci yanlış. Lütfen bağlantınızı denetleyip yeniden "
+"Parola sıfırlama jetonu yanlış. Lütfen bağlantınızı denetleyip yeniden "
 "deneyin."
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:8
@@ -170,62 +170,74 @@ msgstr "Oyla"
 msgid "Bug report"
 msgstr "Hata bildir"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s indirme"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "İndirme Sayısı"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Kur"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Bu uzantıyı yükselt"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Bu uzantıyı yapılandır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Bu uzantıyı kaldır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Uzantı Sayfası"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Oturum Kip(ler)i"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Bu uzantı ekran kilitliyken çalışacaktır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Kilit Açma İletişim Penceresi"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "İndir"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Kabuk sürümü…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Uzantı sürümü…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -235,7 +247,7 @@ msgstr ""
 "gönderdiğiniz uzantıyı inceler. İşlemin sonucu size e-posta ile "
 "gönderilecektir."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."

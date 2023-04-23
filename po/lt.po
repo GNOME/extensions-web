@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-01-14 10:10+0000\n"
-"PO-Revision-Date: 2023-03-04 22:50+0200\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-12 22:03+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -167,62 +167,76 @@ msgstr "Įvertinimą"
 msgid "Bug report"
 msgstr "Pranešimą apie klaidą"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "Atsisiunčiama %(downloads)s"
+msgstr[1] "Atsisiunčiama %(downloads)s"
+msgstr[2] "Atsisiunčiama %(downloads)s"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Atsiuntimų skaičius"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Įdiegti"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Naujinti šį plėtinį"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Konfigūruoti šį plėtinį"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Pašalinti šį plėtinį"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Plėtinio tinklalapis"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Seanso veiksena(-os)"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Šis plėtinys veiks esant užrakintam ekranui"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Atrakinti dialogą"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Atsisiųsti"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Apvalkalo versija…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Plėtinio versija…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -232,7 +246,7 @@ msgstr ""
 "nėra nieko pernelyg pavojingo. Apie apžvalgos rezultatą jums bus pranešta "
 "el. paštu."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."

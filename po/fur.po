@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-12-20 19:33+0000\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-09 20:59+0100\n"
 "Last-Translator: Fabio T. <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Editor: HaiPO 1.4 beta\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -29,8 +29,7 @@ msgstr "Non utent"
 
 #: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
-"Necessari. 30 caratars o di mancul. Dome letaris, numars e @/./+/-/_ ."
+msgstr "Necessari. 30 caratars o di mancul. Dome letaris, numars e @/./+/-/_ ."
 
 #: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
@@ -125,8 +124,8 @@ msgstr "Estensions"
 #, python-format
 msgid ""
 "Unfortunately, to help prevent spam, we require that you <a "
-"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post"
-" a comment or report an error. You understand, right?"
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Par prevignî i messaçs di spam, al è necessari che tu <a "
 "href=\"%(login_url)s\">jentredis su Estensions di GNOME Shell</a> par podê "
@@ -167,62 +166,75 @@ msgstr "Valutazion"
 msgid "Bug report"
 msgstr "Segnalazion erôr"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] ""
+msgstr[1] ""
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Numar di discjariaments"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Instale"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Inzorne cheste estension"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Configure cheste estension"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Disinstale cheste estension"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Pagjine principâl de estension"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Modalitât(s) de session"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Cheste estension no funzionarà intant che il schermi al sarà blocât"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Sbloche dialic"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Discjarie"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Version de shell…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Version de estension…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -232,7 +244,7 @@ msgstr ""
 "nol è nuie di pericolôs. Ti vignarà mandade une e-mail cul risultât dal "
 "control."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
@@ -303,6 +315,53 @@ msgstr "Publiche coment"
 msgid "Edit your comment"
 msgstr "Modifiche il to coment"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Tu puedis cjariâ in rêt la version sucessive midiant il <a href='https://"
+"extensions.gnome.org/upload/'>stes formulari</a> che tu âs doprât par "
+"publicâ cheste version."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Tu puedis cambiâ la icone de estension fasint clic su la icone te tô pagjine "
+"de estension."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Tal câs che tu voledis disativâ une version aprovade, fâs clic sul "
+"colegament di disativazion te tô pagjine de estension."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Tu puedis cjatâ lis vuidis pai svilupadôrs in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Se tu âs bisugne di un cualsisei jutori cu la tô estension, tu nus puedis fâ "
+"domandis sul <a href='https://matrix.to/#/#extensions:gnome.org'>Canâl "
+"Matrix di GNOME</a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Ultimis estensions in Estensions di GNOME Shell"
@@ -311,6 +370,10 @@ msgstr "Ultimis estensions in Estensions di GNOME Shell"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Estensions di GNOME Shell"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Vuide dai svilupadôrs"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -357,9 +420,9 @@ msgid ""
 "troubleshooting entry</a> for more information."
 msgstr ""
 "No rivin a cjatâ su chest sisteme une copie in esecuzion di GNOME, duncje "
-"cualchi part de interface e podarès jessi disabilitade. Viôt <a "
-"href=\"/about/#no-detection\">la nestre vuide ae risoluzion dai "
-"problemis</a> par vê plui informazions."
+"cualchi part de interface e podarès jessi disabilitade. Viôt <a href=\"/"
+"about/#no-detection\">la nestre vuide ae risoluzion dai problemis</a> par vê "
+"plui informazions."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1

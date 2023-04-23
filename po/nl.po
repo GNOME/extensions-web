@@ -1,14 +1,14 @@
 # Dutch translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Nathan Follens <nfollens@gnome.org>, 2019-2020, 2022.
+# Nathan Follens <nfollens@gnome.org>, 2019-2020, 2022-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-11-02 16:03+0100\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-13 22:48+0100\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -124,9 +124,9 @@ msgstr "Uitbreidingen"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Om spam tegen te gaan, vragen we u om u <a href=\"%(login_url)s\">aan te "
 "melden bij Gnome-shelluitbreidingen</a> om een reactie te kunnen plaatsen of "
@@ -167,64 +167,77 @@ msgstr "Beoordeling"
 msgid "Bug report"
 msgstr "Foutrapport"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s download"
+msgstr[1] "%(downloads)s downloads"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Aantal downloads"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Installeren"
 
 # niet opwaarderen - Nathan
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Deze uitbreiding bijwerken"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Deze uitbreiding configureren"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Deze uitbreiding verwijderen"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Website van uitbreiding"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Sessiemodus"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr ""
 "Deze uitbreiding zal uitgevoerd worden wanneer het scherm vergrendeld is"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Ontgrendelingsdialoogvenster"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Downloaden"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Shell-versie…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Uitbreidingsversie…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -234,7 +247,7 @@ msgstr ""
 "dat ze geen gevaar stelt. U krijgt de resultaten van deze controle per e-"
 "mail opgestuurd."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
@@ -305,6 +318,51 @@ msgstr "Reactie plaatsen"
 msgid "Edit your comment"
 msgstr "Uw reactie bewerken"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"U kunt de volgende versie uploaden met <a href='https://extensions.gnome.org/"
+"upload/'>hetzelfde formulier</a> waarmee u deze versie geplaatst hebt."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"U kunt het pictogram van de extensie wijzigen door op het pictogram te "
+"klikken op de pagina van uw extensie."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Indien u een goedgekeurde versie wilt uitschakelen, klik dan op Uitschakelen "
+"op de pagina van uw extensie."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Handleidingen voor ontwikkelaars zijn te vinden op <a href='https://gjs."
+"guide/extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Hulp nodig met uw extensie? Vraag gerust om hulp op het <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME-Matrixkanaal</a> (Engelstalig)."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Laatste nieuwe uitbreidingen bij Gnome-shelluitbreidingen"
@@ -313,6 +371,10 @@ msgstr "Laatste nieuwe uitbreidingen bij Gnome-shelluitbreidingen"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Gnome-shelluitbreidingen"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Handleiding voor ontwikkelaars"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -358,8 +420,9 @@ msgid ""
 "troubleshooting entry</a> for more information."
 msgstr ""
 "We konden niet detecteren dat Gnome op uw systeem draait, dus sommige "
-"onderdelen van de interface zijn mogelijk uitgeschakeld. Bekijk onze <a href="
-"\"/about/#no-detection\">probleemoplossingshulp</a> voor meer informatie."
+"onderdelen van de interface zijn mogelijk uitgeschakeld. Bekijk onze <a "
+"href=\"/about/#no-detection\">probleemoplossingshulp</a> voor meer "
+"informatie."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
