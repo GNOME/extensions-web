@@ -119,7 +119,7 @@ This function will create as many (very simple) extensions as you tell it to.
 Then to add a given number of random ratings to all the extensions:
 ::
 
-  $ python manage.py populate_reviews <number_of_ratings>
+  $ python manage.py populate_ratings <number_of_ratings>
 
 This function will create as many ratings into each extension as you tell it to, in this case, the username and the rating content gets randomly picked from a "Lorem Ipsum" string.
 
