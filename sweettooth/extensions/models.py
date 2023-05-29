@@ -18,8 +18,10 @@ import re
 import zlib
 
 from zipfile import ZipFile, BadZipfile
+from urllib.parse import quote
 
 from django.conf import settings
+from django.core.validators import URLValidator
 from django.db import models
 from django.dispatch import Signal
 from django.urls import reverse
@@ -129,6 +131,7 @@ class Extension(models.Model):
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
     allow_comments = models.BooleanField(default=True)
+    donation_json_field = None
 
     class Meta:
         permissions = (
@@ -148,6 +151,41 @@ class Extension(models.Model):
         self.description = metadata.pop('description', "")
         self.url = metadata.pop('url', "")
         self.uuid = metadata['uuid']
+        self.donation_json_field = metadata.get('donations', {})
+        if 'custom' in self.donation_json_field:
+            field = self.donation_json_field['custom']
+            if type(field) != list:
+                field = [field]
+            validator = URLValidator()
+            for url in field:
+                validator(url)
+
+    def refresh_donation_urls(self):
+        donation_urls = self.donation_urls.all()
+
+        if not self.donation_json_field:
+            donation_urls.delete()
+            return
+
+        supported_types = [item.value for item in DonationUrl.Type]
+        url_ids = []
+        for key, value in self.donation_json_field.items():
+            key = str(key)
+            if key not in supported_types:
+                continue
+            if type(value) != list:
+                value = [value]
+            # Only accept the first three URLs for each type.
+            for url in value[:3]:
+                url = str(url)
+                donation_url, _ = DonationUrl.objects.get_or_create(
+                    extension=self,
+                    url_type=key,
+                    url=url,
+                )
+                url_ids.append(donation_url.id)
+
+        self.donation_urls.exclude(id__in=url_ids).delete()
 
     def clean(self):
         from django.core.exceptions import ValidationError
@@ -165,6 +203,9 @@ class Extension(models.Model):
                     except (BadZipfile, zlib.error):
                         # Ignore bad zipfiles, we don't care
                         pass
+
+        if self.donation_json_field is not None:
+            self.refresh_donation_urls()
 
     def get_absolute_url(self):
         return reverse('extensions-detail', kwargs=dict(pk=self.pk,
@@ -503,6 +544,33 @@ class ExtensionVersion(models.Model):
 
     def is_inactive(self):
         return self.status == STATUS_INACTIVE
+
+class DonationUrl(models.Model):
+    class Type(models.TextChoices):
+        BUY_ME_A_COFFEE = 'buymeacoffee', 'Buy Me a Coffee'
+        CUSTOM = 'custom', 'Link'
+        GITHUB = 'github', 'GitHub'
+        KO_FI = 'kofi', 'Ko-fi'
+        PATREON = 'patreon', 'Patreon'
+        PAYPAL = 'paypal', 'PayPal'
+
+    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="donation_urls")
+    url_type = models.CharField(max_length=32, choices=Type.choices, default=Type.CUSTOM)
+    url = models.CharField(max_length=256)
+    TYPE_BASE_URLS = {
+        'buymeacoffee': 'https://www.buymeacoffee.com',
+        'github': 'https://github.com/sponsors',
+        'kofi': 'https://ko-fi.com',
+        'patreon': 'https://www.patreon.com',
+        'paypal': 'https://paypal.me',
+    }
+
+    @property
+    def full_url(self):
+        if self.url_type in self.TYPE_BASE_URLS:
+            return f"{self.TYPE_BASE_URLS[self.url_type]}/{quote(self.url, safe='')}"
+
+        return self.url
 
 # providing_args=["request", "version"]
 submitted_for_review = Signal()
