@@ -10,7 +10,7 @@
     (at your option) any later version.
 """
 
-from typing import Any, Literal
+from typing import Any, Literal, Union
 import autoslug
 import json
 import os
@@ -24,7 +24,9 @@ from django.conf import settings
 from django.core.validators import URLValidator
 from django.db import models
 from django.dispatch import Signal
+from django.forms import ValidationError
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from .fields import HttpURLField
 
@@ -143,22 +145,46 @@ class Extension(models.Model):
 
     objects = ExtensionManager()
 
+    _http_validator = URLValidator(schemes=('http', 'https'))
+
     def __str__(self):
         return self.uuid
+
+    @staticmethod
+    def _ensure_list(value: Union[Any, list[str]]) -> list[Any]:
+        if not isinstance(value, list):
+            return [value]
+
+        return value
 
     def parse_metadata_json(self, metadata):
         self.name = metadata.pop('name', "")
         self.description = metadata.pop('description', "")
         self.url = metadata.pop('url', "")
         self.uuid = metadata['uuid']
-        self.donation_json_field = metadata.get('donations', {})
-        if 'custom' in self.donation_json_field:
-            field = self.donation_json_field['custom']
-            if type(field) != list:
-                field = [field]
-            validator = URLValidator()
-            for url in field:
-                validator(url)
+
+        self.donation_json_field: dict[str, Union[str, list[str]]] = metadata.get('donations', {})
+
+        supported_types = [item.value for item in DonationUrl.Type]
+        for key, values in self.donation_json_field.items():
+            if key not in supported_types:
+                raise ValidationError(_("Unsupported donation type: %s") % key)
+
+            values = self._ensure_list(values)
+            if len(values) > 3:
+                raise ValidationError(_('You can not specify more than 3 values for donation type "%s"') % key)
+
+            if len(values) < 1:
+                raise ValidationError(_('At least one value must be specified for donation type "%s"') % key)
+
+            if any(not isinstance(value, str) for value in values):
+                raise ValidationError(
+                    _('Value type must be string or list of strings for donation type "%s"') % key
+                )
+
+        # Validate custom URLs
+        for url in self._ensure_list(self.donation_json_field.get('custom', [])):
+            self._http_validator(url)
 
     def refresh_donation_urls(self):
         donation_urls = self.donation_urls.all()
@@ -167,17 +193,10 @@ class Extension(models.Model):
             donation_urls.delete()
             return
 
-        supported_types = [item.value for item in DonationUrl.Type]
         url_ids = []
-        for key, value in self.donation_json_field.items():
-            key = str(key)
-            if key not in supported_types:
-                continue
-            if type(value) != list:
-                value = [value]
-            # Only accept the first three URLs for each type.
-            for url in value[:3]:
-                url = str(url)
+        for key, values in self.donation_json_field.items():
+            values = self._ensure_list(values)
+            for url in values:
                 donation_url, _ = DonationUrl.objects.get_or_create(
                     extension=self,
                     url_type=key,

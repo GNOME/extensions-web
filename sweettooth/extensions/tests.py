@@ -415,25 +415,24 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
                     "name": "Test Metadata",
                     "donations": {"custom": ["https://example.com/1", "https://example.com/2", "https://example.com/3", "https://example.com/4"]}}
 
-        extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        self.assertEqual(3, extension.donation_urls.count())
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
-    def test_create_not_ignore_case(self):
+    def test_disallow_wrong_case(self):
         metadata = {"uuid": "test-metadata@mecheye.net",
                     "name": "Test Metadata",
                     "donations": {"GitHub": "..."}}
 
-        extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        self.assertEquals(0, extension.donation_urls.count())
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
-    def test_ignore_unsupported(self):
+    def test_disallow_unsupported(self):
         metadata = {"uuid": "test-metadata@mecheye.net",
                     "name": "Test Metadata",
                     "donations": {"unsupported": "https://example.com"}}
 
-        extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        donation_url = extension.donation_urls.first()
-        self.assertIsNone(donation_url)
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
     def test_refresh_create(self):
         metadata = {"uuid": "test-metadata@mecheye.net",
@@ -592,6 +591,14 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         metadata = {"uuid": "test-metadata@mecheye.net",
                     "name": "Test Metadata",
                     "donations": {"custom": "somethingelse"}}
+
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
+
+    def test_validate_http_url(self):
+        metadata = {"uuid": "test-metadata@mecheye.net",
+                    "name": "Test Metadata",
+                    "donations": {"custom": "ftp://example.com"}}
 
         with self.assertRaises(ValidationError):
             extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
