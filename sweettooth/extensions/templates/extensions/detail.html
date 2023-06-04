@@ -25,7 +25,7 @@
         <div class="controls">
           {% if donation_urls|length == 1 %}
             {% for url in donation_urls %}
-              <a href="{{ url.full_url | escape }}" class="btn btn-default donate-button">{% trans 'Donate' %}</a>
+              <a href="{% url 'away' target_url=url.full_url|urlencode:"" %}" class="btn btn-default donate-button">{% trans 'Donate' %}</a>
             {% endfor %}
           {% elif donation_urls|length > 1 %}
             <div class="dropdown donate-button">
@@ -35,7 +35,7 @@
               </button>
               <ul class="dropdown-menu" aria-labelledby="donateDropdown">
                 {% for url in donation_urls %}
-                <li><a href="{{ url.full_url | escape }}">{{ url.get_url_type_display | escape }} ({{ url.url | escape }})</a></li>
+                <li><a href="{% url 'away' target_url=url.full_url|urlencode:"" %}">{{ url.get_url_type_display | escape }} ({{ url.url | escape }})</a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -73,7 +73,7 @@
             <dl>
               {% if extension.url %}
               <dt>{% trans "Extension Homepage" %}</dt>
-              <dd><a href="{{ extension.url }}" id="extension_url">{{ extension.url }}</a></dd>
+              <dd><a href="{% url 'away' target_url=extension.url|urlencode:"" %}" id="extension_url">{{ extension.url }}</a></dd>
               {% endif %}
             </dl>
             {% if extension_uses_unlock_dialog %}
