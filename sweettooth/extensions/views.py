@@ -23,6 +23,7 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from sweettooth.exceptions import DatabaseErrorWithMessages
 from sweettooth.extensions import models, search
@@ -510,10 +511,10 @@ def create_version(request, file_source):
                     messages.error(request, "An extension with that UUID has already been added.")
                     raise DatabaseErrorWithMessages
 
-            extension.parse_metadata_json(metadata)
-            extension.save()
-
             try:
+                extension.parse_metadata_json(metadata)
+                extension.save()
+
                 extension.full_clean()
             except ValidationError as e:
                 raise DatabaseErrorWithMessages(e.messages)
