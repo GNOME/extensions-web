@@ -587,7 +587,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
 
         self.assertEquals('https://example.com/test', donation_url.full_url)
 
-    def test_validate_url_custom(self):
+    def test_metadata_validation(self):
         metadata = {"uuid": "test-metadata@mecheye.net",
                     "name": "Test Metadata",
                     "donations": {"custom": "somethingelse"}}
@@ -595,11 +595,23 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         with self.assertRaises(ValidationError):
             extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
-    def test_validate_http_url(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "ftp://example.com"}}
+        metadata['donations'] = {"custom": "ftp://example.com"}
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
+        metadata['donations'] = {"custom": []}
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
+
+        metadata['donations'] = {'github': []}
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
+
+        metadata['donations'] = {"github": ["1", "2", "3", "4"]}
+        with self.assertRaises(ValidationError):
+            extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
+
+        metadata['donations'] = {"github": 1}
         with self.assertRaises(ValidationError):
             extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
