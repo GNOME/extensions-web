@@ -21,13 +21,32 @@
         <span class="downloads" title="{% trans 'Number of Downloads' %}"> {% blocktrans count downloads=extension.downloads %}{{ downloads }} download{% plural %}{{ downloads }} downloads{% endblocktrans %}</span>
       </div>
 
-      <div class="controls col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <button type="button" class="btn btn-primary install-button">{% trans 'Install' %}</button>
-        <div class="switch"></div>
-        <div class="extra-buttons">
-          <div class="upgrade-button" title="{% trans 'Upgrade this extension' %}"></div>
-          <div class="configure-button" title="{% trans 'Configure this extension' %}"></div>
-          <div class="uninstall-button" title="{% trans 'Uninstall this extension' %}"></div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="controls">
+          {% if donation_urls|length == 1 %}
+            {% for url in donation_urls %}
+              <a href="{% url 'away' target_url=url.full_url|urlencode:"" %}" class="btn btn-default donate-button">{% trans 'Donate' %}</a>
+            {% endfor %}
+          {% elif donation_urls|length > 1 %}
+            <div class="dropdown donate-button">
+              <button class="btn btn-default dropdown-toggle" type="button" id="donateDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {% trans 'Donate' %}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="donateDropdown">
+                {% for url in donation_urls %}
+                <li><a href="{% url 'away' target_url=url.full_url|urlencode:"" %}">{{ url.get_url_type_display | escape }} ({{ url.url | escape }})</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          <button type="button" class="btn btn-primary install-button">{% trans 'Install' %}</button>
+          <div class="switch"></div>
+          <div class="extra-buttons">
+            <div class="upgrade-button" title="{% trans 'Upgrade this extension' %}"></div>
+            <div class="configure-button" title="{% trans 'Configure this extension' %}"></div>
+            <div class="uninstall-button" title="{% trans 'Uninstall this extension' %}"></div>
+          </div>
         </div>
       </div>
 
@@ -54,7 +73,7 @@
             <dl>
               {% if extension.url %}
               <dt>{% trans "Extension Homepage" %}</dt>
-              <dd><a href="{{ extension.url }}" id="extension_url">{{ extension.url }}</a></dd>
+              <dd><a href="{% url 'away' target_url=extension.url|urlencode:"" %}" id="extension_url">{{ extension.url }}</a></dd>
               {% endif %}
             </dl>
             {% if extension_uses_unlock_dialog %}

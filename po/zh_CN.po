@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2023-03-07 17:19+0000\n"
-"PO-Revision-Date: 2023-04-04 11:41-0400\n"
+"PO-Revision-Date: 2023-05-19 10:14-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.4.3\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -119,9 +119,9 @@ msgstr "扩展"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a "
-"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
-"a comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a href="
+"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
+"comment or report an error. You understand, right?"
 msgstr ""
 "很抱歉，为了防止垃圾信息，我们在你 <a href=\"%(login_url)s\">登录到 GNOME "
 "Shell 扩展</a> 之后才能让你发表评论或报告错误。你懂的，对吧？"
@@ -313,6 +313,8 @@ msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
 "upload/'>same form</a> you've posted this version."
 msgstr ""
+"你在上传下个版本时可以使用和你发布这个版本时<a href='https://extensions."
+"gnome.org/upload/'>相同的表格</a>。"
 
 #: sweettooth/review/templates/review/review.html:66
 #: extensions-web-domain-django:1
@@ -326,7 +328,7 @@ msgstr "你可以在你的扩展页面上点击图标以修改扩展图标。"
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
 "in your extension page."
-msgstr ""
+msgstr "如果你想停用一个已批准的版本，请点击你的扩展页面上的停用链接。"
 
 #: sweettooth/review/templates/review/review.html:72
 #: extensions-web-domain-django:1

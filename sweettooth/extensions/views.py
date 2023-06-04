@@ -11,18 +11,25 @@
 
 import json
 from math import ceil
+from typing import Any
+from urllib.parse import unquote
 
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, InvalidPage
+from django.core.validators import URLValidator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
+from django.forms import ValidationError
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
+from django.views.generic.base import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from sweettooth.exceptions import DatabaseErrorWithMessages
 from sweettooth.extensions import models, search
@@ -30,6 +37,7 @@ from sweettooth.extensions.forms import ImageUploadForm, UploadForm
 
 from sweettooth.decorators import ajax_view, model_view
 from sweettooth.extensions.templatetags.extension_icon import extension_icon
+
 
 def get_versions_for_version_strings(version_strings):
     def get_version(major, minor, point):
@@ -323,13 +331,16 @@ def extension_view(request, obj, **kwargs):
     else:
         template_name = "extensions/detail.html"
 
+    donation_urls = extension.donation_urls.all().order_by('url_type')
+
     context = dict(shell_version_map = json.dumps(extension.visible_shell_version_map),
                    extension = extension,
                    extension_uses_unlock_dialog = extension.uses_session_mode('unlock-dialog'),
                    all_versions = extension.versions.order_by('-version'),
                    visible_versions=json.dumps(extension.visible_shell_version_array),
                    is_visible = extension.latest_version is not None,
-                   next = extension.get_absolute_url())
+                   next = extension.get_absolute_url(),
+                   donation_urls = donation_urls)
     return render(request, template_name, context)
 
 @require_POST
@@ -507,10 +518,10 @@ def create_version(request, file_source):
                     messages.error(request, "An extension with that UUID has already been added.")
                     raise DatabaseErrorWithMessages
 
-            extension.parse_metadata_json(metadata)
-            extension.save()
-
             try:
+                extension.parse_metadata_json(metadata)
+                extension.save()
+
                 extension.full_clean()
             except ValidationError as e:
                 raise DatabaseErrorWithMessages(e.messages)
@@ -542,3 +553,21 @@ def upload_file(request):
 
     return render(request, 'extensions/upload.html', dict(form=form,
                                                           errors=errors))
+
+
+class AwayView(TemplateView):
+    template_name = "extensions/away.html"
+    _validator = URLValidator(schemes=('http', 'https'))
+
+    def setup(self, request, *args: Any, **kwargs: Any) -> None:
+        super().setup(request, *args, **kwargs)
+        self.target_url = unquote(kwargs["target_url"])
+
+    def get(self, request, *args, **kwargs):
+        try:
+            self._validator(self.target_url)
+            kwargs['target_url'] = self.target_url
+        except ValidationError:
+            return redirect("/")
+
+        return super().get(request, *args, **kwargs)

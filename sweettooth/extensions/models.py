@@ -10,7 +10,7 @@
     (at your option) any later version.
 """
 
-from typing import Any, Literal
+from typing import Any, Literal, Union
 import autoslug
 import json
 import os
@@ -18,11 +18,15 @@ import re
 import zlib
 
 from zipfile import ZipFile, BadZipfile
+from urllib.parse import quote
 
 from django.conf import settings
+from django.core.validators import URLValidator
 from django.db import models
 from django.dispatch import Signal
+from django.forms import ValidationError
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from .fields import HttpURLField
 
@@ -129,6 +133,7 @@ class Extension(models.Model):
     downloads = models.PositiveIntegerField(default=0)
     popularity = models.IntegerField(default=0)
     allow_comments = models.BooleanField(default=True)
+    donation_json_field = None
 
     class Meta:
         permissions = (
@@ -140,14 +145,66 @@ class Extension(models.Model):
 
     objects = ExtensionManager()
 
+    _http_validator = URLValidator(schemes=('http', 'https'))
+
     def __str__(self):
         return self.uuid
+
+    @staticmethod
+    def _ensure_list(value: Union[Any, list[str]]) -> list[Any]:
+        if not isinstance(value, list):
+            return [value]
+
+        return value
 
     def parse_metadata_json(self, metadata):
         self.name = metadata.pop('name', "")
         self.description = metadata.pop('description', "")
         self.url = metadata.pop('url', "")
         self.uuid = metadata['uuid']
+
+        self.donation_json_field: dict[str, Union[str, list[str]]] = metadata.get('donations', {})
+
+        supported_types = [item.value for item in DonationUrl.Type]
+        for key, values in self.donation_json_field.items():
+            if key not in supported_types:
+                raise ValidationError(_("Unsupported donation type: %s") % key)
+
+            values = self._ensure_list(values)
+            if len(values) > 3:
+                raise ValidationError(_('You can not specify more than 3 values for donation type "%s"') % key)
+
+            if len(values) < 1:
+                raise ValidationError(_('At least one value must be specified for donation type "%s"') % key)
+
+            if any(not isinstance(value, str) for value in values):
+                raise ValidationError(
+                    _('Value type must be string or list of strings for donation type "%s"') % key
+                )
+
+        # Validate custom URLs
+        for url in self._ensure_list(self.donation_json_field.get('custom', [])):
+            self._http_validator(url)
+
+    def refresh_donation_urls(self):
+        donation_urls = self.donation_urls.all()
+
+        if not self.donation_json_field:
+            donation_urls.delete()
+            return
+
+        url_ids = []
+        for key, values in self.donation_json_field.items():
+            values = self._ensure_list(values)
+            for url in values:
+                donation_url, _ = DonationUrl.objects.get_or_create(
+                    extension=self,
+                    url_type=key,
+                    url=url,
+                )
+                url_ids.append(donation_url.id)
+
+        self.donation_urls.exclude(id__in=url_ids).delete()
 
     def clean(self):
         from django.core.exceptions import ValidationError
@@ -165,6 +222,9 @@ class Extension(models.Model):
                     except (BadZipfile, zlib.error):
                         # Ignore bad zipfiles, we don't care
                         pass
+
+        if self.donation_json_field is not None:
+            self.refresh_donation_urls()
 
     def get_absolute_url(self):
         return reverse('extensions-detail', kwargs=dict(pk=self.pk,
@@ -503,6 +563,33 @@ class ExtensionVersion(models.Model):
 
     def is_inactive(self):
         return self.status == STATUS_INACTIVE
+
+class DonationUrl(models.Model):
+    class Type(models.TextChoices):
+        BUY_ME_A_COFFEE = 'buymeacoffee', 'Buy Me a Coffee'
+        CUSTOM = 'custom', 'Link'
+        GITHUB = 'github', 'GitHub'
+        KO_FI = 'kofi', 'Ko-fi'
+        PATREON = 'patreon', 'Patreon'
+        PAYPAL = 'paypal', 'PayPal'
+
+    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="donation_urls")
+    url_type = models.CharField(max_length=32, choices=Type.choices, default=Type.CUSTOM)
+    url = models.CharField(max_length=256)
+    TYPE_BASE_URLS = {
+        'buymeacoffee': 'https://www.buymeacoffee.com',
+        'github': 'https://github.com/sponsors',
+        'kofi': 'https://ko-fi.com',
+        'patreon': 'https://www.patreon.com',
+        'paypal': 'https://paypal.me',
+    }
+
+    @property
+    def full_url(self):
+        if self.url_type in self.TYPE_BASE_URLS:
+            return f"{self.TYPE_BASE_URLS[self.url_type]}/{quote(self.url, safe='')}"
+
+        return self.url
 
 # providing_args=["request", "version"]
 submitted_for_review = Signal()

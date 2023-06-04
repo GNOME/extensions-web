@@ -1,6 +1,6 @@
 
 from django.conf.urls import include
-from django.urls import re_path
+from django.urls import path, re_path
 from django.views.generic.base import TemplateView
 
 from sweettooth.extensions import views, models, feeds
@@ -33,6 +33,8 @@ urlpatterns = [
     re_path(r'^$', TemplateView.as_view(template_name='extensions/list.html'), name='extensions-index'),
 
     re_path(r'^about/$', TemplateView.as_view(template_name='extensions/about.html'), name='extensions-about'),
+
+    path("away/<str:target_url>", views.AwayView.as_view(), name='away'),
 
     re_path(r'^extension/(?P<pk>\d+)/(?P<slug>.+)/$',
         views.extension_view, name='extensions-detail'),
