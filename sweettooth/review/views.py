@@ -3,6 +3,8 @@ import base64
 from collections import Counter
 import itertools
 import os.path
+from typing import IO
+from zipfile import ZipFile
 
 import pygments
 import pygments.util
@@ -12,7 +14,6 @@ import pygments.formatters
 from django.core.mail import EmailMessage
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, get_object_or_404, render
-from django.template import Context
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views.decorators.http import require_POST
@@ -81,17 +82,24 @@ def highlight_file(filename, raw, formatter):
         lexer.encoding = "utf-8"
         return pygments.highlight(raw, lexer, formatter)
 
-def html_for_file(filename, raw):
-    base, extension = os.path.splitext(filename)
+
+def html_for_file(filename: str, file: IO[bytes]):
+    _, extension = os.path.splitext(filename)
 
     if extension in BINARY_TYPES:
         return None
     elif extension in IMAGE_TYPES:
         mime = IMAGE_TYPES[extension]
-        raw_base64 = base64.standard_b64encode(raw)
-        return dict(raw=True, html='<img src="data:%s;base64,%s">' % (mime, raw_base64,))
+        return dict(
+            raw=True,
+            html='<img src="data:%s;base64,%s">' % (
+                mime,
+                base64.standard_b64encode(file.read()).decode('ascii'),
+            )
+        )
     else:
-        return dict(raw=False, lines=highlight_file(filename, raw, code_formatter).splitlines())
+        return dict(raw=False, lines=highlight_file(filename, file.read(), code_formatter).splitlines())
+
 
 def get_old_version(version):
     extension = version.extension
@@ -115,15 +123,14 @@ def get_zipfiles(*args: tuple[models.ExtensionVersion]):
         else:
             yield version.get_zipfile('r')
 
-def grab_lines(zipfile, filename):
+
+def grab_lines(zipfile: ZipFile, filename: str):
     try:
-        f = zipfile.open(filename, 'r')
-    except KeyError:
+        with zipfile.open(filename, 'r') as f:
+            return f.read().decode('utf-8').splitlines()
+    except (KeyError, UnicodeDecodeError):
         return None
-    else:
-        content = f.read().decode('utf-8')
-        f.close()
-        return content.splitlines()
+
 
 def get_file_list(zipfile):
     return set(n for n in zipfile.namelist() if not n.endswith('/'))
@@ -205,19 +212,14 @@ def get_changelog(old_version, new_version, filename='CHANGELOG'):
 @ajax_view
 @model_view(models.ExtensionVersion)
 def ajax_get_file_view(request, obj):
-    zipfile = obj.get_zipfile('r')
     filename = request.GET['filename']
 
-    try:
-        f = zipfile.open(filename, 'r')
-    except KeyError:
-        raise Http404()
-
-    raw = f.read()
-    if request.GET.get('raw', False):
-        return raw
-    else:
-        return html_for_file(filename, raw)
+    with obj.get_zipfile('r') as zipfile:
+        try:
+            with zipfile.open(filename, 'r') as f:
+                return html_for_file(filename, f)
+        except KeyError:
+            raise Http404()
 
 def download_zipfile(request, pk):
     version = get_object_or_404(models.ExtensionVersion, pk=pk)
