@@ -1,6 +1,7 @@
 
 import base64
 from collections import Counter
+from contextlib import ExitStack
 import itertools
 import os.path
 from typing import IO
@@ -135,7 +136,7 @@ def grab_lines(zipfile: ZipFile, filename: str):
 def get_file_list(zipfile):
     return set(n for n in zipfile.namelist() if not n.endswith('/'))
 
-def get_file_changeset(old_zipfile, new_zipfile):
+def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
     new_filelist = get_file_list(new_zipfile)
 
     if old_zipfile is None:
@@ -150,17 +151,23 @@ def get_file_changeset(old_zipfile, new_zipfile):
     added   = new_filelist - old_filelist
     deleted = old_filelist - new_filelist
 
-    unchanged, changed = set([]), set([])
+    unchanged, changed = set(), set()
 
     for filename in both:
-        old, new = old_zipfile.open(filename, 'r'), new_zipfile.open(filename, 'r')
-        oldcontent, newcontent = old.read(), new.read()
+        with old_zipfile.open(filename, 'r') as old, new_zipfile.open(filename, 'r') as new:
+            while True:
+                oldcontent, newcontent = old.read(1024), new.read(1024)
+                if not oldcontent or not newcontent:
+                    if oldcontent or newcontent:
+                        changed.add(filename)
+                    else:
+                        unchanged.add(filename)
 
-        # Unchanged, remove
-        if oldcontent == newcontent:
-            unchanged.add(filename)
-        else:
-            changed.add(filename)
+                    break
+
+                if oldcontent != newcontent:
+                    changed.add(filename)
+                    break
 
     return dict(unchanged=sorted(unchanged),
                 changed=sorted(changed),
@@ -391,9 +398,15 @@ def should_auto_approve(version: models.ExtensionVersion):
     if Counter(old_session_modes) != Counter(session_modes):
         return False
 
-    old_zipfile, new_zipfile = get_zipfiles(old_version, version)
-    changeset = get_file_changeset(old_zipfile, new_zipfile)
-    return should_auto_approve_changeset(changeset)
+    with ExitStack() as stack:
+        old_zipfile, new_zipfile = get_zipfiles(old_version, version)
+
+        stack.enter_context(old_zipfile)
+        stack.enter_context(new_zipfile)
+
+        changeset = get_file_changeset(old_zipfile, new_zipfile)
+        return should_auto_approve_changeset(changeset)
+
 
 def extension_submitted(sender, request, version, **kwargs):
     if should_auto_approve(version):
