@@ -96,11 +96,6 @@ define(['jquery', 'diff'], function($, diff) {
 
                     var $file = null;
 
-                    if (diff && isBinary(filename)) {
-                        // We don't show binary files in the diff view.
-                        return;
-                    }
-
                     $('<li>').append($selector).appendTo($fileList);
 
                     if (isBinary(filename)) {
