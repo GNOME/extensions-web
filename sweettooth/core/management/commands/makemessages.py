@@ -66,11 +66,11 @@ class Command(MakeMessagesCommand, MessagesCommand):
     def build_potfiles(self):
         potfiles = super().build_potfiles()
         if self.domain == 'djangojs':
-            if len(potfiles) > 1:
+            if len(set(potfiles)) > 1:
                 # We do not support multiple locale dirs
                 raise NotImplementedError("Multiple locale dirs are not supported")
 
-            po = polib.pofile(potfiles[0], check_for_duplicates = True)
+            po = polib.pofile(potfiles[0], check_for_duplicates=True)
 
             self.search_mustache_texts(po)
 

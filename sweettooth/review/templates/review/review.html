@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% load extension_icon %}
 
@@ -55,6 +56,25 @@
 <h2 class="expandy_header expanded col-xs-12 col-sm-12 col-md-12 col-lg-12">Diff Against Previous Version</h2>
 <div id="diff" data-pk="{{ version.pk }}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 </div>
+{% else %}
+  <h2 class="expandy_header expanded col-xs-12 col-sm-12 col-md-12 col-lg-12">FAQ</h2>
+  <ul>
+    <li>
+      {% trans "You can upload the next version by the <a href='https://extensions.gnome.org/upload/'>same form</a> you've posted this version." %}
+    </li>
+    <li>
+      {% trans "You can change the extension icon by clicking on the icon in your extension page." %}
+    </li>
+    <li>
+      {% trans "In case you want to inactivate an approved version, click on inactivate link in your extension page." %}
+    </li>
+    <li>
+      {% trans "You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs.guide</a>." %}
+    </li>
+    <li>
+      {% trans "If you need any help with your extension, you can ask us on <a href='https://matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>." %}
+    </li>
+  </ul>
 {% endif %}
 
 <h2 class="expandy_header{% if not has_old_version %} expanded{% endif %} col-xs-12 col-sm-12 col-md-12 col-lg-12">Files</h2>

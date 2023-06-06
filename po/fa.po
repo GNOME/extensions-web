@@ -1,14 +1,14 @@
 # Persian translation for extensions-web.
 # Copyright (C) 2020 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Danial Behzadi <dani.behzi@ubuntu.com>, 2020.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2020-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-09 13:38+0430\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-16 16:51+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -140,7 +140,7 @@ msgstr "در حال بارکردن بازبینی‌ها…"
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
 msgid "Your opinion"
-msgstr "نظر شما"
+msgstr "نظرتان"
 
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
@@ -162,62 +162,75 @@ msgstr "رتبه‌گذاری"
 msgid "Bug report"
 msgstr "گزارش خطا"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s بارگیری"
+msgstr[1] "%(downloads)s بارگیری"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "شمار بارگیری‌ها"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "نصب"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "ارتقای این افزونه"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "پیکربندی این افزونه"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "حذف نصب این افزونه"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "صفحهٔ خانگی افزونه"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "حالت(های) نشست"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "این افزونه هنگام قفل بودن صفحه اجرا خواهد شد"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "گفت‌وگوی قفل‌گشایی"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "بارگیری"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "نگارش پوسته…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "نگارش افزونه…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's nothing "
@@ -226,7 +239,7 @@ msgstr ""
 "یک بازبین، افزونه‌ای را که ثبت‌کردید برای اطمینان از خطرناک نبودنش بررسی خواهد "
 "کرد. نتایج بازبینی به شما رایانامه خواهد شد."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
@@ -297,6 +310,43 @@ msgstr "فرستادن نظر"
 msgid "Edit your comment"
 msgstr "ویرایش نظرتان"
 
+#: sweettooth/review/templates/review/review.html:63 extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"می‌توانید نگارش بعدی را با <a href='https://extensions.gnome.org/upload/'>همین "
+"فرمی</a> که این نگاش را فرستادید بارگذارید."
+
+#: sweettooth/review/templates/review/review.html:66 extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension page."
+msgstr "می‌توانید نقشک افزونه را با زدن روی نقشک در صفحهٔ افزونه‌تان عوض کنید."
+
+#: sweettooth/review/templates/review/review.html:69 extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link in "
+"your extension page."
+msgstr ""
+"اگر می‌خواهید نگارشی تأیید شده را فیرفعّال کنید، پیوند غیرفعّال کردن را در صفحهٔ "
+"افزونه‌تان بزنید."
+
+#: sweettooth/review/templates/review/review.html:72 extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"می‌توانید رهنمودهای توسعه‌دهنده را در <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a> بیابید."
+
+#: sweettooth/review/templates/review/review.html:75 extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"اگر برای افزونه‌تان نیاز به کمک داشتید می‌توانید روی <a href='https://matrix.to/#/"
+"#extensions:gnome.org'>کانال ماتریکس گنوم</a> از ما بپرسید."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "جدیدترین افزونه‌ها دز افزونه‌های پوستهٔ گنوم"
@@ -305,6 +355,10 @@ msgstr "جدیدترین افزونه‌ها دز افزونه‌های پوست
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "افزونه‌های پوستهٔ گنوم"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "رهنمود توسعه‌دهندگان"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"

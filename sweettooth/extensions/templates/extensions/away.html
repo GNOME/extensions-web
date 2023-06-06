@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "You are leaving GNOME Extensions website" %}{% endblock %}
+{% block body %}
+<p>
+    {% trans "You are going to leave GNOME Extensions website to" %} {{ target_url|escape }}.
+</p>
+<p>
+    <button type="button" class="btn btn-primary" onclick="history.back();">{% trans "Cancel" %}</button>
+    <a href='{{ target_url }}' rel='external nofollow noopener noreferrer'><button type="button" class="btn btn-secondary">{% trans "Proceed anyway" %}</button></a>
+</p>
+{% endblock %}

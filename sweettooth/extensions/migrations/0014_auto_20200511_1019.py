@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('extensions', '0012_extensionversion_extension_id__status_idx'),
+        ('extensions', '0013_donationurl'),
     ]
 
     operations = [

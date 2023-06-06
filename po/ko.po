@@ -1,14 +1,14 @@
 # Korean translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Seong-ho Cho <shcho@gnome.org>, 2019-2022.
+# Seong-ho Cho <shcho@gnome.org>, 2019-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-25 13:57+0900\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-12 17:01+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -120,12 +120,12 @@ msgstr "확장"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
-"안타깝게도, 댓글을 달거나 오류를 보고하려면 스팸을 막을 목적으로 <a href="
-"\"%(login_url)s\">그놈 쉘에 로그인</a>해야 합니다. 이해하셨죠?"
+"안타깝게도, 댓글을 달거나 오류를 보고하려면 스팸을 막을 목적으로 <a "
+"href=\"%(login_url)s\">그놈 쉘에 로그인</a>해야 합니다. 이해하셨죠?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:23
 #: extensions-web-domain-django:1
@@ -162,71 +162,83 @@ msgstr "평가"
 msgid "Bug report"
 msgstr "버그 보고"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "다운로드 %(downloads)s회"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "다운로드 횟수"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "설치"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "이 확장 업그레이드"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "이 확장 설정"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "이 확장 제거"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "확장 홈페이지"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "세션 모드"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "이 확장 기능은 화면을 잠근 동안에 동작합니다"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "대화 상자 잠금 해제"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "다운로드"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "쉘 버전…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "확장 버전…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"검토자는 여러분이 제출한 확장에 상당한 위험 요소가 있는지 확인합니다. 검토 "
-"결과는 전자메일로 받아보시게 됩니다."
+"검토자는 여러분이 제출한 확장에 상당한 위험 요소가 있는지 확인합니다. 검토 결"
+"과는 전자메일로 받아보시게 됩니다."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
@@ -296,6 +308,48 @@ msgstr "댓글 게시"
 msgid "Edit your comment"
 msgstr "댓글 편집"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"이 버전을 게시한 <a href='https://extensions.gnome.org/upload/'>동일 양식</a>"
+"으로 다음 버전을 업로드할 수 있습니다."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr "확장 페이지의 아이콘을 눌러 확장 아이콘을 바꿀 수 있습니다."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"승인 버전의 비활성을 원할 경우, 확장 페이지에서 비활성 링크를 누르십시오."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"<a href='https://gjs.guide/extensions/'>gjs.guide</a>에서 개발자 안내서 내용"
+"을 찾아볼 수 있습니다."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"확장 작성시 도움을 받으려면 <a href='https://matrix.to/#/#extensions:gnome."
+"org'>그놈 매트릭스 채널</a>에 질문할 수 있습니다."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "그놈 쉘 확장의 최신 확장 기능"
@@ -304,6 +358,10 @@ msgstr "그놈 쉘 확장의 최신 확장 기능"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "그놈 쉘 확장"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "개발자 안내서"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -323,8 +381,8 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"이 사이트에서 그놈 쉘 확장을 다루려면 브라우저 확장 기능과 네이티브 호스트 "
-"메시징 프로그램으로 이루어진 그놈 쉘 통합을 설치해야합니다"
+"이 사이트에서 그놈 쉘 확장을 다루려면 브라우저 확장 기능과 네이티브 호스트 메"
+"시징 프로그램으로 이루어진 그놈 쉘 통합을 설치해야합니다"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
@@ -347,8 +405,8 @@ msgid ""
 "troubleshooting entry</a> for more information."
 msgstr ""
 "이 시스템에서 실행 중인 그놈 사본을 찾을 수 없어 인터페이스 일부 기능을 사용"
-"할 수 없습니다. 자세한 내용은 <a href=\"/about/#no-detection\">문제 해결 항"
-"목</a>을 참고하십시오."
+"할 수 없습니다. 자세한 내용은 <a href=\"/about/#no-detection\">문제 해결 항목"
+"</a>을 참고하십시오."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1

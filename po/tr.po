@@ -1,23 +1,25 @@
 # Turkish translation for extensions-web.
-# Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
+# Copyright (C) 2019-2023 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
+#
 # Serdar Sağlam <teknomobil@msn.com>, 2019.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2022.
+# Sabri Ünal <libreajans@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-09-04 22:55+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-10 21:56+0300\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 3.30.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
 msgid "Username or email"
@@ -87,7 +89,7 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
-"Parola sıfırlama belirteci yanlış. Lütfen bağlantınızı denetleyip yeniden "
+"Parola sıfırlama jetonu yanlış. Lütfen bağlantınızı denetleyip yeniden "
 "deneyin."
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:8
@@ -125,9 +127,9 @@ msgstr "Uzantılar"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Ne yazık ki istenmeyen yorumları önlemek amacıyla yorum yazmak veya hata "
 "bildirmek için <a href=\"%(login_url)s\"> GNOME Kabuk Uzantılarına giriş "
@@ -141,7 +143,7 @@ msgstr "Kullanıcı Yorumları"
 #: sweettooth/extensions/templates/extensions/comments.html:25
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr "Yorumlar açılıyor…"
+msgstr "Yorumlar yükleniyor…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
@@ -168,62 +170,74 @@ msgstr "Oyla"
 msgid "Bug report"
 msgstr "Hata bildir"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s indirme"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "İndirme Sayısı"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Kur"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
-msgstr "Bu uzantıyı güncelle"
+msgstr "Bu uzantıyı yükselt"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Bu uzantıyı yapılandır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Bu uzantıyı kaldır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Uzantı Sayfası"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Oturum Kip(ler)i"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Bu uzantı ekran kilitliyken çalışacaktır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Kilit Açma İletişim Penceresi"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "İndir"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Kabuk sürümü…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Uzantı sürümü…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -233,7 +247,7 @@ msgstr ""
 "gönderdiğiniz uzantıyı inceler. İşlemin sonucu size e-posta ile "
 "gönderilecektir."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
@@ -285,7 +299,7 @@ msgstr "Bu GNOME uzantısıyla ilgili ne düşünüyorsunuz?"
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Lütfen aşağıdaki hatayı düzeltin"
+msgstr[0] "Lütfen aşağıdaki hataları düzeltin"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
@@ -301,7 +315,51 @@ msgstr "Yorumu Gönder"
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr "Yorumu düzenle"
+msgstr "Yorumunu düzenle"
+
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Sonraki sürümü, bu sürümü yayınladığınız <a href='https://extensions.gnome."
+"org/upload/'>aynı form ile</a> yükleyebilirsiniz."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Uzantı sayfanızdaki simgeye tıklayarak uzantı simgesini değiştirebilirsiniz."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Onaylanan bir sürümü devre dışı bırakmak isterseniz, uzantı sayfanızdaki "
+"devre dışı bırak bağlantısına tıklayın."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Geliştirici kılavuzunu <a href='https://gjs.guide/extensions/'>gjs.guide</"
+"a>ʼda bulabilirsiniz."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Uzantınızla ilgili yardım gerekirse, <a href='https://matrix.to/#/"
+"#extensions:gnome.org'>GNOME Matrix Kanalı</a> üzerinden bize sorabilirsiniz."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
@@ -311,6 +369,10 @@ msgstr "GNOME Kabuk Uzantılarıʼnda en son uzantılar"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "GNOME Kabuk Uzantıları"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Geliştirici Kılavuzu"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -331,8 +393,8 @@ msgid ""
 "host messaging application"
 msgstr ""
 "GNOME Kabuk uzantılarını bu siteyi kullanarak denetlemek için iki parçalık "
-"GNOME Kabuk tümleşimini kurmalısınız: tarayıcı uzantısı ve yerli ana "
-"makine iletişim uygulaması"
+"GNOME Kabuk tümleşimini kurmalısınız: tarayıcı uzantısı ve yerli ana makine "
+"iletişim uygulaması"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
@@ -389,7 +451,7 @@ msgstr "Sıralama biçimi"
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr "Tüm yorumları göster"
+msgstr "Daha çok yorum göster"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1

@@ -1,15 +1,15 @@
 # Polish translation for extensions-web.
-# Copyright © 2019-2022 the extensions-web authors.
+# Copyright © 2019-2023 the extensions-web authors.
 # This file is distributed under the same license as the extensions-web package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2019-2022.
-# Aviary.pl <community-poland@mozilla.org>, 2019-2022.
+# Piotr Drąg <piotrdrag@gmail.com>, 2019-2023.
+# Aviary.pl <community-poland@mozilla.org>, 2019-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2022-08-09 08:33+0000\n"
-"PO-Revision-Date: 2022-08-14 15:45+0200\n"
+"POT-Creation-Date: 2023-03-07 17:19+0000\n"
+"PO-Revision-Date: 2023-03-11 15:20+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -122,9 +122,9 @@ msgstr "Rozszerzenia"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Aby uniknąć niechcianych wiadomości do wysyłania komentarzy i zgłaszania "
 "błędów wymagamy <a href=\"%(login_url)s\">zalogowania się w serwisie</a>."
@@ -164,62 +164,76 @@ msgstr "Ocena"
 msgid "Bug report"
 msgstr "Zgłoszenie błędu"
 
-#: sweettooth/extensions/templates/extensions/detail.html:23
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s pobranie"
+msgstr[1] "%(downloads)s pobrania"
+msgstr[2] "%(downloads)s pobrań"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Liczba pobrań"
+
+#: sweettooth/extensions/templates/extensions/detail.html:25
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Zainstaluj"
 
-#: sweettooth/extensions/templates/extensions/detail.html:26
+#: sweettooth/extensions/templates/extensions/detail.html:28
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Zaktualizuj to rozszerzenie"
 
-#: sweettooth/extensions/templates/extensions/detail.html:27
+#: sweettooth/extensions/templates/extensions/detail.html:29
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Skonfiguruj to rozszerzenie"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:30
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Odinstaluj to rozszerzenie"
 
-#: sweettooth/extensions/templates/extensions/detail.html:54
+#: sweettooth/extensions/templates/extensions/detail.html:56
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Strona rozszerzenia"
 
-#: sweettooth/extensions/templates/extensions/detail.html:60
+#: sweettooth/extensions/templates/extensions/detail.html:62
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Tryby sesji"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "To rozszerzenie będzie działało, kiedy ekran jest zablokowany"
 
-#: sweettooth/extensions/templates/extensions/detail.html:61
+#: sweettooth/extensions/templates/extensions/detail.html:63
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Ekran blokady"
 
-#: sweettooth/extensions/templates/extensions/detail.html:65
+#: sweettooth/extensions/templates/extensions/detail.html:67
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Pobierz"
 
-#: sweettooth/extensions/templates/extensions/detail.html:68
+#: sweettooth/extensions/templates/extensions/detail.html:70
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Wersja powłoki…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:72
+#: sweettooth/extensions/templates/extensions/detail.html:74
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Wersja rozszerzenia…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:81
+#: sweettooth/extensions/templates/extensions/detail.html:83
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -228,7 +242,7 @@ msgstr ""
 "Recenzent przejrzy wysłane rozszerzenie, aby upewnić się, że nie ma w nim "
 "nic niebezpiecznego. Wyniki recenzji wyślemy pocztą."
 
-#: sweettooth/extensions/templates/extensions/detail.html:92
+#: sweettooth/extensions/templates/extensions/detail.html:94
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
@@ -300,6 +314,50 @@ msgstr "Wyślij komentarz"
 msgid "Edit your comment"
 msgstr "Modyfikuj komentarz"
 
+#: sweettooth/review/templates/review/review.html:63
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Można przesłać następną wersję za pomocą <a href='https://extensions.gnome."
+"org/upload/'>tego samego formularza</a>, co przy tej wersji."
+
+#: sweettooth/review/templates/review/review.html:66
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Można zmienić ikonę rozszerzenia klikając ikonę na stronie rozszerzenia."
+
+#: sweettooth/review/templates/review/review.html:69
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Można wyłączyć zatwierdzoną wersję klikając odpowiedni odnośnik na stronie "
+"rozszerzenia."
+
+#: sweettooth/review/templates/review/review.html:72
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Przewodniki dla programistów znajdują się na stronie <a href='https://gjs."
+"guide/extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:75
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Na <a href='https://matrix.to/#/#extensions:gnome.org'>kanale GNOME w sieci "
+"Matrix</a> można uzyskać pomoc z rozszerzeniem."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Najnowsze rozszerzenia w serwisie"
@@ -308,6 +366,10 @@ msgstr "Najnowsze rozszerzenia w serwisie"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Rozszerzenia powłoki GNOME"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Przewodnik dla programistów"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -352,8 +414,8 @@ msgid ""
 "troubleshooting entry</a> for more information."
 msgstr ""
 "Nie możemy wykryć uruchomionej kopii GNOME na tym komputerze, więc niektóre "
-"części interfejsu mogą być wyłączone. <a href=\"/about/#no-detection"
-"\">Strona o rozwiązywaniu problemów</a> zawiera więcej informacji."
+"części interfejsu mogą być wyłączone. <a href=\"/about/#no-"
+"detection\">Strona o rozwiązywaniu problemów</a> zawiera więcej informacji."
 
 #: sweettooth/static/js/extensions.js:136
 #: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1

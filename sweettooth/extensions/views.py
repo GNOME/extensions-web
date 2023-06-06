@@ -13,16 +13,22 @@ from functools import reduce
 from itertools import product
 import json
 from urllib.parse import urlencode, urlparse, urlunparse
+from typing import Any
+from urllib.parse import unquote
 
 from django.core.paginator import Paginator
+from django.core.validators import URLValidator
 from django.forms import Field
 from django.http import (
     HttpResponseBadRequest,
     Http404
 )
 from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from django_filters.rest_framework import CharFilter, ChoiceFilter, DjangoFilterBackend, FilterSet, MultipleChoiceFilter
 
@@ -366,3 +372,21 @@ def shell_update(request):
         }
     )
     return ExtensionsViewSet.as_view({'post': 'updates'})(mocked_request)
+
+
+class AwayView(TemplateView):
+    template_name = "extensions/away.html"
+    _validator = URLValidator(schemes=('http', 'https'))
+
+    def setup(self, request, *args: Any, **kwargs: Any) -> None:
+        super().setup(request, *args, **kwargs)
+        self.target_url = unquote(kwargs["target_url"])
+
+    def get(self, request, *args, **kwargs):
+        try:
+            self._validator(self.target_url)
+            kwargs['target_url'] = self.target_url
+        except ValidationError:
+            return redirect("/")
+
+        return super().get(request, *args, **kwargs)

@@ -345,7 +345,17 @@ li.extension:last-child,
 }
 
 .extension.dummy .install-button {
-    display: block;
+    display: inline-block;
+}
+
+.extension .donate-button {
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+}
+
+.extension .donate-button a {
+    text-decoration: none;
 }
 
 .extension.configurable .configure-button,
@@ -806,6 +816,7 @@ textarea:focus {
     border: 1px solid #BABDB6;
     border-left: 1em solid #A5A5AF;
     border-radius: 2px 2px 2px 2px;
+    font-family: monospace;
 }
 
 .review blockquote.empty {
