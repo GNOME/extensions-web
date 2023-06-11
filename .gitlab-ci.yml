@@ -25,9 +25,13 @@ stages:
   stage: build and test
   image: python:$PYTHON_VERSION
   before_script:
-    - cp -r ./xapian-root/. /
-    - ldconfig
-    - rm -r ./xapian-root
+    - if test -d ".xapian/${PYTHON_VERSION}"; then
+    -   cp -r ".xapian/${PYTHON_VERSION}/." /
+    -   ldconfig
+    - else
+    -   openshift/docker/scripts/install-xapian.sh
+    - fi
+    - rm -rf .xapian
     - pip install -r requirements.txt
   variables:
     EGO_DEBUG: 1
@@ -39,11 +43,12 @@ build xapian:
   stage: build and test
   image: python:$PYTHON_VERSION
   script:
-    - 'openshift/docker/scripts/install-xapian.sh'
-    - mv -f /tmp/xapian-root ./
+    - openshift/docker/scripts/install-xapian.sh
+    - mkdir -p ".xapian/${PYTHON_VERSION}"
+    - cp -r /tmp/xapian-root/. ".xapian/${PYTHON_VERSION}/"
   artifacts:
     paths:
-      - xapian-root
+      - .xapian
 
 test:
   extends:
