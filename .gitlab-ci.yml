@@ -26,6 +26,7 @@ stages:
   image: python:$PYTHON_VERSION
   before_script:
     - cp -r ./xapian-root/. /
+    - ldconfig
     - rm -r ./xapian-root
     - pip install -r requirements.txt
   variables:
