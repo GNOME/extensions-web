@@ -81,6 +81,12 @@ class AuthTests(RegistrationDataTest):
             username=self.registration_data['email'],
             password=self.valid_data['password1']))
 
+    def test_auth_disallowed_username(self):
+        with self.settings(DISALLOWED_USERNAMES=(self.registration_data[User.USERNAME_FIELD],)):
+            self.assertFalse(self.client.login(
+                    username=self.registration_data[User.USERNAME_FIELD],
+                    password=self.registration_data['password']))
+
 
 class RegistrationTests(RegistrationDataTest):
     def test_username_email(self):
@@ -99,6 +105,14 @@ class RegistrationTests(RegistrationDataTest):
 
         form = RegistrationForm(data=data)
         self.assertFalse(form.is_valid())
+
+    def test_disallowed(self):
+        with self.settings(DISALLOWED_USERNAMES=('gnome',)):
+            data = self.valid_data.copy()
+            data[User.USERNAME_FIELD] = "official_GNOME"
+
+            form = RegistrationForm(data=data)
+            self.assertFalse(form.is_valid())
 
 
 class PasswordResetTests(RegistrationDataTest):

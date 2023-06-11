@@ -1,5 +1,5 @@
-
 from django import forms
+from django.conf import settings
 from django.contrib.auth import forms as auth_forms, get_user_model
 from django.utils.translation import gettext_lazy as _
 from django_registration.forms import (
@@ -63,9 +63,17 @@ class RegistrationForm(RegistrationFormCaseInsensitive, RegistrationFormUniqueEm
 
     def clean(self):
         cleaned_data = super().clean()
+        username = cleaned_data.get(get_user_model().USERNAME_FIELD)
 
-        if cleaned_data.get('username') == cleaned_data.get('email'):
+        if username == cleaned_data.get('email'):
             raise forms.ValidationError(_("You should not use email as username"))
+
+        if settings.DISALLOWED_USERNAMES and username:
+            if any(
+                word.lower() in username.lower()
+                for word in settings.DISALLOWED_USERNAMES
+            ):
+                raise forms.ValidationError(_("Your username contains forbidden words"))
 
         return cleaned_data
 
