@@ -8,6 +8,7 @@ from django_registration.forms import (
     RegistrationFormUniqueEmail
 )
 
+
 class PlainOutputForm(object):
     def as_plain(self):
         return self._html_output(
@@ -17,6 +18,7 @@ class PlainOutputForm(object):
             help_text_html = u'<br /><span class="helptext">%s</span>',
             errors_on_separate_row = False)
 
+
 class AutoFocusForm(object):
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
@@ -24,7 +26,8 @@ class AutoFocusForm(object):
             self.fields[field].widget.attrs['autofocus'] = 'autofocus'
             break
 
-class LoginOrEmailAuthenticationForm(object):
+
+class LoginOrEmailAuthenticationForm(auth_forms.AuthenticationForm):
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         self.fields['username'].label = _('Username or email')
@@ -37,12 +40,13 @@ class InlineForm(object):
             field.widget.attrs['placeholder'] = field.label
             field.widget.attrs['class'] = 'form-control'
 
+
 class InlineAuthenticationForm(PlainOutputForm, AutoFocusForm,
-                               InlineForm, LoginOrEmailAuthenticationForm, auth_forms.AuthenticationForm):
+                               InlineForm, LoginOrEmailAuthenticationForm):
     pass
 
-class AuthenticationForm(LoginOrEmailAuthenticationForm, AutoFocusForm,
-                        auth_forms.AuthenticationForm):
+
+class AuthenticationForm(AutoFocusForm, LoginOrEmailAuthenticationForm):
     pass
 
 
@@ -64,6 +68,7 @@ class RegistrationForm(RegistrationFormCaseInsensitive, RegistrationFormUniqueEm
             raise forms.ValidationError(_("You should not use email as username"))
 
         return cleaned_data
+
 
 class AutoFocusRegistrationForm(AutoFocusForm, RegistrationForm):
     pass
