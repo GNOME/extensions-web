@@ -25,11 +25,24 @@ stages:
   stage: build and test
   image: python:$PYTHON_VERSION
   before_script:
-    - 'openshift/docker/scripts/install-xapian.sh'
+    - mv ./xapian-root/* /
+    - rm -r ./xapian-root
     - pip install -r requirements.txt
   variables:
     EGO_DEBUG: 1
     EGO_SECRET_KEY: .
+  needs:
+    - build xapian
+
+build xapian:
+  stage: build and test
+  image: python:$PYTHON_VERSION
+  script:
+    - 'openshift/docker/scripts/install-xapian.sh'
+    - mv /tmp/xapian-root ./
+  artifacts:
+    paths:
+      - xapian-root
 
 test:
   extends:
