@@ -120,7 +120,11 @@
 <div id="previous_reviews" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   {% for review in previous_reviews %}
   <div class="review">
+    {% if review.reviewer %}
     <a class="review-author" href="{% url 'auth-profile' user=review.reviewer.username %}">{{ review.reviewer }}</a>
+    {% else %}
+    Ghost
+    {% endif %}
     {% if review.new_status %}
     <span class="extension-status {{ review.get_new_status_display|lower }}">
       {% if review.auto %}auto-{% endif%}

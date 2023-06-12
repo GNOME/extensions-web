@@ -1,13 +1,15 @@
 
 from django.contrib import admin
 
-from sweettooth.extensions.models import Extension, ExtensionVersion
+from sweettooth.extensions.models import DonationUrl, Extension, ExtensionVersion
 from sweettooth.extensions.models import STATUS_ACTIVE, STATUS_REJECTED
 from sweettooth.review.models import CodeReview
+
 
 class CodeReviewAdmin(admin.TabularInline):
     model = CodeReview
     fields = 'reviewer', 'comments',
+
 
 class ExtensionVersionAdmin(admin.ModelAdmin):
     list_display = 'title', 'status',
@@ -26,12 +28,12 @@ class ExtensionVersionAdmin(admin.ModelAdmin):
     def reject(self, request, queryset):
         queryset.update(status=STATUS_REJECTED)
 
-admin.site.register(ExtensionVersion, ExtensionVersionAdmin)
 
 class ExtensionVersionInline(admin.TabularInline):
     model = ExtensionVersion
     fields = 'version', 'status',
     extra = 0
+
 
 class ExtensionAdmin(admin.ModelAdmin):
     list_display = 'name', 'uuid', 'num_versions', 'creator',
@@ -45,4 +47,11 @@ class ExtensionAdmin(admin.ModelAdmin):
 
     inlines = [ExtensionVersionInline]
 
+
+@admin.register(DonationUrl)
+class DonationAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(ExtensionVersion, ExtensionVersionAdmin)
 admin.site.register(Extension, ExtensionAdmin)

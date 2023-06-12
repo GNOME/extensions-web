@@ -6,6 +6,7 @@ from django.db.models import Q
 
 from sweettooth.extensions.models import ExtensionVersion, STATUSES
 
+
 def get_all_reviewers():
     perm = Permission.objects.get(codename="can-review-extensions")
 
@@ -14,8 +15,9 @@ def get_all_reviewers():
     groups = Group.objects.filter(permissions=perm)
     return get_user_model().objects.filter(Q(is_superuser=True)|Q(user_permissions=perm)|Q(groups__in=groups)).distinct()
 
+
 class CodeReview(models.Model):
-    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(auto_now_add=True)
     comments = models.TextField(blank=True)
     version = models.ForeignKey(ExtensionVersion, on_delete=models.CASCADE, related_name="reviews")

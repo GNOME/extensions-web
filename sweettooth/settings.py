@@ -73,6 +73,8 @@ if 'EGO_CORS_ORIGINS' in os.environ:
     INSTALLED_APPS.append('corsheaders')
     CORS_ORIGIN_WHITELIST = list(map(str.strip, os.environ['EGO_CORS_ORIGINS'].split(",")))
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = ['sweettooth.auth.backends.LoginEmailAuthentication']
 
