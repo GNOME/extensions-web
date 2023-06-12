@@ -3,7 +3,6 @@ from django.conf.urls import include
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import re_path
-from django.views.generic.base import TemplateView
 
 from django_registration.backends.activation.views import RegistrationView
 
@@ -21,8 +20,7 @@ urlpatterns = [
     re_path(r'^register/$', RegistrationView.as_view(form_class=forms.AutoFocusRegistrationForm),
         name='registration_register'),
 
-    re_path(r'settings/(?P<user>.+)', TemplateView.as_view(template_name='profile/settings.html'),
-        name='auth-settings'),
+    re_path(r'settings', views.SettingsView.as_view(), name='auth-settings'),
 
     re_path(r'', include('django_registration.backends.activation.urls')),
     re_path(r'^profile/(?P<user>.+)', views.profile, name='auth-profile'),

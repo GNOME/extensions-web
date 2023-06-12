@@ -1,0 +1,10 @@
+Hello, {{ username }}!
+
+You requested to remove your account from GNOME Extensions website.
+
+Your account will be removed in 7 days. During this period you can
+cancel account removal using Settings page.
+
+—
+
+This email was sent automatically by GNOME Extensions. Do not reply.

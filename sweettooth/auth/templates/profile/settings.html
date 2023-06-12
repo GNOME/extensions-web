@@ -1,18 +1,49 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block body %}
-  <h3> Settings </h3>
+  <h3>{% trans "Settings" %}</h3>
   <ul>
-    <li> <a href="{% url 'password_change' %}">Change your password</a> </li>
+    <li> <a href="{% url 'password_change' %}">{% trans "Change your password" %}</a> </li>
   </ul>
 
-  <h3> Other Options </h3>
+  <h3>{% trans "Account removal" %}</h3>
+  {% if schedule_delete %}
+  <div class="alert alert-danger" role="alert">
+    {% blocktrans %}Your account is sheduled for removal after {{ schedule_delete_after }}{% endblocktrans %}
+  </div>
+  {% endif %}
+  <form action="{% url 'auth-settings' %}" method='post' class="form-horizontal settings-form">
+    {% csrf_token %}
+    {% for field in delete_account_form.visible_fields %}
+    <div class="form-group row">
+      <div class="col-sm-4 col-form-label">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if field.help_text %}
+        <div>
+          <small class="form-text text-muted">{{ field.help_text }}</small>
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-sm-8{% if field.errors %} has-error{% endif %}">
+        {{ field }}
+        {% if field.errors %}
+        <div class="help-block">
+          {% for error in field.errors %}
+            <p>{{ error|escape }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+  </form>
+
+  <h3>{% trans "Other Options" %}</h3>
   <p>
-    This website is currently undergoing a redesign, which includes more
-    settings for accounts. We appreciate your patience while work continues.
+    {% trans "This website is currently undergoing a redesign, which includes more settings for accounts. We appreciate your patience while work continues." %}
   </p>
   <p>
-    If you require your e-mail address to be changed or your account to be
-    closed, please <a href="https://gitlab.gnome.org/Infrastructure/extensions-web/issues/new">open an issue</a>
-    in the project repository.
+    {% blocktrans with url="https://gitlab.gnome.org/Infrastructure/extensions-web/issues/new" %}If you require your e-mail address to be changed, please <a href="{{ url }}">open an issue</a> in the project repository.{% endblocktrans %}
   </p>
 {% endblock %}

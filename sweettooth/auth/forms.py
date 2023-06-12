@@ -80,3 +80,20 @@ class RegistrationForm(RegistrationFormCaseInsensitive, RegistrationFormUniqueEm
 
 class AutoFocusRegistrationForm(AutoFocusForm, RegistrationForm):
     pass
+
+
+class DeleteAccountForm(forms.Form):
+    delete_account = forms.TypedChoiceField(
+        label=_("Delete my account"),
+        help_text=_("Your account will be deleted in 7 days"),
+        coerce=lambda x: x == 'True',
+        choices=((True, _('Yes')), (False, _('No'))),
+        widget=forms.RadioSelect,
+    )
+    current_password = forms.CharField(
+        label=_("Current password"),
+        help_text=_("You don't need to specify a password to cancel account removal"),
+        widget=forms.PasswordInput,
+        required=False,
+        strip=False,
+    )
