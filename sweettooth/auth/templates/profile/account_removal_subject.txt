@@ -1,0 +1,1 @@
+GNOME Extensions — removal of account "{{ username }}"

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+  <h3>{% trans "Account removal" %}</h3>
+  <p>
+    {% if schedule_delete %}
+    {% trans "You account is scheduled for removal. You can cancel account removal in 7 days." %}
+    {% else %}
+    {% trans "Account removal is canceled." %}
+    {% endif %}
+  </p>
+{% endblock %}

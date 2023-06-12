@@ -49,7 +49,7 @@ div.navbar-header a.unreviewed_counter:hover {
     color: #0489B7;
 }
 
-.auth_form li, .auth_form ol {
+.auth_form li, .auth_form ol, .settings-form li, .settings-form ul {
     list-style-type: none;
 }
 

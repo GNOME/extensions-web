@@ -353,7 +353,9 @@ objects:
           spec:
             containers:
             - command:
-              - /extensions-web/app/bin/sweettooth-cron-update
+              - python
+              - manage.py
+              - update_popularity
               env:
               - name: EGO_DATABASE_URL
                 valueFrom:
@@ -407,79 +409,6 @@ objects:
 - apiVersion: batch/v1beta1
   kind: CronJob
   metadata:
-    name: job-update-software
-  spec:
-    jobTemplate:
-      spec:
-        template:
-          spec:
-            containers:
-            - command:
-              - /extensions-web/app/bin/sweettooth-cron-software
-              env:
-              - name: EGO_DATABASE_URL
-                valueFrom:
-                  secretKeyRef:
-                    key: database-url
-                    name: ${NAME}
-              - name: EGO_EMAIL_URL
-                valueFrom:
-                  secretKeyRef:
-                    key: email-url
-                    name: ${NAME}
-              - name: EGO_SECRET_KEY
-                valueFrom:
-                  secretKeyRef:
-                    key: secret-key
-                    name: ${NAME}
-              - name: EGO_ADMINISTRATOR_NAME
-                valueFrom:
-                  configMapKeyRef:
-                    key: administrator-name
-                    name: ${NAME}
-              - name: EGO_ADMINISTRATOR_EMAIL
-                valueFrom:
-                  configMapKeyRef:
-                    key: administrator-email
-                    name: ${NAME}
-              - name: EGO_MEDIA_ROOT
-                valueFrom:
-                  configMapKeyRef:
-                    key: media-root
-                    name: extensions-web
-              - name: EGO_STATIC_ROOT
-                valueFrom:
-                  configMapKeyRef:
-                    key: static-root
-                    name: extensions-web
-              - name: EGO_ALLOWED_HOST
-                valueFrom:
-                  configMapKeyRef:
-                    key: allowed-host
-                    name: ${NAME}
-              - name: EGO_XAPIAN_DB
-                valueFrom:
-                  configMapKeyRef:
-                    key: xapian-db
-                    name: ${NAME}
-              image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
-              name: update-software
-              volumeMounts:
-              - mountPath: /extensions-web/www
-                name: data-volume
-                subPath: www
-              - mountPath: /extensions-web/data
-                name: data-volume
-                subPath: data
-            restartPolicy: Never
-            volumes:
-            - name: data-volume
-              persistentVolumeClaim:
-                claimName: extensions-claim
-    schedule: 10 0 * * *
-- apiVersion: batch/v1beta1
-  kind: CronJob
-  metadata:
     name: job-clean-users
   spec:
     jobTemplate:
@@ -488,7 +417,9 @@ objects:
           spec:
             containers:
             - command:
-              - /extensions-web/app/bin/sweettooth-clean-users
+              - python
+              - manage.py
+              - clean_users
               env:
               - name: EGO_DATABASE_URL
                 valueFrom:

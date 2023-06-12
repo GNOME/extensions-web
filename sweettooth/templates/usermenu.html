@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-sm-12">
         <p><a class="btn btn-link no-decoration" href="{% url 'auth-profile' user=request.user.username %}">{% trans "User Profile" %}</a></p>
-        <p><a class="btn btn-link no-decoration" href="{% url 'auth-settings' user=request.user.username %}">{% trans "User Settings" %}</a></p>
+        <p><a class="btn btn-link no-decoration" href="{% url 'auth-settings' %}">{% trans "User Settings" %}</a></p>
         <p><a class="btn btn-link no-decoration" href="{% url 'auth-logout' %}">{% trans "Log out" %}</a></p>
     </div>
 </div>

@@ -19,25 +19,54 @@ stages:
   variables:
     PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
 
-test:
+.test defaults:
   extends:
     - .pip cache
   stage: build and test
   image: python:$PYTHON_VERSION
   before_script:
-    - 'openshift/docker/scripts/install-xapian.sh'
+    - if test -d ".xapian/${PYTHON_VERSION}"; then
+    -   cp -r ".xapian/${PYTHON_VERSION}/." /
+    -   ldconfig
+    - else
+    -   openshift/docker/scripts/install-xapian.sh
+    - fi
+    - rm -rf .xapian
     - pip install -r requirements.txt
-  script:
-    - python manage.py test
   variables:
     EGO_DEBUG: 1
     EGO_SECRET_KEY: .
+  needs:
+    - build xapian
+
+build xapian:
+  stage: build and test
+  image: python:$PYTHON_VERSION
+  script:
+    - openshift/docker/scripts/install-xapian.sh
+    - mkdir -p ".xapian/${PYTHON_VERSION}"
+    - cp -r /tmp/xapian-root/. ".xapian/${PYTHON_VERSION}/"
+  artifacts:
+    paths:
+      - .xapian
+
+test:
+  extends:
+    - .test defaults
+  script:
+    - python manage.py test
   parallel:
     matrix:
       - PYTHON_VERSION:
           - '3.9'
           - '3.10'
           - '3.11'
+
+check migrations:
+  extends:
+    - .test defaults
+  script:
+    - python manage.py makemigrations --check
 
 security (trivy):
   stage: build and test

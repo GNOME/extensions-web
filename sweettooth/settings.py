@@ -76,6 +76,16 @@ if 'EGO_CORS_ORIGINS' in os.environ:
 AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = ['sweettooth.auth.backends.LoginEmailAuthentication']
 
+MAINTAINER_WANTED_USERNAME = 'MaintainerWanted'
+# Disallow authentication and registration when
+# username contains words. Case insensitive.
+DISALLOWED_USERNAMES = (
+    'admin',
+    'GNOME',
+    'official',
+    MAINTAINER_WANTED_USERNAME,
+)
+
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
