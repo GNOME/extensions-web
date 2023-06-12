@@ -353,7 +353,9 @@ objects:
           spec:
             containers:
             - command:
-              - /extensions-web/app/bin/sweettooth-cron-update
+              - python
+              - manage.py
+              - update_popularity
               env:
               - name: EGO_DATABASE_URL
                 valueFrom:
@@ -415,7 +417,9 @@ objects:
           spec:
             containers:
             - command:
-              - /extensions-web/app/bin/sweettooth-clean-users
+              - python
+              - manage.py
+              - clean_users
               env:
               - name: EGO_DATABASE_URL
                 valueFrom:
