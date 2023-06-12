@@ -564,6 +564,7 @@ class ExtensionVersion(models.Model):
     def is_inactive(self):
         return self.status == STATUS_INACTIVE
 
+
 class DonationUrl(models.Model):
     class Type(models.TextChoices):
         BUY_ME_A_COFFEE = 'buymeacoffee', 'Buy Me a Coffee'
@@ -590,6 +591,10 @@ class DonationUrl(models.Model):
             return f"{self.TYPE_BASE_URLS[self.url_type]}/{quote(self.url, safe='')}"
 
         return self.url
+
+    def __str__(self) -> str:
+        return f"[{self.extension}] {self.url_type} ({self.url})"
+
 
 # providing_args=["request", "version"]
 submitted_for_review = Signal()
