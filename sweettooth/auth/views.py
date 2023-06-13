@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, Optional
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -71,11 +71,11 @@ class SettingsView(LoginRequiredMixin, TemplateView):
     template_name = 'profile/settings.html'
 
     @staticmethod
-    def _schedule_delete_context(user) -> dict[str, Any]:
+    def _schedule_delete_context(schedule_delete: Optional[datetime]) -> dict[str, Any]:
         return {
-            'schedule_delete': user.schedule_delete,
+            'schedule_delete': schedule_delete,
             'schedule_delete_after': (
-                user.schedule_delete + timedelta(days=7) if user.schedule_delete else None
+                schedule_delete + timedelta(days=7) if schedule_delete else None
             ),
         }
 
@@ -107,7 +107,7 @@ class SettingsView(LoginRequiredMixin, TemplateView):
             'delete_account_form': DeleteAccountForm(initial={
                 'delete_account': "True" if request.user.schedule_delete else "False",
             }),
-        } | self._schedule_delete_context(request.user)
+        } | self._schedule_delete_context(request.user.schedule_delete)
         return super().get(request, *args, **kwargs)
 
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
@@ -115,6 +115,7 @@ class SettingsView(LoginRequiredMixin, TemplateView):
             return HttpResponseForbidden()
 
         form = DeleteAccountForm(request.POST)
+        schedule_delete = request.user.schedule_delete
         if form.is_valid():
             request.user.schedule_delete = datetime.now() if form.cleaned_data['delete_account'] else None
 
@@ -128,6 +129,6 @@ class SettingsView(LoginRequiredMixin, TemplateView):
 
                 return render(request, "profile/account-removal.html", {'schedule_delete': request.user.schedule_delete})
 
-        self.extra_context = {'delete_account_form': form} | self._schedule_delete_context(request.user)
+        self.extra_context = {'delete_account_form': form} | self._schedule_delete_context(schedule_delete)
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
