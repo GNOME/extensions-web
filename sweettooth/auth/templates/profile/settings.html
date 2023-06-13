@@ -9,7 +9,7 @@
   <h3>{% trans "Account removal" %}</h3>
   {% if schedule_delete %}
   <div class="alert alert-danger" role="alert">
-    {% blocktrans %}Your account is sheduled for removal after {{ schedule_delete_after }}{% endblocktrans %}
+    {% blocktrans %}Your account is scheduled for removal after {{ schedule_delete_after }}{% endblocktrans %}
   </div>
   {% endif %}
   <form action="{% url 'auth-settings' %}" method='post' class="form-horizontal settings-form">
