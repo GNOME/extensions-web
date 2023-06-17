@@ -27,5 +27,8 @@ class CodeReview(models.Model):
     class Meta:
         permissions = (
             ("can-review-extensions", "Can review extensions"),
+            # Yuri Konotopov: this is special permission for me :-)
+            # I just want to go through review process regardless of admin status
+            ("force-review", "Force review for reviewers"),
             ("trusted", "Trusted author"),
         )
