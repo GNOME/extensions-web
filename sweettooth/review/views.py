@@ -4,7 +4,7 @@ from collections import Counter
 from contextlib import ExitStack
 import itertools
 import os.path
-from typing import IO
+from typing import IO, Sequence
 from zipfile import ZipFile
 
 import pygments
@@ -12,7 +12,7 @@ import pygments.util
 import pygments.lexers
 import pygments.formatters
 
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, get_connection
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import redirect, get_object_or_404, render
 from django.template.loader import render_to_string
@@ -298,7 +298,8 @@ def review_version_view(request, obj):
 
     return render(request, 'review/review.html', context)
 
-def render_mail(version, template, data):
+
+def render_mail(version, template, data) -> EmailMessage:
     extension = version.extension
 
     data.update(version=version, extension=extension)
@@ -316,6 +317,17 @@ def render_mail(version, template, data):
 
     return EmailMessage(subject=subject.strip(), body=body.strip(), headers=headers)
 
+
+def send_mass_mail(subject: str, message: str, recipients: Sequence[str], headers: dict[str, str]):
+    connection = get_connection()
+    messages = [
+        EmailMessage(subject, message, None, [recipient], connection=connection, headers=headers)
+        for recipient in recipients
+    ]
+
+    return connection.send_messages(messages)
+
+
 def send_email_submitted(request, version):
     extension = version.extension
 
@@ -327,11 +339,11 @@ def send_email_submitted(request, version):
     recipient_list = list(get_all_reviewers().values_list('email', flat=True))
 
     message = render_mail(version, 'submitted', data)
-    message.to = recipient_list
     message.extra_headers.update({'X-SweetTooth-Purpose': 'NewExtension',
                                   'X-SweetTooth-ExtensionCreator': extension.creator.username})
 
-    message.send()
+    send_mass_mail(message.subject, message.body, recipient_list, message.extra_headers)
+
 
 def send_email_auto_approved(request, version):
     extension = version.extension
@@ -347,10 +359,11 @@ def send_email_auto_approved(request, version):
                 review_url=review_url)
 
     message = render_mail(version, 'auto_approved', data)
-    message.to = recipient_list
     message.extra_headers.update({'X-SweetTooth-Purpose': 'AutoApproved',
                                   'X-SweetTooth-ExtensionCreator': extension.creator.username})
-    message.send()
+
+    send_mass_mail(message.subject, message.body, recipient_list, message.extra_headers)
+
 
 def should_auto_approve_changeset(changes):
     for filename in itertools.chain(changes['changed'], changes['added']):
@@ -441,9 +454,10 @@ def send_email_on_reviewed(sender, request, version, review, **kwargs):
         recipient_list.remove(review.reviewer.email)
 
     message = render_mail(version, 'reviewed', data)
-    message.to = recipient_list
     message.extra_headers.update({'X-SweetTooth-Purpose': 'NewReview',
                                   'X-SweetTooth-Reviewer': review.reviewer.username})
-    message.send()
+
+    send_mass_mail(message.subject, message.body, recipient_list, message.extra_headers)
+
 
 models.reviewed.connect(send_email_on_reviewed)
