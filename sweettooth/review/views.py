@@ -376,14 +376,16 @@ def should_auto_approve_changeset(changes):
 
     return True
 
+
 def should_auto_approve(version: models.ExtensionVersion):
     extension = version.extension
     user = extension.creator
     can_review = can_approve_extension(user, extension)
+    force_review = user.has_perm("review.force-review")
     trusted = user.has_perm("review.trusted")
 
-    if can_review or trusted:
-        return True 
+    if (can_review or trusted) and not force_review:
+        return True
 
     old_version = version.extension.latest_version
     if old_version is None:
