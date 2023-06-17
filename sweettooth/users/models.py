@@ -14,3 +14,6 @@ from django.db import models
 
 class User(AbstractUser):
     schedule_delete = models.DateTimeField(blank=True, null=True)
+    # Yuri Konotopov: this is special permission for me :-)
+    # I just want to go through review process regardless of admin status
+    force_review = models.BooleanField(default=False)

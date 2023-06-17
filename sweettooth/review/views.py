@@ -381,10 +381,9 @@ def should_auto_approve(version: models.ExtensionVersion):
     extension = version.extension
     user = extension.creator
     can_review = can_approve_extension(user, extension)
-    force_review = user.has_perm("review.force-review")
     trusted = user.has_perm("review.trusted")
 
-    if (can_review or trusted) and not force_review:
+    if (can_review or trusted) and not user.force_review:
         return True
 
     old_version = version.extension.latest_version
