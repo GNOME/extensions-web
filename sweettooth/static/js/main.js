@@ -70,11 +70,6 @@ function($, messages, modal, hashParamUtils, commentsTemplate, staticfiles, cook
 
         $("time").timeago();
 
-        $("#new_display_name").each(function() {
-            var pk = $(this).data('pk');
-            $(this).csrfEditable('/accounts/change_display_name/' + pk);
-        });
-
         $('#shell_settings').addShellSettings();
         $('#local_extensions').addLocalExtensions();
         $('.extension.single-page').addExtensionSwitch();

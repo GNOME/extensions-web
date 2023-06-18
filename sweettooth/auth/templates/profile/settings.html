@@ -2,19 +2,20 @@
 {% load i18n %}
 {% block body %}
   <h3>{% trans "Settings" %}</h3>
-  <ul>
-    <li> <a href="{% url 'password_change' %}">{% trans "Change your password" %}</a> </li>
-  </ul>
-
-  <h3>{% trans "Account removal" %}</h3>
-  {% if schedule_delete %}
-  <div class="alert alert-danger" role="alert">
-    {% blocktrans %}Your account is scheduled for removal after {{ schedule_delete_after }}{% endblocktrans %}
-  </div>
-  {% endif %}
   <form action="{% url 'auth-settings' %}" method='post' class="form-horizontal settings-form">
     {% csrf_token %}
-    {% for field in delete_account_form.visible_fields %}
+    {% for hidden in profile_form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    {% if profile_messages %}
+    <div class='alert alert-info'>
+        {% for message in profile_messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {{ profile_form.non_field_errors }}
+    {% for field in profile_form.visible_fields %}
     <div class="form-group row">
       <div class="col-sm-4 col-form-label">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -37,13 +38,43 @@
     </div>
     {% endfor %}
     <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+    <a href="{% url 'password_change' %}"><button type='button' class='btn btn-secondary'>{% trans "Change your password" %}</button></a>
   </form>
 
-  <h3>{% trans "Other Options" %}</h3>
-  <p>
-    {% trans "This website is currently undergoing a redesign, which includes more settings for accounts. We appreciate your patience while work continues." %}
-  </p>
-  <p>
-    {% blocktrans with url="https://gitlab.gnome.org/Infrastructure/extensions-web/issues/new" %}If you require your e-mail address to be changed, please <a href="{{ url }}">open an issue</a> in the project repository.{% endblocktrans %}
-  </p>
+  <h3>{% trans "Account removal" %}</h3>
+  {% if schedule_delete %}
+  <div class="alert alert-danger" role="alert">
+    {% blocktrans %}Your account is scheduled for removal after {{ schedule_delete_after }}{% endblocktrans %}
+  </div>
+  {% endif %}
+  <form action="{% url 'auth-settings' %}" method='post' class="form-horizontal settings-form">
+    {% csrf_token %}
+    {% for hidden in delete_account_form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    {{ delete_account_form.non_field_errors }}
+    {% for field in delete_account_form.visible_fields %}
+    <div class="form-group row">
+      <div class="col-sm-4 col-form-label">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if field.help_text %}
+        <div>
+          <small class="form-text text-muted">{{ field.help_text }}</small>
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-sm-8{% if field.errors %} has-error{% endif %}">
+        {{ field }}
+        {% if field.errors %}
+        <div class="help-block">
+          {% for error in field.errors %}
+            <p>{{ error|escape }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-danger">{% trans 'Submit' %}</button>
+  </form>
 {% endblock %}

@@ -1,0 +1,12 @@
+Hello, {{ username }}!
+
+You requested to change your account's email on the GNOME Extensions website.
+
+Please use this link to confirm your new email:
+{{ confirm_email_change_url }}
+
+The link will be active during 3 days.
+
+—
+
+This email was sent automatically by GNOME Extensions. Do not reply.

@@ -13,8 +13,6 @@ PASSWORD_RESET_TOKEN_PATTERN = r'[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,32}'
 urlpatterns = [
     re_path(r'^login/', LoginView.as_view(form_class=forms.AuthenticationForm), name='auth-login'),
 
-    re_path(r'^change_display_name/(?P<pk>\d+)', views.ajax_change_display_name),
-
     re_path(r'^logout/', LogoutView.as_view(next_page='/'), name='auth-logout'),
 
     re_path(r'^register/$', RegistrationView.as_view(form_class=forms.AutoFocusRegistrationForm),
@@ -53,4 +51,13 @@ urlpatterns = [
         rf'(?P<token>{PASSWORD_RESET_TOKEN_PATTERN})/$',
         auth_views.PasswordResetConfirmView.as_view(),
         name='password_reset_confirm'),
+
+    re_path(
+        r'^change-email/cancel/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z:_\-]+)',
+        views.EmailChangeCancelView.as_view(),
+        name='email_change_cancel'),
+    re_path(
+        r'^change-email/confirm/(?P<user_id>\d+)/(?P<signature>[0-9A-Za-z:_-]+)',
+        views.EmailChangeConfirmView.as_view(),
+        name='email_change_confirm'),
 ]
