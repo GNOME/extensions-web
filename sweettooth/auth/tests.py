@@ -9,12 +9,15 @@
 """
 
 import re
+from django.urls import reverse
 
 from django_registration import validators
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.test.testcases import TestCase
+
+from . import views
 from .forms import AutoFocusRegistrationForm, RegistrationForm
 from .urls import PASSWORD_RESET_TOKEN_PATTERN
 
@@ -121,3 +124,78 @@ class PasswordResetTests(RegistrationDataTest):
         pattern = re.compile(f'^{PASSWORD_RESET_TOKEN_PATTERN}$')
 
         self.assertTrue(pattern.match(token))
+
+
+class SettingsTest(TestCase):
+    registration_data = [
+        {
+            User.USERNAME_FIELD: 'bob',
+            'email': 'bob@example.com',
+            'password': 'mysecretpassword'
+        },
+        {
+            User.USERNAME_FIELD: 'alice',
+            'email': 'alice@example.com',
+            'password': 'swordfish',
+        },
+    ]
+    registered_users = []
+
+    valid_data = {
+        User.USERNAME_FIELD: 'username',
+        'email': 'some@example.com',
+        'password': 'P@ssw0rd',
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        for data in cls.registration_data:
+            cls.registered_users.append(User.objects.create_user(
+                username=data[User.USERNAME_FIELD],
+                email=data['email'],
+                password=data['password']
+            ))
+
+    def test_settings(self):
+        self.client.force_login(self.registered_users[0])
+
+        response = self.client.post(
+            reverse('auth-settings'),
+            {
+                'profile_form': True,
+                'username': self.valid_data[User.USERNAME_FIELD],
+                'email': self.registered_users[0].email,
+                'display_name': self.registered_users[0].display_name,
+            }
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, views.SettingsView.MESSAGE_PROFILE_SAVED)
+
+        response = self.client.post(
+            reverse('auth-settings'),
+            {
+                'profile_form': True,
+                'username': getattr(self.registered_users[1], User.USERNAME_FIELD),
+                'email': self.registered_users[0].email,
+                'display_name': self.registered_users[0].display_name,
+            }
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, "profile_form", "username", validators.DUPLICATE_USERNAME)
+
+        response = self.client.post(
+            reverse('auth-settings'),
+            {
+                'profile_form': True,
+                'username': self.valid_data[User.USERNAME_FIELD],
+                'email': self.registered_users[1].email,
+                'display_name': self.registered_users[0].display_name,
+            }
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, "profile_form", 'email', validators.DUPLICATE_EMAIL)

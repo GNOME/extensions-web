@@ -9,65 +9,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-06-13 11:30+0000\n"
+"POT-Creation-Date: 2023-06-18 19:06+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: sweettooth/auth/forms.py:33 extensions-web-domain-django:1
-msgid "Username or email"
+#: sweettooth/auth/forms.py:152 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
 msgstr ""
 
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
-msgid "Username"
-msgstr ""
-
-#: sweettooth/auth/forms.py:59 extensions-web-domain-django:1
-msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
-
-#: sweettooth/auth/forms.py:60 extensions-web-domain-django:1
-msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
-
-#: sweettooth/auth/forms.py:62 extensions-web-domain-django:1
-msgid "Email"
-msgstr ""
-
-#: sweettooth/auth/forms.py:69 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr ""
-
-#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr ""
-
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:160 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr ""
 
-#: sweettooth/auth/forms.py:88 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:161 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr ""
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:163 extensions-web-domain-django:1
 msgid "No"
 msgstr ""
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:163 extensions-web-domain-django:1
 msgid "Yes"
 msgstr ""
 
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
 msgid "Current password"
 msgstr ""
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 
+#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr ""
+
+#: sweettooth/auth/forms.py:63 extensions-web-domain-django:1
+msgid "Username"
+msgstr ""
+
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+
+#: sweettooth/auth/forms.py:65 extensions-web-domain-django:1
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr ""
+
+#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
+msgid "Email"
+msgstr ""
+
+#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr ""
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr ""
+
 #: sweettooth/auth/templates/profile/account-removal.html:4
-#: sweettooth/auth/templates/profile/settings.html:9
+#: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
 msgid "Account removal"
 msgstr ""
@@ -84,15 +88,9 @@ msgstr ""
 msgid "Account removal is canceled."
 msgstr ""
 
-#: sweettooth/auth/templates/profile/settings.html:12
+#: sweettooth/auth/templates/profile/email_confirm.html:4
 #: extensions-web-domain-django:1
-#, python-format
-msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
-msgstr ""
-
-#: sweettooth/auth/templates/profile/settings.html:39
-#: extensions-web-domain-django:1
-msgid "Submit"
+msgid "Email confirmation"
 msgstr ""
 
 #: sweettooth/auth/templates/profile/settings.html:4
@@ -100,29 +98,21 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: sweettooth/auth/templates/profile/settings.html:42
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:78
 #: extensions-web-domain-django:1
-msgid "Other Options"
+msgid "Submit"
 msgstr ""
 
-#: sweettooth/auth/templates/profile/settings.html:44
+#: sweettooth/auth/templates/profile/settings.html:41
 #: extensions-web-domain-django:1
-msgid ""
-"This website is currently undergoing a redesign, which includes more "
-"settings for accounts. We appreciate your patience while work continues."
+msgid "Change your password"
 msgstr ""
 
 #: sweettooth/auth/templates/profile/settings.html:47
 #: extensions-web-domain-django:1
 #, python-format
-msgid ""
-"If you require your e-mail address to be changed, please <a "
-"href=\"%(url)s\">open an issue</a> in the project repository."
-msgstr ""
-
-#: sweettooth/auth/templates/profile/settings.html:6
-#: extensions-web-domain-django:1
-msgid "Change your password"
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr ""
 
 #: sweettooth/auth/templates/registration/login.html:23
@@ -167,7 +157,6 @@ msgid ""
 "try again."
 msgstr ""
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -180,8 +169,33 @@ msgid ""
 "instructions for setting a new one."
 msgstr ""
 
-#: sweettooth/auth/views.py:123 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:102 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr ""
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr ""
+
+#: sweettooth/auth/views.py:114 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr ""
+
+#: sweettooth/auth/views.py:240 extensions-web-domain-django:1
+msgid ""
+"Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+
+#: sweettooth/auth/views.py:258 extensions-web-domain-django:1
 msgid "Password is wrong"
+msgstr ""
+
+#: sweettooth/auth/views.py:76 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr ""
+
+#: sweettooth/auth/views.py:92 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
 msgstr ""
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1

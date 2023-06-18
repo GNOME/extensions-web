@@ -4,11 +4,7 @@
 {% block body %}
 {% load gravatar extension_icon %}
 <div class="profile">
-  {% if is_editable %}
-  <h2 class="editable" data-pk="{{ user.pk }}" id="new_display_name">{{ display_name }}</h2>
-  {% else %}
   <h2>{{ display_name }}</h2>
-  {% endif %}
   <img class="gravatar" src="{% gravatar_url request user.email 128 %}">
   <p>
     Your avatar is managed through <a href="https://secure.gravatar.com/">Gravatar</a>

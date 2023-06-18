@@ -1,0 +1,13 @@
+Hello, {{ username }}!
+
+You requested to change your account's email to {{ new_email }}.
+
+If you didn't requested this change please use this link to
+reset your password and email:
+{{ cancel_email_change_url }}
+
+The link will be active during 7 days.
+
+—
+
+This email was sent automatically by GNOME Extensions. Do not reply.
