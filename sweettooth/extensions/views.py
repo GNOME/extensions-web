@@ -132,7 +132,7 @@ def shell_download(request, uuid):
         raise Http404()
 
     extension.downloads += 1
-    extension.save(replace_metadata_json=False)
+    extension.save()
 
     return redirect(version.source.url)
 
@@ -418,7 +418,7 @@ def ajax_upload_screenshot_view(request, extension):
 
     extension.screenshot = data
     extension.full_clean()
-    extension.save(replace_metadata_json=False)
+    extension.save()
     return extension.screenshot.url
 
 @ajax_view
@@ -431,7 +431,7 @@ def ajax_upload_icon_view(request, extension):
 
     extension.icon = data
     extension.full_clean()
-    extension.save(replace_metadata_json=False)
+    extension.save()
     return extension.icon.url
 
 def ajax_details(extension, version=None):
@@ -511,15 +511,15 @@ def create_version(request, file_source):
 
             try:
                 extension = models.Extension.objects.get(uuid=uuid)
+                extension.update_from_metadata(metadata)
             except models.Extension.DoesNotExist:
-                extension = models.Extension(creator=request.user)
+                extension = models.Extension(creator=request.user, metadata=metadata)
             else:
                 if request.user != extension.creator and not request.user.is_superuser:
                     messages.error(request, "An extension with that UUID has already been added.")
                     raise DatabaseErrorWithMessages
 
             try:
-                extension.parse_metadata_json(metadata)
                 extension.save()
 
                 extension.full_clean()
@@ -527,11 +527,9 @@ def create_version(request, file_source):
                 raise DatabaseErrorWithMessages(e.messages)
 
             version = models.ExtensionVersion.objects.create(extension=extension,
+                                                             metadata=metadata,
                                                              source=file_source,
                                                              status=models.STATUS_UNREVIEWED)
-            version.parse_metadata_json(metadata)
-            version.replace_metadata_json()
-            version.save()
 
             return version, []
     except DatabaseErrorWithMessages as e:

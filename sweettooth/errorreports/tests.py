@@ -16,9 +16,7 @@ class SubmitErrorReportTestCase(BasicUserTestCase, TestCase):
                     "url": "http://test-metadata.gnome.org"}
 
         extension = Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version = ExtensionVersion(extension=extension, status=STATUS_ACTIVE)
-        version.parse_metadata_json(metadata)
-        version.save()
+        ExtensionVersion.objects.create(extension=extension, metadata=metadata, status=STATUS_ACTIVE)
 
         comment = "YOUR EXTENSION SUCKS IT BROKE"
 

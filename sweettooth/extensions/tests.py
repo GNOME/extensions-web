@@ -73,8 +73,8 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion.objects.create(extension=extension,
+                                                         metadata=metadata,
                                                          status=models.STATUS_UNREVIEWED)
-        version.parse_metadata_json(metadata)
 
         self.assertEqual(version.shell_versions_json, '["3.2", "3.2.1"]')
 
@@ -87,10 +87,10 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
                     ]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version = models.ExtensionVersion.objects.create(extension=extension,
-                                                         status=models.STATUS_UNREVIEWED)
         with self.assertRaises(models.SessionMode.DoesNotExist):
-            version.parse_metadata_json(metadata)
+            version = models.ExtensionVersion.objects.create(extension=extension,
+                                                            metadata=metadata,
+                                                            status=models.STATUS_UNREVIEWED)
 
         metadata = {"uuid": "something2@example.com",
                     "name": "Test Metadata",
@@ -99,9 +99,8 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
                     ]}
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion.objects.create(extension=extension,
+                                                            metadata=metadata,
                                                             status=models.STATUS_UNREVIEWED)
-        version.parse_metadata_json(metadata)
-        version.save()
 
         self.assertEqual([mode.mode for mode in version.session_modes.all()], ['unlock-dialog'])
         self.assertFalse(extension.uses_session_mode('unlock-dialog'))
@@ -118,9 +117,8 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
                     ]}
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion.objects.create(extension=extension,
+                                                            metadata=metadata,
                                                             status=models.STATUS_ACTIVE)
-        version.parse_metadata_json(metadata)
-        version.save()
 
         self.assertEqual([mode.mode for mode in version.session_modes.all()], ['gdm', 'unlock-dialog'])
         self.assertTrue(extension.uses_session_mode('gdm'))
@@ -135,8 +133,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
                     "url": "http://test-metadata.gnome.org"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version = models.ExtensionVersion(extension=extension)
-        version.parse_metadata_json(metadata)
+        version = models.ExtensionVersion(extension=extension, metadata=metadata)
 
         self.assertEqual(extension.uuid, "test-metadata@mecheye.net")
         self.assertEqual(extension.name, "Test Metadata")
@@ -148,8 +145,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
             metadata = models.parse_zipfile_metadata(f)
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version = models.ExtensionVersion(extension=extension)
-        version.parse_metadata_json(metadata)
+        version = models.ExtensionVersion(extension=extension, metadata=metadata)
 
         self.assertEqual(extension.uuid, "test-extension@mecheye.net")
         self.assertEqual(extension.name, "Test Extension")
@@ -161,8 +157,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
             metadata = models.parse_zipfile_metadata(f)
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version = models.ExtensionVersion(extension=extension)
-        version.parse_metadata_json(metadata)
+        version = models.ExtensionVersion.objects.create(extension=extension, metadata=metadata, status=models.STATUS_ACTIVE)
 
         extra = json.loads(version.extra_json_fields)
         self.assertEqual(extension.uuid, "test-extension-2@mecheye.net")
@@ -198,12 +193,9 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
         version = models.ExtensionVersion.objects.create(extension=extension,
+                                          metadata=metadata,
                                           source=File(old_zip_file),
                                           status=models.STATUS_UNREVIEWED)
-
-        version.parse_metadata_json(metadata)
-        version.replace_metadata_json()
-        version.save()
 
         new_zip = version.get_zipfile('r')
 
@@ -222,6 +214,7 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
 
         old_zip.close()
         new_zip.close()
+
 
 class UploadTest(BasicUserTestCase, TransactionTestCase):
     def upload_file(self, zipfile):
@@ -281,6 +274,32 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         extension = models.Extension.objects.get(uuid="bad-shell-version@mecheye.net")
         version1 = extension.versions.order_by("-version")[0]
         self.assertIsNotNone(version1.source)
+
+    def test_dont_replace_metadata(self):
+        self.upload_file('SimpleExtension')
+        self.upload_file('ChangedSimpleExtension')
+
+        extension = models.Extension.objects.get(uuid="test-extension@mecheye.net")
+        version1 = extension.versions.order_by("version")[0]
+        version2 = extension.versions.order_by("version")[1]
+
+        with get_test_zipfile('SimpleExtension') as f:
+            metadata = models.parse_zipfile_metadata(f)
+
+        with get_test_zipfile('ChangedSimpleExtension') as f:
+            metadata2 = models.parse_zipfile_metadata(f)
+
+        with version1.get_zipfile('r') as zipfile, zipfile.open('metadata.json', 'r') as version_metadata_fp:
+            version_metadata = json.load(version_metadata_fp)
+            for field in ('uuid', 'name', 'description', 'url'):
+                self.assertEqual(metadata[field], version_metadata[field])
+
+        with version2.get_zipfile('r') as zipfile, zipfile.open('metadata.json', 'r') as version_metadata_fp:
+            version_metadata = json.load(version_metadata_fp)
+            for field in ('name', 'description', 'url'):
+                self.assertNotEqual(metadata[field], version_metadata[field])
+                self.assertEqual(metadata2[field], version_metadata[field])
+
 
 class ExtensionVersionTest(BasicUserTestCase, TestCase):
     def test_single_version(self):
@@ -359,8 +378,8 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion.objects.create(extension=extension,
+                                                         metadata=metadata,
                                                          status=models.STATUS_ACTIVE)
-        version.parse_metadata_json(metadata)
 
         shell_versions = sorted(sv.version_string for sv in version.shell_versions.all())
         self.assertEqual(shell_versions, [
@@ -378,8 +397,8 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
         version = models.ExtensionVersion.objects.create(extension=extension,
+                                                         metadata=metadata,
                                                          status=models.STATUS_ACTIVE)
-        version.parse_metadata_json(metadata)
 
         shell_versions = sorted(sv.version_string for sv in version.shell_versions.all())
         self.assertEqual(shell_versions, ["3.0", "3.2", "40.0", "56.5"])
@@ -447,8 +466,9 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
                     "name": "Test Metadata",
                     "donations": {"custom": ["https://example.com/1", "https://example.com/2"]}}
 
-        extension.parse_metadata_json(metadata)
+        extension.update_from_metadata(metadata)
         extension.save()
+
         donation_urls = extension.donation_urls.all()
         self.assertEqual(2, len(donation_urls))
         self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
@@ -469,8 +489,9 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
                     "name": "Test Metadata",
                     "donations": {"custom": "https://example.com/1"}}
 
-        extension.parse_metadata_json(metadata)
+        extension.update_from_metadata(metadata)
         extension.save()
+
         donation_urls = extension.donation_urls.all()
         self.assertEqual(1, len(donation_urls))
         self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
@@ -488,7 +509,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         metadata = {"uuid": "test-metadata@mecheye.net",
                     "name": "Test Metadata"}
 
-        extension.parse_metadata_json(metadata)
+        extension.update_from_metadata(metadata)
         extension.save()
         self.assertEqual(0, donation_urls.count())
 
@@ -510,8 +531,8 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
         version = models.ExtensionVersion.objects.create(extension=extension,
+                                                         metadata=metadata,
                                                          status=models.STATUS_ACTIVE)
-        version.parse_metadata_json(metadata)
         metadata_json = version.make_metadata_json()
         self.assertTrue("donations" in metadata_json)
         self.assertTrue("custom" in metadata_json["donations"])
@@ -733,14 +754,14 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
         v1 = models.ExtensionVersion.objects.create(extension=extension,
+                                                    metadata={"shell-version": ['3.2']},
                                                     status=models.STATUS_ACTIVE,
                                                     source=File(zipfile, "version1.zip"))
-        v1.parse_metadata_json({"shell-version": ['3.2']})
 
         v2 = models.ExtensionVersion.objects.create(extension=extension,
+                                                    metadata={"shell-version": ['3.4']},
                                                     status=models.STATUS_ACTIVE,
                                                     source=File(zipfile, "version1.zip"))
-        v2.parse_metadata_json({"shell-version": ['3.4']})
 
         self.assertRedirects(self.download(metadata['uuid'], '3.2'), v1.source.url)
         self.assertRedirects(self.download(metadata['uuid'], '3.4'), v2.source.url)
@@ -756,23 +777,23 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
         v1 = models.ExtensionVersion.objects.create(extension=extension,
+                                                    metadata={"shell-version": ['3.2']},
                                                     status=models.STATUS_ACTIVE,
                                                     source=File(zipfile, "version1.zip"))
-        v1.parse_metadata_json({"shell-version": ['3.2']})
 
         v2 = models.ExtensionVersion.objects.create(extension=extension,
+                                                    metadata={"shell-version": ['3.2.1']},
                                                     status=models.STATUS_ACTIVE,
                                                     source=File(zipfile, "version2.zip"))
-        v2.parse_metadata_json({"shell-version": ['3.2.1']})
 
         self.assertRedirects(self.download(metadata['uuid'], '3.2.0'), v1.source.url)
         self.assertRedirects(self.download(metadata['uuid'], '3.2.1'), v2.source.url)
         self.assertRedirects(self.download(metadata['uuid'], '3.2.2'), v1.source.url)
 
         v3 = models.ExtensionVersion.objects.create(extension=extension,
+                                                    metadata={"shell-version": ['3.2']},
                                                     status=models.STATUS_ACTIVE,
                                                     source=File(zipfile, "version3.zip"))
-        v3.parse_metadata_json({"shell-version": ['3.2']})
 
         self.assertRedirects(self.download(metadata['uuid'], '3.2.0'), v3.source.url)
         self.assertRedirects(self.download(metadata['uuid'], '3.2.1'), v3.source.url)
@@ -789,14 +810,14 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
         v1 = models.ExtensionVersion.objects.create(extension=extension,
+                                                    metadata={"shell-version": ['3.2.0', '3.2.1', '3.2.2']},
                                                     status=models.STATUS_ACTIVE,
                                                     source=File(zipfile, "version1.zip"))
-        v1.parse_metadata_json({"shell-version": ['3.2.0', '3.2.1', '3.2.2']})
 
         v2 = models.ExtensionVersion.objects.create(extension=extension,
+                                                    metadata={"shell-version": ['3.2.2']},
                                                     status=models.STATUS_ACTIVE,
                                                     source=File(zipfile, "version2.zip"))
-        v2.parse_metadata_json({"shell-version": ['3.2.2']})
 
         self.assertRedirects(self.download(metadata['uuid'], '3.2.0'), v1.source.url)
         self.assertRedirects(self.download(metadata['uuid'], '3.2.1'), v1.source.url)
@@ -968,11 +989,17 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         one = self.create_extension("one")
         two = self.create_extension("two")
 
-        v = models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.2"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=one,
+            metadata={"shell-version": ["3.2"]},
+            status=models.STATUS_ACTIVE
+        )
 
-        v = models.ExtensionVersion.objects.create(extension=two, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.3.90"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=two,
+            metadata={"shell-version": ["3.3.90"]},
+            status=models.STATUS_ACTIVE
+        )
 
         # Basic querying...
         uuids = self.gather_uuids(dict(shell_version="3.2"))
@@ -988,11 +1015,17 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
     def test_complex_visibility(self):
         one = self.create_extension("one")
 
-        v = models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.2"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=one,
+            metadata={"shell-version": ["3.2"]},
+            status=models.STATUS_ACTIVE
+        )
 
-        v = models.ExtensionVersion.objects.create(extension=one, status=models.STATUS_UNREVIEWED)
-        v.parse_metadata_json({"shell-version": ["3.3.90"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=one,
+            metadata={"shell-version": ["3.3.90"]},
+            status=models.STATUS_UNREVIEWED
+        )
 
         # Make sure that we don't see one, here - the version that
         # has this shell version is NEW.
@@ -1041,23 +1074,41 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
     def test_grab_proper_extension_version(self):
         extension = self.create_extension("extension")
 
-        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.10", "3.11.1", "3.12"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata={"shell-version": ["3.10", "3.11.1", "3.12"]},
+            status=models.STATUS_ACTIVE
+        )
 
-        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.13.4", "3.14", "3.15.2", "3.16.0", "3.16.1"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata={"shell-version": ["3.13.4", "3.14", "3.15.2", "3.16.0", "3.16.1"]},
+            status=models.STATUS_ACTIVE
+        )
 
-        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.16", "3.16.1", "3.17.1", "3.18.2"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata={"shell-version": ["3.16", "3.16.1", "3.17.1", "3.18.2"]},
+            status=models.STATUS_ACTIVE
+        )
 
-        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.20.0"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata={"shell-version": ["3.20.0"]},
+            status=models.STATUS_ACTIVE
+        )
 
-        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["3.38.0", "40.alpha", "42.3"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata={"shell-version": ["3.38.0", "40.alpha", "42.3"]},
+            status=models.STATUS_ACTIVE
+        )
 
-        v = models.ExtensionVersion.objects.create(extension=extension, status=models.STATUS_ACTIVE)
-        v.parse_metadata_json({"shell-version": ["40"]})
+        v = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata={"shell-version": ["40"]},
+            status=models.STATUS_ACTIVE
+        )
 
         self.assertEqual(views.grab_proper_extension_version(extension, "3.17.1").version, 3)
         self.assertEqual(views.grab_proper_extension_version(extension, "3.20.0").version, 4)

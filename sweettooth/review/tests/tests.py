@@ -9,6 +9,7 @@
     (at your option) any later version.
 """
 
+from zipfile import BadZipFile
 from django.test import TestCase
 from django.core.files.base import File, ContentFile
 
@@ -25,21 +26,21 @@ class DiffViewTest(BasicUserTestCase, TestCase):
                     "name": "Test Metadata"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
-        version1 = models.ExtensionVersion.objects.create(extension=extension,
-                                                          source=File(ContentFile("doot doo"), name="aa"),
-                                                          status=models.STATUS_UNREVIEWED)
-        self.assertEqual(None, get_old_version(version1))
+        with self.assertRaises(BadZipFile):
+            models.ExtensionVersion.objects.create(extension=extension,
+                                                            source=File(ContentFile("doot doo"), name="aa"),
+                                                            status=models.STATUS_UNREVIEWED)
 
         # This one is broken...
         version2 = models.ExtensionVersion.objects.create(extension=extension,
                                                           source="",
                                                           status=models.STATUS_UNREVIEWED)
-        self.assertEqual(version1, get_old_version(version2))
+        self.assertEqual(None, get_old_version(version2))
 
-        version3 = models.ExtensionVersion.objects.create(extension=extension,
-                                                          source=File(ContentFile("doot doo"), name="bb"),
-                                                          status=models.STATUS_UNREVIEWED)
-        self.assertEqual(version1, get_old_version(version3))
+        with self.assertRaises(BadZipFile):
+            models.ExtensionVersion.objects.create(extension=extension,
+                                                            source=File(ContentFile("doot doo"), name="bb"),
+                                                            status=models.STATUS_UNREVIEWED)
 
 
 class TestAutoApproveLogic(BasicUserTestCase, TestCase):
@@ -74,26 +75,23 @@ class TestAutoApproveLogic(BasicUserTestCase, TestCase):
         )
         version = models.ExtensionVersion.objects.create(
             extension=extension,
+            metadata=metadata,
             source=File(zipfile, "version1.zip"),
             status=models.STATUS_ACTIVE
         )
-        version.parse_metadata_json(metadata)
-        version.save()
 
         version: models.ExtensionVersion = models.ExtensionVersion.objects.create(
             extension=extension,
+            metadata=metadata | {'session-modes': ['user']},
             source=File(zipfile, "version2.zip"),
             status=models.STATUS_UNREVIEWED
         )
-        version.parse_metadata_json(metadata | { 'session-modes': ['user']})
-        version.save()
         self.assertFalse(should_auto_approve(version))
 
         version: models.ExtensionVersion = models.ExtensionVersion.objects.create(
             extension=extension,
+            metadata=metadata | {'shell-version': ['43']},
             source=File(zipfile, "version3.zip"),
             status=models.STATUS_UNREVIEWED
         )
-        version.parse_metadata_json(metadata | { 'shell-version': ['43']})
-        version.save()
         self.assertTrue(should_auto_approve(version))

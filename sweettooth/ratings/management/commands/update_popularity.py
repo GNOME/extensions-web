@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
             if popularity_data['popularity'] != extension.popularity:
                 extension.popularity = popularity_data['popularity']
-                extension.save(replace_metadata_json=False)
+                extension.save()
 
             # TODO: review and restore cleanup
             # ext.popularity_items.filter(date__lte=date).delete()
