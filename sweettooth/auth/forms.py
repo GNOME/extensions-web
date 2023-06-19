@@ -99,6 +99,8 @@ class ProfileForm(BaseProfileForm, forms.ModelForm):
         model = User
         fields = ('username', 'display_name', 'email')
 
+    MESSAGE_EMAIL_TOO_FAST = _("You cannot change your email more than once every 7 days")
+
     profile_form = forms.BooleanField(widget=forms.HiddenInput(), initial=True)
     display_name = forms.RegexField(
         regex=re.compile(r'^[\w.@+\- ]+$', re.UNICODE),
@@ -110,6 +112,8 @@ class ProfileForm(BaseProfileForm, forms.ModelForm):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
+
+        self.new_email = None
 
         email_field = User.get_email_field_name()
         if hasattr(self, "reserved_names"):
@@ -144,12 +148,15 @@ class ProfileForm(BaseProfileForm, forms.ModelForm):
         ):
             raise forms.ValidationError(validators.DUPLICATE_EMAIL, code="unique")
 
-        if (
-            self.cleaned_data['email'] != self.instance.email and
-            self.instance.last_email_change and
-            datetime.now() - self.instance.last_email_change < timedelta(days=7)
-        ):
-            raise forms.ValidationError(_("You cannot change your email more than once every 7 days"), code="fast")
+        if self.cleaned_data['email'] != self.instance.email:
+            if (
+                self.instance.last_email_change and
+                datetime.now() - self.instance.last_email_change < timedelta(days=7)
+            ):
+                raise forms.ValidationError(self.MESSAGE_EMAIL_TOO_FAST, code="fast")
+
+            self.new_email = self.cleaned_data['email']
+            return self.instance.email
 
         return self.cleaned_data['email']
 

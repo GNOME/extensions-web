@@ -221,17 +221,14 @@ class SettingsView(LoginRequiredMixin, TemplateView):
     def _profile_post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         messages: list[str] = []
 
-        form = ProfileForm(request.POST, instance=User.objects.get(pk=request.user.pk))
+        form = ProfileForm(request.POST, instance=request.user)
         if form.is_valid():
-            request.user.username = form.cleaned_data['username']
-            request.user.display_name = form.cleaned_data['display_name']
-
             messages.append(self.MESSAGE_PROFILE_SAVED)
 
-            if form.cleaned_data['email'] != request.user.email:
-                self._send_email_change_new(request, request.user, form.cleaned_data['email'])
+            if form.new_email:
+                self._send_email_change_new(request, request.user, form.new_email)
                 try:
-                    self._send_email_change_current(request, request.user, form.cleaned_data['email'])
+                    self._send_email_change_current(request, request.user, form.new_email)
                 except SMTPRecipientsRefused:
                     # Don't fail in case current email is unavailable
                     pass
@@ -239,7 +236,7 @@ class SettingsView(LoginRequiredMixin, TemplateView):
                 request.user.last_email_change = datetime.now()
                 messages.append(_("Confirmation mail is sent to your new address. Please check your inbox."))
 
-            request.user.save()
+            form.save()
 
         self.extra_context = self._initial_context(request.user) | {
             'profile_form': form,
