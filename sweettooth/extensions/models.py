@@ -10,6 +10,7 @@
     (at your option) any later version.
 """
 
+import tempfile
 from typing import Any, Literal, Union
 import autoslug
 import json
@@ -21,8 +22,10 @@ from zipfile import ZipFile, BadZipfile
 from urllib.parse import quote
 
 from django.conf import settings
+from django.core.files import File
+from django.core.files.move import file_move_safe
 from django.core.validators import URLValidator
-from django.db import models
+from django.db import models, transaction
 from django.dispatch import Signal
 from django.forms import ValidationError
 from django.urls import reverse
@@ -60,8 +63,7 @@ class ExtensionManager(models.Manager):
         return self.filter(versions__status=STATUS_ACTIVE).distinct()
 
     def create_from_metadata(self, metadata, **kwargs):
-        instance = self.model(**kwargs)
-        instance.parse_metadata_json(metadata)
+        instance = self.model(metadata=metadata, **kwargs)
         instance.save()
         return instance
 
@@ -123,6 +125,11 @@ class SessionMode(models.Model):
 
 
 class Extension(models.Model):
+    class Meta:
+        permissions = (
+            ("can-modify-data", "Can modify extension data"),
+        )
+
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
@@ -135,11 +142,6 @@ class Extension(models.Model):
     allow_comments = models.BooleanField(default=True)
     donation_json_field = None
 
-    class Meta:
-        permissions = (
-            ("can-modify-data", "Can modify extension data"),
-        )
-
     screenshot = models.ImageField(upload_to=make_screenshot_filename, blank=True)
     icon = models.ImageField(upload_to=make_icon_filename, blank=True, default="")
 
@@ -147,8 +149,16 @@ class Extension(models.Model):
 
     _http_validator = URLValidator(schemes=('http', 'https'))
 
-    def __str__(self):
-        return self.uuid
+    def __init__(self, *args, **kwargs):
+        metadata = None
+        if 'metadata' in kwargs:
+            metadata = kwargs.pop('metadata')
+
+        super().__init__(*args, **kwargs)
+
+        if metadata:
+            self.update_from_metadata(metadata)
+
 
     @staticmethod
     def _ensure_list(value: Union[Any, list[str]]) -> list[Any]:
@@ -157,7 +167,7 @@ class Extension(models.Model):
 
         return value
 
-    def parse_metadata_json(self, metadata):
+    def update_from_metadata(self, metadata):
         self.name = metadata.pop('name', "")
         self.description = metadata.pop('description', "")
         self.url = metadata.pop('url', "")
@@ -212,16 +222,8 @@ class Extension(models.Model):
         if not validate_uuid(self.uuid):
             raise ValidationError("Your extension has an invalid UUID")
 
-    def save(self, replace_metadata_json=True, *args, **kwargs):
+    def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        if replace_metadata_json:
-            for version in self.versions.all():
-                if version.source:
-                    try:
-                        version.replace_metadata_json()
-                    except (BadZipfile, zlib.error):
-                        # Ignore bad zipfiles, we don't care
-                        pass
 
         if self.donation_json_field is not None:
             self.refresh_donation_urls()
@@ -244,6 +246,9 @@ class Extension(models.Model):
             for session_mode in version.session_modes.all()
             if session_mode.mode == mode
         )
+
+    def __str__(self):
+        return self.uuid
 
     @property
     def first_line_of_description(self):
@@ -374,9 +379,10 @@ class ShellVersion(models.Model):
 
         return "%d.%d.%d" % (self.major, self.minor, self.point)
 
+
 class InvalidExtensionData(Exception):
-    def __init__(self, message, *args):
-        super(InvalidExtensionData, self).__init__(message, *args)
+    def __init__(self, message: str, *args: object) -> None:
+        super().__init__(message, *args)
         self.message = message
 
 
@@ -385,28 +391,27 @@ def parse_zipfile_metadata(uploaded_file):
     Given a file, extract out the metadata.json, parse, and return it.
     """
     try:
-        zipfile = ZipFile(uploaded_file, 'r')
+        with ZipFile(uploaded_file, 'r') as zipfile:
+            if zipfile.testzip() is not None:
+                raise InvalidExtensionData("Invalid zip file")
+
+            total_uncompressed = sum(i.file_size for i in zipfile.infolist())
+            if total_uncompressed > 5*1024*1024:  # 5 MB
+                raise InvalidExtensionData("Zip file is too large")
+
+            try:
+                with zipfile.open('metadata.json', 'r') as metadata_fp:
+                    return json.load(metadata_fp)
+            except KeyError:
+                # no metadata.json in archive, raise error
+                raise InvalidExtensionData("Missing metadata.json")
+            except ValueError:
+                # invalid JSON file, raise error
+                raise InvalidExtensionData("Invalid JSON data")
+
     except (BadZipfile, zlib.error):
         raise InvalidExtensionData("Invalid zip file")
 
-    if zipfile.testzip() is not None:
-        raise InvalidExtensionData("Invalid zip file")
-
-    total_uncompressed = sum(i.file_size for i in zipfile.infolist())
-    if total_uncompressed > 5*1024*1024: # 5 MB
-        raise InvalidExtensionData("Zip file is too large")
-
-    try:
-        metadata = json.load(zipfile.open('metadata.json', 'r'))
-    except KeyError:
-        # no metadata.json in archive, raise error
-        raise InvalidExtensionData("Missing metadata.json")
-    except ValueError:
-        # invalid JSON file, raise error
-        raise InvalidExtensionData("Invalid JSON data")
-
-    zipfile.close()
-    return metadata
 
 # uuid max length + suffix max length
 filename_max_length = Extension._meta.get_field('uuid').max_length + len(".v000.shell-version.zip")
@@ -427,13 +432,6 @@ def make_filename(obj, filename=None):
 
 
 class ExtensionVersion(models.Model):
-    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
-    version: int = models.IntegerField(default=0)
-    extra_json_fields = models.TextField()
-    status = models.PositiveIntegerField(choices=STATUSES.items())
-    shell_versions = models.ManyToManyField(ShellVersion)
-    session_modes = models.ManyToManyField(SessionMode)
-
     class Meta:
         unique_together = ('extension', 'version'),
         get_latest_by = 'version'
@@ -442,13 +440,25 @@ class ExtensionVersion(models.Model):
             models.Index(fields=('extension', 'status'), name='extension_id__status_idx'),
         )
 
-    def __str__(self):
-        return "Version %d of %s" % (self.version, self.extension)
+    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
+    version: int = models.IntegerField(default=0)
+    extra_json_fields = models.TextField()
+    status = models.PositiveIntegerField(choices=STATUSES.items())
+    shell_versions = models.ManyToManyField(ShellVersion)
+    session_modes = models.ManyToManyField(SessionMode)
 
     source = models.FileField(upload_to=make_filename,
                               max_length=filename_max_length)
 
     objects = ExtensionVersionManager()
+
+    def __init__(self, *args, **kwargs):
+        if 'metadata' in kwargs:
+            self.metadata = kwargs.pop('metadata').copy()
+        else:
+            self.metadata = {}
+
+        super().__init__(*args, **kwargs)
 
     @property
     def shell_versions_json(self):
@@ -477,9 +487,9 @@ class ExtensionVersion(models.Model):
         return json.dumps(self.make_metadata_json(), sort_keys=True, indent=2)
 
     def get_zipfile(self, mode: Literal["r", "w", "x", "a"]) -> ZipFile:
-        return ZipFile(self.source.storage.path(self.source.name), mode)
+        return ZipFile(self.source.file, mode)
 
-    def replace_metadata_json(self):
+    def _replace_metadata_json(self):
         """
         In the uploaded extension zipfile, edit metadata.json
         to reflect the new contents.
@@ -490,24 +500,29 @@ class ExtensionVersion(models.Model):
         # Just read all the contents from the old zipfile
         # into memory and then emit a new one with the
         # generated metadata.json
-        zipfile_in = self.get_zipfile("r")
+        with tempfile.NamedTemporaryFile("w+b", delete=False) as temp_file:
+            with self.get_zipfile("r") as zipfile_in, ZipFile(temp_file.file, "w") as zipfile:
+                for info in zipfile_in.infolist():
+                    if info.filename == "metadata.json":
+                        continue
 
-        filemap = {}
-        for info in zipfile_in.infolist():
-            if info.filename == "metadata.json":
-                continue
+                    zipfile.writestr(info, zipfile_in.read(info))
 
-            contents = zipfile_in.read(info)
-            filemap[info] = contents
+                zipfile.writestr("metadata.json", self.make_metadata_json_string())
 
-        zipfile = self.get_zipfile("w")
-        for info, contents in filemap.items():
-            zipfile.writestr(info, contents)
+            temp_file.flush()
+            temp_file.seek(0)
 
-        metadata = self.make_metadata_json()
-        zipfile.writestr("metadata.json", self.make_metadata_json_string())
-        zipfile.close()
+            file_move_safe(self.source.path, f"{self.source.path}-replace")
+            self.source.storage.save(self.source.name, File(temp_file.file))
+            try:
+                os.remove(f"{self.source.path}-replace")
+                self.source.file.close()
+                self.source.file = None
+            except Exception:
+                pass
 
+    @transaction.atomic
     def save(self, *args, **kwargs):
         assert self.extension is not None
 
@@ -520,34 +535,32 @@ class ExtensionVersion(models.Model):
             except self.DoesNotExist:
                 self.version = 1
 
+        adding = self._state.adding
+
         super().save(*args, **kwargs)
 
-    def parse_metadata_json(self, metadata: dict[str, Any]):
-        """
-        Given the contents of a metadata.json file, fill in the fields
-        of the version and associated extension.
+        kwargs.pop('force_insert', None)
 
-        NOTE: This needs to be called after this has been saved, as we
-        need a PK to be able to add ourselves to a PK.
-        """
-
-        self.extra_json_fields = json.dumps(metadata)
-
-        for sv_string in metadata.pop('shell-version', []):
+        for sv_string in self.metadata.pop('shell-version', []):
             try:
-                sv = ShellVersion.objects.get_for_version_string(sv_string)
+                self.shell_versions.add(ShellVersion.objects.get_for_version_string(sv_string))
             except InvalidShellVersion:
                 # For now, ignore invalid shell versions, rather than
                 # causing a fit.
                 continue
-            else:
-                self.shell_versions.add(sv)
 
-        if 'session-modes' in metadata:
+        if 'session-modes' in self.metadata:
             self.session_modes.set([
                 SessionMode.objects.get(mode=mode)
-                for mode in metadata['session-modes']
+                for mode in self.metadata.pop('session-modes', [])
             ])
+
+        self.extra_json_fields = json.dumps(self.metadata)
+
+        super().save(*args, **kwargs)
+
+        if adding and self.source:
+            self._replace_metadata_json()
 
     def get_absolute_url(self):
         return self.extension.get_absolute_url()
@@ -563,6 +576,9 @@ class ExtensionVersion(models.Model):
 
     def is_inactive(self):
         return self.status == STATUS_INACTIVE
+
+    def __str__(self):
+        return "Version %d of %s" % (self.version, self.extension)
 
 
 class DonationUrl(models.Model):

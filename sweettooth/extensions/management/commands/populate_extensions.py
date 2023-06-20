@@ -61,7 +61,7 @@ class Command(BaseCommand):
         extension = models.Extension.objects.create_from_metadata(metadata,
                                                                   creator=user)
 
-        extension_version = models.ExtensionVersion.objects.create(extension=extension,
+        models.ExtensionVersion.objects.create(extension=extension,
                                                          status=models.STATUS_ACTIVE)
         if verbose:
             self.stdout.write('Created extension %s with user %s' % (metadata, user))

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-03-07 17:19+0000\n"
-"PO-Revision-Date: 2023-03-09 10:08+0700\n"
+"POT-Creation-Date: 2023-06-18 19:06+0000\n"
+"PO-Revision-Date: 2023-06-19 11:48+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -19,29 +19,109 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:152 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "Anda tidak dapat mengubah surel Anda lebih dari sekali setiap 7 hari"
+
+#: sweettooth/auth/forms.py:160 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Hapus akun saya"
+
+#: sweettooth/auth/forms.py:161 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Akun Anda akan dihapus dalam 7 hari"
+
+#: sweettooth/auth/forms.py:163 extensions-web-domain-django:1
+msgid "No"
+msgstr "Tidak"
+
+#: sweettooth/auth/forms.py:163 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Ya"
+
+#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Kata sandi saat ini"
+
+#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr ""
+"Anda tidak perlu menentukan kata sandi untuk membatalkan penghapusan akun"
+
+#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Nama pengguna atau surel"
 
-#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:63 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nama pengguna"
 
-#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Wajib. 30 karakter atau kurang. Hanya huruf, angka, dan @/./+/-/_."
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:65 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Nilai ini hanya boleh berisi huruf, angka dan karakter @/./+/-/_."
 
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Surel"
 
-#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Anda tidak boleh memakai surel sebagai nama pengguna"
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Nama pengguna Anda mengandung kata-kata terlarang"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Penghapusan akun"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Akun Anda dijadwalkan untuk dihapus. Anda dapat membatalkan penghapusan akun "
+"dalam 7 hari."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Penghapusan akun dibatalkan."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "Konfirmasi surel"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Pengaturan"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:78
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Kirim"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Ubah kata sandi Anda"
+
+#: sweettooth/auth/templates/profile/settings.html:47
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr "Akun Anda dijadwalkan untuk dihapus setelah %(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -87,7 +167,6 @@ msgstr ""
 "Token untuk reset kata sandi salah. Silakan periksa tautan Anda dan coba "
 "lagi."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -101,6 +180,36 @@ msgid ""
 msgstr ""
 "Lupa kata sandi Anda? Masukkan alamat surel Anda di bawah ini, dan kami akan "
 "mengirim surel instruksi untuk mengatur yang baru."
+
+#: sweettooth/auth/views.py:102 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "Tautan konfirmasi Anda kedaluwarsa. Silakan minta yang baru."
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Permintaan yang salah"
+
+#: sweettooth/auth/views.py:114 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Data profil disimpan"
+
+#: sweettooth/auth/views.py:240 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"Surel konfirmasi dikirim ke alamat baru Anda. Silakan periksa kotak masuk "
+"Anda."
+
+#: sweettooth/auth/views.py:258 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Kata sandi salah"
+
+#: sweettooth/auth/views.py:76 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Pulihkan surel dan setel ulang kata sandi"
+
+#: sweettooth/auth/views.py:92 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Alamat surel Anda berhasil diperbarui"
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -117,6 +226,48 @@ msgstr "Tentang"
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Extensions"
 msgstr "Ekstensi"
+
+#: sweettooth/extensions/models.py:171 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Jenis donasi tidak didukung: %s"
+
+#: sweettooth/extensions/models.py:175 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr ""
+"Anda tidak dapat menentukan lebih dari 3 nilai untuk jenis donasi \"%s\""
+
+#: sweettooth/extensions/models.py:178 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "Setidaknya satu nilai harus ditentukan untuk jenis donasi \"%s\""
+
+#: sweettooth/extensions/models.py:182 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+"Jenis nilai harus berupa string atau daftar string untuk jenis donasi \"%s\""
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Tetap melanjutkan"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Anda meninggalkan situs web Ekstensi GNOME"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+msgid "You are going to leave GNOME Extensions website to"
+msgstr "Anda akan meninggalkan situs web Ekstensi GNOME ke"
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Batal"
 
 #: sweettooth/extensions/templates/extensions/comments.html:18
 #: extensions-web-domain-django:1
@@ -165,6 +316,21 @@ msgstr "Peringkat"
 msgid "Bug report"
 msgstr "Laporan kutu"
 
+#: sweettooth/extensions/templates/extensions/detail.html:102
+#: extensions-web-domain-django:1
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+"Peninjau akan meninjau ekstensi yang Anda kirim untuk memastikan tidak ada "
+"yang terlalu berbahaya. Anda akan dikirimkan surel hasil ulasan."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Komentar dinonaktifkan untuk ekstensi ini."
+
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
 #, python-format
@@ -177,75 +343,66 @@ msgstr[0] "%(downloads)s diunduh"
 msgid "Number of Downloads"
 msgstr "Jumlah Unduhan"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Donasi"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Pasang"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:46
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Tingkatkan ekstensi ini"
 
-#: sweettooth/extensions/templates/extensions/detail.html:29
+#: sweettooth/extensions/templates/extensions/detail.html:47
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Konfigurasikan ekstensi ini"
 
-#: sweettooth/extensions/templates/extensions/detail.html:30
+#: sweettooth/extensions/templates/extensions/detail.html:48
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Copot ekstensi ini"
 
-#: sweettooth/extensions/templates/extensions/detail.html:56
+#: sweettooth/extensions/templates/extensions/detail.html:75
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Halaman web ekstensi"
 
-#: sweettooth/extensions/templates/extensions/detail.html:62
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Mode Sesi"
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Ekstensi ini akan berjalan saat layar terkunci"
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Buka Kunci Dialog"
 
-#: sweettooth/extensions/templates/extensions/detail.html:67
+#: sweettooth/extensions/templates/extensions/detail.html:86
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Unduh"
 
-#: sweettooth/extensions/templates/extensions/detail.html:70
+#: sweettooth/extensions/templates/extensions/detail.html:89
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Versi Shell…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:93
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Versi Ekstensi…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:83
-#: extensions-web-domain-django:1
-msgid ""
-"A reviewer will review the extension you submitted to make sure there's "
-"nothing too dangerous. You'll be emailed the result of the review."
-msgstr ""
-"Peninjau akan meninjau ekstensi yang Anda kirim untuk memastikan tidak ada "
-"yang terlalu berbahaya. Anda akan dikirimkan surel hasil ulasan."
-
-#: sweettooth/extensions/templates/extensions/detail.html:94
-#: sweettooth/extensions/templates/extensions/detail_edit.html:7
-#: extensions-web-domain-django:1
-msgid "Comments are disabled for this extension."
-msgstr "Komentar dinonaktifkan untuk ekstensi ini."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -511,3 +668,22 @@ msgstr "Ekstensi sistem"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Anda mencopot pemasangan"
+
+#~ msgid "Other Options"
+#~ msgstr "Pilihan Lain"
+
+#~ msgid ""
+#~ "This website is currently undergoing a redesign, which includes more "
+#~ "settings for accounts. We appreciate your patience while work continues."
+#~ msgstr ""
+#~ "Situs web ini sedang mengalami desain ulang, yang mencakup lebih banyak "
+#~ "pengaturan untuk akun. Kami menghargai kesabaran Anda selama pekerjaan "
+#~ "berlanjut."
+
+#, python-format
+#~ msgid ""
+#~ "If you require your e-mail address to be changed, please <a "
+#~ "href=\"%(url)s\">open an issue</a> in the project repository."
+#~ msgstr ""
+#~ "Jika Anda ingin alamat surel Anda diubah, harap <a href=\"%(url)s\">buka "
+#~ "masalah</a> di repositori proyek."

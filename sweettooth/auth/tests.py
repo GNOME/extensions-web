@@ -9,16 +9,17 @@
 """
 
 import re
-from django.urls import reverse
-
-from django_registration import validators
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core import mail
+from django.urls import reverse
 from django.test.testcases import TestCase
 
+from django_registration import validators
+
 from . import views
-from .forms import AutoFocusRegistrationForm, RegistrationForm
+from .forms import AutoFocusRegistrationForm, ProfileForm, RegistrationForm
 from .urls import PASSWORD_RESET_TOKEN_PATTERN
 
 User = get_user_model()
@@ -144,6 +145,7 @@ class SettingsTest(TestCase):
     valid_data = {
         User.USERNAME_FIELD: 'username',
         'email': 'some@example.com',
+        'email2': 'some2@example.com',
         'password': 'P@ssw0rd',
     }
 
@@ -158,7 +160,7 @@ class SettingsTest(TestCase):
                 password=data['password']
             ))
 
-    def test_settings(self):
+    def test_settings_view(self):
         self.client.force_login(self.registered_users[0])
 
         response = self.client.post(
@@ -199,3 +201,32 @@ class SettingsTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertFormError(response, "profile_form", 'email', validators.DUPLICATE_EMAIL)
+
+        response = self.client.post(
+            reverse('auth-settings'),
+            {
+                'profile_form': True,
+                'username': self.valid_data[User.USERNAME_FIELD],
+                'email': self.valid_data['email'],
+                'display_name': self.registered_users[0].display_name,
+            }
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertIn("to confirm your new email", mail.outbox[0].body)
+        self.assertIn("reset your password and email", mail.outbox[1].body)
+
+        response = self.client.post(
+            reverse('auth-settings'),
+            {
+                'profile_form': True,
+                'username': self.valid_data[User.USERNAME_FIELD],
+                'email': self.valid_data['email2'],
+                'display_name': self.registered_users[0].display_name,
+            }
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, "profile_form", 'email', ProfileForm.MESSAGE_EMAIL_TOO_FAST)
