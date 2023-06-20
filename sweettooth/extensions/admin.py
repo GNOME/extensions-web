@@ -8,7 +8,8 @@ from sweettooth.review.models import CodeReview
 
 class CodeReviewAdmin(admin.TabularInline):
     model = CodeReview
-    fields = 'reviewer', 'comments',
+    fields = ('reviewer', 'comments')
+    raw_id_fields = ('reviewer',)
 
 
 class ExtensionVersionAdmin(admin.ModelAdmin):
