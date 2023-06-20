@@ -138,42 +138,43 @@ def get_file_list(zipfile):
 
 
 def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
-    if old_zipfile is None:
-        return dict(unchanged=[],
-                    changed=[],
-                    added=sorted(new_filelist),
-                    deleted=[])
+    with new_zipfile:
+        if old_zipfile is None:
+            return dict(unchanged=[],
+                        changed=[],
+                        added=sorted(new_filelist),
+                        deleted=[])
 
-    with old_zipfile, new_zipfile:
-        new_filelist = get_file_list(new_zipfile)
-        old_filelist = get_file_list(old_zipfile)
+        with old_zipfile:
+            new_filelist = get_file_list(new_zipfile)
+            old_filelist = get_file_list(old_zipfile)
 
-        both    = new_filelist & old_filelist
-        added   = new_filelist - old_filelist
-        deleted = old_filelist - new_filelist
+            both    = new_filelist & old_filelist
+            added   = new_filelist - old_filelist
+            deleted = old_filelist - new_filelist
 
-        unchanged, changed = set(), set()
+            unchanged, changed = set(), set()
 
-        for filename in both:
-            with old_zipfile.open(filename, 'r') as old, new_zipfile.open(filename, 'r') as new:
-                while True:
-                    oldcontent, newcontent = old.read(1024), new.read(1024)
-                    if not oldcontent or not newcontent:
-                        if oldcontent or newcontent:
+            for filename in both:
+                with old_zipfile.open(filename, 'r') as old, new_zipfile.open(filename, 'r') as new:
+                    while True:
+                        oldcontent, newcontent = old.read(1024), new.read(1024)
+                        if not oldcontent or not newcontent:
+                            if oldcontent or newcontent:
+                                changed.add(filename)
+                            else:
+                                unchanged.add(filename)
+
+                            break
+
+                        if oldcontent != newcontent:
                             changed.add(filename)
-                        else:
-                            unchanged.add(filename)
+                            break
 
-                        break
-
-                    if oldcontent != newcontent:
-                        changed.add(filename)
-                        break
-
-        return dict(unchanged=sorted(unchanged),
-                    changed=sorted(changed),
-                    added=sorted(added),
-                    deleted=sorted(deleted))
+            return dict(unchanged=sorted(unchanged),
+                        changed=sorted(changed),
+                        added=sorted(added),
+                        deleted=sorted(deleted))
 
 
 @ajax_view
