@@ -139,6 +139,7 @@ def get_file_list(zipfile):
 
 def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
     with new_zipfile:
+        new_filelist = get_file_list(new_zipfile)
         if old_zipfile is None:
             return dict(unchanged=[],
                         changed=[],
@@ -146,7 +147,6 @@ def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
                         deleted=[])
 
         with old_zipfile:
-            new_filelist = get_file_list(new_zipfile)
             old_filelist = get_file_list(old_zipfile)
 
             both    = new_filelist & old_filelist
