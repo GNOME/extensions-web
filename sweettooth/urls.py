@@ -20,7 +20,6 @@ urlpatterns = [
     re_path(r'^', include('sweettooth.extensions.urls'), name='index'),
 
     re_path(r'^review/', include('sweettooth.review.urls')),
-    re_path(r'^errors/', include('sweettooth.errorreports.urls')),
 
     re_path(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     re_path(r'^admin/', admin.site.urls),

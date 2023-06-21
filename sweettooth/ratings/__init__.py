@@ -1,13 +1,14 @@
 from django.apps import AppConfig
 
+
 def get_model():
     from sweettooth.ratings.models import RatingComment
     return RatingComment
 
 
 def get_form():
-    from sweettooth.ratings.forms import RatingCommentForm
-    return RatingCommentForm
+    from sweettooth.ratings.forms import RatingCaptchaCommentForm
+    return RatingCaptchaCommentForm
 
 
 class RatingsConfig(AppConfig):
