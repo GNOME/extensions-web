@@ -538,44 +538,6 @@ li.extension:last-child,
     font-size: smaller;
 }
 
-/* Error Reports */
-/* ==================================================================== */
-
-#error_report input[name=can_contact] {
-    margin-left: 1em;
-}
-
-#error_report textarea,
-#error_report div {
-    display: block;
-    width: 100%;
-    resize: vertical;
-    min-height: 80px;
-}
-
-#error_report textarea {
-    height: 300px;
-}
-
-#error_report div {
-    border: 1px solid #999;
-    border-radius: 4px;
-    background-color: white;
-    color: black;
-    font-family: monospace;
-    white-space: pre;
-}
-
-#error_report .email {
-    display: block;
-    margin: .2em auto;
-
-    background-color: white;
-    color: #333;
-    font-family: monospace;
-    font-size: 1.2em;
-}
-
 /* Comments */
 /* ==================================================================== */
 

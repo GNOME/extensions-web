@@ -11,10 +11,10 @@
 
 define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 	'template!extensions/uninstall', 'template!extensions/info',
-	'template!extensions/info_contents', 'template!extensions/error_report_template',
+	'template!extensions/info_contents',
 	'voca', 'paginator', 'switch'],
 	function ($, messages, dbusProxy, extensionUtils, uninstallTemplate,
-			infoTemplate, infoContentsTemplate, reportTemplate, voca) {
+			infoTemplate, infoContentsTemplate, voca) {
 		"use strict";
 
 		var ExtensionState = extensionUtils.ExtensionState;
@@ -134,14 +134,6 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 
 			$.fn.addLocalExtensions = function () {
 				return this.append(gettext('GNOME Shell Extensions cannot list your installed extensions.'));
-			};
-
-			$.fn.fillInErrors = function () {
-				var $textarea = this.find('textarea[name=error]');
-				var $hidden = this.find('input:hidden[name=has_errors]');
-				$textarea.text(gettext('GNOME Shell Extensions cannot list your installed extensions.')).addClass('no-errors').attr('disabled', 'disabled');
-				$hidden.val('');
-				return this;
 			};
 
 			$.fn.grayOutIfOutOfDate = function () {
@@ -499,25 +491,6 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 						$container.append("You don't have any extensions installed.");
 					}
 				})
-			});
-		};
-
-		$.fn.fillInErrors = function () {
-			return this.each(function () {
-				var $form = $(this);
-				var uuid = $form.data('uuid');
-				var $textarea = $form.find('textarea');
-				dbusProxy.GetExtensionInfo(uuid).then(function (meta) {
-					dbusProxy.GetErrors($form.data('uuid')).then(function (errors) {
-						var context = {
-							sv: dbusProxy.ShellVersion,
-							ev: (meta && meta.version) ? meta.version : null,
-							errors: errors
-						};
-
-						$textarea.text(reportTemplate.render(context));
-					});
-				});
 			});
 		};
 

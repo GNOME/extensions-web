@@ -170,8 +170,6 @@ function($, messages, modal, hashParamUtils, commentsTemplate, staticfiles, cook
             }
         });
 
-        $('#error_report').fillInErrors();
-
         $('.extension_status_toggle a').click(function() {
             var $link = $(this);
             var $tr = $link.parents('tr');

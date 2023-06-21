@@ -1,1 +1,0 @@
-GNOME Shell Extensions — "{{ extension.name }}", has a new error report
