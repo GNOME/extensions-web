@@ -185,6 +185,7 @@ COMMENTS_APP = 'sweettooth.ratings'
 
 RECAPTCHA_PUBLIC_KEY = os.getenv('EGO_RECAPTCHA_PUBLIC_KEY', captcha_constants.TEST_PUBLIC_KEY)
 RECAPTCHA_PRIVATE_KEY = os.getenv('EGO_RECAPTCHA_PRIVATE_KEY', captcha_constants.TEST_PRIVATE_KEY)
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # See http://docs.djangoproject.com/en/stable/topics/logging for
 # more details on how to customize your logging configuration.
