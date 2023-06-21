@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/stable/ref/settings/
 import os
 import dj_database_url
 
+from captcha import constants as captcha_constants
+
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(SITE_ROOT)
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     # 'ratings' goes before django's comments
     # app so it will find our templates
     'sweettooth.ratings',
+
+    'captcha',
 
     'django_comments',
 
@@ -125,7 +129,6 @@ DATABASES = {
     'default': dj_database_url.config(env="EGO_DATABASE_URL", default="sqlite://./test.db")
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/stable/topics/i18n/
 
@@ -179,6 +182,9 @@ ACCOUNT_ACTIVATION_DAYS = 5
 LOGIN_URL = '/accounts/login/'
 
 COMMENTS_APP = 'sweettooth.ratings'
+
+RECAPTCHA_PUBLIC_KEY = os.getenv('EGO_RECAPTCHA_PUBLIC_KEY', captcha_constants.TEST_PUBLIC_KEY)
+RECAPTCHA_PRIVATE_KEY = os.getenv('EGO_RECAPTCHA_PRIVATE_KEY', captcha_constants.TEST_PRIVATE_KEY)
 
 # See http://docs.djangoproject.com/en/stable/topics/logging for
 # more details on how to customize your logging configuration.

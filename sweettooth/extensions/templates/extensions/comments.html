@@ -8,8 +8,8 @@
     <a class="btn btn-default" href="javascript:void 0" id="leave_rating">{% trans "Rating" %}</a>
   </div>
   <div id="rating_form">
-    {% load comments %}
-    {% render_comment_form for extension %}
+    {% load rating_comments %}
+    {% render_rating_form for extension %}
   </div>
   {% else %}
   <p class="unauthenticated">

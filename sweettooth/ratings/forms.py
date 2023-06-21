@@ -1,13 +1,16 @@
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 from django.forms import fields, widgets
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django_comments.forms import CommentForm
 from django.utils.encoding import force_text
-from django.utils.safestring import mark_safe
 from django.utils import timezone
 
+from django_comments.forms import CommentForm
+
 from sweettooth.ratings.models import RatingComment
+
 
 # Raty inserts its own <input> element, so we don't want to provide
 # a widget here. We'll insert a <div> for raty to fill in the template.
@@ -15,9 +18,13 @@ class NoOpWidget(widgets.Widget):
     def render(self, *a, **kw):
         return u''
 
+
 class RatingCommentForm(CommentForm):
     rating = fields.IntegerField(min_value=-1, max_value=5,
                                  required=False, widget=NoOpWidget())
+    name = None
+    email = None
+    url = None
 
     def clean_rating(self):
         rating = self.cleaned_data["rating"]
@@ -40,7 +47,6 @@ class RatingCommentForm(CommentForm):
             is_removed   = False,
         )
 
-# Remove the URL, name and email fields. We don't want them.
-RatingCommentForm.base_fields.pop('url')
-RatingCommentForm.base_fields.pop('name')
-RatingCommentForm.base_fields.pop('email')
+
+class RatingCaptchaCommentForm(RatingCommentForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)

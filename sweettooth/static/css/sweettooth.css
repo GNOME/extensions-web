@@ -607,6 +607,10 @@ li.extension:last-child,
     font-size: inherit;
 }
 
+#rating_form:not(.preview) .g-recaptcha > div {
+    margin: 0 auto;
+}
+
 /* Errors & Messages */
 /* ==================================================================== */
 

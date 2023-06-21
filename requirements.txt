@@ -30,6 +30,7 @@ django==3.2.19 \
     # via
     #   -r requirements.in
     #   django-contrib-comments
+    #   django-recaptcha
     #   django-registration
 django-autoslug==1.9.8 \
     --hash=sha256:26459eeddec207e307c55777a10fc25d17f4978753695340b16a17ed248a6f70 \
@@ -38,6 +39,10 @@ django-autoslug==1.9.8 \
 django-contrib-comments==2.1.0 \
     --hash=sha256:d82f1d04690550df026553053903deec0c52dc54212e1b79241b08f0355cff2c \
     --hash=sha256:e02c7341ea1f4bcdfa347851dbf5e632d3e591d84b4f77de2f90b93398897f3c
+    # via -r requirements.in
+django-recaptcha==3.0.0 \
+    --hash=sha256:1aed69fd6ac8fd9e99e52665392ae6748f8b6339ace656fad779fe0c6c915a52 \
+    --hash=sha256:253197051288923cae675d7eff91b619e3775311292a5dbaf27a8a55ffebc670
     # via -r requirements.in
 django-registration==3.2 \
     --hash=sha256:2ea8c7d89a8760ccde41dfd335aa28ba89073d09aab5a0f5f3d7c8c148fcc518 \
