@@ -130,6 +130,8 @@ class Extension(models.Model):
             ("can-modify-data", "Can modify extension data"),
         )
 
+    MESSAGE_SHELL_VERSION_MISSING = _("You must define `shell-version` key in metadata.json")
+
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
@@ -172,6 +174,10 @@ class Extension(models.Model):
         self.description = metadata.pop('description', "")
         self.url = metadata.pop('url', "")
         self.uuid = metadata['uuid']
+
+        shell_versions = metadata.get('shell-version')
+        if not isinstance(shell_versions, list) or not shell_versions:
+            raise ValidationError(self.MESSAGE_SHELL_VERSION_MISSING)
 
         self.donation_json_field: dict[str, Union[str, list[str]]] = metadata.get('donations', {})
 
@@ -415,6 +421,7 @@ def parse_zipfile_metadata(uploaded_file):
 
 # uuid max length + suffix max length
 filename_max_length = Extension._meta.get_field('uuid').max_length + len(".v000.shell-version.zip")
+
 
 class ExtensionVersionManager(models.Manager):
     def unreviewed(self):

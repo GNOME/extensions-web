@@ -2,5 +2,6 @@
     "uuid": "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890@mecheye.net",
     "name": "Large UUID test",
     "description": "Simple test metadata",
-    "url": "http://test-metadata.gnome.org"
+    "url": "http://test-metadata.gnome.org",
+    "shell-version": ["44"]
 }

@@ -2,5 +2,6 @@
     "uuid": "test-extension@mecheye.net",
     "name": "New name",
     "description": "New description",
-    "url": "https://new.example.com"
+    "url": "https://new.example.com",
+    "shell-version": ["44"]
 }

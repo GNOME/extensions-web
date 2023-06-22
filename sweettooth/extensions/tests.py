@@ -47,6 +47,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
     def test_description_parsing(self):
         metadata = {"uuid": "test-metadata@mecheye.net",
                     "name": "Test Metadata",
+                    "shell-version": ["44"],
                     "description": "Simple test metadata"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
@@ -54,6 +55,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
 
         metadata = {"uuid": "test-metadata-2@mecheye.net",
                     "name": "Test Metadata",
+                    "shell-version": ["44"],
                     "description": "First line\nSecond line"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
@@ -61,6 +63,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
 
         metadata = {"uuid": "test-metadata-3@mecheye.net",
                     "name": "Test Metadata",
+                    "shell-version": ["44"],
                     "description": ""}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
@@ -94,6 +97,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
 
         metadata = {"uuid": "something2@example.com",
                     "name": "Test Metadata",
+                    "shell-version": ["42"],
                     "session-modes": [
                         'unlock-dialog'
                     ]}
@@ -111,6 +115,7 @@ class ExtensionPropertiesTest(BasicUserTestCase, TestCase):
 
         metadata = {"uuid": "something3@example.com",
                     "name": "Test Metadata",
+                    "shell-version": ["42"],
                     "session-modes": [
                         'gdm',
                         'unlock-dialog'
@@ -130,7 +135,8 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         metadata = {"uuid": "test-metadata@mecheye.net",
                     "name": "Test Metadata",
                     "description": "Simple test metadata",
-                    "url": "http://test-metadata.gnome.org"}
+                    "url": "http://test-metadata.gnome.org",
+                    "shell-version": ["44"]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion(extension=extension, metadata=metadata)
@@ -300,13 +306,22 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
                 self.assertNotEqual(metadata[field], version_metadata[field])
                 self.assertEqual(metadata2[field], version_metadata[field])
 
+    def test_missing_shell_version(self):
+        for file in ('SimpleExtensionMissingMetadata', 'SimpleExtensionEmptyMetadata'):
+            response = self.upload_file(file)
+
+            self.assertContains(response, models.Extension.MESSAGE_SHELL_VERSION_MISSING)
+            with self.assertRaises(models.Extension.DoesNotExist):
+                models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
 
 class ExtensionVersionTest(BasicUserTestCase, TestCase):
     def test_single_version(self):
         metadata = {"name": "Test Metadata",
                     "uuid": "test-1@mecheye.net",
                     "description": "Simple test metadata",
-                    "url": "http://test-metadata.gnome.org"}
+                    "url": "http://test-metadata.gnome.org",
+                    "shell-version": ["44"]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         version = models.ExtensionVersion.objects.create(extension=extension,
@@ -325,7 +340,8 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         metadata = {"name": "Test Metadata 2",
                     "uuid": "test-2@mecheye.net",
                     "description": "Simple test metadata",
-                    "url": "http://test-metadata.gnome.org"}
+                    "url": "http://test-metadata.gnome.org",
+                    "shell-version": ["44"]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
@@ -344,7 +360,8 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         metadata = {"name": "Test Metadata 3",
                     "uuid": "test-3@mecheye.net",
                     "description": "Simple test metadata",
-                    "url": "http://test-metadata.gnome.org"}
+                    "url": "http://test-metadata.gnome.org",
+                    "shell-version": ["44"]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
@@ -405,10 +422,14 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
 
 
 class DonationUrlTest(BasicUserTestCase, TestCase):
+    DEFAULT_METADATA = {
+        "uuid": "test-metadata@mecheye.net",
+        "name": "Test Metadata",
+        "shell-version": ["44"],
+    }
+
     def test_create_custom(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "https://example.com"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "https://example.com"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -417,9 +438,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals("https://example.com", donation_url.url)
 
     def test_create_list(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": ["https://example.com/1", "https://example.com/2"]}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": ["https://example.com/1", "https://example.com/2"]}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_urls = extension.donation_urls.all()
@@ -430,41 +449,31 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals("https://example.com/2", donation_urls[1].url)
 
     def test_create_list_max3(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": ["https://example.com/1", "https://example.com/2", "https://example.com/3", "https://example.com/4"]}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": ["https://example.com/1", "https://example.com/2", "https://example.com/3", "https://example.com/4"]}}
 
         with self.assertRaises(ValidationError):
             extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
     def test_disallow_wrong_case(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"GitHub": "..."}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"GitHub": "..."}}
 
         with self.assertRaises(ValidationError):
             extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
     def test_disallow_unsupported(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"unsupported": "https://example.com"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"unsupported": "https://example.com"}}
 
         with self.assertRaises(ValidationError):
             extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
     def test_refresh_create(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "https://example.com/1"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "https://example.com/1"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_urls = extension.donation_urls.all()
         self.assertEqual(1, donation_urls.count())
 
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": ["https://example.com/1", "https://example.com/2"]}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": ["https://example.com/1", "https://example.com/2"]}}
 
         extension.update_from_metadata(metadata)
         extension.save()
@@ -477,17 +486,13 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals("https://example.com/2", donation_urls[1].url)
 
     def test_refresh_delete(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": ["https://example.com/1", "https://example.com/2"]}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": ["https://example.com/1", "https://example.com/2"]}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_urls = extension.donation_urls.all()
         self.assertEqual(2, donation_urls.count())
 
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "https://example.com/1"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "https://example.com/1"}}
 
         extension.update_from_metadata(metadata)
         extension.save()
@@ -498,25 +503,20 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals("https://example.com/1", donation_urls[0].url)
 
     def test_refresh_delete_all(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "https://example.com/"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "https://example.com/"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_urls = extension.donation_urls.all()
         self.assertEqual(1, donation_urls.count())
 
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata"}
+        metadata = self.DEFAULT_METADATA | {"shell-version": ["44"],}
 
         extension.update_from_metadata(metadata)
         extension.save()
         self.assertEqual(0, donation_urls.count())
 
     def test_refresh_nothing(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "https://example.com"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "https://example.com"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url1 = extension.donation_urls.first()
@@ -524,9 +524,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals(donation_url1.id, donation_url2.id)
 
     def test_export_with_version(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "https://example.com"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "https://example.com"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
 
@@ -539,9 +537,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEqual("https://example.com", metadata_json["donations"]["custom"])
 
     def test_full_url_bmac(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"buymeacoffee": "test"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"buymeacoffee": "test"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -549,9 +545,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals('https://www.buymeacoffee.com/test', donation_url.full_url)
 
     def test_full_url_github(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"github": "test"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"github": "test"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -559,9 +553,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals('https://github.com/sponsors/test', donation_url.full_url)
 
     def test_full_url_ko_fi(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"kofi": "test"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"kofi": "test"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -569,9 +561,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals('https://ko-fi.com/test', donation_url.full_url)
 
     def test_full_url_patreon(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"patreon": "test"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"patreon": "test"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -579,9 +569,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals('https://www.patreon.com/test', donation_url.full_url)
 
     def test_full_url_paypal(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"paypal": "test"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"paypal": "test"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -589,9 +577,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals('https://paypal.me/test', donation_url.full_url)
 
     def test_full_url_quote(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"paypal": "my/account?key=value"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"paypal": "my/account?key=value"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -599,9 +585,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals('https://paypal.me/my%2Faccount%3Fkey%3Dvalue', donation_url.full_url)
 
     def test_full_url_custom(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "https://example.com/test"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "https://example.com/test"}}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         donation_url = extension.donation_urls.first()
@@ -609,9 +593,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         self.assertEquals('https://example.com/test', donation_url.full_url)
 
     def test_metadata_validation(self):
-        metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata",
-                    "donations": {"custom": "somethingelse"}}
+        metadata = self.DEFAULT_METADATA | {"donations": {"custom": "somethingelse"}}
 
         with self.assertRaises(ValidationError):
             extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
@@ -749,6 +731,7 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         metadata = {"name": "Test Metadata 6",
                     "uuid": "test-6@gnome.org",
                     "description": "Simple test metadata",
+                    "shell-version": ["44"],
                     "url": "http://test-metadata.gnome.org"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
@@ -772,6 +755,7 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         metadata = {"name": "Test Metadata 7",
                     "uuid": "test-7@gnome.org",
                     "description": "Simple test metadata",
+                    "shell-version": ["44"],
                     "url": "http://test-metadata.gnome.org"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
@@ -805,6 +789,7 @@ class DownloadExtensionTest(BasicUserTestCase, TestCase):
         metadata = {"name": "Test Metadata 8",
                     "uuid": "test-8@gnome.org",
                     "description": "Simple test metadata",
+                    "shell-version": ["44"],
                     "url": "http://test-metadata.gnome.org"}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
@@ -950,7 +935,7 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         return [details['uuid'] for details in extensions]
 
     def create_extension(self, name, **kwargs):
-        metadata = dict(uuid=name + "@mecheye.net", name=name)
+        metadata = dict(uuid=name + "@mecheye.net", name=name, **{"shell-version": ["44"]})
         return models.Extension.objects.create_from_metadata(metadata,
                                                              creator=self.user,
                                                              **kwargs)

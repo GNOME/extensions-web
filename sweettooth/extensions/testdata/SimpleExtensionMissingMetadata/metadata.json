@@ -2,6 +2,5 @@
     "uuid": "test-extension@mecheye.net",
     "name": "Test Extension",
     "description": "Simple test metadata",
-    "url": "http://test-metadata.gnome.org",
-    "shell-version": ["44"]
+    "url": "http://test-metadata.gnome.org"
 }
