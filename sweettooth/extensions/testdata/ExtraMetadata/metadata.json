@@ -3,5 +3,6 @@
     "name": "Test Extension",
     "description": "Fingertips",
     "url": "http://extra-metadata.gnome.org",
-    "extra": "This is some good data"
+    "extra": "This is some good data",
+    "shell-version": ["44"]
 }

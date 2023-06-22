@@ -23,7 +23,8 @@ from sweettooth.testutils import BasicUserTestCase
 class DiffViewTest(BasicUserTestCase, TestCase):
     def test_get_zipfiles(self):
         metadata = {"uuid": "test-metadata@mecheye.net",
-                    "name": "Test Metadata"}
+                    "name": "Test Metadata",
+                    "shell-version": ["44"]}
 
         extension = models.Extension.objects.create_from_metadata(metadata, creator=self.user)
         with self.assertRaises(BadZipFile):

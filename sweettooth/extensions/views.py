@@ -519,12 +519,9 @@ def create_version(request, file_source):
                     messages.error(request, "An extension with that UUID has already been added.")
                     raise DatabaseErrorWithMessages
 
-            try:
-                extension.save()
+            extension.save()
 
-                extension.full_clean()
-            except ValidationError as e:
-                raise DatabaseErrorWithMessages(e.messages)
+            extension.full_clean()
 
             version = models.ExtensionVersion.objects.create(extension=extension,
                                                              metadata=metadata,
@@ -532,7 +529,7 @@ def create_version(request, file_source):
                                                              status=models.STATUS_UNREVIEWED)
 
             return version, []
-    except DatabaseErrorWithMessages as e:
+    except (DatabaseErrorWithMessages, ValidationError) as e:
         return None, e.messages
 
 @login_required
