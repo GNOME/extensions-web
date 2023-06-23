@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-06-12 09:38+0000\n"
-"PO-Revision-Date: 2023-06-15 22:59+0100\n"
+"POT-Creation-Date: 2023-06-22 16:37+0000\n"
+"PO-Revision-Date: 2023-06-23 17:18+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <>\n"
 "Language: pt\n"
@@ -20,64 +20,68 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: sweettooth/auth/forms.py:33 extensions-web-domain-django:1
-msgid "Username or email"
-msgstr "Nome de utilizador ou correio eletrónico"
+#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "Não pode alterar o seu e-mail mais do que uma vez em cada 7 dias"
 
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
-msgid "Username"
-msgstr "Nome do utilizador"
-
-#: sweettooth/auth/forms.py:59 extensions-web-domain-django:1
-msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
-"Necessário. 30 caracteres ou menos. Letras, dígitos e @/./+/-/_ somente."
-
-#: sweettooth/auth/forms.py:60 extensions-web-domain-django:1
-msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
-"Este valor pode conter somente letras, números e os caracteres @/./+/-/_."
-
-#: sweettooth/auth/forms.py:62 extensions-web-domain-django:1
-msgid "Email"
-msgstr "Correio eletrónico"
-
-#: sweettooth/auth/forms.py:69 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Não deveria usar o correio eletrónico como nome de utilizador"
-
-#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "O seu nome de utilizador contém palavras proibidas"
-
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Eliminar a minha conta"
 
-#: sweettooth/auth/forms.py:88 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "A sua conta será eliminada no prazo de 7 dias"
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "No"
 msgstr "Não"
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Sim"
 
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:174 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Palavra-passe atual"
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:175 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "Não é necessário especificar uma palavra-passe para cancelar a remoção da "
 "conta"
 
+#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Nome de utilizador ou correio eletrónico"
+
+#: sweettooth/auth/forms.py:63 extensions-web-domain-django:1
+msgid "Username"
+msgstr "Nome do utilizador"
+
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+"Necessário. 30 caracteres ou menos. Letras, dígitos e @/./+/-/_ somente."
+
+#: sweettooth/auth/forms.py:65 extensions-web-domain-django:1
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr ""
+"Este valor pode conter somente letras, números e os caracteres @/./+/-/_."
+
+#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
+msgid "Email"
+msgstr "Correio eletrónico"
+
+#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Não deveria usar o correio eletrónico como nome de utilizador"
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "O seu nome de utilizador contém palavras proibidas"
+
 #: sweettooth/auth/templates/profile/account-removal.html:4
-#: sweettooth/auth/templates/profile/settings.html:9
+#: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
 msgid "Account removal"
 msgstr "Remoção de conta"
@@ -96,51 +100,34 @@ msgstr ""
 msgid "Account removal is canceled."
 msgstr "A remoção da conta foi cancelada."
 
-#: sweettooth/auth/templates/profile/settings.html:12
+#: sweettooth/auth/templates/profile/email_confirm.html:4
 #: extensions-web-domain-django:1
-#, python-format
-msgid "Your account is sheduled for removal after %(schedule_delete_after)s"
-msgstr "A sua conta deverá ser removida após %(schedule_delete_after)s"
-
-#: sweettooth/auth/templates/profile/settings.html:39
-#: extensions-web-domain-django:1
-msgid "Submit"
-msgstr "Submeter"
+msgid "Email confirmation"
+msgstr "Confirmação de e-mail"
 
 #: sweettooth/auth/templates/profile/settings.html:4
 #: extensions-web-domain-django:1
 msgid "Settings"
 msgstr "Definições"
 
-#: sweettooth/auth/templates/profile/settings.html:42
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:78
 #: extensions-web-domain-django:1
-msgid "Other Options"
-msgstr "Outras opções"
+msgid "Submit"
+msgstr "Submeter"
 
-#: sweettooth/auth/templates/profile/settings.html:44
+#: sweettooth/auth/templates/profile/settings.html:41
 #: extensions-web-domain-django:1
-msgid ""
-"This website is currently undergoing a redesign, which includes more "
-"settings for accounts. We appreciate your patience while work continues."
-msgstr ""
-"Este sítio Web está atualmente a ser alvo de uma remodelação, que inclui "
-"mais definições para as contas. Agradecemos a sua paciência enquanto o "
-"trabalho continua."
+msgid "Change your password"
+msgstr "Alterar a sua palavra-passe"
 
 #: sweettooth/auth/templates/profile/settings.html:47
 #: extensions-web-domain-django:1
 #, python-format
-msgid ""
-"If you require your e-mail address to be changed, please <a "
-"href=\"%(url)s\">open an issue</a> in the project repository."
+#| msgid "Your account is sheduled for removal after %(schedule_delete_after)s"
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr ""
-"Se pretender que o seu endereço de correio eletrónico seja alterado, <a "
-"href=\"%(url)s\">crie uma questão</a> no repositório do projeto."
-
-#: sweettooth/auth/templates/profile/settings.html:6
-#: extensions-web-domain-django:1
-msgid "Change your password"
-msgstr "Alterar a sua palavra-passe"
+"A sua conta está programada para ser removida após %(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -186,7 +173,6 @@ msgstr ""
 "O código para a redefinição da palavra-passe está incorreto. Por favor, "
 "verifique sua ligação e tente novamente."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -201,9 +187,35 @@ msgstr ""
 "Esqueceu-se da palavra-passe? Insira o seu correio eletrónico abaixo e "
 "receberá instruções para definir uma nova palavra-passe."
 
-#: sweettooth/auth/views.py:120 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:102 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "A sua ligação de confirmação expirou. Solicite uma nova."
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Pedido incorreto"
+
+#: sweettooth/auth/views.py:114 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Dados de perfil guardados"
+
+#: sweettooth/auth/views.py:237 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"O e-mail de confirmação foi enviado para o seu novo endereço. Verifique a "
+"sua caixa de correio."
+
+#: sweettooth/auth/views.py:255 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "A palavra-passe está incorreta"
+
+#: sweettooth/auth/views.py:76 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Restaurar o e-mail e redefinir a palavra-passe"
+
+#: sweettooth/auth/views.py:92 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "O seu endereço de e-mail foi atualizado com sucesso"
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -221,23 +233,27 @@ msgstr "Acerca"
 msgid "Extensions"
 msgstr "Extensões"
 
-#: sweettooth/extensions/models.py:171 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:133 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "É necessário definir a chave `shell-version` em metadata.json"
+
+#: sweettooth/extensions/models.py:187 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Tipo de doação não suportada: %s"
 
-#: sweettooth/extensions/models.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:191 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr ""
 "Não é possível especificar mais de 3 valores para o tipo de doação \"%s\""
 
-#: sweettooth/extensions/models.py:178 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Deve ser especificado pelo menos um valor para o tipo de doação \"%s\""
 
-#: sweettooth/extensions/models.py:182 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:198 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
@@ -264,7 +280,7 @@ msgstr "Vai sair do sítio Web do Extensões do GNOME para"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -276,12 +292,12 @@ msgstr ""
 "href=\"%(login_url)s\">inicie sessão no Extensões da Interface GNOME</a> "
 "para enviar comentários ou reportar erros. Entende não?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Comentários do utilizador"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "A carregar os comentários…"
@@ -305,11 +321,6 @@ msgstr "Comentário"
 #: extensions-web-domain-django:1
 msgid "Rating"
 msgstr "Classificação"
-
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Reporte de erro"
 
 #: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
@@ -570,8 +581,7 @@ msgstr ""
 "algumas partes da interface podem estar desabilitadas. Veja <a href=\"/about/"
 "#no-detection\">nossa resolução de problemas</a> para mais informação."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
 "Extensões da Interface GNOME não pode listar suas extensões instaladas."
@@ -615,46 +625,6 @@ msgstr "Não há comentários. Seja o primeiro!"
 msgid "Author"
 msgstr "Autor"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Que há de errado?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr "Extensões da Interface GNOME não detetou erros nesta extensão."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Informação de versão"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Versão de interface"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Versão de extensão"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Desconhecido"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Que há testado?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Auto-detetar erros"
-
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
@@ -664,6 +634,53 @@ msgstr "Extensão do sistema"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Desinstalou"
+
+#~ msgid "Other Options"
+#~ msgstr "Outras opções"
+
+#~ msgid ""
+#~ "This website is currently undergoing a redesign, which includes more "
+#~ "settings for accounts. We appreciate your patience while work continues."
+#~ msgstr ""
+#~ "Este sítio Web está atualmente a ser alvo de uma remodelação, que inclui "
+#~ "mais definições para as contas. Agradecemos a sua paciência enquanto o "
+#~ "trabalho continua."
+
+#, python-format
+#~ msgid ""
+#~ "If you require your e-mail address to be changed, please <a "
+#~ "href=\"%(url)s\">open an issue</a> in the project repository."
+#~ msgstr ""
+#~ "Se pretender que o seu endereço de correio eletrónico seja alterado, <a "
+#~ "href=\"%(url)s\">crie uma questão</a> no repositório do projeto."
+
+#~ msgid "Bug report"
+#~ msgstr "Reporte de erro"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Que há de errado?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr "Extensões da Interface GNOME não detetou erros nesta extensão."
+
+#~ msgid "Version information"
+#~ msgstr "Informação de versão"
+
+#~ msgid "Shell version"
+#~ msgstr "Versão de interface"
+
+#~ msgid "Extension version"
+#~ msgstr "Versão de extensão"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconhecido"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Que há testado?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Auto-detetar erros"
 
 #~ msgid "Password"
 #~ msgstr "Palavra-passe"
