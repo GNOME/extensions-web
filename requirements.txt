@@ -127,8 +127,8 @@ django-contrib-comments==2.1.0 \
     --hash=sha256:d82f1d04690550df026553053903deec0c52dc54212e1b79241b08f0355cff2c \
     --hash=sha256:e02c7341ea1f4bcdfa347851dbf5e632d3e591d84b4f77de2f90b93398897f3c
     # via -r requirements.in
-django-opensearch-dsl==0.4.1 \
-    --hash=sha256:7c3cb4ca4cf8679a8cfef6f4073ab1679b71ee423627974ec42060a455b1d694
+django-opensearch-dsl==0.5.1 \
+    --hash=sha256:91c68e1c9d5ce15d760da78d07fa8762385794de0d915710b63b491b2aa44934
     # via -r requirements.in
 django-recaptcha==3.0.0 \
     --hash=sha256:1aed69fd6ac8fd9e99e52665392ae6748f8b6339ace656fad779fe0c6c915a52 \
@@ -142,14 +142,10 @@ idna==3.4 \
     --hash=sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4 \
     --hash=sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2
     # via requests
-opensearch-dsl==2.1.0 \
-    --hash=sha256:31559b738b48ed5abe87b357205a040fa1dc64042a6454ad2d6854050d911ba0 \
-    --hash=sha256:e54ad0d754358233503e0c08e85b77dbe07d6c00babeae62c81d8cee11965ae6
-    # via django-opensearch-dsl
 opensearch-py==2.2.0 \
     --hash=sha256:109fe8d2e1e8f419a22358eb901025f51e6ad2f50014c8962e23796b2a23cb67 \
     --hash=sha256:595dcebe42e21cdf945add0b5dbaecccace1a8a5ba65d60314813767b564263c
-    # via opensearch-dsl
+    # via django-opensearch-dsl
 pillow==9.3.0 \
     --hash=sha256:03150abd92771742d4a8cd6f2fa6246d847dcd2e332a18d0c15cc75bf6703040 \
     --hash=sha256:073adb2ae23431d3b9bcbcff3fe698b62ed47211d0716b067385538a1b0f28b8 \
@@ -226,7 +222,6 @@ python-dateutil==2.8.2 \
     --hash=sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9
     # via
     #   dateutils
-    #   opensearch-dsl
     #   opensearch-py
 pytz==2022.1 \
     --hash=sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7 \
@@ -242,7 +237,6 @@ six==1.16.0 \
     --hash=sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926 \
     --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254
     # via
-    #   opensearch-dsl
     #   opensearch-py
     #   python-dateutil
 sqlparse==0.4.4 \
