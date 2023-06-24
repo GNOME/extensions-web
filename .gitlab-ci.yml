@@ -1,6 +1,5 @@
 variables:
   PYTHON_VERSION: '3.9'
-  XAPIAN_VERSION: '1.4.22'
 
 workflow:
   rules:
@@ -25,30 +24,10 @@ stages:
   stage: build and test
   image: python:$PYTHON_VERSION
   before_script:
-    - if test -d ".xapian/${PYTHON_VERSION}"; then
-    -   cp -r ".xapian/${PYTHON_VERSION}/." /
-    -   ldconfig
-    - else
-    -   openshift/docker/scripts/install-xapian.sh
-    - fi
-    - rm -rf .xapian
     - pip install -r requirements.txt
   variables:
     EGO_DEBUG: 1
     EGO_SECRET_KEY: .
-  needs:
-    - build xapian
-
-build xapian:
-  stage: build and test
-  image: python:$PYTHON_VERSION
-  script:
-    - openshift/docker/scripts/install-xapian.sh
-    - mkdir -p ".xapian/${PYTHON_VERSION}"
-    - cp -r /tmp/xapian-root/. ".xapian/${PYTHON_VERSION}/"
-  artifacts:
-    paths:
-      - .xapian
 
 test:
   extends:
@@ -108,7 +87,6 @@ security (safety):
     - >-
       buildah bud
       --build-arg PYTHON_VERSION="${PYTHON_VERSION}"
-      --build-arg XAPIAN_VERSION="${XAPIAN_VERSION}"
       -t quay.io/gnome_infrastructure/extensions:latest
       -f openshift/docker/Dockerfile
 
