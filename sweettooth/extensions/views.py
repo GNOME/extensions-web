@@ -215,7 +215,6 @@ def ajax_query_params_query(request, versions, n_per_page):
         queryset = queryset.filter(uuid__in=uuids)
 
     sort = request.GET.get('sort', 'popularity')
-    sort = dict(recent='created').get(sort, sort)
     if sort not in ('created', 'downloads', 'popularity', 'name'):
         raise Http404()
 
@@ -273,20 +272,17 @@ def ajax_query_search_query(request, versions, n_per_page):
         query=query,
     )
 
-    ordering = request.GET.get('sort')
-    ordering = (
-        ordering
-        if not ordering or ordering[0] != '-'
-        else ordering[1:]
-    )
+    order_by = request.GET.get('sort')
 
-    if ordering not in ordering_fields:
-        ordering = 'popularity'
+    if order_by not in ordering_fields:
+        order_by = 'popularity'
 
-    if ordering in ('name',):
-        ordering = f"{ordering}.keyword"
+    if order_by in ('name',):
+        order_by = f"{order_by}.raw"
+    else:
+        order_by = f"-{order_by}"
 
-    queryset = queryset.sort(ordering)
+    queryset = queryset.sort(order_by)
 
     paginator = Paginator(queryset.to_queryset(keep_order=True), page_size)
 

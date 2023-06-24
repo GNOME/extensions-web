@@ -38,7 +38,7 @@ define(['jquery', 'dbus!_', 'hashParamUtils', 'modal'],
 
 		var sortCriteria = {
 			'name': gettext("Name"),
-			'recent': gettext("Recent"),
+			'created': gettext("Recent"),
 			'downloads': gettext("Downloads"),
 			'popularity': gettext("Popularity")
 		};

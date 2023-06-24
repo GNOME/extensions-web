@@ -8,7 +8,7 @@
     (at your option) any later version.
 """
 
-from django_opensearch_dsl import Document
+from django_opensearch_dsl import Document, fields
 from django_opensearch_dsl.registries import registry
 
 from .models import Extension
@@ -24,12 +24,16 @@ class ExtensionDocument(Document):
 
         fields = [
             'uuid',
-            'name',
             'description',
             'created',
             'downloads',
             'popularity',
         ]
+
+    name = fields.TextField(
+        fields={'raw': fields.KeywordField()},
+        analyzer='keyword',
+    )
 
     def get_queryset(self, *args, **kwargs):
         return super(ExtensionDocument, self).get_queryset(*args, **kwargs).select_related(
