@@ -1,10 +1,4 @@
 ARG PYTHON_VERSION
-FROM python:$PYTHON_VERSION as xapian
-
-ARG XAPIAN_VERSION
-
-COPY openshift/docker/scripts/ /tmp/scripts/
-RUN /tmp/scripts/install-xapian.sh
 
 FROM python:$PYTHON_VERSION
 
@@ -28,7 +22,6 @@ RUN set -ex \
 
 WORKDIR /extensions-web/app
 
-COPY --from=xapian /tmp/xapian-root /
 COPY . /extensions-web/app
 COPY openshift/docker/wsgi.ini /extensions-web
 

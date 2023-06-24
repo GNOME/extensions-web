@@ -15,8 +15,6 @@ SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(SITE_ROOT)
 
-XAPIAN_DB_PATH = os.getenv('EGO_XAPIAN_DB') or os.path.join(BASE_DIR, 'xapian.db')
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
 
@@ -49,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.messages',
+
+    'django_opensearch_dsl',
 
     'sweettooth.extensions',
     'sweettooth.auth',
@@ -127,6 +127,14 @@ WSGI_APPLICATION = 'sweettooth.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(env="EGO_DATABASE_URL", default="sqlite://./test.db")
 }
+
+OPENSEARCH_DSL = {
+    'default': {
+        'hosts': os.getenv('EGO_OPENSEARCH_ADDRESS') or 'localhost:9200'
+    },
+}
+
+OPENSEARCH_DSL_AUTOSYNC = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/stable/topics/i18n/

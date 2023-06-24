@@ -158,16 +158,26 @@ function($, messages, modal, hashParamUtils, commentsTemplate, staticfiles, cook
                 document.body.scrollTop = 0; // WebKit
             }).trigger('load-page');
 
-        var term = "";
+        let term = "";
+        let timeout_id = null;
         $('#search_input').on('input', function() {
-            var newTerm = $.trim($(this).val());
+            let newTerm = $.trim($(this).val());
 
-            if (newTerm != term) {
-                term = newTerm;
-                // On a new search parameter, reset page to 0.
+            if (newTerm == term) {
+                return;
+            }
+
+            term = newTerm;
+
+            if(timeout_id) {
+                clearTimeout(timeout_id);
+            }
+
+            timeout_id = setTimeout(() => {
+                timeout_id = null;
                 hashParamUtils.setHashParam('page', undefined);
                 $extensionsList.trigger('load-page');
-            }
+            }, 1000);
         });
 
         $('.extension_status_toggle a').click(function() {
