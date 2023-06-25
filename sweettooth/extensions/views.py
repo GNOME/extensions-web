@@ -105,8 +105,9 @@ def grab_proper_extension_version(extension, shell_version, disable_version_vali
     else:
         return versions.order_by('-version')[0]
 
+
 def find_extension_version_from_params(extension, params):
-    vpk = params.get('version_tag', '')
+    vpk = params.get('version_tag')
     shell_version = params.get('shell_version', '')
     disable_version_validation = False if params.get('disable_version_validation', "1").lower() in ["0",
                                                                                                     "false"] else True
@@ -116,10 +117,11 @@ def find_extension_version_from_params(extension, params):
     elif vpk:
         try:
             return extension.visible_versions.get(pk=int(vpk))
-        except models.ExtensionVersion.DoesNotExist:
+        except (models.ExtensionVersion.DoesNotExist, ValueError):
             return None
     else:
         return None
+
 
 def shell_download(request, uuid):
     extension = get_object_or_404(models.Extension.objects.visible(), uuid=uuid)
@@ -467,6 +469,7 @@ def ajax_details(extension, version=None):
         details['download_url'] = "%s?version_tag=%d" % (download_url, version.pk)
     return details
 
+
 @ajax_view
 def ajax_details_view(request):
     uuid = request.GET.get('uuid', None)
@@ -488,6 +491,7 @@ def ajax_details_view(request):
         return HttpResponseBadRequest()
 
     return ajax_details(extension, version)
+
 
 @ajax_view
 def ajax_set_status_view(request, newstatus):

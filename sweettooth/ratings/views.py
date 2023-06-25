@@ -3,7 +3,7 @@ import json
 
 import django_comments as comments
 from django.contrib.messages import info
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.shortcuts import redirect
 from django.template.defaultfilters import linebreaks
 from django.urls import reverse
@@ -13,11 +13,13 @@ from sweettooth.extensions import models
 from sweettooth.decorators import ajax_view, model_view
 from sweettooth.utils import gravatar_url
 
+
 def comment_done(request):
     pk = request.GET['c']
     comment = comments.get_model().objects.get(pk=pk)
     info(request, "Thank you for your comment")
     return redirect(comment.get_content_object_url())
+
 
 def comment_details(request, comment):
     extension = comment.content_object
@@ -38,9 +40,13 @@ def comment_details(request, comment):
 
     return details
 
+
 @ajax_view
 def get_comments(request):
-    extension = models.Extension.objects.get(pk=request.GET['pk'])
+    try:
+        extension = models.Extension.objects.get(pk=request.GET.get('pk'))
+    except (models.Extension.DoesNotExist, ValueError):
+        return HttpResponseNotFound()
 
     if not extension.allow_comments:
         return HttpResponseForbidden()
