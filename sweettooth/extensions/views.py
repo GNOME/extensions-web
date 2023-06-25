@@ -286,7 +286,10 @@ def ajax_query_search_query(request, versions, n_per_page):
 
     paginator = Paginator(queryset.to_queryset(keep_order=True), page_size)
 
-    return ([sr for sr in paginator.page(page).object_list], paginator.num_pages)
+    try:
+        return ([sr for sr in paginator.page(page).object_list], paginator.num_pages)
+    except InvalidPage:
+        return ([], 0)
 
 
 @ajax_view
