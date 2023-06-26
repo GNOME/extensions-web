@@ -8,10 +8,13 @@
     (at your option) any later version.
 """
 
+from django.db.models.signals import post_delete, post_save
+from django.dispatch import receiver
+
 from django_opensearch_dsl import Document, fields
 from django_opensearch_dsl.registries import registry
 
-from .models import Extension
+from .models import Extension, ExtensionVersion
 
 
 @registry.register_document
@@ -49,3 +52,21 @@ class ExtensionDocument(Document):
     @staticmethod
     def document_fields():
         return ['uuid', 'name', 'description', 'creator']
+
+
+@receiver(post_delete, sender=ExtensionVersion)
+@receiver(post_save, sender=ExtensionVersion)
+def index_on_version_save(instance, **kwargs):
+    if instance.extension.latest_version:
+        ExtensionDocument().update(instance.extension, action='index')
+    else:
+        try:
+            ExtensionDocument().update(instance.extension, action='delete')
+        except Exception as ex:
+            errors = getattr(ex, 'errors', [])
+            if (
+                not errors or
+                not isinstance(errors[0], dict) or
+                errors[0].get('delete', {}).get('result', '') != 'not_found'
+            ):
+                raise ex
