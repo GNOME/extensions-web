@@ -43,6 +43,9 @@ class ExtensionDocument(Document):
     def prepare_creator(self, extension):
         return extension.creator.username
 
+    def should_index_object(self, extension):
+        return extension.latest_version
+
     @staticmethod
     def document_fields():
         return ['uuid', 'name', 'description', 'creator']
