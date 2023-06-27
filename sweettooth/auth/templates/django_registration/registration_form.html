@@ -3,11 +3,11 @@
 <div class="col-sm-8 col-md-6 col-centered">
 <form action="" method="POST" class="auth_form" id='registration'>
   {% csrf_token %}
-  <h3>Account Registration</h3>
+  <h3>{% trans "Account Registration" %}</h3>
   <ul>
   {{ form.as_ul }}
   </ul>
-  <button type="submit" class="btn btn-primary btn-block">Register</button>
+  <button type="submit" class="btn btn-primary btn-block">{% trans "Register" %}</button>
 </form>
 </div>
 {% endblock %}
