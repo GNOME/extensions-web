@@ -134,7 +134,7 @@ OPENSEARCH_DSL = {
     },
 }
 
-OPENSEARCH_DSL_AUTOSYNC = False
+OPENSEARCH_DSL_AUTOSYNC = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/stable/topics/i18n/

@@ -1,5 +1,6 @@
 variables:
   PYTHON_VERSION: '3.9'
+  OPENSEARCH_VERSION: '2.8.0'
 
 workflow:
   rules:
@@ -28,11 +29,23 @@ stages:
   variables:
     EGO_DEBUG: 1
     EGO_SECRET_KEY: .
+    EGO_OPENSEARCH_ADDRESS: opensearch:9200
 
 test:
   extends:
     - .test defaults
+  services:
+    - name: docker.io/opensearchproject/opensearch:$OPENSEARCH_VERSION
+      alias: opensearch
+      variables:
+        bootstrap.memory_lock: 'false'
+        discovery.type: single-node
+        plugins.security.ssl.http.enabled: 'false'
+        DISABLE_INSTALL_DEMO_CONFIG: 'true'
+        DISABLE_SECURITY_PLUGIN: 'true'
+        OPENSEARCH_JAVA_OPTS: -Xms256m -Xmx256m
   script:
+    - ./manage.py opensearch index create --force
     - python manage.py test
   parallel:
     matrix:
@@ -40,6 +53,8 @@ test:
           - '3.9'
           - '3.10'
           - '3.11'
+  tags:
+    - docker
 
 check migrations:
   extends:

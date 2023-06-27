@@ -623,5 +623,3 @@ class DonationUrl(models.Model):
 submitted_for_review = Signal()
 # providing_args=["request", "version", "review"]
 reviewed = Signal()
-# providing_args=["extension"]
-extension_updated = Signal()

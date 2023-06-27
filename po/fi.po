@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-03-07 17:19+0000\n"
-"PO-Revision-Date: 2023-03-10 14:20+0200\n"
+"POT-Creation-Date: 2023-06-22 16:37+0000\n"
+"PO-Revision-Date: 2023-06-27 19:34+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -16,33 +16,112 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "Voit vaihtaa sähköpostiosoitteesi vain kerran viikossa"
+
+#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Poista tili"
+
+#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Tilisi poistetaan 7 päivän kuluessa"
+
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+msgid "No"
+msgstr "Ei"
+
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Kyllä"
+
+#: sweettooth/auth/forms.py:174 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Nykyinen salasana"
+
+#: sweettooth/auth/forms.py:175 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr ""
+
+#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Käyttäjänimi tai sähköposti"
 
-#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:63 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Käyttäjänimi"
 
-#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Vaadittu. 30 merkkiä tai vähemmän. Vain kirjaimia, numeroita ja merkkejä @/./"
 "+/-/_"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:65 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Tämä arvo voi sisältää vain kirjaimia, numeroita ja merkkejä @/./+/-/_"
 
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Sähköposti"
 
-#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Vältä sähköpostiosoitteen käyttämistä käyttäjänimenä"
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Käyttäjätunnus sisältää kiellettyjä sanoja"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Tilin poistaminen"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Tilisi on ajastettu poistettavaksi. Voit perua tilin poistamisen viikon "
+"sisällä."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Tilin poistaminen on peruttu."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "Sähköpostin vahvistus"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Asetukset"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:78
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Lähetä"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Vaihda salasanasi"
+
+#: sweettooth/auth/templates/profile/settings.html:47
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr "Tilisi on ajastettu poistettavaksi %(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -87,7 +166,6 @@ msgid ""
 msgstr ""
 "Salasanan nollauspoletti on väärin. Tarkista linkki ja yritä uudelleen."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -101,6 +179,35 @@ msgid ""
 msgstr ""
 "Unohditko salasanasi? Kirjoita sähköpostiosoitteesi alle, me lähetämme "
 "sinulle ohjeet salasanan vaihtamiseksi."
+
+#: sweettooth/auth/views.py:102 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "Vahvistuslinkki on vanhentunut. Pyydä uusi vahvistuslinkki."
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Väärä pyyntö"
+
+#: sweettooth/auth/views.py:114 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Profiilitiedot tallennettu"
+
+#: sweettooth/auth/views.py:237 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"Vahvistusviesti lähetettiin uutteen osoitteeseesi. Tarkista postilaatikkosi."
+
+#: sweettooth/auth/views.py:255 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Salasana on väärin"
+
+#: sweettooth/auth/views.py:76 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr ""
+
+#: sweettooth/auth/views.py:92 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Sähköpostiosoitteesi päivitettiin onnistuneesti"
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -118,7 +225,51 @@ msgstr "Tietoa"
 msgid "Extensions"
 msgstr "Laajennukset"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/extensions/models.py:133 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Sinun tulee määrittää `shell-version`-avain metadata.json-tiedostossa"
+
+#: sweettooth/extensions/models.py:187 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Lahjoituksen tyyppi ei ole tuettu: %s"
+
+#: sweettooth/extensions/models.py:191 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr ""
+
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr ""
+
+#: sweettooth/extensions/models.py:198 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Jatka silti"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Olet poistumassa Gnomen laajennusten verkkosivustolta"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+msgid "You are going to leave GNOME Extensions website to"
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Peru"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -130,12 +281,12 @@ msgstr ""
 "href=\"%(login_url)s\">sisäänkirjautumista GNOME Shell Extensions -"
 "sivustolle</a>, jotta voit kommentoida tai ilmoittaa virheestä. Ymmärräthän?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Käyttäjäarviot"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Ladataan arvioita…"
@@ -160,10 +311,20 @@ msgstr "Kommentti"
 msgid "Rating"
 msgstr "Arvostelu"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Vikailmoitus"
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+"Tarkistaja katselmoi lähettämäsi laajennuksen varmistaakseen, ettei se ole "
+"vaarallinen. Katselmoinnin arvio lähetetään sinulle sähköpostitse."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Kommentit on poistettu käytöstä tämän laajennuksen kohdalla."
 
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
@@ -178,75 +339,66 @@ msgstr[1] "%(downloads)s latausta"
 msgid "Number of Downloads"
 msgstr "Latausten määrä"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Lahjoita"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Asenna"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:46
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Päivitä tämä laajennus"
 
-#: sweettooth/extensions/templates/extensions/detail.html:29
+#: sweettooth/extensions/templates/extensions/detail.html:47
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Muokkaa laajennuksen asetuksia"
 
-#: sweettooth/extensions/templates/extensions/detail.html:30
+#: sweettooth/extensions/templates/extensions/detail.html:48
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Poista tämä laajennus"
 
-#: sweettooth/extensions/templates/extensions/detail.html:56
+#: sweettooth/extensions/templates/extensions/detail.html:75
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Laajennuksen sivusto"
 
-#: sweettooth/extensions/templates/extensions/detail.html:62
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Tämä laajennus on käynnissä näytön ollessa lukittu"
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr ""
 
-#: sweettooth/extensions/templates/extensions/detail.html:67
+#: sweettooth/extensions/templates/extensions/detail.html:86
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Lataa"
 
-#: sweettooth/extensions/templates/extensions/detail.html:70
+#: sweettooth/extensions/templates/extensions/detail.html:89
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Shell-versio…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:93
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Laajennuksen versio…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:83
-#: extensions-web-domain-django:1
-msgid ""
-"A reviewer will review the extension you submitted to make sure there's "
-"nothing too dangerous. You'll be emailed the result of the review."
-msgstr ""
-"Tarkistaja katselmoi lähettämäsi laajennuksen varmistaakseen, ettei se ole "
-"vaarallinen. Katselmoinnin arvio lähetetään sinulle sähköpostitse."
-
-#: sweettooth/extensions/templates/extensions/detail.html:94
-#: sweettooth/extensions/templates/extensions/detail_edit.html:7
-#: extensions-web-domain-django:1
-msgid "Comments are disabled for this extension."
-msgstr "Kommentit on poistettu käytöstä tämän laajennuksen kohdalla."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -414,8 +566,7 @@ msgstr ""
 "jotkin osat käyttöliittymästä saattavat olla pois käytöstä. <a href=\"/about/"
 "#no-detection\">Lue ongelmanratkaisu</a> saadaksesi lisätietoja."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr "GNOME Shell Extensions ei pysty listaamaan asentamiasi laajennuksia."
 
@@ -458,47 +609,6 @@ msgstr "Ei vielä yhtäkään kommenttia. Ole ensimmäinen!"
 msgid "Author"
 msgstr "Tekijä"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Mikä on pielessä?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr ""
-"GNOME Shell Extensions ei havainnut virheitä tämän laajennuksen kanssa."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Versiotiedot"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Shell-versio"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Laajennuksen versio"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Tuntematon"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Mitä olet yrittänyt?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Automaattisesti tunnistetut virheet"
-
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
@@ -508,3 +618,32 @@ msgstr "Järjestelmälaajennus"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Sinä poistit"
+
+#~ msgid "Bug report"
+#~ msgstr "Vikailmoitus"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Mikä on pielessä?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr ""
+#~ "GNOME Shell Extensions ei havainnut virheitä tämän laajennuksen kanssa."
+
+#~ msgid "Version information"
+#~ msgstr "Versiotiedot"
+
+#~ msgid "Shell version"
+#~ msgstr "Shell-versio"
+
+#~ msgid "Extension version"
+#~ msgstr "Laajennuksen versio"
+
+#~ msgid "Unknown"
+#~ msgstr "Tuntematon"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Mitä olet yrittänyt?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Automaattisesti tunnistetut virheet"

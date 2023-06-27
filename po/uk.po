@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-06-12 09:38+0000\n"
-"PO-Revision-Date: 2023-06-14 09:41+0300\n"
+"POT-Creation-Date: 2023-06-22 16:37+0000\n"
+"PO-Revision-Date: 2023-06-25 16:21+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -20,64 +20,68 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: sweettooth/auth/forms.py:33 extensions-web-domain-django:1
-msgid "Username or email"
-msgstr "Ім'я користувача або адреса ел. пошти"
-
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
-msgid "Username"
-msgstr "Ім'я користувача"
-
-#: sweettooth/auth/forms.py:59 extensions-web-domain-django:1
-msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Обов'язкове. 30 символів або менше. Лише літери, цифри та @/./+/-/_."
-
-#: sweettooth/auth/forms.py:60 extensions-web-domain-django:1
-msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr "Це значення може містити лише літери, цифри та символи @/./+/-/_."
-
-#: sweettooth/auth/forms.py:62 extensions-web-domain-django:1
-msgid "Email"
-msgstr "Електронна пошта"
-
-#: sweettooth/auth/forms.py:69 extensions-web-domain-django:1
-msgid "You should not use email as username"
+#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
 msgstr ""
-"Вам не слід використовувати адресу електронної пошти як ім'я користувача"
+"Ви можете змінювати вашу адресу електронної пошти не частіше, ніж раз на 7"
+" днів"
 
-#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "У вашому імені користувача містяться заборонені слова"
-
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
-#| msgid "Don't have an account?"
+#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Вилучити мій профіль"
 
-#: sweettooth/auth/forms.py:88 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Ваш обліковий запис буде вилучено за 7 днів"
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ні"
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Так"
 
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
-#| msgid "Reset your password"
+#: sweettooth/auth/forms.py:174 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Поточний пароль"
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:175 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "Вам не потрібно вказувати пароль для скасування вилучення облікового запису"
 
+#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Ім'я користувача або адреса ел. пошти"
+
+#: sweettooth/auth/forms.py:63 extensions-web-domain-django:1
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Обов'язкове. 30 символів або менше. Лише літери, цифри та @/./+/-/_."
+
+#: sweettooth/auth/forms.py:65 extensions-web-domain-django:1
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr "Це значення може містити лише літери, цифри та символи @/./+/-/_."
+
+#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
+msgid "Email"
+msgstr "Електронна пошта"
+
+#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr ""
+"Вам не слід використовувати адресу електронної пошти як ім'я користувача"
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "У вашому імені користувача містяться заборонені слова"
+
 #: sweettooth/auth/templates/profile/account-removal.html:4
-#: sweettooth/auth/templates/profile/settings.html:9
+#: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
 msgid "Account removal"
 msgstr "Вилучення облікового запису"
@@ -88,62 +92,42 @@ msgid ""
 "You account is scheduled for removal. You can cancel account removal in 7 "
 "days."
 msgstr ""
-"Заплановано вилучення вашого облікового запису. Ви можете скасувати"
-" вилучення протягом 7 днів."
+"Заплановано вилучення вашого облікового запису. Ви можете скасувати "
+"вилучення протягом 7 днів."
 
 #: sweettooth/auth/templates/profile/account-removal.html:9
 #: extensions-web-domain-django:1
 msgid "Account removal is canceled."
 msgstr "Вилучення облікового запису скасовано."
 
-#: sweettooth/auth/templates/profile/settings.html:12
+#: sweettooth/auth/templates/profile/email_confirm.html:4
 #: extensions-web-domain-django:1
-#, python-format
-msgid "Your account is sheduled for removal after %(schedule_delete_after)s"
-msgstr ""
-"Заплановано вилучення вашого облікового запису за %(schedule_delete_after)s"
+msgid "Email confirmation"
+msgstr "Підтвердження адреси ел. пошти"
 
-#: sweettooth/auth/templates/profile/settings.html:39
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Параметри"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:78
 #: extensions-web-domain-django:1
 msgid "Submit"
 msgstr "Надіслати"
 
-#: sweettooth/auth/templates/profile/settings.html:4
+#: sweettooth/auth/templates/profile/settings.html:41
 #: extensions-web-domain-django:1
-#| msgid "User Settings"
-msgid "Settings"
-msgstr "Параметри"
-
-#: sweettooth/auth/templates/profile/settings.html:42
-#: extensions-web-domain-django:1
-msgid "Other Options"
-msgstr "Інші параметри"
-
-#: sweettooth/auth/templates/profile/settings.html:44
-#: extensions-web-domain-django:1
-msgid ""
-"This website is currently undergoing a redesign, which includes more "
-"settings for accounts. We appreciate your patience while work continues."
-msgstr ""
-"Зараз виконуємо зміну дизайну цього сайта, яка надасть доступ до ширшого"
-" спектру параметрів для облікових записів. Будь ласка, потерпіть, доки ми"
-" працюємо."
+msgid "Change your password"
+msgstr "Змінити ваш пароль"
 
 #: sweettooth/auth/templates/profile/settings.html:47
 #: extensions-web-domain-django:1
 #, python-format
-msgid ""
-"If you require your e-mail address to be changed, please <a "
-"href=\"%(url)s\">open an issue</a> in the project repository."
+#| msgid "Your account is sheduled for removal after %(schedule_delete_after)s"
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr ""
-"Якщо вам потрібна зміна адреси електронної пошти, будь ласка, <a href=\""
-"%(url)s\">створіть запис щодо проблеми</a> у сховищі проєкту."
-
-#: sweettooth/auth/templates/profile/settings.html:6
-#: extensions-web-domain-django:1
-#| msgid "Reset your password"
-msgid "Change your password"
-msgstr "Змінити ваш пароль"
+"Заплановано вилучення вашого облікового запису за %(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -189,7 +173,6 @@ msgstr ""
 "Токен скидання пароля є помилковим. Будь ласка, перевірте своє посилання та "
 "повторіть спробу."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -204,10 +187,38 @@ msgstr ""
 "Забули пароль? Введіть свою адресу електронної пошти нижче, і ми надішлемо "
 "електронною поштою інструкції з налаштування нового."
 
-#: sweettooth/auth/views.py:120 extensions-web-domain-django:1
-#| msgid "Password confirmation"
+#: sweettooth/auth/views.py:102 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr ""
+"Строк дії вашого посилання щодо підтвердження вичерпано. Будь ласка,"
+" попросіть про нове."
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Помилковий запит"
+
+#: sweettooth/auth/views.py:114 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Дані профілю збережено"
+
+#: sweettooth/auth/views.py:237 extensions-web-domain-django:1
+msgid ""
+"Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"На вашу нову адресу надіслано повідомлення щодо підтвердження. Будь ласка,"
+" перевірте вашу теку «Вхідні»."
+
+#: sweettooth/auth/views.py:255 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "Помилковий пароль"
+
+#: sweettooth/auth/views.py:76 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Відновити адресу ел. пошти і скинути пароль"
+
+#: sweettooth/auth/views.py:92 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Вашу адресу електронної пошти успішно оновлено"
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -225,29 +236,33 @@ msgstr "Відомості"
 msgid "Extensions"
 msgstr "Розширення"
 
-#: sweettooth/extensions/models.py:171 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:133 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Вам слід визначити ключ «shell-version» у metadata.json"
+
+#: sweettooth/extensions/models.py:187 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Непідтримуваний тип фінансової підтримки: %s"
 
-#: sweettooth/extensions/models.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:191 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr ""
 "Ви не можете вказувати більше 3 значень для типу фінансової підтримки «%s»"
 
-#: sweettooth/extensions/models.py:178 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr ""
 "Для типу фінансової підтримки «%s» має бути вказано принаймні одне значення"
 
-#: sweettooth/extensions/models.py:182 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:198 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
-"Для типу фінансової підтримки «%s» типом значення має бути рядок або список"
-" рядків"
+"Для типу фінансової підтримки «%s» типом значення має бути рядок або список "
+"рядків"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -269,7 +284,7 @@ msgstr "Ви наказали програмі полишити сайт роз�
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -281,12 +296,12 @@ msgstr ""
 "href=\"%(login_url)s\">увійшли до GNOME Shell Extensions</a>, щоб "
 "опублікувати коментар або повідомити про помилку. Розумієте, чи не так?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Відгуки користувачів"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Завантаження відгуків…"
@@ -310,11 +325,6 @@ msgstr "Коментар"
 #: extensions-web-domain-django:1
 msgid "Rating"
 msgstr "Оцінку"
-
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Звіт про помилку"
 
 #: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
@@ -583,8 +593,7 @@ msgstr ""
 "інтерфейсу можуть бути відключені. Додаткову інформацію дивіться в розділі "
 "<a href=\"/about/#no-detection\">про усунення неполадок</a>."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
 "GNOME Shell Extensions не вдається вивести список встановлених розширень."
@@ -628,46 +637,6 @@ msgstr "Немає коментарів. Будьте першим!"
 msgid "Author"
 msgstr "Автор"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Що не так?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr "GNOME Shell Extensions не виявив жодних помилок з цим розширенням."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Інформація про версію"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Версія Shell"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Версія розширення"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Невідомо"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Що ви пробували?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Автоматично виявлені помилки"
-
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
@@ -677,6 +646,53 @@ msgstr "Системне розширення"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Ви вилучили"
+
+#~ msgid "Other Options"
+#~ msgstr "Інші параметри"
+
+#~ msgid ""
+#~ "This website is currently undergoing a redesign, which includes more "
+#~ "settings for accounts. We appreciate your patience while work continues."
+#~ msgstr ""
+#~ "Зараз виконуємо зміну дизайну цього сайта, яка надасть доступ до ширшого "
+#~ "спектру параметрів для облікових записів. Будь ласка, потерпіть, доки ми "
+#~ "працюємо."
+
+#, python-format
+#~ msgid ""
+#~ "If you require your e-mail address to be changed, please <a "
+#~ "href=\"%(url)s\">open an issue</a> in the project repository."
+#~ msgstr ""
+#~ "Якщо вам потрібна зміна адреси електронної пошти, будь ласка, <a "
+#~ "href=\"%(url)s\">створіть запис щодо проблеми</a> у сховищі проєкту."
+
+#~ msgid "Bug report"
+#~ msgstr "Звіт про помилку"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Що не так?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr "GNOME Shell Extensions не виявив жодних помилок з цим розширенням."
+
+#~ msgid "Version information"
+#~ msgstr "Інформація про версію"
+
+#~ msgid "Shell version"
+#~ msgstr "Версія Shell"
+
+#~ msgid "Extension version"
+#~ msgstr "Версія розширення"
+
+#~ msgid "Unknown"
+#~ msgstr "Невідомо"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Що ви пробували?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Автоматично виявлені помилки"
 
 #~ msgid "Password"
 #~ msgstr "Пароль"
