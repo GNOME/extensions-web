@@ -38,6 +38,8 @@ class ExtensionDocument(Document):
         analyzer='keyword',
     )
 
+    shell_versions = fields.TextField(multi=True)
+
     def get_queryset(self, *args, **kwargs):
         return super(ExtensionDocument, self).get_queryset(*args, **kwargs).select_related(
             'creator'
@@ -45,6 +47,9 @@ class ExtensionDocument(Document):
 
     def prepare_creator(self, extension):
         return extension.creator.username
+
+    def prepare_shell_versions(self, extension):
+        return list(extension.visible_shell_version_map.keys())
 
     def should_index_object(self, extension):
         return extension.latest_version
