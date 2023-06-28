@@ -250,7 +250,7 @@ def ajax_query_params_query(request, versions, n_per_page):
     return page_obj.object_list, paginator.num_pages
 
 
-def ajax_query_search_query(request, versions, n_per_page):
+def ajax_query_search_query(request, versions: set[models.ShellVersion], n_per_page: int):
     max_page_size = 100
     ordering_fields = ['name', 'created', 'downloads', 'popularity']
     try:
@@ -273,6 +273,9 @@ def ajax_query_search_query(request, versions, n_per_page):
         "multi_match",
         query=query,
     )
+
+    if versions:
+        queryset = queryset.filter('terms', shell_versions=[str(version) for version in versions])
 
     order_by = request.GET.get('sort')
 
