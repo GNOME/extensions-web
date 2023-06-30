@@ -112,13 +112,15 @@ security (safety):
       -t quay.io/gnome_infrastructure/extensions:latest
       -f openshift/docker/Dockerfile
 
-buildah:
+build image:
   extends:
     - .build image
   stage: build
+  rules:
+    - if: $CI_COMMIT_BRANCH != "deploy"
   needs: []
 
-deploy:
+build and deploy:
   extends:
     - .build image
   stage: deploy
@@ -128,3 +130,5 @@ deploy:
     - !reference [.build image, script]
     - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
     - buildah push quay.io/gnome_infrastructure/extensions:latest
+  needs:
+    - test
