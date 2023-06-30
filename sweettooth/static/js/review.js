@@ -29,11 +29,17 @@ define(['jquery', 'diff'], function($, diff) {
     }
 
     function createDiffView(filename, pk) {
+        let compare_version_pk = $('#diff_version_select').val();
+        let compare_version_url = '';
+        if(compare_version_pk) {
+            compare_version_url = `/${compare_version_pk}`
+        }
+
         return $.ajax({
             type: 'GET',
             dataType: 'json',
             data: { filename: filename },
-            url: REVIEW_URL_BASE + '/get-file-diff/' + pk
+            url: `${REVIEW_URL_BASE}/get-file-diff/${pk}${compare_version_url}`
         }).pipe(function(data) {
             return diff.buildDiffTable(data.chunks, data.oldlines, data.newlines);
         });
@@ -53,6 +59,7 @@ define(['jquery', 'diff'], function($, diff) {
     $.fn.reviewify = function(diff) {
         return this.each(function() {
             var $elem = $(this);
+            $elem.empty();
             var $fileList = $('<ul>', {'class': 'filelist'}).appendTo($elem);
             var pk = $elem.data('pk');
 

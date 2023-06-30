@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-03-07 17:19+0000\n"
-"PO-Revision-Date: 2023-03-07 22:13+0300\n"
-"Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
+"POT-Creation-Date: 2023-06-22 16:37+0000\n"
+"PO-Revision-Date: 2023-06-24 01:59+1000\n"
+"Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,32 +17,114 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr ""
+"Вы не можете менять адрес своей электронной почты чаще одного раза в 7 дней"
+
+#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Удалить мою учётную запись"
+
+#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Ваша учётная запись будет удалена через 7 дней"
+
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+msgid "No"
+msgstr "Нет"
+
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Да"
+
+#: sweettooth/auth/forms.py:174 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Текущий пароль"
+
+#: sweettooth/auth/forms.py:175 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr "Вам не нужно указывать пароль, чтобы отменить удаление учётной записи"
+
+#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Имя пользователя или email"
 
-#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:63 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Требуется. Не более 30 символов. Только буквы, цифры и @/./+/-/_."
+msgstr ""
+"Требуется заполнить. Не более 30 символов. Только буквы, цифры и @/./+/-/_."
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:65 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Это значение может содержать только буквы, цифры и символы @/./+/-/_."
 
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Электронная почта"
 
-#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr ""
 "Вы не должны использовать электронную почту в качестве имени пользователя"
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Ваше имя пользователя содержит запрещённые слова"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Удаление учётной записи"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Ваша учётная запись запланирована к удалению. В течение 7 дней вы можете "
+"отменить удаление учётной записи."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Удаление учётной записи отменено."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "Подтверждение по электронной почте"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Настройки"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:78
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Отправить"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Изменить пароль"
+
+#: sweettooth/auth/templates/profile/settings.html:47
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr ""
+"Удаление вашей учётной записи запланировано через %(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -60,7 +142,7 @@ msgstr "Войти"
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr "Нет аккаунта?"
+msgstr "Нет учётной записи?"
 
 #: sweettooth/auth/templates/registration/login.html:37
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
@@ -88,7 +170,6 @@ msgstr ""
 "Токен для сброса пароля неверен. Пожалуйста, проверьте свою ссылку и "
 "повторите попытку."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -100,8 +181,39 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Забыли пароль? Введите свой адрес электронной почты ниже, и мы вышлем "
+"Забыли пароль? Введите ниже адрес своей электронной почты, и мы вышлем "
 "инструкции по установке нового пароля."
+
+#: sweettooth/auth/views.py:102 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr ""
+"Истёк срок действия ссылки для подтверждения. Пожалуйста, запросите новую."
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Неверный запрос"
+
+#: sweettooth/auth/views.py:114 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Данные профиля были сохранены"
+
+#: sweettooth/auth/views.py:237 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"Электронное письмо с подтверждением будет отправлено на ваш новый почтовый "
+"адрес. Пожалуйста, проверьте свой почтовый ящик."
+
+#: sweettooth/auth/views.py:255 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Неверный пароль"
+
+#: sweettooth/auth/views.py:76 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Восстановить электронную почту и сбросить пароль"
+
+#: sweettooth/auth/views.py:92 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Адрес вашей электронной почты успешно обновлён"
 
 #: sweettooth/context_processors.py:13 extensions-web-domain-django:1
 msgid "Add yours"
@@ -119,7 +231,56 @@ msgstr "О приложении"
 msgid "Extensions"
 msgstr "Расширения"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/extensions/models.py:133 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Вы должны определить ключ «shell-version» в файле metadata.json"
+
+#: sweettooth/extensions/models.py:187 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Неподдерживаемый тип финансовой поддержки: %s"
+
+#: sweettooth/extensions/models.py:191 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr ""
+"Вы не можете указывать более 3 значений для типа финансовой поддержки «%s»"
+
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr ""
+"Для типа финансовой поддержки «%s» должно быть указано, по крайней мере, "
+"одно значение"
+
+#: sweettooth/extensions/models.py:198 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+"Для типа финансовой поддержки «%s» типом значения должна быть строка или "
+"список строк"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Всё равно продолжить"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Вы покидаете веб-сайт расширений GNOME"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+msgid "You are going to leave GNOME Extensions website to"
+msgstr "Вы собираетесь покинуть веб-сайт расширений GNOME"
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Отменить"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -127,16 +288,16 @@ msgid ""
 "href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
 "a comment or report an error. You understand, right?"
 msgstr ""
-"К сожалению, чтобы предотвратить спам, мы требуем, чтобы вы <a "
+"К сожалению, для предотвращения спама, мы требуем, чтобы вы <a "
 "href=\"%(login_url)s\">вошли в GNOME Shell Extensions</a>, чтобы оставить "
-"комментарий или сообщить об ошибке. Вы понимаете, да?"
+"комментарий или сообщить об ошибке. Вы ведь понимаете, не так ли?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Отзывы пользователей"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Загрузка отзывов…"
@@ -161,81 +322,7 @@ msgstr "Комментарий"
 msgid "Rating"
 msgstr "Рейтинг"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Сообщение об ошибке"
-
-#: sweettooth/extensions/templates/extensions/detail.html:21
-#: extensions-web-domain-django:1
-#, python-format
-msgid "%(downloads)s download"
-msgid_plural "%(downloads)s downloads"
-msgstr[0] "%(downloads)s загрузка"
-msgstr[1] "%(downloads)s загрузки"
-msgstr[2] "%(downloads)s загрузкок"
-
-#: sweettooth/extensions/templates/extensions/detail.html:21
-#: extensions-web-domain-django:1
-msgid "Number of Downloads"
-msgstr "Количество загрузок"
-
-#: sweettooth/extensions/templates/extensions/detail.html:25
-#: extensions-web-domain-django:1
-msgid "Install"
-msgstr "Установить"
-
-#: sweettooth/extensions/templates/extensions/detail.html:28
-#: extensions-web-domain-django:1
-msgid "Upgrade this extension"
-msgstr "Обновить это расширение"
-
-#: sweettooth/extensions/templates/extensions/detail.html:29
-#: extensions-web-domain-django:1
-msgid "Configure this extension"
-msgstr "Настроить это расширение"
-
-#: sweettooth/extensions/templates/extensions/detail.html:30
-#: extensions-web-domain-django:1
-msgid "Uninstall this extension"
-msgstr "Удалить это расширение"
-
-#: sweettooth/extensions/templates/extensions/detail.html:56
-#: extensions-web-domain-django:1
-msgid "Extension Homepage"
-msgstr "Домашняя страница расширения"
-
-#: sweettooth/extensions/templates/extensions/detail.html:62
-#: extensions-web-domain-django:1
-msgid "Session Mode(s)"
-msgstr "Режим(ы) сеанса"
-
-#: sweettooth/extensions/templates/extensions/detail.html:63
-#: extensions-web-domain-django:1
-msgid "This extension will run while the screen is locked"
-msgstr "Это расширение будет работать, пока экран заблокирован"
-
-#: sweettooth/extensions/templates/extensions/detail.html:63
-#: extensions-web-domain-django:1
-msgid "Unlock Dialog"
-msgstr "Диалоговое окно разблокировки"
-
-#: sweettooth/extensions/templates/extensions/detail.html:67
-#: extensions-web-domain-django:1
-msgid "Download"
-msgstr "Скачать"
-
-#: sweettooth/extensions/templates/extensions/detail.html:70
-#: extensions-web-domain-django:1
-msgid "Shell version…"
-msgstr "Версия оболочки…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:74
-#: extensions-web-domain-django:1
-msgid "Extension version…"
-msgstr "Версия расширения…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:83
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -245,11 +332,86 @@ msgstr ""
 "нем нет ничего слишком опасного. Результат проверки будет отправлен вам по "
 "электронной почте."
 
-#: sweettooth/extensions/templates/extensions/detail.html:94
+#: sweettooth/extensions/templates/extensions/detail.html:113
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
 msgstr "Комментарии для этого расширения отключены."
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s загрузка"
+msgstr[1] "%(downloads)s загрузки"
+msgstr[2] "%(downloads)s загрузок"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Количество загрузок"
+
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Поддержать финансово"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Установить"
+
+#: sweettooth/extensions/templates/extensions/detail.html:46
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "Обновить это расширение"
+
+#: sweettooth/extensions/templates/extensions/detail.html:47
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "Настроить это расширение"
+
+#: sweettooth/extensions/templates/extensions/detail.html:48
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "Удалить это расширение"
+
+#: sweettooth/extensions/templates/extensions/detail.html:75
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "Домашняя страница расширения"
+
+#: sweettooth/extensions/templates/extensions/detail.html:81
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Режим(ы) сеанса"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "Это расширение будет работать, пока экран заблокирован"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Диалоговое окно разблокировки"
+
+#: sweettooth/extensions/templates/extensions/detail.html:86
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "Скачать"
+
+#: sweettooth/extensions/templates/extensions/detail.html:89
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Версия оболочки…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:93
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "Версия расширения…"
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -420,8 +582,7 @@ msgstr ""
 "некоторые части интерфейса могут быть отключены. Дополнительную информацию "
 "см. в <a href=\"/about/#no-detection\">статье об устранении неполадок</a>."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
 "Расширения GNOME Shell не могут вывести список установленных расширений."
@@ -465,47 +626,6 @@ msgstr "Комментариев нет. Будьте первыми!"
 msgid "Author"
 msgstr "Автор"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Что случилось?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr ""
-"Расширения GNOME Shell не обнаружили никаких ошибок с этим расширением."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Информация о версии"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Версия оболочки"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Версия расширения"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Неизвестно"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Что вы пробовали?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Автоматически обнаруженные ошибки"
-
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
@@ -515,3 +635,51 @@ msgstr "Cистемное расширение"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Вы удалили"
+
+#~ msgid "Bug report"
+#~ msgstr "Сообщение об ошибке"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Что случилось?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr ""
+#~ "Расширения GNOME Shell не обнаружили никаких ошибок с этим расширением."
+
+#~ msgid "Version information"
+#~ msgstr "Информация о версии"
+
+#~ msgid "Shell version"
+#~ msgstr "Версия оболочки"
+
+#~ msgid "Extension version"
+#~ msgstr "Версия расширения"
+
+#~ msgid "Unknown"
+#~ msgstr "Неизвестно"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Что вы пробовали?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Автоматически обнаруженные ошибки"
+
+#~ msgid "Other Options"
+#~ msgstr "Другие параметры"
+
+#~ msgid ""
+#~ "This website is currently undergoing a redesign, which includes more "
+#~ "settings for accounts. We appreciate your patience while work continues."
+#~ msgstr ""
+#~ "В настоящее время этот веб-сайт проходит редизайн, который включает в "
+#~ "себя добавление дополнительных настроек для учётных записей. Пожалуйста, "
+#~ "наберитесь терпение, пока продолжается эта работа."
+
+#, python-format
+#~ msgid ""
+#~ "If you require your e-mail address to be changed, please <a "
+#~ "href=\"%(url)s\">open an issue</a> in the project repository."
+#~ msgstr ""
+#~ "Если вам требуется изменить адрес электронной почты, пожалуйста, <a "
+#~ "href=\"%(url)s\">создайте сообщение о проблеме</a> в репозитории проекта."
