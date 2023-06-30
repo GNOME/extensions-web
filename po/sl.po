@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2023-06-22 16:37+0000\n"
-"PO-Revision-Date: 2023-06-30 17:58+0200\n"
+"PO-Revision-Date: 2023-06-30 18:03+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -48,7 +48,7 @@ msgstr "Trenutno geslo"
 
 #: sweettooth/auth/forms.py:175 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
-msgstr ""
+msgstr "Za preklic odstranitve računa vam ni treba navesti gesla"
 
 #: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
 msgid "Username or email"
@@ -94,6 +94,8 @@ msgid ""
 "You account is scheduled for removal. You can cancel account removal in 7 "
 "days."
 msgstr ""
+"Vaš račun je predviden za odstranitev. Odstranitev računa lahko prekličete v "
+"sedmih dneh."
 
 #: sweettooth/auth/templates/profile/account-removal.html:9
 #: extensions-web-domain-django:1
@@ -125,7 +127,7 @@ msgstr "Spremenite geslo"
 #: extensions-web-domain-django:1
 #, python-format
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
-msgstr ""
+msgstr "Vaš račun bo odstranjen po %(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -200,6 +202,8 @@ msgstr "Podatki profila so shranjeni"
 #: sweettooth/auth/views.py:237 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
+"Na novi naslov vam pošljemo potrditveno e-sporočilo. Preverite svoj poštni "
+"predal."
 
 #: sweettooth/auth/views.py:255 extensions-web-domain-django:1
 msgid "Password is wrong"
@@ -231,7 +235,7 @@ msgstr "Razširitve"
 
 #: sweettooth/extensions/models.py:133 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
-msgstr ""
+msgstr "Ključ `shell-version` morate definirati v metadata.json"
 
 #: sweettooth/extensions/models.py:187 extensions-web-domain-django:1
 #, python-format
@@ -241,17 +245,17 @@ msgstr "Nepodprta vrsta donacije: %s"
 #: sweettooth/extensions/models.py:191 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
-msgstr ""
+msgstr "Za vrsto donacije »%s« ne morete določiti več kot treh vrednosti"
 
 #: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
-msgstr ""
+msgstr "Za vrsto donacije »%s« morate navesti vsaj eno vrednost"
 
 #: sweettooth/extensions/models.py:198 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
-msgstr ""
+msgstr "Vrsta vrednosti mora biti niz ali seznam nizov za vrsto donacije »%s«"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
