@@ -10,6 +10,9 @@ define(['jquery', 'review'], function($) {
 
     $('#diff_version_select').on('click', (event) => {
         event.stopPropagation();
+    });
+
+    $('#diff_version_select').on('change', (event) => {
         $("#diff").reviewify(true);
-    })
+    });
 });

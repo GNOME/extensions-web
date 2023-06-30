@@ -13,7 +13,7 @@ import pygments.lexers
 import pygments.formatters
 
 from django.core.mail import EmailMessage, get_connection
-from django.http import HttpResponseForbidden, Http404
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, Http404
 from django.shortcuts import redirect, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -190,8 +190,15 @@ def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
 
 @ajax_view
 @model_view(models.ExtensionVersion)
-def ajax_get_file_list_view(request, version):
-    return get_file_changeset(*get_zipfiles(get_old_version(version), version))
+def ajax_get_file_list_view(request, version, old_version_pk: Optional[int] = None):
+    if old_version_pk:
+        old_version = get_object_or_404(models.ExtensionVersion, pk=old_version_pk)
+        if old_version.extension != version.extension:
+            return HttpResponseBadRequest()
+    else:
+        old_version = get_old_version(version)
+
+    return get_file_changeset(*get_zipfiles(old_version, version))
 
 
 @ajax_view
