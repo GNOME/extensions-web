@@ -8,7 +8,10 @@ workflow:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 stages:
-  - build and test
+  - migrations
+  - test
+  - security
+  - build
   - deploy
 
 .pip cache:
@@ -22,7 +25,6 @@ stages:
 .test defaults:
   extends:
     - .pip cache
-  stage: build and test
   image: python:$PYTHON_VERSION
   before_script:
     - pip install -r requirements.txt
@@ -30,10 +32,12 @@ stages:
     EGO_DEBUG: 1
     EGO_SECRET_KEY: .
     EGO_OPENSEARCH_ADDRESS: opensearch:9200
+  needs: []
 
 test:
   extends:
     - .test defaults
+  stage: test
   services:
     - name: docker.io/opensearchproject/opensearch:$OPENSEARCH_VERSION
       alias: opensearch
@@ -59,11 +63,12 @@ test:
 check migrations:
   extends:
     - .test defaults
+  stage: migrations
   script:
     - python manage.py makemigrations --check
 
 security (trivy):
-  stage: build and test
+  stage: security
   image:
     name: aquasec/trivy
     entrypoint: [""]
@@ -82,11 +87,12 @@ security (trivy):
     TRIVY_SCANNERS: vuln,config
     # This is single-run job so we do not care of k8s recommendations
     TRIVY_SKIP_FILES: openshift/jobs/reindex-extensions.yml
+  needs: []
 
 security (safety):
   extends:
     - .pip cache
-  stage: build and test
+  stage: security
   image:
     name: python:$PYTHON_VERSION
   before_script:
@@ -95,6 +101,7 @@ security (safety):
     - safety check -r requirements.txt
     - safety check -r requirements.ego.txt
   allow_failure: true
+  needs: []
 
 .build image:
   image: quay.io/gnome_infrastructure/buildah:latest
@@ -108,7 +115,8 @@ security (safety):
 buildah:
   extends:
     - .build image
-  stage: build and test
+  stage: build
+  needs: []
 
 deploy:
   extends:
