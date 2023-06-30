@@ -1,5 +1,5 @@
 
-from django.urls import re_path
+from django.urls import path, re_path
 from django.views.generic.list import ListView
 
 from sweettooth.extensions.models import ExtensionVersion
@@ -12,7 +12,12 @@ urlpatterns = [
         name='review-list'),
     re_path(r'^ajax/get-file/(?P<pk>\d+)', views.ajax_get_file_view, name='review-ajax-files'),
     re_path(r'^ajax/get-file-list/(?P<pk>\d+)', views.ajax_get_file_list_view, name='review-ajax-file-list'),
-    re_path(r'^ajax/get-file-diff/(?P<pk>\d+)', views.ajax_get_file_diff_view, name='review-ajax-file-diff'),
+    path(r'ajax/get-file-diff/<int:pk>', views.ajax_get_file_diff_view, name='review-ajax-file-diff'),
+    path(
+        'ajax/get-file-diff/<int:pk>/<int:old_version_pk>',
+        views.ajax_get_file_diff_view,
+        name='review-ajax-file-diff-against'
+    ),
     re_path(r'^submit/(?P<pk>\d+)', views.submit_review_view, name='review-submit'),
 
     re_path(r'^download/(?P<pk>\d+)\.shell-extension.zip$',

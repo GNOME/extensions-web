@@ -7,4 +7,9 @@ define(['jquery', 'review'], function($) {
         $("#files").reviewify(false);
         $("#diff").reviewify(true);
     });
+
+    $('#diff_version_select').on('click', (event) => {
+        event.stopPropagation();
+        $("#diff").reviewify(true);
+    })
 });

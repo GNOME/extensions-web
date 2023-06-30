@@ -6,20 +6,23 @@ from django.utils.safestring import mark_safe
 import functools
 import json
 
+
 def model_view(model):
     def inner(view):
         @functools.wraps(view)
-        def new_view(request, pk, **kw):
+        def new_view(request, pk, *args, **kwargs):
             obj = get_object_or_404(model, pk=pk)
-            return view(request, obj, **kw)
+            return view(request, obj, *args, **kwargs)
         return new_view
     return inner
+
 
 def dump_json(response, pretty=False):
     if pretty:
         return json.dumps(response, indent=2, sort_keys=True)
     else:
         return json.dumps(response)
+
 
 def ajax_view(view):
     @functools.wraps(view)

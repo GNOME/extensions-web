@@ -4,7 +4,7 @@ from collections import Counter
 from contextlib import ExitStack
 import itertools
 import os.path
-from typing import IO, Sequence
+from typing import IO, Optional, Sequence
 from zipfile import ZipFile
 
 import pygments
@@ -109,11 +109,22 @@ def get_old_version(version):
     # that actually has a source field. Sometimes the upload validation
     # fails, so work around it here.
     try:
-        old_version = extension.versions.filter(version__lt=version.version).exclude(source="").latest()
+        old_version = (
+            extension.versions
+                .filter(version__lt=version.version, status__in=(models.STATUS_ACTIVE, models.STATUS_INACTIVE))
+                .exclude(source="").latest()
+        )
     except models.ExtensionVersion.DoesNotExist:
-        # There's nothing before us that has a source, or this is the
-        # first version.
-        return None
+        try:
+            old_version = (
+                extension.versions
+                    .filter(version__lt=version.version)
+                    .exclude(source="").earliest()
+            )
+        except models.ExtensionVersion.DoesNotExist:
+            # There's nothing before us that has a source, or this is the
+            # first version.
+            return None
 
     return old_version
 
@@ -185,17 +196,24 @@ def ajax_get_file_list_view(request, version):
 
 @ajax_view
 @model_view(models.ExtensionVersion)
-def ajax_get_file_diff_view(request, version):
+def ajax_get_file_diff_view(request, version: models.ExtensionVersion, old_version_pk: Optional[int] = None):
     filename = request.GET['filename']
 
-    file_base, file_extension = os.path.splitext(filename)
+    _, file_extension = os.path.splitext(filename)
     if file_extension in IMAGE_TYPES:
         return None
 
     if file_extension in BINARY_TYPES:
         return None
 
-    old_zipfile, new_zipfile = get_zipfiles(get_old_version(version), version)
+    if old_version_pk:
+        old_version = get_object_or_404(models.ExtensionVersion, pk=old_version_pk)
+        if old_version.extension != version.extension:
+            return None
+    else:
+        old_version = get_old_version(version)
+
+    old_zipfile, new_zipfile = get_zipfiles(old_version, version)
     oldlines, newlines = grab_lines(old_zipfile, filename), grab_lines(new_zipfile, filename)
 
     chunks = list(get_chunks(oldlines, newlines))
@@ -277,6 +295,7 @@ def submit_review_view(request, obj):
 
     return redirect('review-list')
 
+
 @model_view(models.ExtensionVersion)
 def review_version_view(request, obj):
     extension, version = obj.extension, obj
@@ -287,7 +306,7 @@ def review_version_view(request, obj):
     # Other reviews on the same version.
     previous_reviews = version.reviews.all()
 
-    has_old_version = get_old_version(version) is not None
+    compare_version = get_old_version(version)
     can_approve = can_approve_extension(request.user, extension)
     can_review = can_review_extension(request.user, extension)
 
@@ -295,7 +314,7 @@ def review_version_view(request, obj):
                    version=version,
                    all_versions=all_versions,
                    previous_reviews=previous_reviews,
-                   has_old_version=has_old_version,
+                   compare_version=compare_version,
                    can_approve=can_approve,
                    can_review=can_review)
 
