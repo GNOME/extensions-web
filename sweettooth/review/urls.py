@@ -11,7 +11,8 @@ urlpatterns = [
                                 context_object_name='version_list'),
         name='review-list'),
     re_path(r'^ajax/get-file/(?P<pk>\d+)', views.ajax_get_file_view, name='review-ajax-files'),
-    re_path(r'^ajax/get-file-list/(?P<pk>\d+)', views.ajax_get_file_list_view, name='review-ajax-file-list'),
+    path('ajax/get-file-list/<int:pk>', views.ajax_get_file_list_view, name='review-ajax-file-list'),
+    path('ajax/get-file-list/<int:pk>/<int:old_version_pk>', views.ajax_get_file_list_view),
     path(r'ajax/get-file-diff/<int:pk>', views.ajax_get_file_diff_view, name='review-ajax-file-diff'),
     path(
         'ajax/get-file-diff/<int:pk>/<int:old_version_pk>',

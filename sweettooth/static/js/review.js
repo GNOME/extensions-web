@@ -28,18 +28,22 @@ define(['jquery', 'diff'], function($, diff) {
         return $table;
     }
 
-    function createDiffView(filename, pk) {
+    function compareVersionUrlPart() {
         let compare_version_pk = $('#diff_version_select').val();
         let compare_version_url = '';
         if(compare_version_pk) {
             compare_version_url = `/${compare_version_pk}`
         }
 
+        return compare_version_url;
+    }
+
+    function createDiffView(filename, pk) {
         return $.ajax({
             type: 'GET',
             dataType: 'json',
             data: { filename: filename },
-            url: `${REVIEW_URL_BASE}/get-file-diff/${pk}${compare_version_url}`
+            url: `${REVIEW_URL_BASE}/get-file-diff/${pk}${compareVersionUrlPart()}`
         }).pipe(function(data) {
             return diff.buildDiffTable(data.chunks, data.oldlines, data.newlines);
         });
@@ -72,7 +76,7 @@ define(['jquery', 'diff'], function($, diff) {
             var req = $.ajax({
                 type: 'GET',
                 dataType: 'json',
-                url: REVIEW_URL_BASE + '/get-file-list/' + pk,
+                url: `${REVIEW_URL_BASE}/get-file-list/${pk}${compareVersionUrlPart()}`,
             });
 
             function showTable(filename, $file, $selector) {
