@@ -7,6 +7,16 @@ from zlib import error as ZlibError
 class Command(BaseCommand):
     help = "Checks consistency of extension's archives."
 
+    def _version_message(self, version: ExtensionVersion, message: str, error: bool = False):
+        channel = self.stdout
+        if error:
+            channel = self.stderr
+
+        channel.write(f"[{version.pk}][{version.extension.name}: {version.version}] {message}")
+
+    def _version_error(self, version: ExtensionVersion, message: str):
+        return self._version_message(version, message, True)
+
     def handle(self, *args, **options):
         for version in ExtensionVersion.objects.exclude(status=STATUS_REJECTED):
             badversion = True
@@ -15,22 +25,22 @@ class Command(BaseCommand):
                     badfile = zip.testzip()
 
                     if badfile:
-                        self.stderr.write("[%s: %d] Bad entry %s in zip file" % (version.extension.name, version.version, badfile))
+                        self._version_error(version, f"Bad entry {badfile} in zip file")
                     else:
                         badversion = False
 
             except IOError as e:
-                self.stderr.write("[%s: %d] Unable to find zip file: %s" % (version.extension.name, version.version, str(e)))
+                self._version_error(version, f"Unable to find zip file: {str(e)}")
             except BadZipfile:
-                self.stderr.write("[%s: %d] Bad zip file: %s" % (version.extension.name, version.version, version.source.name))
+                self._version_error(version, f"Bad zip file: {version.source.name}")
             except ZlibError as e:
-                self.stderr.write("[%s: %d] Zlib error: %s" % (version.extension.name, version.version, str(e)))
+                self._version_error(version, f"Zlib error: {str(e)}")
 
             if badversion:
                 if version.extension.versions.filter(version__gt=version.version).filter(status=STATUS_ACTIVE).exists():
-                    self.stdout.write("[%s: %d] Rejecting" % (version.extension.name, version.version))
+                    self._version_message(version, "Rejecting")
                 else:
-                    self.stdout.write("[%s: %d] Not rejecting: no newer active versions" % (version.extension.name, version.version))
+                    self._version_message(version, "Not rejecting: no newer active versions")
 
             self.stdout.flush()
 
