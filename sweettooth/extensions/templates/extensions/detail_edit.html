@@ -12,49 +12,6 @@
   {% endif %}
 {% endblock %}
 
-{% block extra %}
-  <h2 class="expandy_header expanded"> Versions </h2>
-  <table>
-    <thead> <tr>
-        <th> Version </th> <th> Status </th> <th> Shell Versions </th> <th> Actions </th>
-    </tr> </thead>
-    <tbody>
-      {% for version in all_versions %}
-      <tr data-pk="{{ version.pk }}">
-        <td> {{ version.version }} </td>
-        <td class="mvs">
-          {% include "extensions/multiversion_status.html" %}
-        </td>
-        <td>
-          {% for shell_version in version.shell_versions.all %}
-          <code class="extension_shell_versions">{{ shell_version.version_string }}</code>
-          {% endfor %}
-        </td>
-        {% if version.is_approved %}
-        <td class="extension_status_toggle{% if version.is_active %} visible{% endif %}">
-          <a href="{% url 'extensions-ajax-set-status-inactive' %}">Inactivate</a>
-        </td>
-        <td class="extension_status_toggle{% if version.is_inactive %} visible{% endif %}">
-          <a href="{% url 'extensions-ajax-set-status-active' %}">Activate</a>
-        </td>
-        {% endif %}
-
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <h2 class="expandy_header expanded"> Shell Versions </h2>
-  <div>
-    <p> Shell versions mapped to their associated extension versions </p>
-    <table id="extension_shell_versions_info">
-      <thead> <th> Shell Version </th> <th> Extension Version </th> </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-{% endblock %}
-
 {% block screenshot %}
     <div class="screenshot col-xs-12 col-sm-5 col-md-4 col-lg-3 no-left-padding">
         <a href="{{ extension.screenshot.url }}"><img src="{{ extension.screenshot.url }}"/></a>
