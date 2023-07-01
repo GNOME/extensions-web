@@ -464,7 +464,28 @@ def extension_submitted(sender, request, version, **kwargs):
     else:
         send_email_submitted(request, version)
 
+        unreviewed_versions = (
+            version.extension.versions
+                .filter(
+                    version__lt=version.version,
+                    status__in=(models.STATUS_UNREVIEWED, models.STATUS_WAITING)
+                )
+        )
+
+        for _version in unreviewed_versions:
+            CodeReview.objects.create(
+                version=_version,
+                reviewer=request.user,
+                comments=f"Auto-rejected because of new version {version.version} was uploaded",
+                new_status=models.STATUS_REJECTED,
+                auto=True
+            )
+            _version.status = models.STATUS_REJECTED
+            _version.save()
+
+
 models.submitted_for_review.connect(extension_submitted)
+
 
 def send_email_on_reviewed(sender, request, version, review, **kwargs):
     extension = version.extension
