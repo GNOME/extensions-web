@@ -1,9 +1,11 @@
 
 from django.contrib.auth import get_user_model
 
+
 class BasicUserTestCase(object):
     def setUp(self):
         super().setUp()
+
         self.username = 'TestUser1'
         self.email = 'non-existant@non-existant.tld'
         self.password = 'a random password'
