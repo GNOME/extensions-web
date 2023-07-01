@@ -331,8 +331,9 @@ def ajax_query_view(request):
 @model_view(models.Extension)
 def extension_view(request, obj, **kwargs):
     extension, versions = obj, obj.visible_versions
+    can_edit = extension.user_can_edit(request.user)
 
-    if versions.count() == 0 and not extension.user_can_edit(request.user):
+    if versions.count() == 0 and not can_edit:
         raise Http404()
 
     # Redirect if we don't match the slug.
@@ -344,7 +345,7 @@ def extension_view(request, obj, **kwargs):
         return redirect(extension)
 
     # If the user can edit the model, let him do so.
-    if extension.user_can_edit(request.user):
+    if can_edit:
         template_name = "extensions/detail_edit.html"
     else:
         template_name = "extensions/detail.html"
@@ -358,7 +359,9 @@ def extension_view(request, obj, **kwargs):
                    visible_versions=json.dumps(extension.visible_shell_version_array),
                    is_visible = extension.latest_version is not None,
                    next = extension.get_absolute_url(),
-                   donation_urls = donation_urls)
+                   donation_urls = donation_urls,
+                   can_edit=can_edit,
+                   show_versions=can_edit or request.user.has_perm("review.can-review-extensions"))
     return render(request, template_name, context)
 
 @require_POST
