@@ -3,6 +3,7 @@ import os.path
 import json
 import tempfile
 from io import BytesIO
+from typing import Any, Optional
 from uuid import uuid4
 from zipfile import ZipFile
 
@@ -17,14 +18,26 @@ from django.test.utils import override_settings
 
 testdata_dir = os.path.join(os.path.dirname(__file__), 'testdata')
 
-def get_test_zipfile(testname):
-    original = open(os.path.join(testdata_dir, testname, testname + ".zip"), 'rb')
-    new_temp = tempfile.NamedTemporaryFile(suffix=testname + ".zip.temp")
-    new_temp.write(original.read())
-    new_temp.seek(0)
-    original.close()
 
-    return new_temp
+def get_test_zipfile(testname: str, extra_metadata: dict[str, Any] = {}):
+    temp_fp = tempfile.NamedTemporaryFile(suffix=f"{testname}.zip.temp")
+
+    with ZipFile(os.path.join(testdata_dir, testname, testname + ".zip"), "r") as zipfile_in, ZipFile(temp_fp, "w") as zipfile:
+        for info in zipfile_in.infolist():
+            if info.filename == "metadata.json" and extra_metadata:
+                with zipfile_in.open('metadata.json', 'r') as metadata_fp:
+                    metadata = json.load(metadata_fp)
+
+                zipfile.writestr(info, json.dumps(metadata | extra_metadata).encode('utf-8'))
+                continue
+
+            zipfile.writestr(info, zipfile_in.read(info))
+
+    temp_fp.flush()
+    temp_fp.seek(0)
+
+    return temp_fp
+
 
 class UUIDPolicyTest(TestCase):
     def test_uuid_policy(self):
@@ -223,8 +236,8 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
 
 
 class UploadTest(BasicUserTestCase, TransactionTestCase):
-    def upload_file(self, zipfile):
-        with get_test_zipfile(zipfile) as f:
+    def upload_file(self, zipfile: str, extra_metadata: dict[str, Any] = {}):
+        with get_test_zipfile(zipfile, extra_metadata) as f:
             return self.client.post(reverse('extensions-upload-file'),
                                     dict(source=f,
                                          gplv2_compliant=True,
@@ -313,6 +326,29 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
             self.assertContains(response, models.Extension.MESSAGE_SHELL_VERSION_MISSING)
             with self.assertRaises(models.Extension.DoesNotExist):
                 models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+    def test_session_modes_saved(self):
+        uuid = 'session-mode@extension.local'
+        session_modes = [
+            models.SessionMode.SessionModes.USER.value,
+            models.SessionMode.SessionModes.UNLOCK_DIALOG.value,
+        ]
+
+        for mode in models.SessionMode.SessionModes.values:
+            models.SessionMode.objects.create(mode=mode)
+
+        self.upload_file('SimpleExtension', {
+            'uuid': uuid,
+            'session-modes': session_modes,
+        })
+
+        extension = models.Extension.objects.get(uuid=uuid)
+        self.assertEqual(extension.versions.count(), 1)
+
+        with extension.versions.first().get_zipfile('r') as zipfile, zipfile.open('metadata.json', 'r') as version_metadata_fp:
+            version_metadata = json.load(version_metadata_fp)
+            self.assertIn('session-modes', version_metadata)
+            self.assertCountEqual(session_modes, version_metadata['session-modes'])
 
 
 class ExtensionVersionTest(BasicUserTestCase, TestCase):

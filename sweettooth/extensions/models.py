@@ -485,6 +485,7 @@ class ExtensionVersion(models.Model):
             version     = self.version,
         )
 
+        fields['session-modes'] = [m.mode for m in self.session_modes.all()]
         fields['shell-version'] = [sv.version_string for sv in self.shell_versions.all()]
 
         data.update(fields)
