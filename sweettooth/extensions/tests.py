@@ -350,6 +350,23 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
             self.assertIn('session-modes', version_metadata)
             self.assertCountEqual(session_modes, version_metadata['session-modes'])
 
+    def test_session_modes_ommited(self):
+        uuid = 'session-mode-ommited@extension.local'
+
+        for mode in models.SessionMode.SessionModes.values:
+            models.SessionMode.objects.create(mode=mode)
+
+        self.upload_file('SimpleExtension', {
+            'uuid': uuid,
+        })
+
+        extension = models.Extension.objects.get(uuid=uuid)
+        self.assertEqual(extension.versions.count(), 1)
+
+        with extension.versions.first().get_zipfile('r') as zipfile, zipfile.open('metadata.json', 'r') as version_metadata_fp:
+            version_metadata = json.load(version_metadata_fp)
+            self.assertNotIn('session-modes', version_metadata)
+
 
 class ExtensionVersionTest(BasicUserTestCase, TestCase):
     def test_single_version(self):
