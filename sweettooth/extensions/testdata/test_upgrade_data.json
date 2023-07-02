@@ -1,6 +1,15 @@
 [
   {
     "pk": 1,
+    "model": "users.User",
+    "fields": {
+      "username": "Test",
+      "email": "test@localhost.local",
+      "password": "test@localhost.local"
+    }
+  },
+  {
+    "pk": 1,
     "model": "extensions.extension",
     "fields": {
       "description": "Upgrade me, please",
@@ -135,15 +144,6 @@
         1,
         2
       ]
-    }
-  },
-  {
-    "pk": 1,
-    "model": "users.User",
-    "fields": {
-      "username": "Test",
-      "email": "test@localhost.local",
-      "password": "test@localhost.local"
     }
   }
 ]
