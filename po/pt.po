@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-06-22 16:37+0000\n"
-"PO-Revision-Date: 2023-06-23 17:18+0100\n"
+"POT-Creation-Date: 2023-07-02 11:21+0000\n"
+"PO-Revision-Date: 2023-07-02 16:30+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <>\n"
 "Language: pt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -124,7 +124,6 @@ msgstr "Alterar a sua palavra-passe"
 #: sweettooth/auth/templates/profile/settings.html:47
 #: extensions-web-domain-django:1
 #, python-format
-#| msgid "Your account is sheduled for removal after %(schedule_delete_after)s"
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr ""
 "A sua conta está programada para ser removida após %(schedule_delete_after)s"
@@ -477,7 +476,7 @@ msgstr "Publicar comentário"
 msgid "Edit your comment"
 msgstr "Edite o seu comentário"
 
-#: sweettooth/review/templates/review/review.html:63
+#: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
@@ -486,7 +485,7 @@ msgstr ""
 "Pode carregar a próxima versão através do mesmo <a href='https://extensions."
 "gnome.org/upload/'>formulário</a> que publicou esta versão."
 
-#: sweettooth/review/templates/review/review.html:66
+#: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
 msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
@@ -494,7 +493,7 @@ msgid ""
 msgstr ""
 "Pode alterar o ícone de extensão clicando no ícone na sua página de extensão."
 
-#: sweettooth/review/templates/review/review.html:69
+#: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
@@ -503,7 +502,7 @@ msgstr ""
 "Caso deseje desativar uma versão aprovada, clique em inativar ligação na sua "
 "página de extensão."
 
-#: sweettooth/review/templates/review/review.html:72
+#: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
 "You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
@@ -512,7 +511,7 @@ msgstr ""
 "Pode encontrar guias para programadores em <a href='https://gjs.guide/"
 "extensions/'>gjs.guide</a>."
 
-#: sweettooth/review/templates/review/review.html:75
+#: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
 msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
@@ -586,7 +585,7 @@ msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
 "Extensões da Interface GNOME não pode listar suas extensões instaladas."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Compatível com"
 
@@ -606,7 +605,11 @@ msgstr "Transferências"
 msgid "Popularity"
 msgstr "Popularidade"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Relevância"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Ordenar por"
 
