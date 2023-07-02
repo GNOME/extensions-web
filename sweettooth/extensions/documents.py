@@ -35,7 +35,6 @@ class ExtensionDocument(Document):
 
     name = fields.TextField(
         fields={'raw': fields.KeywordField()},
-        analyzer='keyword',
     )
 
     shell_versions = fields.TextField(multi=True)
