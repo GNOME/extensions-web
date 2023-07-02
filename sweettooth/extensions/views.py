@@ -190,6 +190,7 @@ def shell_update(request):
 
     return operations
 
+
 def ajax_query_params_query(request, versions, n_per_page):
     version_qs = models.ExtensionVersion.objects.visible()
 
@@ -217,6 +218,9 @@ def ajax_query_params_query(request, versions, n_per_page):
         queryset = queryset.filter(uuid__in=uuids)
 
     sort = request.GET.get('sort', 'popularity')
+    if sort == 'relevance':
+        sort = 'popularity'
+
     if sort not in ('created', 'downloads', 'popularity', 'name'):
         raise Http404()
 
@@ -277,17 +281,15 @@ def ajax_query_search_query(request, versions: set[models.ShellVersion], n_per_p
     if versions:
         queryset = queryset.filter('terms', shell_versions=[str(version) for version in versions])
 
-    order_by = request.GET.get('sort')
+    order_by = request.GET.get('sort', 'relevance')
 
-    if order_by not in ordering_fields:
-        order_by = 'popularity'
+    if order_by in ordering_fields:
+        if order_by in ('name',):
+            order_by = f"{order_by}.raw"
+        else:
+            order_by = f"-{order_by}"
 
-    if order_by in ('name',):
-        order_by = f"{order_by}.raw"
-    else:
-        order_by = f"-{order_by}"
-
-    queryset = queryset.sort(order_by)
+        queryset = queryset.sort(order_by)
 
     paginator = Paginator(queryset.to_queryset(keep_order=True), page_size)
 
