@@ -276,6 +276,13 @@ def ajax_query_search_query(request, versions: set[models.ShellVersion], n_per_p
     queryset = ExtensionDocument.search().extra(size=5000).query(
         "multi_match",
         query=query,
+        type='best_fields',
+        fields=[
+            'uuid',
+            'name^2',
+            'description',
+            'creator',
+        ],
     )
 
     if versions:
