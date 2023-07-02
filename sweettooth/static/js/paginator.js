@@ -63,7 +63,16 @@ define(['jquery', 'hashParamUtils', 'paginatorUtils', 'dbus!_',
 			if ($('#search_input').val())
 			{
 				queryParams.search = $('#search_input').val();
+                if (!queryParams.sort) {
+                    hashParamUtils.setHashParam('sort', 'relevance');
+                }
 			}
+            else
+            {
+                if (queryParams.sort == 'relevance') {
+                    hashParamUtils.setHashParam('sort');
+                }
+            }
 
 			currentRequest = $.ajax({
 				url: '/extension-query/',

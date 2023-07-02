@@ -40,7 +40,8 @@ define(['jquery', 'dbus!_', 'hashParamUtils', 'modal'],
 			'name': gettext("Name"),
 			'created': gettext("Recent"),
 			'downloads': gettext("Downloads"),
-			'popularity': gettext("Popularity")
+			'popularity': gettext("Popularity"),
+			'relevance': gettext("Relevance"),
 		};
 
 		$.fn.fsUIify = function () {
