@@ -36,7 +36,7 @@ class ExtensionDocument(Document):
     name = fields.TextField(
         fields={'raw': fields.KeywordField()},
     )
-
+    creator = fields.TextField()
     shell_versions = fields.TextField(multi=True)
 
     def get_queryset(self, *args, **kwargs):
@@ -45,7 +45,7 @@ class ExtensionDocument(Document):
         )
 
     def prepare_creator(self, extension):
-        return extension.creator.username
+        return extension.creator.get_full_name()
 
     def prepare_shell_versions(self, extension):
         return list(extension.visible_shell_version_map.keys())
