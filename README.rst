@@ -18,7 +18,7 @@ Requirements
 
 
 System Requirements:
-  * `python`_ 3.9+
+  * `python`_ 3.10+
   * `OpenSearch`_
 
 Python Requirements:
