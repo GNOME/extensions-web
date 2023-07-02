@@ -276,6 +276,13 @@ def ajax_query_search_query(request, versions: set[models.ShellVersion], n_per_p
     queryset = ExtensionDocument.search().extra(size=5000).query(
         "multi_match",
         query=query,
+        type='best_fields',
+        fields=[
+            'uuid',
+            'name^2',
+            'description',
+            'creator',
+        ],
     )
 
     if versions:
@@ -458,7 +465,7 @@ def ajax_upload_icon_view(request, extension):
 def ajax_details(extension, version=None):
     details = dict(uuid = extension.uuid,
                    name = extension.name,
-                   creator = extension.creator.username,
+                   creator = extension.creator.get_full_name(),
                    creator_url = reverse('auth-profile', kwargs=dict(user=extension.creator.username)),
                    pk = extension.pk,
                    description = extension.description,

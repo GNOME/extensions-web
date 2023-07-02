@@ -8,6 +8,7 @@
     (at your option) any later version.
 """
 
+from django.contrib.auth import get_user_model
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 
@@ -15,6 +16,7 @@ from django_opensearch_dsl import Document, fields
 from django_opensearch_dsl.registries import registry
 
 from .models import Extension, ExtensionVersion
+
 
 
 @registry.register_document
@@ -35,9 +37,8 @@ class ExtensionDocument(Document):
 
     name = fields.TextField(
         fields={'raw': fields.KeywordField()},
-        analyzer='keyword',
     )
-
+    creator = fields.TextField()
     shell_versions = fields.TextField(multi=True)
 
     def get_queryset(self, *args, **kwargs):
@@ -46,7 +47,7 @@ class ExtensionDocument(Document):
         )
 
     def prepare_creator(self, extension):
-        return extension.creator.username
+        return extension.creator.get_full_name()
 
     def prepare_shell_versions(self, extension):
         return list(extension.visible_shell_version_map.keys())
@@ -75,3 +76,10 @@ def index_on_version_save(instance, **kwargs):
                 errors[0].get('delete', {}).get('result', '') != 'not_found'
             ):
                 raise ex
+
+
+@receiver(post_delete, sender=get_user_model())
+@receiver(post_save, sender=get_user_model())
+def index_on_user_save(instance, **kwargs):
+    extensions = Extension.objects.visible().filter(creator=instance)
+    ExtensionDocument().update(extensions, action='index')

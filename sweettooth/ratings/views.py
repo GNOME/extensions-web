@@ -1,6 +1,3 @@
-
-import json
-
 import django_comments as comments
 from django.contrib.messages import info
 from django.http import HttpResponseForbidden, HttpResponseNotFound
@@ -25,13 +22,13 @@ def comment_details(request, comment):
     extension = comment.content_object
     gravatar = gravatar_url(request, comment.email)
     is_extension_creator = (comment.user == extension.creator)
-    username = comment.user.username if comment.user else "nobody"
+    display_name = comment.user.get_full_name() if comment.user else "nobody"
 
     details = dict(gravatar = gravatar,
                    is_extension_creator = is_extension_creator,
                    comment = linebreaks(comment.comment, autoescape=True),
-                   author = dict(username=username,
-                                 url=reverse('auth-profile', kwargs=dict(user=username))),
+                   author = dict(username=display_name,
+                                 url=reverse('auth-profile', kwargs=dict(user=comment.user.username)) if comment.user else None),
                    date = dict(timestamp = comment.submit_date.isoformat(),
                                standard = format_date(comment.submit_date, 'F j, Y')))
 
@@ -51,7 +48,7 @@ def get_comments(request):
     if not extension.allow_comments:
         return HttpResponseForbidden()
 
-    show_all = json.loads(request.GET.get('all', 'false'))
+    show_all = request.GET.get('all') == 'true'
 
     comment_list = comments.get_model().objects.for_model(extension)
     comment_list = comment_list.order_by('-submit_date')
