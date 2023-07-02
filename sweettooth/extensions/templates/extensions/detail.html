@@ -16,7 +16,7 @@
         {% endblock icon %}
         <h3 class="extension-name" id="extension_name">{{ extension.name }}</h3>
         {% endspaceless %}
-        <span class="author">by <a href="{% url 'auth-profile' user=extension.creator.username %}">{{ extension.creator }}</a></span>
+        <span class="author">by <a href="{% url 'auth-profile' user=extension.creator.username %}">{{ extension.creator.get_full_name }}</a></span>
         <span class="divider"> | </span>
         <span class="downloads" title="{% trans 'Number of Downloads' %}"> {% blocktrans count downloads=extension.downloads %}{{ downloads }} download{% plural %}{{ downloads }} downloads{% endblocktrans %}</span>
       </div>

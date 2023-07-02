@@ -465,7 +465,7 @@ def ajax_upload_icon_view(request, extension):
 def ajax_details(extension, version=None):
     details = dict(uuid = extension.uuid,
                    name = extension.name,
-                   creator = extension.creator.username,
+                   creator = extension.creator.get_full_name(),
                    creator_url = reverse('auth-profile', kwargs=dict(user=extension.creator.username)),
                    pk = extension.pk,
                    description = extension.description,

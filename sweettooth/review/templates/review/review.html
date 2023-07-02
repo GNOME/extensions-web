@@ -131,7 +131,7 @@
   {% for review in previous_reviews %}
   <div class="review">
     {% if review.reviewer %}
-    <a class="review-author" href="{% url 'auth-profile' user=review.reviewer.username %}">{{ review.reviewer }}</a>
+    <a class="review-author" href="{% url 'auth-profile' user=review.reviewer.username %}">{{ review.reviewer.get_full_name }}</a>
     {% else %}
     Ghost
     {% endif %}
