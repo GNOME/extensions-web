@@ -1,6 +1,3 @@
-
-import json
-
 import django_comments as comments
 from django.contrib.messages import info
 from django.http import HttpResponseForbidden, HttpResponseNotFound
@@ -51,7 +48,7 @@ def get_comments(request):
     if not extension.allow_comments:
         return HttpResponseForbidden()
 
-    show_all = json.loads(request.GET.get('all', 'false'))
+    show_all = request.GET.get('all') == 'true'
 
     comment_list = comments.get_model().objects.for_model(extension)
     comment_list = comment_list.order_by('-submit_date')
