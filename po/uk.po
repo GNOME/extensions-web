@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-06-22 16:37+0000\n"
-"PO-Revision-Date: 2023-06-25 16:21+0300\n"
+"POT-Creation-Date: 2023-07-02 11:21+0000\n"
+"PO-Revision-Date: 2023-07-02 21:40+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -23,8 +23,8 @@ msgstr ""
 #: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr ""
-"Ви можете змінювати вашу адресу електронної пошти не частіше, ніж раз на 7"
-" днів"
+"Ви можете змінювати вашу адресу електронної пошти не частіше, ніж раз на 7 "
+"днів"
 
 #: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
 msgid "Delete my account"
@@ -124,7 +124,6 @@ msgstr "Змінити ваш пароль"
 #: sweettooth/auth/templates/profile/settings.html:47
 #: extensions-web-domain-django:1
 #, python-format
-#| msgid "Your account is sheduled for removal after %(schedule_delete_after)s"
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr ""
 "Заплановано вилучення вашого облікового запису за %(schedule_delete_after)s"
@@ -190,8 +189,8 @@ msgstr ""
 #: sweettooth/auth/views.py:102 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
 msgstr ""
-"Строк дії вашого посилання щодо підтвердження вичерпано. Будь ласка,"
-" попросіть про нове."
+"Строк дії вашого посилання щодо підтвердження вичерпано. Будь ласка, "
+"попросіть про нове."
 
 #: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Wrong request"
@@ -205,8 +204,8 @@ msgstr "Дані профілю збережено"
 msgid ""
 "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
-"На вашу нову адресу надіслано повідомлення щодо підтвердження. Будь ласка,"
-" перевірте вашу теку «Вхідні»."
+"На вашу нову адресу надіслано повідомлення щодо підтвердження. Будь ласка, "
+"перевірте вашу теку «Вхідні»."
 
 #: sweettooth/auth/views.py:255 extensions-web-domain-django:1
 msgid "Password is wrong"
@@ -485,7 +484,7 @@ msgstr "Опублікувати коментар"
 msgid "Edit your comment"
 msgstr "Відредагуйте свій коментар"
 
-#: sweettooth/review/templates/review/review.html:63
+#: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
@@ -495,7 +494,7 @@ msgstr ""
 "extensions.gnome.org/upload/'>тієї самої форми</a>, яку використали для "
 "записування цієї."
 
-#: sweettooth/review/templates/review/review.html:66
+#: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
 msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
@@ -504,7 +503,7 @@ msgstr ""
 "Ви можете змінити піктограму розширення клацанням на піктограмі на вашій "
 "сторінці розширення."
 
-#: sweettooth/review/templates/review/review.html:69
+#: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
@@ -513,7 +512,7 @@ msgstr ""
 "Якщо ви хочете скасувати активацію затвердженої версії, натисніть посилання "
 "скасування активації на вашій сторінці розширення."
 
-#: sweettooth/review/templates/review/review.html:72
+#: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
 "You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
@@ -522,7 +521,7 @@ msgstr ""
 "Настанови щодо розробки можна знайти у <a href='https://gjs.guide/"
 "extensions/'>підручнику з gjs</a>."
 
-#: sweettooth/review/templates/review/review.html:75
+#: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
 msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
@@ -598,7 +597,7 @@ msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
 "GNOME Shell Extensions не вдається вивести список встановлених розширень."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Сумісне з"
 
@@ -618,7 +617,11 @@ msgstr "Завантаженням"
 msgid "Popularity"
 msgstr "Популярності"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Відповідність"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Сортувати по"
 

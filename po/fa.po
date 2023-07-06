@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-06-22 16:37+0000\n"
-"PO-Revision-Date: 2023-06-23 02:15+0330\n"
+"POT-Creation-Date: 2023-07-02 11:21+0000\n"
+"PO-Revision-Date: 2023-07-05 15:25+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -459,7 +459,7 @@ msgstr "فرستادن نظر"
 msgid "Edit your comment"
 msgstr "ویرایش نظرتان"
 
-#: sweettooth/review/templates/review/review.html:63 extensions-web-domain-django:1
+#: sweettooth/review/templates/review/review.html:73 extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
 "upload/'>same form</a> you've posted this version."
@@ -467,12 +467,12 @@ msgstr ""
 "می‌توانید نگارش بعدی را با <a href='https://extensions.gnome.org/upload/'>همین "
 "فرمی</a> که این نگاش را فرستادید بارگذارید."
 
-#: sweettooth/review/templates/review/review.html:66 extensions-web-domain-django:1
+#: sweettooth/review/templates/review/review.html:76 extensions-web-domain-django:1
 msgid ""
 "You can change the extension icon by clicking on the icon in your extension page."
 msgstr "می‌توانید نقشک افزونه را با زدن روی نقشک در صفحهٔ افزونه‌تان عوض کنید."
 
-#: sweettooth/review/templates/review/review.html:69 extensions-web-domain-django:1
+#: sweettooth/review/templates/review/review.html:79 extensions-web-domain-django:1
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link in "
 "your extension page."
@@ -480,7 +480,7 @@ msgstr ""
 "اگر می‌خواهید نگارشی تأیید شده را فیرفعّال کنید، پیوند غیرفعّال کردن را در صفحهٔ "
 "افزونه‌تان بزنید."
 
-#: sweettooth/review/templates/review/review.html:72 extensions-web-domain-django:1
+#: sweettooth/review/templates/review/review.html:82 extensions-web-domain-django:1
 msgid ""
 "You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
 "guide</a>."
@@ -488,7 +488,7 @@ msgstr ""
 "می‌توانید رهنمودهای توسعه‌دهنده را در <a href='https://gjs.guide/extensions/'>gjs."
 "guide</a> بیابید."
 
-#: sweettooth/review/templates/review/review.html:75 extensions-web-domain-django:1
+#: sweettooth/review/templates/review/review.html:85 extensions-web-domain-django:1
 msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
 "matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
@@ -558,7 +558,7 @@ msgstr ""
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr "افزونه‌های پوستهٔ گنو نمی‌تواند افزونه‌های نصب‌شده‌تان را فهرست کند."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "سازگار با"
 
@@ -578,7 +578,11 @@ msgstr "بارگیری‌ها"
 msgid "Popularity"
 msgstr "محبوبیت"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "ارتباط"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "چینش با"
 
