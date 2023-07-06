@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-06-18 19:06+0000\n"
-"PO-Revision-Date: 2023-06-19 11:48+0700\n"
+"POT-Creation-Date: 2023-07-02 11:21+0000\n"
+"PO-Revision-Date: 2023-07-06 11:49+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -19,31 +19,31 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: sweettooth/auth/forms.py:152 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Anda tidak dapat mengubah surel Anda lebih dari sekali setiap 7 hari"
 
-#: sweettooth/auth/forms.py:160 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Hapus akun saya"
 
-#: sweettooth/auth/forms.py:161 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Akun Anda akan dihapus dalam 7 hari"
 
-#: sweettooth/auth/forms.py:163 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "No"
 msgstr "Tidak"
 
-#: sweettooth/auth/forms.py:163 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Ya"
 
-#: sweettooth/auth/forms.py:167 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:174 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Kata sandi saat ini"
 
-#: sweettooth/auth/forms.py:168 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:175 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "Anda tidak perlu menentukan kata sandi untuk membatalkan penghapusan akun"
@@ -193,13 +193,13 @@ msgstr "Permintaan yang salah"
 msgid "Profile data saved"
 msgstr "Data profil disimpan"
 
-#: sweettooth/auth/views.py:240 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:237 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
 "Surel konfirmasi dikirim ke alamat baru Anda. Silakan periksa kotak masuk "
 "Anda."
 
-#: sweettooth/auth/views.py:258 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:255 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "Kata sandi salah"
 
@@ -227,23 +227,27 @@ msgstr "Tentang"
 msgid "Extensions"
 msgstr "Ekstensi"
 
-#: sweettooth/extensions/models.py:171 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:133 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Anda harus menentukan kunci `shell-version` di metadata.json"
+
+#: sweettooth/extensions/models.py:187 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Jenis donasi tidak didukung: %s"
 
-#: sweettooth/extensions/models.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:191 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr ""
 "Anda tidak dapat menentukan lebih dari 3 nilai untuk jenis donasi \"%s\""
 
-#: sweettooth/extensions/models.py:178 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Setidaknya satu nilai harus ditentukan untuk jenis donasi \"%s\""
 
-#: sweettooth/extensions/models.py:182 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:198 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
@@ -269,7 +273,7 @@ msgstr "Anda akan meninggalkan situs web Ekstensi GNOME ke"
 msgid "Cancel"
 msgstr "Batal"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -281,12 +285,12 @@ msgstr ""
 "href=\"%(login_url)s\">masuk ke Ekstensi  GNOME Shell</a> untuk mengirim "
 "komentar atau melaporkan galat. Anda mengerti kan?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Ulasan Pengguna"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Memuat ulasan…"
@@ -310,11 +314,6 @@ msgstr "Komentar"
 #: extensions-web-domain-django:1
 msgid "Rating"
 msgstr "Peringkat"
-
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Laporan kutu"
 
 #: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
@@ -468,7 +467,7 @@ msgstr "Kirim Komentar"
 msgid "Edit your comment"
 msgstr "Sunting komentar Anda"
 
-#: sweettooth/review/templates/review/review.html:63
+#: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
@@ -478,7 +477,7 @@ msgstr ""
 "gnome.org/upload/'>formulir yang sama</a> dengan yang telah Anda posting "
 "versi ini."
 
-#: sweettooth/review/templates/review/review.html:66
+#: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
 msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
@@ -487,7 +486,7 @@ msgstr ""
 "Anda dapat mengubah ikon ekstensi dengan mengklik ikon di halaman ekstensi "
 "Anda."
 
-#: sweettooth/review/templates/review/review.html:69
+#: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
@@ -496,7 +495,7 @@ msgstr ""
 "Jika Anda ingin menonaktifkan versi yang disetujui, klik tautan nonaktifkan "
 "di halaman ekstensi Anda."
 
-#: sweettooth/review/templates/review/review.html:72
+#: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
 "You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
@@ -505,7 +504,7 @@ msgstr ""
 "Anda dapat menemukan panduan pengembang di <a href='https://gjs.guide/"
 "extensions/'>gjs.guide</a>."
 
-#: sweettooth/review/templates/review/review.html:75
+#: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
 msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
@@ -574,13 +573,12 @@ msgstr ""
 "about/#no-detection\">entri pemecahan masalah kami</a> untuk informasi lebih "
 "lanjut."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
 "Ekstensi GNOME Shell tidak dapat mencantumkan ekstensi yang Anda pasang."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Kompatibel dengan"
 
@@ -600,7 +598,11 @@ msgstr "Unduh"
 msgid "Popularity"
 msgstr "Popularitas"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Relevansi"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Urut berdasarkan"
 
@@ -619,46 +621,6 @@ msgstr "Tidak ada komentar. Jadilah yang pertama!"
 msgid "Author"
 msgstr "Penulis"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Apa yang salah?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr "Ekstensi GNOME Shell tidak mendeteksi kesalahan dengan ekstensi ini."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Informasi Versi"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Versi Shell"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Versi Ekstensi"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Tidak dikenal"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Apa yang sudah kamu coba?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Galat yang terdeteksi secara otomatis"
-
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
@@ -668,6 +630,35 @@ msgstr "Ekstensi sistem"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Anda mencopot pemasangan"
+
+#~ msgid "Bug report"
+#~ msgstr "Laporan kutu"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Apa yang salah?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr ""
+#~ "Ekstensi GNOME Shell tidak mendeteksi kesalahan dengan ekstensi ini."
+
+#~ msgid "Version information"
+#~ msgstr "Informasi Versi"
+
+#~ msgid "Shell version"
+#~ msgstr "Versi Shell"
+
+#~ msgid "Extension version"
+#~ msgstr "Versi Ekstensi"
+
+#~ msgid "Unknown"
+#~ msgstr "Tidak dikenal"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Apa yang sudah kamu coba?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Galat yang terdeteksi secara otomatis"
 
 #~ msgid "Other Options"
 #~ msgstr "Pilihan Lain"
