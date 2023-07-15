@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('extensions', '0006_auto_20191123_2146'),
+        ("extensions", "0006_auto_20191123_2146"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='shellversion',
-            name='minor',
+            model_name="shellversion",
+            name="minor",
             field=models.IntegerField(),
         ),
     ]

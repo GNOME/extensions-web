@@ -1,16 +1,17 @@
-
 # The code in this file is adapted from ReviewBoard, MIT licensed
 # https://github.com/reviewboard/reviewboard
 # Copyright 2011 Review Board Team
 
 import re
-from itertools import zip_longest
 from difflib import SequenceMatcher
+from itertools import zip_longest
+
 
 class MyersDiffer:
     """
     An implementation of Eugene Myers's O(ND) Diff algorithm based on GNU diff.
     """
+
     SNAKE_LIMIT = 20
 
     DISCARD_NONE = 0
@@ -53,8 +54,7 @@ class MyersDiffer:
         a_equals = self.a_data.length - len(self.a_data.modified)
         b_equals = self.b_data.length - len(self.b_data.modified)
 
-        return 1.0 * (a_equals + b_equals) / \
-                     (self.a_data.length + self.b_data.length)
+        return 1.0 * (a_equals + b_equals) / (self.a_data.length + self.b_data.length)
 
     def get_opcodes(self):
         """
@@ -74,10 +74,12 @@ class MyersDiffer:
             a_start = a_line
             b_start = b_line
 
-            if a_line < self.a_data.length and \
-               not self.a_data.modified.get(a_line, False) and \
-               b_line < self.b_data.length and \
-               not self.b_data.modified.get(b_line, False):
+            if (
+                a_line < self.a_data.length
+                and not self.a_data.modified.get(a_line, False)
+                and b_line < self.b_data.length
+                and not self.b_data.modified.get(b_line, False)
+            ):
                 # Equal
                 a_changed = b_changed = 1
                 tag = "equal"
@@ -89,17 +91,19 @@ class MyersDiffer:
                 # Count every old line that's been modified, and the
                 # remainder of old lines if we've reached the end of the new
                 # file.
-                while a_line < self.a_data.length and \
-                      (b_line >= self.b_data.length or \
-                       self.a_data.modified.get(a_line, False)):
+                while a_line < self.a_data.length and (
+                    b_line >= self.b_data.length
+                    or self.a_data.modified.get(a_line, False)
+                ):
                     a_line += 1
 
                 # Count every new line that's been modified, and the
                 # remainder of new lines if we've reached the end of the old
                 # file.
-                while b_line < self.b_data.length and \
-                      (a_line >= self.a_data.length or \
-                       self.b_data.modified.get(b_line, False)):
+                while b_line < self.b_data.length and (
+                    a_line >= self.a_data.length
+                    or self.b_data.modified.get(b_line, False)
+                ):
                     b_line += 1
 
                 a_changed = a_line - a_start
@@ -124,16 +128,24 @@ class MyersDiffer:
                         a_changed = b_changed = min(a_changed, b_changed)
 
             if last_group and last_group[0] == tag:
-                last_group = (tag,
-                              last_group[1], last_group[2] + a_changed,
-                              last_group[3], last_group[4] + b_changed)
+                last_group = (
+                    tag,
+                    last_group[1],
+                    last_group[2] + a_changed,
+                    last_group[3],
+                    last_group[4] + b_changed,
+                )
             else:
                 if last_group:
                     yield last_group
 
-                last_group = (tag, a_start, a_start + a_changed,
-                              b_start, b_start + b_changed)
-
+                last_group = (
+                    tag,
+                    a_start,
+                    a_start + a_changed,
+                    b_start,
+                    b_start + b_changed,
+                )
 
         if not last_group:
             last_group = ("equal", 0, self.a_data.length, 0, self.b_data.length)
@@ -153,18 +165,22 @@ class MyersDiffer:
 
         self._discard_confusing_lines()
 
-        self.max_lines = self.a_data.undiscarded_lines + \
-                         self.b_data.undiscarded_lines + 3
+        self.max_lines = (
+            self.a_data.undiscarded_lines + self.b_data.undiscarded_lines + 3
+        )
 
-        vector_size = self.a_data.undiscarded_lines + \
-                      self.b_data.undiscarded_lines + 3
+        vector_size = self.a_data.undiscarded_lines + self.b_data.undiscarded_lines + 3
         self.fdiag = [0] * vector_size
         self.bdiag = [0] * vector_size
         self.downoff = self.upoff = self.b_data.undiscarded_lines + 1
 
-        self._lcs(0, self.a_data.undiscarded_lines,
-                  0, self.b_data.undiscarded_lines,
-                  self.minimal_diff)
+        self._lcs(
+            0,
+            self.a_data.undiscarded_lines,
+            0,
+            self.b_data.undiscarded_lines,
+            self.minimal_diff,
+        )
         self._shift_chunks(self.a_data, self.b_data)
         self._shift_chunks(self.b_data, self.a_data)
 
@@ -202,11 +218,11 @@ class MyersDiffer:
         """
         Finds the Shortest Middle Snake.
         """
-        down_vector = self.fdiag # The vector for the (0, 0) to (x, y) search
-        up_vector   = self.bdiag # The vector for the (u, v) to (N, M) search
+        down_vector = self.fdiag  # The vector for the (0, 0) to (x, y) search
+        up_vector = self.bdiag  # The vector for the (u, v) to (N, M) search
 
-        down_k = a_lower - b_lower # The k-line to start the forward search
-        up_k   = a_upper - b_upper # The k-line to start the reverse search
+        down_k = a_lower - b_lower  # The k-line to start the forward search
+        up_k = a_upper - b_upper  # The k-line to start the reverse search
         odd_delta = (down_k - up_k) % 2 != 0
 
         down_vector[self.downoff + down_k] = a_lower
@@ -216,7 +232,7 @@ class MyersDiffer:
         dmax = a_upper - b_lower
 
         down_min = down_max = down_k
-        up_min   = up_max   = up_k
+        up_min = up_max = up_k
 
         cost = 0
 
@@ -251,13 +267,19 @@ class MyersDiffer:
 
                 # Find the end of the furthest reaching forward D-path in
                 # diagonal k
-                while x < a_upper and y < b_upper and \
-                      self.a_data.undiscarded[x] == self.b_data.undiscarded[y]:
+                while (
+                    x < a_upper
+                    and y < b_upper
+                    and self.a_data.undiscarded[x] == self.b_data.undiscarded[y]
+                ):
                     x += 1
                     y += 1
 
-                if odd_delta and up_min <= k <= up_max and \
-                   up_vector[self.upoff + k] <= x:
+                if (
+                    odd_delta
+                    and up_min <= k <= up_max
+                    and up_vector[self.upoff + k] <= x
+                ):
                     return x, y, True, True
 
                 if x - old_x > self.SNAKE_LIMIT:
@@ -290,14 +312,19 @@ class MyersDiffer:
                 y = x - k
                 old_x = x
 
-                while x > a_lower and y > b_lower and \
-                      self.a_data.undiscarded[x - 1] == \
-                      self.b_data.undiscarded[y - 1]:
+                while (
+                    x > a_lower
+                    and y > b_lower
+                    and self.a_data.undiscarded[x - 1] == self.b_data.undiscarded[y - 1]
+                ):
                     x -= 1
                     y -= 1
 
-                if not odd_delta and down_min <= k <= down_max and \
-                   x <= down_vector[self.downoff + k]:
+                if (
+                    not odd_delta
+                    and down_min <= k <= down_max
+                    and x <= down_vector[self.downoff + k]
+                ):
                     return x, y, True, True
 
                 if old_x - x > self.SNAKE_LIMIT:
@@ -319,39 +346,59 @@ class MyersDiffer:
             # closer to that of GNU diff, which more people would expect.
 
             if cost > 200 and big_snake:
-                ret_x, ret_y, best = \
-                    self._find_diagonal(down_min, down_max, down_k, 0,
-                                        self.downoff, down_vector,
-                                        lambda x: x - a_lower,
-                                        lambda x: a_lower + self.SNAKE_LIMIT <=
-                                                  x < a_upper,
-                                        lambda y: b_lower + self.SNAKE_LIMIT <=
-                                                  y < b_upper,
-                                        lambda i,k: i - k,
-                                        1, cost)
+                ret_x, ret_y, best = self._find_diagonal(
+                    down_min,
+                    down_max,
+                    down_k,
+                    0,
+                    self.downoff,
+                    down_vector,
+                    lambda x: x - a_lower,
+                    lambda x: a_lower + self.SNAKE_LIMIT <= x < a_upper,
+                    lambda y: b_lower + self.SNAKE_LIMIT <= y < b_upper,
+                    lambda i, k: i - k,
+                    1,
+                    cost,
+                )
 
                 if best > 0:
                     return ret_x, ret_y, True, False
 
-                ret_x, ret_y, best = \
-                    self._find_diagonal(up_min, up_max, up_k, best, self.upoff,
-                                        up_vector,
-                                        lambda x: a_upper - x,
-                                        lambda x: a_lower < x <= a_upper -
-                                                  self.SNAKE_LIMIT,
-                                        lambda y: b_lower < y <= b_upper -
-                                                  self.SNAKE_LIMIT,
-                                        lambda i,k: i + k,
-                                        0, cost)
+                ret_x, ret_y, best = self._find_diagonal(
+                    up_min,
+                    up_max,
+                    up_k,
+                    best,
+                    self.upoff,
+                    up_vector,
+                    lambda x: a_upper - x,
+                    lambda x: a_lower < x <= a_upper - self.SNAKE_LIMIT,
+                    lambda y: b_lower < y <= b_upper - self.SNAKE_LIMIT,
+                    lambda i, k: i + k,
+                    0,
+                    cost,
+                )
 
                 if best > 0:
                     return ret_x, ret_y, False, True
 
         raise Exception("The function should not have reached here.")
 
-    def _find_diagonal(self, minimum, maximum, k, best, diagoff, vector,
-                       vdiff_func, check_x_range, check_y_range,
-                       discard_index, k_offset, cost):
+    def _find_diagonal(
+        self,
+        minimum,
+        maximum,
+        k,
+        best,
+        diagoff,
+        vector,
+        vdiff_func,
+        check_x_range,
+        check_y_range,
+        discard_index,
+        k_offset,
+        cost,
+    ):
         for d in range(maximum, minimum - 1, -2):
             dd = d - k
             x = vector[diagoff + d]
@@ -359,15 +406,16 @@ class MyersDiffer:
             v = vdiff_func(x) * 2 + dd
 
             if v > 12 * (cost + abs(dd)):
-                if v > best and \
-                   check_x_range(x) and check_y_range(y):
+                if v > best and check_x_range(x) and check_y_range(y):
                     # We found a sufficient diagonal.
                     k = k_offset
                     x_index = discard_index(x, k)
                     y_index = discard_index(y, k)
 
-                    while self.a_data.undiscarded[x_index] == \
-                          self.b_data.undiscarded[y_index]:
+                    while (
+                        self.a_data.undiscarded[x_index]
+                        == self.b_data.undiscarded[y_index]
+                    ):
                         if k == self.SNAKE_LIMIT - 1 + k_offset:
                             return x, y, v
 
@@ -380,15 +428,20 @@ class MyersDiffer:
         Subsequence (LCS) algorithm.
         """
         # Fast walkthrough equal lines at the start
-        while a_lower < a_upper and b_lower < b_upper and \
-              self.a_data.undiscarded[a_lower] == \
-              self.b_data.undiscarded[b_lower]:
+        while (
+            a_lower < a_upper
+            and b_lower < b_upper
+            and self.a_data.undiscarded[a_lower] == self.b_data.undiscarded[b_lower]
+        ):
             a_lower += 1
             b_lower += 1
 
-        while a_upper > a_lower and b_upper > b_lower and \
-              self.a_data.undiscarded[a_upper - 1] == \
-              self.b_data.undiscarded[b_upper - 1]:
+        while (
+            a_upper > a_lower
+            and b_upper > b_lower
+            and self.a_data.undiscarded[a_upper - 1]
+            == self.b_data.undiscarded[b_upper - 1]
+        ):
             a_upper -= 1
             b_upper -= 1
 
@@ -404,9 +457,9 @@ class MyersDiffer:
                 a_lower += 1
         else:
             # Find the middle snake and length of an optimal path for A and B
-            x, y, low_minimal, high_minimal = \
-                self._find_sms(a_lower, a_upper, b_lower, b_upper,
-                               find_minimal)
+            x, y, low_minimal, high_minimal = self._find_sms(
+                a_lower, a_upper, b_lower, b_upper, find_minimal
+            )
 
             self._lcs(a_lower, x, b_lower, y, low_minimal)
             self._lcs(x, a_upper, y, b_upper, high_minimal)
@@ -557,7 +610,7 @@ class MyersDiffer:
 
                     # Find the end of this run of discardable lines and count
                     # how many are provisionally discardable.
-                    #for j in range(i, data.length):
+                    # for j in range(i, data.length):
                     j = i
                     while j < data.length:
                         if discards[j] == self.DISCARD_NONE:
@@ -598,9 +651,9 @@ class MyersDiffer:
 
                             j += 1
 
-                        scan_run(discards, i, length, lambda x,y: x + y)
+                        scan_run(discards, i, length, lambda x, y: x + y)
                         i += length - 1
-                        scan_run(discards, i, length, lambda x,y: x - y)
+                        scan_run(discards, i, length, lambda x, y: x - y)
 
                 i += 1
 
@@ -615,7 +668,6 @@ class MyersDiffer:
                     data.modified[i] = True
 
             data.undiscarded_lines = j
-
 
         self.a_data.undiscarded = [0] * self.a_data.length
         self.b_data.undiscarded = [0] * self.b_data.length
@@ -641,7 +693,6 @@ class MyersDiffer:
         discard_lines(self.a_data, a_discarded)
         discard_lines(self.b_data, b_discarded)
 
-
     def _very_approx_sqrt(self, i):
         result = 1
         i /= 4
@@ -651,7 +702,9 @@ class MyersDiffer:
 
         return result
 
-ALPHANUM_RE = re.compile(r'\w')
+
+ALPHANUM_RE = re.compile(r"\w")
+
 
 def get_line_changed_regions(oldline, newline):
     if oldline is None or newline is None:
@@ -700,16 +753,19 @@ def get_line_changed_regions(oldline, newline):
 
     return (oldchanges, newchanges)
 
-def new_chunk(lines, collapsable=False, tag='equal'):
+
+def new_chunk(lines, collapsable=False, tag="equal"):
     return {
-        'lines': lines,
-        'change': tag,
-        'collapsable': collapsable,
+        "lines": lines,
+        "change": tag,
+        "collapsable": collapsable,
     }
+
 
 def get_fake_chunk(numlines, tag):
     lines = [new_line(oldindex=n, newindex=n) for n in range(numlines)]
     return new_chunk(lines, tag=tag)
+
 
 def get_linenum(idx):
     if idx is not None:
@@ -717,11 +773,18 @@ def get_linenum(idx):
     else:
         return None
 
+
 def new_line(oldindex, newindex, oldregion=None, newregion=None):
     oldlinenum, newlinenum = get_linenum(oldindex), get_linenum(newindex)
-    return dict(oldlinenum=oldlinenum, newlinenum=newlinenum,
-                oldindex=oldindex, newindex=newindex,
-                oldregion=oldregion, newregion=newregion)
+    return dict(
+        oldlinenum=oldlinenum,
+        newlinenum=newlinenum,
+        oldindex=oldindex,
+        newindex=newindex,
+        oldregion=oldregion,
+        newregion=newregion,
+    )
+
 
 def diff_line(old, new):
     oldindex, oldline = old
@@ -730,16 +793,17 @@ def diff_line(old, new):
     oldregion, newregion = get_line_changed_regions(oldline, newline)
     return new_line(oldindex, newindex, oldregion, newregion)
 
+
 def get_chunks(a, b):
     if a == b:
         return
 
     if a is None:
-        yield get_fake_chunk(len(b), tag='insert')
+        yield get_fake_chunk(len(b), tag="insert")
         return
 
     if b is None:
-        yield get_fake_chunk(len(a), tag='delete')
+        yield get_fake_chunk(len(a), tag="delete")
         return
 
     a_num_lines = len(a)
@@ -755,14 +819,17 @@ def get_chunks(a, b):
     collapse_threshold = 2 * context_num_lines + 3
 
     for tag, i1, i2, j1, j2 in differ.get_opcodes():
-        numlines = max(i2-i1, j2-j1)
+        numlines = max(i2 - i1, j2 - j1)
 
         oldlines = zip(range(i1, i2), a[i1:i2])
         newlines = zip(range(j1, j2), b[j1:j2])
 
-        lines = [diff_line(old, new) for old, new in zip_longest(oldlines, newlines, fillvalue=(None, None))]
+        lines = [
+            diff_line(old, new)
+            for old, new in zip_longest(oldlines, newlines, fillvalue=(None, None))
+        ]
 
-        if tag == 'equal' and numlines > collapse_threshold:
+        if tag == "equal" and numlines > collapse_threshold:
             last_range_start = numlines - context_num_lines
 
             if linenum == 1:
@@ -774,12 +841,15 @@ def get_chunks(a, b):
                 if i2 == a_num_lines and j2 == b_num_lines:
                     yield new_chunk(lines[context_num_lines:numlines], collapsable=True)
                 else:
-                    yield new_chunk(lines[context_num_lines:last_range_start], collapsable=True)
+                    yield new_chunk(
+                        lines[context_num_lines:last_range_start], collapsable=True
+                    )
                     yield new_chunk(lines[last_range_start:numlines])
         else:
             yield new_chunk(lines[:numlines], collapsable=False, tag=tag)
 
         linenum += numlines
+
 
 def is_valid_move_range(lines):
     """Determines if a move range is valid and should be included.
@@ -799,8 +869,9 @@ def is_valid_move_range(lines):
 
     return False
 
+
 def _test(oldfile, newfile):
-    old, new = open(oldfile, 'r'), open(newfile, 'r')
+    old, new = open(oldfile, "r"), open(newfile, "r")
     a, b = old.read().splitlines(), new.read().splitlines()
 
     chunks = list(get_chunks(a, b))
@@ -809,11 +880,13 @@ def _test(oldfile, newfile):
 
     return chunks
 
+
 def main():
     import pprint
     import sys
 
     pprint.pprint(_test(sys.argv[1], sys.argv[2]))
+
 
 if __name__ == "__main__":
     main()

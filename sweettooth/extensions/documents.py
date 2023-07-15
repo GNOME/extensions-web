@@ -11,39 +11,39 @@
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
-
 from django_opensearch_dsl import Document, fields
 from django_opensearch_dsl.registries import registry
 
 from .models import Extension, ExtensionVersion
 
 
-
 @registry.register_document
 class ExtensionDocument(Document):
     class Index:
-        name = 'extensions'
+        name = "extensions"
 
     class Django:
         model = Extension
 
         fields = [
-            'uuid',
-            'description',
-            'created',
-            'downloads',
-            'popularity',
+            "uuid",
+            "description",
+            "created",
+            "downloads",
+            "popularity",
         ]
 
     name = fields.TextField(
-        fields={'raw': fields.KeywordField()},
+        fields={"raw": fields.KeywordField()},
     )
     creator = fields.TextField()
     shell_versions = fields.TextField(multi=True)
 
     def get_queryset(self, *args, **kwargs):
-        return super(ExtensionDocument, self).get_queryset(*args, **kwargs).select_related(
-            'creator'
+        return (
+            super(ExtensionDocument, self)
+            .get_queryset(*args, **kwargs)
+            .select_related("creator")
         )
 
     def prepare_creator(self, extension):
@@ -57,23 +57,23 @@ class ExtensionDocument(Document):
 
     @staticmethod
     def document_fields():
-        return ['uuid', 'name', 'description', 'creator']
+        return ["uuid", "name", "description", "creator"]
 
 
 @receiver(post_delete, sender=ExtensionVersion)
 @receiver(post_save, sender=ExtensionVersion)
 def index_on_version_save(instance, **kwargs):
     if instance.extension.latest_version:
-        ExtensionDocument().update(instance.extension, action='index')
+        ExtensionDocument().update(instance.extension, action="index")
     else:
         try:
-            ExtensionDocument().update(instance.extension, action='delete')
+            ExtensionDocument().update(instance.extension, action="delete")
         except Exception as ex:
-            errors = getattr(ex, 'errors', [])
+            errors = getattr(ex, "errors", [])
             if (
-                not errors or
-                not isinstance(errors[0], dict) or
-                errors[0].get('delete', {}).get('result', '') != 'not_found'
+                not errors
+                or not isinstance(errors[0], dict)
+                or errors[0].get("delete", {}).get("result", "") != "not_found"
             ):
                 raise ex
 
@@ -82,4 +82,4 @@ def index_on_version_save(instance, **kwargs):
 @receiver(post_save, sender=get_user_model())
 def index_on_user_save(instance, **kwargs):
     extensions = Extension.objects.visible().filter(creator=instance)
-    ExtensionDocument().update(extensions, action='index')
+    ExtensionDocument().update(extensions, action="index")

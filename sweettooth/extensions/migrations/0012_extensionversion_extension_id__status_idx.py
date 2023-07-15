@@ -4,14 +4,15 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('extensions', '0011_extension_allow_comments'),
+        ("extensions", "0011_extension_allow_comments"),
     ]
 
     operations = [
         migrations.AddIndex(
-            model_name='extensionversion',
-            index=models.Index(fields=['extension', 'status'], name='extension_id__status_idx'),
+            model_name="extensionversion",
+            index=models.Index(
+                fields=["extension", "status"], name="extension_id__status_idx"
+            ),
         ),
     ]

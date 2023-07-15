@@ -3,19 +3,23 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+
 import sweettooth.extensions.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('extensions', '0002_auto_20161027_1641'),
+        ("extensions", "0002_auto_20161027_1641"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='extension',
-            name='icon',
-            field=models.ImageField(blank=True, default=b'', upload_to=sweettooth.extensions.models.make_icon_filename),
+            model_name="extension",
+            name="icon",
+            field=models.ImageField(
+                blank=True,
+                default=b"",
+                upload_to=sweettooth.extensions.models.make_icon_filename,
+            ),
         ),
     ]

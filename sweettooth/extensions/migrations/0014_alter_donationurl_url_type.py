@@ -4,15 +4,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('extensions', '0013_donationurl'),
+        ("extensions", "0013_donationurl"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='donationurl',
-            name='url_type',
-            field=models.CharField(choices=[('buymeacoffee', 'Buy Me a Coffee'), ('custom', 'Link'), ('github', 'GitHub'), ('kofi', 'Ko-fi'), ('patreon', 'Patreon'), ('paypal', 'PayPal')], default='custom', max_length=32),
+            model_name="donationurl",
+            name="url_type",
+            field=models.CharField(
+                choices=[
+                    ("buymeacoffee", "Buy Me a Coffee"),
+                    ("custom", "Link"),
+                    ("github", "GitHub"),
+                    ("kofi", "Ko-fi"),
+                    ("patreon", "Patreon"),
+                    ("paypal", "PayPal"),
+                ],
+                default="custom",
+                max_length=32,
+            ),
         ),
     ]

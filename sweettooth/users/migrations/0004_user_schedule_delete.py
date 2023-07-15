@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0003_rename_users_table'),
+        ("users", "0003_rename_users_table"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='schedule_delete',
+            model_name="user",
+            name="schedule_delete",
             field=models.DateTimeField(blank=True, null=True),
         ),
     ]

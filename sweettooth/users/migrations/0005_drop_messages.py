@@ -4,11 +4,8 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0004_user_schedule_delete'),
+        ("users", "0004_user_schedule_delete"),
     ]
 
-    operations = [
-        migrations.RunSQL("DROP TABLE IF EXISTS auth_message")
-    ]
+    operations = [migrations.RunSQL("DROP TABLE IF EXISTS auth_message")]
