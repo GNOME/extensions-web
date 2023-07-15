@@ -8,7 +8,7 @@ workflow:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 stages:
-  - migrations
+  - validate
   - test
   - security
   - build
@@ -33,6 +33,16 @@ stages:
     EGO_SECRET_KEY: .
     EGO_OPENSEARCH_ADDRESS: opensearch:9200
   needs: []
+
+.validate defaults:
+  extends:
+    - .test defaults
+  stage: validate
+  script:
+    - >-
+      "${VALIDATE_TOOL}" ${VALIDATE_TOOL_ARGS}
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 test:
   extends:
@@ -62,9 +72,29 @@ test:
 check migrations:
   extends:
     - .test defaults
-  stage: migrations
+  stage: validate
   script:
     - python manage.py makemigrations --check
+
+flake8:
+  extends:
+    - .validate defaults
+  variables:
+    VALIDATE_TOOL: flake8
+
+isort:
+  extends:
+    - .validate defaults
+  variables:
+    VALIDATE_TOOL: isort
+    VALIDATE_TOOL_ARGS: --check --diff .
+
+black:
+  extends:
+    - .validate defaults
+  variables:
+    VALIDATE_TOOL: black
+    VALIDATE_TOOL_ARGS: --check --diff .
 
 security (trivy):
   stage: security
