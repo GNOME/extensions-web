@@ -6,41 +6,51 @@ from sweettooth.migrations import VendorAwareRunSQL
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('extensions', '0014_alter_donationurl_url_type'),
+        ("extensions", "0014_alter_donationurl_url_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='donationurl',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="donationurl",
+            name="id",
+            field=models.BigAutoField(
+                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+            ),
         ),
         migrations.AlterField(
-            model_name='extension',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="extension",
+            name="id",
+            field=models.BigAutoField(
+                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+            ),
         ),
         migrations.AlterField(
-            model_name='extensionpopularityitem',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="extensionpopularityitem",
+            name="id",
+            field=models.BigAutoField(
+                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+            ),
         ),
         migrations.AlterField(
-            model_name='extensionversion',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="extensionversion",
+            name="id",
+            field=models.BigAutoField(
+                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+            ),
         ),
         migrations.AlterField(
-            model_name='shellversion',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="shellversion",
+            name="id",
+            field=models.BigAutoField(
+                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+            ),
         ),
         VendorAwareRunSQL(
-            ('mysql', 'mariadb'), [
+            ("mysql", "mariadb"),
+            [
                 "ALTER TABLE extensions_extensionversion_session_modes MODIFY id BIGINT NOT NULL AUTO_INCREMENT",
                 "ALTER TABLE extensions_extensionversion_shell_versions MODIFY id BIGINT NOT NULL AUTO_INCREMENT",
-            ]
+            ],
         ),
     ]

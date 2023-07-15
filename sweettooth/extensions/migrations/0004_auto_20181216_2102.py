@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
+
 from sweettooth.extensions.models import Extension
 
 
@@ -10,11 +11,8 @@ def update_icons(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('extensions', '0003_auto_20181216_2101'),
+        ("extensions", "0003_auto_20181216_2101"),
     ]
 
-    operations = [
-        migrations.RunPython(update_icons)
-    ]
+    operations = [migrations.RunPython(update_icons)]

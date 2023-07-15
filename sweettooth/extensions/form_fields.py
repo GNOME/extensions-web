@@ -11,6 +11,7 @@
 from django.core.exceptions import ValidationError
 from django.forms.fields import ImageField
 
+
 class RestrictedImageField(ImageField):
     def __init__(self, *, allowed_types=["gif", "jpeg", "png", "webp"], **kwargs):
         self.allowed_types = allowed_types
@@ -23,11 +24,11 @@ class RestrictedImageField(ImageField):
 
         if f.image.format is None or not f.image.format.lower() in self.allowed_types:
             raise ValidationError(
-                self.error_messages['invalid_image'],
-                code='invalid_image_type',
+                self.error_messages["invalid_image"],
+                code="invalid_image_type",
             )
 
-        if hasattr(f, 'seek') and callable(f.seek):
+        if hasattr(f, "seek") and callable(f.seek):
             f.seek(0)
 
         return f

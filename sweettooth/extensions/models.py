@@ -10,17 +10,16 @@
     (at your option) any later version.
 """
 
-import tempfile
-from typing import Any, Literal, Union
-import autoslug
 import json
 import os
 import re
+import tempfile
 import zlib
-
-from zipfile import ZipFile, BadZipfile
+from typing import Any, Literal, Union
 from urllib.parse import quote
+from zipfile import BadZipfile, ZipFile
 
+import autoslug
 from django.conf import settings
 from django.core.files import File
 from django.core.files.move import file_move_safe
@@ -33,30 +32,34 @@ from django.utils.translation import gettext as _
 
 from .fields import HttpURLField
 
-(STATUS_UNREVIEWED,
- STATUS_REJECTED,
- STATUS_INACTIVE,
- STATUS_ACTIVE,
- STATUS_WAITING) = range(5)
+(
+    STATUS_UNREVIEWED,
+    STATUS_REJECTED,
+    STATUS_INACTIVE,
+    STATUS_ACTIVE,
+    STATUS_WAITING,
+) = range(5)
 
 STATUSES = {
-    STATUS_UNREVIEWED: u"Unreviewed",
-    STATUS_REJECTED: u"Rejected",
-    STATUS_INACTIVE: u"Inactive",
-    STATUS_ACTIVE: u"Active",
-    STATUS_WAITING: u"Waiting for author",
+    STATUS_UNREVIEWED: "Unreviewed",
+    STATUS_REJECTED: "Rejected",
+    STATUS_INACTIVE: "Inactive",
+    STATUS_ACTIVE: "Active",
+    STATUS_WAITING: "Waiting for author",
 }
 
+
 def validate_uuid(uuid):
-    if re.match(r'[-a-zA-Z0-9@._]+$', uuid) is None:
+    if re.match(r"[-a-zA-Z0-9@._]+$", uuid) is None:
         return False
 
     # Don't blacklist "gnome.org" - we don't want to eliminate
     # world-of-gnome.org or something like that.
-    if re.search(r'[.@]gnome\.org$', uuid) is not None:
+    if re.search(r"[.@]gnome\.org$", uuid) is not None:
         return False
 
     return True
+
 
 class ExtensionManager(models.Manager):
     def visible(self):
@@ -66,6 +69,7 @@ class ExtensionManager(models.Manager):
         instance = self.model(metadata=metadata, **kwargs)
         instance.save()
         return instance
+
 
 def build_shell_version_map(versions):
     shell_version_map = {}
@@ -79,10 +83,10 @@ def build_shell_version_map(versions):
                 shell_version_map[key] = version
 
     for key, version in shell_version_map.items():
-        shell_version_map[key] = dict(pk = version.pk,
-                                      version = version.version)
+        shell_version_map[key] = dict(pk=version.pk, version=version.version)
 
     return shell_version_map
+
 
 def build_shell_version_array(versions):
     shell_version_map = {}
@@ -95,8 +99,8 @@ def build_shell_version_array(versions):
 
             if version.pk not in shell_version_map[key]:
                 shell_version_map[key][version.pk] = dict(
-                    pk=version.pk,
-                    version=version.version)
+                    pk=version.pk, version=version.version
+                )
 
     return shell_version_map
 
@@ -113,9 +117,9 @@ def make_icon_filename(obj, filename=None):
 
 class SessionMode(models.Model):
     class SessionModes(models.TextChoices):
-        USER = 'user'
-        UNLOCK_DIALOG = 'unlock-dialog'
-        GDM = 'gdm'
+        USER = "user"
+        UNLOCK_DIALOG = "unlock-dialog"
+        GDM = "gdm"
 
     mode = models.CharField(
         primary_key=True,
@@ -126,16 +130,18 @@ class SessionMode(models.Model):
 
 class Extension(models.Model):
     class Meta:
-        permissions = (
-            ("can-modify-data", "Can modify extension data"),
-        )
+        permissions = (("can-modify-data", "Can modify extension data"),)
 
-    MESSAGE_SHELL_VERSION_MISSING = _("You must define `shell-version` key in metadata.json")
+    MESSAGE_SHELL_VERSION_MISSING = _(
+        "You must define `shell-version` key in metadata.json"
+    )
 
     name = models.CharField(max_length=200)
     uuid = models.CharField(max_length=200, unique=True, db_index=True)
     slug = autoslug.AutoSlugField(populate_from="name")
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT)
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL, db_index=True, on_delete=models.PROTECT
+    )
     description = models.TextField(blank=True)
     url = HttpURLField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -149,18 +155,17 @@ class Extension(models.Model):
 
     objects = ExtensionManager()
 
-    _http_validator = URLValidator(schemes=('http', 'https'))
+    _http_validator = URLValidator(schemes=("http", "https"))
 
     def __init__(self, *args, **kwargs):
         metadata = None
-        if 'metadata' in kwargs:
-            metadata = kwargs.pop('metadata')
+        if "metadata" in kwargs:
+            metadata = kwargs.pop("metadata")
 
         super().__init__(*args, **kwargs)
 
         if metadata:
             self.update_from_metadata(metadata)
-
 
     @staticmethod
     def _ensure_list(value: Union[Any, list[str]]) -> list[Any]:
@@ -170,16 +175,18 @@ class Extension(models.Model):
         return value
 
     def update_from_metadata(self, metadata):
-        self.name = metadata.pop('name', "")
-        self.description = metadata.pop('description', "")
-        self.url = metadata.pop('url', "")
-        self.uuid = metadata['uuid']
+        self.name = metadata.pop("name", "")
+        self.description = metadata.pop("description", "")
+        self.url = metadata.pop("url", "")
+        self.uuid = metadata["uuid"]
 
-        shell_versions = metadata.get('shell-version')
+        shell_versions = metadata.get("shell-version")
         if not isinstance(shell_versions, list) or not shell_versions:
             raise ValidationError(self.MESSAGE_SHELL_VERSION_MISSING)
 
-        self.donation_json_field: dict[str, Union[str, list[str]]] = metadata.get('donations', {})
+        self.donation_json_field: dict[str, Union[str, list[str]]] = metadata.get(
+            "donations", {}
+        )
 
         supported_types = [item.value for item in DonationUrl.Type]
         for key, values in self.donation_json_field.items():
@@ -188,18 +195,28 @@ class Extension(models.Model):
 
             values = self._ensure_list(values)
             if len(values) > 3:
-                raise ValidationError(_('You can not specify more than 3 values for donation type "%s"') % key)
+                raise ValidationError(
+                    _('You can not specify more than 3 values for donation type "%s"')
+                    % key
+                )
 
             if len(values) < 1:
-                raise ValidationError(_('At least one value must be specified for donation type "%s"') % key)
+                raise ValidationError(
+                    _('At least one value must be specified for donation type "%s"')
+                    % key
+                )
 
             if any(not isinstance(value, str) for value in values):
                 raise ValidationError(
-                    _('Value type must be string or list of strings for donation type "%s"') % key
+                    _(
+                        "Value type must be string or list of strings for"
+                        ' donation type "%s"'
+                    )
+                    % key
                 )
 
         # Validate custom URLs
-        for url in self._ensure_list(self.donation_json_field.get('custom', [])):
+        for url in self._ensure_list(self.donation_json_field.get("custom", [])):
             self._http_validator(url)
 
     def refresh_donation_urls(self):
@@ -235,20 +252,19 @@ class Extension(models.Model):
             self.refresh_donation_urls()
 
     def get_absolute_url(self):
-        return reverse('extensions-detail', kwargs=dict(pk=self.pk,
-                                                        slug=self.slug))
+        return reverse("extensions-detail", kwargs=dict(pk=self.pk, slug=self.slug))
 
     def user_can_edit(self, user):
         if user == self.creator:
             return True
-        if user.has_perm('extensions.can-modify-data'):
+        if user.has_perm("extensions.can-modify-data"):
             return True
         return False
 
     def uses_session_mode(self, mode: str):
         return any(
             session_mode
-            for version in self.visible_versions.order_by('-pk')
+            for version in self.visible_versions.order_by("-pk")
             for session_mode in version.session_modes.all()
             if session_mode.mode == mode
         )
@@ -281,11 +297,17 @@ class Extension(models.Model):
     def visible_shell_version_array(self):
         return build_shell_version_array(self.visible_versions)
 
+
 class ExtensionPopularityItem(models.Model):
-    extension = models.ForeignKey(Extension, db_index=True,
-                                  on_delete=models.CASCADE, related_name='popularity_items')
+    extension = models.ForeignKey(
+        Extension,
+        db_index=True,
+        on_delete=models.CASCADE,
+        related_name="popularity_items",
+    )
     offset = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
+
 
 class InvalidShellVersion(Exception):
     pass
@@ -293,11 +315,11 @@ class InvalidShellVersion(Exception):
 
 def parse_version_string(version_string):
     prerelease_versions = {
-        'alpha': -4,
-        'beta': -3,
-        'rc': -2,
+        "alpha": -4,
+        "beta": -3,
+        "rc": -2,
     }
-    version = version_string.split('.')
+    version = version_string.split(".")
     version_parts = len(version)
 
     if version_parts < 1 or version_parts > 4:
@@ -331,6 +353,7 @@ def parse_version_string(version_string):
 
     return major, minor, point
 
+
 class ShellVersionManager(models.Manager):
     def lookup_for_version_string(self, version_string):
         major, minor, point = parse_version_string(version_string)
@@ -348,6 +371,7 @@ class ShellVersionManager(models.Manager):
 
         return obj
 
+
 class ShellVersion(models.Model):
     major = models.PositiveIntegerField()
     # -3: alpha, -2: beta, -1: rc
@@ -363,11 +387,7 @@ class ShellVersion(models.Model):
 
     @property
     def version_string(self):
-        prerelease_versions = {
-            -4: 'alpha',
-            -3: 'beta',
-            -2: 'rc'
-        }
+        prerelease_versions = {-4: "alpha", -3: "beta", -2: "rc"}
 
         # GNOME 40+: unstable versions
         # https://discourse.gnome.org/t/new-gnome-versioning-scheme/4235
@@ -375,7 +395,7 @@ class ShellVersion(models.Model):
             if self.minor < -1:
                 return "%d.%s" % (
                     self.major,
-                    prerelease_versions.get(self.minor, 'unknown')
+                    prerelease_versions.get(self.minor, "unknown"),
                 )
             elif self.minor == -1:
                 return "%d" % (self.major)
@@ -397,16 +417,16 @@ def parse_zipfile_metadata(uploaded_file):
     Given a file, extract out the metadata.json, parse, and return it.
     """
     try:
-        with ZipFile(uploaded_file, 'r') as zipfile:
+        with ZipFile(uploaded_file, "r") as zipfile:
             if zipfile.testzip() is not None:
                 raise InvalidExtensionData("Invalid zip file")
 
             total_uncompressed = sum(i.file_size for i in zipfile.infolist())
-            if total_uncompressed > 5*1024*1024:  # 5 MB
+            if total_uncompressed > 5 * 1024 * 1024:  # 5 MB
                 raise InvalidExtensionData("Zip file is too large")
 
             try:
-                with zipfile.open('metadata.json', 'r') as metadata_fp:
+                with zipfile.open("metadata.json", "r") as metadata_fp:
                     return json.load(metadata_fp)
             except KeyError:
                 # no metadata.json in archive, raise error
@@ -420,7 +440,9 @@ def parse_zipfile_metadata(uploaded_file):
 
 
 # uuid max length + suffix max length
-filename_max_length = Extension._meta.get_field('uuid').max_length + len(".v000.shell-version.zip")
+filename_max_length = Extension._meta.get_field("uuid").max_length + len(
+    ".v000.shell-version.zip"
+)
 
 
 class ExtensionVersionManager(models.Manager):
@@ -440,28 +462,31 @@ def make_filename(obj, filename=None):
 
 class ExtensionVersion(models.Model):
     class Meta:
-        unique_together = ('extension', 'version'),
-        get_latest_by = 'version'
+        unique_together = (("extension", "version"),)
+        get_latest_by = "version"
 
         indexes = (
-            models.Index(fields=('extension', 'status'), name='extension_id__status_idx'),
+            models.Index(
+                fields=("extension", "status"), name="extension_id__status_idx"
+            ),
         )
 
-    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="versions")
+    extension: Extension = models.ForeignKey(
+        Extension, on_delete=models.CASCADE, related_name="versions"
+    )
     version: int = models.IntegerField(default=0)
     extra_json_fields = models.TextField()
     status = models.PositiveIntegerField(choices=STATUSES.items())
     shell_versions = models.ManyToManyField(ShellVersion)
     session_modes = models.ManyToManyField(SessionMode)
 
-    source = models.FileField(upload_to=make_filename,
-                              max_length=filename_max_length)
+    source = models.FileField(upload_to=make_filename, max_length=filename_max_length)
 
     objects = ExtensionVersionManager()
 
     def __init__(self, *args, **kwargs):
-        if 'metadata' in kwargs:
-            self.metadata = kwargs.pop('metadata').copy()
+        if "metadata" in kwargs:
+            self.metadata = kwargs.pop("metadata").copy()
         else:
             self.metadata = {}
 
@@ -477,19 +502,21 @@ class ExtensionVersion(models.Model):
         """
         data = json.loads(self.extra_json_fields)
         fields = dict(
-            _generated  = "Generated by SweetTooth, do not edit",
-            name        = self.extension.name,
-            description = self.extension.description,
-            url         = self.extension.url,
-            uuid        = self.extension.uuid,
-            version     = self.version,
+            _generated="Generated by SweetTooth, do not edit",
+            name=self.extension.name,
+            description=self.extension.description,
+            url=self.extension.url,
+            uuid=self.extension.uuid,
+            version=self.version,
         )
 
-        fields['session-modes'] = [m.mode for m in self.session_modes.all()]
-        if not fields['session-modes']:
-            del fields['session-modes']
+        fields["session-modes"] = [m.mode for m in self.session_modes.all()]
+        if not fields["session-modes"]:
+            del fields["session-modes"]
 
-        fields['shell-version'] = [sv.version_string for sv in self.shell_versions.all()]
+        fields["shell-version"] = [
+            sv.version_string for sv in self.shell_versions.all()
+        ]
 
         data.update(fields)
         return data
@@ -512,7 +539,9 @@ class ExtensionVersion(models.Model):
         # into memory and then emit a new one with the
         # generated metadata.json
         with tempfile.NamedTemporaryFile("w+b", delete=False) as temp_file:
-            with self.get_zipfile("r") as zipfile_in, ZipFile(temp_file.file, "w") as zipfile:
+            with self.get_zipfile("r") as zipfile_in, ZipFile(
+                temp_file.file, "w"
+            ) as zipfile:
                 for info in zipfile_in.infolist():
                     if info.filename == "metadata.json":
                         continue
@@ -550,21 +579,25 @@ class ExtensionVersion(models.Model):
 
         super().save(*args, **kwargs)
 
-        kwargs.pop('force_insert', None)
+        kwargs.pop("force_insert", None)
 
-        for sv_string in self.metadata.pop('shell-version', []):
+        for sv_string in self.metadata.pop("shell-version", []):
             try:
-                self.shell_versions.add(ShellVersion.objects.get_for_version_string(sv_string))
+                self.shell_versions.add(
+                    ShellVersion.objects.get_for_version_string(sv_string)
+                )
             except InvalidShellVersion:
                 # For now, ignore invalid shell versions, rather than
                 # causing a fit.
                 continue
 
-        if 'session-modes' in self.metadata:
-            self.session_modes.set([
-                SessionMode.objects.get(mode=mode)
-                for mode in self.metadata.pop('session-modes', [])
-            ])
+        if "session-modes" in self.metadata:
+            self.session_modes.set(
+                [
+                    SessionMode.objects.get(mode=mode)
+                    for mode in self.metadata.pop("session-modes", [])
+                ]
+            )
 
         self.extra_json_fields = json.dumps(self.metadata)
 
@@ -594,22 +627,26 @@ class ExtensionVersion(models.Model):
 
 class DonationUrl(models.Model):
     class Type(models.TextChoices):
-        BUY_ME_A_COFFEE = 'buymeacoffee', 'Buy Me a Coffee'
-        CUSTOM = 'custom', 'Link'
-        GITHUB = 'github', 'GitHub'
-        KO_FI = 'kofi', 'Ko-fi'
-        PATREON = 'patreon', 'Patreon'
-        PAYPAL = 'paypal', 'PayPal'
+        BUY_ME_A_COFFEE = "buymeacoffee", "Buy Me a Coffee"
+        CUSTOM = "custom", "Link"
+        GITHUB = "github", "GitHub"
+        KO_FI = "kofi", "Ko-fi"
+        PATREON = "patreon", "Patreon"
+        PAYPAL = "paypal", "PayPal"
 
-    extension: Extension = models.ForeignKey(Extension, on_delete=models.CASCADE, related_name="donation_urls")
-    url_type = models.CharField(max_length=32, choices=Type.choices, default=Type.CUSTOM)
+    extension: Extension = models.ForeignKey(
+        Extension, on_delete=models.CASCADE, related_name="donation_urls"
+    )
+    url_type = models.CharField(
+        max_length=32, choices=Type.choices, default=Type.CUSTOM
+    )
     url = models.CharField(max_length=256)
     TYPE_BASE_URLS = {
-        'buymeacoffee': 'https://www.buymeacoffee.com',
-        'github': 'https://github.com/sponsors',
-        'kofi': 'https://ko-fi.com',
-        'patreon': 'https://www.patreon.com',
-        'paypal': 'https://paypal.me',
+        "buymeacoffee": "https://www.buymeacoffee.com",
+        "github": "https://github.com/sponsors",
+        "kofi": "https://ko-fi.com",
+        "patreon": "https://www.patreon.com",
+        "paypal": "https://paypal.me",
     }
 
     @property

@@ -14,7 +14,9 @@ from django.contrib.auth.backends import ModelBackend, UserModel
 
 class LoginEmailAuthentication(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
-        user = super().authenticate(request, username=username, password=password, **kwargs)
+        user = super().authenticate(
+            request, username=username, password=password, **kwargs
+        )
         if user is not None:
             return user
 
@@ -31,7 +33,10 @@ class LoginEmailAuthentication(ModelBackend):
 
     def user_can_authenticate(self, user) -> bool:
         if settings.DISALLOWED_USERNAMES:
-            if any(word.lower() in user.get_username().lower() for word in settings.DISALLOWED_USERNAMES):
+            if any(
+                word.lower() in user.get_username().lower()
+                for word in settings.DISALLOWED_USERNAMES
+            ):
                 return False
 
         return super().user_can_authenticate(user)

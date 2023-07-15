@@ -8,9 +8,9 @@
     (at your option) any later version.
 """
 
-from django.db.models import URLField
 from django.core.validators import URLValidator
+from django.db.models import URLField
 
 
 class HttpURLField(URLField):
-    default_validators = [URLValidator(schemes=['http', 'https'])]
+    default_validators = [URLValidator(schemes=["http", "https"])]

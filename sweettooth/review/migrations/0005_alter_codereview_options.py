@@ -4,14 +4,18 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('review', '0004_alter_codereview_options'),
+        ("review", "0004_alter_codereview_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='codereview',
-            options={'permissions': (('can-review-extensions', 'Can review extensions'), ('trusted', 'Trusted author'))},
+            name="codereview",
+            options={
+                "permissions": (
+                    ("can-review-extensions", "Can review extensions"),
+                    ("trusted", "Trusted author"),
+                )
+            },
         ),
     ]

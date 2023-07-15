@@ -1,7 +1,6 @@
-
 from django.db import models
-from django_comments.models import Comment
 from django_comments.managers import CommentManager
+from django_comments.models import Comment
 from django_comments.signals import comment_will_be_posted
 
 

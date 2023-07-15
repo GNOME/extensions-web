@@ -8,13 +8,15 @@
     (at your option) any later version.
 """
 
-from django.conf import settings
 from pathlib import Path
 
+from django.conf import settings
+
+
 class MessagesCommand:
-    metadata_domain_prefix = 'extensions-web-domain-'
-    po_path = Path(settings.BASE_DIR).joinpath('po')
-    linguas_path = Path(po_path).joinpath('LINGUAS')
+    metadata_domain_prefix = "extensions-web-domain-"
+    po_path = Path(settings.BASE_DIR).joinpath("po")
+    linguas_path = Path(po_path).joinpath("LINGUAS")
     locale_path = Path(settings.SITE_ROOT).joinpath("locale")
 
     def check_po_directory(self):

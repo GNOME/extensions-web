@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0006_alter_user_id'),
+        ("users", "0006_alter_user_id"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='force_review',
+            model_name="user",
+            name="force_review",
             field=models.BooleanField(default=False),
         ),
     ]

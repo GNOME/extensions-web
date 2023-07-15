@@ -8,10 +8,13 @@
     (at your option) any later version.
 """
 
-from django import template
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
 import json
+
+from django import template
+from django.contrib.staticfiles.storage import (
+    ManifestStaticFilesStorage,
+    staticfiles_storage,
+)
 from django.utils.safestring import mark_safe
 
 register = template.Library()
@@ -26,10 +29,10 @@ def static_js_paths():
 
     if isinstance(staticfiles_storage, ManifestStaticFilesStorage):
         if js_paths is None:
-            js_paths = {};
+            js_paths = {}
 
             for base_file, hashed_file in staticfiles_storage.hashed_files.items():
-                if base_file.endswith('.js') and base_file.startswith('js/'):
+                if base_file.endswith(".js") and base_file.startswith("js/"):
                     js_paths[base_file[3:-3]] = hashed_file[3:-3]
 
             js_paths = json.dumps(js_paths)
@@ -46,10 +49,10 @@ def static_img_paths():
 
     if isinstance(staticfiles_storage, ManifestStaticFilesStorage):
         if img_paths is None:
-            img_paths = {};
+            img_paths = {}
 
             for base_file, hashed_file in staticfiles_storage.hashed_files.items():
-                if base_file.startswith('images/'):
+                if base_file.startswith("images/"):
                     img_paths[base_file] = hashed_file
 
             img_paths = json.dumps(img_paths)

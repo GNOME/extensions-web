@@ -4,29 +4,31 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0007_user_force_review'),
+        ("users", "0007_user_force_review"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='user',
-            name='last_name',
+            model_name="user",
+            name="last_name",
         ),
         migrations.RenameField(
-            model_name='user',
-            old_name='first_name',
-            new_name='display_name',
+            model_name="user",
+            old_name="first_name",
+            new_name="display_name",
         ),
         migrations.AlterField(
-            model_name='user',
-            name='display_name',
-            field=models.CharField(blank=True, max_length=150,),
+            model_name="user",
+            name="display_name",
+            field=models.CharField(
+                blank=True,
+                max_length=150,
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='last_email_change',
+            model_name="user",
+            name="last_email_change",
             field=models.DateTimeField(blank=True, null=True),
         ),
     ]

@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('extensions', '0010_session_modes'),
+        ("extensions", "0010_session_modes"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='extension',
-            name='allow_comments',
+            model_name="extension",
+            name="allow_comments",
             field=models.BooleanField(default=True),
         ),
     ]

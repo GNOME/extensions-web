@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
-from django import template
 
+from django import template
 from django_comments import get_form
 from django_comments.templatetags.comments import RenderCommentFormNode
 
@@ -15,7 +15,9 @@ class RenderCaptchaCommentFormNode(RenderCommentFormNode):
         user = context.request.user
         form_class = get_form()
 
-        if user.comment_comments.count() > 10 and (datetime.now() - user.date_joined) > timedelta(days=10):
+        if user.comment_comments.count() > 10 and (
+            datetime.now() - user.date_joined
+        ) > timedelta(days=10):
             form_class = RatingCommentForm
 
         return form_class(obj)
