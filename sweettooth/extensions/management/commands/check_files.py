@@ -18,7 +18,7 @@ class Command(BaseCommand):
         return self._version_message(version, message, True)
 
     def handle(self, *args, **options):
-        for version in ExtensionVersion.objects.exclude(status=STATUS_REJECTED):
+        for version in ExtensionVersion.objects.all():
             badversion = True
             try:
                 with version.get_zipfile('r') as zip:
