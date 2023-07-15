@@ -101,8 +101,6 @@ security (trivy):
   image:
     name: aquasec/trivy
     entrypoint: [""]
-  before_script:
-    - cat requirements.ego.txt >> requirements.txt
   script:
     - trivy fs .
   allow_failure: true
@@ -128,7 +126,6 @@ security (safety):
     - pip install safety
   script:
     - safety check -r requirements.txt
-    - safety check -r requirements.ego.txt
   allow_failure: true
   needs: []
 
