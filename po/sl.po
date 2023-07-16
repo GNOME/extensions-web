@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-07-02 11:21+0000\n"
-"PO-Revision-Date: 2023-07-02 15:38+0200\n"
+"POT-Creation-Date: 2023-07-15 07:00+0000\n"
+"PO-Revision-Date: 2023-07-15 18:46+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -82,6 +82,18 @@ msgstr "Elektronskega naslova ni priporočljivo uporabiti kot uporabniško ime"
 msgid "Your username contains forbidden words"
 msgstr "Vaše uporabniško ime vsebuje prepovedane besede"
 
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Vpisnik"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Prijava računa"
+
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
@@ -146,12 +158,6 @@ msgstr "Prijava"
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Še nimate računa za dostop?"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Vpisnik"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
