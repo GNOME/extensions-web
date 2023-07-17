@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-07-02 11:21+0000\n"
-"PO-Revision-Date: 2023-07-02 21:40+0300\n"
+"POT-Creation-Date: 2023-07-15 07:00+0000\n"
+"PO-Revision-Date: 2023-07-17 23:48+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -80,6 +80,18 @@ msgstr ""
 msgid "Your username contains forbidden words"
 msgstr "У вашому імені користувача містяться заборонені слова"
 
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Зареєструвати"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Реєстрація облікового запису"
+
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
@@ -145,12 +157,6 @@ msgstr "Увійти"
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Не маєте облікового запису?"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Зареєструвати"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
