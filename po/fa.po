@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-07-02 11:21+0000\n"
-"PO-Revision-Date: 2023-07-05 15:25+0330\n"
+"POT-Creation-Date: 2023-07-15 07:00+0000\n"
+"PO-Revision-Date: 2023-07-17 20:19+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -73,6 +73,18 @@ msgstr "نباید از رایانامه به عنوان نام کاربری ا�
 #: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "نام کاربریتان دارای واژگان ممنوعه است"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "ثبت‌نام"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "ثبت‌نام حساب"
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -135,12 +147,6 @@ msgstr "ورود"
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "حسابی ندارید؟"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "ثبت‌نام"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
