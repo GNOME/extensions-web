@@ -23,7 +23,6 @@ develop-eggs
 # sweettooth-specific
 Demos
 uploaded-files
-xapian.db
 sweettooth.wsgi
 local_settings.py
 *.crt
@@ -31,10 +30,5 @@ local_settings.py
 *.key
 
 contrib/
-openshift/docker/
-!openshift/docker/nginx.conf
-!openshift/docker/scripts
-!openshift/docker/wsgi.ini
 static/
 uploaded-files/
-xapian*

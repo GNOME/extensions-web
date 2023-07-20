@@ -24,6 +24,7 @@ WORKDIR /extensions-web/app
 
 COPY . /extensions-web/app
 COPY openshift/docker/wsgi.ini /extensions-web
+COPY openshift/docker/docker-entrypoint.sh /
 
 RUN set -ex \
 	&& ldconfig \
@@ -31,3 +32,6 @@ RUN set -ex \
 	&& chown www-data:root /extensions-web/wsgi.ini \
 	&& pip install -r requirements.txt \
 	&& EGO_SECRET_KEY=- python manage.py compilemessages
+
+ENTRYPOINT []
+CMD [ "/docker-entrypoint.sh" ]
