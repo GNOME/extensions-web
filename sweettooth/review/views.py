@@ -489,7 +489,7 @@ def should_auto_approve(version: models.ExtensionVersion):
         return should_auto_approve_changeset(changeset)
 
 
-def extension_submitted(sender, request, version, **kwargs):
+def extension_submitted(sender, request, version: models.ExtensionVersion, **kwargs):
     if should_auto_approve(version):
         CodeReview.objects.create(
             version=version,
@@ -510,6 +510,9 @@ def extension_submitted(sender, request, version, **kwargs):
         )
 
         for _version in unreviewed_versions:
+            if set(version.shell_versions.all()) != set(_version.shell_versions.all()):
+                continue
+
             CodeReview.objects.create(
                 version=_version,
                 reviewer=request.user,
