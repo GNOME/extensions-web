@@ -12,7 +12,7 @@
 from zipfile import BadZipFile
 
 from django.core.files.base import ContentFile, File
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 
 from sweettooth.extensions import models
 from sweettooth.extensions.tests import get_test_zipfile
@@ -144,3 +144,94 @@ class TestAutoApproveLogic(BasicUserTestCase, TestCase):
             status=models.STATUS_UNREVIEWED,
         )
         self.assertTrue(should_auto_approve(version))
+
+
+class TestAutoRejectLogic(BasicUserTestCase, TestCase):
+    def setUp(self):
+        super().setUp()
+        self.factory = RequestFactory()
+
+    @staticmethod
+    def refresh_from_db(*args: models.ExtensionVersion):
+        for version in args:
+            version.refresh_from_db()
+
+    def test_auto_reject(self):
+        metadata = {
+            "uuid": "something1@example.com",
+            "name": "Test Metadata",
+            "shell-version": ["42"],
+        }
+        zipfile = get_test_zipfile("SimpleExtension")
+
+        extension: models.Extension = models.Extension.objects.create_from_metadata(
+            metadata, creator=self.user
+        )
+        version1 = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata=metadata,
+            source=File(zipfile, "version1.zip"),
+            status=models.STATUS_UNREVIEWED,
+        )
+
+        request = self.factory.post("/upload")
+        request.user = self.user
+
+        models.submitted_for_review.send(
+            sender=request, request=request, version=version1
+        )
+
+        self.refresh_from_db(version1)
+
+        self.assertEqual(version1.status, models.STATUS_UNREVIEWED)
+
+        version2: models.ExtensionVersion = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata=metadata | {"shell-version": ["42", "43"]},
+            source=File(zipfile, "version2.zip"),
+            status=models.STATUS_UNREVIEWED,
+        )
+
+        models.submitted_for_review.send(
+            sender=request, request=request, version=version2
+        )
+
+        self.refresh_from_db(version1, version2)
+
+        self.assertEqual(version1.status, models.STATUS_UNREVIEWED)
+        self.assertEqual(version2.status, models.STATUS_UNREVIEWED)
+
+        version3: models.ExtensionVersion = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata=metadata,
+            source=File(zipfile, "version3.zip"),
+            status=models.STATUS_UNREVIEWED,
+        )
+
+        models.submitted_for_review.send(
+            sender=request, request=request, version=version3
+        )
+
+        self.refresh_from_db(version1, version2, version3)
+
+        self.assertEqual(version1.status, models.STATUS_REJECTED)
+        self.assertEqual(version2.status, models.STATUS_UNREVIEWED)
+        self.assertEqual(version3.status, models.STATUS_UNREVIEWED)
+
+        version4: models.ExtensionVersion = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata=metadata,
+            source=File(zipfile, "version4.zip"),
+            status=models.STATUS_UNREVIEWED,
+        )
+
+        models.submitted_for_review.send(
+            sender=request, request=request, version=version4
+        )
+
+        self.refresh_from_db(version1, version2, version3, version4)
+
+        self.assertEqual(version1.status, models.STATUS_REJECTED)
+        self.assertEqual(version2.status, models.STATUS_UNREVIEWED)
+        self.assertEqual(version3.status, models.STATUS_REJECTED)
+        self.assertEqual(version4.status, models.STATUS_UNREVIEWED)
