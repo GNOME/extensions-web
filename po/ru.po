@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-07-02 11:21+0000\n"
-"PO-Revision-Date: 2023-07-09 16:35+1000\n"
+"POT-Creation-Date: 2023-07-15 07:00+0000\n"
+"PO-Revision-Date: 2023-07-15 20:02+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -78,6 +78,18 @@ msgstr ""
 msgid "Your username contains forbidden words"
 msgstr "Ваше имя пользователя содержит запрещённые слова"
 
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Регистрация"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Регистрация учётной записи"
+
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
@@ -143,12 +155,6 @@ msgstr "Войти"
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Нет учётной записи?"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Регистрация"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -609,7 +615,7 @@ msgstr "Популярности"
 
 #: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
 msgid "Relevance"
-msgstr "Ревалентности"
+msgstr "Релевантности"
 
 #: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
