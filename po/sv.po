@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-07-02 11:21+0000\n"
-"PO-Revision-Date: 2023-07-03 14:52+0200\n"
+"POT-Creation-Date: 2023-07-15 07:00+0000\n"
+"PO-Revision-Date: 2023-07-15 14:01+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -75,6 +75,18 @@ msgstr "Du får inte använda e-post som användarnamn"
 msgid "Your username contains forbidden words"
 msgstr "Ditt användarnamn innehåller förbjudna ord"
 
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Registrera"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Kontoregistrering"
+
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
@@ -140,12 +152,6 @@ msgstr "Logga in"
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Har du inget konto?"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Registrera"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
