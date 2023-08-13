@@ -44,6 +44,10 @@
   <h3>{% trans "Account removal" %}</h3>
   {% if schedule_delete %}
   <div class="alert alert-danger" role="alert">
+    {% comment %}
+        Translators: `schedule_delete_after` is a string representation of Python datetime object.
+        It's a date-time after which account will be deleted.
+    {% endcomment %}
     {% blocktrans %}Your account is scheduled for removal after {{ schedule_delete_after }}{% endblocktrans %}
   </div>
   {% endif %}

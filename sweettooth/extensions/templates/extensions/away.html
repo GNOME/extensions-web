@@ -3,7 +3,7 @@
 {% block title %}{% trans "You are leaving GNOME Extensions website" %}{% endblock %}
 {% block body %}
 <p>
-    {% trans "You are going to leave GNOME Extensions website to" %} {{ target_url|escape }}.
+    {% blocktrans with url=target_url|escape %}You are going to leave GNOME Extensions website to {{ url }}.{% endblocktrans %}
 </p>
 <p>
     <button type="button" class="btn btn-primary" onclick="history.back();">{% trans "Cancel" %}</button>
