@@ -7,44 +7,144 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
+"POT-Creation-Date: 2023-08-13 17:44+0000\n"
+"PO-Revision-Date: 2023-08-20 01:43+0300\n"
+"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
+"Language-Team: Ελληνικά <>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-09-01 22:24+0300\n"
-"Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
-"Language-Team: Ελληνικά <>\n"
-"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:116 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr ""
+"Δεν μπορείτε να αλλάξετε την ηλεκτρονική σας διεύθυνση περισσότερο από μία "
+"φορά κάθε 7 ημέρες"
+
+#: sweettooth/auth/forms.py:188 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Διαγραφή του λογαριασμού μου"
+
+#: sweettooth/auth/forms.py:189 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Ο λογαριασμός σας θα διαγραφεί σε 7 ημέρες"
+
+#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+msgid "No"
+msgstr "Όχι"
+
+#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Ναι"
+
+#: sweettooth/auth/forms.py:195 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Τρέχον συνθηματικό"
+
+#: sweettooth/auth/forms.py:196 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr ""
+"Δεν χρειάζεται να καθορίσετε συνθηματικό για να ακυρώσετε την αφαίρεση "
+"λογαριασμού"
+
+#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Όνομα χρήστη ή ηλεκτρονική διεύθυνση"
+
+#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Όνομα χρήστη"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:72 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
+"Απαιτείται. 30 χαρακτήρες ή λιγότεροι. Μόνο γράμματα, ψηφία και @/./+/-/_."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
+"Αυτή η τιμή μπορεί να περιέχει μόνο γράμματα, αριθμούς και @/./+/-/_ "
+"χαρακτήρες."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:80 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Ηλεκτρονικό ταχυδρομείο"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Συνθηματικό"
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr ""
+"Δεν πρέπει να χρησιμοποιείτε την ηλεκτρονική σας διεύθυνση ως όνομα χρήστη"
 
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Επιβεβαίωση συνθηματικού"
+#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Το όνομα χρήστη σας περιέχει απαγορευμένες λέξεις"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Εισάγετε το ίδιο συνθηματικό όπως παραπάνω, για επιβεβαίωση."
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Εγγραφή"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Εγγραφή λογαριασμού"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Απομάκρυνση λογαριασμού"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Ο λογαριασμός σας έχει προγραμματιστεί για αφαίρεση. Μπορείτε να ακυρώσετε "
+"την αφαίρεση λογαριασμού σε 7 ημέρες."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Η αφαίρεση του λογαριασμού ακυρώθηκε."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "Επιβεβαίωση ηλεκτρονικής διεύθυνσης"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Υποβολή"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Αλλαγή του συνθηματικού σας"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr ""
+"Ο λογαριασμός σας έχει προγραμματιστεί για αφαίρεση μετά το "
+"%(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:23
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -58,17 +158,11 @@ msgstr "Ξεχάσατε το συνθηματικό σας;"
 msgid "Log in"
 msgstr "Είσοδος"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:36
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Δεν έχετε λογαριασμό;"
-
-#: sweettooth/auth/templates/registration/login.html:38
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Εγγραφή"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -90,7 +184,6 @@ msgstr ""
 "Το διακριτικό για την επαναφορά του συνθηματικού είναι λανθασμένο. Ελέγξτε "
 "το σύνδεσμό σας και δοκιμάστε ξανά."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -106,37 +199,119 @@ msgstr ""
 "ταχυδρομείου σας παρακάτω και θα σας στείλουμε οδηγίες για τη ρύθμιση ενός "
 "νέου."
 
-#: sweettooth/context_processors.py:13 extensions-web-domain-django:1
-msgid "Add yours"
+#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Η ηλεκτρονική σας διεύθυνση ενημερώθηκε με επιτυχία"
+
+#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "Ο σύνδεσμος επιβεβαίωσης έληξε. Παρακαλούμε ζητήστε νέο."
+
+#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Εσφαλμένο αίτημα"
+
+#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Τα δεδομένα προφίλ αποθηκεύτηκαν"
+
+#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
+"Το μήνυμα επιβεβαίωσης αποστέλλεται στη νέα σας διεύθυνση. Παρακαλούμε "
+"ελέγξτε τα εισερχόμενά σας."
 
-#: sweettooth/context_processors.py:17 extensions-web-domain-django:1
-msgid "Installed extensions"
-msgstr "Εγκατεστημένες επεκτάσεις"
+#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Εσφαλμένο συνθηματικού"
 
-#: sweettooth/context_processors.py:21 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Επαναφορά ηλεκτρονικής διεύθυνσης και επαναφορά συνθηματικού"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
 msgstr "Περί"
 
-#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
 msgid "Extensions"
 msgstr "Επεκτάσεις"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "Προσθέστε το δικό σας"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "Εγκατεστημένες επεκτάσεις"
+
+#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Πρέπει να ορίσετε το κλειδί \"shell-version\" στο metadata.json"
+
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Μη υποστηριζόμενος τύπος δωρεάς: %s"
+
+#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr ""
+"Δεν μπορείτε να καθορίσετε περισσότερες από 3 τιμές για τον τύπο δωρεάς «%s»"
+
+#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "Πρέπει να καθοριστεί τουλάχιστον μία τιμή για τον τύπο δωρεάς «%s»"
+
+#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+"Ο τύπος τιμής πρέπει να είναι συμβολοσειρά ή λίστα συμβολοσειρών για τον "
+"τύπο δωρεάς «%s»"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Συνέχισε πάραυτα"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Αποχωρείτε από τον ιστότοπο των επεκτάσεων GNOME"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "Θα αφήσετε τον ιστότοπο των επεκτάσεων GNOME στο %(url)s."
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
+"Δυστυχώς, για να βοηθήσουμε στην αποφυγή ανεπιθύμητων μηνυμάτων, απαιτούμε "
+"να <a href=\"%(login_url)s\">συνδεθείτε στις επεκτάσεις του κελύφους του "
+"GNOME</a> για να δημοσιεύσετε ένα σχόλιο ή να αναφέρετε ένα σφάλμα. "
+"Καταλαβαίντε το λόγο, έτσι;"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Κριτικές χρήστη"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Φόρτωση κριτικών…"
@@ -161,52 +336,95 @@ msgstr "Σχόλιο"
 msgid "Rating"
 msgstr "Αξιολόγηση"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Αναφορά σφάλματος"
-
-#: sweettooth/extensions/templates/extensions/detail.html:25
-#: extensions-web-domain-django:1
-msgid "Upgrade this extension"
-msgstr "Αναβάθμιση αυτής της επέκτασης"
-
-#: sweettooth/extensions/templates/extensions/detail.html:26
-#: extensions-web-domain-django:1
-msgid "Configure this extension"
-msgstr "Ρύθμιση αυτής της επέκτασης"
-
-#: sweettooth/extensions/templates/extensions/detail.html:27
-#: extensions-web-domain-django:1
-msgid "Uninstall this extension"
-msgstr "Απεγκατάσταση αυτής της επέκτασης"
-
-#: sweettooth/extensions/templates/extensions/detail.html:53
-#: extensions-web-domain-django:1
-msgid "Extension Homepage"
-msgstr "Ιστοσελίδα επεκτάσεων"
-
-#: sweettooth/extensions/templates/extensions/detail.html:58
-#: extensions-web-domain-django:1
-msgid "Download"
-msgstr "Λήψη"
-
-#: sweettooth/extensions/templates/extensions/detail.html:61
-#: extensions-web-domain-django:1
-msgid "Shell version…"
-msgstr "Έκδοση κελύφους…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:65
-#: extensions-web-domain-django:1
-msgid "Extension version…"
-msgstr "Έκδοση επέκτασης…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
+"Ένας αναθεωρητής θα ελέγξει την επέκταση που υποβάλατε για να βεβαιωθεί ότι "
+"δεν υπάρχει τίποτα πολύ επικίνδυνο. Θα λάβετε μήνυμα με το αποτέλεσμα του "
+"ελέγχου."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Τα σχόλια είναι απενεργοποιημένα για αυτήν την επέκταση."
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s λήψη"
+msgstr[1] "%(downloads)s λήψεις"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Αριθμός λήψεων"
+
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Δωρεά"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Εγκατάσταση"
+
+#: sweettooth/extensions/templates/extensions/detail.html:46
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "Αναβάθμιση αυτής της επέκτασης"
+
+#: sweettooth/extensions/templates/extensions/detail.html:47
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "Ρύθμιση αυτής της επέκτασης"
+
+#: sweettooth/extensions/templates/extensions/detail.html:48
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "Απεγκατάσταση αυτής της επέκτασης"
+
+#: sweettooth/extensions/templates/extensions/detail.html:75
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "Ιστοσελίδα επεκτάσεων"
+
+#: sweettooth/extensions/templates/extensions/detail.html:81
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Λειτουργία(εις) συνεδρίας"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "Αυτή η επέκταση θα εκτελείται όσο η οθόνη είναι κλειδωμένη"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Διάλογος ξεκλειδώματος"
+
+#: sweettooth/extensions/templates/extensions/detail.html:86
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "Λήψη"
+
+#: sweettooth/extensions/templates/extensions/detail.html:89
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Έκδοση κελύφους…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:93
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "Έκδοση επέκτασης…"
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -224,11 +442,11 @@ msgstr "Εγκατεστημένες επεκτάσεις"
 msgid "Shell settings"
 msgstr "Ρυθμίσεις κελύφους"
 
-#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "Περιεχόμενο"
 
-#: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Metadata"
 msgstr "Μεταδεδομένα"
 
@@ -254,8 +472,8 @@ msgstr "Τι πιστεύετε για αυτήν την επέκταση του
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Παρακαλούμε διορθώστε το παρακάτω σφάλμα"
+msgstr[1] "Παρακαλούμε διορθώστε τα παρακάτω σφάλματα"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
@@ -273,6 +491,51 @@ msgstr "Δημοσίευση σχολίου"
 msgid "Edit your comment"
 msgstr "Επεξεργασία του σχολίου σας"
 
+#: sweettooth/review/templates/review/review.html:73
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Μπορείτε να ανεβάσετε την επόμενη έκδοση από την <a href='https://extensions."
+"gnome.org/upload/'>ίδια φόρμα</a> που έχετε δημοσιεύσει αυτήν την έκδοση."
+
+#: sweettooth/review/templates/review/review.html:76
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Μπορείτε να αλλάξετε το εικονίδιο επέκτασης κάνοντας κλικ στο εικονίδιο στη "
+"σελίδα επέκτασης."
+
+#: sweettooth/review/templates/review/review.html:79
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Σε περίπτωση που θέλετε να απενεργοποιήσετε μια εγκεκριμένη έκδοση, κάντε "
+"κλικ στο σύνδεσμο απενεργοποίηση στη σελίδα επέκτασης."
+
+#: sweettooth/review/templates/review/review.html:82
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Μπορείτε να βρείτε οδηγούς προγραμματιστών στο <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:85
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Εάν χρειάζεστε βοήθεια με την επέκτασή σας, μπορείτε να μας ρωτήσετε στο <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>Κανάλι GNOME Matrix</a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Τελευταίες επεκτάσεις στο Επεκτάσεις κελύφους GNOME"
@@ -281,6 +544,10 @@ msgstr "Τελευταίες επεκτάσεις στο Επεκτάσεις κ
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Επεκτάσεις κελύφους GNOME"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Οδηγός προγραμματιστών"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -294,39 +561,51 @@ msgstr "Ρυθμίσεις χρήστη"
 msgid "Log out"
 msgstr "Έξοδος"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
+"Για να ελέγξετε τις επεκτάσεις του GNOME Shell χρησιμοποιώντας αυτόν τον "
+"ιστότοπο, πρέπει να εγκαταστήσετε την ενσωμάτωση του GNOME Shell που "
+"αποτελείται από δύο μέρη: επέκταση προγράμματος περιήγησης και εφαρμογή "
+"ανταλλαγής μηνυμάτων εγγενούς κεντρικού υπολογιστή"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr ""
+"Εγκαταστήστε την επέκταση προγράμματος περιήγησης ενσωμάτωσης του GNOME Shell"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
 msgstr "Κάντε κλικ εδώ για να εγκαταστήσετε επέκταση προγράμματος περιήγησης"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
+"Ανατρέξτε στη σελίδα %swiki%s για οδηγίες εισαγωγής εγγενούς σύνδεσης "
+"κεντρικού υπολογιστή"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
+"Δεν μπορούμε να εντοπίσουμε ένα εκτελούμενο αντίγραφο του GNOME σε αυτό το "
+"σύστημα, επομένως ορισμένα τμήματα της διεπαφής ενδέχεται να είναι "
+"απενεργοποιημένα. Ανατρέξτε στην <a href=\"/about/#no-detection\">καταχώρισή "
+"μας αντιμετώπισης προβλημάτων</a> για περισσότερες πληροφορίες."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
+"Οι επεκτάσεις κελύφους GNOME δεν μπορούν να εμφανίσουν τις εγκατεστημένες "
+"επεκτάσεις σας."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Συμβατό με"
 
@@ -346,16 +625,20 @@ msgstr "Λήψεις"
 msgid "Popularity"
 msgstr "Δημοτικότητα"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Συνάφεια"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Ταξινόμηση κατά"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
 msgstr "Εμφάνιση περισσότερων κριτικών"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Δεν υπάρχουν σχόλια. Στείλτε πρώτος!"
@@ -364,47 +647,6 @@ msgstr "Δεν υπάρχουν σχόλια. Στείλτε πρώτος!"
 #: extensions-web-domain-djangojs:1
 msgid "Author"
 msgstr "Δημιουργός"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr ""
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr ""
-"Οι επεκτάσεις κελύφους του GNOME δεν ανίχνευσαν λάθη με αυτήν την επέκταση."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Πληροφορίες έκδοσης"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Έκδοση κελύφους"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Έκδοση επέκτασης"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Άγνωστο"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Τι προσπαθήσατε;"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Αυτόματη εντόπιση σφαλμάτων"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
@@ -415,3 +657,36 @@ msgstr "Επέκταση συστήματος"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Απεγκαταστήσατε"
+
+#~ msgid "Password"
+#~ msgstr "Συνθηματικό"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "Εισάγετε το ίδιο συνθηματικό όπως παραπάνω, για επιβεβαίωση."
+
+#~ msgid "Bug report"
+#~ msgstr "Αναφορά σφάλματος"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr ""
+#~ "Οι επεκτάσεις κελύφους του GNOME δεν ανίχνευσαν λάθη με αυτήν την "
+#~ "επέκταση."
+
+#~ msgid "Version information"
+#~ msgstr "Πληροφορίες έκδοσης"
+
+#~ msgid "Shell version"
+#~ msgstr "Έκδοση κελύφους"
+
+#~ msgid "Extension version"
+#~ msgstr "Έκδοση επέκτασης"
+
+#~ msgid "Unknown"
+#~ msgstr "Άγνωστο"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Τι προσπαθήσατε;"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Αυτόματη εντόπιση σφαλμάτων"
