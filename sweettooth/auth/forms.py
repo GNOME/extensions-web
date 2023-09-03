@@ -1,6 +1,6 @@
 import re
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, Dict
 
 from django import forms
 from django.conf import settings
@@ -42,6 +42,21 @@ class LoginOrEmailAuthenticationForm(auth_forms.AuthenticationForm):
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         self.fields["username"].label = _("Username or email")
+
+    def clean(self) -> Dict[str, Any]:
+        try:
+            return super().clean()
+        except User.MultipleObjectsReturned:
+            raise forms.ValidationError(
+                _(
+                    "You have multiple accounts registered using single email. You can"
+                    " log in using your username or you can request removal of"
+                    " duplicate accounts using GNOME Gitlab (%(url)s)."
+                )
+                % {
+                    "url": "https://gitlab.gnome.org/Infrastructure/extensions-web/-/issues"  # noqa: E501
+                }
+            )
 
 
 class InlineForm(object):
