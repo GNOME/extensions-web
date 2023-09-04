@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-08-13 17:44+0000\n"
-"PO-Revision-Date: 2023-08-14 09:35+0200\n"
+"POT-Creation-Date: 2023-09-03 07:38+0000\n"
+"PO-Revision-Date: 2023-09-03 11:22+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -22,31 +22,39 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: sweettooth/auth/forms.py:116 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:101 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Elektronskega naslova ni priporočljivo uporabiti kot uporabniško ime"
+
+#: sweettooth/auth/forms.py:108 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Vaše uporabniško ime vsebuje prepovedane besede"
+
+#: sweettooth/auth/forms.py:130 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Svojega e-naslova ne morete spremeniti več kot enkrat v sedmih dneh"
 
-#: sweettooth/auth/forms.py:188 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Izbriši moj račun"
 
-#: sweettooth/auth/forms.py:189 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Vaš račun bo izbrisan čez 7 dni"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ne"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Da"
 
-#: sweettooth/auth/forms.py:195 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Trenutno geslo"
 
-#: sweettooth/auth/forms.py:196 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Za preklic odstranitve računa vam ni treba navesti gesla"
 
@@ -54,36 +62,39 @@ msgstr "Za preklic odstranitve računa vam ni treba navesti gesla"
 msgid "Username or email"
 msgstr "Uporabniško ime ali elektronski naslov"
 
-#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"Z enim e-poštnim naslovom imate registriranih več računov. Prijavite se "
+"lahko s svojim uporabniškim imenom ali pa zahtevate odstranitev podvojenih "
+"računov prek GNOME Gitlab (%(url)s)."
+
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: sweettooth/auth/forms.py:72 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:86 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Zahtevan je vpis do 30 znakov, uporabiti pa je mogoče le črke, številke in "
 "znake @/./+/-/_."
 
-#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Ta vrednost lahko vsebuje le črke, številke in znake »@«, ».«, »+«, »-« in "
 "»_«."
 
-#: sweettooth/auth/forms.py:80 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Elektronski naslov"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Elektronskega naslova ni priporočljivo uporabiti kot uporabniško ime"
-
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "Vaše uporabniško ime vsebuje prepovedane besede"
-
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:35
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -144,19 +155,19 @@ msgstr "Spremenite geslo"
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr "Vaš račun bo odstranjen po %(schedule_delete_after)s"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "Ali ste pozabili geslo?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "Prijava"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
