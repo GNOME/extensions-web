@@ -533,12 +533,12 @@ def ajax_details(extension, version=None):
 
 @ajax_view
 def ajax_details_view(request):
-    uuid = request.GET.get("uuid", "")
+    uuid = request.GET.get("uuid", None)
     pk = request.GET.get("pk", None)
 
-    if len(uuid) > 2 and len(uuid) <= models.Extension.uuid.max_length:
+    if uuid is not None:
         extension = get_object_or_404(models.Extension.objects.visible(), uuid=uuid)
-    elif pk:
+    elif pk is not None:
         try:
             extension = get_object_or_404(models.Extension.objects.visible(), pk=pk)
         except (TypeError, ValueError):
