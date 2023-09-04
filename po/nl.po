@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-08-13 17:44+0000\n"
-"PO-Revision-Date: 2023-08-27 17:42+0200\n"
+"POT-Creation-Date: 2023-09-03 07:38+0000\n"
+"PO-Revision-Date: 2023-09-04 21:13+0200\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
@@ -18,31 +18,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: sweettooth/auth/forms.py:116 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:101 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "U gebruikt beter geen e-mailadres als gebruikersnaam"
+
+#: sweettooth/auth/forms.py:108 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Uw gebruikersnaam bevat niet-toegestane woorden"
+
+#: sweettooth/auth/forms.py:130 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "U kunt uw e-mailadres maar één keer per 7 dagen wijzigen"
 
-#: sweettooth/auth/forms.py:188 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Mijn account verwijderen"
 
-#: sweettooth/auth/forms.py:189 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "U account zal na 7 dagen verwijderd worden"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
 msgid "No"
 msgstr "Nee"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Ja"
 
-#: sweettooth/auth/forms.py:195 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Huidig wachtwoord"
 
-#: sweettooth/auth/forms.py:196 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "U hoeft uw wachtwoord niet in te geven om de verwijdering van uw account te "
@@ -52,34 +60,37 @@ msgstr ""
 msgid "Username or email"
 msgstr "Gebruikersnaam of e-mailadres"
 
-#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"U hebt meerdere accounts met hetzelfde e-mailadres geregistreerd. Meld u aan "
+"met uw gebruikersnaam, of vraag op GNOME GitLab (%(url)s) om de dubbele "
+"accounts te verwijderen."
+
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: sweettooth/auth/forms.py:72 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:86 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Vereist. 30 tekens of minder. Enkel letters, cijfers en @/./+/-/_."
 
-#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Deze waarde mag alleen letters, cijfers of de volgende tekens bevatten: @ . "
 "+ - _"
 
-#: sweettooth/auth/forms.py:80 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-mailadres"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "U gebruikt beter geen e-mailadres als gebruikersnaam"
-
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "Uw gebruikersnaam bevat niet-toegestane woorden"
-
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:35
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -139,19 +150,19 @@ msgstr "Uw wachtwoord wijzigen"
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr "Uw account wordt verwijderd na %(schedule_delete_after)s"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "Wachtwoord vergeten?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "Aanmelden"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
