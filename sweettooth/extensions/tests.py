@@ -1,4 +1,5 @@
 import json
+import logging
 import os.path
 import tempfile
 from io import BytesIO
@@ -1447,3 +1448,59 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         self.assertEqual(
             views.grab_proper_extension_version(extension, "129.rc", True).version, 5
         )
+
+
+class ExtensionDetailsTest(BasicUserTestCase, TestCase):
+    def setUp(self) -> None:
+        super().setUp()
+
+        # Reduce the log level to avoid messages like 'bad request'
+        logger = logging.getLogger("django.request")
+        self.previous_level = logger.getEffectiveLevel()
+        logger.setLevel(logging.ERROR)
+
+    def tearDown(self) -> None:
+        super().tearDown()
+
+        logger = logging.getLogger("django.request")
+        logger.setLevel(self.previous_level)
+
+    def test_extension_details(self):
+        metadata = {
+            "name": "Detail Test",
+            "uuid": "detail-test@extension.org",
+            "description": "Simple test detail",
+            "url": "http://test-metadata.gnome.org",
+            "shell-version": ["3.0", "3.2", "40.0", "56.5"],
+        }
+
+        extension = models.Extension.objects.create_from_metadata(
+            metadata.copy(), creator=self.user
+        )
+
+        models.ExtensionVersion.objects.create(
+            extension=extension, metadata=metadata.copy(), status=models.STATUS_ACTIVE
+        )
+
+        response = self.client.get(
+            reverse("extensions-ajax-details"),
+            {
+                "uuid": metadata["uuid"],
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+        json_response = response.json()
+        for key in ("name", "uuid", "description"):
+            self.assertEqual(metadata[key], json_response.get(key))
+
+    def test_long_uuid(self):
+        response = self.client.get(
+            reverse("extensions-ajax-details"),
+            {
+                "uuid": "a" * 250,
+            },
+        )
+
+        self.assertEqual(response.status_code, 400)
