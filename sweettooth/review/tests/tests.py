@@ -145,6 +145,22 @@ class TestAutoApproveLogic(BasicUserTestCase, TestCase):
         )
         self.assertTrue(should_auto_approve(version))
 
+        version: models.ExtensionVersion = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata=metadata | {"shell-version": ["45"]},
+            source=File(zipfile, "version4.zip"),
+            status=models.STATUS_UNREVIEWED,
+        )
+        self.assertFalse(should_auto_approve(version))
+
+        version: models.ExtensionVersion = models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata=metadata | {"shell-version": ["42", "64"]},
+            source=File(zipfile, "version5.zip"),
+            status=models.STATUS_UNREVIEWED,
+        )
+        self.assertFalse(should_auto_approve(version))
+
 
 class TestAutoRejectLogic(BasicUserTestCase, TestCase):
     def setUp(self):
