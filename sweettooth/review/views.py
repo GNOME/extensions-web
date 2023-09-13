@@ -469,7 +469,7 @@ def should_auto_approve(version: models.ExtensionVersion):
     if (can_review or trusted) and not user.force_review:
         return True
 
-    old_version = version.extension.latest_version
+    old_version: Optional[models.ExtensionVersion] = version.extension.latest_version
     if old_version is None:
         return False
 
@@ -477,6 +477,14 @@ def should_auto_approve(version: models.ExtensionVersion):
     session_modes = [x.mode for x in version.session_modes.all()]
 
     if Counter(old_session_modes) != Counter(session_modes):
+        return False
+
+    old_shell_versions: set[int] = set(
+        sv.major for sv in old_version.shell_versions.all()
+    )
+    new_shell_versions: set[int] = set(sv.major for sv in version.shell_versions.all())
+
+    if any(v >= 45 for v in (new_shell_versions - old_shell_versions)):
         return False
 
     with ExitStack() as stack:
