@@ -13,6 +13,7 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django_opensearch_dsl import Document, fields
 from django_opensearch_dsl.registries import registry
+from opensearchpy.helpers.analysis import analyzer
 
 from .models import Extension, ExtensionVersion
 
@@ -21,6 +22,24 @@ from .models import Extension, ExtensionVersion
 class ExtensionDocument(Document):
     class Index:
         name = "extensions"
+        settings = {
+            "analysis": {
+                "filter": {
+                    "edge_ngram_filter": {
+                        "type": "edge_ngram",
+                        "min_gram": 3,
+                        "max_gram": 12,
+                    }
+                },
+                "analyzer": {
+                    "autocomplete": {
+                        "type": "custom",
+                        "tokenizer": "standard",
+                        "filter": ["lowercase", "edge_ngram_filter"],
+                    }
+                },
+            },
+        }
 
     class Django:
         model = Extension
@@ -35,8 +54,11 @@ class ExtensionDocument(Document):
 
     name = fields.TextField(
         fields={"raw": fields.KeywordField()},
+        analyzer=analyzer("autocomplete"),
     )
-    creator = fields.TextField()
+    creator = fields.TextField(
+        analyzer=analyzer("autocomplete"),
+    )
     shell_versions = fields.TextField(multi=True)
 
     def get_queryset(self, *args, **kwargs):

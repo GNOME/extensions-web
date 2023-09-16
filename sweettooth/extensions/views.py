@@ -309,9 +309,9 @@ def ajax_query_search_query(
             type="best_fields",
             fields=[
                 "uuid",
-                "name^2",
+                "name^3",
                 "description",
-                "creator",
+                "creator^2",
             ],
         )
     )
