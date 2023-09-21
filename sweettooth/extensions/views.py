@@ -15,6 +15,7 @@ from urllib.parse import unquote
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import BadRequest
 from django.core.paginator import InvalidPage, Paginator
 from django.core.validators import URLValidator
 from django.db import transaction
@@ -294,11 +295,11 @@ def ajax_query_search_query(
         page = int(request.GET.get("page", 1))
         page_size = max(1, min(max_page_size, int(n_per_page)))
     except Exception:
-        return HttpResponseBadRequest()
+        raise BadRequest()
 
     query = request.GET.get("search", "")
     if not query:
-        return HttpResponseBadRequest()
+        raise BadRequest()
 
     queryset = (
         ExtensionDocument.search()
