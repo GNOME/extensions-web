@@ -68,6 +68,9 @@ class EmainChangeCancelTokenGenerator:
     MAX_AGE = timedelta(days=7)
 
     def check_token(self, user, token: str):
+        if not (user and token):
+            return False
+
         try:
             self.data = TimestampSigner(salt=self.SALT).unsign_object(
                 token, max_age=self.MAX_AGE
