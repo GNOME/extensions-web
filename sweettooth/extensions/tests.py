@@ -771,6 +771,26 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
 
         self.assertEquals("https://ko-fi.com/test", donation_url.full_url)
 
+    def test_full_url_liberapay(self):
+        metadata = self.DEFAULT_METADATA | {"donations": {"liberapay": "test"}}
+
+        extension = models.Extension.objects.create_from_metadata(
+            metadata, creator=self.user
+        )
+        donation_url = extension.donation_urls.first()
+
+        self.assertEquals("https://liberapay.com/test", donation_url.full_url)
+
+    def test_full_url_opencollective(self):
+        metadata = self.DEFAULT_METADATA | {"donations": {"opencollective": "test"}}
+
+        extension = models.Extension.objects.create_from_metadata(
+            metadata, creator=self.user
+        )
+        donation_url = extension.donation_urls.first()
+
+        self.assertEquals("https://opencollective.com/test", donation_url.full_url)
+
     def test_full_url_patreon(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"patreon": "test"}}
 

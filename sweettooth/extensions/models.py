@@ -631,6 +631,8 @@ class DonationUrl(models.Model):
         CUSTOM = "custom", "Link"
         GITHUB = "github", "GitHub"
         KO_FI = "kofi", "Ko-fi"
+        LIBERAPAY = "liberapay", "Liberapay"
+        OPENCOLLECTIVE = "opencollective", "Open Collective"
         PATREON = "patreon", "Patreon"
         PAYPAL = "paypal", "PayPal"
 
@@ -645,6 +647,8 @@ class DonationUrl(models.Model):
         "buymeacoffee": "https://www.buymeacoffee.com",
         "github": "https://github.com/sponsors",
         "kofi": "https://ko-fi.com",
+        "liberapay": "https://liberapay.com",
+        "opencollective": "https://opencollective.com",
         "patreon": "https://www.patreon.com",
         "paypal": "https://paypal.me",
     }
