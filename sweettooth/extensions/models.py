@@ -631,8 +631,20 @@ class DonationUrl(models.Model):
         CUSTOM = "custom", "Link"
         GITHUB = "github", "GitHub"
         KO_FI = "kofi", "Ko-fi"
+        LIBERAPAY = "liberapay", "Liberapay"
+        OPENCOLLECTIVE = "opencollective", "Open Collective"
         PATREON = "patreon", "Patreon"
         PAYPAL = "paypal", "PayPal"
+
+    TYPE_BASE_URLS = {
+        Type.BUY_ME_A_COFFEE: "https://www.buymeacoffee.com",
+        Type.GITHUB: "https://github.com/sponsors",
+        Type.KO_FI: "https://ko-fi.com",
+        Type.LIBERAPAY: "https://liberapay.com",
+        Type.OPENCOLLECTIVE: "https://opencollective.com",
+        Type.PATREON: "https://www.patreon.com",
+        Type.PAYPAL: "https://paypal.me",
+    }
 
     extension: Extension = models.ForeignKey(
         Extension, on_delete=models.CASCADE, related_name="donation_urls"
@@ -641,13 +653,6 @@ class DonationUrl(models.Model):
         max_length=32, choices=Type.choices, default=Type.CUSTOM
     )
     url = models.CharField(max_length=256)
-    TYPE_BASE_URLS = {
-        "buymeacoffee": "https://www.buymeacoffee.com",
-        "github": "https://github.com/sponsors",
-        "kofi": "https://ko-fi.com",
-        "patreon": "https://www.patreon.com",
-        "paypal": "https://paypal.me",
-    }
 
     @property
     def full_url(self):
