@@ -16,6 +16,14 @@ span.action_button {
     padding-left: 0px;
 }
 
+.user-details {
+  text-align: center;
+}
+
+.user-details .gravatar {
+  border-radius: 100%;
+}
+
 /* Unreviewed Extension Counter */
 /* ==================================================================== */
 
@@ -571,6 +579,7 @@ li.extension:last-child,
 .comment .gravatar {
     position: absolute;
     margin-left: -90px;
+    border-radius: 100%;
 }
 
 .comment .rating-author {

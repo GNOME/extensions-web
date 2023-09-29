@@ -4,11 +4,13 @@
 {% block body %}
 {% load gravatar extension_icon %}
 <div class="profile">
-  <h2>{{ display_name }}</h2>
-  <img class="gravatar" src="{% gravatar_url request user.email 128 %}">
-  <p>
-    Your avatar is managed through <a href="https://secure.gravatar.com/">Gravatar</a>
-  </p>
+  <div class="user-details">
+    <img class="gravatar" src="{% gravatar_url request user.email 128 %}">
+    <h2>{{ display_name }}</h2>
+    <p>
+      Your avatar is managed through <a href="https://secure.gravatar.com/">Gravatar</a>
+    </p>
+  </div>
 
   <h3> {{ display_name }} has authored </h3>
   <ul>
