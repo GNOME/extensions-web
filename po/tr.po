@@ -5,72 +5,174 @@
 # Serdar Sağlam <teknomobil@msn.com>, 2019.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2022.
 # Sabri Ünal <libreajans@gmail.com>, 2023.
+# Alperen İsa Nalbant <afacanc38@vuhuv.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-03-07 17:19+0000\n"
-"PO-Revision-Date: 2023-03-10 21:56+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2023-09-03 07:38+0000\n"
+"PO-Revision-Date: 2023-10-04 19:50+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 45.1\n"
 
-#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:101 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "E-posta adresini kullanıcı adı olarak kullanmayınız"
+
+#: sweettooth/auth/forms.py:108 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Kullanıcı adınız yasaklanmış sözcükler içeriyor"
+
+#: sweettooth/auth/forms.py:130 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "E-postanızı 7 gün içinde birden çok kez değiştiremezsiniz"
+
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Hesabımı sil"
+
+#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Hesabınız 7 gün içinde silinecektir"
+
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+msgid "No"
+msgstr "Hayır"
+
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Evet"
+
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Şu anki parola"
+
+#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr "Hesabınızı silmeyi iptal etmek için bir parola belirtmeniz gerekmez"
+
+#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Kullanıcı adı ya da e-posta"
 
-#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"Tek bir e-postayla kaydedilmiş birden çok hesabınız var. Kullanıcı "
+"adınızla giriş yapabilir ya da GNOME Gitlab’da birden çok kez açılmış "
+"hesapları silme isteminde bulunabilirsiniz. (%(url)s)."
+
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:86 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Gerekli. 30 karakter veya daha az olmalı. Yalnızca harfler, rakamlar ve @/./"
 "+/-/_"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Bu giriş yalnızca harfler, sayılar ve @/./+/-/_ karakterlerini içerebilir."
 
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-posta"
 
-#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "E-posta adresini kullanıcı adı olarak kullanmayınız"
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:35
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Kaydol"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Hesap Kaydı"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Hesabı silme"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Hesabınız silinmek için zamanlandı. Hesabı silmeyi 7 gün içinde iptal "
+"edebilirsiniz."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Hesap silme iptal edildi."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "E-posta doğrulaması"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Tercihler"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Gönder"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Parolanızı değiştirin"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr ""
+"Hesabınız %(schedule_delete_after)s tarihinden sonra silinmek için "
+"zamanlandı"
+
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "Parolanızı mı unuttunuz?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "Giriş"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Hesabınız yok mu?"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Kaydol"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -92,7 +194,6 @@ msgstr ""
 "Parola sıfırlama jetonu yanlış. Lütfen bağlantınızı denetleyip yeniden "
 "deneyin."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -107,23 +208,100 @@ msgstr ""
 "Parolanızı mı unuttunuz? E-posta adresinizi aşağıya girin, yenisini "
 "belirlemek için e-posta yönergelerini gönderelim."
 
-#: sweettooth/context_processors.py:13 extensions-web-domain-django:1
-msgid "Add yours"
-msgstr "Kendininkileri ekle"
+#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "E-posta adresiniz başarıyla güncellendi"
 
-#: sweettooth/context_processors.py:17 extensions-web-domain-django:1
-msgid "Installed extensions"
-msgstr "Kurulu uzantılar"
+#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr ""
+"Doğrulama bağlantınız geçerliliğini yitirdi. Lütfen yenisini isteyin."
 
-#: sweettooth/context_processors.py:21 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Yanlış istem"
+
+#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Profil verisi kaydedildi"
+
+#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"Yeni adresinize doğrulama e-postası gönderildi. Lütfen gelen kutunuzu "
+"gözden geçirin."
+
+#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Parola yanlış"
+
+#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "E-postayı kurtar ve parolayı sıfırla"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
 msgstr "Hakkında"
 
-#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
 msgid "Extensions"
 msgstr "Uzantılar"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "Kendininkileri ekle"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "Kurulu uzantılar"
+
+#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "metadata.json’da `shell-version` anahtarı tanımlamalısınız."
+
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Desteklenmeyen bağış seçeneği: %s"
+
+#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr "\"%s\" bağış seçeneği için üçten çok değer belirtemezsiniz"
+
+#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "\"%s\" bağış seçeneği için en az bir değer belirtilmelidir"
+
+#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+"\"%s\" bağış seçeneği için değer türü dizge ya da dizge listesinden oluşmalıdır"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Yine de sürdür"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "GNOME Uzantılar web sitesinden ayrılıyorsunuz"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "GNOME Uzantılar web sitesinden %(url)s sayfasına gidiyorsunuz"
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "İptal"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -135,12 +313,12 @@ msgstr ""
 "bildirmek için <a href=\"%(login_url)s\"> GNOME Kabuk Uzantılarına giriş "
 "yapmanız</a> gerekmektedir. Anlıyorsun, değil mi?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Kullanıcı Yorumları"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Yorumlar yükleniyor…"
@@ -165,10 +343,21 @@ msgstr "Yorum yaz"
 msgid "Rating"
 msgstr "Oyla"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Hata bildir"
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+"Bir gözlemci, çok tehlikeli bir şey olmadığından emin olmak için "
+"gönderdiğiniz uzantıyı inceler. İşlemin sonucu size e-posta ile "
+"gönderilecektir."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Bu uzantı yorumlara kapalıdır."
 
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
@@ -182,76 +371,66 @@ msgstr[0] "%(downloads)s indirme"
 msgid "Number of Downloads"
 msgstr "İndirme Sayısı"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Bağış"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Kur"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:46
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Bu uzantıyı yükselt"
 
-#: sweettooth/extensions/templates/extensions/detail.html:29
+#: sweettooth/extensions/templates/extensions/detail.html:47
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Bu uzantıyı yapılandır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:30
+#: sweettooth/extensions/templates/extensions/detail.html:48
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Bu uzantıyı kaldır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:56
+#: sweettooth/extensions/templates/extensions/detail.html:75
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Uzantı Sayfası"
 
-#: sweettooth/extensions/templates/extensions/detail.html:62
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Oturum Kip(ler)i"
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Bu uzantı ekran kilitliyken çalışacaktır"
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Kilit Açma İletişim Penceresi"
 
-#: sweettooth/extensions/templates/extensions/detail.html:67
+#: sweettooth/extensions/templates/extensions/detail.html:86
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "İndir"
 
-#: sweettooth/extensions/templates/extensions/detail.html:70
+#: sweettooth/extensions/templates/extensions/detail.html:89
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Kabuk sürümü…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:93
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Uzantı sürümü…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:83
-#: extensions-web-domain-django:1
-msgid ""
-"A reviewer will review the extension you submitted to make sure there's "
-"nothing too dangerous. You'll be emailed the result of the review."
-msgstr ""
-"Bir gözlemci, çok tehlikeli bir şey olmadığından emin olmak için "
-"gönderdiğiniz uzantıyı inceler. İşlemin sonucu size e-posta ile "
-"gönderilecektir."
-
-#: sweettooth/extensions/templates/extensions/detail.html:94
-#: sweettooth/extensions/templates/extensions/detail_edit.html:7
-#: extensions-web-domain-django:1
-msgid "Comments are disabled for this extension."
-msgstr "Bu uzantı yorumlara kapalıdır."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -269,11 +448,11 @@ msgstr "Kurulu Uzantılar"
 msgid "Shell settings"
 msgstr "Kabuk ayarları"
 
-#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "İçerik"
 
-#: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Metadata"
 msgstr "Üst Veri"
 
@@ -317,7 +496,7 @@ msgstr "Yorumu Gönder"
 msgid "Edit your comment"
 msgstr "Yorumunu düzenle"
 
-#: sweettooth/review/templates/review/review.html:63
+#: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
@@ -326,7 +505,7 @@ msgstr ""
 "Sonraki sürümü, bu sürümü yayınladığınız <a href='https://extensions.gnome."
 "org/upload/'>aynı form ile</a> yükleyebilirsiniz."
 
-#: sweettooth/review/templates/review/review.html:66
+#: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
 msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
@@ -334,7 +513,7 @@ msgid ""
 msgstr ""
 "Uzantı sayfanızdaki simgeye tıklayarak uzantı simgesini değiştirebilirsiniz."
 
-#: sweettooth/review/templates/review/review.html:69
+#: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
@@ -343,7 +522,7 @@ msgstr ""
 "Onaylanan bir sürümü devre dışı bırakmak isterseniz, uzantı sayfanızdaki "
 "devre dışı bırak bağlantısına tıklayın."
 
-#: sweettooth/review/templates/review/review.html:72
+#: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
 "You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
@@ -352,7 +531,7 @@ msgstr ""
 "Geliştirici kılavuzunu <a href='https://gjs.guide/extensions/'>gjs.guide</"
 "a>ʼda bulabilirsiniz."
 
-#: sweettooth/review/templates/review/review.html:75
+#: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
 msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
@@ -419,12 +598,11 @@ msgstr ""
 "bölümleri devre dışı bırakılabilir. Daha çok bilgi için <a href=\"/about/#no-"
 "detection\">sorun giderme girdimize</a> bakın."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr "GNOME Kabuk Uzantıları, kurulu uzantılarınızı listeleyemez."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Uyumluluk biçimi"
 
@@ -444,7 +622,11 @@ msgstr "Çok indirilenler"
 msgid "Popularity"
 msgstr "Çok oylananlar"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "İlgiye göre"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Sıralama biçimi"
 
@@ -456,53 +638,12 @@ msgstr "Daha çok yorum göster"
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr "Yorum yok. İlk olun!"
+msgstr "Yorum yok. İlk yazan olun!"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:4
 #: extensions-web-domain-djangojs:1
 msgid "Author"
 msgstr "Yazar"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Ne oldu?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr ""
-"GNOME Kabuk Uzantıları, bu uzantıyla ilgili herhangi bir hata saptamadı."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Sürüm bilgisi"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Kabuk sürümü"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Uzantı sürümü"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Bilinmiyor"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Ne denedin?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Kendiliğinden algılanan hatalar"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
@@ -513,3 +654,32 @@ msgstr "Sistem uzantısı"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Uzantı kaldırıldı"
+
+#~ msgid "Bug report"
+#~ msgstr "Hata bildir"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Ne oldu?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr ""
+#~ "GNOME Kabuk Uzantıları, bu uzantıyla ilgili herhangi bir hata saptamadı."
+
+#~ msgid "Version information"
+#~ msgstr "Sürüm bilgisi"
+
+#~ msgid "Shell version"
+#~ msgstr "Kabuk sürümü"
+
+#~ msgid "Extension version"
+#~ msgstr "Uzantı sürümü"
+
+#~ msgid "Unknown"
+#~ msgstr "Bilinmiyor"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Ne denedin?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Kendiliğinden algılanan hatalar"
