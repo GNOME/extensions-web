@@ -608,11 +608,17 @@ def create_version(request, file_source):
             extension.full_clean()
             extension.save()
 
+            if "version-name" in metadata:
+                version_name = metadata.pop("version-name").strip()
+            else:
+                version_name = None
+
             version = models.ExtensionVersion(
                 extension=extension,
                 metadata=metadata,
                 source=file_source,
                 status=models.STATUS_UNREVIEWED,
+                version_name=version_name,
             )
 
             version.full_clean()

@@ -1,1 +1,1 @@
-GNOME Shell Extensions — Auto-approved: "{{ extension.name }}", v{{ version.version }}
+GNOME Shell Extensions — Auto-approved: "{{ extension.name }}", {{ version.display_version }}

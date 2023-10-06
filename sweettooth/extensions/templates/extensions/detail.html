@@ -125,7 +125,7 @@
         <tbody>
         {% for version in all_versions %}
         <tr data-pk="{{ version.pk }}">
-            <td> {{ version.version }} </td>
+            <td> {{ version.display_version }} </td>
             <td class="mvs">
             {% include "extensions/multiversion_status.html" %}
             </td>

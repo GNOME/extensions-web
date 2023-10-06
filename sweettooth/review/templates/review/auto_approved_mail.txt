@@ -1,4 +1,4 @@
-A new extension version, "{{ extension.name }}", version {{ version.version }}, was auto-approved.
+A new extension version, "{{ extension.name }}", version {{ version.display_full_version }}, was auto-approved.
 
 The full review details can be found at {{ review_url }}, and the extension's version page
 can be found at {{ version_url }}.

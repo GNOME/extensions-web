@@ -1,4 +1,4 @@
-{{ extension.creator }}'s extension, "{{ extension.name }}", version {{ version.version }} has a new review:
+{{ extension.creator }}'s extension, "{{ extension.name }}", version {{ version.display_version }} has a new review:
 
 {{ review.reviewer }} posted a review on {{ review.date|date:"F j, Y" }}:
 

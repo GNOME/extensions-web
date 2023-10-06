@@ -28,6 +28,8 @@ class ExtensionVersionAdmin(admin.ModelAdmin):
     )
 
     def title(self, ver):
+        if ver.version_name:
+            return "%s (%d, %s)" % (ver.extension.uuid, ver.version, ver.version_name)
         return "%s (%d)" % (ver.extension.uuid, ver.version)
 
     title.short_description = "Extension (version)"

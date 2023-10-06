@@ -99,7 +99,8 @@ def build_shell_version_array(versions):
 
             if version.pk not in shell_version_map[key]:
                 shell_version_map[key][version.pk] = dict(
-                    pk=version.pk, version=version.version
+                    pk=version.pk,
+                    version=version.display_version,
                 )
 
     return shell_version_map
@@ -460,6 +461,21 @@ def make_filename(obj, filename=None):
     return "%s.v%d.shell-extension.zip" % (obj.extension.uuid, obj.version)
 
 
+def version_name_validator(value):
+    stripped_value = value.strip(".")
+    if not stripped_value:
+        raise ValidationError(_("Version name cannot be just spaces or dots."))
+
+    pattern = r"^[a-zA-Z0-9 .]*$"
+    if not re.match(pattern, stripped_value):
+        raise ValidationError(
+            _(
+                "Only alphanumeric characters (eng), spaces, and dots are"
+                " allowed for version name."
+            )
+        )
+
+
 class ExtensionVersion(models.Model):
     class Meta:
         unique_together = (("extension", "version"),)
@@ -475,6 +491,13 @@ class ExtensionVersion(models.Model):
         Extension, on_delete=models.CASCADE, related_name="versions"
     )
     version: int = models.IntegerField(default=0)
+    version_name = models.CharField(
+        default=None,
+        blank=True,
+        null=True,
+        validators=[version_name_validator],
+        max_length=16,
+    )
     extra_json_fields = models.TextField()
     status = models.PositiveIntegerField(choices=STATUSES.items())
     shell_versions = models.ManyToManyField(ShellVersion)
@@ -503,6 +526,18 @@ class ExtensionVersion(models.Model):
     def shell_versions_json(self):
         return json.dumps([sv.version_string for sv in self.shell_versions.all()])
 
+    @property
+    def display_version(self):
+        if self.version_name:
+            return self.version_name
+        return self.version
+
+    @property
+    def display_full_version(self):
+        if self.version_name:
+            return f"{self.version_name} ({self.version})"
+        return self.version
+
     def make_metadata_json(self):
         """
         Return generated contents of metadata.json
@@ -524,6 +559,9 @@ class ExtensionVersion(models.Model):
         fields["shell-version"] = [
             sv.version_string for sv in self.shell_versions.all()
         ]
+
+        if self.version_name:
+            fields["version-name"] = self.version_name
 
         data.update(fields)
         return data
@@ -627,7 +665,10 @@ class ExtensionVersion(models.Model):
         return self.status == STATUS_INACTIVE
 
     def __str__(self):
-        return "Version %d of %s" % (self.version, self.extension)
+        return "Version %s of %s" % (
+            self.display_full_version,
+            self.extension,
+        )
 
 
 class DonationUrl(models.Model):
