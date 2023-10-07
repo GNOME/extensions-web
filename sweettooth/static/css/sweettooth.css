@@ -599,13 +599,9 @@ li.extension:last-child,
     color: #999;
 }
 
-.comment .extension-creator-badge {
-    font-weight: bold;
-    background-color: rgb(255,255,200);
-    position: absolute;
-    margin-left: -90px;
-    padding: 0.2em;
-    z-index: 999;
+.comment .badge {
+    background-color: rgb(74,134,207);
+    margin-left: 4px;
 }
 
 .comments-holder {
