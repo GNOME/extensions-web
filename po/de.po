@@ -548,7 +548,7 @@ msgid ""
 "matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
 msgstr ""
 "Wenn Sie Hilfe mit Ihrer Erweiterung benötigen, können Sie uns auf dem <a "
-"href='https://extensions.gnome.org/upload/'>GNOME Matrix-Kanal</a> "
+"href='https://matrix.to/#/#extensions:gnome.org'>GNOME Matrix-Kanal</a> "
 "kontaktieren."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
