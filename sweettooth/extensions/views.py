@@ -520,6 +520,7 @@ def ajax_details(extension, version=None):
         screenshot=extension.screenshot.url if extension.screenshot else None,
         shell_version_map=extension.visible_shell_version_map,
         downloads=extension.downloads,
+        url=extension.url,
     )
 
     if version is not None:
