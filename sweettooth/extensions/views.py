@@ -521,6 +521,9 @@ def ajax_details(extension, version=None):
         shell_version_map=extension.visible_shell_version_map,
         downloads=extension.downloads,
         url=extension.url,
+        donation_urls=[
+            d.full_url for d in extension.donation_urls.all().order_by("url_type")
+        ],
     )
 
     if version is not None:
