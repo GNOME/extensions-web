@@ -490,6 +490,13 @@ class ExtensionVersion(models.Model):
         else:
             self.metadata = {}
 
+        extra_metadata = self.metadata.copy()
+        for known_field in ("shell-versions", "session-modes"):
+            if known_field in extra_metadata:
+                del extra_metadata[known_field]
+
+        kwargs["extra_json_fields"] = json.dumps(extra_metadata)
+
         super().__init__(*args, **kwargs)
 
     @property
@@ -598,8 +605,6 @@ class ExtensionVersion(models.Model):
                     for mode in self.metadata.pop("session-modes", [])
                 ]
             )
-
-        self.extra_json_fields = json.dumps(self.metadata)
 
         super().save(*args, **kwargs)
 

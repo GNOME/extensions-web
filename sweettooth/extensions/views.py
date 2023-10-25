@@ -601,16 +601,18 @@ def create_version(request, file_source):
                     )
                     raise DatabaseErrorWithMessages
 
+            extension.full_clean()
             extension.save()
 
-            extension.full_clean()
-
-            version = models.ExtensionVersion.objects.create(
+            version = models.ExtensionVersion(
                 extension=extension,
                 metadata=metadata,
                 source=file_source,
                 status=models.STATUS_UNREVIEWED,
             )
+
+            version.full_clean()
+            version.save()
 
             return version, []
     except (DatabaseErrorWithMessages, ValidationError) as e:
