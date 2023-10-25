@@ -641,6 +641,13 @@ class DonationUrl(models.Model):
         PATREON = "patreon", "Patreon"
         PAYPAL = "paypal", "PayPal"
 
+    class Meta:
+        indexes = (
+            models.Index(
+                fields=("extension", "url_type"), name="extension_id__url_type_idx"
+            ),
+        )
+
     TYPE_BASE_URLS = {
         Type.BUY_ME_A_COFFEE: "https://www.buymeacoffee.com",
         Type.GITHUB: "https://github.com/sponsors",
