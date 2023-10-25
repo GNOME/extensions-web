@@ -22,6 +22,11 @@ stages:
   variables:
     PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
 
+.security defaults:
+  stage: security
+  allow_failure: true
+  needs: []
+
 .test defaults:
   extends:
     - .pip cache
@@ -97,13 +102,13 @@ black:
     VALIDATE_TOOL_ARGS: --check --diff .
 
 security (trivy):
-  stage: security
+  extends:
+    - .security defaults
   image:
     name: aquasec/trivy
     entrypoint: [""]
   script:
     - trivy fs .
-  allow_failure: true
   cache:
     paths:
       - .trivy
@@ -114,20 +119,28 @@ security (trivy):
     TRIVY_SCANNERS: vuln,config
     # This is single-run job so we do not care of k8s recommendations
     TRIVY_SKIP_FILES: openshift/jobs/reindex-extensions.yml
-  needs: []
 
 security (safety):
   extends:
     - .pip cache
-  stage: security
+    - .security defaults
   image:
     name: python:$PYTHON_VERSION
   before_script:
     - pip install safety
   script:
     - safety check -r requirements.txt
-  allow_failure: true
-  needs: []
+
+security (pip-audit):
+  extends:
+    - .pip cache
+    - .security defaults
+  image:
+    name: python:$PYTHON_VERSION
+  before_script:
+    - pip install pip-audit
+  script:
+    - pip-audit -r requirements.txt
 
 .build image:
   image: quay.io/gnome_infrastructure/buildah:latest
