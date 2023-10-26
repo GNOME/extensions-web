@@ -1,4 +1,4 @@
-A new extension version, "{{ extension.name }}", version {{ version.version }} has been submitted for review by {{ extension.creator }}.
+A new extension version, "{{ extension.name }}", {{ version.display_full_version }} has been submitted for review by {{ extension.creator }}.
 
 Please review the extension at {{ url }}
 

@@ -1,14 +1,14 @@
 {{#comments}}
   <div class="comment">
-    {{#is_extension_creator}}
-    <div class="extension-creator-badge"><x-gettext>Author</x-gettext></div>
-    {{/is_extension_creator}}
     <img src="{{gravatar}}" class="gravatar">
     <div class="rating-author">
       {{#rating}}
         <div class="rating" data-rating-value="{{rating}}"></div> by
       {{/rating}}
       <a class="comment-author" href="{{author.url}}">{{author.username}}</a>
+      {{#is_extension_creator}}
+        <span class="badge"><x-gettext>Author</x-gettext></span>
+      {{/is_extension_creator}}
       <div>
         {{{comment}}}
       </div>

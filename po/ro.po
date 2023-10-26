@@ -7,9 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-25 19:56+0000\n"
-"PO-Revision-Date: 2020-02-24 19:43+0100\n"
-"Last-Translator: Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
+"POT-Creation-Date: 2023-09-03 07:38+0000\n"
+"PO-Revision-Date: 2023-10-14 11:52+0300\n"
+"Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
+"gmail [dot] com>\n"
 "Language-Team: Gnome Romanian Translation Team <gnomero-list@lists."
 "sourceforge.net>\n"
 "Language: ro\n"
@@ -18,57 +19,156 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.4\n"
 
-#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:101 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Nu ar trebui să utilizați adresa de email ca nume de utilizator"
+
+#: sweettooth/auth/forms.py:108 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Numele de utilizator conține cuvinte interzise"
+
+#: sweettooth/auth/forms.py:130 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "Nu puteți modifica emailul mai mult de o dată la fiecare 7 zile"
+
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Șterge contul"
+
+#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Contul va fi șters în timp de 7 zile"
+
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+msgid "No"
+msgstr "Nu"
+
+#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Da"
+
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Parola curentă"
+
+#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr "Nu trebuie să specificați o parolă pentru a anula eliminarea contului"
+
+#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Nume de utilizator sau email"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"Aveți conturi multiple înregistrate utilizând același email. Puteți să vă "
+"autentificați utilizând numele de utilizator sau puteți cere eliminarea "
+"conturilor duplicate utilizând Gitlab GNOME (%(url)s)."
+
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nume de utilizator"
 
-#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:86 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Necesar. 30 de caractere sau mai puține. Numai litere, cifre și @/./+/-/_."
 
-#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Această valoare poate conține doar litere, numere și caracterele @/./+/-/_."
 
-#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Email"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Nu ar trebui să utilizați adresa de email ca nume de utilizator"
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:35
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Înregistrare"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Înregistrare cont"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Eliminare cont"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Contul este programat pentru eliminare. Puteți anula eliminarea contului în "
+"timp de 7 zile."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Eliminarea contului este anulată."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "Confirmare email"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Configurări"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Trimite"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Modifică parola"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr "Contul este programat pentru eliminare după %(schedule_delete_after)s"
+
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "Ați uitat parola?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "Autentificare"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Nu aveți un cont?"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Înregistrare"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -90,7 +190,6 @@ msgstr ""
 "Token.ul pentru restabilirea parolei este incorect. Verificați legătura și "
 "încercați din nou."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -105,40 +204,116 @@ msgstr ""
 "Ați uitat parola? Introduceți adresa de email mai jos și vă vom trimite "
 "instrucțiuni pentru a stabili o parolă nouă."
 
-#: sweettooth/context_processors.py:13 extensions-web-domain-django:1
-msgid "Add yours"
-msgstr "Adaug-o"
+#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Adresa de email a fost actualizată cu succes"
 
-#: sweettooth/context_processors.py:17 extensions-web-domain-django:1
-msgid "Installed extensions"
-msgstr "Extensii instalate"
+#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "Legătura de confirmare a expirat. Cereți una nouă."
 
-#: sweettooth/context_processors.py:21 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Cerere greșită"
+
+#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Datele profilului salvate"
+
+#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"Emailul de confirmare a fost trimis adresei noi. Verificați mesajele primite."
+
+#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Parola este greșită"
+
+#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Restaurează emailul și restabilește parola"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
 msgstr "Despre"
 
-#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
 msgid "Extensions"
 msgstr "Extensii"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "Adaug-o"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "Extensii instalate"
+
+#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Trebuie să definiți cheia „shell-version” în metadata.json"
+
+#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Tip de donație nesuportat: %s"
+
+#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr "Nu puteți specifica mai mult de 3 valori pentru tipul de donație „%s”"
+
+#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "Cel puțin o valoare trebuie specificată pentru tipul de donație „%s”"
+
+#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+"Tipul valorii trebuie să fie șir sau listă de șiruri pentru tipul de donație "
+"„%s”"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Continuă oricum"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Părăsiți pagina web Extensii GNOME"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "Veți părăsi pagina web Extensii GNOME către %(url)s."
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Anulează"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Din păcate, pentru a preveni spam-ul, cerem să <a href=\"%(login_url)s\">vă "
 "autentificați la Extensii pentru Shell-ul GNOME</a> pentru a putea publica "
 "un comentariu sau raporta o eroare. Sperăm că înțelegeți, așa-i?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Recenziile utilizatorilor"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Se încarcă recenziile…"
@@ -163,47 +338,7 @@ msgstr "Comentariu"
 msgid "Rating"
 msgstr "Evaluare"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Raport de defecțiune"
-
-#: sweettooth/extensions/templates/extensions/detail.html:25
-#: extensions-web-domain-django:1
-msgid "Upgrade this extension"
-msgstr "Înnoiește această extensie"
-
-#: sweettooth/extensions/templates/extensions/detail.html:26
-#: extensions-web-domain-django:1
-msgid "Configure this extension"
-msgstr "Configurează această extensie"
-
-#: sweettooth/extensions/templates/extensions/detail.html:27
-#: extensions-web-domain-django:1
-msgid "Uninstall this extension"
-msgstr "Dezinstalează această extensie"
-
-#: sweettooth/extensions/templates/extensions/detail.html:53
-#: extensions-web-domain-django:1
-msgid "Extension Homepage"
-msgstr "Pagina principală a extensiei"
-
-#: sweettooth/extensions/templates/extensions/detail.html:58
-#: extensions-web-domain-django:1
-msgid "Download"
-msgstr "Descarcă"
-
-#: sweettooth/extensions/templates/extensions/detail.html:61
-#: extensions-web-domain-django:1
-msgid "Shell version…"
-msgstr "Versiune Shell…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:65
-#: extensions-web-domain-django:1
-msgid "Extension version…"
-msgstr "Versiune extensie…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -212,6 +347,87 @@ msgstr ""
 "Un revizor va verifica extensia pe care ați trimis-o pentru a ne asigura că "
 "nu se întâmplă nimic prea periculos. Veți primi un email cu rezultatul "
 "verificării."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Comentariile sunt dezactivate pentru această extensie."
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s descărcare"
+msgstr[1] "%(downloads)s descărcări"
+msgstr[2] "%(downloads)s de descărcări"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Număr de descărcări"
+
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Donează"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Instalează"
+
+#: sweettooth/extensions/templates/extensions/detail.html:46
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "Înnoiește această extensie"
+
+#: sweettooth/extensions/templates/extensions/detail.html:47
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "Configurează această extensie"
+
+#: sweettooth/extensions/templates/extensions/detail.html:48
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "Dezinstalează această extensie"
+
+#: sweettooth/extensions/templates/extensions/detail.html:75
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "Pagina principală a extensiei"
+
+#: sweettooth/extensions/templates/extensions/detail.html:81
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Mod(uri) de sesiune"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "Această extensie va rula în timp ce ecranul este blocat"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Deblochează dialogul"
+
+#: sweettooth/extensions/templates/extensions/detail.html:86
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "Descarcă"
+
+#: sweettooth/extensions/templates/extensions/detail.html:89
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Versiune Shell…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:93
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "Versiune extensie…"
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -229,11 +445,11 @@ msgstr "Extensii instalate"
 msgid "Shell settings"
 msgstr "Configurări Shell"
 
-#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "Conținut"
 
-#: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Metadata"
 msgstr "Metadate"
 
@@ -279,6 +495,50 @@ msgstr "Publică comentariul"
 msgid "Edit your comment"
 msgstr "Editează comentariul"
 
+#: sweettooth/review/templates/review/review.html:73
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Puteți încărca versiunea următoare utilizând <a href='https://extensions."
+"gnome.org/upload/'>același formular</a> în care ați postat această versiune."
+
+#: sweettooth/review/templates/review/review.html:76
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Puteți modifica iconița extensiei dând clic pe iconița din pagina extensiei."
+
+#: sweettooth/review/templates/review/review.html:79
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"În cazul în care doriți să dezactivați o versiune aprobată, dați clic pe "
+"legătura de dezactivare din pagina extensiei."
+
+#: sweettooth/review/templates/review/review.html:82
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"Puteți găsi ghiduri de dezvoltator în <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:85
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Dacă aveți nevoie de ajutor cu extensia, puteți să ne întrebați pe <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>canalul Matrix GNOME</a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Cele mai noi extensii din Extensii pentru Shell-ul GNOME"
@@ -287,6 +547,10 @@ msgstr "Cele mai noi extensii din Extensii pentru Shell-ul GNOME"
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
 msgstr "Extensii pentru Shell-ul GNOME"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Ghidul dezvoltatorului"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
@@ -300,7 +564,7 @@ msgstr "Configurări de utilizator"
 msgid "Log out"
 msgstr "Deautentificare"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
@@ -310,38 +574,37 @@ msgstr ""
 "trebuie să instalați integrarea cu Shell-ul GNOME ce constă în două părți: "
 "extensia de navigator și aplicația nativă de mesagerie"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr ""
 "Instalează extensia de integrare cu Shell-ul GNOME pentru navigatorul de "
 "internet"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
 msgstr "Clic aici pentru a instala extensia de navigator"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
 "Consultați %swiki page%s pentru instrucțiuni în a instala conectorul nativ"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
 "Nu putem detecta o copie de GNOME rulând pe acest sistem, deci unele părți "
-"ale interfeței pot fi dezactivate. Consultați <a href=\"/about/#no-detection"
-"\">articolul nostru pentru depanare</a> pentru mai multe informații."
+"ale interfeței pot fi dezactivate. Consultați <a href=\"/about/#no-"
+"detection\">articolul nostru pentru depanare</a> pentru mai multe informații."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr "Extensii pentru Shell-ul GNOME nu poate lista extensiile instalate."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Compatibilă cu"
 
@@ -361,7 +624,11 @@ msgstr "Descărcări"
 msgid "Popularity"
 msgstr "Popularitate"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Relevanță"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Sortează după"
 
@@ -380,48 +647,6 @@ msgstr "Nu sunt comentarii. Fi-ți primul!"
 msgid "Author"
 msgstr "Autor"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Care este defectul?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr ""
-"Extensii pentru Shell-ul GNOME nu a detectat nicio eroare cu această "
-"extensie."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Informații despre versiune"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Versiune Shell"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Versiune extensie"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Necunoscută"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Ce ați încercat?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Erori detectate automat"
-
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
@@ -432,11 +657,38 @@ msgstr "Extensie de sistem"
 msgid "You uninstalled"
 msgstr "Instalate de dumneavoastră"
 
+#~ msgid "Bug report"
+#~ msgstr "Raport de defecțiune"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Care este defectul?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr ""
+#~ "Extensii pentru Shell-ul GNOME nu a detectat nicio eroare cu această "
+#~ "extensie."
+
+#~ msgid "Version information"
+#~ msgstr "Informații despre versiune"
+
+#~ msgid "Shell version"
+#~ msgstr "Versiune Shell"
+
+#~ msgid "Extension version"
+#~ msgstr "Versiune extensie"
+
+#~ msgid "Unknown"
+#~ msgstr "Necunoscută"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Ce ați încercat?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Erori detectate automat"
+
 #~ msgid "Password"
 #~ msgstr "Parolă"
-
-#~ msgid "Password confirmation"
-#~ msgstr "Confirmarea parolei"
 
 #~ msgid "Enter the same password as above, for verification."
 #~ msgstr "Introduceți aceeași parolă ca mai sus pentru verificare."

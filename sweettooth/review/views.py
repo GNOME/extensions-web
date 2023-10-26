@@ -525,8 +525,8 @@ def extension_submitted(sender, request, version: models.ExtensionVersion, **kwa
                 version=_version,
                 reviewer=request.user,
                 comments=(
-                    f"Auto-rejected because of new version {version.version}"
-                    " was uploaded"
+                    "Auto-rejected because of new version"
+                    f" {version.display_full_version} was uploaded"
                 ),
                 new_status=models.STATUS_REJECTED,
                 auto=True,

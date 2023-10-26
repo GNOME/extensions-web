@@ -520,6 +520,10 @@ def ajax_details(extension, version=None):
         screenshot=extension.screenshot.url if extension.screenshot else None,
         shell_version_map=extension.visible_shell_version_map,
         downloads=extension.downloads,
+        url=extension.url,
+        donation_urls=[
+            d.full_url for d in extension.donation_urls.all().order_by("url_type")
+        ],
     )
 
     if version is not None:
@@ -601,16 +605,24 @@ def create_version(request, file_source):
                     )
                     raise DatabaseErrorWithMessages
 
+            extension.full_clean()
             extension.save()
 
-            extension.full_clean()
+            if "version-name" in metadata:
+                version_name = metadata.pop("version-name").strip()
+            else:
+                version_name = None
 
-            version = models.ExtensionVersion.objects.create(
+            version = models.ExtensionVersion(
                 extension=extension,
                 metadata=metadata,
                 source=file_source,
                 status=models.STATUS_UNREVIEWED,
+                version_name=version_name,
             )
+
+            version.full_clean()
+            version.save()
 
             return version, []
     except (DatabaseErrorWithMessages, ValidationError) as e:

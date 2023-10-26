@@ -1,1 +1,1 @@
-GNOME Shell Extensions — New review request: "{{ extension.name }}", v{{ version.version }}
+GNOME Shell Extensions — New review request: "{{ extension.name }}", {{ version.display_full_version }}
