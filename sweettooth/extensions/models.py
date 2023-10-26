@@ -15,7 +15,7 @@ import os
 import re
 import tempfile
 import zlib
-from typing import Any, Literal, Union
+from typing import Any, Literal, Optional, Union
 from urllib.parse import quote
 from zipfile import BadZipfile, ZipFile
 
@@ -284,7 +284,7 @@ class Extension(models.Model):
         return self.versions.filter(status=STATUS_ACTIVE)
 
     @property
-    def latest_version(self):
+    def latest_version(self) -> Optional["ExtensionVersion"]:
         try:
             return self.visible_versions.latest()
         except ExtensionVersion.DoesNotExist:
@@ -527,16 +527,18 @@ class ExtensionVersion(models.Model):
         return json.dumps([sv.version_string for sv in self.shell_versions.all()])
 
     @property
-    def display_version(self):
+    def display_version(self) -> str:
         if self.version_name:
             return self.version_name
-        return self.version
+
+        return str(self.version)
 
     @property
-    def display_full_version(self):
+    def display_full_version(self) -> str:
         if self.version_name:
             return f"{self.version_name} ({self.version})"
-        return self.version
+
+        return str(self.version)
 
     def make_metadata_json(self):
         """
