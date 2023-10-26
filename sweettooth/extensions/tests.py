@@ -580,6 +580,76 @@ class ExtensionVersionTest(BasicUserTestCase, TestCase):
         )
         self.assertEqual(shell_versions, ["3.0", "3.2", "40.0", "56.5"])
 
+    def test_version_name(self):
+        metadata = {
+            "name": "Test Metadata 6",
+            "uuid": "test-6@extensions.gnome.org",
+            "description": "Simple test metadata",
+            "url": "http://test-metadata.gnome.org",
+            "shell-version": ["45"],
+            "version-name": "too long version.",
+        }
+        zipfile = get_test_zipfile("SimpleExtension")
+
+        extension: models.Extension = models.Extension.objects.create_from_metadata(
+            metadata, creator=self.user
+        )
+
+        version = models.ExtensionVersion(
+            extension=extension,
+            metadata=metadata,
+            status=models.STATUS_ACTIVE,
+            version_name=metadata["version-name"],
+            source=File(zipfile, "version1.zip"),
+        )
+
+        with self.assertRaises(ValidationError):
+            version.full_clean()
+            version.save()
+
+        metadata["version-name"] = "версия"  # Russian "version" word
+
+        version = models.ExtensionVersion(
+            extension=extension,
+            metadata=metadata,
+            status=models.STATUS_ACTIVE,
+            version_name=metadata["version-name"],
+            source=File(zipfile, "version1.zip"),
+        )
+
+        with self.assertRaises(ValidationError):
+            version.full_clean()
+            version.save()
+
+        metadata["version-name"] = "2.0 BlueBerry"
+
+        version = models.ExtensionVersion(
+            extension=extension,
+            metadata=metadata,
+            status=models.STATUS_ACTIVE,
+            version_name=metadata["version-name"],
+            source=File(zipfile, "version1.zip"),
+        )
+        version.full_clean()
+        version.save()
+
+        version = extension.latest_version
+        self.assertEqual(version.display_version, "2.0 BlueBerry")
+        self.assertEqual(version.display_full_version, "2.0 BlueBerry (1)")
+
+        version = models.ExtensionVersion(
+            extension=extension,
+            metadata=metadata,
+            status=models.STATUS_ACTIVE,
+            source=File(zipfile, "version1.zip"),
+        )
+        version.full_clean()
+        version.save()
+
+        version = extension.latest_version
+        self.assertEqual(version.display_version, "2")
+        self.assertEqual(version.display_full_version, "2")
+
 
 class DonationUrlTest(BasicUserTestCase, TestCase):
     DEFAULT_METADATA = {
