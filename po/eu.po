@@ -7,8 +7,8 @@
 msgid ""
 msgstr "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-08-13 17:44+0000\n"
-"PO-Revision-Date: 2023-08-18 10:00+0100\n"
+"POT-Creation-Date: 2023-10-26 18:42+0000\n"
+"PO-Revision-Date: 2023-10-28 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -17,31 +17,39 @@ msgstr "Project-Id-Version: extensions-web master\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: sweettooth/auth/forms.py:116 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Ez zenuke posta-helbidea erabili beharko erabiltzaile-izen modura"
+
+#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Zure erabiltzaile-izenak onartzen ez diren hitzak ditu"
+
+#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Posta elektronikoko helbidea 7 egunetik behin soilik aldatu daiteke"
 
-#: sweettooth/auth/forms.py:188 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Ezabatu nire kontua"
 
-#: sweettooth/auth/forms.py:189 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Zure kontua 7 egunetan ezabatuko da"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ez"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Bai"
 
-#: sweettooth/auth/forms.py:195 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Uneko pasahitza"
 
-#: sweettooth/auth/forms.py:196 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Ez da pasahitzik zehaztu behar kontuaren ezabatzea bertan behera uzteko"
 
@@ -49,32 +57,32 @@ msgstr "Ez da pasahitzik zehaztu behar kontuaren ezabatzea bertan behera uzteko"
 msgid "Username or email"
 msgstr "Erabiltzaile-izena edo posta-helbidea"
 
-#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr "Kontu bat baino gehiago duzu posta elektronikoko helbide honekin erregistratuta. Zure erabiltzaile-izena erabiliz hasi dezakezu saioa, edo kontu bikoizutak kentzea eskatu dezakezu GNOMEren Gitlab bidez (%(url)s)."
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
-#: sweettooth/auth/forms.py:72 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Derrigorrezkoa. 30 karaktere edo gutxiago. Hizkiak, digituak eta @/./+/-/_ soilik."
 
-#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Balio honek hizkiak, zenbakiak eta @/./+/-/_  karaktereak soilik izan ditzake."
 
-#: sweettooth/auth/forms.py:80 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Helb. el."
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Ez zenuke posta-helbidea erabili beharko erabiltzaile-izen modura"
-
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "Zure erabiltzaile-izenak onartzen ez diren hitzak ditu"
-
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:35
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -133,19 +141,19 @@ msgstr "Aldatu zure pasahitza"
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr "Zure kontua %(schedule_delete_after)s ondoren kenduko da"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "Pasahitza ahaztu duzu?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "Hasi saioa"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
@@ -181,31 +189,31 @@ msgid ""
 "instructions for setting a new one."
 msgstr "Pasahitza ahaztu duzu? Sartu zure posta elektronikoko helbidea behean, eta pasahitz berria ezartzeko argibideak bidaliko dizkizugu."
 
-#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
 msgstr "Zure helbide elektronikoa ongi eguneratu da"
 
-#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
 msgstr "Zure berrespen-esteka iraungi da. Eskatu beste bat."
 
-#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
 msgid "Wrong request"
 msgstr "Eskari okerra"
 
-#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
 msgid "Profile data saved"
 msgstr "Profil-datuak gorde dira"
 
-#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr "Berrespen-posta bidali dugu zure helbide berrira. Begiratu zure sarrerako ontzia."
 
-#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "Pasahitza okerra da"
 
-#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
 msgstr "Eguneratu posta elektronikoko helbidea eta berrezarri pasahitza"
 
@@ -225,29 +233,39 @@ msgstr "Gehitu zureak"
 msgid "Installed extensions"
 msgstr "Instalatutako hedapenak"
 
-#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "`shell-version` gakoa definitu behar da metadata.json fitxategian"
 
-#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:195 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Onartzen ez den dohaintza mota: %s"
 
-#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:200 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "Ezin dira 3 balio baino gehiago zehaztu \"%s\" dohaintza motarako"
 
-#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:206 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Gutxienez balio bat zehaztu behar da \"%s\" dohaintza motarako"
 
-#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "Balio motak katea edo kateen zerrenda izan behar du \"%s\" dohaintza motarako"
+
+#: sweettooth/extensions/models.py:467 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "Bertsio-izena ezin da zuriuneekin edo puntuekin soilik osatuta egon."
+
+#: sweettooth/extensions/models.py:473 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr "Karaktere alfanumerikoak (ingelesezkoak), zuriuneak eta puntuak soilik onartzen dira bertsio-izenerako."
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -580,6 +598,11 @@ msgstr "Garrantzia"
 msgid "Sort by"
 msgstr "Ordenatu honen arabera:"
 
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "Egilea"
+
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
@@ -589,11 +612,6 @@ msgstr "Erakutsi aipamen gehiago"
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Ez dago iruzkinik. Izan lehena!"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
-#: extensions-web-domain-djangojs:1
-msgid "Author"
-msgstr "Egilea"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1

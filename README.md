@@ -13,7 +13,7 @@ must go through code review and testing.
 ## Requirements
 
 ### System Requirements:
-  - [python 3.10+](https://www.python.org/)
+  - [python 3.11+](https://www.python.org/)
   - [OpenSearch](https://opensearch.org/)
 
 ### Python Requirements:

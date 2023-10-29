@@ -1,5 +1,5 @@
 variables:
-  PYTHON_VERSION: '3.10'
+  PYTHON_VERSION: '3.11'
   OPENSEARCH_VERSION: '2.8.0'
 
 workflow:
@@ -69,7 +69,6 @@ test:
   parallel:
     matrix:
       - PYTHON_VERSION:
-          - '3.10'
           - '3.11'
   tags:
     - docker

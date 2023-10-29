@@ -26,20 +26,20 @@
             <p><strong>Summary</strong></p>
             <p>{% trans "What do you think about this GNOME extension?" %}</p>
             {% for field in form %}
-                {% ifnotequal field.name "rating" %}
+                {% if field.name != "rating" %}
                     {% if field.is_hidden %}
                         <div>{{ field }}</div>
                     {% else %}
                         {% if field.errors %}{{ field.errors }}{% endif %}
                         <p
                                 {% if field.errors %} class="error"{% endif %}
-                                {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-                            {% ifnotequal field.name "comment" %}{{ field.label_tag }} {% endifnotequal %}{{ field }}
+                                {% if field.name == "honeypot" %} style="display:none;"{% endif %}>
+                            {% if field.name != "comment" %}{{ field.label_tag }} {% endif %}{{ field }}
                         </p>
                     {% endif %}
                 {% else %}
                     <input type="hidden" name="rating_initial" value="{{ field.value }}" />
-                {% endifnotequal %}
+                {% endif %}
             {% endfor %}
             <p class="submit">
                 <input type="submit" name="submit" class="btn btn-default" value="{% trans "Post" %}"/>

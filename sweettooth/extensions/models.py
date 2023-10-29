@@ -507,6 +507,8 @@ class ExtensionVersion(models.Model):
 
     objects = ExtensionVersionManager()
 
+    _extra_json_field_position = None
+
     def __init__(self, *args, **kwargs):
         if "metadata" in kwargs:
             self.metadata = kwargs.pop("metadata").copy()
@@ -518,9 +520,26 @@ class ExtensionVersion(models.Model):
             if known_field in extra_metadata:
                 del extra_metadata[known_field]
 
-        kwargs["extra_json_fields"] = json.dumps(extra_metadata)
+        if len(args) < self._get_extra_json_field_position():
+            kwargs["extra_json_fields"] = json.dumps(extra_metadata)
 
         super().__init__(*args, **kwargs)
+
+    def _get_extra_json_field_position(self):
+        if self._extra_json_field_position is not None:
+            return self._extra_json_field_position
+
+        self._extra_json_field_position = next(
+            (
+                index
+                for index, field in enumerate(
+                    [f for f in self._meta.get_fields() if getattr(f, "attname", None)]
+                )
+                if field.attname == "extra_json_fields"
+            )
+        )
+
+        return self._extra_json_field_position
 
     @property
     def shell_versions_json(self):
