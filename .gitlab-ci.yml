@@ -73,6 +73,15 @@ test:
   tags:
     - docker
 
+test collectstatic:
+  extends:
+    - .test defaults
+  stage: test
+  script:
+    - ./manage.py collectstatic --noinput
+  variables:
+    EGO_STATIC_ROOT: static
+
 check migrations:
   extends:
     - .test defaults
