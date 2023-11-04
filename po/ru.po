@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-09-03 07:38+0000\n"
-"PO-Revision-Date: 2023-09-03 12:33+0300\n"
-"Last-Translator: Artur So <arturios2005@mail.ru>\n"
+"POT-Creation-Date: 2023-10-26 18:42+0000\n"
+"PO-Revision-Date: 2023-10-28 10:16+1000\n"
+"Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,43 +17,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: sweettooth/auth/forms.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr ""
 "Вы не должны использовать электронную почту в качестве имени пользователя"
 
-#: sweettooth/auth/forms.py:108 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "Ваше имя пользователя содержит запрещённые слова"
 
-#: sweettooth/auth/forms.py:130 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr ""
 "Вы не можете менять адрес своей электронной почты чаще одного раза в 7 дней"
 
-#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Удалить мою учётную запись"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Ваша учётная запись будет удалена через 7 дней"
 
-#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
 msgid "No"
 msgstr "Нет"
 
-#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Да"
 
-#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Текущий пароль"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Вам не нужно указывать пароль, чтобы отменить удаление учётной записи"
 
@@ -73,20 +73,20 @@ msgstr ""
 "пользователя, или запросить удаление дублирующихся учетных записей с помощью "
 "GNOME Gitlab (%(url)s)."
 
-#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: sweettooth/auth/forms.py:86 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Требуется заполнить. Не более 30 символов. Только буквы, цифры и @/./+/-/_."
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Это значение может содержать только буквы, цифры и символы @/./+/-/_."
 
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Электронная почта"
 
@@ -205,34 +205,34 @@ msgstr ""
 "Забыли пароль? Введите ниже адрес своей электронной почты, и мы вышлем "
 "инструкции по установке нового пароля."
 
-#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
 msgstr "Адрес вашей электронной почты успешно обновлён"
 
-#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
 msgstr ""
 "Истёк срок действия ссылки для подтверждения. Пожалуйста, запросите новую."
 
-#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
 msgid "Wrong request"
 msgstr "Неверный запрос"
 
-#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
 msgid "Profile data saved"
 msgstr "Данные профиля были сохранены"
 
-#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
 "Электронное письмо с подтверждением будет отправлено на ваш новый почтовый "
 "адрес. Пожалуйста, проверьте свой почтовый ящик."
 
-#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "Неверный пароль"
 
-#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
 msgstr "Восстановить электронную почту и сбросить пароль"
 
@@ -252,34 +252,46 @@ msgstr "Добавить свое"
 msgid "Installed extensions"
 msgstr "Установленные расширения"
 
-#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "Вы должны определить ключ «shell-version» в файле metadata.json"
 
-#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:195 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Неподдерживаемый тип финансовой поддержки: %s"
 
-#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:200 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr ""
 "Вы не можете указывать более 3 значений для типа финансовой поддержки «%s»"
 
-#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:206 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr ""
 "Для типа финансовой поддержки «%s» должно быть указано, по крайней мере, "
 "одно значение"
 
-#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
-"Для типа финансовой поддержки «%s» типом значения должна быть строка или "
-"список строк"
+"Значением для типа финансовой поддержки «%s» должна быть строка или список "
+"строк"
+
+#: sweettooth/extensions/models.py:467 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "Название версии не может состоять только из пробелов или точек."
+
+#: sweettooth/extensions/models.py:473 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+"В названии версии допускаются только буквенно-цифровые символы (английские), "
+"пробелы и точки."
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -311,9 +323,10 @@ msgid ""
 "href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
 "a comment or report an error. You understand, right?"
 msgstr ""
-"К сожалению, для предотвращения спама, мы требуем, чтобы вы <a "
-"href=\"%(login_url)s\">вошли в GNOME Shell Extensions</a>, чтобы оставить "
-"комментарий или сообщить об ошибке. Вы ведь понимаете, не так ли?"
+"К сожалению, для предотвращения спама, мы требуем от вас <a "
+"href=\"%(login_url)s\">войти в GNOME Shell Extensions</a>, чтобы оставить "
+"комментарий или сообщить об ошибке. Вы ведь понимаете необходимость этого, "
+"не так ли?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
@@ -638,6 +651,11 @@ msgstr "Релевантности"
 msgid "Sort by"
 msgstr "Упорядочить по"
 
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "Автор"
+
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
@@ -647,11 +665,6 @@ msgstr "Показать больше отзывов"
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Комментариев нет. Будьте первыми!"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
-#: extensions-web-domain-djangojs:1
-msgid "Author"
-msgstr "Автор"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
