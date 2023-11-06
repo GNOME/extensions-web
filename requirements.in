@@ -1,4 +1,4 @@
-Django==4.2.6
+Django==4.2.7
 django-autoslug==1.9.9
 django-contrib-comments==2.2.0
 django-opensearch-dsl==0.5.1
@@ -13,7 +13,7 @@ dj-email-url==1.0.6
 
 # extensions.gnome.org requirements
 mysqlclient==2.2.0
-uWSGI==2.0.22
+uWSGI==2.0.23
 
 # development requirements
 black==23.7.0

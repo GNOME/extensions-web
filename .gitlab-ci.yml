@@ -70,8 +70,10 @@ test:
     matrix:
       - PYTHON_VERSION:
           - '3.11'
+          - '3.12'
   tags:
     - docker
+    - private
 
 test collectstatic:
   extends:

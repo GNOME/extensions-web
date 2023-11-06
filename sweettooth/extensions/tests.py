@@ -668,8 +668,8 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
         self.assertIsNotNone(donation_url)
-        self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_url.url_type)
-        self.assertEquals("https://example.com", donation_url.url)
+        self.assertEqual(models.DonationUrl.Type.CUSTOM, donation_url.url_type)
+        self.assertEqual("https://example.com", donation_url.url)
 
     def test_create_list(self):
         metadata = self.DEFAULT_METADATA | {
@@ -681,10 +681,10 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_urls = extension.donation_urls.all()
         self.assertEqual(2, len(donation_urls))
-        self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
-        self.assertEquals("https://example.com/1", donation_urls[0].url)
-        self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_urls[1].url_type)
-        self.assertEquals("https://example.com/2", donation_urls[1].url)
+        self.assertEqual(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
+        self.assertEqual("https://example.com/1", donation_urls[0].url)
+        self.assertEqual(models.DonationUrl.Type.CUSTOM, donation_urls[1].url_type)
+        self.assertEqual("https://example.com/2", donation_urls[1].url)
 
     def test_create_list_max3(self):
         metadata = self.DEFAULT_METADATA | {
@@ -735,10 +735,10 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
 
         donation_urls = extension.donation_urls.all()
         self.assertEqual(2, len(donation_urls))
-        self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
-        self.assertEquals("https://example.com/1", donation_urls[0].url)
-        self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_urls[1].url_type)
-        self.assertEquals("https://example.com/2", donation_urls[1].url)
+        self.assertEqual(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
+        self.assertEqual("https://example.com/1", donation_urls[0].url)
+        self.assertEqual(models.DonationUrl.Type.CUSTOM, donation_urls[1].url_type)
+        self.assertEqual("https://example.com/2", donation_urls[1].url)
 
     def test_refresh_delete(self):
         metadata = self.DEFAULT_METADATA | {
@@ -760,8 +760,8 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
 
         donation_urls = extension.donation_urls.all()
         self.assertEqual(1, len(donation_urls))
-        self.assertEquals(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
-        self.assertEquals("https://example.com/1", donation_urls[0].url)
+        self.assertEqual(models.DonationUrl.Type.CUSTOM, donation_urls[0].url_type)
+        self.assertEqual("https://example.com/1", donation_urls[0].url)
 
     def test_refresh_delete_all(self):
         metadata = self.DEFAULT_METADATA | {
@@ -792,7 +792,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url1 = extension.donation_urls.first()
         donation_url2 = extension.donation_urls.first()
-        self.assertEquals(donation_url1.id, donation_url2.id)
+        self.assertEqual(donation_url1.id, donation_url2.id)
 
     def test_export_with_version(self):
         metadata = self.DEFAULT_METADATA | {
@@ -819,7 +819,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://www.buymeacoffee.com/test", donation_url.full_url)
+        self.assertEqual("https://www.buymeacoffee.com/test", donation_url.full_url)
 
     def test_full_url_github(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"github": "test"}}
@@ -829,7 +829,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://github.com/sponsors/test", donation_url.full_url)
+        self.assertEqual("https://github.com/sponsors/test", donation_url.full_url)
 
     def test_full_url_ko_fi(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"kofi": "test"}}
@@ -839,7 +839,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://ko-fi.com/test", donation_url.full_url)
+        self.assertEqual("https://ko-fi.com/test", donation_url.full_url)
 
     def test_full_url_liberapay(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"liberapay": "test"}}
@@ -849,7 +849,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://liberapay.com/test", donation_url.full_url)
+        self.assertEqual("https://liberapay.com/test", donation_url.full_url)
 
     def test_full_url_opencollective(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"opencollective": "test"}}
@@ -859,7 +859,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://opencollective.com/test", donation_url.full_url)
+        self.assertEqual("https://opencollective.com/test", donation_url.full_url)
 
     def test_full_url_patreon(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"patreon": "test"}}
@@ -869,7 +869,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://www.patreon.com/test", donation_url.full_url)
+        self.assertEqual("https://www.patreon.com/test", donation_url.full_url)
 
     def test_full_url_paypal(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"paypal": "test"}}
@@ -879,7 +879,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://paypal.me/test", donation_url.full_url)
+        self.assertEqual("https://paypal.me/test", donation_url.full_url)
 
     def test_full_url_quote(self):
         metadata = self.DEFAULT_METADATA | {
@@ -891,7 +891,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals(
+        self.assertEqual(
             "https://paypal.me/my%2Faccount%3Fkey%3Dvalue", donation_url.full_url
         )
 
@@ -905,7 +905,7 @@ class DonationUrlTest(BasicUserTestCase, TestCase):
         )
         donation_url = extension.donation_urls.first()
 
-        self.assertEquals("https://example.com/test", donation_url.full_url)
+        self.assertEqual("https://example.com/test", donation_url.full_url)
 
     def test_metadata_validation(self):
         metadata = self.DEFAULT_METADATA | {"donations": {"custom": "somethingelse"}}
