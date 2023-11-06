@@ -73,6 +73,7 @@ test:
           - '3.12'
   tags:
     - docker
+    - private
 
 test collectstatic:
   extends:
