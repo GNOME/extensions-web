@@ -27,8 +27,8 @@ class RatingCommentForm(CommentForm):
 
     def clean_rating(self):
         rating = self.cleaned_data["rating"]
-        if rating is None:
-            rating = -1
+        if not rating:
+            rating = 0
         return rating
 
     def get_comment_model(self):
