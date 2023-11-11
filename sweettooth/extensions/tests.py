@@ -295,7 +295,11 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         with get_test_zipfile(zipfile, extra_metadata) as f:
             return self.client.post(
                 reverse("extensions-upload-file"),
-                dict(source=f, gplv2_compliant=True, tos_compliant=True),
+                data={
+                    "source": f,
+                    "shell_license_compliant": True,
+                    "tos_compliant": True,
+                },
                 follow=True,
             )
 
