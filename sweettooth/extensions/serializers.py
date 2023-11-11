@@ -124,33 +124,52 @@ class ExtensionUploadSerializer(serializers.Serializer):
 
         return value
 
+    def validate(self, attrs):
+        if "user" not in attrs:
+            raise Exception("Serializer was called without passing `user` instance")
+
+        return attrs
+
     def create(self, validated_data):
         with transaction.atomic():
             try:
                 extension = models.Extension.objects.get(uuid=self.uuid)
             except models.Extension.DoesNotExist:
-                extension = models.Extension(creator=validated_data["user"])
-
-            assert (
-                validated_data["user"] == extension.creator
-                or validated_data["user"].is_superuser
-            ), _("An extension with that UUID has already been added")
-
-            extension.parse_metadata_json(self.metadata)
-            extension.save()
+                extension = models.Extension(
+                    creator=validated_data["user"], metadata=self.metadata
+                )
+            else:
+                if (
+                    validated_data["user"] != extension.creator
+                    and not validated_data["user"].is_superuser
+                ):
+                    raise serializers.ValidationError(
+                        _("An extension with that UUID has already been added")
+                    )
 
             try:
                 extension.full_clean()
             except ValidationError as e:
                 raise serializers.ValidationError(e.messages)
+            extension.save()
 
-            version = models.ExtensionVersion.objects.create(
+            if "version-name" in self.metadata:
+                version_name = self.metadata.pop("version-name").strip()
+            else:
+                version_name = None
+
+            version = models.ExtensionVersion(
                 extension=extension,
+                metadata=self.metadata,
                 source=validated_data["source"],
                 status=models.STATUS_UNREVIEWED,
+                version_name=version_name,
             )
-            version.parse_metadata_json(self.metadata)
-            version.replace_metadata_json()
+
+            try:
+                version.full_clean()
+            except ValidationError as e:
+                raise serializers.ValidationError(e.messages)
             version.save()
 
             models.submitted_for_review.send(
