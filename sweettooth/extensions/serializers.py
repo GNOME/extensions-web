@@ -85,9 +85,27 @@ class ExtensionsUpdatesSerializer(serializers.Serializer):
 
 
 class ExtensionUploadSerializer(serializers.Serializer):
+    TOS_VALIDATION_ERROR = _(
+        "You must agree with the extensions.gnome.org terms of service"
+    )
+
     source = serializers.FileField(required=True)
-    shell_license_compliant = serializers.BooleanField(required=True)
-    tos_compliant = serializers.BooleanField(required=True)
+    shell_license_compliant = serializers.BooleanField(
+        required=True,
+        label=_(
+            "By uploading this extension I agree and verify that in any controversial"
+            " case regarding the compatibility of extension's license with the GNOME"
+            " Shell's license, uploaded by me extension may be used by any GNOME Shell"
+            " user under the terms of the license used by GNOME Shell"
+        ),
+    )
+    tos_compliant = serializers.BooleanField(
+        required=True,
+        label=_(
+            "I agree that a staff of extensions.gnome.org website may remove, modify or"
+            " reassign maintainership of uploaded by me extension"
+        ),
+    )
 
     def validate_source(self, value):
         try:
@@ -104,23 +122,13 @@ class ExtensionUploadSerializer(serializers.Serializer):
 
     def validate_shell_license_compliant(self, value):
         if not value:
-            raise serializers.ValidationError(
-                _(
-                    "Extension can not be published without grant to use it with GNOME"
-                    " Shell compatible license"
-                )
-            )
+            raise serializers.ValidationError(self.TOS_VALIDATION_ERROR)
 
         return value
 
     def validate_tos_compliant(self, value):
         if not value:
-            raise serializers.ValidationError(
-                _(
-                    "Extension can not be published without grant to change extension"
-                    " maintainer"
-                )
-            )
+            raise serializers.ValidationError(self.TOS_VALIDATION_ERROR)
 
         return value
 

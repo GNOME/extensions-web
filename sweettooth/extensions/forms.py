@@ -13,41 +13,33 @@ from django import forms
 from django.core.validators import FileExtensionValidator
 
 from .form_fields import RestrictedImageField
+from .serializers import ExtensionUploadSerializer
 
 
 class UploadForm(forms.Form):
     source = forms.FileField(required=True)
-    gplv2_compliant = forms.BooleanField(
-        label=(
-            "I verify that my extension can be distributed"
-            " under the terms of the GPLv2+"
-        ),
+    shell_license_compliant = forms.BooleanField(
+        label=ExtensionUploadSerializer._declared_fields[
+            "shell_license_compliant"
+        ].label,
         required=False,
     )
 
     tos_compliant = forms.BooleanField(
-        label=(
-            "I agree that GNOME Shell Extensions can remove,"
-            " modify or reassign maintainership of my extension"
-        ),
+        label=ExtensionUploadSerializer._declared_fields["tos_compliant"].label,
         required=False,
     )
 
-    def clean_gplv2_compliant(self):
-        gplv2_compliant = self.cleaned_data["gplv2_compliant"]
-        if not gplv2_compliant:
-            raise forms.ValidationError(
-                "You must be able to distribute your extension"
-                " under the terms of the GPLv2+."
-            )
-        return gplv2_compliant
+    def clean_shell_license_compliant(self):
+        shell_license_compliant = self.cleaned_data["shell_license_compliant"]
+        if not shell_license_compliant:
+            raise forms.ValidationError(ExtensionUploadSerializer.TOS_VALIDATION_ERROR)
+        return shell_license_compliant
 
     def clean_tos_compliant(self):
         tos_compliant = self.cleaned_data["tos_compliant"]
         if not tos_compliant:
-            raise forms.ValidationError(
-                "You must agree to the GNOME Shell Extensions terms of service."
-            )
+            raise forms.ValidationError(ExtensionUploadSerializer.TOS_VALIDATION_ERROR)
         return tos_compliant
 
 

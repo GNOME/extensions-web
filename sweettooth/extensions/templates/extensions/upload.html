@@ -21,24 +21,52 @@
     If this is your first extension, please see the documentation on <a href="https://gjs.guide/extensions">gjs.guide</a> for directions on creating an extension and preparing it for upload.
   </p>
 
-  <form enctype="multipart/form-data" action="" method="POST">
+  <form enctype="multipart/form-data" action="" method="POST" class="form-horizontal">
     {% csrf_token %}
 
-    {{ form.source }}
-    {{ form.source.errors }}
+    {{ form.non_field_errors }}
 
-    <br>
-    {{ form.gplv2_compliant }}
-    {{ form.gplv2_compliant.label_tag }}
-    {{ form.gplv2_compliant.errors }}
+    <div class="form-group row">
+        <div class="col-sm-12{% if field.errors %} has-error{% endif %}">
+            {{ form.source }}
+            {% if form.source.errors %}
+            <div class="help-block">
+            {% for error in form.source.errors %}
+                <p>{{ error|escape }}</p>
+            {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
 
-    <br>
-    {{ form.tos_compliant }}
-    {{ form.tos_compliant.label_tag }}
-    {{ form.tos_compliant.errors }}
+    {% for field in form.visible_fields %}
+    {% if field.name != 'source' %}
+    <div class="form-group row">
+      <div class="col-sm-8 col-form-label">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if field.help_text %}
+        <div>
+          <small class="form-text text-muted">{{ field.help_text }}</small>
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-sm-4{% if field.errors %} has-error{% endif %}">
+        {{ field }}
+        {% if field.errors %}
+        <div class="help-block">
+          {% for error in field.errors %}
+            <p>{{ error|escape }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
 
-    <br>
-    <button type="submit" class="btn btn-primary">Upload extension</button>
+    <div class="fieldWrapper">
+        <button type="submit" class="btn btn-primary">Upload extension</button>
+    </div>
   </form>
 
 </div>
