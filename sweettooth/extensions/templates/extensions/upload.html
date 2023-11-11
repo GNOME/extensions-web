@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block extra-messages %}
   {{ block.super }}
@@ -10,18 +11,26 @@
 {% endblock %}
 
 {% block body %}
-<div class="step">
-  <p>
-    Upload your extension Zip file to submit it for review. Later versions can be uploaded using the same form. Once your extension has been reviewed you will be notified of the result by e-mail.
-  </p>
-  <p>
-    Please see the <a href="https://gjs.guide/extensions/review-guidelines/review-guidelines.html">Review Guidelines</a> to learn what is required for approval.
-  </p>
-  <p>
-    If this is your first extension, please see the documentation on <a href="https://gjs.guide/extensions">gjs.guide</a> for directions on creating an extension and preparing it for upload.
-  </p>
+<h3>{% trans "Upload extension" %}</h3>
+<div class='alert alert-info'>
+    <p>
+        {% blocktrans trimmed %}
+        Upload your extension Zip file to submit it for review. Later versions can be uploaded using the same form. Once your extension has been reviewed you will be notified of the result by e-mail.
+        {% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans trimmed with url="https://gjs.guide/extensions/review-guidelines/review-guidelines.html" %}
+        Please see the <a href="{{ url }}">Review Guidelines</a> to learn what is required for approval.
+        {% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans trimmed with url="https://gjs.guide/extensions" %}
+        If this is your first extension, please see the documentation on <a href="{{ url }}">gjs.guide</a> for directions on creating an extension and preparing it for upload.
+        {% endblocktrans %}
+    </p>
+</div>
 
-  <form enctype="multipart/form-data" action="" method="POST" class="form-horizontal">
+<form enctype="multipart/form-data" action="" method="POST" class="form-horizontal">
     {% csrf_token %}
 
     {{ form.non_field_errors }}
@@ -64,12 +73,13 @@
     {% endif %}
     {% endfor %}
 
-    <div class="fieldWrapper">
-        <button type="submit" class="btn btn-primary">Upload extension</button>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Upload extension</button>
+        </div>
     </div>
-  </form>
+</form>
 
-</div>
 {% endblock %}
 
 {% block navclass %}upload{% endblock %}
