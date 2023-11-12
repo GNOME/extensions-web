@@ -95,15 +95,15 @@ class ExtensionUploadSerializer(serializers.Serializer):
         label=_(
             "By uploading this extension I agree and verify that in any controversial"
             " case regarding the compatibility of extension's license with the GNOME"
-            " Shell's license, uploaded by me extension may be used by any GNOME Shell"
-            " user under the terms of the license used by GNOME Shell"
+            " Shell's license, the extension uploaded by me may be used by any GNOME"
+            " Shell user under the terms of the license used by GNOME Shell"
         ),
     )
     tos_compliant = serializers.BooleanField(
         required=True,
         label=_(
             "I agree that a staff of extensions.gnome.org website may remove, modify or"
-            " reassign maintainership of uploaded by me extension"
+            " reassign maintainership of the extension uploaded by me"
         ),
     )
 

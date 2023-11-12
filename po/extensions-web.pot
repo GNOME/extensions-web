@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-11 13:40+0000\n"
+"POT-Creation-Date: 2023-11-12 11:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -277,14 +277,14 @@ msgstr ""
 #: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
 msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of uploaded by me extension"
+"reassign maintainership of the extension uploaded by me"
 msgstr ""
 
-#: sweettooth/extensions/serializers.py:116 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr ""
 
-#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr ""
 
@@ -296,8 +296,8 @@ msgstr ""
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
-"Shell's license, uploaded by me extension may be used by any GNOME Shell "
-"user under the terms of the license used by GNOME Shell"
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell"
+" user under the terms of the license used by GNOME Shell"
 msgstr ""
 
 #: sweettooth/extensions/templates/extensions/away.html:10
