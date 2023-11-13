@@ -48,8 +48,10 @@ class ExtensionDocument(Document):
             "uuid",
             "description",
             "created",
+            "updated",
             "downloads",
             "popularity",
+            "recommended",
         ]
 
     name = fields.TextField(

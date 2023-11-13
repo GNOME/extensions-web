@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-10-26 18:42+0000\n"
-"PO-Revision-Date: 2023-10-26 23:06+0100\n"
+"POT-Creation-Date: 2023-11-12 11:34+0000\n"
+"PO-Revision-Date: 2023-11-13 13:09+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -20,7 +20,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.1\n"
 
-#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Não deveria usar o correio eletrónico como nome de utilizador"
 
@@ -90,6 +91,14 @@ msgstr ""
 #: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Correio eletrónico"
+
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "Este e-mail já está registado"
+
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "Este nome de utilizador já está registado"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
 #: sweettooth/auth/templates/registration/login.html:35
@@ -256,40 +265,74 @@ msgstr "Extensões instaladas"
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "É necessário definir a chave `shell-version` em metadata.json"
 
-#: sweettooth/extensions/models.py:195 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Tipo de doação não suportada: %s"
 
-#: sweettooth/extensions/models.py:200 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr ""
 "Não é possível especificar mais de 3 valores para o tipo de doação \"%s\""
 
-#: sweettooth/extensions/models.py:206 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Deve ser especificado pelo menos um valor para o tipo de doação \"%s\""
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "O tipo de valor deve ser uma cadeia ou uma lista de cadeias para o tipo de "
 "doação \"%s\""
 
-#: sweettooth/extensions/models.py:467 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "O nome da versão não pode conter apenas espaços ou pontos."
 
-#: sweettooth/extensions/models.py:473 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr ""
 "Apenas caracteres alfanuméricos (eng), espaços e pontos são permitidos para "
 "o nome da versão."
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Concordo que a equipa do sítio Web extensions.gnome.org possa remover, "
+"modificar ou reatribuir a responsabilidade pela manutenção da extensão "
+"carregada por mim"
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "O campo `uuid` está em falta em `metadata.json`"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Uma extensão com esse UUID já foi adicionada"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Tem de concordar com os termos de serviço de extensions.gnome.org"
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"Ao carregar esta extensão, concordo e verifico que, em qualquer caso "
+"controverso relativo à compatibilidade da licença da extensão com a licença "
+"do GNOME Shell, a extensão carregada por mim pode ser utilizada por qualquer "
+"utilizador do GNOME Shell ao abrigo dos termos da licença utilizada pelo "
+"GNOME Shell"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -460,6 +503,45 @@ msgstr "Extensões instaladas"
 msgid "Shell settings"
 msgstr "Definições de interface"
 
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Carregar extensão"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"Carregue o ficheiro Zip da sua extensão para o submeter a revisão. As "
+"versões posteriores podem ser carregadas utilizando o mesmo formulário. "
+"Assim que a sua extensão for analisada, será notificado do resultado por "
+"correio eletrónico."
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"Consulte as <a href=\"%(url)s\">Diretrizes de revisão</a> para saber o que é "
+"necessário para a aprovação."
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"Se esta for a sua primeira extensão, consulte a documentação em <a "
+"href=\"%(url)s\">gjs.guide</a> para obter instruções sobre como criar uma "
+"extensão e prepará-la para carregamento."
+
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "Conteúdo"
@@ -478,13 +560,13 @@ msgstr "Publicar"
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr "Antever"
+msgstr "Pré-visualizar"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr "Que pensa desta extensão GNOME?"
+msgstr "O que pensa desta extensão GNOME?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
@@ -497,7 +579,7 @@ msgstr[1] "Corrija os erros abaixo"
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr "Antever o seu comentário"
+msgstr "Pré-visualizar o seu comentário"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1

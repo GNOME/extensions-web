@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-08-13 17:44+0000\n"
+"POT-Creation-Date: 2023-11-11 13:40+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -19,31 +19,40 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: sweettooth/auth/forms.py:116 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "ელფოსტა მომხმარებლის სახელად არ უნდა გამოიყენოთ"
+
+#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "თქვენი მომხმარებლის სახელი შეიცავს აკრძალულ სიტყვებს"
+
+#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "თქვენი ელფოსტის შეცვლა 7 დღეში ერთხელ შეგიძლიათ"
 
-#: sweettooth/auth/forms.py:188 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "ჩემი ანგარიშის წაშლა"
 
-#: sweettooth/auth/forms.py:189 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "თქვენი ანგარიში წაიშლება 7 დღეში"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
 msgid "No"
 msgstr "არა"
 
-#: sweettooth/auth/forms.py:191 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "დიახ"
 
-#: sweettooth/auth/forms.py:195 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Მიმდინარე პაროლი"
 
-#: sweettooth/auth/forms.py:196 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "ანგარიშის წაშლის გასაუქმებლად პაროლის შეყვანა არ გჭირდებათ"
 
@@ -51,32 +60,40 @@ msgstr "ანგარიშის წაშლის გასაუქმე�
 msgid "Username or email"
 msgstr "მომხმარებლის სახელი ან ელ-ფოსტა"
 
-#: sweettooth/auth/forms.py:68 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
 msgstr "მოხმარებელი"
 
-#: sweettooth/auth/forms.py:72 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "საჭიროა. 30 ან ნაკლები სიმბოლო. მხოლოდ ასოები, ციფრები და @/./+/-/_ ."
 
-#: sweettooth/auth/forms.py:76 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "მნიშვნელობა შეიძლება შეიცავდეს მხოლოდ ასოებს, ციფრებს და @/./+/-/_ ."
 
-#: sweettooth/auth/forms.py:80 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "ელ-ფოსტა"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "ელფოსტა მომხმარებლის სახელად არ უნდა გამოიყენოთ"
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "ეს ელფოსტა უკვე რეგისტრირებულია"
 
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "თქვენი მომხმარებლის სახელი შეიცავს აკრძალულ სიტყვებს"
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "ეს მომხმარებლი სახელი უკვე რეგისტრირებულია"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:35
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
@@ -137,19 +154,19 @@ msgstr "შეცვალეთ თქვენი პაროლი"
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
 msgstr "თქვენი ანგარიში წაიშლება %(schedule_delete_after)s დღის შემდეგ"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "დაგავიწყდათ პაროლი?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "შესვლა"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
@@ -188,32 +205,32 @@ msgstr ""
 "დაგავიწყდათ პაროლი? შეიყვანეთ ელფოსტის მისამართი ქვემოთ და პაროლის შეცვლის "
 "ინსტრუქციებს გამოგიგზავნით."
 
-#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
 msgstr "თქვენი ელფოსტის მისამართის განახლება წარმატებულია"
 
-#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
 msgstr "თქვენი დადასტურების ვადა ამოიწურა. ახალი გამოითხოვეთ."
 
-#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
 msgid "Wrong request"
 msgstr "არასწორი მოთხოვნა"
 
-#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
 msgid "Profile data saved"
 msgstr "პროფილის მონაცემების შენახულია"
 
-#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
 "დადასტურების ელფოსტა გაგაზავნილია ახალ მისამართზე. შეამოწმეთ საფოსტო ყუთი."
 
-#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "პაროლი არასწორია"
 
-#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
 msgstr "აღადგინეთ ელფოსტა და შეცვალეთ პაროლი"
 
@@ -233,28 +250,64 @@ msgstr "დაამატეთ თქვენი"
 msgid "Installed extensions"
 msgstr "დაყენებული გაფართოებები"
 
-#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr ""
 
-#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "მხარდაუჭერელი შემოწირულობის ტიპი: %s"
 
-#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr ""
 
-#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr ""
 
-#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr ""
+
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of uploaded by me extension"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:116 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, uploaded by me extension may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
 msgstr ""
 
 #: sweettooth/extensions/templates/extensions/away.html:10
@@ -419,6 +472,36 @@ msgstr "დაყენებული გაფართოებები"
 #: extensions-web-domain-django:1
 msgid "Shell settings"
 msgstr "გარსის მორგება"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "გაფართოების ატვირთვა"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -591,6 +674,11 @@ msgstr "შესაბამისობა"
 msgid "Sort by"
 msgstr "დალაგება"
 
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "ავტორი"
+
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
@@ -600,11 +688,6 @@ msgstr "მეტი მიმოხილვის ჩვენება"
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "კომეტარები არაა. იყავით პირველი!"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
-#: extensions-web-domain-djangojs:1
-msgid "Author"
-msgstr "ავტორი"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1

@@ -16,9 +16,13 @@ from django.core import mail
 from django.test.testcases import TestCase
 from django.urls import reverse
 from django_registration import validators
+from rest_framework import status
+from rest_framework.test import APIRequestFactory, APITestCase
+from rest_registration.api.views import login, register
 
 from . import views
 from .forms import AutoFocusRegistrationForm, ProfileForm, RegistrationForm
+from .serializers import RegisterUserSerializer
 from .urls import PASSWORD_RESET_TOKEN_PATTERN
 
 User = get_user_model()
@@ -251,3 +255,108 @@ class SettingsTest(TestCase):
         self.assertFormError(
             response, "profile_form", "email", ProfileForm.MESSAGE_EMAIL_TOO_FAST
         )
+
+
+class APIRegistrationDataTest(RegistrationDataTest, APITestCase):
+    valid_data = {
+        User.USERNAME_FIELD: "alice",
+        "email": "alice@example.com",
+        "password": "swordfish",
+        "password_confirm": "swordfish",
+        "display_name": "Alice",
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.factory = APIRequestFactory()
+
+
+# registration/tests/test_forms.py
+class APIAuthTests(APIRegistrationDataTest):
+    def test_email_uniqueness(self):
+        url = reverse("rest_registration:register")
+
+        data = self.valid_data.copy()
+        data.update(email=self.registration_data["email"])
+
+        request = self.factory.post(url, data)
+        response = register(request)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("email", response.data.keys())
+
+    # TODO: make email DB field unique and enable email login
+    def test_auth_username_email(self):
+        url = reverse("rest_registration:login")
+
+        response = login(
+            self.factory.post(
+                url,
+                {
+                    "login": self.registration_data[User.USERNAME_FIELD],
+                    "password": self.registration_data["password"],
+                },
+            )
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = login(
+            self.factory.post(
+                url,
+                {
+                    "login": self.registration_data["email"],
+                    "password": self.registration_data["password"],
+                },
+            )
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = login(
+            self.factory.post(
+                url,
+                {
+                    "login": self.registration_data[User.USERNAME_FIELD],
+                    "password": self.valid_data["password"],
+                },
+            )
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        response = login(
+            self.factory.post(
+                url,
+                {
+                    "login": self.registration_data["email"],
+                    "password": self.valid_data["password"],
+                },
+            )
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class APIRegistrationTests(APIRegistrationDataTest):
+    def test_username_email(self):
+        serializer = RegisterUserSerializer(data=self.valid_data.copy())
+        self.assertTrue(serializer.is_valid())
+
+        data = self.valid_data.copy()
+        data[User.USERNAME_FIELD] = data["email"]
+        serializer = RegisterUserSerializer(data=data)
+        self.assertFalse(serializer.is_valid())
+
+    def test_username_case(self):
+        url = reverse("rest_registration:register")
+
+        data = self.valid_data.copy()
+        data[User.USERNAME_FIELD] = self.registration_data[
+            User.USERNAME_FIELD
+        ].swapcase()
+        self.assertTrue(
+            data[User.USERNAME_FIELD] != self.registration_data[User.USERNAME_FIELD]
+        )
+
+        request = self.factory.post(url, data)
+        response = register(request)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
