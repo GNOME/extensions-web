@@ -18,7 +18,7 @@ def populate_data(apps, schema_editor):
                     os.path.getmtime(version.source.storage.path(version.source.name))
                 )
                 version.save()
-            except FileNotFoundError:
+            except Exception:
                 pass
 
             if version.created and extension.updated < version.created:
