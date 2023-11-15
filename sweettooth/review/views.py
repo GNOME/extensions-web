@@ -299,6 +299,9 @@ def submit_review_view(request, obj):
         reject=models.STATUS_REJECTED,
     ).get(status_string, None)
 
+    if newstatus and not can_approve:
+        return HttpResponseForbidden()
+
     # If a normal user didn't change the status and it was in WAITING,
     # change it back to UNREVIEWED
     if not can_approve and version.status == models.STATUS_WAITING:
@@ -308,12 +311,7 @@ def submit_review_view(request, obj):
         version=version, reviewer=request.user, comments=request.POST.get("comments")
     )
 
-    if newstatus is not None:
-        if newstatus == models.STATUS_ACTIVE and not can_approve:
-            return HttpResponseForbidden()
-        elif newstatus == models.STATUS_REJECTED and not can_approve:
-            return HttpResponseForbidden()
-
+    if newstatus:
         review.new_status = newstatus
         version.status = newstatus
         version.save()
