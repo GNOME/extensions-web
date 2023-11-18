@@ -9,18 +9,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-10-26 18:42+0000\n"
-"PO-Revision-Date: 2023-10-27 13:07+0800\n"
+"POT-Creation-Date: 2023-11-12 11:34+0000\n"
+"PO-Revision-Date: 2023-11-15 17:24+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 45.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.4.1\n"
 
-#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "不要将邮件地址用作用户名"
 
@@ -85,6 +86,14 @@ msgstr "此值只能包含字母、数字和 @/./+/-/_ 等字符。"
 #: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "电子邮件"
+
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "该邮箱已被注册"
+
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "该用户名已被注册"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
 #: sweettooth/auth/templates/registration/login.html:35
@@ -243,35 +252,66 @@ msgstr "已安装的扩展"
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "您必须在 metadata.json 中定义 `shell-version` 键值"
 
-#: sweettooth/extensions/models.py:195 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "不支持的捐赠类型：%s"
 
-#: sweettooth/extensions/models.py:200 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "您不能为捐赠类型“%s”指定多于3个值"
 
-#: sweettooth/extensions/models.py:206 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "您至少需要为捐赠类型“%s”指定1个值"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "捐赠类型“%s”的值类型必须为字符串或字符串列表"
 
-#: sweettooth/extensions/models.py:467 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "版本名称不能只有空格或点。"
 
-#: sweettooth/extensions/models.py:473 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr "仅允许字母数字字符（英文）、空格和点用于版本名称。"
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"我同意 extensions.gnome.org 网站的工作人员可以删除、修改或重新分配我已上传的"
+"扩展程序的维护者的身份"
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json` 中缺失 `uuid` 字段"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "已添加具有该 UUID 的扩展程序"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "您必须同意 extensions.gnome.org 的服务条款"
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"通过上传此扩展，我同意并确认，在扩展许可证与 GNOME Shell 许可证的兼容性存在任"
+"何争议的情况下，我上传的扩展可以由任何 GNOME Shell 用户根据 GNOME Shell 使用"
+"的许可证条款使用"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -438,6 +478,40 @@ msgstr "已安装的扩展"
 #: extensions-web-domain-django:1
 msgid "Shell settings"
 msgstr "Shell 设置"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "上传扩展"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"上传您的扩展 Zip 文件以提交审核。可以使用同样的表单上传更新版本的扩展。一旦您"
+"的扩展被审阅，审核的结果将通过邮件通知给您。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr "请参阅 <a href=\"%(url)s\">审核指南</a> 来了解批准所需的条件。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"如果这是您的第一个扩展程序，请参阅 <a href=\"%(url)s\">gjs.guide</a> 上的文"
+"档，了解有关创建扩展程序和准备上传的说明。"
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
