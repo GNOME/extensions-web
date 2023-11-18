@@ -256,6 +256,20 @@ class SettingsTest(TestCase):
             response, "profile_form", "email", ProfileForm.MESSAGE_EMAIL_TOO_FAST
         )
 
+    def test_disallowed_name(self):
+        with self.settings(DISALLOWED_USERNAMES=("gnome",)):
+            data = self.valid_data.copy()
+            data[User.USERNAME_FIELD] = "official_GNOME"
+
+            form = ProfileForm(data=data)
+            self.assertFalse(form.is_valid())
+
+            data = self.valid_data.copy()
+            data["display_name"] = "official_GNOME"
+
+            form = ProfileForm(data=data)
+            self.assertFalse(form.is_valid())
+
 
 class APIRegistrationDataTest(RegistrationDataTest, APITestCase):
     valid_data = {

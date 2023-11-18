@@ -101,14 +101,19 @@ class BaseProfileForm(forms.Form):
         if username == cleaned_data.get("email"):
             raise forms.ValidationError(_("You should not use email as username"))
 
-        if settings.DISALLOWED_USERNAMES and username:
-            if any(
-                word.lower() in username.lower()
-                for word in settings.DISALLOWED_USERNAMES
-            ):
-                raise forms.ValidationError(_("Your username contains forbidden words"))
+        if self.is_disallowed_name(username):
+            raise forms.ValidationError(_("Your username contains forbidden words"))
 
         return cleaned_data
+
+    def is_disallowed_name(self, name: str):
+        if settings.DISALLOWED_USERNAMES and name:
+            if any(
+                word.lower() in name.lower() for word in settings.DISALLOWED_USERNAMES
+            ):
+                return True
+
+        return False
 
 
 class RegistrationForm(
@@ -159,6 +164,12 @@ class ProfileForm(BaseProfileForm, forms.ModelForm):
             (validators.HTML5EmailValidator(), validators.validate_confusables_email)
         )
         self.fields[email_field].required = True
+
+    def clean_display_name(self):
+        if self.is_disallowed_name(self.cleaned_data["display_name"]):
+            raise forms.ValidationError(_("Your display name contains forbidden words"))
+
+        return self.cleaned_data["display_name"]
 
     def clean_username(self):
         if (
