@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def _with_extensions(queryset):
-        return queryset.annotate(extensions_count=Count("extension")).filter(
+        return queryset.annotate(extensions_count=Count("extensions")).filter(
             extensions_count__gt=0
         )
 
