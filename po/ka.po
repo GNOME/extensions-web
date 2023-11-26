@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-11 13:40+0000\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -24,35 +24,39 @@ msgstr ""
 msgid "You should not use email as username"
 msgstr "ელფოსტა მომხმარებლის სახელად არ უნდა გამოიყენოთ"
 
-#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "თქვენი მომხმარებლის სახელი შეიცავს აკრძალულ სიტყვებს"
 
-#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "თქვენი ელფოსტის შეცვლა 7 დღეში ერთხელ შეგიძლიათ"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "თქვენი საჩვენებელი სახელი შეიცავს აკრძალულ სიტყვებს"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "ჩემი ანგარიშის წაშლა"
 
-#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "თქვენი ანგარიში წაიშლება 7 დღეში"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "არა"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "დიახ"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Მიმდინარე პაროლი"
 
-#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "ანგარიშის წაშლის გასაუქმებლად პაროლის შეყვანა არ გჭირდებათ"
 
@@ -287,14 +291,14 @@ msgstr ""
 #: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
 msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of uploaded by me extension"
+"reassign maintainership of the extension uploaded by me"
 msgstr ""
 
-#: sweettooth/extensions/serializers.py:116 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr ""
 
-#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr ""
 
@@ -306,7 +310,7 @@ msgstr ""
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
-"Shell's license, uploaded by me extension may be used by any GNOME Shell "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
 msgstr ""
 
