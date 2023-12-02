@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-12 11:34+0000\n"
-"PO-Revision-Date: 2023-11-13 13:09+0000\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2023-11-22 13:34+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -25,35 +25,39 @@ msgstr ""
 msgid "You should not use email as username"
 msgstr "Não deveria usar o correio eletrónico como nome de utilizador"
 
-#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "O seu nome de utilizador contém palavras proibidas"
 
-#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Não pode alterar o seu e-mail mais do que uma vez em cada 7 dias"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "O seu nome de apresentação contém palavras proibidas"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Eliminar a minha conta"
 
-#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "A sua conta será eliminada no prazo de 7 dias"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "Não"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Sim"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Palavra-passe atual"
 
-#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "Não é necessário especificar uma palavra-passe para cancelar a remoção da "

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-12 11:34+0000\n"
-"PO-Revision-Date: 2023-11-12 19:14+0200\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2023-11-18 20:52+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -26,37 +26,42 @@ msgid "You should not use email as username"
 msgstr ""
 "Вам не слід використовувати адресу електронної пошти як ім'я користувача"
 
-#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "У вашому імені користувача містяться заборонені слова"
 
-#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr ""
 "Ви можете змінювати вашу адресу електронної пошти не частіше, ніж раз на 7 "
 "днів"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#| msgid "Your username contains forbidden words"
+msgid "Your display name contains forbidden words"
+msgstr "У вашому показаному імені містяться заборонені слова"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Вилучити мій профіль"
 
-#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Ваш обліковий запис буде вилучено за 7 днів"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ні"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Так"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Поточний пароль"
 
-#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "Вам не потрібно вказувати пароль для скасування вилучення облікового запису"
@@ -310,8 +315,8 @@ msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
 "reassign maintainership of the extension uploaded by me"
 msgstr ""
-"Я погоджуюся з тим, що персонал сайта extensions.gnome.org може вилучати,"
-" змінювати або віддавати у супровід іншій особі вивантажене мною розширення"
+"Я погоджуюся з тим, що персонал сайта extensions.gnome.org може вилучати, "
+"змінювати або віддавати у супровід іншій особі вивантажене мною розширення"
 
 #: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
@@ -332,11 +337,11 @@ msgid ""
 "Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
 msgstr ""
-"Вивантаженням цього розширення я погоджуюся і затверджую, що у будь-якому"
-" неоднозначному випадку щодо сумісності умов ліцензування розширення з"
-" умовами ліцензування GNOME "
-"Shell, вивантажене мною розширення може використовувати будь-який користувач"
-" GNOME Shell за умов дотримання ліцензії, що використовується для GNOME Shell"
+"Вивантаженням цього розширення я погоджуюся і затверджую, що у будь-якому "
+"неоднозначному випадку щодо сумісності умов ліцензування розширення з "
+"умовами ліцензування GNOME Shell, вивантажене мною розширення може "
+"використовувати будь-який користувач GNOME Shell за умов дотримання "
+"ліцензії, що використовується для GNOME Shell"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -512,7 +517,6 @@ msgstr "Параметри Shell"
 
 #: sweettooth/extensions/templates/extensions/upload.html:14
 #: extensions-web-domain-django:1
-#| msgid "Upgrade this extension"
 msgid "Upload extension"
 msgstr "Вивантажити розширення"
 
@@ -523,10 +527,10 @@ msgid ""
 "be uploaded using the same form. Once your extension has been reviewed you "
 "will be notified of the result by e-mail."
 msgstr ""
-"Вивантажте файл Zip вашого розширення для рецензування. Наступні версії"
-" можна буде вивантажити за допомогою тієї самої форми. Щойно рецензування"
-" вашого розширення буде завершено, ви отримаєте сповіщення про результати"
-" електронною поштою."
+"Вивантажте файл Zip вашого розширення для рецензування. Наступні версії "
+"можна буде вивантажити за допомогою тієї самої форми. Щойно рецензування "
+"вашого розширення буде завершено, ви отримаєте сповіщення про результати "
+"електронною поштою."
 
 #: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
@@ -535,8 +539,8 @@ msgid ""
 "Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
 "required for approval."
 msgstr ""
-"Будь ласка, ознайомтеся із <a href=\"%(url)s\">Настановами щодо"
-" рецензування</a>, щоб дізнатися про вимоги для схвалення."
+"Будь ласка, ознайомтеся із <a href=\"%(url)s\">Настановами щодо "
+"рецензування</a>, щоб дізнатися про вимоги для схвалення."
 
 #: sweettooth/extensions/templates/extensions/upload.html:27
 #: extensions-web-domain-django:1
@@ -546,10 +550,9 @@ msgid ""
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
-"Якщо це ваше перше розширення, будь ласка, ознайомтеся із документацією щодо"
-" <a "
-"href=\"%(url)s\">gjs.guide</a>, щоб дізнатися більше про створення"
-" розширення та приготування його до вивантаження."
+"Якщо це ваше перше розширення, будь ласка, ознайомтеся із документацією щодо "
+"<a href=\"%(url)s\">gjs.guide</a>, щоб дізнатися більше про створення "
+"розширення та приготування його до вивантаження."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
