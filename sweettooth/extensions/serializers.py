@@ -132,13 +132,10 @@ class ExtensionUploadSerializer(serializers.Serializer):
 
         return value
 
-    def validate(self, attrs):
-        if "user" not in attrs:
+    def create(self, validated_data):
+        if "user" not in validated_data:
             raise Exception("Serializer was called without passing `user` instance")
 
-        return attrs
-
-    def create(self, validated_data):
         with transaction.atomic():
             try:
                 extension = models.Extension.objects.get(uuid=self.uuid)
@@ -181,7 +178,9 @@ class ExtensionUploadSerializer(serializers.Serializer):
             version.save()
 
             models.submitted_for_review.send(
-                sender=validated_data["user"], version=version
+                sender=validated_data["user"],
+                request=validated_data["request"],
+                version=version,
             )
 
             return version
