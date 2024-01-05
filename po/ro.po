@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-10-26 18:42+0000\n"
-"PO-Revision-Date: 2023-10-27 19:51+0300\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2023-12-27 16:32+0200\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Gnome Romanian Translation Team <gnomero-list@lists."
@@ -19,41 +19,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Nu ar trebui să utilizați adresa de email ca nume de utilizator"
 
-#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "Numele de utilizator conține cuvinte interzise"
 
-#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Nu puteți modifica emailul mai mult de o dată la fiecare 7 zile"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "Numele de utilizator conține cuvinte interzise"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Șterge contul"
 
-#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Contul va fi șters în timp de 7 zile"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "Nu"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Da"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Parola curentă"
 
-#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Nu trebuie să specificați o parolă pentru a anula eliminarea contului"
 
@@ -89,6 +94,14 @@ msgstr ""
 #: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Email"
+
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "Acest email este înregistrat deja"
+
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "Acest nume de utilizator este înregistrat deja"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
 #: sweettooth/auth/templates/registration/login.html:35
@@ -253,39 +266,72 @@ msgstr "Extensii instalate"
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "Trebuie să definiți cheia „shell-version” în metadata.json"
 
-#: sweettooth/extensions/models.py:195 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Tip de donație nesuportat: %s"
 
-#: sweettooth/extensions/models.py:200 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "Nu puteți specifica mai mult de 3 valori pentru tipul de donație „%s”"
 
-#: sweettooth/extensions/models.py:206 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Cel puțin o valoare trebuie specificată pentru tipul de donație „%s”"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "Tipul valorii trebuie să fie șir sau listă de șiruri pentru tipul de donație "
 "„%s”"
 
-#: sweettooth/extensions/models.py:467 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "Numele versiunii nu poate fi doar spații sau puncte."
 
-#: sweettooth/extensions/models.py:473 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr ""
 "Doar caractere alfanumerice (engleză), spații și puncte sunt permise pentru "
 "numele versiunii."
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Sunt de acord că un personal al paginii web extensions.gnome.org poate "
+"elimina, modifica sau reatribui întreținerea extensiei încărcate de mine"
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Câmpul „uuid” lipsește în „metadata.json”"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "O extensie cu acel UUID a fost adăugată deja"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr ""
+"Trebuie să fiți de acord cu termenii și condițiile extensions.gnome.org"
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"Prin încărcarea acestei extensii sunt de acord și verific că, în orice caz "
+"controversat privind compatibilitatea licenței extensiei cu licența GNOME "
+"Shell, extensia încărcată de mine poate fi utilizată de orice utilizator "
+"GNOME Shell în conformitate cu termenii licenței utilizate de GNOME Shell"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -312,9 +358,9 @@ msgstr "Anulează"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a "
-"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
-"a comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a href="
+"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
+"comment or report an error. You understand, right?"
 msgstr ""
 "Din păcate, pentru a preveni spam-ul, cerem să <a href=\"%(login_url)s\">vă "
 "autentificați la Extensii pentru Shell-ul GNOME</a> pentru a putea publica "
@@ -456,6 +502,45 @@ msgstr "Extensii instalate"
 #: extensions-web-domain-django:1
 msgid "Shell settings"
 msgstr "Configurări Shell"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Încarcă extensia"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"Încărcați fișierul Zip cu extensia pentru a-l trimite spre examinare. "
+"Versiunile ulterioare pot fi încărcate utilizând același formular. După ce "
+"extensia a fost examinată, veți fi înștiințat cu privire la rezultat prin "
+"email."
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"Consultați <a href=\"%(url)s\">Regulile de revizuire</a> pentru a afla ce "
+"este necesar pentru aprobare."
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a href="
+"\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"Dacă aceasta este prima extensie pe care o creați, consultați documentația "
+"de pe <a href=\"%(url)s\">gjs.guide</a> pentru instrucțiuni despre crearea "
+"unei extensii și pregătirea acesteia pentru încărcare."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -609,8 +694,8 @@ msgid ""
 "troubleshooting entry</a> for more information."
 msgstr ""
 "Nu putem detecta o copie de GNOME rulând pe acest sistem, deci unele părți "
-"ale interfeței pot fi dezactivate. Consultați <a href=\"/about/#no-"
-"detection\">articolul nostru pentru depanare</a> pentru mai multe informații."
+"ale interfeței pot fi dezactivate. Consultați <a href=\"/about/#no-detection"
+"\">articolul nostru pentru depanare</a> pentru mai multe informații."
 
 #: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."

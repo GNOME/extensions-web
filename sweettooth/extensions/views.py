@@ -273,7 +273,7 @@ class ExtensionUploadView(CreateAPIView):
     serializer_class = serializers.ExtensionUploadSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user, request=self.request)
 
 
 def get_versions_for_version_strings(version_strings):

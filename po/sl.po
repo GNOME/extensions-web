@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-09-03 07:38+0000\n"
-"PO-Revision-Date: 2023-09-03 11:22+0200\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2023-12-29 16:24+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -22,39 +22,44 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: sweettooth/auth/forms.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Elektronskega naslova ni priporočljivo uporabiti kot uporabniško ime"
 
-#: sweettooth/auth/forms.py:108 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "Vaše uporabniško ime vsebuje prepovedane besede"
 
-#: sweettooth/auth/forms.py:130 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Svojega e-naslova ne morete spremeniti več kot enkrat v sedmih dneh"
 
-#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "Vaše pojavno ime vsebuje prepovedane besede"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Izbriši moj račun"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Vaš račun bo izbrisan čez 7 dni"
 
-#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ne"
 
-#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Da"
 
-#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Trenutno geslo"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Za preklic odstranitve računa vam ni treba navesti gesla"
 
@@ -73,25 +78,33 @@ msgstr ""
 "lahko s svojim uporabniškim imenom ali pa zahtevate odstranitev podvojenih "
 "računov prek GNOME Gitlab (%(url)s)."
 
-#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: sweettooth/auth/forms.py:86 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Zahtevan je vpis do 30 znakov, uporabiti pa je mogoče le črke, številke in "
 "znake @/./+/-/_."
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Ta vrednost lahko vsebuje le črke, številke in znake »@«, ».«, »+«, »-« in "
 "»_«."
 
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Elektronski naslov"
+
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "Ta e-poštni naslov je že registriran"
+
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "To uporabniško ime je že registrirano"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
 #: sweettooth/auth/templates/registration/login.html:35
@@ -207,33 +220,33 @@ msgstr ""
 "Ali ste pozabili geslo? Spodaj vpišite prijavni elektronski naslov in "
 "prejeli boste navodila za ponastavitev."
 
-#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
 msgstr "Vaš e-naslov je bil uspešno posodobljen"
 
-#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
 msgstr "Vaša potrditvena povezava je potekla. Zahtevajte novo."
 
-#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
 msgid "Wrong request"
 msgstr "Napačna zahteva"
 
-#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
 msgid "Profile data saved"
 msgstr "Podatki profila so shranjeni"
 
-#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
 "Na novi naslov vam pošljemo potrditveno e-sporočilo. Preverite svoj poštni "
 "predal."
 
-#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "Geslo je napačno"
 
-#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
 msgstr "Obnovi uporabniško ime in ponastavi geslo"
 
@@ -253,29 +266,73 @@ msgstr "Dodajte svoje"
 msgid "Installed extensions"
 msgstr "Nameščene razširitve"
 
-#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "Ključ `shell-version` morate definirati v metadata.json"
 
-#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Nepodprta vrsta donacije: %s"
 
-#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "Za vrsto donacije »%s« ne morete določiti več kot treh vrednosti"
 
-#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Za vrsto donacije »%s« morate navesti vsaj eno vrednost"
 
-#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "Vrsta vrednosti mora biti niz ali seznam nizov za vrsto donacije »%s«"
+
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "Ime različice ne more biti samo iz presledkov ali pik."
+
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+"Za ime različice so dovoljeni samo alfanumerični znaki (angleške abecede), "
+"presledki in pike."
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Strinjam se, da lahko osebje spletišča extensions.gnome.org odstrani, "
+"spremeni ali prerazporedi vzdrževanje razširitve, ki sem jo naložil_a"
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Polje 'uuid' manjka v 'metadata.json'"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Razširitev s tem UUID je že bila dodana"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Strinjati se morate s pogoji storitve extensions.gnome.org"
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"Z nalaganjem te razširitve se strinjam in potrjujem, da lahko v vsakem "
+"spornem primeru glede združljivosti dovoljenja razširitve z dovoljenje GNOME "
+"Shell razširitev, ki sem jo naložil_a, uporablja kateri koli uporabnik GNOME "
+"Shell pod pogoji dovoljenja, ki jo uporablja GNOME Shell"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -446,6 +503,44 @@ msgstr "Nameščene razširitve"
 #: extensions-web-domain-django:1
 msgid "Shell settings"
 msgstr "Nastavitve lupine"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Naloži razširitev"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"Naložite datoteko razširitve Zip, da jo pošljete v pregled. Poznejše "
+"različice lahko naložite z istim obrazcem. Ko bo razširitev pregledana, "
+"boste o rezultatu obveščeni po e-pošti."
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"Oglejte si <a href=\"%(url)s\">smernice za pregled</a> , če želite izvedeti, "
+"kaj je potrebno za odobritev."
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a href="
+"\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"Če je to vaša prva razširitev, si oglejte dokumentacijo na <a href=\"%(url)s"
+"\">gjs.guide</a> - navodila za ustvarjanje razširitve in pripravo za "
+"nalaganje."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -635,6 +730,11 @@ msgstr "pomembnosti"
 msgid "Sort by"
 msgstr "Razvrsti po"
 
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "Avtor"
+
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
@@ -644,11 +744,6 @@ msgstr "Pokaži več ocen"
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Ni še vpisane nobene opombe. Bodite prvi!"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
-#: extensions-web-domain-djangojs:1
-msgid "Author"
-msgstr "Avtor"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
