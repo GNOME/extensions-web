@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2024-01-23 00:36+0100\n"
+"PO-Revision-Date: 2024-01-23 00:46+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -676,7 +676,8 @@ msgstr "Kliknutím zde nainstalujete doplněk prohlížeče"
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Návod k instalaci přirozeného konektoru do systému najdete na %swiki page%s"
+"Návod k instalaci přirozeného konektoru do systému najdete na %sstránce "
+"wiki%s"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
