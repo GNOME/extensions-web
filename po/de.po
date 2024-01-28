@@ -5,7 +5,7 @@
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2019.
 # Tim Sabsch <tim@sabsch.com>, 2019, 2022.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2020.
-# Jürgen Benvenuti <gastornis@posteo.org>, 2022, 2023.
+# Jürgen Benvenuti <gastornis@posteo.org>, 2022-2024.
 # Philipp Kiemle <philipp.kiemle@gmail.com>, 2023.
 #
 #
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-10-26 18:42+0000\n"
-"PO-Revision-Date: 2023-10-27 18:39+0200\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2024-01-24 16:06+0100\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -24,39 +24,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4\n"
 
-#: sweettooth/auth/forms.py:102 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Sie sollten nicht die E-Mail-Adresse als Benutzernamen verwenden"
 
-#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "Ihr Benutzername enthält verbotene Wörter"
 
-#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Sie können Ihre E-Mail-Adresse nur einmal in sieben Tagen ändern"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "Ihr Anzeigename enthält verbotene Wörter"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Mein Benutzerkonto löschen"
 
-#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Ihr Konto wird in sieben Tagen gelöscht"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "Nein"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Ja"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Aktuelles Passwort"
 
-#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Um Ihr Konto zu löschen, müssen Sie kein Passwort angeben"
 
@@ -92,6 +97,14 @@ msgstr ""
 #: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-Mail"
+
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "Diese E-Mail-Adresse ist bereits registriert"
+
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "Dieser Benutzername ist bereits registriert"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
 #: sweettooth/auth/templates/registration/login.html:35
@@ -258,39 +271,65 @@ msgstr "Installierte Erweiterungen"
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "Sie müssen den Schlüssel `shell-version` in metadata.json definieren"
 
-#: sweettooth/extensions/models.py:195 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Nicht unterstützte Spendenart: %s"
 
-#: sweettooth/extensions/models.py:200 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "Sie können nicht mehr als drei Werte für den Spendentyp »%s« festlegen"
 
-#: sweettooth/extensions/models.py:206 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Für den Spendentyp »%s« muss mindestens ein Wert definiert sein"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "Für den Spendentyp »%s« muss der Typ des Werts »String« oder eine Liste von "
 "Strings sein"
 
-#: sweettooth/extensions/models.py:467 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "Der Versionsname darf nicht nur aus Leerzeichen oder Punkten bestehen."
 
-#: sweettooth/extensions/models.py:473 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr ""
 "Für den Versionsnamen sind nur (englische) alphanumerische Zeichen, "
 "Leerzeichen und Punkte erlaubt."
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Das »uuid«-Feld fehlt in »metadata.json«"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Eine Erweiterung mit dieser UUID wurde bereits hinzugefügt"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr ""
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -464,6 +503,36 @@ msgstr "Installierte Erweiterungen"
 #: extensions-web-domain-django:1
 msgid "Shell settings"
 msgstr "Shell-Einstellungen"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Erweiterung hochladen"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
