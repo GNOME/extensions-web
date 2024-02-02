@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-12 11:34+0000\n"
-"PO-Revision-Date: 2023-11-17 17:58+0300\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2024-02-03 01:58+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
 #: extensions-web-domain-django:1
@@ -25,35 +25,39 @@ msgid "You should not use email as username"
 msgstr ""
 "Вы не павінны выкарыстоўваць у якасці імя карыстальніка электронную пошту"
 
-#: sweettooth/auth/forms.py:109 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "Імя карыстальніка змяшчае забароненыя словы"
 
-#: sweettooth/auth/forms.py:131 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Вы не можаце змяняць адрас эл. пошты часцей аднаго разу на сем дзён"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "Бачнае имя змяшчае забароненыя словы"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Выдаліць мой уліковы запіс"
 
-#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Ваш уліковы запіс будзе выдалены праз сем дзён"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "Не"
 
-#: sweettooth/auth/forms.py:206 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Так"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Бягучы пароль"
 
-#: sweettooth/auth/forms.py:211 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Вам не трэба ўказваць пароль, каб скасаваць выдаленне ўліковага запісу"
 
@@ -323,6 +327,11 @@ msgid ""
 "Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
 msgstr ""
+"Пры запампоўванні гэтага пашырэння, я згаджаюся і пацвярджаю, што ў любым "
+"спрэчным выпадку адносна сумяшчальнасці ліцэнзіі пашырэння з ліцэнзіяй "
+"асяроддзя GNOME, запампаванае мной пашырэнне можа выкарыстоўвацца любым "
+"карыстальнікам асяроддзя GNOME згодна з умовамі ліцэнзіі, якая "
+"выкарыстоўваецца для асяроддзя GNOME."
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -506,6 +515,9 @@ msgid ""
 "be uploaded using the same form. Once your extension has been reviewed you "
 "will be notified of the result by e-mail."
 msgstr ""
+"Запампуйце файл Zip з пашырэннем, каб адправіць яго на разгляд. Больш познія "
+"версіі можна запампаваць праз тую ж форму. Апавяшчэнне з вынікам разгляду "
+"будзе адпраўлена на вашу электронную пошту."
 
 #: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
@@ -514,6 +526,8 @@ msgid ""
 "Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
 "required for approval."
 msgstr ""
+"Азнаёмцеся з <a href=\"%(url)s\">Крытэрыямі ацэнкі пры разглядзе</a>, каб "
+"даведацца, што патрабуецца для зацвярджэння."
 
 #: sweettooth/extensions/templates/extensions/upload.html:27
 #: extensions-web-domain-django:1
@@ -523,6 +537,9 @@ msgid ""
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
+"Калі гэта ваша першае пашырэнне, азнаёмцеся з дакументацыяй на <a "
+"href=\"%(url)s\">gjs.guide</a>, каб атрымаць інструкцыі як стварыць "
+"пашырэнне і падрыхтаваць яго для запампоўвання."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -695,7 +712,7 @@ msgstr "Назва"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr "Нядаўнія"
+msgstr "Навізна"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
@@ -707,7 +724,7 @@ msgstr "Папулярнасць"
 
 #: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
 msgid "Relevance"
-msgstr "Дарэчнасць"
+msgstr "Рэлевантнасць"
 
 #: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
