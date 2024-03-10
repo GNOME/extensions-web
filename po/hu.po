@@ -1,15 +1,15 @@
 # Hungarian translation for extensions-web.
-# Copyright (C) 2019, 2022, 2023 Free Software Foundation, Inc.
+# Copyright (C) 2019, 2022, 2023, 2024 Free Software Foundation, Inc.
 # This file is distributed under the same license as the extensions-web package.
 #
 # Balázs Meskó <mesko.balazs at fsf dot hu>, 2019.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2022, 2023.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-09-03 07:38+0000\n"
-"PO-Revision-Date: 2023-09-09 20:52+0200\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2024-03-10 17:40+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -17,41 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
-#: sweettooth/auth/forms.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Nem kellene e-mail-címet használnia felhasználónévként"
 
-#: sweettooth/auth/forms.py:108 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
 msgstr "A felhasználóneve tiltott szavakat tartalmaz"
 
-#: sweettooth/auth/forms.py:130 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Nem változtathatja meg az e-mail-címét 7 nap alatt többször"
 
-#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#| msgid "Your username contains forbidden words"
+msgid "Your display name contains forbidden words"
+msgstr "A megjelenített neve tiltott szavakat tartalmaz"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Fiókom törlése"
 
-#: sweettooth/auth/forms.py:203 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "A fiókja 7 napon belül törölve lesz"
 
-#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "No"
 msgstr "Nem"
 
-#: sweettooth/auth/forms.py:205 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Igen"
 
-#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Jelenlegi jelszó"
 
-#: sweettooth/auth/forms.py:210 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Nem kell jelszót megadnia a fiók eltávolításának megszakításához"
 
@@ -66,28 +72,36 @@ msgid ""
 "using your username or you can request removal of duplicate accounts using "
 "GNOME Gitlab (%(url)s)."
 msgstr ""
-"Ön több fiókot regisztrált ugyanazzal az e-mail-címmel. Bejelentkezhet a"
-" felhasználónevével, vagy kérheti a kettőzött fiókok eltávolítását a GNOME"
-" GitLab használatával (%(url)s)."
+"Ön több fiókot regisztrált ugyanazzal az e-mail-címmel. Bejelentkezhet a "
+"felhasználónevével, vagy kérheti a kettőzött fiókok eltávolítását a GNOME "
+"GitLab használatával (%(url)s)."
 
-#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: sweettooth/auth/forms.py:86 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Kötelező. 30 karakter vagy kevesebb. Csak betűk, számok és @/./+/-/_ "
 "karakterek."
 
-#: sweettooth/auth/forms.py:90 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Ez az érték csak betűket, számokat és @/./+/-/_ karaktereket tartalmazhat."
 
-#: sweettooth/auth/forms.py:94 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-mail"
+
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "Ez az e-mail-cím már regisztrálva van"
+
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "Ez a felhasználónév már regisztrálva van"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
 #: sweettooth/auth/templates/registration/login.html:35
@@ -203,33 +217,33 @@ msgstr ""
 "Elfelejtette a jelszavát? Adja meg az e-mail-címét lent, és elküldjük az új "
 "jelszó beállításához szükséges utasításokat."
 
-#: sweettooth/auth/views.py:101 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
 msgstr "Az e-mail-címe sikeresen frissítve"
 
-#: sweettooth/auth/views.py:113 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
 msgstr "A megerősítési hivatkozás lejárt. Kérjen egy újat."
 
-#: sweettooth/auth/views.py:115 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
 msgid "Wrong request"
 msgstr "Hibás kérés"
 
-#: sweettooth/auth/views.py:125 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
 msgid "Profile data saved"
 msgstr "Profiladatok elmentve"
 
-#: sweettooth/auth/views.py:268 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
 "A megerősítési levél elküldésre került az új címére. Nézze meg a "
 "postafiókját."
 
-#: sweettooth/auth/views.py:295 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
 msgid "Password is wrong"
 msgstr "A jelszó hibás"
 
-#: sweettooth/auth/views.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
 msgstr "E-mail-cím helyreállítása és a jelszó visszaállítása"
 
@@ -249,31 +263,77 @@ msgstr "Saját hozzáadása"
 msgid "Installed extensions"
 msgstr "Telepített kiterjesztések"
 
-#: sweettooth/extensions/models.py:136 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "Meg kell határoznia a „shell-version” kulcsot a metadata.json fájlban"
 
-#: sweettooth/extensions/models.py:194 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Nem támogatott adománytípus: %s"
 
-#: sweettooth/extensions/models.py:199 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "Nem adhat meg 3-nál több értéket a(z) „%s” adománytípusnál"
 
-#: sweettooth/extensions/models.py:205 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Legalább egy értéket meg kell adni a(z) „%s” adománytípusnál"
 
-#: sweettooth/extensions/models.py:212 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "Az értéktípus csak karakterlánc vagy karakterláncok listája lehet a(z) „%s” "
 "adománytípusnál"
+
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "A verziónév nem lehet csak szóköz vagy pont."
+
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+"Csak (angol) alfanumerikus karakterek, szóköz és pont engedélyezett a"
+" verziónévnél."
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Elfogadom, hogy az extensions.gnome.org webhely munkatársai eltávolíthatják,"
+" módosíthatják vagy átruházhatják az általam feltöltött kiterjesztés"
+" karbantartását"
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Az „uuid” mező hiányzik a „metadata.json” fájlból"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Ezzel az UUID azonosítóval már hozzá lett adva egy kiterjesztés"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "El kell fogadnia az extensions.gnome.org szolgáltatási feltételeit"
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"A kiterjesztés feltöltésével elfogadom és megerősítem, hogy a kiterjesztés"
+" licencének a GNOME Shell licencével való összeegyeztethetőségét érintő vitás"
+" esetekben az általam feltöltött kiterjesztést bármely GNOME Shell"
+" felhasználó a GNOME Shell által használt licenc feltételei szerint"
+" használhatja."
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -288,7 +348,6 @@ msgstr "Ön elhagyja a GNOME kiterjesztések webhelyet"
 #: sweettooth/extensions/templates/extensions/away.html:6
 #: extensions-web-domain-django:1
 #, python-format
-#| msgid "You are going to leave GNOME Extensions website to"
 msgid "You are going to leave GNOME Extensions website to %(url)s."
 msgstr ""
 "Ön el fogja hagyni a GNOME kiterjesztések webhelyet a(z) %(url)s címre."
@@ -444,6 +503,46 @@ msgstr "Telepített kiterjesztések"
 #: extensions-web-domain-django:1
 msgid "Shell settings"
 msgstr "Shell beállítások"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+#| msgid "Upgrade this extension"
+msgid "Upload extension"
+msgstr "Kiterjesztés feltöltése"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"Töltse fel a kiterjesztés ZIP-fájlját a felülvizsgálatra való beküldéshez. A"
+" későbbi verziók ugyanezen űrlap használatával tölthetők fel. Amint a"
+" kiterjesztés felülvizsgálata megtörtént, e-mailben kap értesítést az"
+" eredményről."
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"Nézze meg a <a href=\"%(url)s\">felülvizsgálati útmutatót</a> annak"
+" megismeréséhez, hogy mi szükséges az elfogadáshoz."
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"Ha ez az első kiterjesztése, akkor nézze meg a <a href=\"%(url)s\">gjs.guide<"
+"/a> oldalon lévő dokumentációt a kiterjesztés létrehozásához és a feltöltésre"
+" való előkészítéséhez szükséges utasításokért."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -633,6 +732,11 @@ msgstr "Fontosság"
 msgid "Sort by"
 msgstr "Rendezés eszerint:"
 
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "Szerző"
+
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
@@ -642,11 +746,6 @@ msgstr "Több értékelés megjelenítése"
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "Még nincsenek megjegyzések. Legyen Ön az első!"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
-#: extensions-web-domain-djangojs:1
-msgid "Author"
-msgstr "Szerző"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
