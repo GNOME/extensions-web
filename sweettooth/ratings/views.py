@@ -30,9 +30,11 @@ def comment_details(request, comment):
         comment=linebreaks(comment.comment, autoescape=True),
         author=dict(
             username=display_name,
-            url=reverse("auth-profile", kwargs=dict(user=comment.user.username))
-            if comment.user
-            else None,
+            url=(
+                reverse("auth-profile", kwargs=dict(user=comment.user.username))
+                if comment.user
+                else None
+            ),
         ),
         date=dict(
             timestamp=comment.submit_date.isoformat(),

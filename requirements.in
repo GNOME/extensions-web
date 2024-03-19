@@ -1,4 +1,4 @@
-Django==4.2.10
+Django==4.2.11
 djangorestframework==3.14.0
 django-autoslug==1.9.9
 django-contrib-comments==2.2.0
@@ -22,7 +22,7 @@ mysqlclient==2.2.0
 uWSGI==2.0.23
 
 # development requirements
-black==23.7.0
+black==24.3.0
 django-cors-headers==4.2.0
 flake8==6.0.0
 isort==5.12.0
