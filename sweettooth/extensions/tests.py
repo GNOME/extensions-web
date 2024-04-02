@@ -11,9 +11,14 @@ from django.core.files.base import File
 from django.test import TestCase, TransactionTestCase
 from django.test.utils import override_settings
 from django.urls import reverse
+from rest_framework.test import APITransactionTestCase
 
 from sweettooth.extensions import models, views
-from sweettooth.testutils import BasicUserTestCase, SilentDjangoRequestTest
+from sweettooth.testutils import (
+    BasicAPIUserTestCase,
+    BasicUserTestCase,
+    SilentDjangoRequestTest,
+)
 
 testdata_dir = os.path.join(os.path.dirname(__file__), "testdata")
 
@@ -318,10 +323,11 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.assertEqual(extension.description, "Simple test metadata")
         self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
-        url = reverse(
-            "extensions-detail", kwargs=dict(pk=extension.pk, slug=extension.slug)
-        )
-        self.assertRedirects(response, url)
+        if not isinstance(self, APITransactionTestCase):
+            url = reverse(
+                "extensions-detail", kwargs=dict(pk=extension.pk, slug=extension.slug)
+            )
+            self.assertRedirects(response, url)
 
         version1.status = models.STATUS_ACTIVE
         version1.save()
@@ -335,6 +341,12 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         # This should be auto-approved.
         self.assertEqual(version2.status, models.STATUS_ACTIVE)
         self.assertEqual(version2.version, version1.version + 1)
+
+        self.upload_file("SimpleExtensionMissingMetadata")
+
+        version3 = extension.versions.order_by("-version")[0]
+        # version 3 should not be created
+        self.assertEqual(version3, version2)
 
     def test_upload_large_uuid(self):
         self.upload_file("LargeUUID")
@@ -394,6 +406,16 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
             with self.assertRaises(models.Extension.DoesNotExist):
                 models.Extension.objects.get(uuid="test-extension@mecheye.net")
 
+    def test_missing_shell_version(self):
+        for file in ("SimpleExtensionMissingMetadata", "SimpleExtensionEmptyMetadata"):
+            response = self.upload_file(file)
+
+            self.assertContains(
+                response, models.Extension.MESSAGE_SHELL_VERSION_MISSING
+            )
+            with self.assertRaises(models.Extension.DoesNotExist):
+                models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
     def test_session_modes_saved(self):
         uuid = "session-mode@extension.local"
         session_modes = [
@@ -402,7 +424,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         ]
 
         for mode in models.SessionMode.SessionModes.values:
-            models.SessionMode.objects.create(mode=mode)
+            models.SessionMode.objects.get_or_create(mode=mode)
 
         self.upload_file(
             "SimpleExtension",
@@ -426,7 +448,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         uuid = "session-mode-ommited@extension.local"
 
         for mode in models.SessionMode.SessionModes.values:
-            models.SessionMode.objects.create(mode=mode)
+            models.SessionMode.objects.get_or_create(mode=mode)
 
         self.upload_file(
             "SimpleExtension",
@@ -443,6 +465,33 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         ) as version_metadata_fp:
             version_metadata = json.load(version_metadata_fp)
             self.assertNotIn("session-modes", version_metadata)
+
+
+class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
+    def upload_file(self, zipfile: str, extra_metadata: dict[str, Any] = {}):
+        with get_test_zipfile(zipfile, extra_metadata) as f:
+            return self.client.post(
+                reverse("extension-upload"),
+                data={
+                    "source": f,
+                    "shell_license_compliant": True,
+                    "tos_compliant": True,
+                },
+                format="multipart",
+                follow=True,
+            )
+
+    def test_missing_shell_version(self):
+        for file in ("SimpleExtensionMissingMetadata", "SimpleExtensionEmptyMetadata"):
+            response = self.upload_file(file)
+
+            self.assertEqual(response.status_code, 400)
+            self.assertIn(
+                models.Extension.MESSAGE_SHELL_VERSION_MISSING, response.data[0]
+            )
+
+            with self.assertRaises(models.Extension.DoesNotExist):
+                models.Extension.objects.get(uuid="test-extension@mecheye.net")
 
 
 class ExtensionVersionTest(BasicUserTestCase, TestCase):
