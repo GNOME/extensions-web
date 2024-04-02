@@ -138,24 +138,26 @@ class ExtensionUploadSerializer(serializers.Serializer):
 
         with transaction.atomic():
             try:
-                extension = models.Extension.objects.get(uuid=self.uuid)
-            except models.Extension.DoesNotExist:
-                extension = models.Extension(
-                    creator=validated_data["user"], metadata=self.metadata
-                )
-            else:
-                if (
-                    validated_data["user"] != extension.creator
-                    and not validated_data["user"].is_superuser
-                ):
-                    raise serializers.ValidationError(
-                        _("An extension with that UUID has already been added")
+                try:
+                    extension = models.Extension.objects.get(uuid=self.uuid)
+                    extension.update_from_metadata(self.metadata)
+                except models.Extension.DoesNotExist:
+                    extension = models.Extension(
+                        creator=validated_data["user"], metadata=self.metadata
                     )
+                else:
+                    if (
+                        validated_data["user"] != extension.creator
+                        and not validated_data["user"].is_superuser
+                    ):
+                        raise serializers.ValidationError(
+                            _("An extension with that UUID has already been added")
+                        )
 
-            try:
                 extension.full_clean()
             except ValidationError as e:
                 raise serializers.ValidationError(e.messages)
+
             extension.save()
 
             if "version-name" in self.metadata:
