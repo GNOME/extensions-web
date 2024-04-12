@@ -315,9 +315,7 @@ drf-nested-routers==0.93.4 \
 drf-spectacular[sidecar]==0.26.5 \
     --hash=sha256:aee55330a774ba8a9cbdb125714d1c9ee05a8aafd3ce3be8bfd26527649aeb44 \
     --hash=sha256:c0002a820b11771fdbf37853deb371947caf0159d1afeeffe7598e964bc1db94
-    # via
-    #   -r requirements.in
-    #   drf-spectacular
+    # via -r requirements.in
 drf-spectacular-sidecar==2023.10.1 \
     --hash=sha256:3d042a6772512f4d238f0385d3430acf5f669f595fd0be2641fe6bbfb4c7b376 \
     --hash=sha256:546a83c173589715e530fad211af60cbcda2db54eb9e0935d44251639332af6d
@@ -326,9 +324,9 @@ flake8==6.0.0 \
     --hash=sha256:3833794e27ff64ea4e9cf5d410082a8b97ff1a06c16aa3d2027339cd0f1195c7 \
     --hash=sha256:c61007e76655af75e6785a931f452915b371dc48f56efd765247c8fe68f2b181
     # via -r requirements.in
-idna==3.4 \
-    --hash=sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4 \
-    --hash=sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2
+idna==3.7 \
+    --hash=sha256:028ff3aadf0609c1fd278d8ea3089299412a7a8b9bd005dd08b9f8285bcb5cfc \
+    --hash=sha256:82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0
     # via requests
 inflection==0.5.1 \
     --hash=sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417 \
