@@ -1199,6 +1199,7 @@ class UpdateVersionTest(SilentDjangoRequestTest):
     upgrade_uuid = "upgrade-extension@testcases.sweettooth.mecheye.net"
     reject_uuid = "reject-extension@testcases.sweettooth.mecheye.net"
     downgrade_uuid = "downgrade-extension@testcases.sweettooth.mecheye.net"
+    downgrade2_uuid = "downgrade-extension2@testcases.sweettooth.mecheye.net"
     nonexistant_uuid = "blah-blah-blah@testcases.sweettooth.mecheye.net"
     full_expected = {
         upgrade_uuid: "upgrade",
@@ -1209,10 +1210,10 @@ class UpdateVersionTest(SilentDjangoRequestTest):
     def build_response(self, installed):
         return dict((k, dict(version=v)) for k, v in installed.items())
 
-    def grab_post_response(self, installed):
+    def grab_post_response(self, installed, shell_version="3.2.0"):
         installed = self.build_response(installed)
         response = self.client.post(
-            reverse("extensions-shell-update") + "?shell_version=3.2.0",
+            f"{reverse('extensions-shell-update')}?shell_version={shell_version}",
             data=json.dumps(installed),
             content_type="application/json",
         )
@@ -1252,7 +1253,7 @@ class UpdateVersionTest(SilentDjangoRequestTest):
         response = self.grab_post_response({uuid: 2})
         self.assertEqual(response, {})
 
-    def test_downgrade_me(self):
+    def test_downgrade_rejected(self):
         uuid = self.downgrade_uuid
 
         # The user has a rejected version, so downgrade.
@@ -1263,6 +1264,27 @@ class UpdateVersionTest(SilentDjangoRequestTest):
         # The user has the appropriate version on his machine.
         response = self.grab_post_response({uuid: 1})
         self.assertEqual(response, {})
+
+    def test_downgrade(self):
+        uuid = self.downgrade2_uuid
+
+        response = self.grab_post_response({uuid: 1}, shell_version="45")
+        self.assertEqual(response, {uuid: "upgrade"})
+
+        response = self.grab_post_response({uuid: 1}, shell_version="46")
+        self.assertEqual(response, {uuid: "upgrade"})
+
+        response = self.grab_post_response({uuid: 2}, shell_version="45")
+        self.assertEqual(response, {})
+
+        response = self.grab_post_response({uuid: 2}, shell_version="46")
+        self.assertEqual(response, {uuid: "upgrade"})
+
+        response = self.grab_post_response({uuid: 3}, shell_version="46")
+        self.assertEqual(response, {})
+
+        response = self.grab_post_response({uuid: 3}, shell_version="45")
+        self.assertEqual(response, {uuid: "downgrade"})
 
     def test_nonexistent_uuid(self):
         # The user has an extension that's not on the site.
