@@ -156,10 +156,13 @@ class ExtensionsViewSet(
                 updates.validated_data["version_validation_enabled"],
             )
 
-            if proper_version is not None:
+            if proper_version:
+                if proper_version.version == version.version:
+                    continue
+
                 if version.version < proper_version.version:
                     result[uuid] = "upgrade"
-                elif version.status == models.STATUS_REJECTED:
+                else:
                     result[uuid] = "downgrade"
             else:
                 result[uuid] = "blacklist"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2023-12-07 23:00+0330\n"
+"PO-Revision-Date: 2024-04-26 13:56+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
 #: extensions-web-domain-django:1
@@ -284,13 +284,15 @@ msgstr "نام نگارش نمی‌تواند فقط فاصله یا نقطه ب
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
-msgstr ""
+msgstr "تنها نویسه‌های عددحرفی (انگلیسی)، فاصله و نقطه برای نام نگارش مجازند."
 
 #: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
 msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
 "reassign maintainership of the extension uploaded by me"
 msgstr ""
+"موافقم که کارکنان پایگاه وب extensions.gnome.org می‌توانند افزونهٔ بارگذاشته‌ام را "
+"برداشته، تغییر داده یا نگه‌داریش را به دیگری اختصاص دهند"
 
 #: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
@@ -311,6 +313,9 @@ msgid ""
 "license, the extension uploaded by me may be used by any GNOME Shell user under "
 "the terms of the license used by GNOME Shell"
 msgstr ""
+"با بارگذاری این افزونه موافقت می‌کنم که در هر مورد مناقشه برانگیز مربوط به "
+"سازگاری پروانهٔ افزونه با پروانهٔ پوستهٔ گنوم، افزونهٔ بارگذاشته‌ام می‌توانند از سوی "
+"هر کاربر پوستهٔ گنوم تحت شرایط پروانهٔ استفاده شده به دست پوستهٔ گنوم استفاده شود."
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -491,6 +496,8 @@ msgid ""
 "uploaded using the same form. Once your extension has been reviewed you will be "
 "notified of the result by e-mail."
 msgstr ""
+"بارگذاری پروندهٔ Zip افزونه برای باربینی. نگارش‌های بعدی می‌توانند از طریق همین فرم "
+"بار گذاشته شوند. پس از بررسی افزونه‌تان از طریق رایانامه از نتیجه آگاه خواهید شد."
 
 #: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
@@ -509,6 +516,8 @@ msgid ""
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
+"اگر نخستین افزونه‌تان است، لطفاً برای مستندات <a href=\"%(url)s\">gjs.guide</a> را "
+"برای ایجاد افزونه و آماده کردنش برای بارگذاری را ببینید."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
