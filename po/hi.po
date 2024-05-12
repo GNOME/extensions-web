@@ -1,0 +1,735 @@
+# Hindi translation for extensions-web.
+# Copyright (C) 2024 extensions-web's COPYRIGHT HOLDER
+# This file is distributed under the same license as the extensions-web package.
+# Scrambled 777 <weblate.scrambled777@simplelogin.com>, 2024.
+# Scrambled777 <weblate.scrambled777@simplelogin.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extensions-web master\n"
+"Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-04-22 16:19+0530\n"
+"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Gtranslator 46.0\n"
+
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "आपको ईमेल को उपयोक्तानाम के रूप में उपयोग नहीं करना चाहिए"
+
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "आपके उपयोक्तानाम में निषिद्ध शब्द हैं"
+
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "आप अपना ईमेल हर 7 दिन में एक बार से अधिक नहीं बदल सकते"
+
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "आपके प्रदर्शन नाम में निषिद्ध शब्द हैं"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "मेरा खाता मिटायें"
+
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "आपका खाता 7 दिन में मिटा दिया जाएगा"
+
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+msgid "No"
+msgstr "नहीं"
+
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "हाँ"
+
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "वर्तमान पासवर्ड"
+
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr "खाता निष्कासन को रद्द करने के लिए आपको पासवर्ड निर्दिष्ट करने की आवश्यकता नहीं है"
+
+#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "उपयोक्तानाम या ईमेल"
+
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"आपके पास एक ही ईमेल का उपयोग करके कई खाते पंजीकृत हैं। आप अपने उपयोक्तानाम का उपयोग "
+"करके लॉग इन कर सकते हैं या आप GNOME Gitlab (%(url)s) का उपयोग करके डुप्लिकेट खातों को "
+"हटाने का अनुरोध कर सकते हैं।"
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+msgid "Username"
+msgstr "उपयोक्तानाम"
+
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "आवश्यक। 30 वर्ण या उससे कम। केवल अक्षर, अंक और @/./+/-/_।"
+
+#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr "इस मान में केवल अक्षर, संख्याएँ और @/./+/-/_ वर्ण हो सकते हैं।"
+
+#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+msgid "Email"
+msgstr "ईमेल"
+
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "यह ईमेल पहले से ही पंजीकृत है"
+
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "यह उपयोक्तानाम पहले से ही पंजीकृत है"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:35
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "पंजीकृत करें"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "खाता पंजीकरण"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "खाता हटाना"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr "आपका खाता हटाने के लिए निर्धारित है। आप 7 दिनों में खाता हटाना रद्द कर सकते हैं।"
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "खाता निष्कासन रद्द कर दिया गया है।"
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "ईमेल पुष्टिकरण"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "जमा करें"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "अपना पासवर्ड बदलें"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr "आपका खाता %(schedule_delete_after)s के बाद हटाने के लिए निर्धारित है"
+
+#: sweettooth/auth/templates/registration/login.html:21
+#: sweettooth/auth/templates/registration/login_popup_form.html:14
+#: extensions-web-domain-django:1
+msgid "Forgot your password?"
+msgstr "क्या आप अपना पासवर्ड भूल गए?"
+
+#: sweettooth/auth/templates/registration/login.html:30
+#: sweettooth/auth/templates/registration/login_popup_form.html:11
+#: sweettooth/templates/base.html:72 extensions-web-domain-django:1
+msgid "Log in"
+msgstr "लॉगिन"
+
+#: sweettooth/auth/templates/registration/login.html:34
+#: sweettooth/auth/templates/registration/login_popup_form.html:17
+#: extensions-web-domain-django:1
+msgid "Don't have an account?"
+msgstr "क्या आपके पास कोई खाता नहीं है?"
+
+#: sweettooth/auth/templates/registration/login.html:6
+#: extensions-web-domain-django:1
+msgid "User Login"
+msgstr "उपयोगकर्ता लॉगिन"
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:12
+#: sweettooth/auth/templates/registration/password_reset_form.html:12
+#: extensions-web-domain-django:1
+msgid "Reset your password"
+msgstr "अपना पासवर्ड रीसेट करें"
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:15
+#: extensions-web-domain-django:1
+msgid ""
+"The token for the password reset is incorrect. Please check your link and "
+"try again."
+msgstr "पासवर्ड रीसेट के लिए टोकन गलत है। कृपया अपना लिंक जांचें और पुनः प्रयास करें।"
+
+#: sweettooth/auth/templates/registration/password_reset_form.html:7
+#: extensions-web-domain-django:1
+msgid "Password reset"
+msgstr "पासवर्ड रीसेट करें"
+
+#: sweettooth/auth/templates/registration/password_reset_form.html:8
+#: extensions-web-domain-django:1
+msgid ""
+"Forgot your password? Enter your e-mail address below, and we’ll e-mail "
+"instructions for setting a new one."
+msgstr ""
+"क्या आप अपना पासवर्ड भूल गए? नीचे अपना ई-मेल पता दर्ज करें, और हम एक नया निर्धारित "
+"करने के लिए निर्देश ई-मेल करेंगे।"
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "आपका ईमेल पता सफलतापूर्वक अपडेट हो गया"
+
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "आपका पुष्टिकरण लिंक समाप्त हो गया। कृपया नये का अनुरोध करें।"
+
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "ग़लत अनुरोध"
+
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "प्रोफ़ाइल डेटा सहेजा गया"
+
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr "पुष्टिकरण मेल आपके नए पते पर भेजा जाता है। कृपया अपना इनबॉक्स जांचें।"
+
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "पासवर्ड ग़लत है"
+
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "ईमेल पुनर्स्थापित करें और पासवर्ड रीसेट करें"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
+msgid "About"
+msgstr "बारे में"
+
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
+msgid "Extensions"
+msgstr "एक्सटेंशन"
+
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "अपना जोड़ें"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "स्थापित एक्सटेंशन"
+
+#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "आपको metadata.json में `shell-version` कुंजी को परिभाषित करना होगा"
+
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "असमर्थित दान प्रकार: %s"
+
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr "आप दान प्रकार \"%s\" के लिए 3 से अधिक मान निर्दिष्ट नहीं कर सकते"
+
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "दान प्रकार \"%s\" के लिए कम से कम एक मान निर्दिष्ट होना चाहिए"
+
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr "दान प्रकार \"%s\" के लिए मान प्रकार स्ट्रिंग या स्ट्रिंग की सूची होनी चाहिए"
+
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "संस्करण का नाम केवल रिक्त स्थान या बिंदु नहीं हो सकता।"
+
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+"संस्करण नाम के लिए केवल अक्षरांकीय वर्ण (अंग्रेज़ी), रिक्त स्थान और बिंदुओं की अनुमति है।"
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"मैं इस बात से सहमत हूं कि extensions.gnome.org वेबसाइट का  कर्मचारी मेरे द्वारा अपलोड "
+"किए गए एक्सटेंशन को हटा सकता है, संशोधित कर सकता है या उसका रखरखाव फिर से सौंप सकता "
+"है।"
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json` में `uuid` क्षेत्र गायब है"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "उस UUID के साथ एक एक्सटेंशन पहले ही जोड़ा जा चुका है"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "आपको extensions.gnome.org की सेवा की शर्तों से सहमत होना होगा"
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"इस एक्सटेंशन को अपलोड करके मैं सहमत हूं और सत्यापित करता हूं कि GNOME शैल के लाइसेंस के साथ "
+"एक्सटेंशन के लाइसेंस की संगतता के संबंध में किसी भी विवादास्पद मामले में, मेरे द्वारा अपलोड किए "
+"गए एक्सटेंशन का उपयोग GNOME शैल द्वारा उपयोग किए गए लाइसेंस की शर्तों के तहत किसी भी "
+"GNOME शैल उपयोक्ता द्वारा किया जा सकता है।"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "फिर भी आगे बढ़ें"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "आप GNOME एक्सटेंशन्स वेबसाइट छोड़ रहे हैं"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "आप GNOME एक्सटेंशन वेबसाइट को %(url)s के लिए छोड़ने जा रहे हैं।"
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
+msgstr ""
+"दुर्भाग्य से, स्पैम को रोकने में मदद करने के लिए, हमें आवश्यकता है कि आप टिप्पणी पोस्ट करने या "
+"त्रुटि की रिपोर्ट करने के लिए <a href=\"%(login_url)s\">GNOME शैल एक्सटेंशन में लॉग इन "
+"करें</a>। आप समझते हैं, है ना?"
+
+#: sweettooth/extensions/templates/extensions/comments.html:22
+#: extensions-web-domain-django:1
+msgid "User Reviews"
+msgstr "उपयोक्ता समीक्षाएं"
+
+#: sweettooth/extensions/templates/extensions/comments.html:24
+#: extensions-web-domain-django:1
+msgid "Loading reviews…"
+msgstr "समीक्षाएं लोड हो रही हैं…"
+
+#: sweettooth/extensions/templates/extensions/comments.html:3
+#: extensions-web-domain-django:1
+msgid "Your opinion"
+msgstr "आपकी राय"
+
+#: sweettooth/extensions/templates/extensions/comments.html:6
+#: extensions-web-domain-django:1
+msgid "Leave a…"
+msgstr "एक छोड़ो…"
+
+#: sweettooth/extensions/templates/extensions/comments.html:7
+#: extensions-web-domain-django:1
+msgid "Comment"
+msgstr "टिप्पणी"
+
+#: sweettooth/extensions/templates/extensions/comments.html:8
+#: extensions-web-domain-django:1
+msgid "Rating"
+msgstr "रेटिंग"
+
+#: sweettooth/extensions/templates/extensions/detail.html:102
+#: extensions-web-domain-django:1
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+"एक समीक्षक आपके द्वारा सबमिट किए गए एक्सटेंशन की समीक्षा करेगा ताकि यह सुनिश्चित हो सके "
+"कि इसमें कुछ भी खतरनाक नहीं है। आपको समीक्षा का परिणाम ईमेल कर दिया जाएगा।"
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "इस एक्सटेंशन के लिए टिप्पणियाँ अक्षम हैं।"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s डाउनलोड"
+msgstr[1] "%(downloads)s डाउनलोड"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "डाउनलोड की संख्या"
+
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "दान करें"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "स्थापित करें"
+
+#: sweettooth/extensions/templates/extensions/detail.html:46
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "इस एक्सटेंशन को उन्नयन करें"
+
+#: sweettooth/extensions/templates/extensions/detail.html:47
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "इस एक्सटेंशन को विन्यस्त करें"
+
+#: sweettooth/extensions/templates/extensions/detail.html:48
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "इस एक्सटेंशन को अस्थापित करें"
+
+#: sweettooth/extensions/templates/extensions/detail.html:75
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "एक्सटेंशन मुखपृष्ठ"
+
+#: sweettooth/extensions/templates/extensions/detail.html:81
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "सत्र मोड"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "यह एक्सटेंशन स्क्रीन लॉक होने पर भी चलेगा"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "संवाद अनलॉक करें"
+
+#: sweettooth/extensions/templates/extensions/detail.html:86
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "डाउनलोड"
+
+#: sweettooth/extensions/templates/extensions/detail.html:89
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "शैल संस्करण…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:93
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "एक्सटेंशन संस्करण…"
+
+#: sweettooth/extensions/templates/extensions/list.html:13
+#: extensions-web-domain-django:1
+msgid "Search for extensions…"
+msgstr "एक्सटेंशन खोजें…"
+
+#: sweettooth/extensions/templates/extensions/local.html:3
+#: sweettooth/extensions/templates/extensions/local.html:8
+#: extensions-web-domain-django:1
+msgid "Installed Extensions"
+msgstr "स्थापित एक्सटेंशन"
+
+#: sweettooth/extensions/templates/extensions/local.html:5
+#: extensions-web-domain-django:1
+msgid "Shell settings"
+msgstr "शैल सेटिंग्स"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "एक्सटेंशन अपलोड करें"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"समीक्षा के लिए सबमिट करने के लिए अपनी एक्सटेंशन Zip फ़ाइल अपलोड करें। बाद के संस्करण उसी "
+"प्रपत्र का उपयोग करके अपलोड किए जा सकते हैं। एक बार आपके एक्सटेंशन की समीक्षा हो जाने के "
+"बाद आपको परिणाम के बारे में ई-मेल द्वारा सूचित किया जाएगा।"
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"अनुमोदन के लिए क्या आवश्यक है यह जानने के लिए कृपया <a href=\"%(url)s\">समीक्षा "
+"दिशानिर्देश</a> देखें।"
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"यदि यह आपका पहला एक्सटेंशन है, तो एक्सटेंशन बनाने और इसे अपलोड के लिए तैयार करने के "
+"निर्देशों के लिए कृपया <a href=\"%(url)s\">gjs.guide</a> पर दस्तावेज़ देखें।"
+
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
+msgid "Content"
+msgstr "सामग्री"
+
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+msgid "Metadata"
+msgstr "मेटाडेटा"
+
+#: sweettooth/ratings/templates/comments/form.html:26
+#: sweettooth/ratings/templates/comments/preview.html:45
+#: extensions-web-domain-django:1
+msgid "Post"
+msgstr "पोस्ट"
+
+#: sweettooth/ratings/templates/comments/form.html:27
+#: sweettooth/ratings/templates/comments/preview.html:46
+#: extensions-web-domain-django:1
+msgid "Preview"
+msgstr "पूर्वावलोकन"
+
+#: sweettooth/ratings/templates/comments/form.html:8
+#: sweettooth/ratings/templates/comments/preview.html:27
+#: extensions-web-domain-django:1
+msgid "What do you think about this GNOME extension?"
+msgstr "आप इस GNOME एक्सटेंशन के बारे में क्या सोचते हैं?"
+
+#: sweettooth/ratings/templates/comments/preview.html:13
+#: extensions-web-domain-django:1
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] "कृपया नीचे दी गई त्रुटि सुधारें"
+msgstr[1] "कृपया नीचे दी गई त्रुटियों को सुधारें"
+
+#: sweettooth/ratings/templates/comments/preview.html:4
+#: sweettooth/ratings/templates/comments/preview.html:15
+#: extensions-web-domain-django:1
+msgid "Preview your comment"
+msgstr "अपनी टिप्पणी का पूर्वावलोकन करें"
+
+#: sweettooth/ratings/templates/comments/preview.html:18
+#: extensions-web-domain-django:1
+msgid "Post Comment"
+msgstr "टिप्पणी पोस्ट करें"
+
+#: sweettooth/ratings/templates/comments/preview.html:21
+#: extensions-web-domain-django:1
+msgid "Edit your comment"
+msgstr "अपनी टिप्पणी संपादित करें"
+
+#: sweettooth/review/templates/review/review.html:73
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"आप अगला संस्करण <a href='https://extensions.gnome.org/upload/'>उसी रूप</a> "
+"द्वारा अपलोड कर सकते हैं, जिसे आपने यह संस्करण पोस्ट किया है।"
+
+#: sweettooth/review/templates/review/review.html:76
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr "आप अपने एक्सटेंशन पृष्ठ में आइकन पर क्लिक करके एक्सटेंशन आइकन बदल सकते हैं।"
+
+#: sweettooth/review/templates/review/review.html:79
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"यदि आप किसी स्वीकृत संस्करण को निष्क्रिय करना चाहते हैं, तो अपने एक्सटेंशन पृष्ठ में निष्क्रिय "
+"लिंक पर क्लिक करें।"
+
+#: sweettooth/review/templates/review/review.html:82
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
+"guide</a>."
+msgstr ""
+"आप <a href='https://gjs.guide/extensions/'>gjs.guide</a> में विकासकर्ता "
+"मार्गदर्शक पा सकते हैं।"
+
+#: sweettooth/review/templates/review/review.html:85
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"यदि आपको अपने एक्सटेंशन के संबंध में किसी सहायता की आवश्यकता है, तो आप हमसे <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>GNOME Matrix चैनल</a> पर पूछ "
+"सकते हैं।"
+
+#: sweettooth/templates/base.html:16 extensions-web-domain-django:1
+msgid "Latest extensions in GNOME Shell Extensions"
+msgstr "GNOME शैल एक्सटेंशन में नवीनतम एक्सटेंशन"
+
+#: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
+#: extensions-web-domain-django:1
+msgid "GNOME Shell Extensions"
+msgstr "GNOME शैल एक्सटेंशन"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "विकासकर्ता मार्गदर्शिका"
+
+#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+msgid "User Profile"
+msgstr "उपयोक्ता प्रोफ़ाइल"
+
+#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+msgid "User Settings"
+msgstr "उपयोक्ता सेटिंग"
+
+#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "लॉग आउट"
+
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
+msgid ""
+"To control GNOME Shell extensions using this site you must install GNOME "
+"Shell integration that consists of two parts: browser extension and native "
+"host messaging application"
+msgstr ""
+"इस साइट का उपयोग करके GNOME शैल एक्सटेंशन को नियंत्रित करने के लिए आपको GNOME शैल "
+"एकीकरण स्थापित करना होगा जिसमें दो भाग होते हैं: ब्राउज़र एक्सटेंशन और मूल होस्ट मैसेजिंग "
+"अनुप्रयोग"
+
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+msgid "Install GNOME Shell integration browser extension"
+msgstr "GNOME शैल एकीकरण ब्राउज़र एक्सटेंशन स्थापित करें"
+
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+msgid "Click here to install browser extension"
+msgstr "ब्राउज़र एक्सटेंशन स्थापित करने के लिए यहां क्लिक करें"
+
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
+#, javascript-format
+msgid "See %swiki page%s for native host connector installation instructions"
+msgstr "मूल होस्ट कनेक्टर स्थापना निर्देशों के लिए %sविकि पृष्ठ%s देखें"
+
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
+msgid ""
+"We cannot detect a running copy of GNOME on this system, so some parts of "
+"the interface may be disabled. See <a href=\"/about/#no-detection\">our "
+"troubleshooting entry</a> for more information."
+msgstr ""
+"हम इस सिस्टम पर GNOME की चल रही प्रतिलिपि का पता नहीं लगा सकते हैं, इसलिए इंटरफ़ेस के "
+"कुछ हिस्से अक्षम हो सकते हैं। अधिक जानकारी के लिए <a href=\"/about/#no-"
+"detection\">हमारी समस्या निवारण प्रविष्टि</a> देखें।"
+
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
+msgid "GNOME Shell Extensions cannot list your installed extensions."
+msgstr "GNOME शैल एक्सटेंशन आपके स्थापित किए गए एक्सटेंशन को सूचीबद्ध नहीं कर सकते।"
+
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
+msgid "Compatible with"
+msgstr "इनके साथ संगत"
+
+#: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
+msgid "Name"
+msgstr "नाम"
+
+#: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
+msgid "Recent"
+msgstr "हालिया"
+
+#: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
+msgid "Downloads"
+msgstr "डाउनलोड"
+
+#: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
+msgid "Popularity"
+msgstr "लोकप्रियता"
+
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "प्रासंगिकता"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
+msgid "Sort by"
+msgstr "ऐसे छाँटे"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "लेखक"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
+#: extensions-web-domain-djangojs:1
+msgid "Show more reviews"
+msgstr "अधिक समीक्षाएँ दिखाएँ"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
+#: extensions-web-domain-djangojs:1
+msgid "There are no comments. Be the first!"
+msgstr "कोई टिप्पणियाँ नहीं हैं। पहले बनें!"
+
+#: sweettooth/static/js/templates/extensions/info_contents.mst:21
+#: extensions-web-domain-djangojs:1
+msgid "System extension"
+msgstr "सिस्टम एक्सटेंशन"
+
+#: sweettooth/static/js/templates/extensions/uninstall.mst:1
+#: extensions-web-domain-djangojs:1
+msgid "You uninstalled"
+msgstr "आपने अस्थापित किया"
