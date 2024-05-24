@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-03-07 17:19+0000\n"
-"PO-Revision-Date: 2023-03-12 22:03+0200\n"
+"POT-Creation-Date: 2023-11-18 08:46+0000\n"
+"PO-Revision-Date: 2024-05-24 23:22+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -17,57 +17,169 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"(n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: Gtranslator 42.0\n"
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: sweettooth/auth/forms.py:30 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Neturėtumėte naudoti el. pašto kaip naudotojo vardo"
+
+#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Jūsų naudotojo varde yra neleistinų žodžių"
+
+#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "Negalima keisti el. pašto dažniau nei kas 7 dienas"
+
+#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "Jūsų rodomame varde yra neleistinų žodžių"
+
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Ištrinti mano paskyrą"
+
+#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Jūsų paskyra bus ištrinta po 7 dienų"
+
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+msgid "No"
+msgstr "Ne"
+
+#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Taip"
+
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Dabartinis slaptažodis"
+
+#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr "Nereikia pateikti slaptažodžio norint atsisakyti paskyros ištrynimo"
+
+#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Naudotojo vardas arba el. paštas"
 
-#: sweettooth/auth/forms.py:54 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"Turite kelias paskyras, registruotas vienu el. pašto adresu. Galite "
+"prisijungti savo naudotojo vardu arba galite paprašyti pašalinti "
+"besidubliuojančias paskyras naudodami GNOME Gitlab (%(url)s)."
+
+#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Naudotojo vardas"
 
-#: sweettooth/auth/forms.py:55 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Būtinas. 30 simbolių arba mažiau. Tik raidės, skaitmenys ir @/./+/-/_"
+msgstr "Būtinas. 30 simbolių arba mažiau. Tik raidės, skaitmenys ir @/./+/-/_."
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Šioje reikšmėje gali būti tik raidės, skaitmenys ir @/./+/-/_ simboliai."
 
-#: sweettooth/auth/forms.py:58 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
 msgstr "El. paštas"
 
-#: sweettooth/auth/forms.py:64 extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Neturėtumėte naudoti el. pašto kaip naudotojo vardo"
+#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "Šis el. pašto adresas jau registruotas"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "Šis naudotojo vardas jau registruotas"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:35
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Užsiregistruoti"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Paskyros registracija"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Paskyros šalinimas"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Jūsų paskyros pašalinimas suplanuotas. Galite atsisakyti paskyros pašalinimo "
+"per 7 dienas."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Paskyros pašalinimo atsisakyta."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "El. pašto patvirtinimas"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Nuostatos"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Pateikti"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Keisti savo slaptažodį"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr "Jūsų paskyros pašalinimas suplanuotas po %(schedule_delete_after)s"
+
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "Pamiršote slaptažodį?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "Prisijungti"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "Neturite paskyros?"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Užsiregistruoti"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -89,7 +201,6 @@ msgstr ""
 "Neteisinga slaptažodžio atstatymo leksema. Patikrinkite nuorodą ir bandykite "
 "dar kartą."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -104,23 +215,142 @@ msgstr ""
 "Pamiršote slaptažodį? Įveskite žemiau savo el. pašto adresą ir mes jums "
 "išsiųsime nurodymus, kaip nusistatyti naują."
 
-#: sweettooth/context_processors.py:13 extensions-web-domain-django:1
-msgid "Add yours"
-msgstr "Pridėkite savo"
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Jūsų el. pašto adresas sėkmingai pakeistas"
 
-#: sweettooth/context_processors.py:17 extensions-web-domain-django:1
-msgid "Installed extensions"
-msgstr "Įdiegti plėtiniai"
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "Jūsų patvirtinimo saito galiojimas baigėsi. Paprašykite naujo."
 
-#: sweettooth/context_processors.py:21 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Bloga užklausa"
+
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Profilio duomenys įrašyti"
+
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr "Patvirtinimo laiškas išsiųstas jūsų naujuoju adresu. Pasitikrinkite."
+
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Slaptažodis yra neteisingas"
+
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Atkurti el. paštą ir atstatyti slaptažodį"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
 msgstr "Apie"
 
-#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
 msgid "Extensions"
 msgstr "Plėtiniai"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "Pridėkite savo"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "Įdiegti plėtiniai"
+
+#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Turite nustatyti `shell-version` raktą metadata.json faile"
+
+#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Nepalaikomas aukos tipas: %s"
+
+#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr "Negalite nurodyti daugiau nei 3 vertes aukos tipui „%s“"
+
+#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "Bent viena vertė turi būti nurodyta aukos tipui „%s“"
+
+#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+"Vertės tipas turi būti simbolių eilutė arba simbolių eilučių sąrašas aukos "
+"tipui „%s“"
+
+#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "Versijos pavadinimas negali būti tik tarpai ir taškai."
+
+#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+"Versijos pavadinime gali būti tik alfaskaitmenys (angliški), tarpai ir "
+"taškai."
+
+#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Sutinku, kad extensions.gnome.org tinklalapio darbuotojai gali pašalinti, "
+"keisti arba perskirti mano įkelto plėtinio priežiūrą"
+
+#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json` faile trūksta lauko `uuid`"
+
+#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Plėtinys su tokiu UUID jau buvo pridėtas"
+
+#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Turite sutikti su extensions.gnome.org naudojimosi sąlygomis"
+
+#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"Įkeldamas šį plėtinį sutinku ir patvirtinu, kad bet kokiu kontraversišku "
+"atveju, susijusiu su plėtinio licencijos suderinamumu su GNOME Apvalkalo "
+"licencija, mano įkeltas plėtinys gali būti naudojamas bet kurio GNOME "
+"Apvalkalo naudotojo GNOME Apvalkalo licencijos sąlygomis"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Vis tiek tęsti"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Paliekate GNOME plėtinių tinklalapį"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "Paliksite GNOME plėtinių tinklalapį į %(url)s."
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Atsisakyti"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -132,12 +362,12 @@ msgstr ""
 "komentarą ar pranešti apie klaidą <a href=\"%(login_url)s\">prisijungtumėte "
 "prie GNOME apvalkalo plėtinių</a>. Jūs juk mus suprantate, ar ne?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Naudotojų apžvalgos"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "Įkeliamos apžvalgos…"
@@ -162,10 +392,21 @@ msgstr "Komentarą"
 msgid "Rating"
 msgstr "Įvertinimą"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Pranešimą apie klaidą"
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+"Apžvalgininkas peržiūrės jūsų pateiktą plėtinį, kad įsitikintų, jog jame "
+"nėra nieko pernelyg pavojingo. Apie apžvalgos rezultatą jums bus pranešta "
+"el. paštu."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Šiam plėtiniui komentarai išjungti."
 
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
@@ -181,76 +422,66 @@ msgstr[2] "Atsisiunčiama %(downloads)s"
 msgid "Number of Downloads"
 msgstr "Atsiuntimų skaičius"
 
-#: sweettooth/extensions/templates/extensions/detail.html:25
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Paaukoti"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
 #: extensions-web-domain-django:1
 msgid "Install"
 msgstr "Įdiegti"
 
-#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:46
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
 msgstr "Naujinti šį plėtinį"
 
-#: sweettooth/extensions/templates/extensions/detail.html:29
+#: sweettooth/extensions/templates/extensions/detail.html:47
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
 msgstr "Konfigūruoti šį plėtinį"
 
-#: sweettooth/extensions/templates/extensions/detail.html:30
+#: sweettooth/extensions/templates/extensions/detail.html:48
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
 msgstr "Pašalinti šį plėtinį"
 
-#: sweettooth/extensions/templates/extensions/detail.html:56
+#: sweettooth/extensions/templates/extensions/detail.html:75
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
 msgstr "Plėtinio tinklalapis"
 
-#: sweettooth/extensions/templates/extensions/detail.html:62
+#: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
 msgstr "Seanso veiksena(-os)"
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
 msgstr "Šis plėtinys veiks esant užrakintam ekranui"
 
-#: sweettooth/extensions/templates/extensions/detail.html:63
+#: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
 msgstr "Atrakinti dialogą"
 
-#: sweettooth/extensions/templates/extensions/detail.html:67
+#: sweettooth/extensions/templates/extensions/detail.html:86
 #: extensions-web-domain-django:1
 msgid "Download"
 msgstr "Atsisiųsti"
 
-#: sweettooth/extensions/templates/extensions/detail.html:70
+#: sweettooth/extensions/templates/extensions/detail.html:89
 #: extensions-web-domain-django:1
 msgid "Shell version…"
 msgstr "Apvalkalo versija…"
 
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:93
 #: extensions-web-domain-django:1
 msgid "Extension version…"
 msgstr "Plėtinio versija…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:83
-#: extensions-web-domain-django:1
-msgid ""
-"A reviewer will review the extension you submitted to make sure there's "
-"nothing too dangerous. You'll be emailed the result of the review."
-msgstr ""
-"Apžvalgininkas peržiūrės jūsų pateiktą plėtinį, kad įsitikintų, jog jame "
-"nėra nieko pernelyg pavojingo. Apie apžvalgos rezultatą jums bus pranešta "
-"el. paštu."
-
-#: sweettooth/extensions/templates/extensions/detail.html:94
-#: sweettooth/extensions/templates/extensions/detail_edit.html:7
-#: extensions-web-domain-django:1
-msgid "Comments are disabled for this extension."
-msgstr "Šiam plėtiniui komentarai išjungti."
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -268,11 +499,47 @@ msgstr "Įdiegti plėtiniai"
 msgid "Shell settings"
 msgstr "Apvalkalo nustatymai"
 
-#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Įkelti plėtinį"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"Įkelkite savo plėtinio Zip failą jam pateikti peržiūrai. Vėlesnės versijos "
+"gali būti atnaujintos naudojant tą pačią formą. Kai jūsų plėtinys bus "
+"peržiūrėtas, jums bus pranešta el. paštu."
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"Ko reikia patvirtinimui gauti rasite <a href=\"%(url)s\">peržiūros gide</a>."
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"Jei tai yra jūsų pirmas plėtinys, perskaitykite dokumentacijoje <a "
+"href=\"%(url)s\">gjs.guide</a>, kai sukurti plėtinį ir jį paruošti įkėlimui."
+
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "Turinys"
 
-#: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Metadata"
 msgstr "Metaduomenys"
 
@@ -318,7 +585,7 @@ msgstr "Paskelbti komentarą"
 msgid "Edit your comment"
 msgstr "Taisyti savo komentarą"
 
-#: sweettooth/review/templates/review/review.html:63
+#: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
@@ -327,7 +594,7 @@ msgstr ""
 "Galite nusiųsti kitą versiją <a href='https://extensions.gnome.org/"
 "upload/'>ta apčia form</a>, kuria pateikėte šią versiją."
 
-#: sweettooth/review/templates/review/review.html:66
+#: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
 msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
@@ -336,7 +603,7 @@ msgstr ""
 "Galite pakeisti plėtinio piktogramą paspausdami ant piktogramos jūsų "
 "plėtinio puslapyje."
 
-#: sweettooth/review/templates/review/review.html:69
+#: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
@@ -345,7 +612,7 @@ msgstr ""
 "Jei norite patvirtintą versiją padaryti neaktyvią, paspauskite deaktyvavimo "
 "nuorodą savo plėtinio puslapyje."
 
-#: sweettooth/review/templates/review/review.html:72
+#: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
 "You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
@@ -354,7 +621,7 @@ msgstr ""
 "Galite rasti kūrėjo gidą <a href='https://gjs.guide/extensions/'>gjs.guide</"
 "a>."
 
-#: sweettooth/review/templates/review/review.html:75
+#: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
 msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
@@ -422,12 +689,11 @@ msgstr ""
 "kurios sąsajos dalys gali būti išjungtos. Išsamesnei informacijai, žiūrėkite "
 "<a href=\"/about/#no-detection\">mūsų nesklandumų šalinimo įrašą</a>."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr "GNOME apvalkalo plėtiniai negali išvardyti jūsų įdiegtų plėtinių."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Suderinamas su"
 
@@ -447,9 +713,18 @@ msgstr "Atsiuntimus"
 msgid "Popularity"
 msgstr "Populiarumą"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Atitiktis"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Rikiuoti pagal"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "Autorius"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
@@ -461,51 +736,6 @@ msgstr "Rodyti daugiau apžvalgų"
 msgid "There are no comments. Be the first!"
 msgstr "Nėra jokių komentarų. Būkite pirmi!"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
-#: extensions-web-domain-djangojs:1
-msgid "Author"
-msgstr "Autorius"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Kas nutiko?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr "GNOME apvalkalo plėtiniai neaptiko jokių klaidų su šiuo plėtiniu."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Versijos informacija"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Apvalkalo informacija"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Plėtinio versija"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Nežinoma"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Ką esate išbandę?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Automatiškai aptiktos klaidos"
-
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
@@ -516,11 +746,36 @@ msgstr "Sisteminis plėtinys"
 msgid "You uninstalled"
 msgstr "Jūs pašalinote"
 
+#~ msgid "Bug report"
+#~ msgstr "Pranešimą apie klaidą"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Kas nutiko?"
+
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr "GNOME apvalkalo plėtiniai neaptiko jokių klaidų su šiuo plėtiniu."
+
+#~ msgid "Version information"
+#~ msgstr "Versijos informacija"
+
+#~ msgid "Shell version"
+#~ msgstr "Apvalkalo informacija"
+
+#~ msgid "Extension version"
+#~ msgstr "Plėtinio versija"
+
+#~ msgid "Unknown"
+#~ msgstr "Nežinoma"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Ką esate išbandę?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Automatiškai aptiktos klaidos"
+
 #~ msgid "Password"
 #~ msgstr "Slaptažodis"
-
-#~ msgid "Password confirmation"
-#~ msgstr "Slaptažodžio patvirtinimas"
 
 #~ msgid "Enter the same password as above, for verification."
 #~ msgstr "Patvirtinimui, įveskite tą patį slaptažodį dar kartą."
