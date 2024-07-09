@@ -19,7 +19,7 @@ dj-email-url==1.0.6
 
 # extensions.gnome.org requirements
 mysqlclient==2.2.0
-uWSGI==2.0.23
+uWSGI==2.0.26
 
 # development requirements
 black==24.3.0
