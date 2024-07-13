@@ -14,23 +14,25 @@ IS_CHROME	= (typeof(chrome) !== 'undefined' && (
 	typeof(chrome.csi) !== 'undefined'
 ));
 IS_FIREFOX	= CSS.supports("-moz-appearance: none");
-IS_OPERA	= (typeof(opr) !== 'undefined');
 
 function browser_extension_install() {
 	function reload_page() {
 		location.reload();
 	}
 
-	if (IS_OPERA)
+	if(IS_FIREFOX)
 	{
-		opr.addons.installExtension(
-			'olkooankbfblcebocnkjganpdmflbnbk',
-			reload_page
-		);
-	}
-	else if(IS_FIREFOX)
-	{
-		window.location.assign('https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/platform:2/addon-751081-latest.xpi');
+        let url = "https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/platform:2/addon-751081-latest.xpi";
+
+        try {
+            const version = parseFloat(navigator.userAgent.split(" ").pop().split("/").pop());
+            if(version < 126) {
+                url = "https://addons.mozilla.org/firefox/downloads/file/3974897/gnome_shell_integration-11.1.xpi";
+            }
+        }
+        catch (e) { }
+
+        window.location.assign(url);
 	}
 	else if (IS_CHROME)
 	{
