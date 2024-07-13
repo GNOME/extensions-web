@@ -14,21 +14,13 @@ IS_CHROME	= (typeof(chrome) !== 'undefined' && (
 	typeof(chrome.csi) !== 'undefined'
 ));
 IS_FIREFOX	= CSS.supports("-moz-appearance: none");
-IS_OPERA	= (typeof(opr) !== 'undefined');
 
 function browser_extension_install() {
 	function reload_page() {
 		location.reload();
 	}
 
-	if (IS_OPERA)
-	{
-		opr.addons.installExtension(
-			'olkooankbfblcebocnkjganpdmflbnbk',
-			reload_page
-		);
-	}
-	else if(IS_FIREFOX)
+	if(IS_FIREFOX)
 	{
         let url = "https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/platform:2/addon-751081-latest.xpi";
 
