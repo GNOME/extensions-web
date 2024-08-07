@@ -247,9 +247,9 @@ dj-email-url==1.0.6 \
     --hash=sha256:55ffe3329e48f54f8a75aa36ece08f365e09d61f8a209773ef09a1d4760e699a \
     --hash=sha256:cbd08327fbb08b104eac160fb4703f375532e4c0243eb230f5b960daee7a96db
     # via -r requirements.in
-django==4.2.14 \
-    --hash=sha256:3ec32bc2c616ab02834b9cac93143a7dc1cdcd5b822d78ac95fc20a38c534240 \
-    --hash=sha256:fc6919875a6226c7ffcae1a7d51e0f2ceaf6f160393180818f6c95f51b1e7b96
+django==4.2.15 \
+    --hash=sha256:61ee4a130efb8c451ef3467c67ca99fdce400fedd768634efc86a68c18d80d30 \
+    --hash=sha256:c77f926b81129493961e19c0e02188f8d07c112a1162df69bfab178ae447f94a
     # via
     #   -r requirements.in
     #   dj-database-url
@@ -315,9 +315,7 @@ drf-nested-routers==0.93.4 \
 drf-spectacular[sidecar]==0.26.5 \
     --hash=sha256:aee55330a774ba8a9cbdb125714d1c9ee05a8aafd3ce3be8bfd26527649aeb44 \
     --hash=sha256:c0002a820b11771fdbf37853deb371947caf0159d1afeeffe7598e964bc1db94
-    # via
-    #   -r requirements.in
-    #   drf-spectacular
+    # via -r requirements.in
 drf-spectacular-sidecar==2023.10.1 \
     --hash=sha256:3d042a6772512f4d238f0385d3430acf5f669f595fd0be2641fe6bbfb4c7b376 \
     --hash=sha256:546a83c173589715e530fad211af60cbcda2db54eb9e0935d44251639332af6d
