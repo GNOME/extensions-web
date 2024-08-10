@@ -116,7 +116,6 @@
       {% endif %}
       {% endblock comments %}
 
-    {% if show_versions %}
     <h2 class="expandy_header expanded"> Versions </h2>
     <table>
         <thead> <tr>
@@ -149,6 +148,7 @@
         </tbody>
     </table>
 
+    {% if show_versions %}
     <h2 class="expandy_header expanded"> Shell Versions </h2>
     <div>
         <p> Shell versions mapped to their associated extension versions </p>
