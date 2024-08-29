@@ -102,7 +102,7 @@ define(['jquery', 'messages', 'dbus!_', 'extensionUtils',
 			// If API is exported let's assume that browser extension is installed and will handle errors.
 			if(!window.SweetTooth || typeof(window.SweetTooth.initialize) !== 'function')
 			{
-				if (IS_CHROME || IS_FIREFOX || IS_OPERA) // browser_extension.js should be included globally
+				if (IS_CHROME || IS_FIREFOX) // browser_extension.js should be included globally
 				{
 					// Help user to install browser extension for supported browsers
 					messages.addInfo(voca.sprintf(
