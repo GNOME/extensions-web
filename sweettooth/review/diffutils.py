@@ -31,7 +31,7 @@ class MyersDiffer:
             self.real_indexes = []
 
     def __init__(self, a, b, ignore_space=False):
-        if type(a) != type(b):
+        if type(a) is not type(b):
             raise TypeError
 
         self.a = a
@@ -821,8 +821,8 @@ def get_chunks(a, b):
     for tag, i1, i2, j1, j2 in differ.get_opcodes():
         numlines = max(i2 - i1, j2 - j1)
 
-        oldlines = zip(range(i1, i2), a[i1:i2])
-        newlines = zip(range(j1, j2), b[j1:j2])
+        oldlines = zip(range(i1, i2), a[i1:i2], strict=True)
+        newlines = zip(range(j1, j2), b[j1:j2], strict=True)
 
         lines = [
             diff_line(old, new)

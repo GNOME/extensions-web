@@ -1,12 +1,4 @@
-"""
-    GNOME Shell extensions repository
-    Copyright (C) 2020  Yuri Konotopov <ykonotopov@gnome.org>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-"""
+# SPDX-License-Identifer: AGPL-3.0-or-later
 
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_delete, post_save
@@ -64,11 +56,7 @@ class ExtensionDocument(Document):
     shell_versions = fields.TextField(multi=True)
 
     def get_queryset(self, *args, **kwargs):
-        return (
-            super(ExtensionDocument, self)
-            .get_queryset(*args, **kwargs)
-            .select_related("creator")
-        )
+        return super().get_queryset(*args, **kwargs).select_related("creator")
 
     def prepare_creator(self, extension):
         return extension.creator.get_full_name()

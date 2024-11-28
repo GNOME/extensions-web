@@ -26,9 +26,12 @@ testdata_dir = os.path.join(os.path.dirname(__file__), "testdata")
 def get_test_zipfile(testname: str, extra_metadata: dict[str, Any] = {}):
     temp_fp = tempfile.NamedTemporaryFile(suffix=f"{testname}.zip.temp")
 
-    with ZipFile(
-        os.path.join(testdata_dir, testname, testname + ".zip"), "r"
-    ) as zipfile_in, ZipFile(temp_fp, "w") as zipfile:
+    with (
+        ZipFile(
+            os.path.join(testdata_dir, testname, testname + ".zip"), "r"
+        ) as zipfile_in,
+        ZipFile(temp_fp, "w") as zipfile,
+    ):
         for info in zipfile_in.infolist():
             if info.filename == "metadata.json" and extra_metadata:
                 with zipfile_in.open("metadata.json", "r") as metadata_fp:
@@ -381,16 +384,18 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         with get_test_zipfile("ChangedSimpleExtension") as f:
             metadata2 = models.parse_zipfile_metadata(f)
 
-        with version1.get_zipfile("r") as zipfile, zipfile.open(
-            "metadata.json", "r"
-        ) as version_metadata_fp:
+        with (
+            version1.get_zipfile("r") as zipfile,
+            zipfile.open("metadata.json", "r") as version_metadata_fp,
+        ):
             version_metadata = json.load(version_metadata_fp)
             for field in ("uuid", "name", "description", "url"):
                 self.assertEqual(metadata[field], version_metadata[field])
 
-        with version2.get_zipfile("r") as zipfile, zipfile.open(
-            "metadata.json", "r"
-        ) as version_metadata_fp:
+        with (
+            version2.get_zipfile("r") as zipfile,
+            zipfile.open("metadata.json", "r") as version_metadata_fp,
+        ):
             version_metadata = json.load(version_metadata_fp)
             for field in ("name", "description", "url"):
                 self.assertNotEqual(metadata[field], version_metadata[field])
@@ -427,9 +432,10 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         extension = models.Extension.objects.get(uuid=uuid)
         self.assertEqual(extension.versions.count(), 1)
 
-        with extension.versions.first().get_zipfile("r") as zipfile, zipfile.open(
-            "metadata.json", "r"
-        ) as version_metadata_fp:
+        with (
+            extension.versions.first().get_zipfile("r") as zipfile,
+            zipfile.open("metadata.json", "r") as version_metadata_fp,
+        ):
             version_metadata = json.load(version_metadata_fp)
             self.assertIn("session-modes", version_metadata)
             self.assertCountEqual(session_modes, version_metadata["session-modes"])
@@ -450,9 +456,10 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         extension = models.Extension.objects.get(uuid=uuid)
         self.assertEqual(extension.versions.count(), 1)
 
-        with extension.versions.first().get_zipfile("r") as zipfile, zipfile.open(
-            "metadata.json", "r"
-        ) as version_metadata_fp:
+        with (
+            extension.versions.first().get_zipfile("r") as zipfile,
+            zipfile.open("metadata.json", "r") as version_metadata_fp,
+        ):
             version_metadata = json.load(version_metadata_fp)
             self.assertNotIn("session-modes", version_metadata)
 

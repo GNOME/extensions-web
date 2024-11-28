@@ -1,6 +1,6 @@
 import re
 from datetime import datetime, timedelta
-from typing import Any, Dict
+from typing import Any
 
 from django import forms
 from django.conf import settings
@@ -17,7 +17,7 @@ from django_registration.forms import (
 User = get_user_model()
 
 
-class PlainOutputForm(object):
+class PlainOutputForm:
     def as_plain(self):
         return self._html_output(
             normal_row=(
@@ -30,7 +30,7 @@ class PlainOutputForm(object):
         )
 
 
-class AutoFocusForm(object):
+class AutoFocusForm:
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         for field in self.fields:
@@ -43,7 +43,7 @@ class LoginOrEmailAuthenticationForm(auth_forms.AuthenticationForm):
         super().__init__(*a, **kw)
         self.fields["username"].label = _("Username or email")
 
-    def clean(self) -> Dict[str, Any]:
+    def clean(self) -> dict[str, Any]:
         try:
             return super().clean()
         except User.MultipleObjectsReturned:
@@ -59,7 +59,7 @@ class LoginOrEmailAuthenticationForm(auth_forms.AuthenticationForm):
             )
 
 
-class InlineForm(object):
+class InlineForm:
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         for field in self.fields.values():

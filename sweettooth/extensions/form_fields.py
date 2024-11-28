@@ -1,12 +1,4 @@
-"""
-    GNOME Shell Extensions Repository
-    Copyright (C) 2020 Yuri Konotopov <ykonotopov@gnome.org>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-"""
+# SPDX-License-Identifer: AGPL-3.0-or-later
 
 from django.core.exceptions import ValidationError
 from django.forms.fields import ImageField
@@ -22,7 +14,7 @@ class RestrictedImageField(ImageField):
         if f is None or f.image is None:
             return None
 
-        if f.image.format is None or not f.image.format.lower() in self.allowed_types:
+        if f.image.format is None or f.image.format.lower() not in self.allowed_types:
             raise ValidationError(
                 self.error_messages["invalid_image"],
                 code="invalid_image_type",

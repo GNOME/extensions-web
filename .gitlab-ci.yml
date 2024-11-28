@@ -33,7 +33,7 @@ stages:
     - .pip cache
   image: python:$PYTHON_VERSION
   before_script:
-    - pip install -r requirements.txt
+    - pip install -r requirements.dev.txt
   variables:
     EGO_DEBUG: 1
     EGO_SECRET_KEY: .
@@ -49,6 +49,8 @@ stages:
       "${VALIDATE_TOOL}" ${VALIDATE_TOOL_ARGS}
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  variables:
+    VALIDATE_TOOL: ruff
 
 test:
   extends:
@@ -90,25 +92,17 @@ check migrations:
   script:
     - python manage.py makemigrations --check
 
-flake8:
+lint:
   extends:
     - .validate defaults
   variables:
-    VALIDATE_TOOL: flake8
+    VALIDATE_TOOL_ARGS: check
 
-isort:
+format:
   extends:
     - .validate defaults
   variables:
-    VALIDATE_TOOL: isort
-    VALIDATE_TOOL_ARGS: --check --diff .
-
-black:
-  extends:
-    - .validate defaults
-  variables:
-    VALIDATE_TOOL: black
-    VALIDATE_TOOL_ARGS: --check --diff .
+    VALIDATE_TOOL_ARGS: format --check --diff
 
 security (trivy):
   extends:

@@ -23,6 +23,7 @@ var
 sdist
 develop-eggs
 .installed.cfg
+sweettooth/__version__.py
 
 # Installer logs
 pip-log.txt

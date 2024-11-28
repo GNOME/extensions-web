@@ -12,6 +12,7 @@ from urllib.parse import urljoin
 
 import dj_database_url
 from captcha import constants as captcha_constants
+from django.utils.log import DEFAULT_LOGGING as LOGGING
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -215,8 +216,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1",
     "COMPONENT_SPLIT_REQUEST": True,
     "SORT_OPERATION_PARAMETERS": False,
-    "COMPONENT_SPLIT_REQUEST": True,
-    "SORT_OPERATION_PARAMETERS": False,
     "SERVE_INCLUDE_SCHEMA": False,
     "SWAGGER_UI_DIST": "SIDECAR",
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
@@ -233,7 +232,6 @@ SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
 # See http://docs.djangoproject.com/en/stable/topics/logging for
 # more details on how to customize your logging configuration.
-from django.utils.log import DEFAULT_LOGGING as LOGGING
 
 LOGGING["handlers"]["console"]["filters"] = None
 LOGGING["handlers"]["console"]["level"] = "DEBUG"

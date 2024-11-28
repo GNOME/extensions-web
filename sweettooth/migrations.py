@@ -1,4 +1,5 @@
-from typing import Any, Sequence, Union
+from collections.abc import Sequence
+from typing import Any
 
 from django.db.migrations import RunSQL
 
@@ -6,7 +7,7 @@ from django.db.migrations import RunSQL
 class VendorAwareRunSQL(RunSQL):
     def __init__(
         self,
-        database_vendors: Union[str, Sequence[str]],
+        database_vendors: str | Sequence[str],
         sql,
         reverse_sql=None,
         state_operations=None,

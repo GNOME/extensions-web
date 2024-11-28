@@ -1,0 +1,117 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "extensions-web"
+dynamic = ["version"]
+authors = [
+    {name = "Yuri Konotopov", email = "ykonotopov@gnome.org"},
+    {name = "Jasper St. Pierre", email = "jstpierre@mecheye.net"},
+]
+description = "GNOME Shell extesions website."
+readme = "README.md"
+license = {file = "COPYING"}
+keywords = ["django"]
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Framework :: Django",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Desktop Environment :: Gnome",
+]
+dependencies = [
+    "Django==4.2.16",
+    "djangorestframework==3.15.2",
+    "django-autoslug==1.9.9",
+    "django-contrib-comments==2.2.0",
+    "django-filter==23.3",
+    "django-rest-registration==0.8.2",
+    "django-rest-knox==4.2.0",
+    "django-opensearch-dsl==0.5.1",
+    "django-recaptcha==3.0.0",
+    "django-registration==3.4",
+    "drf-nested-routers==0.93.4",
+    "drf-spectacular[sidecar]==0.26.5",
+    "Pygments==2.15.1",
+    "pillow==10.3.0",
+    "polib==1.1.1",
+    "chardet==5.1.0",
+    "dj-database-url==2.0.0",
+    "dj-email-url==1.0.6",
+    "mysqlclient==2.2.0",
+    "uWSGI==2.0.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "django-cors-headers==4.2.0",
+    "pip-tools==7.4.1",
+    "pylint==3.3.1",
+    "pylint-django==2.6.1",
+    "ruff==0.7.4",
+]
+
+
+[project.urls]
+Homepage = "https://extensions.gnome.org"
+Repository = "https://gitlab.gnome.org/Infrastructure/extensions-web.git"
+Issues = "https://gitlab.gnome.org/Infrastructure/extensions-web/-/issues"
+Changelog = "https://gitlab.gnome.org/Infrastructure/extensions-web/-/commits/master/?ref_type=HEADS"
+
+[tool.setuptools.packages.find]
+include = ["sweettooth*"]
+
+[tool.setuptools_scm]
+version_file = "sweettooth/__version__.py"
+
+[tool.pylint.main]
+ignore-patterns = "^\\.#"
+jobs = 0
+load-plugins = "pylint_django"
+django-settings-module = "sweettooth.settings"
+disable = [
+    "C0111",
+    "W1203",
+]
+
+[tool.pyright]
+exclude = [
+    "build/",
+    "contrib/",
+    "dist/",
+    "**/*.egg-info",
+]
+
+[tool.ruff]
+extend-exclude = [
+    "migrations",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["sweettooth"]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # isort
+    "I",
+]
+
+ignore = [
+    # No docstyle for now
+    "D",
+    # We don't want to replace huge `if` statements with return
+    "SIM102",
+    "SIM103",
+    # Explicit is better than implicit
+    "UP015",
+    # We have too many percent-encoded string. Ignore for now
+    "UP031",
+]

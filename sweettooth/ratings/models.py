@@ -1,5 +1,3 @@
-from typing import Type
-
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models.signals import post_save
@@ -32,7 +30,7 @@ comment_will_be_posted.connect(make_sure_user_was_authenticated)
 
 @receiver(post_save, sender=RatingComment)
 def update_rating(
-    sender: Type[RatingComment], instance: RatingComment, created: bool, **kwargs
+    sender: type[RatingComment], instance: RatingComment, created: bool, **kwargs
 ):
     if created and isinstance(instance.content_object, Extension):
         extension = instance.content_object

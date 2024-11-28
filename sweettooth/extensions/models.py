@@ -1,21 +1,11 @@
-"""
-    GNOME Shell Extensions Repository
-    Copyright (C) 2011-2013 Jasper St. Pierre <jstpierre@mecheye.net>
-    Copyright (C) 2019 Claude Paroz <claude@2xlibre.net>
-    Copyright (C) 2016-2020 Yuri Konotopov <ykonotopov@gnome.org>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-"""
+# SPDX-License-Identifer: AGPL-3.0-or-later
 
 import json
 import os
 import re
 import tempfile
 import zlib
-from typing import Any, Literal, Optional, Union
+from typing import Any, Literal, Optional
 from urllib.parse import quote
 from zipfile import BadZipfile, ZipFile
 
@@ -176,7 +166,7 @@ class Extension(models.Model):
             self.update_from_metadata(metadata)
 
     @staticmethod
-    def _ensure_list(value: Union[Any, list[str]]) -> list[Any]:
+    def _ensure_list(value: Any | list[str]) -> list[Any]:
         if not isinstance(value, list):
             return [value]
 
@@ -192,7 +182,7 @@ class Extension(models.Model):
         if not isinstance(shell_versions, list) or not shell_versions:
             raise ValidationError(self.MESSAGE_SHELL_VERSION_MISSING)
 
-        self.donation_json_field: dict[str, Union[str, list[str]]] = metadata.get(
+        self.donation_json_field: dict[str, str | list[str]] = metadata.get(
             "donations", {}
         )
 
@@ -339,7 +329,7 @@ def parse_version_string(version_string):
 
         # GNOME 40+
         # https://discourse.gnome.org/t/new-gnome-versioning-scheme/4235
-        if major >= 40 and minor in prerelease_versions.keys():
+        if major >= 40 and minor in prerelease_versions:
             minor = prerelease_versions.get(minor)
         else:
             minor = int(minor)
@@ -613,9 +603,10 @@ class ExtensionVersion(models.Model):
         # into memory and then emit a new one with the
         # generated metadata.json
         with tempfile.NamedTemporaryFile("w+b", delete=False) as temp_file:
-            with self.get_zipfile("r") as zipfile_in, ZipFile(
-                temp_file.file, "w"
-            ) as zipfile:
+            with (
+                self.get_zipfile("r") as zipfile_in,
+                ZipFile(temp_file.file, "w") as zipfile,
+            ):
                 for info in zipfile_in.infolist():
                     if info.filename == "metadata.json":
                         continue

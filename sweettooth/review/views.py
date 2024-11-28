@@ -2,8 +2,9 @@ import base64
 import itertools
 import os.path
 from collections import Counter
+from collections.abc import Sequence
 from contextlib import ExitStack
-from typing import IO, Optional, Sequence
+from typing import IO
 from zipfile import ZipFile
 
 import pygments
@@ -177,9 +178,10 @@ def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
             unchanged, changed = set(), set()
 
             for filename in both:
-                with old_zipfile.open(filename, "r") as old, new_zipfile.open(
-                    filename, "r"
-                ) as new:
+                with (
+                    old_zipfile.open(filename, "r") as old,
+                    new_zipfile.open(filename, "r") as new,
+                ):
                     while True:
                         oldcontent, newcontent = old.read(1024), new.read(1024)
                         if not oldcontent or not newcontent:
@@ -204,7 +206,7 @@ def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
 
 @ajax_view
 @model_view(models.ExtensionVersion)
-def ajax_get_file_list_view(request, version, old_version_pk: Optional[int] = None):
+def ajax_get_file_list_view(request, version, old_version_pk: int | None = None):
     if old_version_pk:
         old_version = get_object_or_404(models.ExtensionVersion, pk=old_version_pk)
         if old_version.extension != version.extension:
@@ -218,7 +220,7 @@ def ajax_get_file_list_view(request, version, old_version_pk: Optional[int] = No
 @ajax_view
 @model_view(models.ExtensionVersion)
 def ajax_get_file_diff_view(
-    request, version: models.ExtensionVersion, old_version_pk: Optional[int] = None
+    request, version: models.ExtensionVersion, old_version_pk: int | None = None
 ):
     filename = request.GET["filename"]
 
@@ -237,8 +239,9 @@ def ajax_get_file_diff_view(
         old_version = get_old_version(version)
 
     old_zipfile, new_zipfile = get_zipfiles(old_version, version)
-    oldlines, newlines = grab_lines(old_zipfile, filename), grab_lines(
-        new_zipfile, filename
+    oldlines, newlines = (
+        grab_lines(old_zipfile, filename),
+        grab_lines(new_zipfile, filename),
     )
 
     chunks = list(get_chunks(oldlines, newlines))
@@ -247,8 +250,9 @@ def ajax_get_file_diff_view(
 
 def get_changelog(old_version, new_version, filename="CHANGELOG"):
     old_zipfile, new_zipfile = get_zipfiles(old_version, new_version)
-    oldlines, newlines = grab_lines(old_zipfile, filename), grab_lines(
-        new_zipfile, filename
+    oldlines, newlines = (
+        grab_lines(old_zipfile, filename),
+        grab_lines(new_zipfile, filename),
     )
     chunks = get_chunks(oldlines, newlines)
 
@@ -467,7 +471,7 @@ def should_auto_approve(version: models.ExtensionVersion):
     if (can_review or trusted) and not user.force_review:
         return True
 
-    old_version: Optional[models.ExtensionVersion] = version.extension.latest_version
+    old_version: models.ExtensionVersion | None = version.extension.latest_version
     if old_version is None:
         return False
 
