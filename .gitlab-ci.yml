@@ -26,6 +26,9 @@ stages:
 .security defaults:
   stage: security
   allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   needs: []
 
 .test defaults:
