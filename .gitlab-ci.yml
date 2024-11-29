@@ -69,6 +69,8 @@ test:
   script:
     - ./manage.py opensearch index create --force
     - python manage.py test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   parallel:
     matrix:
       - PYTHON_VERSION:
@@ -173,4 +175,5 @@ build and deploy:
     - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
     - buildah push quay.io/gnome_infrastructure/extensions:latest
   needs:
-    - test
+    - check migrations
+    - test collectstatic
