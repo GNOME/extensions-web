@@ -35,13 +35,13 @@ dependencies = [
     "drf-nested-routers==0.93.4",
     "drf-spectacular[sidecar]==0.26.5",
     "Pygments==2.15.1",
-    "pillow==10.3.0",
+    "pillow==11.0.0",
     "polib==1.1.1",
     "chardet==5.1.0",
     "dj-database-url==2.0.0",
     "dj-email-url==1.0.6",
     "mysqlclient==2.2.0",
-    "uWSGI==2.0.26",
+    "uWSGI==2.0.28",
 ]
 
 [project.optional-dependencies]
