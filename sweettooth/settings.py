@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [os.getenv("EGO_ALLOWED_HOST") or "extensions.gnome.org"]
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django_registration",
+    "maintenance_mode",
     # 'ratings' goes before django's comments
     # app so it will find our templates
     "sweettooth.ratings",
@@ -70,6 +71,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "maintenance_mode.middleware.MaintenanceModeMiddleware",
 ]
 
 if "EGO_CORS_ORIGINS" in os.environ:
@@ -267,6 +269,13 @@ REST_REGISTRATION = {
     "AUTH_TOKEN_MANAGER_CLASS": "sweettooth.auth.authentication.KnoxAuthTokenManager",
     "LOGIN_RETRIEVE_TOKEN": True,
 }
+
+MAINTENANCE_MODE_STATE_BACKEND = "maintenance_mode.backends.DefaultStorageBackend"
+MAINTENANCE_MODE_STATE_FILE_NAME = ".ego_maintenance_enabled.txt"
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
+MAINTENANCE_MODE_TEMPLATE = "maintenance.html"
+MAINTENANCE_MODE_STATUS_CODE = 503
+MAINTENANCE_MODE_RETRY_AFTER = 60
 
 try:
     from local_settings import *  # noqa: F401, F403
