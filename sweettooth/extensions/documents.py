@@ -1,5 +1,7 @@
 # SPDX-License-Identifer: AGPL-3.0-or-later
 
+from contextlib import suppress
+
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
@@ -75,19 +77,20 @@ class ExtensionDocument(Document):
 @receiver(post_delete, sender=ExtensionVersion)
 @receiver(post_save, sender=ExtensionVersion)
 def index_on_version_save(instance, **kwargs):
-    if instance.extension.latest_version:
-        ExtensionDocument().update(instance.extension, action="index")
-    else:
-        try:
-            ExtensionDocument().update(instance.extension, action="delete")
-        except Exception as ex:
-            errors = getattr(ex, "errors", [])
-            if (
-                not errors
-                or not isinstance(errors[0], dict)
-                or errors[0].get("delete", {}).get("result", "") != "not_found"
-            ):
-                raise ex
+    with suppress(Extension.DoesNotExist):
+        if instance.extension.latest_version:
+            ExtensionDocument().update(instance.extension, action="index")
+        else:
+            try:
+                ExtensionDocument().update(instance.extension, action="delete")
+            except Exception as ex:
+                errors = getattr(ex, "errors", [])
+                if (
+                    not errors
+                    or not isinstance(errors[0], dict)
+                    or errors[0].get("delete", {}).get("result", "") != "not_found"
+                ):
+                    raise ex
 
 
 @receiver(post_delete, sender=get_user_model())
