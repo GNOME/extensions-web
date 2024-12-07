@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from smtplib import SMTPRecipientsRefused
-from typing import Any, Optional
+from typing import Any
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -128,7 +128,7 @@ class SettingsView(LoginRequiredMixin, TemplateView):
     MESSAGE_PROFILE_SAVED = _("Profile data saved")
 
     @staticmethod
-    def _schedule_delete_context(schedule_delete: Optional[datetime]) -> dict[str, Any]:
+    def _schedule_delete_context(schedule_delete: datetime | None) -> dict[str, Any]:
         return {
             "schedule_delete": schedule_delete,
             "schedule_delete_after": (

@@ -35,7 +35,7 @@ class Command(BaseCommand):
                     else:
                         badversion = False
 
-            except IOError as e:
+            except OSError as e:
                 self._version_error(version, f"Unable to find zip file: {str(e)}")
             except BadZipfile:
                 self._version_error(version, f"Bad zip file: {version.source.name}")

@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Optional, Sequence, Type
+from collections.abc import Sequence
+from typing import TYPE_CHECKING
 
 from django.http import HttpRequest
 from drf_spectacular.authentication import TokenScheme
@@ -25,7 +26,7 @@ class KnoxTokenScheme(TokenScheme):
 
 
 class KnoxAuthTokenManager(AbstractAuthTokenManager):
-    def get_authentication_class(self) -> Type[BaseAuthentication]:
+    def get_authentication_class(self) -> type[BaseAuthentication]:
         return TokenAuthentication
 
     def get_app_names(self) -> Sequence[str]:
@@ -44,7 +45,7 @@ class KnoxAuthTokenManager(AbstractAuthTokenManager):
         return AuthTokenType(token)
 
     def revoke_token(
-        self, user: "AbstractBaseUser", *, token: Optional[AuthTokenType] = None
+        self, user: "AbstractBaseUser", *, token: AuthTokenType | None = None
     ) -> None:
         if token:
             AuthToken.objects.get(user=user, digest=token).delete()

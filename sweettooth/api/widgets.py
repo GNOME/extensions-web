@@ -1,3 +1,5 @@
+# SPDX-License-Identifer: AGPL-3.0-or-later
+
 from django_filters.widgets import QueryArrayWidget as MutableQueryArrayWidget
 
 

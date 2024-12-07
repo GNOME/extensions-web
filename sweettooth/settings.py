@@ -12,6 +12,7 @@ from urllib.parse import urljoin
 
 import dj_database_url
 from captcha import constants as captcha_constants
+from django.utils.log import DEFAULT_LOGGING as LOGGING
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,6 +35,7 @@ ALLOWED_HOSTS = [os.getenv("EGO_ALLOWED_HOST") or "extensions.gnome.org"]
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django_registration",
+    "maintenance_mode",
     # 'ratings' goes before django's comments
     # app so it will find our templates
     "sweettooth.ratings",
@@ -69,6 +71,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "maintenance_mode.middleware.MaintenanceModeMiddleware",
 ]
 
 if "EGO_CORS_ORIGINS" in os.environ:
@@ -215,8 +218,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1",
     "COMPONENT_SPLIT_REQUEST": True,
     "SORT_OPERATION_PARAMETERS": False,
-    "COMPONENT_SPLIT_REQUEST": True,
-    "SORT_OPERATION_PARAMETERS": False,
     "SERVE_INCLUDE_SCHEMA": False,
     "SWAGGER_UI_DIST": "SIDECAR",
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
@@ -233,7 +234,6 @@ SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
 # See http://docs.djangoproject.com/en/stable/topics/logging for
 # more details on how to customize your logging configuration.
-from django.utils.log import DEFAULT_LOGGING as LOGGING
 
 LOGGING["handlers"]["console"]["filters"] = None
 LOGGING["handlers"]["console"]["level"] = "DEBUG"
@@ -269,6 +269,13 @@ REST_REGISTRATION = {
     "AUTH_TOKEN_MANAGER_CLASS": "sweettooth.auth.authentication.KnoxAuthTokenManager",
     "LOGIN_RETRIEVE_TOKEN": True,
 }
+
+MAINTENANCE_MODE_STATE_BACKEND = "maintenance_mode.backends.DefaultStorageBackend"
+MAINTENANCE_MODE_STATE_FILE_NAME = ".ego_maintenance_enabled.txt"
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
+MAINTENANCE_MODE_TEMPLATE = "maintenance.html"
+MAINTENANCE_MODE_STATUS_CODE = 503
+MAINTENANCE_MODE_RETRY_AFTER = 60
 
 try:
     from local_settings import *  # noqa: F401, F403

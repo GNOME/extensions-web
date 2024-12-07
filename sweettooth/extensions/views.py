@@ -1,13 +1,4 @@
-"""
-    GNOME Shell Extensions Repository
-    Copyright (C) 2011-2016 Jasper St. Pierre <jstpierre@mecheye.net>
-    Copyright (C) 2016-2020 Yuri Konotopov <ykonotopov@gnome.org>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-"""
+# SPDX-License-Identifer: AGPL-3.0-or-later
 
 import json
 from functools import reduce
@@ -443,7 +434,7 @@ def ajax_query_params_query(request, versions, n_per_page):
     if versions is not None:
         version_qs = version_qs.filter(shell_versions__in=versions)
 
-    """  # noqa: E501
+    """
     TODO: this is produces temporary table.
     SELECT DISTINCT
        `extensions_extension`.`id`, `extensions_extension`.`name`, `extensions_extension`.`uuid`, `extensions_extension`.`slug`,
@@ -456,7 +447,7 @@ def ajax_query_params_query(request, versions, n_per_page):
     ORDER BY `extensions_extension`.`popularity` DESC
 
     We must cache "active" ExtensionVersion state in Extension model and use it in filter
-    """
+    """  # noqa: E501
     queryset = models.Extension.objects.distinct().filter(versions__in=version_qs)
 
     uuids = request.GET.getlist("uuid")

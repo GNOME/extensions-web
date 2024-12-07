@@ -26,6 +26,9 @@ stages:
 .security defaults:
   stage: security
   allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   needs: []
 
 .test defaults:
@@ -33,7 +36,7 @@ stages:
     - .pip cache
   image: python:$PYTHON_VERSION
   before_script:
-    - pip install -r requirements.txt
+    - pip install -r requirements.dev.txt
   variables:
     EGO_DEBUG: 1
     EGO_SECRET_KEY: .
@@ -49,6 +52,8 @@ stages:
       "${VALIDATE_TOOL}" ${VALIDATE_TOOL_ARGS}
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  variables:
+    VALIDATE_TOOL: ruff
 
 test:
   extends:
@@ -67,11 +72,14 @@ test:
   script:
     - ./manage.py opensearch index create --force
     - python manage.py test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   parallel:
     matrix:
       - PYTHON_VERSION:
           - '3.11'
           - '3.12'
+          - '3.13'
 
 test collectstatic:
   extends:
@@ -89,25 +97,17 @@ check migrations:
   script:
     - python manage.py makemigrations --check
 
-flake8:
+lint:
   extends:
     - .validate defaults
   variables:
-    VALIDATE_TOOL: flake8
+    VALIDATE_TOOL_ARGS: check
 
-isort:
+format:
   extends:
     - .validate defaults
   variables:
-    VALIDATE_TOOL: isort
-    VALIDATE_TOOL_ARGS: --check --diff .
-
-black:
-  extends:
-    - .validate defaults
-  variables:
-    VALIDATE_TOOL: black
-    VALIDATE_TOOL_ARGS: --check --diff .
+    VALIDATE_TOOL_ARGS: format --check --diff
 
 security (trivy):
   extends:
@@ -165,6 +165,8 @@ build image:
   stage: build
   rules:
     - if: $CI_COMMIT_BRANCH != "deploy"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   needs: []
 
 build and deploy:
@@ -178,4 +180,5 @@ build and deploy:
     - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
     - buildah push quay.io/gnome_infrastructure/extensions:latest
   needs:
-    - test
+    - check migrations
+    - test collectstatic
