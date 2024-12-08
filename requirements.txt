@@ -7,7 +7,9 @@
 asgiref==3.8.1 \
     --hash=sha256:3e1e3ecc849832fe52ccf2cb6686b7a55f82bb1d6aee72a58826471390335e47 \
     --hash=sha256:c343bd80a0bec947a9860adb4c432ffa7db769836c64238fc34bdc3fec84d590
-    # via django
+    # via
+    #   django
+    #   django-cors-headers
 attrs==24.2.0 \
     --hash=sha256:5cfb1b9148b5b086569baec03f20d7b6bf3bcacc9a42bebf87ffaaca362f6346 \
     --hash=sha256:81921eb96de3191c8258c199618104dd27ac608d9366f5e35d011eae1867ede2
@@ -253,6 +255,7 @@ django==4.2.17 \
     # via
     #   dj-database-url
     #   django-contrib-comments
+    #   django-cors-headers
     #   django-filter
     #   django-recaptcha
     #   django-registration
@@ -270,6 +273,10 @@ django-autoslug==1.9.9 \
 django-contrib-comments==2.2.0 \
     --hash=sha256:2ca79060bbc8fc5b636981ef6e50f35ab83649af75fc1be47bf770636be3271c \
     --hash=sha256:48de00f15677e016a216aeff205d6e00e4391c9a5702136c64119c472b7356da
+    # via extensions-web (pyproject.toml)
+django-cors-headers==4.6.0 \
+    --hash=sha256:14d76b4b4c8d39375baeddd89e4f08899051eeaf177cb02a29bd6eae8cf63aa8 \
+    --hash=sha256:8edbc0497e611c24d5150e0055d3b178c6534b8ed826fb6f53b21c63f5d48ba3
     # via extensions-web (pyproject.toml)
 django-filter==23.3 \
     --hash=sha256:015fe155582e1805b40629344e4a6cf3cc40450827d294d040b4b8c1749a9fa6 \
