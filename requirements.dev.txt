@@ -10,7 +10,6 @@ asgiref==3.8.1 \
     # via
     #   -c requirements.txt
     #   django
-    #   django-cors-headers
 astroid==3.3.5 \
     --hash=sha256:5cfc40ae9f68311075d27ef68a4841bdc5cc7f6cf86671b49f00607d30188e2d \
     --hash=sha256:a9d1c946ada25098d790e079ba2a1b112157278f3fb7e718ae6a9252f5835dc8
@@ -314,12 +313,10 @@ django-contrib-comments==2.2.0 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
-django-cors-headers==4.6.0 \
-    --hash=sha256:14d76b4b4c8d39375baeddd89e4f08899051eeaf177cb02a29bd6eae8cf63aa8 \
-    --hash=sha256:8edbc0497e611c24d5150e0055d3b178c6534b8ed826fb6f53b21c63f5d48ba3
-    # via
-    #   -c requirements.txt
-    #   extensions-web (pyproject.toml)
+django-cors-headers==4.2.0 \
+    --hash=sha256:9ada212b0e2efd4a5e339360ffc869cb21ac5605e810afe69f7308e577ea5bde \
+    --hash=sha256:f9749c6410fe738278bc2b6ef17f05195bc7b251693c035752d8257026af024f
+    # via extensions-web (pyproject.toml)
 django-filter==23.3 \
     --hash=sha256:015fe155582e1805b40629344e4a6cf3cc40450827d294d040b4b8c1749a9fa6 \
     --hash=sha256:65bc5d1d8f4fff3aaf74cb5da537b6620e9214fb4b3180f6c560776b1b6dccd0
