@@ -235,7 +235,11 @@ SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 # See http://docs.djangoproject.com/en/stable/topics/logging for
 # more details on how to customize your logging configuration.
 
-LOGGING["handlers"]["console"]["filters"] = None
+LOGGING["handlers"]["console"]["filters"] = {
+    "require_not_maintenance_mode_503": {
+        "()": "maintenance_mode.logging.RequireNotMaintenanceMode503",
+    },
+}
 LOGGING["handlers"]["console"]["level"] = "DEBUG"
 LOGGING["loggers"] = {
     "django": {
