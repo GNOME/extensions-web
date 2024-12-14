@@ -426,17 +426,6 @@ mccabe==0.7.0 \
     --hash=sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325 \
     --hash=sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e
     # via pylint
-mysqlclient==2.2.0 \
-    --hash=sha256:004fe1d30d2c2ff8072f8ea513bcec235fd9b896f70dad369461d0ad7e570e98 \
-    --hash=sha256:04368445f9c487d8abb7a878e3d23e923e6072c04a6c320f9e0dc8a82efba14e \
-    --hash=sha256:530ece9995a36cadb6211b9787f0c9e05cdab6702549bdb4236af5e9b535ed6a \
-    --hash=sha256:5670679ff1be1cc3fef0fa81bf39f0cd70605ba121141050f02743eb878ac114 \
-    --hash=sha256:68837b6bb23170acffb43ae411e47533a560b6360c06dac39aa55700972c93b2 \
-    --hash=sha256:955dba905a7443ce4788c63fdb9f8d688316260cf60b20ff51ac3b1c77616ede \
-    --hash=sha256:9c6b142836c7dba4f723bf9c93cc46b6e5081d65b2af807f400dda9eb85a16d0
-    # via
-    #   -c requirements.txt
-    #   extensions-web (pyproject.toml)
 opensearch-py==2.7.1 \
     --hash=sha256:5417650eba98a1c7648e502207cebf3a12beab623ffe0ebbf55f9b1b4b6e44e9 \
     --hash=sha256:67ab76e9373669bc71da417096df59827c08369ac3795d5438c9a8be21cbd759
