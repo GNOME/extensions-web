@@ -151,7 +151,11 @@ security (pip-audit):
     - pip-audit -r requirements.txt
 
 .build image:
-  image: quay.io/gnome_infrastructure/buildah:latest
+  image: quay.io/buildah/stable:latest
+  variables:
+    STORAGE_DRIVER: vfs
+    BUILDAH_ISOLATION: chroot
+  retry: 2
   tags:
     - aarch64
   script:
