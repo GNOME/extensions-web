@@ -152,11 +152,13 @@ security (pip-audit):
 
 .build image:
   image: quay.io/gnome_infrastructure/buildah:latest
+  tags:
+    - aarch64
   script:
     - >-
       buildah bud
       --build-arg PYTHON_VERSION="${PYTHON_VERSION}"
-      -t quay.io/gnome_infrastructure/extensions:latest
+      -t quay.io/gnome_infrastructure/extensions:aarch64-latest
       -f openshift/docker/Dockerfile
 
 build image:
@@ -178,7 +180,7 @@ build and deploy:
   script:
     - !reference [.build image, script]
     - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
-    - buildah push quay.io/gnome_infrastructure/extensions:latest
+    - buildah push quay.io/gnome_infrastructure/extensions:aarch64-latest
   needs:
     - check migrations
     - test collectstatic
