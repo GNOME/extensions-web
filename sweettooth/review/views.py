@@ -337,7 +337,7 @@ def review_version_view(request, obj):
     all_versions = extension.versions.order_by("-version")
 
     # Other reviews on the same version.
-    previous_reviews = version.reviews.all()
+    previous_reviews = version.reviews.order_by("pk")
 
     compare_version = get_old_version(version)
     can_approve = can_approve_extension(request.user, extension)

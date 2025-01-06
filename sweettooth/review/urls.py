@@ -9,7 +9,7 @@ urlpatterns = [
         r"^$",
         ListView.as_view(
             template_name="review/list.html",
-            queryset=ExtensionVersion.objects.unreviewed(),
+            queryset=ExtensionVersion.objects.unreviewed().order_by("pk"),
             context_object_name="version_list",
         ),
         name="review-list",
