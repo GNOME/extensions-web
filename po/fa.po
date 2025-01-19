@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2024-04-26 13:56+0330\n"
+"POT-Creation-Date: 2024-11-30 16:58+0000\n"
+"PO-Revision-Date: 2025-01-18 23:22+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "نباید از رایانامه به عنوان نام کاربری استفاده کنید"
@@ -27,35 +27,35 @@ msgstr "نباید از رایانامه به عنوان نام کاربری ا�
 msgid "Your username contains forbidden words"
 msgstr "نام کاربریتان دارای واژگان ممنوعه است"
 
-#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "نمی‌توانید رایانامه‌تان را بیش از یک بار در هر ۷ روز تغییر دهید"
 
-#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "نام نمایشیتان دارای واژگان ممنوعه است"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "حذف حسابم"
 
-#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "حسابتان در ۷ روز آینده حذف خواهد شد"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "No"
 msgstr "خیر"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "بله"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "گذرواژهٔ کنونی"
 
-#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "برای لغو برداشتن حساب نیازی به مشخّص کردن گذواژه ندارید"
 
@@ -89,11 +89,11 @@ msgstr "این مقدار فقط می‌تواند شامل حروف، ارقا�
 msgid "Email"
 msgstr "رایانامه"
 
-#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
 msgstr "این رایانامه از پیش ثبت شده"
 
-#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
 msgstr "این نام کاربری از پیش ثبت شده"
 
@@ -108,6 +108,10 @@ msgstr "ثبت‌نام"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "ثبت‌نام حساب"
+
+#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "پایگاه وب در حال نگه‌داری است. لطفاُ دقایقی بعد دوباره تلاش کنید."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -252,70 +256,70 @@ msgstr "افزودن افزونهٔ خودتان"
 msgid "Installed extensions"
 msgstr "افزونه‌های نصب‌شده"
 
-#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "باید کلید shell-version را در metadata.json تعریف کنید"
 
-#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "گونهٔ اعانهٔ پشتیبانی‌نشده: %s"
 
-#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "نمی‌توانید بیش از ۳ مقدار برای گونهٔ اعانهٔ «%s» مشخّص کنید"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "کمینه یک مقدار باید برای گونهٔ اعانهٔ «%s» مشخّص شود"
 
-#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "گونهٔ مقدار برای گونهٔ اعانهٔ «%s» باید رشته یا سیاههٔ رشته‌ها باشد"
 
-#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "نام نگارش نمی‌تواند فقط فاصله یا نقطه باشد."
 
-#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr "تنها نویسه‌های عددحرفی (انگلیسی)، فاصله و نقطه برای نام نگارش مجازند."
 
-#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"موافقم که کارکنان پایگاه وب extensions.gnome.org می‌توانند افزونهٔ بارگذاشته‌ام را "
-"برداشته، تغییر داده یا نگه‌داریش را به دیگری اختصاص دهند"
-
-#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "زمینهٔ uuid در metadata.json نیست"
 
-#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "افزونه‌ای با این شناسهٔء یکتا از پیش اضافه شده"
 
-#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "باید با شرایط خدمت extensions.gnome.org موافقت کنید"
 
-#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial case "
 "regarding the compatibility of extension's license with the GNOME Shell's "
 "license, the extension uploaded by me may be used by any GNOME Shell user under "
 "the terms of the license used by GNOME Shell"
 msgstr ""
-"با بارگذاری این افزونه موافقت می‌کنم که در هر مورد مناقشه برانگیز مربوط به "
-"سازگاری پروانهٔ افزونه با پروانهٔ پوستهٔ گنوم، افزونهٔ بارگذاشته‌ام می‌توانند از سوی "
-"هر کاربر پوستهٔ گنوم تحت شرایط پروانهٔ استفاده شده به دست پوستهٔ گنوم استفاده شود."
+"با بارگذاری این افزونه موافقت و تأیید می‌کنم که در هر مورد مناقشه برانگیز مربوط "
+"به سازگاری پروانهٔ افزونه با پروانهٔ پوستهٔ گنوم، افزونهٔ بارگذاشته‌ام می‌تواند از سوی "
+"هر کاربر پوستهٔ گنوم با شرایط پروانهٔ استفاده شده به دست پوستهٔ گنوم استفاده شود"
+
+#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"موافقم که کارکنان پایگاه وب extensions.gnome.org می‌توانند افزونهٔ بارگذاشته‌ام را "
+"برداشته، تغییر داده یا نگه‌داریش را به دیگری اختصاص دهند"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -591,11 +595,11 @@ msgstr ""
 
 #: sweettooth/review/templates/review/review.html:82 extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
-"می‌توانید رهنمودهای توسعه‌دهنده را در <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a> بیابید."
+"می‌توانید رهنمودهای توسعه‌دهنده را در <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a> بیابید."
 
 #: sweettooth/review/templates/review/review.html:85 extensions-web-domain-django:1
 msgid ""
