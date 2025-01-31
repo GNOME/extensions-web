@@ -1,24 +1,24 @@
 # Bulgarian translation of extensions-web po-file.
 # Copyright (C) 2024 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024.
+# twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2024-11-07 14:47+0100\n"
+"POT-Creation-Date: 2024-11-30 16:58+0000\n"
+"PO-Revision-Date: 2025-01-15 16:25+0100\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Не ползвайте е-поща като потребителско име"
@@ -27,35 +27,35 @@ msgstr "Не ползвайте е-поща като потребителско 
 msgid "Your username contains forbidden words"
 msgstr "Потребителското ви име съдържа забранени думи"
 
-#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
-msgstr "Не може да променяте е-пощата си повече от веднъж на всеки 7 дни."
+msgstr "Не може да променяте е-пощата си повече от веднъж на всеки 7 дни"
 
-#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "Вашето име за показване съдържа забранени думи"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Изтриване на регистрацията ми"
 
-#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Вашата регистрация ще бъде изтрита след 7 дни"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "No"
 msgstr "Не"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Да"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Текуща парола"
 
-#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "Не е необходимо да посочвате парола, за да отмените премахването на "
@@ -96,11 +96,11 @@ msgstr ""
 msgid "Email"
 msgstr "Е-поща"
 
-#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
 msgstr "Тази е-поща вече е заета"
 
-#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
 msgstr "Това потребителско име вече е заето"
 
@@ -115,6 +115,12 @@ msgstr "Регистриране"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "Регистрация"
+
+#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr ""
+"Уеб страницата е временно недостъпна поради поддръжка. Опитайте отново след "
+"няколко минути."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -265,36 +271,36 @@ msgstr "Добавете свое"
 msgid "Installed extensions"
 msgstr "Инсталирани разширения"
 
-#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "Трябва да дефинирате ключа „shell-version“ в „metadata.json“"
 
-#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Неподдържан вид дарение: %s"
 
-#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "Не може да посочите повече от 3 стойности за вид дарение „%s“"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Трябва да бъде посочена поне една стойност за вид дарение „%s“"
 
-#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "Типът на стойността трябва да е низ или списък от низове за вид дарение „%s“"
 
-#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "Името на версията не може да съдържа само интервали или точки."
 
-#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
@@ -302,29 +308,20 @@ msgstr ""
 "За името на версията са позволени само буквено-цифрови знаци (латиница), "
 "интервали и точки."
 
-#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Съгласявам се, че служителите на уеб сайта „extensions.gnome.org“ може да "
-"премахват, променят или преназначават права̀та за поддръжка на каченото от "
-"мен разширение."
-
-#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "В „metadata.json“ липсва полето „uuid“"
 
-#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Вече е добавено разширение с този идентификатор (UUID)"
 
-#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr ""
 "Трябва да сте съгласни с условията на услугата на „extensions.gnome.org“"
 
-#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -334,7 +331,16 @@ msgstr ""
 "С качването на това разширение аз се съгласявам и потвърждавам, че във всеки "
 "спорен случай относно съвместимостта на лиценза на разширението с лиценза на "
 "GNOME Shell, каченото от мен разширение може да се използва от всеки "
-"потребител на GNOME Shell при условията на лиценза, използван от GNOME Shell."
+"потребител на GNOME Shell при условията на лиценза, използван от GNOME Shell"
+
+#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Съгласявам се, че служителите на уеб сайта „extensions.gnome.org“ може да "
+"премахват, променят или преназначават права̀та за поддръжка на каченото от "
+"мен разширение"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -622,8 +628,8 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
 "Може да намерите ръководства за разработчици в <a href='https://gjs.guide/"
 "extensions/'>gjs.guide</a>."
@@ -670,7 +676,7 @@ msgid ""
 msgstr ""
 "За да управлявате разширенията на GNOME Shell с помощта на този уеб сайт, "
 "трябва да инсталирате интеграцията към нея, която се състои от две части: "
-"разширение на браузъра и системна програма за съобщения на хоста."
+"разширение на браузъра и системна програма за съобщения на хоста"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
