@@ -68,9 +68,11 @@ class ExtensionVersionSerializer(serializers.ModelSerializer):
         fields = [
             "extension",
             "version",
+            "version_name",
             "status",
             "shell_versions",
             "created",
+            "session_modes",
         ]
 
 
