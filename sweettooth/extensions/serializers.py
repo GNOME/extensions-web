@@ -28,6 +28,8 @@ class ShellVersionSerializer(serializers.ModelSerializer):
 
 class ExtensionSerializer(serializers.ModelSerializer):
     creator = BaseUserProfileSerializer(many=False, read_only=True)
+    donation_urls = serializers.SerializerMethodField()
+    link = serializers.CharField(source="get_absolute_url", read_only=True)
 
     class Meta:
         model = Extension
@@ -45,7 +47,13 @@ class ExtensionSerializer(serializers.ModelSerializer):
             "icon",
             "rating",
             "rated",
+            "url",
+            "donation_urls",
+            "link",
         ]
+
+    def get_donation_urls(self, obj):
+        return [donation.full_url for donation in obj.donation_urls.all()]
 
 
 class ExtensionVersionSerializer(serializers.ModelSerializer):
