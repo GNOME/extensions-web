@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the extensions-web package.
 # mansil <mmsrs@sky.com>, 2019.
 # Juliano de Souza Camargo <julianosc@protonmail.com>, 2020.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2020, 2021, 2022, 2023.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2020, 2021, 2022, 2023, 2024, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2023-11-22 13:34+0000\n"
+"POT-Creation-Date: 2024-11-30 16:58+0000\n"
+"PO-Revision-Date: 2025-01-24 22:45+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -18,9 +18,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "Não deveria usar o correio eletrónico como nome de utilizador"
@@ -29,35 +29,35 @@ msgstr "Não deveria usar o correio eletrónico como nome de utilizador"
 msgid "Your username contains forbidden words"
 msgstr "O seu nome de utilizador contém palavras proibidas"
 
-#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Não pode alterar o seu e-mail mais do que uma vez em cada 7 dias"
 
-#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "O seu nome de apresentação contém palavras proibidas"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Eliminar a minha conta"
 
-#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "A sua conta será eliminada no prazo de 7 dias"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "No"
 msgstr "Não"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Sim"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Palavra-passe atual"
 
-#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "Não é necessário especificar uma palavra-passe para cancelar a remoção da "
@@ -96,11 +96,11 @@ msgstr ""
 msgid "Email"
 msgstr "Correio eletrónico"
 
-#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
 msgstr "Este e-mail já está registado"
 
-#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
 msgstr "Este nome de utilizador já está registado"
 
@@ -115,6 +115,11 @@ msgstr "Registar"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "Registo de conta"
+
+#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr ""
+"O sítio Web está em manutenção. Tente novamente dentro de alguns minutos."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -265,38 +270,38 @@ msgstr "Adicione a sua"
 msgid "Installed extensions"
 msgstr "Extensões instaladas"
 
-#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "É necessário definir a chave `shell-version` em metadata.json"
 
-#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Tipo de doação não suportada: %s"
 
-#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr ""
 "Não é possível especificar mais de 3 valores para o tipo de doação \"%s\""
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Deve ser especificado pelo menos um valor para o tipo de doação \"%s\""
 
-#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "O tipo de valor deve ser uma cadeia ou uma lista de cadeias para o tipo de "
 "doação \"%s\""
 
-#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "O nome da versão não pode conter apenas espaços ou pontos."
 
-#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
@@ -304,28 +309,19 @@ msgstr ""
 "Apenas caracteres alfanuméricos (eng), espaços e pontos são permitidos para "
 "o nome da versão."
 
-#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Concordo que a equipa do sítio Web extensions.gnome.org possa remover, "
-"modificar ou reatribuir a responsabilidade pela manutenção da extensão "
-"carregada por mim"
-
-#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "O campo `uuid` está em falta em `metadata.json`"
 
-#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Uma extensão com esse UUID já foi adicionada"
 
-#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "Tem de concordar com os termos de serviço de extensions.gnome.org"
 
-#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -337,6 +333,15 @@ msgstr ""
 "do GNOME Shell, a extensão carregada por mim pode ser utilizada por qualquer "
 "utilizador do GNOME Shell ao abrigo dos termos da licença utilizada pelo "
 "GNOME Shell"
+
+#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Concordo que a equipa do sítio Web extensions.gnome.org possa remover, "
+"modificar ou reatribuir a responsabilidade pela manutenção da extensão "
+"carregada por mim"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1

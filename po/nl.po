@@ -1,14 +1,14 @@
 # Dutch translation for extensions-web.
 # Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Nathan Follens <nfollens@gnome.org>, 2019-2020, 2022-2024.
+# Nathan Follens <nfollens@gnome.org>, 2019-2020, 2022-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2024-03-31 15:19+0200\n"
+"POT-Creation-Date: 2024-11-30 16:58+0000\n"
+"PO-Revision-Date: 2025-01-23 21:50+0100\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "U gebruikt beter geen e-mailadres als gebruikersnaam"
@@ -27,35 +27,35 @@ msgstr "U gebruikt beter geen e-mailadres als gebruikersnaam"
 msgid "Your username contains forbidden words"
 msgstr "Uw gebruikersnaam bevat niet-toegestane woorden"
 
-#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "U kunt uw e-mailadres maar één keer per 7 dagen wijzigen"
 
-#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "Uw weergavenaam bevat niet-toegestane woorden"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Mijn account verwijderen"
 
-#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
-msgstr "U account zal na 7 dagen verwijderd worden"
+msgstr "Uw account zal na 7 dagen verwijderd worden"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "No"
 msgstr "Nee"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Ja"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Huidig wachtwoord"
 
-#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
 "U hoeft uw wachtwoord niet in te geven om de verwijdering van uw account te "
@@ -94,11 +94,11 @@ msgstr ""
 msgid "Email"
 msgstr "E-mailadres"
 
-#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
 msgstr "Dit e-mailadres is reeds geregistreerd"
 
-#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
 msgstr "Deze gebruikersnaam is reeds geregistreerd"
 
@@ -113,6 +113,11 @@ msgstr "Registreren"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "Accountregistratie"
+
+#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr ""
+"Er wordt aan de website gewerkt. Probeer het binnen enkele minuten opnieuw."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -179,7 +184,7 @@ msgstr "Aanmelden"
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr "Heeft u geen account?"
+msgstr "Hebt u geen account?"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -262,37 +267,37 @@ msgstr "Uw uitbreidingen toevoegen"
 msgid "Installed extensions"
 msgstr "Geïnstalleerde uitbreidingen"
 
-#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "U dient de sleutel ‘shell-version’ in te stellen in metadata.json"
 
-#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Niet-ondersteund donatietype: %s"
 
-#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "U kunt niet meer dan 3 waarden opgeven voor donatietype ‘%s’"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "U moet minstens één waarde opgeven voor donatietype ‘%s’"
 
-#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "Waardetype moet een tekenreeks of lijst van tekenreeksen zijn voor "
 "donatietype ‘%s’"
 
-#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "De versienaam mag niet enkel spaties of punten bevatten."
 
-#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
@@ -300,28 +305,19 @@ msgstr ""
 "De versienaam mag alleen maar bestaan uit alfanumerieke tekens (eng), "
 "spaties en punten."
 
-#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Ik ga akkoord dat een staflid van de extensions.gnome.org-website de door "
-"mij geüploade uitbreiding kan verwijderen, wijzigen of het beheer ervan kan "
-"hertoewijzen"
-
-#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "Het veld `uuid` ontbreekt in `metadata.json`"
 
-#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Er is al een uitbreiding met die UUID toegevoegd"
 
-#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "U moet akkoord gaan met de dienstvoorwaarden van extensions.gnome.org"
 
-#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -333,6 +329,15 @@ msgstr ""
 "de uitbreiding met de licentie van GNOME Shell, de door mij geüploade "
 "licentie door om het even welke GNOME Shell-gebruiker gebruikt mag worden "
 "onder de voorwaarden van de licentie van GNOME Shell"
+
+#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Ik ga akkoord dat een staflid van de extensions.gnome.org-website de door "
+"mij geüploade uitbreiding kan verwijderen, wijzigen of het beheer ervan kan "
+"hertoewijzen"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -366,8 +371,8 @@ msgid ""
 "a comment or report an error. You understand, right?"
 msgstr ""
 "Om spam tegen te gaan, vragen we u om u <a href=\"%(login_url)s\">aan te "
-"melden bij Gnome-shelluitbreidingen</a> om een reactie te kunnen plaatsen of "
-"een fout te melden."
+"melden bij Uitbreiding voor GNOME Shell</a> om een reactie te kunnen "
+"plaatsen of een fout te melden."
 
 #: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
@@ -405,7 +410,7 @@ msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"De uitbreiding die u heeft ingediend zal nagekeken worden om zeker te zijn "
+"De uitbreiding die u hebt ingediend zal nagekeken worden om zeker te zijn "
 "dat ze geen gevaar stelt. U krijgt de resultaten van deze controle per e-"
 "mail opgestuurd."
 
@@ -570,7 +575,7 @@ msgstr "Voorbeeld"
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr "Wat vindt u van deze Gnome-uitbreiding?"
+msgstr "Wat vindt u van deze GNOME-uitbreiding?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
@@ -642,12 +647,12 @@ msgstr ""
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr "Laatste nieuwe uitbreidingen bij Gnome-shelluitbreidingen"
+msgstr "Laatste nieuwe uitbreidingen voor GNOME Shell"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "Gnome-shelluitbreidingen"
+msgstr "Uitbreidingen voor GNOME Shell"
 
 #: sweettooth/templates/base.html:96 extensions-web-domain-django:1
 msgid "Developers Guide"
@@ -671,13 +676,13 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"Om via deze site Gnome-shelluitbreidingen te beheren, dient u de Gnome-"
-"shellintegratie te installeren, bestaande uit twee delen: een "
+"Om via deze site uitbreidingen voor GNOME Shell te beheren, dient u de GNOME "
+"Shell-integratie te installeren, bestaande uit twee delen: een "
 "browserextensie en een native-host-messaging-toepassing"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr "Browserextensie voor Gnome-shellintegratie installeren"
+msgstr "Browserextensie voor GNOME Shell-integratie installeren"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
@@ -696,7 +701,7 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"We konden niet detecteren dat Gnome op uw systeem draait, dus sommige "
+"We konden niet detecteren dat GNOME op uw systeem draait, dus sommige "
 "onderdelen van de interface zijn mogelijk uitgeschakeld. Bekijk onze <a "
 "href=\"/about/#no-detection\">probleemoplossingshulp</a> voor meer "
 "informatie."
@@ -704,7 +709,8 @@ msgstr ""
 #: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
-"Gnome-shelluitbreidingen kan uw geïnstalleerde uitbreidingen niet oplijsten."
+"Uitbreidingen voor GNOME Shell kan uw geïnstalleerde uitbreidingen niet "
+"oplijsten."
 
 #: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
