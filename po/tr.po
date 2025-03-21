@@ -4,15 +4,15 @@
 #
 # Serdar Sağlam <teknomobil@msn.com>, 2019.
 # Alperen İsa Nalbant <afacanc38@vuhuv.com>, 2023.
-# Sabri Ünal <libreajans@gmail.com>, 2023, 2024.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2022, 2023, 2024.
+# Sabri Ünal <yakushabb@gmail.com>, 2023, 2024.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2022, 2023, 2024, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2024-01-25 08:00+0300\n"
+"POT-Creation-Date: 2024-11-30 16:58+0000\n"
+"PO-Revision-Date: 2025-03-21 08:00+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
+#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "E-posta adresini kullanıcı adı olarak kullanmayınız"
@@ -31,35 +31,35 @@ msgstr "E-posta adresini kullanıcı adı olarak kullanmayınız"
 msgid "Your username contains forbidden words"
 msgstr "Kullanıcı adınız yasaklanmış sözcükler içeriyor"
 
-#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "E-postanızı 7 gün içinde birden çok kez değiştiremezsiniz"
 
-#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "Görünen adınız yasaklanmış sözcükler içeriyor"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Hesabımı sil"
 
-#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Hesabınız 7 gün içinde silinecektir"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "No"
 msgstr "Hayır"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Evet"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Şu anki parola"
 
-#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Hesabınızı silmeyi iptal etmek için bir parola belirtmeniz gerekmez"
 
@@ -97,11 +97,11 @@ msgstr ""
 msgid "Email"
 msgstr "E-posta"
 
-#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
 msgstr "Bu e-posta zaten kayıtlı"
 
-#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
 msgstr "Bu kullanıcı adı zaten kayıtlı"
 
@@ -116,6 +116,10 @@ msgstr "Kaydol"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "Hesap Kaydı"
+
+#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "Web sitesi bakımdadır. Lütfen birkaç dakika sonra yeniden deneyin."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -266,37 +270,37 @@ msgstr "Kendininkileri ekle"
 msgid "Installed extensions"
 msgstr "Kurulu uzantılar"
 
-#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "metadata.json’da `shell-version` anahtarı tanımlamalısınız."
 
-#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Desteklenmeyen bağış seçeneği: %s"
 
-#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "\"%s\" bağış seçeneği için üçten çok değer belirtemezsiniz"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "\"%s\" bağış seçeneği için en az bir değer belirtilmelidir"
 
-#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
 "\"%s\" bağış seçeneği için değer türü dizge ya da dizge listesinden "
 "oluşmalıdır"
 
-#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "Sürüm adı yalnızca boşluk veya nokta olamaz."
 
-#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
@@ -304,28 +308,19 @@ msgstr ""
 "Sürüm adında yalnızca alfanümerik karakterler (İngilizce), boşluklar ve "
 "noktalara izin verilir."
 
-#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"extensions.gnome.org web sitesinin tarafımca yüklenen uzantının bakımcısını "
-"kaldırabileceğini, değiştirebileceğini ya da yeniden atayabileceğini kabul "
-"ediyorum"
-
-#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "`metadata.json` içinde `uuid` alanı eksik"
 
-#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Bu UUID ile bir uzantı zaten eklenmiş"
 
-#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "extensions.gnome.org hizmet koşullarını kabul etmelisiniz"
 
-#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -336,6 +331,15 @@ msgstr ""
 "uyumluluğuna ilişkin tartışmalı bir durumda, yüklediğim uzantının GNOME "
 "Shell lisans koşullarıyla herhangi GNOME Shell kullanıcısınca "
 "kullanılabileceğini kabul ediyor ve doğruluyorum"
+
+#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"extensions.gnome.org web sitesinin tarafımca yüklenen uzantının bakımcısını "
+"kaldırabileceğini, değiştirebileceğini ya da yeniden atayabileceğini kabul "
+"ediyorum"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -540,7 +544,8 @@ msgid ""
 "preparing it for upload."
 msgstr ""
 "Bu sizin ilk uzantınızsa, lütfen uzantı oluşturma ve yüklemeye hazırlama "
-"yönergeleri için <a href=\"%(url)s\">gjs.guide</a> adresindeki belgelere bakınız."
+"yönergeleri için <a href=\"%(url)s\">gjs.guide</a> adresindeki belgelere "
+"bakınız."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
