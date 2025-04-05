@@ -71,7 +71,7 @@ test:
         OPENSEARCH_JAVA_OPTS: -Xms256m -Xmx256m
   script:
     - ./manage.py opensearch index create --force
-    - python manage.py test
+    - python -Wd manage.py test
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   parallel:
