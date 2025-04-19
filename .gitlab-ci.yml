@@ -128,17 +128,6 @@ security (trivy):
     # This is single-run job so we do not care of k8s recommendations
     TRIVY_SKIP_FILES: openshift/jobs/reindex-extensions.yml
 
-security (safety):
-  extends:
-    - .pip cache
-    - .security defaults
-  image:
-    name: python:$PYTHON_VERSION
-  before_script:
-    - pip install safety
-  script:
-    - safety check -r requirements.txt
-
 security (pip-audit):
   extends:
     - .pip cache
