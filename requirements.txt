@@ -292,8 +292,8 @@ django-maintenance-mode==0.21.1 \
     --hash=sha256:b79afddb671c59972ae542e4fafbc99117d2d37991843eaaa837e328eed12b1b \
     --hash=sha256:c02fff0e386b7f8b2ab54479d3a0d336ae34014da22a7a2365ca96d5a2c1db94
     # via extensions-web (pyproject.toml)
-django-opensearch-dsl==0.5.1 \
-    --hash=sha256:91c68e1c9d5ce15d760da78d07fa8762385794de0d915710b63b491b2aa44934
+django-opensearch-dsl==0.7.0 \
+    --hash=sha256:a7b899e2a8bdf87a983f49928cded23eb8f0012ca95081ab85238f63bab0f8e7
     # via extensions-web (pyproject.toml)
 django-recaptcha==3.0.0 \
     --hash=sha256:1aed69fd6ac8fd9e99e52665392ae6748f8b6339ace656fad779fe0c6c915a52 \

@@ -338,8 +338,8 @@ django-maintenance-mode==0.21.1 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
-django-opensearch-dsl==0.5.1 \
-    --hash=sha256:91c68e1c9d5ce15d760da78d07fa8762385794de0d915710b63b491b2aa44934
+django-opensearch-dsl==0.7.0 \
+    --hash=sha256:a7b899e2a8bdf87a983f49928cded23eb8f0012ca95081ab85238f63bab0f8e7
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
