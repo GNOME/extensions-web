@@ -3,7 +3,7 @@
     <div class="col-sm-12">
         <form action="{% url 'auth-login' %}" method="POST" class="form">
           {% csrf_token %}
-          {{ login_popup_form.as_plain }}
+          {{ login_popup_form.as_div }}
             <div class="form-group">
                 <input type="hidden" name="next" class="form-control" value="{{ request.path }}"/>
             </div>

@@ -17,19 +17,6 @@ from django_registration.forms import (
 User = get_user_model()
 
 
-class PlainOutputForm:
-    def as_plain(self):
-        return self._html_output(
-            normal_row=(
-                '<div class="form-group">%(field)s</div> %(errors)s%(help_text)s'
-            ),
-            error_row="%s",
-            row_ender="</div>",
-            help_text_html='<br /><span class="helptext">%s</span>',
-            errors_on_separate_row=False,
-        )
-
-
 class AutoFocusForm:
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
@@ -68,7 +55,7 @@ class InlineForm:
 
 
 class InlineAuthenticationForm(
-    PlainOutputForm, AutoFocusForm, InlineForm, LoginOrEmailAuthenticationForm
+    AutoFocusForm, InlineForm, LoginOrEmailAuthenticationForm
 ):
     pass
 
