@@ -160,8 +160,6 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = False
 
 ADMINS = (
@@ -193,7 +191,14 @@ STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (os.path.join(SITE_ROOT, "static"),)
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    },
+}
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = int(os.getenv("EGO_MAX_UPLOAD", 5 * 1024 * 1024))
 FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
@@ -301,5 +306,7 @@ if not DEBUG and not NO_SECURE_SETTINGS:
 if "EGO_STATIC_ROOT" in os.environ:
     STATIC_ROOT = os.getenv("EGO_STATIC_ROOT")
 elif DEBUG and not NO_STATICFILES_SETTINGS:
-    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+    STORAGES["staticfiles"]["BACKEND"] = (
+        "django.contrib.staticfiles.storage.StaticFilesStorage"
+    )
     STATIC_ROOT = None

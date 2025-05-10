@@ -171,6 +171,86 @@ class SettingsTest(TestCase):
                 )
             )
 
+    # Copied from the Django 3.2.25 assertFormError which was changed in the 5.0
+    # https://github.com/django/django/blob/3.2.25/django/test/testcases.py#L484
+    def assertResponseFormError(self, response, form, field, errors, msg_prefix=""):
+        def to_list(value):
+            """
+            Put value into a list if it's not already one. Return an empty list if
+            value is None.
+            """
+            if value is None:
+                value = []
+            elif not isinstance(value, list):
+                value = [value]
+            return value
+
+        """
+        Assert that a form used to render the response has a specific field
+        error.
+        """
+        if msg_prefix:
+            msg_prefix += ": "
+
+        # Put context(s) into a list to simplify processing.
+        contexts = to_list(response.context)
+        if not contexts:
+            self.fail(
+                msg_prefix + "Response did not use any contexts to render the response"
+            )
+
+        # Put error(s) into a list to simplify processing.
+        errors = to_list(errors)
+
+        # Search all contexts for the error.
+        found_form = False
+        for i, context in enumerate(contexts):
+            if form not in context:
+                continue
+            found_form = True
+            for err in errors:
+                if field:
+                    if field in context[form].errors:
+                        field_errors = context[form].errors[field]
+                        self.assertTrue(
+                            err in field_errors,
+                            msg_prefix + "The field '%s' on form '%s' in"
+                            " context %d does not contain the error '%s'"
+                            " (actual errors: %s)"
+                            % (field, form, i, err, repr(field_errors)),
+                        )
+                    elif field in context[form].fields:
+                        self.fail(
+                            msg_prefix
+                            + (
+                                "The field '%s' on form '%s' in context %d"
+                                " contains no errors"
+                            )
+                            % (field, form, i)
+                        )
+                    else:
+                        self.fail(
+                            msg_prefix
+                            + (
+                                "The form '%s' in context %d "
+                                "does not contain the field '%s'"
+                            )
+                            % (form, i, field)
+                        )
+                else:
+                    non_field_errors = context[form].non_field_errors()
+                    self.assertTrue(
+                        err in non_field_errors,
+                        msg_prefix + "The form '%s' in context %d does not"
+                        " contain the non-field error '%s'"
+                        " (actual errors: %s)"
+                        % (form, i, err, non_field_errors or "none"),
+                    )
+        if not found_form:
+            self.fail(
+                msg_prefix + "The form '%s' was not used to render the response" % form
+            )
+
     def test_settings_view(self):
         self.client.force_login(self.registered_users[0])
 
@@ -198,7 +278,7 @@ class SettingsTest(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(
+        self.assertResponseFormError(
             response, "profile_form", "username", validators.DUPLICATE_USERNAME
         )
 
@@ -213,7 +293,7 @@ class SettingsTest(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(
+        self.assertResponseFormError(
             response, "profile_form", "email", validators.DUPLICATE_EMAIL
         )
 
@@ -244,7 +324,7 @@ class SettingsTest(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(
+        self.assertResponseFormError(
             response, "profile_form", "email", ProfileForm.MESSAGE_EMAIL_TOO_FAST
         )
 
