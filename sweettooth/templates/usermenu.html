@@ -1,10 +1,13 @@
 {% load i18n %}
 {% if request.user.is_authenticated %}
+<form id="logout_form" method="post" action="{% url 'auth-logout' %}" style="display: none">
+    {% csrf_token %}
+</form>
 <div class="row">
     <div class="col-sm-12">
         <p><a class="btn btn-link no-decoration" href="{% url 'auth-profile' user=request.user.username %}">{% trans "User Profile" %}</a></p>
         <p><a class="btn btn-link no-decoration" href="{% url 'auth-settings' %}">{% trans "User Settings" %}</a></p>
-        <p><a class="btn btn-link no-decoration" href="{% url 'auth-logout' %}">{% trans "Log out" %}</a></p>
+        <p><a class="btn btn-link no-decoration" href="{% url 'auth-logout' %}" onclick="document.getElementById('logout_form').submit(); return false;">{% trans "Log out" %}</a></p>
     </div>
 </div>
 {% else %}
