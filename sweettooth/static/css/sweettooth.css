@@ -583,7 +583,7 @@ li.extension:last-child,
 }
 
 .comment .rating-author {
-    overflow: hidden;
+    overflow: auto;
 }
 
 .comment .rating {

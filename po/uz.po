@@ -1,66 +1,68 @@
-# Basque translation for extensions-web.
-# Copyright (C) 2019 extensions-web's COPYRIGHT HOLDER
+# Uzbek (Latin) translation for extensions-web.
+# Copyright (C) 2025 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-#
-# Asier Saratsua Garmendia <asiersarasua@ni.eus>, 2019, 2020, 2023, 2025.
+# Baxrom Raxmatov <magdiyevbahrom@gmail.com>,  2025.
 #
 msgid ""
-msgstr "Project-Id-Version: extensions-web master\n"
+msgstr ""
+"Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2024-11-30 16:58+0000\n"
-"PO-Revision-Date: 2025-05-11 10:00+0100\n"
-"Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
-"Language-Team: Basque <librezale@librezale.eus>\n"
-"Language: eu\n"
+"PO-Revision-Date: 2025-05-17 12:08+0500\n"
+"Last-Translator: Baxrom Raxmatov\n"
+"Language-Team: Uzbek (Latin) <Uzbek>\n"
+"Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
 
 #: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
 msgid "You should not use email as username"
-msgstr "Ez zenuke posta-helbidea erabili beharko erabiltzaile-izen modura"
+msgstr ""
+"Siz foydalanuvchi nomi sifatida elektron pochtadan foydalanmasligingiz kerak"
 
 #: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
-msgstr "Zure erabiltzaile-izenak onartzen ez diren hitzak ditu"
+msgstr "Sizning foydalanuvchi nomingizda taqiqlangan so'zlar mavjud"
 
 #: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
-msgstr "Posta elektronikoko helbidea 7 egunetik behin soilik aldatu daiteke"
+msgstr "E-pochtangizni 7 kunda bir martadan ortiq o'zgartira olmaysiz"
 
 #: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
-msgstr "Bistaratutako zure izenak onartzen ez diren hitzak ditu"
+msgstr "Ko'rsatilgan nomingizda taqiqlangan so'zlar mavjud"
 
 #: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
 msgid "Delete my account"
-msgstr "Ezabatu nire kontua"
+msgstr "Hisobimni o'chirish"
 
 #: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
-msgstr "Zure kontua 7 egunetan ezabatuko da"
+msgstr "Hisobingiz 7 kundan keyin oʻchiriladi"
 
 #: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "No"
-msgstr "Ez"
+msgstr "Yo'q"
 
 #: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
 msgid "Yes"
-msgstr "Bai"
+msgstr "Xa"
 
 #: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
 msgid "Current password"
-msgstr "Uneko pasahitza"
+msgstr "Hozirgi parol"
 
 #: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
-msgstr "Ez da pasahitzik zehaztu behar kontuaren ezabatzea bertan behera uzteko"
+msgstr "Hisobni oʻchirishni bekor qilish uchun parol koʻrsatish shart emas"
 
 #: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
 msgid "Username or email"
-msgstr "Erabiltzaile-izena edo posta-helbidea"
+msgstr "Foydalanuvchi nomi yoki email"
 
 #: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
 #, python-format
@@ -68,86 +70,97 @@ msgid ""
 "You have multiple accounts registered using single email. You can log in "
 "using your username or you can request removal of duplicate accounts using "
 "GNOME Gitlab (%(url)s)."
-msgstr "Kontu bat baino gehiago duzu posta elektronikoko helbide honekin erregistratuta. Zure erabiltzaile-izena erabiliz hasi dezakezu saioa, edo kontu bikoizutak kentzea eskatu dezakezu GNOMEren Gitlab bidez (%(url)s)."
+msgstr ""
+"Sizda bitta elektron pochta orqali ro'yxatdan o'tgan bir nechta hisoblar "
+"mavjud. Siz foydalanuvchi nomidan foydalanib tizimga kirishingiz yoki GNOME "
+"Gitlab (%(url)s) yordamida takroriy hisoblarni oʻchirishni soʻrashingiz "
+"mumkin."
 
 #: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
-msgstr "Erabiltzaile-izena"
+msgstr "Foydalanuvchi nomi"
 
 #: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Derrigorrezkoa. 30 karaktere edo gutxiago. Hizkiak, digituak eta @/./+/-/_ soilik."
+msgstr ""
+"Majburiy. 30 yoki undan kam belgi. Faqat harflar, raqamlar va @/./+/-/_."
 
 #: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr "Balio honek hizkiak, zenbakiak eta @/./+/-/_  karaktereak soilik izan ditzake."
+msgstr ""
+"Bu qiymat faqat harflar, raqamlar va @/./+/-/_ belgilaridan iborat bo'lishi "
+"mumkin."
 
 #: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
 msgid "Email"
-msgstr "Helb. el."
+msgstr "Email"
 
 #: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
-msgstr "Posta elektronikoko helbide hori jadanik hartuta dago"
+msgstr "Ushbu e-pochta manzili allaqachon ro'yxatdan o'tkazilgan"
 
 #: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
-msgstr "Erabiltzaile-izen hori jadanik hartuta dago"
+msgstr "Bu foydalanuvchi nomi allaqachon ro'yxatdan o'tgan"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:11
 #: sweettooth/auth/templates/registration/login.html:35
 #: sweettooth/auth/templates/registration/login_popup_form.html:19
 #: extensions-web-domain-django:1
 msgid "Register"
-msgstr "Eman izena"
+msgstr "Ro'yxatdan o'tish"
 
 #: sweettooth/auth/templates/django_registration/registration_form.html:7
 #: extensions-web-domain-django:1
 msgid "Account Registration"
-msgstr "Kontuaren harpidetza"
+msgstr "Hisobni ro'yxatdan o'tkazish"
 
 #: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
 msgid "The website is under maintenance. Please retry in a few minutes."
-msgstr "Webgunea mantentze-lanetan dago. Saiatu berriro minutu batzuk igaro ondoren."
+msgstr ""
+"Veb-sayt parvarish qilinmoqda. Bir necha daqiqadan so‘ng qayta urinib "
+"ko‘ring."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
 msgid "Account removal"
-msgstr "Kontua kentzea"
+msgstr "Hisobni olib tashlash"
 
 #: sweettooth/auth/templates/profile/account-removal.html:7
 #: extensions-web-domain-django:1
 msgid ""
 "You account is scheduled for removal. You can cancel account removal in 7 "
 "days."
-msgstr "Zure kontua kendu egingo da. Kontua kentzea bertan behera uzteko 7 egun egun dituzu."
+msgstr ""
+"Hisobingiz oʻchirilishi rejalashtirilgan. Hisobni olib tashlashni 7 kun "
+"ichida bekor qilishingiz mumkin."
 
 #: sweettooth/auth/templates/profile/account-removal.html:9
 #: extensions-web-domain-django:1
 msgid "Account removal is canceled."
-msgstr "Kontua kentzea bertan behera utzi da."
+msgstr "Hisobni olib tashlash bekor qilindi."
 
 #: sweettooth/auth/templates/profile/email_confirm.html:4
 #: extensions-web-domain-django:1
 msgid "Email confirmation"
-msgstr "Posta bidezko berrespena"
+msgstr "Elektron pochta orqali tasdiqlash"
 
 #: sweettooth/auth/templates/profile/settings.html:4
 #: extensions-web-domain-django:1
 msgid "Settings"
-msgstr "Ezarpenak"
+msgstr "Sozlamalar"
 
 #: sweettooth/auth/templates/profile/settings.html:40
 #: sweettooth/auth/templates/profile/settings.html:82
 #: extensions-web-domain-django:1
 msgid "Submit"
-msgstr "Bidali"
+msgstr "Yuborish"
 
 #: sweettooth/auth/templates/profile/settings.html:41
 #: extensions-web-domain-django:1
 msgid "Change your password"
-msgstr "Aldatu zure pasahitza"
+msgstr "Parolni o'zgartirish"
 
 #. Translators: `schedule_delete_after` is a string representation of Python
 #. datetime object.
@@ -156,145 +169,158 @@ msgstr "Aldatu zure pasahitza"
 #: extensions-web-domain-django:1
 #, python-format
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
-msgstr "Zure kontua %(schedule_delete_after)s ondoren kenduko da"
+msgstr ""
+"Hisobingiz %(schedule_delete_after)s dan keyin olib tashlanishi "
+"rejalashtirilgan"
 
 #: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
-msgstr "Pasahitza ahaztu duzu?"
+msgstr "Parolingizni unutdingizmi?"
 
 #: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
-msgstr "Hasi saioa"
+msgstr "Kirish"
 
 #: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr "Ez daukazu konturik?"
+msgstr "Hisobingiz yo'qmi?"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
 msgid "User Login"
-msgstr "Erabiltzailearen saio-hasiera"
+msgstr "Login"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:12
 #: sweettooth/auth/templates/registration/password_reset_form.html:12
 #: extensions-web-domain-django:1
 msgid "Reset your password"
-msgstr "Berrezarri zure pasahitza"
+msgstr "Parolingizni qayta o'rnating"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
 msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
-msgstr "Pasahitza berrezartzeko tokena ez da zuzena. Begiratu esteka ondo dagoen eta saiatu berriro."
+msgstr ""
+"Parolni tiklash tokeni noto'g'ri. Iltimos, havolani tekshiring va qayta "
+"urinib ko'ring."
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr "Pasahitzaren berrezarpena"
+msgstr "Parolni tiklash"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
 msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
-msgstr "Pasahitza ahaztu duzu? Sartu zure posta elektronikoko helbidea behean, eta pasahitz berria ezartzeko argibideak bidaliko dizkizugu."
+msgstr ""
+"Parolingiz esdan chiqdimi? Quyida elektron pochta manzilingizni kiriting va "
+"biz yangisini o'rnatish bo'yicha ko'rsatmalarni elektron pochta orqali "
+"yuboramiz."
 
 #: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
-msgstr "Zure helbide elektronikoa ongi eguneratu da"
+msgstr "Email manzilingiz muvaffaqiyatli yangilandi"
 
 #: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
-msgstr "Zure berrespen-esteka iraungi da. Eskatu beste bat."
+msgstr "Tasdiqlash havolasi muddati tugagan. Iltimos, yangisini so'rang."
 
 #: sweettooth/auth/views.py:118 extensions-web-domain-django:1
 msgid "Wrong request"
-msgstr "Eskari okerra"
+msgstr "Noto'g'ri so'rov"
 
 #: sweettooth/auth/views.py:128 extensions-web-domain-django:1
 msgid "Profile data saved"
-msgstr "Profil-datuak gorde dira"
+msgstr "Profil maʼlumotlari saqlandi"
 
 #: sweettooth/auth/views.py:271 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
-msgstr "Berrespen-posta bidali dugu zure helbide berrira. Begiratu zure sarrerako ontzia."
+msgstr ""
+"Tasdiqlash xati yangi manzilingizga yuboriladi. Iltimos, pochta qutingizni "
+"tekshiring."
 
 #: sweettooth/auth/views.py:298 extensions-web-domain-django:1
 msgid "Password is wrong"
-msgstr "Pasahitza okerra da"
+msgstr "Parol noto'g'ri"
 
 #: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
-msgstr "Eguneratu posta elektronikoko helbidea eta berrezarri pasahitza"
+msgstr "Elektron pochtani tiklang va parolni o'rnating"
 
 #: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
-msgstr "Honi buruz"
+msgstr "Biz haqimizda"
 
 #: sweettooth/context_processors.py:7 extensions-web-domain-django:1
 msgid "Extensions"
-msgstr "Hedapenak"
+msgstr "Kengaytmalar"
 
 #: sweettooth/context_processors.py:8 extensions-web-domain-django:1
 msgid "Add yours"
-msgstr "Gehitu zureak"
+msgstr "O'zingiznikini qo'shing"
 
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr "Instalatutako hedapenak"
+msgstr "O'rnatilgan kengaytmalar yo'q"
 
 #: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
-msgstr "`shell-version` gakoa definitu behar da metadata.json fitxategian"
+msgstr "Metadata.json da \"shell-version\" kalitini belgilashingiz kerak"
 
 #: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
-msgstr "Onartzen ez den dohaintza mota: %s"
+msgstr "Qoʻllab-quvvatlanmaydigan xayriya turi: %s"
 
 #: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
-msgstr "Ezin dira 3 balio baino gehiago zehaztu \"%s\" dohaintza motarako"
+msgstr "“%s” xayriya turi uchun 3 tadan ortiq qiymat belgilay olmaysiz"
 
 #: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
-msgstr "Gutxienez balio bat zehaztu behar da \"%s\" dohaintza motarako"
+msgstr "“%s” xayriya turi uchun kamida bitta qiymat belgilanishi kerak"
 
 #: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
-msgstr "Balio motak katea edo kateen zerrenda izan behar du \"%s\" dohaintza motarako"
+msgstr ""
+"Qiymat turi “%s” xayriya turi uchun qator yoki qatorlar roʻyxati boʻlishi "
+"kerak"
 
 #: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
-msgstr "Bertsio-izena ezin da zuriuneekin edo puntuekin soilik osatuta egon."
+msgstr "Versiya nomi faqat bo'shliq yoki nuqta bo'lishi mumkin emas."
 
 #: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
-msgstr "Karaktere alfanumerikoak (ingelesezkoak), zuriuneak eta puntuak soilik onartzen dira bertsio-izenerako."
+msgstr ""
+"Versiya nomi uchun faqat harf-raqamli belgilar (inglizcha), bo'shliqlar va "
+"nuqtalarga ruxsat beriladi."
 
 #: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "`uuid` eremua falta da `metadata.json` fitxategian"
+msgstr "“Metadata.json”da “uuid” maydoni yo‘q"
 
 #: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
-msgstr "Badago lehendik UUID hori duen hedapen bat"
+msgstr "UUID bilan kengaytma allaqachon qo'shilgan"
 
 #: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "extensions.gnome.org gunearen erabilera-baldintzak onartu behar dituzu"
+msgstr "Siz extensions.gnome.org xizmat shartlariga rozi bo'lishingiz kerak"
 
 #: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
 msgid ""
@@ -302,34 +328,42 @@ msgid ""
 "case regarding the compatibility of extension's license with the GNOME "
 "Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
-msgstr "Hedapen hau igotzean, onartzen dut nire hedapenaren lizentzia eta GNOME Shellen lizentziaren artean inola arazorik badago, nik igotako hedapena GNOME Shellen edozein erabiltzailek erabili ahal izango duela GNOME Shell beraren lizentziaren baldintzetan"
+msgstr ""
+"Ushbu kengaytmani yuklash orqali men kengaytma litsenziyasining GNOME Shell "
+"litsenziyasiga muvofiqligi bilan bog‘liq har qanday bahsli holatda men "
+"yuklagan kengaytmadan har qanday GNOME Shell foydalanuvchisi GNOME Shell "
+"tomonidan ishlatiladigan litsenziya shartlariga muvofiq foydalanishi "
+"mumkinligini tasdiqlayman"
 
 #: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
 msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
 "reassign maintainership of the extension uploaded by me"
-msgstr "Onartzen dut extensions.gnome.org webguneko langileek nik igotako hedapena kendu, aldatu edo bere mantenimendua beste norbaiti esleitu diezaioketela"
+msgstr ""
+"Men extensions.gnome.org veb-sayti xodimlari men yuklagan kengaytmani olib "
+"tashlashi, o‘zgartirishi yoki xizmat ko‘rsatishni qayta tayinlashi "
+"mumkinligiga roziman"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
 msgid "Proceed anyway"
-msgstr "Jarraitu dena den"
+msgstr "Baribir davom eting"
 
 #: sweettooth/extensions/templates/extensions/away.html:3
 #: extensions-web-domain-django:1
 msgid "You are leaving GNOME Extensions website"
-msgstr "GNOMEren hedapenen gunetik irteten ari zara"
+msgstr "Siz GNOME kengaytmalari veb-saytini tark etyapsiz"
 
 #: sweettooth/extensions/templates/extensions/away.html:6
 #: extensions-web-domain-django:1
 #, python-format
 msgid "You are going to leave GNOME Extensions website to %(url)s."
-msgstr "GNOMEren hedapenen gunetik irteten ari zara hona joateko:  %(url)s"
+msgstr "Siz GNOME kengaytmalari veb-saytini %(url)s ga tark etmoqchisiz."
 
 #: sweettooth/extensions/templates/extensions/away.html:9
 #: extensions-web-domain-django:1
 msgid "Cancel"
-msgstr "Utzi"
+msgstr "Bekor qilish"
 
 #: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
@@ -338,145 +372,151 @@ msgid ""
 "Unfortunately, to help prevent spam, we require that you <a "
 "href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
 "a comment or report an error. You understand, right?"
-msgstr "Zoritxarrez, spam-a saihesteko, <a href=\"%(login_url)s\">GNOME Shell hedapenetan</a> saioa hastea eskatzen dugu, iruzkin bat bidali edo errore bat jakinarazi nahi baduzu. Ulertzen duzu, ezta?"
+msgstr ""
+"Afsuski, spamning oldini olish uchun fikr bildirish yoki xato haqida xabar "
+"berish uchun sizdan <a href=\"%(login_url)s\">GNOME Shell Extensions "
+"tizimiga kirishingiz</a> talab etiladi. Tushundingiz, to'g'rimi?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr "Erabiltzaileen aipamenak"
+msgstr "Foydalanuvchi sharhlari"
 
 #: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr "Aipamenak kargatzen..."
+msgstr "Sharhlar yuklanmoqda…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
 msgid "Your opinion"
-msgstr "Zure iritzia"
+msgstr "Sizning fikringiz"
 
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr "Utzi..."
+msgstr "Qoldirish…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
 msgid "Comment"
-msgstr "Iruzkina"
+msgstr "Izoh"
 
 #: sweettooth/extensions/templates/extensions/comments.html:8
 #: extensions-web-domain-django:1
 msgid "Rating"
-msgstr "Balorazioa"
+msgstr "Baho"
 
 #: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
-msgstr "Aztertzaile batek zuk bidalitako hedapena aztertuko du, ezer arriskutsurik ez dagoela egiaztatzeko. Azterketaren emaitza postaz bidaliko dizugu."
+msgstr ""
+"Ko'rib chiquvchi siz yuborgan kengaytmani ko'rib chiqadi va hech qanday "
+"xavfli narsa yo'qligiga ishonch hosil qiladi. Tekshiruv natijasi sizga "
+"elektron pochta orqali yuboriladi."
 
 #: sweettooth/extensions/templates/extensions/detail.html:113
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
-msgstr "Iruzkinak desgaituta daude hedapen honentzako."
+msgstr "Ushbu kengaytma uchun sharhlar o‘chirib qo‘yilgan."
 
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
 #, python-format
 msgid "%(downloads)s download"
 msgid_plural "%(downloads)s downloads"
-msgstr[0] "Deskarga %(downloads)s"
-msgstr[1] "%(downloads)s deskarga"
+msgstr[0] "%(downloads)s yuklab olish"
+msgstr[1] "%(downloads)s ta yuklab olish"
 
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
 msgid "Number of Downloads"
-msgstr "Deskarga kopurua"
+msgstr "Yuklab olishlar soni"
 
 #: sweettooth/extensions/templates/extensions/detail.html:28
 #: sweettooth/extensions/templates/extensions/detail.html:33
 #: extensions-web-domain-django:1
 msgid "Donate"
-msgstr "Lagundu diruz"
+msgstr "Xayriya qiling"
 
 #: sweettooth/extensions/templates/extensions/detail.html:43
 #: extensions-web-domain-django:1
 msgid "Install"
-msgstr "Instalatu"
+msgstr "O'rnatish"
 
 #: sweettooth/extensions/templates/extensions/detail.html:46
 #: extensions-web-domain-django:1
 msgid "Upgrade this extension"
-msgstr "Bertsio berritu hedapen hau"
+msgstr "Ushbu kengaytmani yangilang"
 
 #: sweettooth/extensions/templates/extensions/detail.html:47
 #: extensions-web-domain-django:1
 msgid "Configure this extension"
-msgstr "Konfiguratu hedapen hau"
+msgstr "Ushbu kengaytmani sozlang"
 
 #: sweettooth/extensions/templates/extensions/detail.html:48
 #: extensions-web-domain-django:1
 msgid "Uninstall this extension"
-msgstr "Desinstalatu hedapen hau"
+msgstr "Kengaytmani olib tashlang"
 
 #: sweettooth/extensions/templates/extensions/detail.html:75
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
-msgstr "Hedapenaren orri nagusia"
+msgstr "Kengaytma bosh sahifasi"
 
 #: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
-msgstr "Saioko modua(k)"
+msgstr "Seans rejim(lar)i"
 
 #: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
-msgstr "Hedapen hau pantaila blokeatuta dagoen bitartean exekutatuko da"
+msgstr "Ushbu kengaytma ekran qulflanganda ishlaydi"
 
 #: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
-msgstr "Desblokeatu elkarrizketa-koadroa"
+msgstr "Dialogni qulfdan chiqarish"
 
 #: sweettooth/extensions/templates/extensions/detail.html:86
 #: extensions-web-domain-django:1
 msgid "Download"
-msgstr "Deskargatu"
+msgstr "Yuklash"
 
 #: sweettooth/extensions/templates/extensions/detail.html:89
 #: extensions-web-domain-django:1
 msgid "Shell version…"
-msgstr "Shell bertsioa..."
+msgstr "Shell versiyasi…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:93
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr "Hedapenaren bertsioa..."
+msgstr "Kengaytma versiyasi…"
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr "Bilatu hedapenak..."
+msgstr "Kengaytmalarni qidirish…"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
 #: extensions-web-domain-django:1
 msgid "Installed Extensions"
-msgstr "Instalatutako hedapenak"
+msgstr "O'rnatilgan kengaytmalar yo'q"
 
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
 msgid "Shell settings"
-msgstr "Shell ezarpenak"
+msgstr "Shell sozlamalari"
 
 #: sweettooth/extensions/templates/extensions/upload.html:14
 #: extensions-web-domain-django:1
 msgid "Upload extension"
-msgstr "Kargatu hedapena"
+msgstr "Yuklashni taqiqlash"
 
 #: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
@@ -484,7 +524,10 @@ msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
 "be uploaded using the same form. Once your extension has been reviewed you "
 "will be notified of the result by e-mail."
-msgstr "Kargatu zure hedapenaren ZIP fitxategia, berrikusia izan dadin. Etorkizuneko bertsioak modu berean igo daitezke. Zure hedapena berrikusi ondoren, posta elektronikoz emango dizugu horren berri."
+msgstr ""
+"Ko'rib chiqish uchun yuborish uchun kengaytmali Zip faylni yuklang. Keyingi "
+"versiyalarni bir xil shakl yordamida yuklash mumkin. Kengaytmangiz ko'rib "
+"chiqilgach, sizga natija haqida elektron pochta orqali xabar beriladi."
 
 #: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
@@ -492,7 +535,9 @@ msgstr "Kargatu zure hedapenaren ZIP fitxategia, berrikusia izan dadin. Etorkizu
 msgid ""
 "Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
 "required for approval."
-msgstr "Begiratu <a href=\"%(url)s\">Berrikuspenen gidalerroak</a> hedapena onartzeko bete behar direnak ezagutzeko."
+msgstr ""
+"Tasdiqlash uchun nima talab qilinishini bilish uchun <a "
+"href=\"%(url)s\">Tekshirish yoʻriqnomasiga</a> qarang."
 
 #: sweettooth/extensions/templates/extensions/upload.html:27
 #: extensions-web-domain-django:1
@@ -501,232 +546,221 @@ msgid ""
 "If this is your first extension, please see the documentation on <a "
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
-msgstr "Zure lehen hedapena bada, begiratu <a href=\"%(url)s\">gjs.guide</a> dokumentazioa hedapen bat nola sortu eta nola kargatu ikasteko."
+msgstr ""
+"Agar bu sizning birinchi kengaytmangiz bo'lsa, kengaytma yaratish va uni "
+"yuklashga tayyorlash bo'yicha ko'rsatmalar uchun <a "
+"href=\"%(url)s\">gjs.guide</a> dagi hujjatlarga qarang."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
-msgstr "Edukia"
+msgstr "Tarkibi"
 
 #: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Metadata"
-msgstr "Metadatuak"
+msgstr "Meta ma'lumotlar"
 
 #: sweettooth/ratings/templates/comments/form.html:26
 #: sweettooth/ratings/templates/comments/preview.html:45
 #: extensions-web-domain-django:1
 msgid "Post"
-msgstr "Bidali"
+msgstr "Xabar"
 
 #: sweettooth/ratings/templates/comments/form.html:27
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr "Aurrebista"
+msgstr "Oldindan ko'rish"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr "Zer deritzozu GNOME hedapen honi?"
+msgstr "Ushbu GNOME kengaytmasi haqida nima deb o'ylaysiz?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Zuzendu beheko errorea"
-msgstr[1] "Zuzendu beheko erroreak"
+msgstr[0] "Quyidagi xatoni tuzating"
+msgstr[1] "Quyidagi xatolarni tuzating"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr "Aurreikusi zure iruzkina"
+msgstr "Fikringizni oldindan ko'rib chiqing"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr "Bidali iruzkina"
+msgstr "Fikr bildirish"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr "Editatu zure iruzkina"
+msgstr "Izohlsiz"
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
 "upload/'>same form</a> you've posted this version."
-msgstr "Hurrengo bertsioa igotzeko, erabili bertsio honetarako erabili duzun <a href='https://extensions.gnome.org/upload/'>inprimaki bera</a>."
+msgstr ""
+"Siz keyingi versiyani ushbu versiyani joylagan <a href='https://"
+"extensions.gnome.org/upload/'>shakl</a> orqali yuklashingiz mumkin."
 
 #: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
 msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
 "page."
-msgstr "Hedapenaren ikonoa aldatzeko, egin klik zure hedapen-orriko ikonoan."
+msgstr ""
+"Kengaytma sahifangizdagi belgini bosish orqali kengaytma belgisini "
+"o'zgartirishingiz mumkin."
 
 #: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
 msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
 "in your extension page."
-msgstr "Onartutako bertsio bat desaktibatzeko, egin klik zure hedapen-orriko esteka inaktiboan."
+msgstr ""
+"Agar siz tasdiqlangan versiyani faolsizlantirmoqchi bo'lsangiz, kengaytma "
+"sahifangizdagi faolsizlantirish havolasini bosing."
 
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
-msgstr "Garatzaileentzako gida <a href='https://gjs.guide/extensions/'>gjs.guide</a> gunean dago."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+msgstr ""
+"Ishlab chiquvchi qoʻllanmalarini <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a> da topishingiz mumkin."
 
 #: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
 msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
 "matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
-msgstr "Laguntzarik behar baduzu hedapenarekin, galdetu <a href='https://matrix.to/#/#extensions:gnome.org'>GNOME Matrix kanalean</a>."
+msgstr ""
+"Agar sizga kengaytmangiz bo'yicha yordam kerak bo'lsa, bizdan <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a> "
+"orqali so'rashingiz mumkin."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr "GNOME Shell-eko azken hedapenak"
+msgstr "GNOME Shell kengaytmalaridagi so'nggi kengaytmalar"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr "GNOME Shell-eko hedapenak"
+msgstr "GNOME Shell kengaytmalari"
 
 #: sweettooth/templates/base.html:96 extensions-web-domain-django:1
 msgid "Developers Guide"
-msgstr "Garatzaile-gida"
+msgstr "Ishlab chiquvchilar uchun qo'llanma"
 
 #: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
 msgid "User Profile"
-msgstr "Erabiltzaile-profila"
+msgstr "Foydalanuvchi profili"
 
 #: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
 msgid "User Settings"
-msgstr "Erabiltzaile-ezarpenak"
+msgstr "Foydalanuvchi sozlamalari"
 
 #: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
 msgid "Log out"
-msgstr "Amaitu saioa"
+msgstr "Chiqish"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
-msgstr "GNOME Shell hedapenak gune hau erabilita kontrolatzeko, GNOME Shell integrazioa instalatu behar duzu. Bi atal ditu: nabigatzailearen hedapen bat eta jatorrizko ostalariaren mezu-aplikazioa"
+msgstr ""
+"Ushbu sayt yordamida GNOME Shell kengaytmalarini boshqarish uchun siz ikki "
+"qismdan iborat GNOME Shell integratsiyasini o'rnatishingiz kerak: brauzer "
+"kengaytmasi va mahalliy xost xabar almashish ilovasi"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr "Instalatu GNOME Shell integraziorako nabigatzaile-hedapena"
+msgstr "GNOME Shell integratsiya brauzer kengaytmasini o'rnating"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr "Sakatu hemen nabigatzaile-hedapena instalatzeko"
+msgstr "Brauzer kengaytmasini o'rnatish uchun shu yerni bosing"
 
 #: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
-msgstr "Ikus %swiki orria%s jatorrizko ostalariaren konektorea instalatzeko argibideak jasotzeko"
+msgstr ""
+"Mahalliy xost konnektorini oʻrnatish boʻyicha koʻrsatmalar uchun %swiki "
+"sahifasiga%s qarang"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
-msgstr "Ez dugu aurkitu GNOMEren kopia exekutagarri bat sistema honetan; beraz, interfazearen zenbait atal desgaituta agertuko dira. Ikus <a href=\"/about/#no-detection\">arazoak konpontzeko orria</a> informazio gehiagorako."
+msgstr ""
+"Ushbu tizimda GNOME-ning ishlayotgan nusxasini aniqlay olmadik, shuning "
+"uchun interfeysning ba'zi qismlari o'chirilgan bo'lishi mumkin. Qo'shimcha "
+"ma'lumot olish uchun <a href=\"/about/#no-detection\">bizning muammolarni "
+"bartaraf etish bo'limiga</a> qarang."
 
 #: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
-msgstr "GNOME Shell hedapenen aplikazioak ezin du zerrendatu instalatuta dituzun hedapenak."
+msgstr ""
+"GNOME Shell kengaytmalari o'rnatilgan kengaytmalaringizni ro'yxatga olmaydi."
 
 #: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
-msgstr "Bateragarria honekin:"
+msgstr "Mos keladigan loyihalar ro'yxati"
 
 #: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
 msgid "Name"
-msgstr "Izena"
+msgstr "Ism"
 
 #: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
 msgid "Recent"
-msgstr "Duela gutxi erabilita"
+msgstr "So‘nggi"
 
 #: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
 msgid "Downloads"
-msgstr "Deskargak"
+msgstr "Yuklashlar"
 
 #: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
 msgid "Popularity"
-msgstr "Ospea"
+msgstr "Mashhurlik"
 
 #: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
 msgid "Relevance"
-msgstr "Garrantzia"
+msgstr "Muvofiqlik"
 
 #: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
-msgstr "Ordenatu honen arabera:"
+msgstr "Tartiblash"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:10
 #: extensions-web-domain-djangojs:1
 msgid "Author"
-msgstr "Egilea"
+msgstr "Muallif"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr "Erakutsi aipamen gehiago"
+msgstr "Ko'proq sharhlarni ko'rsatish"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr "Ez dago iruzkinik. Izan lehena!"
+msgstr "Hech qanday izoh yo'q. Birinchi bo'ling!"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr "Sistemaren hedapena"
+msgstr "Tizim kengaytmasi"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
-msgstr "Zuk desinstalatu duzu"
-
-#~ msgid "Bug report"
-#~ msgstr "Akats baten jakinarazpena"
-
-#~ msgid "What's wrong?"
-#~ msgstr "Zer dago gaizki?"
-
-#~ msgid ""
-#~ "GNOME Shell Extensions did not detect any errors with this extension."
-#~ msgstr ""
-#~ "GNOME Shell hedapenen aplikazioak ez du aurkitu errorerik hedapen honetan."
-
-#~ msgid "Version information"
-#~ msgstr "Bertsioaren informazioa"
-
-#~ msgid "Shell version"
-#~ msgstr "Shell bertsioa"
-
-#~ msgid "Extension version"
-#~ msgstr "Hedapenaren bertsioa"
-
-#~ msgid "Unknown"
-#~ msgstr "Ezezaguna"
-
-#~ msgid "What have you tried?"
-#~ msgstr "Zer egiten saiatu zara?"
-
-#~ msgid "Automatically detected errors"
-#~ msgstr "Automatikoki detektatutako erroreak"
-
-#~ msgid "Password"
-#~ msgstr "Pasahitza"
-
-#~ msgid "Enter the same password as above, for verification."
-#~ msgstr "Sartu goiko pasahitz bera, pasahitza egiaztatzeko."
+msgstr "Siz oʻchirib tashladingiz"
