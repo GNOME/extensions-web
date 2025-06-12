@@ -23,7 +23,11 @@ from sweettooth.testutils import (
 testdata_dir = os.path.join(os.path.dirname(__file__), "testdata")
 
 
-def get_test_zipfile(testname: str, extra_metadata: dict[str, Any] = {}):
+def get_test_zipfile(
+    testname: str,
+    extra_metadata: dict[str, Any] = {},
+    add_extension_js: bool | str = False,
+):
     temp_fp = tempfile.NamedTemporaryFile(suffix=f"{testname}.zip.temp")
 
     with (
@@ -43,6 +47,15 @@ def get_test_zipfile(testname: str, extra_metadata: dict[str, Any] = {}):
                 continue
 
             zipfile.writestr(info, zipfile_in.read(info))
+
+        if isinstance(add_extension_js, str) or add_extension_js:
+            with zipfile.open("extension.js", "w") as fp:
+                fp.write(
+                    add_extension_js.encode()
+                    if isinstance(add_extension_js, str)
+                    else b" "
+                )
+                fp.flush()
 
     temp_fp.flush()
     temp_fp.seek(0)
@@ -203,7 +216,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
     def test_simple_zipdata_data(self):
-        with get_test_zipfile("SimpleExtension") as f:
+        with get_test_zipfile("SimpleExtension", add_extension_js=True) as f:
             metadata = models.parse_zipfile_metadata(f)
 
         extension = models.Extension.objects.create_from_metadata(
@@ -217,7 +230,7 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
         self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
     def test_extra_metadata(self):
-        with get_test_zipfile("ExtraMetadata") as f:
+        with get_test_zipfile("ExtraMetadata", add_extension_js=True) as f:
             metadata = models.parse_zipfile_metadata(f)
 
         extension = models.Extension.objects.create_from_metadata(
@@ -245,15 +258,29 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
             ):
                 models.parse_zipfile_metadata(f)
 
-        with get_test_zipfile("NoMetadata") as f:
+        with get_test_zipfile("NoMetadata", add_extension_js=True) as f:
             with self.assertRaisesMessage(
                 models.InvalidExtensionData, "Missing metadata.json"
             ):
                 models.parse_zipfile_metadata(f)
 
-        with get_test_zipfile("BadMetadata") as f:
+        with get_test_zipfile("BadMetadata", add_extension_js=True) as f:
             with self.assertRaisesMessage(
                 models.InvalidExtensionData, "Invalid JSON data"
+            ):
+                models.parse_zipfile_metadata(f)
+
+    def test_missing_extension_js(self):
+        with get_test_zipfile("SimpleExtension") as f:
+            with self.assertRaisesMessage(
+                models.InvalidExtensionData, "Missing extension.js"
+            ):
+                models.parse_zipfile_metadata(f)
+
+    def test_empty_extension_js(self):
+        with get_test_zipfile("SimpleExtension", add_extension_js="") as f:
+            with self.assertRaisesMessage(
+                models.InvalidExtensionData, "The extension.js file is empty"
             ):
                 models.parse_zipfile_metadata(f)
 
@@ -299,8 +326,15 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
 
 
 class UploadTest(BasicUserTestCase, TransactionTestCase):
-    def upload_file(self, zipfile: str, extra_metadata: dict[str, Any] = {}):
-        with get_test_zipfile(zipfile, extra_metadata) as f:
+    def upload_file(
+        self,
+        zipfile: str,
+        extra_metadata: dict[str, Any] = {},
+        add_extension_js: bool | str = False,
+    ):
+        with get_test_zipfile(
+            zipfile, extra_metadata, add_extension_js=add_extension_js
+        ) as f:
             return self.client.post(
                 reverse("extensions-upload-file"),
                 data={
@@ -316,7 +350,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_upload_parsing(self):
-        response = self.upload_file("SimpleExtension")
+        response = self.upload_file("SimpleExtension", add_extension_js=True)
         extension = models.Extension.objects.get(uuid="test-extension@mecheye.net")
         version1 = extension.versions.order_by("-version")[0]
 
@@ -336,7 +370,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         version1.save()
 
         # Try again, hoping to get a new version
-        self.upload_file("SimpleExtension")
+        self.upload_file("SimpleExtension", add_extension_js=True)
 
         version2 = extension.versions.order_by("-version")[0]
         self.assertNotEqual(version1, version2)
@@ -352,7 +386,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.assertEqual(version3, version2)
 
     def test_upload_large_uuid(self):
-        self.upload_file("LargeUUID")
+        self.upload_file("LargeUUID", add_extension_js=True)
 
         large_uuid = "1234567890" * 9 + "@mecheye.net"
         extension = models.Extension.objects.get(uuid=large_uuid)
@@ -365,23 +399,23 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.assertEqual(extension.url, "http://test-metadata.gnome.org")
 
     def test_upload_bad_shell_version(self):
-        self.upload_file("BadShellVersion")
+        self.upload_file("BadShellVersion", add_extension_js=True)
         extension = models.Extension.objects.get(uuid="bad-shell-version@mecheye.net")
         version1 = extension.versions.order_by("-version")[0]
         self.assertIsNotNone(version1.source)
 
     def test_dont_replace_metadata(self):
-        self.upload_file("SimpleExtension")
-        self.upload_file("ChangedSimpleExtension")
+        self.upload_file("SimpleExtension", add_extension_js=True)
+        self.upload_file("ChangedSimpleExtension", add_extension_js=True)
 
         extension = models.Extension.objects.get(uuid="test-extension@mecheye.net")
         version1 = extension.versions.order_by("version")[0]
         version2 = extension.versions.order_by("version")[1]
 
-        with get_test_zipfile("SimpleExtension") as f:
+        with get_test_zipfile("SimpleExtension", add_extension_js=True) as f:
             metadata = models.parse_zipfile_metadata(f)
 
-        with get_test_zipfile("ChangedSimpleExtension") as f:
+        with get_test_zipfile("ChangedSimpleExtension", add_extension_js=True) as f:
             metadata2 = models.parse_zipfile_metadata(f)
 
         with (
@@ -403,7 +437,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
 
     def test_missing_shell_version(self):
         for file in ("SimpleExtensionMissingMetadata", "SimpleExtensionEmptyMetadata"):
-            response = self.upload_file(file)
+            response = self.upload_file(file, add_extension_js=True)
 
             self.assertContains(
                 response, models.Extension.MESSAGE_SHELL_VERSION_MISSING
@@ -427,6 +461,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
                 "uuid": uuid,
                 "session-modes": session_modes,
             },
+            add_extension_js=True,
         )
 
         extension = models.Extension.objects.get(uuid=uuid)
@@ -451,6 +486,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
             {
                 "uuid": uuid,
             },
+            add_extension_js=True,
         )
 
         extension = models.Extension.objects.get(uuid=uuid)
@@ -465,8 +501,15 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
 
 
 class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
-    def upload_file(self, zipfile: str, extra_metadata: dict[str, Any] = {}):
-        with get_test_zipfile(zipfile, extra_metadata) as f:
+    def upload_file(
+        self,
+        zipfile: str,
+        extra_metadata: dict[str, Any] = {},
+        add_extension_js: bool | str = False,
+    ):
+        with get_test_zipfile(
+            zipfile, extra_metadata, add_extension_js=add_extension_js
+        ) as f:
             return self.client.post(
                 reverse("extension-upload"),
                 data={
@@ -480,7 +523,7 @@ class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
 
     def test_missing_shell_version(self):
         for file in ("SimpleExtensionMissingMetadata", "SimpleExtensionEmptyMetadata"):
-            response = self.upload_file(file)
+            response = self.upload_file(file, add_extension_js=True)
 
             self.assertEqual(response.status_code, 400)
             self.assertIn(
@@ -489,6 +532,24 @@ class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
 
             with self.assertRaises(models.Extension.DoesNotExist):
                 models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+    def test_missing_extension_js(self):
+        response = self.upload_file("SimpleExtension")
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Missing extension.js", response.data["source"][0])
+
+        with self.assertRaises(models.Extension.DoesNotExist):
+            models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+    def test_empty_extension_js(self):
+        response = self.upload_file("SimpleExtension", add_extension_js="")
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("The extension.js file is empty", response.data["source"][0])
+
+        with self.assertRaises(models.Extension.DoesNotExist):
+            models.Extension.objects.get(uuid="test-extension@mecheye.net")
 
 
 class ExtensionVersionTest(BasicUserTestCase, TestCase):

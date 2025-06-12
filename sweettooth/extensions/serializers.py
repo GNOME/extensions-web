@@ -118,7 +118,7 @@ class ExtensionUploadSerializer(serializers.Serializer):
                 )
             self.uuid = self.metadata["uuid"]
         except InvalidExtensionData as ex:
-            raise serializers.ValidationError(ex.message)
+            raise serializers.ValidationError(ex.message) from ex
 
         return value
 

@@ -424,17 +424,24 @@ def parse_zipfile_metadata(uploaded_file):
                 raise InvalidExtensionData("Zip file is too large")
 
             try:
+                info = zipfile.getinfo("extension.js")
+                if info.file_size < 1:
+                    raise InvalidExtensionData("The extension.js file is empty")
+            except KeyError as ex:
+                raise InvalidExtensionData("Missing extension.js") from ex
+
+            try:
                 with zipfile.open("metadata.json", "r") as metadata_fp:
                     return json.load(metadata_fp)
-            except KeyError:
+            except KeyError as ex:
                 # no metadata.json in archive, raise error
-                raise InvalidExtensionData("Missing metadata.json")
-            except ValueError:
+                raise InvalidExtensionData("Missing metadata.json") from ex
+            except ValueError as ex:
                 # invalid JSON file, raise error
-                raise InvalidExtensionData("Invalid JSON data")
+                raise InvalidExtensionData("Invalid JSON data") from ex
 
-    except (BadZipfile, zlib.error):
-        raise InvalidExtensionData("Invalid zip file")
+    except (BadZipfile, zlib.error) as ex:
+        raise InvalidExtensionData("Invalid zip file") from ex
 
 
 # uuid max length + suffix max length

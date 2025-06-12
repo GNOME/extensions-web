@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
 #: extensions-web-domain-django:1
@@ -71,6 +71,8 @@ msgid ""
 "using your username or you can request removal of duplicate accounts using "
 "GNOME Gitlab (%(url)s)."
 msgstr ""
+"ერთ ელფოსტაზე ერთზე მეტი ანგარიშია. შეგიძლიათ, შეხვიდეთ მომხმარებლის "
+"სახელით, ან მოითხოვოთ გამეორებული ანგარიშები GNOME Gitlab-ით (%(url)s)."
 
 #: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
 msgid "Username"
@@ -256,7 +258,7 @@ msgstr "დაყენებული გაფართოებები"
 
 #: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
-msgstr ""
+msgstr "თქვენს metadata.json ფაილში 'shell-version'-ის განსაზღვრა აუცილებელია"
 
 #: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
 #, python-format
@@ -266,45 +268,50 @@ msgstr "მხარდაუჭერელი შემოწირულო�
 #: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
-msgstr ""
+msgstr "დონაციის ტიპისთვის \"%s\" სამზე მეტ მნიშვნელობას ვერ მიუთითებთ"
 
 #: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
-msgstr ""
+msgstr "დონაციის ტიპისთვის \"%s\" სულ ცოტა, ერთი მნიშვნელობაა საჭირო"
 
 #: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
+"მნიშვნელობა უნდა იყოს სტრიქონი, ან სტრიქონების სია დონაციის ტიპისთვის \"%s\""
 
 #: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
-msgstr ""
+msgstr "ვერსიის სახელი ვერ იქნება უბრალოდ ჰარეები, ან წერტილები."
 
 #: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr ""
+"ვერსიის სახელში დაშვებულია მხოლოდ ალფარიცხვითი სიმბოლოები (ლათინური), "
+"ჰარეები და წერტილები."
 
 #: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
 msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
 "reassign maintainership of the extension uploaded by me"
 msgstr ""
+"მე ვეთანხმები, რომ extensions.gnome.org ვებგვერდის პერსონალს შეუძლია "
+"წაშალოს, შეცვალოს ან გადასცეს სხვას ჩემს მიერ ატვირთული გაფართოება"
 
 #: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
-msgstr ""
+msgstr "'metadata.json'-ში ველი 'uuid' აღმოჩენილი არაა"
 
 #: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
-msgstr ""
+msgstr "ამ UUID-ით გაფართოება უკვე დამატებულია"
 
 #: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr ""
+msgstr "უნდა დაეთანხმოთ extensions.gnome.org-ის მომსახურების პირობებს"
 
 #: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
 msgid ""
@@ -313,6 +320,10 @@ msgid ""
 "Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
 msgstr ""
+"გაფართოების ატვირთვით მე ვეთანხმები, რომ ნებისმიერი საკამათო საკითხში "
+"გაფართოების ლიცენზიისა GNOME Shell-ის ლიცენზიასთან, გაფართოება, რომელიც მე "
+"ავტვირთე, შეიძლება გამოყენებული იქნას ნებისმიერი GNOME Shell-ის მომხმარებლის "
+"მიერ ლიცენზიით, რომელსაც GNOME Shell იყენებს"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -343,6 +354,10 @@ msgid ""
 "href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
 "a comment or report an error. You understand, right?"
 msgstr ""
+"სამწუხაროდ, იმისთვის, რომ სპამი თავიდან ავიცილოთ, ჩვენ ვითხოვთ, რომ <a "
+"href=\"%(login_url)s\">შეხვიდეთ GNOME Shell-ის გაფართოების ვებგვერდზე </a>, "
+"რომ დაპოსტოთ კომენტარი ან გააგზავნოთ ანგარიში შეცდომის შესახებ. ეს გესმით, "
+"ხომ?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
@@ -380,6 +395,8 @@ msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
+"რეცენზენტი გადახედავს გაფართოებას, რომელიც თქვენ ატვირთეთ, რომ დარწმუნდეს, "
+"რომ ის საშიში არაა. მიმოხილვის შედეგებს ელფოსტაზე მიიღებთ."
 
 #: sweettooth/extensions/templates/extensions/detail.html:113
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
@@ -489,6 +506,9 @@ msgid ""
 "be uploaded using the same form. Once your extension has been reviewed you "
 "will be notified of the result by e-mail."
 msgstr ""
+"ატვირთეთ თქვენი გაფართოების Zip ფაილი მისი მიმოხილვის დასაწყებად. უფრო ახალი "
+"ვერსიების ატვირთვა იგივე ფორმით ხდება. როცა თქვენი გაფართოების მიმოხილვა "
+"დასრულდება, ამის შესახებ ელფოსტაზე მოგწერთ."
 
 #: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
@@ -497,6 +517,8 @@ msgid ""
 "Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
 "required for approval."
 msgstr ""
+"იხილეთ <a href=\"%(url)s\">მიმოხილვის სახელმძღვანელო</a> რომ გაიგოთ, რა არის "
+"საჭირო დასტურის მისაღებად."
 
 #: sweettooth/extensions/templates/extensions/upload.html:27
 #: extensions-web-domain-django:1
@@ -506,6 +528,9 @@ msgid ""
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
+"თუ ეს თქვენი პირველი გაფართოებაა, იხილეთ დოკუმენტაცია ვებგვერდზე <a "
+"href=\"%(url)s\">gjs.guide</a> გაფართოების შექმნისა და მისი ასატვირთად "
+"მომზადებისთვის."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -562,6 +587,8 @@ msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
 "upload/'>same form</a> you've posted this version."
 msgstr ""
+"შემდეგი ვერსიის ატვირთვა <a href='https://extensions.gnome.org/"
+"upload/'>იგივე ფორმით</a> ხდება, რომლითაც ეს ვერსია ატვირთეთ."
 
 #: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
@@ -569,6 +596,8 @@ msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
 "page."
 msgstr ""
+"გაფართოების ხატულას შეცვლა გაფართოების გვერდზე ხატულაზე დაწკაპუნებით "
+"შეგიძლიათ."
 
 #: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
@@ -576,15 +605,17 @@ msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
 "in your extension page."
 msgstr ""
+"იმისათვის, რომ დადასტურებული ვერსია არააქტიური გახადოთ, დააჭირეთ აქტიურობის "
+"გაუქმების ბმულზე გაფართოების ვებგვერდზე."
 
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
-"პროგრამისტის სახელმძღვანელო შეგიძლიათ იპოვოთ ბმულზე <a href='https://gjs."
-"guide/extensions/'>gjs.guide</a>."
+"პროგრამისტის სახელმძღვანელო შეგიძლიათ იპოვოთ ბმულზე <a href='https://"
+"gjs.guide/extensions/'>gjs.guide</a>."
 
 #: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
@@ -592,6 +623,8 @@ msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
 "matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
 msgstr ""
+"თუ თქვენი გაფართოების შესახებ კითხვები გაქვთ, მათი დასმა <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME-ის Matrix-ის არხზე შეგიძლიათ</a>."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
@@ -624,10 +657,13 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
+"იმისათვის, რომ მართოთ GNOME Shell-ის გაფართოებები ამ საიტით, უნდა დააყენოთ "
+"GNOME Shell-ის ინტეგრაცია, რომელიც ორი ნაწილისგან შედგება: ბრაუზერის "
+"გაფართოება და ჰოსტის შეტყობინებების აპლიკაცია"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr ""
+msgstr "GNOME Shell-ის ინტეგრაციის ბრაუზერის გაფართოების დაყენება"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
@@ -637,6 +673,8 @@ msgstr "ბრაუზერის გაფართოების დას�
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
+"იხილეთ %sვიკისგვერდი%s ჰოსტზე კონექტორის აპლიკაციის დაყენების "
+"ინსტრუქციებისთვის"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
@@ -644,6 +682,9 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
+"ამ სისტემაზე გაშვებული GNOME აღმოჩენილი არაა, ასე რომ, ინტერფეისის ზოგიერთი "
+"ნაწილი, შეიძლება, გათიშული იყოს. მეტი ინფორმაციისთვის იხილეთ <a href=\"/"
+"about/#no-detection\">ეს ბმული</a>."
 
 #: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
