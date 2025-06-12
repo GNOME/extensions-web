@@ -24,7 +24,9 @@ testdata_dir = os.path.join(os.path.dirname(__file__), "testdata")
 
 
 def get_test_zipfile(
-    testname: str, extra_metadata: dict[str, Any] = {}, add_extension_js: bool = False
+    testname: str,
+    extra_metadata: dict[str, Any] = {},
+    add_extension_js: bool | str = False,
 ):
     temp_fp = tempfile.NamedTemporaryFile(suffix=f"{testname}.zip.temp")
 
@@ -46,8 +48,13 @@ def get_test_zipfile(
 
             zipfile.writestr(info, zipfile_in.read(info))
 
-        if add_extension_js:
+        if isinstance(add_extension_js, str) or add_extension_js:
             with zipfile.open("extension.js", "w") as fp:
+                fp.write(
+                    add_extension_js.encode()
+                    if isinstance(add_extension_js, str)
+                    else b" "
+                )
                 fp.flush()
 
     temp_fp.flush()
@@ -270,6 +277,13 @@ class ParseZipfileTest(BasicUserTestCase, TestCase):
             ):
                 models.parse_zipfile_metadata(f)
 
+    def test_empty_extension_js(self):
+        with get_test_zipfile("SimpleExtension", add_extension_js="") as f:
+            with self.assertRaisesMessage(
+                models.InvalidExtensionData, "The extension.js file is empty"
+            ):
+                models.parse_zipfile_metadata(f)
+
 
 class ReplaceMetadataTest(BasicUserTestCase, TestCase):
     @override_settings(MEDIA_ROOT=tempfile.gettempdir())
@@ -316,7 +330,7 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self,
         zipfile: str,
         extra_metadata: dict[str, Any] = {},
-        add_extension_js: bool = False,
+        add_extension_js: bool | str = False,
     ):
         with get_test_zipfile(
             zipfile, extra_metadata, add_extension_js=add_extension_js
@@ -491,7 +505,7 @@ class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
         self,
         zipfile: str,
         extra_metadata: dict[str, Any] = {},
-        add_extension_js: bool = False,
+        add_extension_js: bool | str = False,
     ):
         with get_test_zipfile(
             zipfile, extra_metadata, add_extension_js=add_extension_js
@@ -524,6 +538,15 @@ class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
 
         self.assertEqual(response.status_code, 400)
         self.assertIn("Missing extension.js", response.data["source"][0])
+
+        with self.assertRaises(models.Extension.DoesNotExist):
+            models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+    def test_empty_extension_js(self):
+        response = self.upload_file("SimpleExtension", add_extension_js="")
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("The extension.js file is empty", response.data["source"][0])
 
         with self.assertRaises(models.Extension.DoesNotExist):
             models.Extension.objects.get(uuid="test-extension@mecheye.net")

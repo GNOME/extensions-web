@@ -424,8 +424,9 @@ def parse_zipfile_metadata(uploaded_file):
                 raise InvalidExtensionData("Zip file is too large")
 
             try:
-                with zipfile.open("extension.js", "r") as _:
-                    pass
+                info = zipfile.getinfo("extension.js")
+                if info.file_size < 1:
+                    raise InvalidExtensionData("The extension.js file is empty")
             except KeyError as ex:
                 raise InvalidExtensionData("Missing extension.js") from ex
 
