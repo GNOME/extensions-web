@@ -1,11 +1,12 @@
 import base64
 import itertools
 import os.path
+import stat
 from collections import Counter
-from collections.abc import Sequence
+from collections.abc import Iterable, Sequence
 from contextlib import ExitStack
 from typing import IO
-from zipfile import ZipFile
+from zipfile import ZipFile, ZipInfo
 
 import pygments
 import pygments.formatters
@@ -156,20 +157,38 @@ def grab_lines(zipfile: ZipFile, filename: str):
         return None
 
 
-def get_file_list(zipfile):
-    return set(n for n in zipfile.namelist() if not n.endswith("/"))
+def get_file_info(zipfile) -> set[ZipInfo]:
+    return set(n for n in zipfile.infolist() if not n.filename.endswith("/"))
 
 
-def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
+def get_file_list(fileinfo: Iterable[ZipInfo]) -> set[str]:
+    return {i.filename for i in fileinfo}
+
+
+def get_symlinks(fileinfo: Iterable[ZipInfo]) -> set[str]:
+    return {
+        i.filename for i in fileinfo if stat.S_ISLNK((i.external_attr >> 16) & 0xFFFF)
+    }
+
+
+def get_file_changeset(old_zipfile: ZipFile | None, new_zipfile: ZipFile):
     with new_zipfile:
-        new_filelist = get_file_list(new_zipfile)
+        new_fileinfo = get_file_info(new_zipfile)
+        new_filelist = get_file_list(new_fileinfo)
+        new_symlinks = get_symlinks(new_fileinfo)
+
         if old_zipfile is None:
             return dict(
-                unchanged=[], changed=[], added=sorted(new_filelist), deleted=[]
+                unchanged=[],
+                changed=[],
+                added=sorted(new_filelist),
+                deleted=[],
+                symlinks=list(new_symlinks),
             )
 
         with old_zipfile:
-            old_filelist = get_file_list(old_zipfile)
+            old_fileinfo = get_file_info(old_zipfile)
+            old_filelist = get_file_list(old_fileinfo)
 
             both = new_filelist & old_filelist
             added = new_filelist - old_filelist
@@ -201,6 +220,7 @@ def get_file_changeset(old_zipfile: ZipFile, new_zipfile: ZipFile):
                 changed=sorted(changed),
                 added=sorted(added),
                 deleted=sorted(deleted),
+                symlinks=list(new_symlinks),
             )
 
 

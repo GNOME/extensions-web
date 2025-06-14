@@ -94,6 +94,12 @@
     background-color: #ddffdd;
 }
 
+.fileselector.symlink:before {
+    content: "⤦ ";
+    font-weight: bold;
+    color: #f00;
+}
+
 .diff-line.deleted .diff-inline.changed {
     background-color: #ffaaaa;
 }
