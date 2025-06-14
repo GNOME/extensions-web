@@ -89,26 +89,27 @@ def highlight_file(filename, raw, formatter):
         return pygments.highlight(raw, lexer, formatter)
 
 
-def html_for_file(filename: str, file: IO[bytes]):
+def html_for_file(filename: str, file: IO[bytes], is_symlink: bool):
     _, extension = os.path.splitext(filename)
 
-    if extension in BINARY_TYPES:
-        return None
-    elif extension in IMAGE_TYPES:
-        mime = IMAGE_TYPES[extension]
-        return dict(
-            raw=True,
-            html='<img src="data:%s;base64,%s">'
-            % (
-                mime,
-                base64.standard_b64encode(file.read()).decode("ascii"),
-            ),
-        )
-    else:
-        return dict(
-            raw=False,
-            lines=highlight_file(filename, file.read(), code_formatter).splitlines(),
-        )
+    if not is_symlink:
+        if extension in BINARY_TYPES:
+            return None
+        elif extension in IMAGE_TYPES:
+            mime = IMAGE_TYPES[extension]
+            return dict(
+                raw=True,
+                html='<img src="data:%s;base64,%s">'
+                % (
+                    mime,
+                    base64.standard_b64encode(file.read()).decode("ascii"),
+                ),
+            )
+
+    return dict(
+        raw=False,
+        lines=highlight_file(filename, file.read(), code_formatter).splitlines(),
+    )
 
 
 def get_old_version(version):
@@ -165,10 +166,12 @@ def get_file_list(fileinfo: Iterable[ZipInfo]) -> set[str]:
     return {i.filename for i in fileinfo}
 
 
+def is_symlink(external_attr: int):
+    return stat.S_ISLNK((external_attr >> 16) & 0xFFFF)
+
+
 def get_symlinks(fileinfo: Iterable[ZipInfo]) -> set[str]:
-    return {
-        i.filename for i in fileinfo if stat.S_ISLNK((i.external_attr >> 16) & 0xFFFF)
-    }
+    return {i.filename for i in fileinfo if is_symlink(i.external_attr)}
 
 
 def get_file_changeset(old_zipfile: ZipFile | None, new_zipfile: ZipFile):
@@ -289,13 +292,15 @@ def get_changelog(old_version, new_version, filename="CHANGELOG"):
 
 @ajax_view
 @model_view(models.ExtensionVersion)
-def ajax_get_file_view(request, obj):
+def ajax_get_file_view(request, obj: models.ExtensionVersion):
     filename = request.GET["filename"]
 
     with obj.get_zipfile("r") as zipfile:
         try:
             with zipfile.open(filename, "r") as f:
-                return html_for_file(filename, f)
+                return html_for_file(
+                    filename, f, is_symlink(zipfile.getinfo(filename).external_attr)
+                )
         except KeyError:
             raise Http404()
 
