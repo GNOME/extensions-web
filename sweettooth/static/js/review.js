@@ -60,6 +60,16 @@ define(['jquery', 'diff'], function($, diff) {
         });
     }
 
+    function getFileClass(main_class, filename, files) {
+        let classes = [main_class];
+
+        if (files.symlinks.includes(filename)) {
+            classes.push("symlink");
+        }
+
+        return classes.join(" ");
+    }
+
     $.fn.reviewify = function(diff) {
         return this.each(function() {
             var $elem = $(this);
@@ -134,9 +144,9 @@ define(['jquery', 'diff'], function($, diff) {
                     });
                 }
 
-                $.each(files.changed, function() { createFileSelector('changed', this); });
-                $.each(files.added, function() { createFileSelector('added', this); });
-                $.each(files.deleted, function() { createFileSelector('deleted', this); });
+                $.each(files.changed, function() { createFileSelector(getFileClass('changed', this, files), this); });
+                $.each(files.added, function() { createFileSelector(getFileClass('added', this, files), this); });
+                $.each(files.deleted, function() { createFileSelector(getFileClass('deleted', this, files), this); });
 
                 // Don't show the 'unchanged' section in a diff view.
                 if (!diff)
