@@ -150,7 +150,7 @@ define(['jquery', 'diff'], function($, diff) {
 
                 // Don't show the 'unchanged' section in a diff view.
                 if (!diff)
-                    $.each(files.unchanged, function() { createFileSelector('unchanged', this); });
+                    $.each(files.unchanged, function() { createFileSelector(getFileClass('unchanged', this, files), this); });
 
                 // Select the first item.
                 $fileList.find('li a.fileselector').first().click();
