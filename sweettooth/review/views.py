@@ -119,7 +119,7 @@ def highlight_file(filename, raw: bytes, formatter):
 
     try:
         return pygments.highlight(raw, lexer, formatter)
-    except TypeError:
+    except (TypeError, UnicodeDecodeError):
         # Fallback to UTF-8 for old broken pygments version
         lexer.encoding = "utf-8"
         return pygments.highlight(raw, lexer, formatter)
