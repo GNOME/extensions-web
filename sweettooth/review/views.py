@@ -8,6 +8,7 @@ from contextlib import ExitStack
 from typing import IO
 from zipfile import ZipFile, ZipInfo
 
+import chardet
 import pygments
 import pygments.formatters
 import pygments.lexers
@@ -68,10 +69,45 @@ def can_approve_extension(user, extension):
     return user.has_perm("review.can-review-extensions")
 
 
-def highlight_file(filename, raw, formatter):
+# The `detect_encoding` function code is mostly from Pygments which is
+# licensed under BSD 2-clause license.
+# Copyright (c) 2006-2022 by the respective authors (see AUTHORS file).
+# All rights reserved.
+# https://github.com/pygments/pygments/blob/2.19.1/LICENSE
+# https://github.com/pygments/pygments/blob/2.19.1/pygments/lexer.py#L212
+def detect_encoding(text: bytes):
+    _encoding_map = [
+        (b"\xef\xbb\xbf", "utf-8"),
+        (b"\xff\xfe\0\0", "utf-32"),
+        (b"\0\0\xfe\xff", "utf-32be"),
+        (b"\xff\xfe", "utf-16"),
+        (b"\xfe\xff", "utf-16be"),
+    ]
+
+    # check for BOM first
+    decoded = None
+    for bom, encoding in _encoding_map:
+        if text.startswith(bom):
+            return encoding
+
+    # no BOM found, so use chardet
+    if decoded is None:
+        enc = chardet.detect(text[:1024])  # Guess using first 1KB
+        encoding = enc.get("encoding") or "utf-8"
+
+        # Probably wrong detection due to
+        # https://github.com/chardet/chardet/issues/292
+        # The Windows-1254 encoding looks uncommon for GNOME extensions
+        if isinstance(encoding, str) and encoding.lower() == "windows-1254":
+            return "utf-8"
+
+        return encoding
+
+
+def highlight_file(filename, raw: bytes, formatter):
     try:
         lexer = pygments.lexers.guess_lexer_for_filename(
-            filename, raw, encoding="chardet"
+            filename, raw, encoding=detect_encoding(raw)
         )
     except pygments.util.ClassNotFound:
         # released pygments doesn't yet have .json
