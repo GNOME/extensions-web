@@ -29,6 +29,18 @@
         {% endblocktrans %}
     </p>
 </div>
+<div class='alert alert-info'>
+    <p>
+        {% blocktrans trimmed with url="https://conduct.gnome.org" %}
+        Extensions distributed via this website are subject to the <a href="{{ url }}">Code of Conduct</a>.
+        {% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans trimmed with url="https://conduct.gnome.org" %}
+        Extensions that violate the <a href="{{ url }}">Code of Conduct</a> will be removed from this website.
+        {% endblocktrans %}
+    </p>
+</div>
 
 <form enctype="multipart/form-data" action="" method="POST" class="form-horizontal">
     {% csrf_token %}
