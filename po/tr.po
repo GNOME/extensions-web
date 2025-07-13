@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-03-21 08:00+0300\n"
+"PO-Revision-Date: 2025-07-13 08:00+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -76,7 +76,7 @@ msgstr "Kullanıcı Adı"
 #: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
-"Gerekli. 30 karakter veya daha az olmalı. Yalnızca harfler, rakamlar ve @/./"
+"Gerekli. 30 karakter ya da daha az olmalı. Yalnızca harfler, rakamlar ve @/./"
 "+/-/_"
 
 #: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
@@ -294,7 +294,7 @@ msgstr ""
 
 #: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
-msgstr "Sürüm adı yalnızca boşluk veya nokta olamaz."
+msgstr "Sürüm adı yalnızca boşluk ya da nokta olamaz."
 
 #: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
@@ -366,7 +366,7 @@ msgid ""
 "href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
 "a comment or report an error. You understand, right?"
 msgstr ""
-"Ne yazık ki istenmeyen yorumları önlemek amacıyla yorum yazmak veya hata "
+"Ne yazık ki istenmeyen yorumları önlemek amacıyla yorum yazmak ya da hata "
 "bildirmek için <a href=\"%(login_url)s\"> GNOME Kabuk Uzantılarına giriş "
 "yapmanız</a> gerekmektedir. Anlıyorsun, değil mi?"
 
@@ -690,7 +690,7 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"GNOME Kabuk uzantılarını bu siteyi kullanarak denetlemek için iki parçalık "
+"Bu siteyi kullanarak GNOME Kabuk uzantılarını denetlemek için iki parçalı "
 "GNOME Kabuk tümleşimini kurmalısınız: tarayıcı uzantısı ve yerli ana makine "
 "iletişim uygulaması"
 
@@ -773,32 +773,3 @@ msgstr "Sistem uzantısı"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Uzantı kaldırıldı"
-
-#~ msgid "Bug report"
-#~ msgstr "Hata bildir"
-
-#~ msgid "What's wrong?"
-#~ msgstr "Ne oldu?"
-
-#~ msgid ""
-#~ "GNOME Shell Extensions did not detect any errors with this extension."
-#~ msgstr ""
-#~ "GNOME Kabuk Uzantıları, bu uzantıyla ilgili herhangi bir hata saptamadı."
-
-#~ msgid "Version information"
-#~ msgstr "Sürüm bilgisi"
-
-#~ msgid "Shell version"
-#~ msgstr "Kabuk sürümü"
-
-#~ msgid "Extension version"
-#~ msgstr "Uzantı sürümü"
-
-#~ msgid "Unknown"
-#~ msgstr "Bilinmiyor"
-
-#~ msgid "What have you tried?"
-#~ msgstr "Ne denedin?"
-
-#~ msgid "Automatically detected errors"
-#~ msgstr "Kendiliğinden algılanan hatalar"
