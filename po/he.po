@@ -8,64 +8,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2024-11-30 16:58+0000\n"
-"PO-Revision-Date: 2025-04-22 22:07+0300\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"POT-Creation-Date: 2025-06-22 07:03+0000\n"
+"PO-Revision-Date: 2025-08-15 14:32+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
-"2 : 3)\n"
-"X-Generator: Gtranslator 48.0\n"
+"2 : 3);\n"
+"X-Generator: Poedit 3.6\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
-#: extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "לא כדאי להשתמש בכתובת הדוא״ל כשם משתמש"
-
-#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "שם המשתמש שלך מכיל מילים אסורות"
-
-#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "לא ניתן להחליף את כתובת הדוא״ל שלך יותר מפעם אחת בכל שבוע"
 
-#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "שם התצוגה שלך מכיל מילים אסורות"
 
-#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "למחוק את החשבון שלי"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
-msgstr "החשבון שלך ימחק בתוך 7 ימים"
+msgstr "החשבון שלך יימחק בתוך 7 ימים"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "No"
 msgstr "לא"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "כן"
 
-#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "ססמה נוכחית"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "אין צורך בססמה על מנת לבטל מחיקת משתמש"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "שם משתמש או כתובת דוא״ל"
 
-#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
 msgid ""
 "You have multiple accounts registered using single email. You can log in "
@@ -75,21 +66,30 @@ msgstr ""
 "רשמת מספר חשבונות על אותה כתובת דוא״ל. אפשר להיכנס באמצעות שם המשתמש או לבקש "
 "הסרה של חשבונות כפולים דרך ה־GitLab של GNOME‏ (%(url)s)."
 
-#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "שם משתמש"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "נחוץ. 30 תווים או פחות. אותיות, ספרות ו־@/./+/-/_ בלבד."
 
-#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "הערך הזה יכול להכיל אותיות, ספרות ואת התווים @/./+/-/_."
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "דוא״ל"
+
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "לא כדאי להשתמש בכתובת הדוא״ל כשם משתמש"
+
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "שם המשתמש שלך מכיל מילים אסורות"
 
 #: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
@@ -110,10 +110,6 @@ msgstr "הרשמה"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "רישום חשבון"
-
-#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
-msgid "The website is under maintenance. Please retry in a few minutes."
-msgstr "האתר בתחזוקה. נא לנסות שוב בעוד מספר דקות."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -281,29 +277,37 @@ msgstr "יש להגדיר לכל הפחות סוג תרומה אחד עבור �
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "ערך הסוג חייב להכיל מחורזת או רשימה של מחוזרות לסוג תרומה „%s”"
 
-#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "מספר הגרסה לא יכול להיות סתם רווחים או נקודות."
 
-#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr "מותר רק תווים (לטיניים), רווחים ונקודות בשם הגרסה."
 
 #: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"מקובל עלי שסגל האתר extensions.gnome.org יסיר, יערוך או יקצה מחדש את האחריות "
+"לתחזוקה על ההרחבה שהעליתי"
+
+#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "השדה `uuid` חסר ב־`metadata.json`"
 
-#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "כבר נוספה הרחבה עם המזהה הייחודי (UUID) הזה"
 
-#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "חובה להסכים לתנאי השימוש של extensions.gnome.org"
 
-#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -313,14 +317,6 @@ msgstr ""
 "מעצם העלאת ההרחבה הזאת מוסכם עליי ומקובל עליי שבכל מקרה שנוי במחלוקת בנוגע "
 "לתאימות של רישיון ההרחבה למול הרישיון של מעטפת GNOME, ההרחבה שהעליתי מותרת "
 "לשימוש על ידי כל משתמש של מעטפת GNOME בכפוף לתנאי הרישיון של מעטפת GNOME"
-
-#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"מקובל עלי שסגל האתר extensions.gnome.org יסיר, יערוך או יקצה מחדש את האחריות "
-"לתחזוקה על ההרחבה שהעליתי"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -524,8 +520,26 @@ msgid ""
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
-"אם זאת ההרחבה הראשונה שלך, נא לעיין בתיעוד תחת <a href=\"%(url)s\">gjs."
-"guide</a> להנחיות בנוגע ליצירת הרחבה והכנתה להעלאה."
+"אם זאת ההרחבה הראשונה שלך, נא לעיין בתיעוד תחת <a "
+"href=\"%(url)s\">gjs.guide</a> להנחיות בנוגע ליצירת הרחבה והכנתה להעלאה."
+
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr ""
+"ההרחבות שמופצות דרך האתר הזה כפופות ל<a href=\"%(url)s\">כללי ההתנהגות</a>."
+
+#: sweettooth/extensions/templates/extensions/upload.html:39
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr ""
+"הרחבות שמפרות את <a href=\"%(url)s\">כללי ההתנהגות</a> תוסרנה מהאתר הזה."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -605,11 +619,11 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
-"מדריך למפתחים ניתן למצוא ב־<a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"מדריך למפתחים ניתן למצוא ב־<a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 
 #: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
@@ -617,8 +631,8 @@ msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
 "matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
 msgstr ""
-"לכל עזרה עם ההרחבה שלך, באפשרותך לשאול ולהתייעץ אתנו <a href='https://matrix."
-"to/#/#extensions:gnome.org'>בערוץ ה־Matrix של GNOME</a>."
+"לכל עזרה עם ההרחבה שלך, באפשרותך לשאול ולהתייעץ אתנו <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>בערוץ ה־Matrix של GNOME</a>."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
@@ -633,17 +647,21 @@ msgstr "הרחבות מעטפת GNOME"
 msgid "Developers Guide"
 msgstr "מדריך למפתחים"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "האתר בתחזוקה. נא לנסות שוב בעוד מספר דקות."
+
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "יציאה"
+
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
 msgid "User Profile"
 msgstr "פרופיל משתמש"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
 msgid "User Settings"
 msgstr "הגדרות משתמש"
-
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
-msgid "Log out"
-msgstr "יציאה"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
