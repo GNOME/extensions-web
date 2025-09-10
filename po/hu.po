@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2024-11-30 16:58+0000\n"
-"PO-Revision-Date: 2025-02-28 19:15+0100\n"
+"POT-Creation-Date: 2025-06-22 07:03+0000\n"
+"PO-Revision-Date: 2025-09-01 14:07+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -17,54 +17,45 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
-#: extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Nem kellene e-mail-címet használnia felhasználónévként"
-
-#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "A felhasználóneve tiltott szavakat tartalmaz"
-
-#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Nem változtathatja meg az e-mail-címét 7 nap alatt többször"
 
-#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "A megjelenített neve tiltott szavakat tartalmaz"
 
-#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Fiókom törlése"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "A fiókja 7 napon belül törölve lesz"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "No"
 msgstr "Nem"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Igen"
 
-#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Jelenlegi jelszó"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Nem kell jelszót megadnia a fiók eltávolításának megszakításához"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Felhasználónév vagy e-mail-cím"
 
-#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
 msgid ""
 "You have multiple accounts registered using single email. You can log in "
@@ -75,24 +66,33 @@ msgstr ""
 "felhasználónevével, vagy kérheti a kettőzött fiókok eltávolítását a GNOME "
 "GitLab használatával (%(url)s)."
 
-#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Kötelező. 30 karakter vagy kevesebb. Csak betűk, számok és @/./+/-/_ "
 "karakterek."
 
-#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Ez az érték csak betűket, számokat és @/./+/-/_ karaktereket tartalmazhat."
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-mail"
+
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Nem kellene e-mail-címet használnia felhasználónévként"
+
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "A felhasználóneve tiltott szavakat tartalmaz"
 
 #: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
@@ -113,10 +113,6 @@ msgstr "Regisztráció"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "Fiók regisztrálása"
-
-#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
-msgid "The website is under maintenance. Please retry in a few minutes."
-msgstr "A webhely karbantartás alatt áll. Próbálja újra néhány perccel később."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -292,11 +288,11 @@ msgstr ""
 "Az értéktípus csak karakterlánc vagy karakterláncok listája lehet a(z) „%s” "
 "adománytípusnál"
 
-#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "A verziónév nem lehet csak szóköz vagy pont."
 
-#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
@@ -305,18 +301,27 @@ msgstr ""
 "verziónévnél."
 
 #: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Elfogadom, hogy az extensions.gnome.org webhely munkatársai eltávolíthatják, "
+"módosíthatják vagy átruházhatják az általam feltöltött kiterjesztés "
+"karbantartását"
+
+#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "Az „uuid” mező hiányzik a „metadata.json” fájlból"
 
-#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Ezzel az UUID azonosítóval már hozzá lett adva egy kiterjesztés"
 
-#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "El kell fogadnia az extensions.gnome.org szolgáltatási feltételeit"
 
-#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -328,15 +333,6 @@ msgstr ""
 "esetekben az általam feltöltött kiterjesztést bármely GNOME Shell "
 "felhasználó a GNOME Shell által használt licenc feltételei szerint "
 "használhatja."
-
-#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Elfogadom, hogy az extensions.gnome.org webhely munkatársai eltávolíthatják, "
-"módosíthatják vagy átruházhatják az általam feltöltött kiterjesztés "
-"karbantartását"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -542,9 +538,29 @@ msgid ""
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
-"Ha ez az első kiterjesztése, akkor nézze meg a <a href=\"%(url)s\">gjs."
-"guide</a> oldalon lévő dokumentációt a kiterjesztés létrehozásához és a "
-"feltöltésre való előkészítéséhez szükséges utasításokért."
+"Ha ez az első kiterjesztése, akkor nézze meg a <a "
+"href=\"%(url)s\">gjs.guide</a> oldalon lévő dokumentációt a kiterjesztés "
+"létrehozásához és a feltöltésre való előkészítéséhez szükséges utasításokért."
+
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr ""
+"A webhelyen keresztül terjesztett kiterjesztésekre a <a href=\"%(url)s\">magat"
+"artási kódex</a> vonatkozik."
+
+#: sweettooth/extensions/templates/extensions/upload.html:39
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr ""
+"A <a href=\"%(url)s\">magatartási kódexet</a> megsértő kiterjesztések eltávolí"
+"tásra kerülnek erről a webhelyről."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -626,8 +642,8 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
 "Fejlesztői útmutatókat találhat a <a href='https://gjs.guide/"
 "extensions/'>gjs.guide</a> oldalon."
@@ -655,17 +671,21 @@ msgstr "GNOME Shell kiterjesztések"
 msgid "Developers Guide"
 msgstr "Fejlesztői útmutató"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "A webhely karbantartás alatt áll. Próbálja újra néhány perccel később."
+
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "Kijelentkezés"
+
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
 msgid "User Profile"
 msgstr "Felhasználói profil"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
 msgid "User Settings"
 msgstr "Felhasználó beállításai"
-
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
-msgid "Log out"
-msgstr "Kijelentkezés"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
@@ -758,4 +778,3 @@ msgstr "Rendszerkiterjesztés"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Eltávolította:"
-

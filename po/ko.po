@@ -1,14 +1,14 @@
 # Korean translation for extensions-web.
-# Copyright (C) 2019 extensions-web's contributors.
+# Copyright (C) 2019-2025 extensions-web's contributors.
 # This file is distributed under the same license as the extensions-web package.
-# Seong-ho Cho <shcho@gnome.org>, 2019-2024.
+# Seong-ho Cho <shcho@gnome.org>, 2019-2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2024-08-31 20:04+0900\n"
+"POT-Creation-Date: 2025-06-22 07:03+0000\n"
+"PO-Revision-Date: 2025-09-06 15:28+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -16,54 +16,45 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.7\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
-#: extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "전자메일 주소를 사용자 이름으로 사용하면 안됩니다"
-
-#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "사용자 이름에 금지 단어가 들어있습니다"
-
-#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "매 7일 마다 1회 이상 전자메일 주소를 바꿀 수 없습니다"
 
-#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "사용자 이름에 금지 단어가 들어있습니다"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "내 계정 삭제"
 
-#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "7일 이내로 계정을 삭제합니다"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "No"
 msgstr "아니요"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "예"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "현재 암호"
 
-#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "계정 제거를 취소할 때 암호를 지정할 필요가 없습니다"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "사용자 이름 또는 전자메일"
 
-#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
 msgid ""
 "You have multiple accounts registered using single email. You can log in "
@@ -73,28 +64,37 @@ msgstr ""
 "단일 전자메일 주소로 여러 계정을 등록했습니다. 사용자 이름으로 로그인하거나 "
 "그놈 기트랩(%(url)s)에서 중복 계정 제거를 요청할 수 있습니다."
 
-#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "사용자 이름"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "필수. 30글자 이하. 영문자, 숫자 또는 @/./+/-/_ 특수 문자만 쓸 수 있습니다."
 
-#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "이 값에는 영문자, 숫자 또는 @/./+/-/_ 특수 문자만 들어가야합니다."
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "전자메일 주소"
 
-#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "전자메일 주소를 사용자 이름으로 사용하면 안됩니다"
+
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "사용자 이름에 금지 단어가 들어있습니다"
+
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
 msgstr "이 전자메일은 이미 등록했습니다"
 
-#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
 msgstr "이 사용자 이름은 이미 등록했습니다"
 
@@ -252,42 +252,42 @@ msgstr "확장 추가"
 msgid "Installed extensions"
 msgstr "설치한 확장"
 
-#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "metadata.json의 `shell-version`키 값을 지정해야 합니다."
 
-#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "지원하지 않는 기부 방식: %s"
 
-#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "\"%s\" 기부 방식 값을 3개 이상 지정할 수 없습니다"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "\"%s\" 기부 방식 값을 최소 하나 이상 지정해야 합니다"
 
-#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "\"%s\" 기부 방식 값 형식은 문자열이거나 문자열 목록이어야 합니다"
 
-#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "버전 이름에 공백 문자 또는 점 문자 만은 넣을 수 없습니다."
 
-#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr ""
 "알파벳, 숫자 문자(영문), 공백 문자, 점 문자만 버전 이름에 넣을 수 있습니다."
 
-#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
 msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
 "reassign maintainership of the extension uploaded by me"
@@ -295,19 +295,19 @@ msgstr ""
 "extensions.gnome.org 웹사이트 관리자가 본인이 업로드한 확장 기능을 제거하고, "
 "수정하거나, 관리 권한을 철회할 수 있음에 동의합니다"
 
-#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "`metadata.json`에 `uuid` 필드가 빠졌습니다"
 
-#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "해당 UUID를 가진 확장 기능은 이미 추가했습니다"
 
-#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "extensions.gnome.org의 서비스 이용 조항에 동의해야 합니다"
 
-#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -521,6 +521,26 @@ msgstr ""
 "첫 확장 기능일 경우, 확장 기능을 만들고 업로드를 준비하는 방법을 <a "
 "href=\"%(url)s\">gjs.guide</a>문서에서 확인하십시오."
 
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr ""
+"이 웹사이트로 배포하는 확장 기능은 <a href=\"%(url)s\">활동 지침</a>을 준수해"
+"야 합니다."
+
+#: sweettooth/extensions/templates/extensions/upload.html:39
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr ""
+"<a href=\"%(url)s\">활동 지침</a>을 위반한 확장 기능은 이 웹사이트에서 제거합"
+"니다."
+
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "내용"
@@ -596,8 +616,8 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
 "<a href='https://gjs.guide/extensions/'>gjs.guide</a>에서 개발자 안내서 내용"
 "을 찾아볼 수 있습니다."
@@ -608,8 +628,8 @@ msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
 "matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
 msgstr ""
-"확장 작성시 도움을 받으려면 <a href='https://matrix.to/#/#extensions:gnome."
-"org'>그놈 매트릭스 채널</a>에 질문할 수 있습니다."
+"확장 작성시 도움을 받으려면 <a href='https://matrix.to/#/"
+"#extensions:gnome.org'>그놈 매트릭스 채널</a>에 질문할 수 있습니다."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
@@ -624,17 +644,21 @@ msgstr "그놈 쉘 확장"
 msgid "Developers Guide"
 msgstr "개발자 안내서"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "이 웹사이트는 관리중입니다. 잠시만 기다려 주십시오."
+
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "로그아웃"
+
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
 msgid "User Profile"
 msgstr "사용자 프로파일"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
 msgid "User Settings"
 msgstr "사용자 설정"
-
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
-msgid "Log out"
-msgstr "로그아웃"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""

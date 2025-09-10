@@ -9,65 +9,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2024-11-30 16:58+0000\n"
-"PO-Revision-Date: 2025-01-12 16:45+0100\n"
+"POT-Creation-Date: 2025-06-22 07:03+0000\n"
+"PO-Revision-Date: 2025-06-22 09:50+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
-"n%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
-#: extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Elektronskega naslova ni priporočljivo uporabiti kot uporabniško ime"
-
-#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "Vaše uporabniško ime vsebuje prepovedane besede"
-
-#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Svojega e-naslova ne morete spremeniti več kot enkrat v sedmih dneh"
 
-#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "Vaše pojavno ime vsebuje prepovedane besede"
 
-#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Izbriši moj račun"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Vaš račun bo izbrisan čez 7 dni"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ne"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Da"
 
-#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Trenutno geslo"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Za preklic odstranitve računa vam ni treba navesti gesla"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Uporabniško ime ali elektronski naslov"
 
-#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
 msgid ""
 "You have multiple accounts registered using single email. You can log in "
@@ -78,25 +69,34 @@ msgstr ""
 "lahko s svojim uporabniškim imenom ali pa zahtevate odstranitev podvojenih "
 "računov prek GNOME Gitlab (%(url)s)."
 
-#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 "Zahtevan je vpis do 30 znakov, uporabiti pa je mogoče le črke, številke in "
 "znake @/./+/-/_."
 
-#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Ta vrednost lahko vsebuje le črke, številke in znake »@«, ».«, »+«, »-« in "
 "»_«."
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Elektronski naslov"
+
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Elektronskega naslova ni priporočljivo uporabiti kot uporabniško ime"
+
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Vaše uporabniško ime vsebuje prepovedane besede"
 
 #: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
@@ -117,10 +117,6 @@ msgstr "Vpisnik"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "Prijava računa"
-
-#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
-msgid "The website is under maintenance. Please retry in a few minutes."
-msgstr "Spletna stran je v vzdrževanju. Poskusite znova čez nekaj minut."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -294,11 +290,11 @@ msgstr "Za vrsto donacije »%s« morate navesti vsaj eno vrednost"
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "Vrsta vrednosti mora biti niz ali seznam nizov za vrsto donacije »%s«"
 
-#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "Ime različice ne more biti samo iz presledkov ali pik."
 
-#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
@@ -307,18 +303,26 @@ msgstr ""
 "presledki in pike."
 
 #: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Strinjam se, da lahko osebje spletišča extensions.gnome.org odstrani, "
+"spremeni ali prerazporedi vzdrževanje razširitve, ki sem jo naložil_a"
+
+#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "Polje 'uuid' manjka v 'metadata.json'"
 
-#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Razširitev s tem UUID je že bila dodana"
 
-#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "Strinjati se morate s pogoji storitve extensions.gnome.org"
 
-#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -329,14 +333,6 @@ msgstr ""
 "spornem primeru glede združljivosti dovoljenja razširitve z dovoljenje GNOME "
 "Shell razširitev, ki sem jo naložil_a, uporablja kateri koli uporabnik GNOME "
 "Shell pod pogoji dovoljenja, ki jo uporablja GNOME Shell"
-
-#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Strinjam se, da lahko osebje spletišča extensions.gnome.org odstrani, "
-"spremeni ali prerazporedi vzdrževanje razširitve, ki sem jo naložil_a"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -363,9 +359,9 @@ msgstr "Prekliči"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a "
-"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
-"a comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a href="
+"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
+"comment or report an error. You understand, right?"
 msgstr ""
 "Za preprečevanje prejemanja neželenih sporočil je pred pošiljanjem opomb in "
 "poročil o napakah zahtevana <a href=\"%(login_url)s\">prijava na spletno "
@@ -538,13 +534,33 @@ msgstr ""
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"If this is your first extension, please see the documentation on <a "
-"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"If this is your first extension, please see the documentation on <a href="
+"\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
-"Če je to vaša prva razširitev, si oglejte dokumentacijo na <a "
-"href=\"%(url)s\">gjs.guide</a> - navodila za ustvarjanje razširitve in "
-"pripravo za nalaganje."
+"Če je to vaša prva razširitev, si oglejte dokumentacijo na <a href=\"%(url)s"
+"\">gjs.guide</a> - navodila za ustvarjanje razširitve in pripravo za "
+"nalaganje."
+
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a href=\"%(url)s"
+"\">Code of Conduct</a>."
+msgstr ""
+"Za razširitve, ki se razširjajo prek te spletne strani, velja <a href="
+"\"%(url)s\">Kodeks ravnanja</a>."
+
+#: sweettooth/extensions/templates/extensions/upload.html:39
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr ""
+"Razširitve, ki kršijo <a href=\"%(url)s\">Kodeks ravnanja</a> , bodo "
+"odstranjene s tega spletnega mesta."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -655,17 +671,21 @@ msgstr "Razširitve lupine Gnome"
 msgid "Developers Guide"
 msgstr "Vodnik za razvijalce"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "Spletna stran je v vzdrževanju. Poskusite znova čez nekaj minut."
+
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "Odjava"
+
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
 msgid "User Profile"
 msgstr "Profil uporabnika"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
 msgid "User Settings"
 msgstr "Uporabniške nastavitve"
-
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
-msgid "Log out"
-msgstr "Odjava"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
