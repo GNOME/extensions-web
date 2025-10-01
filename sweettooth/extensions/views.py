@@ -204,7 +204,17 @@ class ExtensionsViewSet(
         queryset = (
             ExtensionDocument.search()
             .extra(size=5000)
-            .query("multi_match", query=query)
+            .query(
+                "multi_match",
+                query=query,
+                type="best_fields",
+                fields=[
+                    "uuid",
+                    "name^3",
+                    "description",
+                    "creator^2",
+                ],
+            )
         )
 
         if self.request.query_params.get("recommended") in ("true", "1"):
