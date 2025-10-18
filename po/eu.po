@@ -7,8 +7,8 @@
 msgid ""
 msgstr "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2024-11-30 16:58+0000\n"
-"PO-Revision-Date: 2025-05-11 10:00+0100\n"
+"POT-Creation-Date: 2025-06-22 07:03+0000\n"
+"PO-Revision-Date: 2025-10-18 10:00+0100\n"
 "Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -17,52 +17,43 @@ msgstr "Project-Id-Version: extensions-web master\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:54
-#: extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Ez zenuke posta-helbidea erabili beharko erabiltzaile-izen modura"
-
-#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "Zure erabiltzaile-izenak onartzen ez diren hitzak ditu"
-
-#: sweettooth/auth/forms.py:136 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "Posta elektronikoko helbidea 7 egunetik behin soilik aldatu daiteke"
 
-#: sweettooth/auth/forms.py:170 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "Bistaratutako zure izenak onartzen ez diren hitzak ditu"
 
-#: sweettooth/auth/forms.py:214 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Ezabatu nire kontua"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Zure kontua 7 egunetan ezabatuko da"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ez"
 
-#: sweettooth/auth/forms.py:217 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Bai"
 
-#: sweettooth/auth/forms.py:221 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Uneko pasahitza"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Ez da pasahitzik zehaztu behar kontuaren ezabatzea bertan behera uzteko"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Erabiltzaile-izena edo posta-helbidea"
 
-#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
 msgid ""
 "You have multiple accounts registered using single email. You can log in "
@@ -70,21 +61,30 @@ msgid ""
 "GNOME Gitlab (%(url)s)."
 msgstr "Kontu bat baino gehiago duzu posta elektronikoko helbide honekin erregistratuta. Zure erabiltzaile-izena erabiliz hasi dezakezu saioa, edo kontu bikoizutak kentzea eskatu dezakezu GNOMEren Gitlab bidez (%(url)s)."
 
-#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Derrigorrezkoa. 30 karaktere edo gutxiago. Hizkiak, digituak eta @/./+/-/_ soilik."
 
-#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Balio honek hizkiak, zenbakiak eta @/./+/-/_  karaktereak soilik izan ditzake."
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Helb. el."
+
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Ez zenuke posta-helbidea erabili beharko erabiltzaile-izen modura"
+
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Zure erabiltzaile-izenak onartzen ez diren hitzak ditu"
 
 #: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
@@ -105,10 +105,6 @@ msgstr "Eman izena"
 #: extensions-web-domain-django:1
 msgid "Account Registration"
 msgstr "Kontuaren harpidetza"
-
-#: sweettooth/auth/templates/maintenance.html:5 extensions-web-domain-django:1
-msgid "The website is under maintenance. Please retry in a few minutes."
-msgstr "Webgunea mantentze-lanetan dago. Saiatu berriro minutu batzuk igaro ondoren."
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
@@ -274,41 +270,41 @@ msgstr "Gutxienez balio bat zehaztu behar da \"%s\" dohaintza motarako"
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "Balio motak katea edo kateen zerrenda izan behar du \"%s\" dohaintza motarako"
 
-#: sweettooth/extensions/models.py:464 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "Bertsio-izena ezin da zuriuneekin edo puntuekin soilik osatuta egon."
 
-#: sweettooth/extensions/models.py:470 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr "Karaktere alfanumerikoak (ingelesezkoak), zuriuneak eta puntuak soilik onartzen dira bertsio-izenerako."
 
 #: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr "Onartzen dut extensions.gnome.org webguneko langileek nik igotako hedapena kendu, aldatu edo bere mantenimendua beste norbaiti esleitu diezaioketela"
+
+#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "`uuid` eremua falta da `metadata.json` fitxategian"
 
-#: sweettooth/extensions/serializers.py:146 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Badago lehendik UUID hori duen hedapen bat"
 
-#: sweettooth/extensions/serializers.py:81 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
 msgstr "extensions.gnome.org gunearen erabilera-baldintzak onartu behar dituzu"
 
-#: sweettooth/extensions/serializers.py:88 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
 "Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
 msgstr "Hedapen hau igotzean, onartzen dut nire hedapenaren lizentzia eta GNOME Shellen lizentziaren artean inola arazorik badago, nik igotako hedapena GNOME Shellen edozein erabiltzailek erabili ahal izango duela GNOME Shell beraren lizentziaren baldintzetan"
-
-#: sweettooth/extensions/serializers.py:97 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr "Onartzen dut extensions.gnome.org webguneko langileek nik igotako hedapena kendu, aldatu edo bere mantenimendua beste norbaiti esleitu diezaioketela"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -503,6 +499,22 @@ msgid ""
 "preparing it for upload."
 msgstr "Zure lehen hedapena bada, begiratu <a href=\"%(url)s\">gjs.guide</a> dokumentazioa hedapen bat nola sortu eta nola kargatu ikasteko."
 
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr "Webgune honen bidez argitaratutako hedapenek <a href=\"%(url)s\">jokabide-kodea</a> bete behar dute."
+
+#: sweettooth/extensions/templates/extensions/upload.html:39
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr "<a href=\"%(url)s\">Jokabide-kodea</a> bortxatzen duten hedapenak kendu egingo dira webgunetik."
+
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "Edukia"
@@ -576,8 +588,8 @@ msgstr "Onartutako bertsio bat desaktibatzeko, egin klik zure hedapen-orriko est
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr "Garatzaileentzako gida <a href='https://gjs.guide/extensions/'>gjs.guide</a> gunean dago."
 
 #: sweettooth/review/templates/review/review.html:85
@@ -600,17 +612,21 @@ msgstr "GNOME Shell-eko hedapenak"
 msgid "Developers Guide"
 msgstr "Garatzaile-gida"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "Webgunea mantentze-lanetan dago. Saiatu berriro minutu batzuk igaro ondoren."
+
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "Amaitu saioa"
+
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
 msgid "User Profile"
 msgstr "Erabiltzaile-profila"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
 msgid "User Settings"
 msgstr "Erabiltzaile-ezarpenak"
-
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
-msgid "Log out"
-msgstr "Amaitu saioa"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
