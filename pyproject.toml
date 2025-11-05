@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Desktop Environment :: Gnome",
 ]
 dependencies = [
-    "Django==5.2.7",
+    "Django==5.2.8",
     "djangorestframework==3.15.2",
     "django-autoslug==1.9.9",
     "django-contrib-comments==2.2.0",
