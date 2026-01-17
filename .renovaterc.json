@@ -1,0 +1,3 @@
+{
+  "extends": ["security:only-security-updates"]
+}
