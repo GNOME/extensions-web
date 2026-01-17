@@ -97,6 +97,29 @@ check migrations:
   script:
     - python manage.py makemigrations --check
 
+check requirements:
+  extends:
+    - .test defaults
+  stage: validate
+  script:
+    - pip install
+      --dry-run
+      --ignore-installed
+      --require-hashes
+      -r requirements.txt
+      -r requirements.dev.txt
+
+    - sed -E 's/ --hash=[^ ]+//g; s/^([[:alnum:]][[:alnum:]._-]*)\[[^]]+\]/\1/'
+        requirements.txt > /tmp/constraints.txt
+    - sed -E 's/ --hash=[^ ]+//g; s/^([[:alnum:]][[:alnum:]._-]*)\[[^]]+\]/\1/'
+        requirements.dev.txt > /tmp/constraints.dev.txt
+    - pip install
+      --dry-run
+      --ignore-installed
+      -c /tmp/constraints.txt
+      -c /tmp/constraints.dev.txt
+      .
+
 lint:
   extends:
     - .validate defaults
