@@ -1,0 +1,773 @@
+# Cornish translation for extensions-web.
+# Copyright (C) 2026 extensions-web's COPYRIGHT HOLDER
+# This file is distributed under the same license as the extensions-web package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Flynn Peck <cirilla@tuta.io>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extensions-web master\n"
+"Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
+"POT-Creation-Date: 2025-06-22 07:03+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-02-09 20:49+0000\n"
+"Last-Translator: Flynn Peck <cirilla@tuta.io>\n"
+"Language-Team: kw\n"
+"Language: kw\n"
+"X-DL-VCS-Web: https://gitlab.gnome.org/Infrastructure/extensions-web/\n"
+"X-DL-Lang: kw\n"
+"X-DL-Module: extensions-web\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 49.0\n"
+
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "Ty ny yllir chanjya dha trigva ebost namoy es unweyth pub 7 dedhyow"
+
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "Dha hanow displetyans kontaynya geryow difenys"
+
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Dilea ow akont"
+
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "Dha akont a wra bos dileys yn 7 dedhyow"
+
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+msgid "No"
+msgstr "Na"
+
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Ya"
+
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Ger-tremena a-lemmyn"
+
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr "Ty ny res ragnotya unn ger-tremena rag hedhi dileans akont"
+
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Hanow usyer po ebost"
+
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"Ty kavos akontys liesek kovskrifys ow devnydhya unn trigva ebost. Ty a yll "
+"omgelmi ow devnydhya dha hanow usyer po ty a yll govyn dileans a akontys "
+"doblek ow devnydhya GNOME Gitlab (%(url)s)."
+
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
+msgid "Username"
+msgstr "Hanow usyer"
+
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
+msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "A res. 30 lytherennow po le. Lytherennow, niverow ha @/./+/-/_ hepken."
+
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr "An re ma a yll kontayna lytherennow, niverow ha @/./+/-/_ hepken."
+
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
+msgid "Email"
+msgstr "Trigva Ebost"
+
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Ny godh dhis devnydhya trigva ebost avel hanow usyer"
+
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Dha hanow usyer kontaynya geryow difenys"
+
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "An ebost ma yw kovskrifys seulabrys"
+
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "An hanow usyer ma yw kovskrifys seulabrys"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:35
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Kovskrifa"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Kovskrifans Akont"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Dileans akont"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"Dha akont yw ow gortos dileans. Ty a yll hedhi dileans akont yn 7 dedhyow."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "Dileans akont yw hedhys."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "Fastyans ebost"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Settyansow"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Danvon"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Chanjya dha ger-tremena"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr "Dha akont yw ow gortos dileans wosa %(schedule_delete_after)s"
+
+#: sweettooth/auth/templates/registration/login.html:21
+#: sweettooth/auth/templates/registration/login_popup_form.html:14
+#: extensions-web-domain-django:1
+msgid "Forgot your password?"
+msgstr "Ankevys dha ger-tremena?"
+
+#: sweettooth/auth/templates/registration/login.html:30
+#: sweettooth/auth/templates/registration/login_popup_form.html:11
+#: sweettooth/templates/base.html:72 extensions-web-domain-django:1
+msgid "Log in"
+msgstr "Omgelmi"
+
+#: sweettooth/auth/templates/registration/login.html:34
+#: sweettooth/auth/templates/registration/login_popup_form.html:17
+#: extensions-web-domain-django:1
+msgid "Don't have an account?"
+msgstr "Nyns eus akont?"
+
+#: sweettooth/auth/templates/registration/login.html:6
+#: extensions-web-domain-django:1
+msgid "User Login"
+msgstr "Omgelmyans Usyer"
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:12
+#: sweettooth/auth/templates/registration/password_reset_form.html:12
+#: extensions-web-domain-django:1
+msgid "Reset your password"
+msgstr "Dasgorra dha ger-tremena"
+
+#: sweettooth/auth/templates/registration/password_reset_confirm.html:15
+#: extensions-web-domain-django:1
+msgid ""
+"The token for the password reset is incorrect. Please check your link and "
+"try again."
+msgstr ""
+"An tokyn rag an dasgorrans ger-tremena yw anewn. Mar pleg checkya dha "
+"gorgevren hag assaya arta."
+
+#: sweettooth/auth/templates/registration/password_reset_form.html:7
+#: extensions-web-domain-django:1
+msgid "Password reset"
+msgstr "Dasgorrans ger-tremena"
+
+#: sweettooth/auth/templates/registration/password_reset_form.html:8
+#: extensions-web-domain-django:1
+msgid ""
+"Forgot your password? Enter your e-mail address below, and we’ll e-mail "
+"instructions for setting a new one."
+msgstr ""
+"Ankevys dha ger-tremena? Ynworra dha trigva ebost a-woles, ha ni a wra "
+"ebostya danvonadow rag ow gorra unn nowydh."
+
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "Dha trigva ebost nowedhys yn sewen"
+
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "Dha gorgevren fastyans diwedhys. Mar pleg, govyn unn nowydh."
+
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Govyn kamm"
+
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "Data profil sawys"
+
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"Ebost fastyan yw danvenys dhe dha trigva nowydh. Mar pleg, checkya dha "
+"yngist."
+
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "Ger-tremena yw anewn"
+
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Daskor trigva ebost ha dasgorra ger-tremena"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
+msgid "About"
+msgstr "A-dro"
+
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
+msgid "Extensions"
+msgstr "Ystynansow"
+
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "Addya dha re"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "Ystynansow leys"
+
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Ty res styrya alhwedh `shell-version` yn metadata.json"
+
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Eghen argevro anskoodhys: %s"
+
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr "Ty ny yllowgh ragnotya moy es 3 taklor rag eghen agrevro \"%s\""
+
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "Unn tra dhe'n lyha res bos ragnotys rag eghen argevro \"%s\""
+
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr "Eghen tra res bos tekst po rol a tekstow rag eghen argevro \"%s\""
+
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "Hanow verson ny yllir bos spassow po dyjynnow hepken."
+
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+"Lytherennow (sowsnek), spassow, ha dyjynnow hepken yw gasys rag hanow "
+"versyon."
+
+#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Akordys ov vy mayni a extensions.gnome.org a yll remova, chanjya po "
+"daskanasa mentenourogeth a'n ystynnans ughkargys gans vy"
+
+#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "An tra `uuid` yw fyllel yn `metadata.json`"
+
+#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Unn ystynnans gans an UUID na re bos addys seulabrys"
+
+#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Ty res akordya gans an termys gonis extensions.gnome.org"
+
+#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"Gans owgh ughkarga an ystynnans ma, akordys ha gwirhe ov vy yn neb kas "
+"gorthargyadow yn-kever an kesplegadewder a'n leshyans ystynnans gans an "
+"leshyans GNOME Shell, an ystynnans ughkarghys gans vy a yll bos devnydhys "
+"gans neb usyer GNOME Shell y'n termyn a'n leshyans devnydhys gans GNOME Shell"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Procedya yn neb kas"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Os ow diberth an gwiasva GNOME Ystynansow"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "Os a wra dibertth an gwiasva GNOME Ystynansow dhe %(url)s."
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Hedhi"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
+msgstr ""
+"Y'n gwettha prys, rag gweres lettya spam, ni rekwirya ty <a "
+"href=\"%(login_url)s\">omgelmi orth GNOME Shell Ystynnansow</a> rag postya "
+"unn kampol po derivas unn error. Ty konvedhes, ya?"
+
+#: sweettooth/extensions/templates/extensions/comments.html:22
+#: extensions-web-domain-django:1
+msgid "User Reviews"
+msgstr "Breusyansow Usyer"
+
+#: sweettooth/extensions/templates/extensions/comments.html:24
+#: extensions-web-domain-django:1
+msgid "Loading reviews…"
+msgstr "Ow karga breusyansow…"
+
+#: sweettooth/extensions/templates/extensions/comments.html:3
+#: extensions-web-domain-django:1
+msgid "Your opinion"
+msgstr "Dha breus"
+
+#: sweettooth/extensions/templates/extensions/comments.html:6
+#: extensions-web-domain-django:1
+msgid "Leave a…"
+msgstr "Postya unn…"
+
+#: sweettooth/extensions/templates/extensions/comments.html:7
+#: extensions-web-domain-django:1
+msgid "Comment"
+msgstr "Kampol"
+
+#: sweettooth/extensions/templates/extensions/comments.html:8
+#: extensions-web-domain-django:1
+msgid "Rating"
+msgstr "Breusyans"
+
+#: sweettooth/extensions/templates/extensions/detail.html:102
+#: extensions-web-domain-django:1
+msgid ""
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
+msgstr ""
+"Unn barner a wra dashwithra an ystynnans ty danvenys rag surhe yma tra vyth "
+"re diantel. Ty a wra bos ebostys an sewyans a'n dashwithrans."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Kampollow yw marow rag an ystynnans ma."
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s iskarg"
+msgstr[1] "%(downloads)s iskargow"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Niver a Iskargow"
+
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Argevri"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Lea"
+
+#: sweettooth/extensions/templates/extensions/detail.html:46
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "Ughradha an ystynnans ma"
+
+#: sweettooth/extensions/templates/extensions/detail.html:47
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "Selya an ystynnans ma"
+
+#: sweettooth/extensions/templates/extensions/detail.html:48
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "Dilea an ystynnans ma"
+
+#: sweettooth/extensions/templates/extensions/detail.html:75
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "Folen Tre Ystynnans"
+
+#: sweettooth/extensions/templates/extensions/detail.html:81
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Fordh(ow) Esedhek"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "An ystynnans ma a wra eksekutya hag an skrin yw alhwedhys"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Fenester Dialhwedha"
+
+#: sweettooth/extensions/templates/extensions/detail.html:86
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "Iskarga"
+
+#: sweettooth/extensions/templates/extensions/detail.html:89
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Versyon shell…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:93
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "Versyon ystynnans…"
+
+#: sweettooth/extensions/templates/extensions/list.html:13
+#: extensions-web-domain-django:1
+msgid "Search for extensions…"
+msgstr "Hwilas ystynansow…"
+
+#: sweettooth/extensions/templates/extensions/local.html:3
+#: sweettooth/extensions/templates/extensions/local.html:8
+#: extensions-web-domain-django:1
+msgid "Installed Extensions"
+msgstr "Ystynansow Leys"
+
+#: sweettooth/extensions/templates/extensions/local.html:5
+#: extensions-web-domain-django:1
+msgid "Shell settings"
+msgstr "Settyansow shell"
+
+#: sweettooth/extensions/templates/extensions/upload.html:14
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Ughkarga ystynnans"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"Ughkarga an restren Zip a dha ystynnans rag danvon yth rag dashwithrans. "
+"Versyons diwetta a yll bos ughkargys ow devnydhya gans an form keth. Wosa "
+"dha ystynnans yw dashwithrys ty a wra bos gwarnys a'n sewyans gans ebost."
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"Mar pleg gweles an < href=\"%(url)s\">Gidys Dashwithrans</a> rag dyski pyth "
+"yw a res rag komendyans."
+
+#: sweettooth/extensions/templates/extensions/upload.html:27
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"Mar hemma yw dha ystynnans kynsa, mar pleg gweles an kowethlyver war <a "
+"href=\"%(url)s\">gjs.guide</a> rag danvonadow war ow gul unn ystynnans hag "
+"ow pareusi yth rag ughkarg."
+
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr ""
+"Ystynansow lesrannys der an gwiasva ma yw yw herwydh an <a "
+"href=\"%(url)s\">Goden-Fara</a>."
+
+#: sweettooth/extensions/templates/extensions/upload.html:39
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr ""
+"Ystynnans gorthmos an <a href=\"%(url)s\">Goden-Fara</a> a wra bos removys "
+"dhyworth an gwiasav ma."
+
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
+msgid "Content"
+msgstr "Dalgh"
+
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+msgid "Metadata"
+msgstr "Metadata"
+
+#: sweettooth/ratings/templates/comments/form.html:26
+#: sweettooth/ratings/templates/comments/preview.html:45
+#: extensions-web-domain-django:1
+msgid "Post"
+msgstr "Post"
+
+#: sweettooth/ratings/templates/comments/form.html:27
+#: sweettooth/ratings/templates/comments/preview.html:46
+#: extensions-web-domain-django:1
+msgid "Preview"
+msgstr "Ragwolok"
+
+#: sweettooth/ratings/templates/comments/form.html:8
+#: sweettooth/ratings/templates/comments/preview.html:27
+#: extensions-web-domain-django:1
+msgid "What do you think about this GNOME extension?"
+msgstr "Pandr'a dybowgh a-dro an ystynnans GNOME ma?"
+
+#: sweettooth/ratings/templates/comments/preview.html:13
+#: extensions-web-domain-django:1
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] "Mar pleg ewnhe an error a-woles"
+msgstr[1] "Mar pleg ewnhe an errors a-woles"
+
+#: sweettooth/ratings/templates/comments/preview.html:4
+#: sweettooth/ratings/templates/comments/preview.html:15
+#: extensions-web-domain-django:1
+msgid "Preview your comment"
+msgstr "Ragwolok dha kampol"
+
+#: sweettooth/ratings/templates/comments/preview.html:18
+#: extensions-web-domain-django:1
+msgid "Post Comment"
+msgstr "Postya Kampol"
+
+#: sweettooth/ratings/templates/comments/preview.html:21
+#: extensions-web-domain-django:1
+msgid "Edit your comment"
+msgstr "Golegi dha kampol"
+
+#: sweettooth/review/templates/review/review.html:73
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Ty a yll ughkarga an verson nessa gans an <a href='https://"
+"extensions.gnome.org/upload/'>form keth</a> os postys an versyon ma."
+
+#: sweettooth/review/templates/review/review.html:76
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Ty a yll chanjya an arwodhik ystynnans gans ow klyckya war'n arwodhik yn dha "
+"folen ystynnans."
+
+#: sweettooth/review/templates/review/review.html:79
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"Les ty mynnes dibywhe unn verson komendys, klyckya war'n gorgevren dibywhe "
+"yn dha folen ystynnans."
+
+#: sweettooth/review/templates/review/review.html:82
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+msgstr ""
+"Ty a yll kavos gidys awtour yn <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:85
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Mar ty res neb gweres gans dha ystynnans, ty a yll govyn ni war'n <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>Chanel Matrix GNOME</a>."
+
+#: sweettooth/templates/base.html:16 extensions-web-domain-django:1
+msgid "Latest extensions in GNOME Shell Extensions"
+msgstr "Ystynansow diwettha yn GNOME Shell Ystynansow"
+
+#: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
+#: extensions-web-domain-django:1
+msgid "GNOME Shell Extensions"
+msgstr "GNOME Shell Ystynansow"
+
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Gid Awtour"
+
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr ""
+"An gwiasva yw yn drehevyans. Mar pleg, assaya arta yn nebes mynysennow."
+
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "Omdhigelmi"
+
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
+msgid "User Profile"
+msgstr "Profil Usyer"
+
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
+msgid "User Settings"
+msgstr "Settyasnow Usyer"
+
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
+msgid ""
+"To control GNOME Shell extensions using this site you must install GNOME "
+"Shell integration that consists of two parts: browser extension and native "
+"host messaging application"
+msgstr ""
+"Rag routya GNOME Shell ystynansow ow devnydhya an gwiasva ma ty res lea "
+"GNOME Shell oberyans ow konsystya a dew darnow: ystynnans peurell hag app "
+"messajyans ost teythiek"
+
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+msgid "Install GNOME Shell integration browser extension"
+msgstr "Lea ystynnans peurell GNOME Shell oberyans"
+
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+msgid "Click here to install browser extension"
+msgstr "Klyckya omma rag lea ystynnans peurell"
+
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
+#, javascript-format
+msgid "See %swiki page%s for native host connector installation instructions"
+msgstr "Gweles %sfolen wiki%s rag danvonadow leyans junyer ost teythiek"
+
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
+msgid ""
+"We cannot detect a running copy of GNOME on this system, so some parts of "
+"the interface may be disabled. See <a href=\"/about/#no-detection\">our "
+"troubleshooting entry</a> for more information."
+msgstr ""
+"Ni ny yllir helerghi unn dasskrif a GNOME war'n system ma, ytho nebes darnow "
+"a'n ynterfas a wra marowhys martesen. Gweles <a href=\"/about/#no-"
+"detection\">agan ynworrans prevessans</a> rag kedhlow moy."
+
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
+msgid "GNOME Shell Extensions cannot list your installed extensions."
+msgstr "GNOME Shell Ystynansow ny yllir rolya dha ystynansow leys."
+
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
+msgid "Compatible with"
+msgstr "Kesplegadow gans"
+
+#: sweettooth/static/js/fsui.js:40 extensions-web-domain-djangojs:1
+msgid "Name"
+msgstr "Hanow"
+
+#: sweettooth/static/js/fsui.js:41 extensions-web-domain-djangojs:1
+msgid "Recent"
+msgstr "A-dhiwedhes"
+
+#: sweettooth/static/js/fsui.js:42 extensions-web-domain-djangojs:1
+msgid "Downloads"
+msgstr "Iskargow"
+
+#: sweettooth/static/js/fsui.js:43 extensions-web-domain-djangojs:1
+msgid "Popularity"
+msgstr "Gerys-da"
+
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Bri"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
+msgid "Sort by"
+msgstr "Sortya gans"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "Awtour"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
+#: extensions-web-domain-djangojs:1
+msgid "Show more reviews"
+msgstr "Diskwedhes breusyansow moy"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
+#: extensions-web-domain-djangojs:1
+msgid "There are no comments. Be the first!"
+msgstr "Yma kampollow vyth. Bos an kynsa!"
+
+#: sweettooth/static/js/templates/extensions/info_contents.mst:21
+#: extensions-web-domain-djangojs:1
+msgid "System extension"
+msgstr "Ystynnans system"
+
+#: sweettooth/static/js/templates/extensions/uninstall.mst:1
+#: extensions-web-domain-djangojs:1
+msgid "You uninstalled"
+msgstr "Ty disleys"
