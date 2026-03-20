@@ -74,7 +74,11 @@ urlpatterns = [
         name="extensions-local",
     ),
     re_path(r"^rss/", feeds.LatestExtensionsFeed(), name="extensions-rss-feed"),
-    re_path(r"^upload/", views.upload_file, name="extensions-upload-file"),
+    re_path(
+        r"^upload/",
+        views.ExtensionUploadPageView.as_view(),
+        name="extensions-upload-file",
+    ),
     re_path(r"^ajax/", include(ajax_patterns)),
     re_path(r"", include(shell_patterns)),
 ]

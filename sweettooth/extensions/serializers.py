@@ -62,6 +62,8 @@ class ExtensionVersionSerializer(serializers.ModelSerializer):
         many=False, read_only=True, slug_field="uuid"
     )
     shell_versions = ShellVersionSerializer(many=True, read_only=True)
+    # TODO: remove after full migration to REST front.
+    link = serializers.CharField(source="get_absolute_url", read_only=True)
 
     class Meta:
         model = ExtensionVersion
@@ -73,6 +75,7 @@ class ExtensionVersionSerializer(serializers.ModelSerializer):
             "shell_versions",
             "created",
             "session_modes",
+            "link",
         ]
 
 
@@ -163,7 +166,19 @@ class ExtensionUploadSerializer(serializers.Serializer):
             extension.save()
 
             if "version-name" in self.metadata:
-                version_name = self.metadata.pop("version-name").strip()
+                version_name = self.metadata.pop("version-name")
+                if not isinstance(version_name, str):
+                    raise serializers.ValidationError(
+                        {
+                            "source": [
+                                _(
+                                    "The `version-name` field in `metadata.json` must"
+                                    " be a string"
+                                )
+                            ]
+                        }
+                    )
+                version_name = version_name.strip()
             else:
                 version_name = None
 

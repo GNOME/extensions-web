@@ -1,17 +1,12 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
-{% block extra-messages %}
+{% block head %}
   {{ block.super }}
-  {% for error in errors %}
-  <p class="message error">
-    {{ error }}
-  </p>
-  {% endfor %}
+  <script src="{% static 'js/upload-page.js' %}"></script>
 {% endblock %}
 
 {% block body %}
-<h3>{% trans "Upload extension" %}</h3>
 <div class='alert alert-info'>
     <p>
         {% blocktrans trimmed %}
@@ -41,53 +36,58 @@
         {% endblocktrans %}
     </p>
 </div>
+<div class='alert alert-info'>
+    <p>
+        {% blocktrans trimmed %}
+        Before uploading, you can run the Shexli static analyzer locally to catch common packaging and review issues early.
+        {% endblocktrans %}
+    </p>
+    <pre class="mb-0"><code>virtualenv venv
+. venv/bin/activate
+pip install -U shexli
+shexli path_to_zip_or_folder</code></pre>
+</div>
+<h3>{% trans "Upload extension" %}</h3>
 
-<form enctype="multipart/form-data" action="" method="POST" class="form-horizontal">
+<div id="upload-page-config"
+     data-upload-api-url="{{ upload_api_url }}"
+     data-upload-failed-message="{% trans 'Upload failed. Please try again.' %}">
+</div>
+
+<div id="upload-messages"></div>
+
+<form id="extension-upload-form" enctype="multipart/form-data" class="form-horizontal">
     {% csrf_token %}
-
-    {{ form.non_field_errors }}
-
     <div class="form-group row">
-        <div class="col-sm-12{% if field.errors %} has-error{% endif %}">
-            {{ form.source }}
-            {% if form.source.errors %}
-            <div class="help-block">
-            {% for error in form.source.errors %}
-                <p>{{ error|escape }}</p>
-            {% endfor %}
-            </div>
-            {% endif %}
+        <div class="col-sm-12" data-field-group="{{ source_name }}">
+            <input type="file" name="{{ source_name }}" id="id_{{ source_name }}" required>
+            <div class="help-block" data-field-errors="{{ source_name }}"></div>
         </div>
     </div>
 
-    {% for field in form.visible_fields %}
-    {% if field.name != 'source' %}
     <div class="form-group row">
       <div class="col-sm-8 col-form-label">
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {% if field.help_text %}
-        <div>
-          <small class="form-text text-muted">{{ field.help_text }}</small>
-        </div>
-        {% endif %}
+        <label for="id_{{ shell_license_name }}">{{ shell_license_label }}</label>
       </div>
-      <div class="col-sm-4{% if field.errors %} has-error{% endif %}">
-        {{ field }}
-        {% if field.errors %}
-        <div class="help-block">
-          {% for error in field.errors %}
-            <p>{{ error|escape }}</p>
-          {% endfor %}
-        </div>
-        {% endif %}
+      <div class="col-sm-4" data-field-group="{{ shell_license_name }}">
+        <input type="checkbox" name="{{ shell_license_name }}" id="id_{{ shell_license_name }}" value="true">
+        <div class="help-block" data-field-errors="{{ shell_license_name }}"></div>
       </div>
     </div>
-    {% endif %}
-    {% endfor %}
+
+    <div class="form-group row">
+      <div class="col-sm-8 col-form-label">
+        <label for="id_{{ tos_name }}">{{ tos_label }}</label>
+      </div>
+      <div class="col-sm-4" data-field-group="{{ tos_name }}">
+        <input type="checkbox" name="{{ tos_name }}" id="id_{{ tos_name }}" value="true">
+        <div class="help-block" data-field-errors="{{ tos_name }}"></div>
+      </div>
+    </div>
 
     <div class="form-group row">
         <div class="col-sm-12">
-            <button type="submit" class="btn btn-primary">Upload extension</button>
+            <button type="submit" class="btn btn-primary" disabled>Upload extension</button>
         </div>
     </div>
 </form>
