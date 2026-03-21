@@ -334,6 +334,8 @@ Django==5.2.13 \
     #   django-registration
     #   django-rest-knox
     #   django-rest-registration
+    #   django-stubs
+    #   django-stubs-ext
     #   djangorestframework
     #   drf-nested-routers
     #   drf-spectacular
@@ -398,6 +400,16 @@ django-rest-registration==0.8.2 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
+django-stubs==5.2.9 \
+    --hash=sha256:2317a7130afdaa76f6ff7f623650d7f3bf1b6c86a60f95840e14e6ec6de1a7cd \
+    --hash=sha256:c192257120b08785cfe6f2f1c91f1797aceae8e9daa689c336e52c91e8f6a493
+    # via
+    #   djangorestframework-stubs
+    #   extensions-web (pyproject.toml)
+django-stubs-ext==6.0.1 \
+    --hash=sha256:17415759b9a3f4b4da7998ac3b08c7dc5137f9a019490b918aece1a8a4c2ade4 \
+    --hash=sha256:633b280f89c0cbb7e3ce2f2f842e0acc43d8091378e75f84921d6be675d052dc
+    # via django-stubs
 djangorestframework==3.15.2 \
     --hash=sha256:2b8871b062ba1aefc2de01f773875441a961fefbf79f5eed1e32b2f096944b20 \
     --hash=sha256:36fe88cd2d6c6bec23dca9804bab2ba5517a8bb9d8f47ebc68981b56840107ad
@@ -408,6 +420,10 @@ djangorestframework==3.15.2 \
     #   drf-nested-routers
     #   drf-spectacular
     #   extensions-web (pyproject.toml)
+djangorestframework-stubs==3.15.4 \
+    --hash=sha256:0028a34c498f6c209e28c83e798166800082af86f47d4d51101f7485df80146a \
+    --hash=sha256:a958277096f44fc1427189ea2a86666504301a5628012c6f8c9af1529ee9066e
+    # via extensions-web (pyproject.toml)
 drf-nested-routers==0.93.4 \
     --hash=sha256:01aa556b8c08608bb74fb34f6ca065a5183f2cda4dc0478192cc17a2581d71b0 \
     --hash=sha256:996b77f3f4dfaf64569e7b8f04e3919945f90f95366838ca5b8bed9dd709d6c5
@@ -779,6 +795,7 @@ requests==2.33.0 \
     --hash=sha256:c7ebc5e8b0f21837386ad0e1c8fe8b829fa5f544d8df3b2253bff14ef29d7652
     # via
     #   -c requirements.txt
+    #   djangorestframework-stubs
     #   opensearch-py
 rpds-py==0.21.0 \
     --hash=sha256:031819f906bb146561af051c7cef4ba2003d28cff07efacef59da973ff7969ba \
@@ -964,12 +981,25 @@ tree-sitter-javascript==0.25.0 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
+types-pyyaml==6.0.12.20250915 \
+    --hash=sha256:0f8b54a528c303f0e6f7165687dd33fafa81c807fcac23f632b63aa624ced1d3 \
+    --hash=sha256:e7d4d9e064e89a3b3cae120b4990cd370874d2bf12fa5f46c97018dd5d3c9ab6
+    # via
+    #   django-stubs
+    #   djangorestframework-stubs
+types-requests==2.32.4.20260107 \
+    --hash=sha256:018a11ac158f801bfa84857ddec1650750e393df8a004a8a9ae2a9bec6fcb24f \
+    --hash=sha256:b703fe72f8ce5b31ef031264fe9395cac8f46a04661a79f7ed31a80fb308730d
+    # via djangorestframework-stubs
 typing-extensions==4.12.2 \
     --hash=sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d \
     --hash=sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8
     # via
     #   -c requirements.txt
     #   dj-database-url
+    #   django-stubs
+    #   django-stubs-ext
+    #   djangorestframework-stubs
     #   psycopg
 uritemplate==4.1.1 \
     --hash=sha256:4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0 \
@@ -984,6 +1014,7 @@ urllib3==2.6.3 \
     #   -c requirements.txt
     #   opensearch-py
     #   requests
+    #   types-requests
 uwsgi==2.0.28 \
     --hash=sha256:79ca1891ef2df14508ab0471ee8c0eb94bd2d51d03f32f90c4bbe557ab1e99d0
     # via
