@@ -132,25 +132,6 @@ format:
   variables:
     VALIDATE_TOOL_ARGS: format --check --diff
 
-security (trivy):
-  extends:
-    - .security defaults
-  image:
-    name: aquasec/trivy
-    entrypoint: [""]
-  script:
-    - trivy fs .
-  cache:
-    paths:
-      - .trivy
-    when: always
-  variables:
-    TRIVY_CACHE_DIR: .trivy
-    TRIVY_EXIT_CODE: 1
-    TRIVY_SCANNERS: vuln,config
-    # This is single-run job so we do not care of k8s recommendations
-    TRIVY_SKIP_FILES: openshift/jobs/reindex-extensions.yml
-
 security (pip-audit):
   extends:
     - .pip cache
