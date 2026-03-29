@@ -36,7 +36,7 @@ dependencies = [
     "django-registration==3.4",
     "drf-nested-routers==0.93.4",
     "drf-spectacular[sidecar]==0.26.5",
-    "Pygments==2.19.1",
+    "Pygments==2.20.0",
     "pillow==12.1.1",
     "polib==1.1.1",
     "chardet==5.2.0",
