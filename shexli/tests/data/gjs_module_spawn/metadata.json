@@ -1,0 +1,6 @@
+{
+  "uuid": "gjs-module-spawn@example.com",
+  "name": "GJS Module Spawn",
+  "description": "Fixture for gjs -m reachability.",
+  "shell-version": ["48"]
+}

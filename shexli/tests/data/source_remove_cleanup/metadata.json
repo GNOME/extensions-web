@@ -1,0 +1,6 @@
+{
+  "uuid": "source-remove-cleanup@example.com",
+  "name": "Source Remove Cleanup",
+  "description": "Fixture for GLib.source_remove cleanup detection.",
+  "shell-version": ["48"]
+}

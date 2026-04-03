@@ -1,0 +1,7 @@
+{
+  "uuid": "gnome48-ok@example.com",
+  "name": "GNOME 48 OK",
+  "description": "Uses older APIs but does not claim unsupported target versions.",
+  "shell-version": ["48"]
+}
+

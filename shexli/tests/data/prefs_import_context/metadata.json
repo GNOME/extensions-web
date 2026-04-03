@@ -1,0 +1,6 @@
+{
+  "uuid": "prefs-import-context@example.com",
+  "name": "Prefs Import Context",
+  "description": "Fixture for import-graph-based process detection.",
+  "shell-version": ["49"]
+}

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shexli"
+version = "0.1.0"
+description = "Static analyzer for GNOME Shell extension reviews"
+readme = "README.md"
+license = {file = "COPYING"}
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+]
+dependencies = [
+    "tree-sitter>=0.25.0",
+    "tree-sitter-javascript>=0.25.0",
+]
+
+[project.scripts]
+shexli = "shexli.cli:main"
+
+[tool.setuptools]
+packages = ["shexli"]

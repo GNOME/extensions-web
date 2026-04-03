@@ -1,0 +1,6 @@
+{
+  "uuid": "legacy-import-context@example.com",
+  "name": "Legacy Import Context",
+  "description": "Fixture for legacy Me.imports reachability.",
+  "shell-version": ["44"]
+}

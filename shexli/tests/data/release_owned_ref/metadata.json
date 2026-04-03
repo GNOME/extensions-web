@@ -1,0 +1,6 @@
+{
+  "uuid": "release-owned-ref@example.com",
+  "name": "Release Owned Ref",
+  "description": "Fixture for owned reference release check",
+  "shell-version": ["49"]
+}

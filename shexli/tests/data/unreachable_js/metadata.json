@@ -1,0 +1,6 @@
+{
+  "uuid": "unreachable-js@example.com",
+  "name": "Unreachable JS",
+  "description": "Fixture for unreachable JavaScript detection.",
+  "shell-version": ["49"]
+}
