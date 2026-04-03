@@ -1,6 +1,6 @@
 variables:
   FF_NETWORK_PER_BUILD: 'true'
-  PYTHON_VERSION: '3.11'
+  PYTHON_VERSION: '3.12'
   OPENSEARCH_VERSION: '2.8.0'
 
 workflow:
@@ -77,7 +77,6 @@ test:
   parallel:
     matrix:
       - PYTHON_VERSION:
-          - '3.11'
           - '3.12'
           - '3.13'
 

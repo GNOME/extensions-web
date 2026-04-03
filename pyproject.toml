@@ -50,7 +50,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "pip-tools==7.4.1",
+    "pip-tools==7.5.3",
     "pylint==3.3.1",
     "pylint-django==2.6.1",
     "ruff==0.7.4",
