@@ -12,6 +12,7 @@ from ...ast import (
     identifier_name,
     iter_nodes,
     member_expression_parts,
+    node_text,
     variable_declarator_name,
     variable_declarator_value,
 )
@@ -168,9 +169,7 @@ def collect_resources_from_methods(
                     signal_args = call_arguments(node)
                     signal_event = None
                     if signal_args and signal_args[0].type == "string":
-                        signal_event = source[
-                            signal_args[0].start_byte + 1 : signal_args[0].end_byte - 1
-                        ]
+                        signal_event = node_text(source, signal_args[0]).strip("\"'")
 
                     if (
                         signal_event == "activate"

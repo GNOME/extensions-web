@@ -6,17 +6,80 @@ import zipfile
 from pathlib import Path
 
 from shexli import AnalysisLimits, analyze_path
+from shexli.analyzer.evidence import node_evidence
+from shexli.analyzer.paths import PathMapper
+from shexli.ast import iter_nodes, parse_js
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
 
 class SmokeTest(unittest.TestCase):
+    def _call_expression_snippet_containing(self, source: str, fragment: str) -> str:
+        tree = parse_js(source)
+        node = next(
+            node
+            for node in iter_nodes(tree.root_node)
+            if node.type == "call_expression"
+            and fragment in source[node.start_byte : node.end_byte]
+        )
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        return node_evidence(Path("/tmp/extension.js"), source, node, mapper).snippet
+
     def test_bad_extension_reports_findings(self) -> None:
         result = analyze_path(DATA_DIR / "bad_extension")
         rule_ids = {finding.rule_id for finding in result.findings}
         self.assertIn("EGO003", rule_ids)
         self.assertIn("EGO004", rule_ids)
         self.assertIn("EGO018", rule_ids)
+
+    def test_multiline_node_snippet_preserves_space_indent(self) -> None:
+        snippet = self._call_expression_snippet_containing(
+            """
+class E {
+    enable() {
+        this._settings.connect('changed::x', () => {
+            this._update();
+        });
+    }
+}
+""".strip(),
+            "this._settings.connect",
+        )
+        self.assertTrue(snippet.startswith("        this._settings.connect("))
+
+    def test_multiline_node_snippet_preserves_tab_indent(self) -> None:
+        snippet = self._call_expression_snippet_containing(
+            (
+                "class E {\n"
+                "\tmethod() {\n"
+                "\t\tthis._settings.connect('changed::x', () => {\n"
+                "\t\t\tthis._update();\n"
+                "\t\t});\n"
+                "\t}\n"
+                "}"
+            ),
+            "this._settings.connect",
+        )
+        self.assertTrue(snippet.startswith("\t\tthis._settings.connect("))
+
+    def test_multiline_node_snippet_does_not_capture_prior_code_on_same_line(
+        self,
+    ) -> None:
+        snippet = self._call_expression_snippet_containing(
+            (
+                "class E {\n"
+                "    enable() {\n"
+                "        console.log('x');        "
+                "this._settings.connect('changed::x', () => {\n"
+                "            this._update();\n"
+                "        });\n"
+                "    }\n"
+                "}"
+            ),
+            "this._settings.connect",
+        )
+        self.assertTrue(snippet.startswith("this._settings.connect("))
+        self.assertNotIn("console.log", snippet)
 
     def test_legacy_imports_gi_detect_shell_forbidden_imports(self) -> None:
         result = analyze_path(DATA_DIR / "legacy_shell_import")
@@ -1037,6 +1100,47 @@ class Indicator extends PanelMenu.Button {
         super._init(0.0, "Indicator");
         const item = new PopupMenu.PopupMenuItem("Run");
         item.connect("activate", () => {});
+        this.menu.addMenuItem(item);
+    }
+});
+
+export default class Extension {
+    enable() {
+        this._indicator = new Indicator();
+    }
+
+    disable() {
+        this._indicator.destroy();
+        this._indicator = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+
+    def test_single_quoted_menu_owned_activate_signal_is_not_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"menu-signal-single@example.com","name":"MenuSignalSingle","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import GObject from "gi://GObject";
+import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
+import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
+
+const Indicator = GObject.registerClass(
+class Indicator extends PanelMenu.Button {
+    _init() {
+        super._init(0.0, "Indicator");
+        const item = new PopupMenu.PopupImageMenuItem("Run", "system-run-symbolic");
+        item.connect('activate', () => {});
         this.menu.addMenuItem(item);
     }
 });

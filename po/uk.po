@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the extensions-web package.
 #
 # vikaig <vikaig99@gmail.com>, 2019.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2022, 2023, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2022, 2023, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-06-22 19:34+0300\n"
+"POT-Creation-Date: 2026-04-03 15:18+0000\n"
+"PO-Revision-Date: 2026-04-03 22:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -560,8 +560,8 @@ msgid ""
 "Extensions distributed via this website are subject to the <a "
 "href=\"%(url)s\">Code of Conduct</a>."
 msgstr ""
-"Розширення, які поширюються з цього сайта, підлягають правилам <a href=\""
-"%(url)s\">Кодексу поведінки</a>."
+"Розширення, які поширюються з цього сайта, підлягають правилам <a "
+"href=\"%(url)s\">Кодексу поведінки</a>."
 
 #: sweettooth/extensions/templates/extensions/upload.html:39
 #: extensions-web-domain-django:1
@@ -570,8 +570,8 @@ msgid ""
 "Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
 "removed from this website."
 msgstr ""
-"Розширення, які порушують правила <a href=\"%(url)s\">Кодексу поведінки</a>,"
-" буде вилучено з цього сайта."
+"Розширення, які порушують правила <a href=\"%(url)s\">Кодексу поведінки</a>, "
+"буде вилучено з цього сайта."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -624,6 +624,57 @@ msgstr "Опублікувати коментар"
 msgid "Edit your comment"
 msgstr "Відредагуйте свій коментар"
 
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (експеримент)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli виявлено %(count)s проблему, яка може потребувати уваги"
+" рецензента.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli виявлено %(count)s проблеми, які можуть потребувати уваги"
+" рецензента.\n"
+"    "
+msgstr[2] ""
+"\n"
+"    Shexli виявлено %(count)s проблем, які можуть потребувати уваги"
+" рецензента.\n"
+"    "
+msgstr[3] ""
+"\n"
+"    Shexli виявлено проблему, яка може потребувати уваги рецензента.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli не знайдено жодних проблем."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli не вдалося проаналізувати цю версію."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli ще не повідомляла про результати."
+
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
@@ -655,8 +706,8 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
 "Настанови щодо розробки можна знайти у <a href='https://gjs.guide/"
 "extensions/'>підручнику з gjs</a>."
