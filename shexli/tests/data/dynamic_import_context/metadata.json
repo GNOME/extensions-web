@@ -1,0 +1,6 @@
+{
+  "uuid": "dynamic-import-context@example.com",
+  "name": "Dynamic Import Context",
+  "description": "Fixture for literal dynamic imports in import graph.",
+  "shell-version": ["49"]
+}

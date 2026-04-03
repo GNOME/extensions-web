@@ -1,0 +1,6 @@
+{
+  "uuid": "legacy-shell-import@example.com",
+  "name": "Legacy Shell Import",
+  "description": "Fixture for legacy imports.gi shell import detection",
+  "shell-version": ["46"]
+}

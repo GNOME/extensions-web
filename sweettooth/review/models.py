@@ -39,3 +39,14 @@ class CodeReview(models.Model):
             ("can-review-extensions", "Can review extensions"),
             ("trusted", "Trusted author"),
         )
+
+
+class ShexliResult(models.Model):
+    version = models.OneToOneField(
+        ExtensionVersion,
+        on_delete=models.CASCADE,
+        related_name="shexli_result",
+    )
+    result = models.JSONField(blank=True, null=True)
+    error = models.TextField(blank=True)
+    updated = models.DateTimeField(auto_now=True)

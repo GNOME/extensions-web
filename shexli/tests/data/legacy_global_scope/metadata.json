@@ -1,0 +1,6 @@
+{
+  "uuid": "legacy-global-scope@example.com",
+  "name": "Legacy Global Scope",
+  "description": "Fixture for legacy pre-enable global side effects",
+  "shell-version": ["46"]
+}

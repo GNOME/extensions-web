@@ -191,3 +191,91 @@
 #approve_form {
     float: right;
 }
+
+#shexli .message {
+    margin-top: 20px;
+}
+
+.expandy_header .shexli-header-title {
+    margin-right: 0.5em;
+}
+
+.expandy_header .shexli-header-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.shexli-finding {
+    border-width: 1px 1px 1px 6px;
+}
+
+.shexli-finding.severity-error {
+    border-left-color: #c00;
+}
+
+.shexli-finding.severity-warning {
+    border-left-color: #c4a000;
+}
+
+.shexli-finding.severity-manual_review {
+    border-left-color: #3465a4;
+}
+
+.shexli-finding-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    flex-wrap: wrap;
+}
+
+.shexli-severity {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-transform: uppercase;
+    overflow: hidden;
+    line-height: 1.2;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.2em 0.6em;
+}
+
+.shexli-severity-label,
+.shexli-severity-count {
+    display: inline-block;
+}
+
+.shexli-severity-split {
+    padding: 0;
+}
+
+.shexli-severity-split .shexli-severity-label,
+.shexli-severity-split .shexli-severity-count {
+    padding: 0.2em 0.6em;
+}
+
+.shexli-severity-count {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.shexli-severity.severity-error {
+    color: #fff;
+    background-color: #c00;
+}
+
+.shexli-severity.severity-warning {
+    color: #000;
+    background-color: #ebde71;
+}
+
+.shexli-severity.severity-manual_review {
+    color: #fff;
+    background-color: #3465a4;
+}

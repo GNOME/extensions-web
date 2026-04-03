@@ -1,0 +1,6 @@
+{
+  "uuid": "legacy-global-release@example.com",
+  "name": "Legacy Global Release",
+  "description": "Fixture for global container release tracking",
+  "shell-version": ["46"]
+}

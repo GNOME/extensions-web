@@ -1,0 +1,6 @@
+{
+  "uuid": "builtin-map-cleanup@example.com",
+  "name": "Builtin Map Cleanup",
+  "description": "Fixture for ignoring JS builtin constructors in destroy checks.",
+  "shell-version": ["48"]
+}

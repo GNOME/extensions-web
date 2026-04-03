@@ -1,0 +1,7 @@
+{
+  "uuid": "good-cleanup@example.com",
+  "name": "Good Cleanup",
+  "description": "Uses helper methods and container cleanup.",
+  "shell-version": ["45"]
+}
+

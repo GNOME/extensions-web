@@ -1,0 +1,8 @@
+{
+  "uuid": "bad-extension@gnome.org",
+  "name": "Bad Extension",
+  "description": "Example package for analyzer smoke tests.",
+  "shell-version": ["50", "51", "50.beta"],
+  "session-modes": ["user"]
+}
+

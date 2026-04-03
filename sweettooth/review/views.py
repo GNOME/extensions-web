@@ -23,7 +23,8 @@ from django.views.decorators.http import require_POST
 from sweettooth.decorators import ajax_view, model_view
 from sweettooth.extensions import models
 from sweettooth.review.diffutils import get_chunks
-from sweettooth.review.models import CodeReview, get_all_reviewers
+from sweettooth.review.models import CodeReview, ShexliResult, get_all_reviewers
+from sweettooth.review.shexli import run_shexli_for_version
 
 IMAGE_TYPES = {
     ".png": "image/png",
@@ -403,6 +404,10 @@ def review_version_view(request, obj):
     compare_version = get_old_version(version)
     can_approve = can_approve_extension(request.user, extension)
     can_review = can_review_extension(request.user, extension)
+    try:
+        shexli_analysis = version.shexli_result
+    except ShexliResult.DoesNotExist:
+        shexli_analysis = None
 
     context = dict(
         extension=extension,
@@ -412,6 +417,7 @@ def review_version_view(request, obj):
         compare_version=compare_version,
         can_approve=can_approve,
         can_review=can_review,
+        shexli_analysis=shexli_analysis,
     )
 
     return render(request, "review/review.html", context)
@@ -596,6 +602,8 @@ def extension_submitted(sender, request, version: models.ExtensionVersion, **kwa
             )
             _version.status = models.STATUS_REJECTED
             _version.save()
+
+        run_shexli_for_version(version)
 
 
 models.submitted_for_review.connect(extension_submitted)

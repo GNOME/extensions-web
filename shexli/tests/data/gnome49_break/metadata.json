@@ -1,0 +1,7 @@
+{
+  "uuid": "gnome49-break@example.com",
+  "name": "GNOME 49 Break",
+  "description": "Uses APIs removed in GNOME Shell 49.",
+  "shell-version": ["49"]
+}
+

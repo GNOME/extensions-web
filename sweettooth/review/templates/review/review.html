@@ -97,6 +97,66 @@
       the extension zipfile</a>.</p>
 </div>
 
+<h2 class="expandy_header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <span class="shexli-header-title">{% trans "Shexli (experimental)" %}</span>
+  {% if shexli_analysis and shexli_analysis.result and shexli_analysis.result.summary.severity_counts %}
+  <span class="shexli-header-badges">
+    {% for severity, count in shexli_analysis.result.summary.severity_counts.items %}
+    <span class="shexli-severity shexli-severity-split severity-{{ severity|lower }}">
+      <span class="shexli-severity-label">{{ severity }}</span>
+      <span class="shexli-severity-count">{{ count }}</span>
+    </span>
+    {% endfor %}
+  </span>
+  {% endif %}
+</h2>
+<div id="shexli" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  {% if shexli_analysis and shexli_analysis.result %}
+  {% if shexli_analysis.result.findings %}
+  <p class="message warning">
+    {% blocktrans count count=shexli_analysis.result.summary.finding_count %}
+    Shexli found 1 issue that may need reviewer attention.
+    {% plural %}
+    Shexli found {{ count }} issues that may need reviewer attention.
+    {% endblocktrans %}
+  </p>
+
+    {% for finding in shexli_analysis.result.findings %}
+    <div class="review shexli-finding severity-{{ finding.severity|lower }}">
+      <p class="shexli-finding-header">
+        <strong>{{ finding.rule_id }}</strong>
+        <span class="shexli-severity severity-{{ finding.severity|lower }}">{{ finding.severity }}</span>
+      </p>
+
+      <p><strong>{{ finding.title }}</strong></p>
+      <p>{{ finding.message }}</p>
+
+      <p>
+        <a href="{{ finding.source_url }}">{{ finding.source_section }}</a>
+      </p>
+
+      {% if finding.evidence %}
+      <ul>
+        {% for evidence in finding.evidence %}
+        <li>
+          <code>{{ evidence.path }}</code>{% if evidence.line %}:{{ evidence.line }}{% endif %}
+          {% if evidence.snippet %}<pre>{{ evidence.snippet }}</pre>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  {% else %}
+  <p class="message info">{% trans "Shexli did not find any issues." %}</p>
+  {% endif %}
+  {% elif shexli_analysis and shexli_analysis.error %}
+  <p class="message warning">{% trans "Shexli could not analyze this version." %}</p>
+  {% else %}
+  <p class="message info">{% trans "Shexli has not produced a result yet." %}</p>
+  {% endif %}
+</div>
+
 <h2 class="expandy_header expanded col-xs-12 col-sm-12 col-md-12 col-lg-12">All Versions</h2>
 <div id="all_versions">
   <table>

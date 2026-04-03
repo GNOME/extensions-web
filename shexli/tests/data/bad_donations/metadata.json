@@ -1,0 +1,11 @@
+{
+  "uuid": "bad-donations@example.com",
+  "name": "Bad Donations",
+  "description": "Invalid donation metadata.",
+  "shell-version": ["45"],
+  "donations": {
+    "ko-fi": "test",
+    "custom": "ftp://example.com"
+  }
+}
+

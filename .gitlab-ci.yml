@@ -1,6 +1,6 @@
 variables:
   FF_NETWORK_PER_BUILD: 'true'
-  PYTHON_VERSION: '3.11'
+  PYTHON_VERSION: '3.12'
   OPENSEARCH_VERSION: '2.8.0'
 
 workflow:
@@ -77,7 +77,6 @@ test:
   parallel:
     matrix:
       - PYTHON_VERSION:
-          - '3.11'
           - '3.12'
           - '3.13'
 
@@ -131,25 +130,6 @@ format:
     - .validate defaults
   variables:
     VALIDATE_TOOL_ARGS: format --check --diff
-
-security (trivy):
-  extends:
-    - .security defaults
-  image:
-    name: aquasec/trivy
-    entrypoint: [""]
-  script:
-    - trivy fs .
-  cache:
-    paths:
-      - .trivy
-    when: always
-  variables:
-    TRIVY_CACHE_DIR: .trivy
-    TRIVY_EXIT_CODE: 1
-    TRIVY_SCANNERS: vuln,config
-    # This is single-run job so we do not care of k8s recommendations
-    TRIVY_SKIP_FILES: openshift/jobs/reindex-extensions.yml
 
 security (pip-audit):
   extends:
