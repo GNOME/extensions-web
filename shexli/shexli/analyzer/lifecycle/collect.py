@@ -31,6 +31,16 @@ from .base import (
     resource_from_node,
 )
 
+LOCAL_UI_NAMESPACE_ROOTS = {
+    "Adw",
+    "Clutter",
+    "Gtk",
+    "PanelMenu",
+    "PopupMenu",
+    "QuickSettings",
+    "St",
+}
+
 
 def collect_resources_from_methods(
     source: str,
@@ -50,6 +60,7 @@ def collect_resources_from_methods(
         owner_aliases: dict[str, str] = {}
         cleared_sources: set[str] = set()
         menu_item_aliases: set[str] = set()
+        local_ui_aliases: set[str] = set()
         local_menu_owned: set[str] = set()
 
         for node in iter_nodes(body):
@@ -88,11 +99,15 @@ def collect_resources_from_methods(
 
                     if name and value is not None and value.type == "new_expression":
                         constructor = value.child_by_field_name("constructor")
-                        constructor_name = ".".join(
-                            member_expression_parts(source, constructor)
-                        )
+                        constructor_parts = member_expression_parts(source, constructor)
+                        constructor_name = ".".join(constructor_parts)
                         if constructor_name.startswith("PopupMenu.Popup"):
                             menu_item_aliases.add(name)
+                        if (
+                            constructor_parts
+                            and constructor_parts[0] in LOCAL_UI_NAMESPACE_ROOTS
+                        ):
+                            local_ui_aliases.add(name)
             elif node.type == "assignment_expression":
                 left = node.child_by_field_name("left")
                 right = node.child_by_field_name("right")
@@ -155,6 +170,17 @@ def collect_resources_from_methods(
                         )
                         if owner:
                             owner_aliases[name] = owner
+                        if right.type == "new_expression":
+                            constructor = right.child_by_field_name("constructor")
+                            constructor_parts = member_expression_parts(
+                                source,
+                                constructor,
+                            )
+                            if (
+                                constructor_parts
+                                and constructor_parts[0] in LOCAL_UI_NAMESPACE_ROOTS
+                            ):
+                                local_ui_aliases.add(name)
             elif node.type == "call_expression":
                 function_node = node.child_by_field_name("function")
                 if function_node is None:
@@ -179,6 +205,14 @@ def collect_resources_from_methods(
                     ):
                         receiver_name = identifier_name(source, receiver)
                         if receiver_name in menu_item_aliases:
+                            continue
+
+                    if receiver is not None and receiver.type == "identifier":
+                        receiver_name = identifier_name(source, receiver)
+                        if receiver_name and (
+                            aliases.get(receiver_name) == "object"
+                            or receiver_name in local_ui_aliases
+                        ):
                             continue
 
                     receiver_field = None
