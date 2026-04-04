@@ -194,6 +194,23 @@ def collect_resources_from_methods(
 
                 call_name = ".".join(call_callee_parts(source, node))
                 if (
+                    call_name == "Context.monitors.connect"
+                    and node.parent is not None
+                    and node.parent.type == "expression_statement"
+                ):
+                    arguments = call_arguments(node)
+                    if arguments:
+                        owner = field_name_from_node(
+                            source,
+                            arguments[0],
+                            aliases,
+                            module_vars,
+                        )
+                        if owner:
+                            evidence = node_evidence(path, source, node, mapper)
+                            record_resource(tracker.signal_groups, owner, evidence)
+                            continue
+                if (
                     is_signal_connect_call(source, node)
                     and node.parent is not None
                     and node.parent.type == "expression_statement"
