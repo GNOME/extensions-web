@@ -695,6 +695,45 @@ export default class E extends Extension {
         rule_ids = {finding.rule_id for finding in result.findings}
         self.assertNotIn("EGO026", rule_ids)
 
+    def test_reexport_chain_is_included_in_context_graph(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"reexport@example.com","name":"ReExport","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import { run } from "./src/index.js";
+
+export default class E {
+    enable() {
+        run();
+    }
+
+    disable() {}
+}
+""".strip(),
+                encoding="utf-8",
+            )
+            (root / "src").mkdir()
+            (root / "src" / "index.js").write_text(
+                """
+export { run } from "./impl.js";
+""".strip(),
+                encoding="utf-8",
+            )
+            (root / "src" / "impl.js").write_text(
+                """
+export function run() {}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO026", rule_ids)
+
     def test_unreachable_js_files_are_flagged(self) -> None:
         result = analyze_path(DATA_DIR / "unreachable_js")
         rule_ids = {finding.rule_id for finding in result.findings}
