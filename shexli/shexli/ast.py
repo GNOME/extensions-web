@@ -563,6 +563,100 @@ def bound_this_callback_methods(source: str, node: Node) -> list[str]:
     return names
 
 
+def connect_bound_this_callback_methods(source: str, node: Node) -> list[str]:
+    names: list[str] = []
+    for sub in iter_nodes(node):
+        if sub.type != "call_expression":
+            continue
+
+        call_name = ".".join(call_callee_parts(source, sub))
+        if not (call_name.endswith(".connect") or call_name.endswith(".connectObject")):
+            continue
+
+        for argument in call_arguments(sub):
+            if argument.type != "call_expression":
+                continue
+
+            function_node = argument.child_by_field_name("function")
+            if function_node is None:
+                continue
+
+            parts = member_expression_parts(source, function_node)
+            if len(parts) != 3 or parts[2] != "bind":
+                continue
+
+            target = function_node.child_by_field_name("object")
+            if target is None:
+                continue
+
+            target_parts = member_expression_parts(source, target)
+            if len(target_parts) != 2 or target_parts[0] != "this":
+                continue
+
+            args = call_arguments(argument)
+            if len(args) != 1 or args[0].type != "this":
+                continue
+
+            names.append(target_parts[1])
+
+    return names
+
+
+def connect_callback_methods_for_events(
+    source: str,
+    node: Node,
+    events: set[str],
+) -> list[str]:
+    names: list[str] = []
+    for sub in iter_nodes(node):
+        if sub.type != "call_expression":
+            continue
+
+        call_name = ".".join(call_callee_parts(source, sub))
+        if not (call_name.endswith(".connect") or call_name.endswith(".connectObject")):
+            continue
+
+        arguments = call_arguments(sub)
+        if not arguments or arguments[0].type != "string":
+            continue
+
+        event_name = node_text(source, arguments[0]).strip("\"'")
+        if event_name not in events:
+            continue
+
+        for argument in arguments[1:]:
+            if argument.type == "identifier":
+                names.append(node_text(source, argument))
+                continue
+
+            if argument.type != "call_expression":
+                continue
+
+            function_node = argument.child_by_field_name("function")
+            if function_node is None:
+                continue
+
+            parts = member_expression_parts(source, function_node)
+            if len(parts) != 3 or parts[2] != "bind":
+                continue
+
+            target = function_node.child_by_field_name("object")
+            if target is None:
+                continue
+
+            target_parts = member_expression_parts(source, target)
+            if len(target_parts) != 2 or target_parts[0] != "this":
+                continue
+
+            bind_args = call_arguments(argument)
+            if len(bind_args) != 1 or bind_args[0].type != "this":
+                continue
+
+            names.append(target_parts[1])
+
+    return names
+
+
 def call_arguments(node: Node) -> list[Node]:
     args = node.child_by_field_name("arguments")
     return list(args.named_children) if args is not None else []

@@ -93,6 +93,59 @@ class E {
         self.assertNotIn("EGO015", rule_ids)
         self.assertNotIn("EGO016", rule_ids)
 
+    def test_destroy_signal_bound_cleanup_suppresses_object_group_warning(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"destroy-bound@example.com","name":"DestroyBound","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import GObject from "gi://GObject";
+import St from "gi://St";
+import * as SwitcherPopup from "resource:///org/gnome/shell/ui/switcherPopup.js";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+
+const Item = GObject.registerClass(
+class Item extends St.BoxLayout {});
+
+const Holder = GObject.registerClass(
+class Holder extends SwitcherPopup.SwitcherList {
+    _init() {
+        super._init(false);
+        this.items = [];
+        const item = new Item();
+        this.items.push(item);
+        this.connect("destroy", this._onDestroy.bind(this));
+    }
+
+    _onDestroy() {
+        for (const item of this.items) {
+            item.destroy();
+        }
+        this.items = [];
+    }
+});
+
+export default class E extends Extension {
+    enable() {
+        this._holder = new Holder();
+    }
+
+    disable() {
+        this._holder.destroy();
+        this._holder = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO014", rule_ids)
+
     def test_glib_source_remove_counts_as_cleanup(self) -> None:
         result = analyze_path(DATA_DIR / "source_remove_cleanup")
         rule_ids = {finding.rule_id for finding in result.findings}
