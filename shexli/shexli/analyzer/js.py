@@ -5,6 +5,7 @@ from __future__ import annotations
 from ..ast import (
     call_arguments,
     call_callee_parts,
+    connect_callback_methods_for_events,
     default_export_class_methods,
     imports_in_program,
     iter_nodes,
@@ -543,10 +544,31 @@ def check_js_file(
             class_methods,
             ["constructor", "_init", "enable"],
         )
+        cleanup_start_names = [
+            "disable",
+            "destroy",
+            "_destroy",
+            "dispose",
+            "cleanup",
+            "stop",
+        ]
+        for method in class_enable_methods:
+            body = method.child_by_field_name("body")
+            if body is None:
+                continue
+
+            for callback_name in connect_callback_methods_for_events(
+                text,
+                body,
+                {"destroy"},
+            ):
+                if callback_name not in cleanup_start_names:
+                    cleanup_start_names.append(callback_name)
+
         class_disable_methods = method_reachability(
             text,
             class_methods,
-            ["disable", "destroy", "_destroy", "dispose", "cleanup", "stop"],
+            cleanup_start_names,
         )
         if not class_enable_methods:
             continue
