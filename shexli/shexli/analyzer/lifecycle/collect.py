@@ -288,9 +288,16 @@ def collect_resources_from_methods(
                     "set_child",
                     "add_actor",
                     "addMenuItem",
+                    "addChildToParent",
                 }:
                     is_menu_item_add = callee_parts[-1] == "addMenuItem"
+                    uses_add_child_wrapper = callee_parts[-1] == "addChildToParent"
                     parent_node = function_node.child_by_field_name("object")
+                    if uses_add_child_wrapper:
+                        arguments = call_arguments(node)
+                        if not arguments:
+                            continue
+                        parent_node = arguments[0]
                     local_parent_name = None
                     if parent_node is not None and parent_node.type == "identifier":
                         parent_name = identifier_name(source, parent_node)
@@ -312,7 +319,12 @@ def collect_resources_from_methods(
                     if parent is None and local_parent_name is None:
                         continue
 
-                    for arg in call_arguments(node):
+                    child_args = (
+                        call_arguments(node)[1:]
+                        if uses_add_child_wrapper
+                        else call_arguments(node)
+                    )
+                    for arg in child_args:
                         child = field_name_from_node(
                             source,
                             arg,
