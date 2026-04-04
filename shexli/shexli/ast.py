@@ -162,7 +162,7 @@ def assigned_new_target(source: str, node: Node) -> list[str]:
 def imports_in_program(source: str, root: Node) -> list[JSImport]:
     imports: list[JSImport] = []
     for child in root.children:
-        if child.type != "import_statement":
+        if child.type not in {"import_statement", "export_statement"}:
             continue
         snippet = node_text(source, child)
         module = None
