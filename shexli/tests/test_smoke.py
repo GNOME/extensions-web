@@ -1575,6 +1575,53 @@ export default class E extends Extension {
             self.assertNotIn("EGO014", rule_ids)
             self.assertNotIn("EGO027", rule_ids)
 
+    def test_transitive_child_menu_roots_are_framework_owned(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"child-menu@example.com","name":"ChildMenu","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+
+class PopupMenuSection {}
+
+class ChildMenu extends PopupMenuSection {
+    constructor() {
+        super();
+        this.menu = new PopupMenuSection();
+    }
+}
+
+class CustomizeChildMenu extends ChildMenu {
+    constructor() {
+        super();
+        this.actor.connect("destroy", () => this._destroy());
+        this.menu.connect("open-state-changed", () => this._sync());
+    }
+
+    _destroy() {}
+    _sync() {}
+}
+
+export default class E extends Extension {
+    enable() {
+        this._menu = new CustomizeChildMenu();
+    }
+
+    disable() {
+        this._menu = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            self.assertNotIn("EGO015", {finding.rule_id for finding in result.findings})
+
     def test_signal_handling_wrapper_is_treated_as_signal_group(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
@@ -1608,6 +1655,43 @@ export default class E extends Extension {
         this._button.destroy();
         this._button = null;
         this._signals = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+
+    def test_signal_manager_destroy_is_treated_as_signal_group(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"signal-manager@example.com","name":"SignalManager","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+
+class SignalManager {
+    connect(obj, signal, handler) {
+        return obj.connect(signal, handler);
+    }
+
+    destroy() {}
+}
+
+export default class E extends Extension {
+    enable() {
+        this._signals = new SignalManager();
+        this._signals.connect(global.display, "restacked", () => {});
+    }
+
+    disable() {
+        this._signals.destroy();
     }
 }
 """.strip(),

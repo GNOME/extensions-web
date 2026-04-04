@@ -31,6 +31,7 @@ from .lifecycle import (
     collect_destroyable_class_names,
     collect_pre_enable_evidence,
     collect_resources_from_methods,
+    collect_signal_manager_fields,
     method_reachability,
 )
 from .lifecycle.base import JS_BUILTIN_CONTAINERS, SOURCE_ADD_NAMES
@@ -182,6 +183,26 @@ def _aborted_soup_session_fields(text: str, methods: list) -> set[str]:
                 fields.add(parts[1])
 
     return fields
+
+
+def _inherits_from(
+    class_name: str,
+    class_superclasses: dict[str, str],
+    targets: set[str],
+) -> bool:
+    current = class_name
+    seen: set[str] = set()
+
+    while current not in seen:
+        seen.add(current)
+        superclass = class_superclasses.get(current)
+        if superclass is None:
+            return False
+        if superclass in targets:
+            return True
+        current = superclass
+
+    return False
 
 
 def _entrypoint_local_class_refs(
@@ -452,8 +473,28 @@ def check_js_file(
     disable_methods = method_reachability(text, methods, ["disable"])
     destroyable_classes = collect_destroyable_class_names(text, root)
     local_class_names = top_level_class_names(text, root)
-    cleaned = collect_cleanup_from_methods(text, disable_methods, module_vars)
+    signal_manager_fields = collect_signal_manager_fields(
+        text,
+        method_reachability(text, methods, ["constructor", "_init", "enable"]),
+        destroyable_classes,
+        module_vars,
+    )
 
+    created = collect_resources_from_methods(
+        text,
+        path,
+        enable_methods,
+        mapper,
+        destroyable_classes,
+        module_vars,
+        signal_manager_fields,
+    )
+    cleaned = collect_cleanup_from_methods(
+        text,
+        disable_methods,
+        module_vars,
+        set(created.signal_groups) | signal_manager_fields,
+    )
     pre_enable_evidence = collect_pre_enable_evidence(text, path, root, methods, mapper)
     constructor_custom_refs = _entrypoint_constructor_custom_refs(
         text,
@@ -472,15 +513,6 @@ def check_js_file(
             ),
             pre_enable_evidence[:10],
         )
-
-    created = collect_resources_from_methods(
-        text,
-        path,
-        enable_methods,
-        mapper,
-        destroyable_classes,
-        module_vars,
-    )
     constructor_created = collect_resources_from_methods(
         text,
         path,
@@ -575,6 +607,16 @@ def check_js_file(
         if not class_enable_methods:
             continue
 
+        class_signal_manager_fields = collect_signal_manager_fields(
+            text,
+            method_reachability(
+                text,
+                class_methods,
+                ["constructor", "_init", "enable"],
+            ),
+            destroyable_classes,
+            set(),
+        )
         class_created = collect_resources_from_methods(
             text,
             path,
@@ -582,18 +624,27 @@ def check_js_file(
             mapper,
             destroyable_classes,
             set(),
+            class_signal_manager_fields,
         )
         class_cleaned = collect_cleanup_from_methods(
             text,
             class_disable_methods,
             set(),
+            set(class_created.signal_groups) | class_signal_manager_fields,
         )
         suppress_root_fields: set[str] = set()
-        if class_superclasses.get(class_name) in {
+        framework_root_superclasses = {
             "PopupMenuSection",
             "PopupMenu.PopupMenuSection",
-        }:
-            suppress_root_fields.update({"actor", "box"})
+            "CollapsibleGroup",
+            "ChildMenu",
+        }
+        if class_name in framework_root_superclasses or _inherits_from(
+            class_name,
+            class_superclasses,
+            framework_root_superclasses,
+        ):
+            suppress_root_fields.update({"actor", "box", "menu"})
         append_lifecycle_findings(
             ctx.findings,
             class_created,

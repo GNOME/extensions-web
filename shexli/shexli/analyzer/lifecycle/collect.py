@@ -50,8 +50,10 @@ def collect_resources_from_methods(
     mapper: PathMapper,
     destroyable_classes: set[str],
     module_vars: set[str],
+    known_signal_manager_fields: set[str] | None = None,
 ) -> ResourceTracker:
     tracker = ResourceTracker.empty()
+    known_signal_manager_fields = known_signal_manager_fields or set()
     for method in methods:
         body = method.child_by_field_name("body")
         if body is None:
@@ -60,7 +62,7 @@ def collect_resources_from_methods(
         aliases: dict[str, str] = {}
         owner_aliases: dict[str, str] = {}
         cleared_sources: set[str] = set()
-        signal_manager_fields: set[str] = set()
+        signal_manager_fields = set(known_signal_manager_fields)
         menu_item_aliases: set[str] = set()
         local_ui_aliases: set[str] = set()
         local_menu_owned: set[str] = set()
@@ -200,11 +202,15 @@ def collect_resources_from_methods(
                 ):
                     arguments = call_arguments(node)
                     if arguments:
-                        owner = field_name_from_node(
-                            source,
-                            arguments[0],
-                            aliases,
-                            module_vars,
+                        owner = (
+                            SELF_OWNER
+                            if arguments[0].type == "this"
+                            else field_name_from_node(
+                                source,
+                                arguments[0],
+                                aliases,
+                                module_vars,
+                            )
                         )
                         if owner:
                             evidence = node_evidence(path, source, node, mapper)
@@ -438,19 +444,98 @@ def collect_resources_from_methods(
     return tracker
 
 
-def collect_cleanup_from_methods(
+def collect_signal_manager_fields(
     source: str,
     methods: list[Node],
+    destroyable_classes: set[str],
     module_vars: set[str],
-) -> ResourceTracker:
-    tracker = ResourceTracker.empty()
+) -> set[str]:
+    fields: set[str] = set()
+
     for method in methods:
         body = method.child_by_field_name("body")
         if body is None:
             continue
 
         aliases: dict[str, str] = {}
-        collector = CleanupCollector(source, aliases, module_vars, tracker)
+        for node in iter_nodes(body):
+            if node.type == "variable_declarator":
+                name = variable_declarator_name(source, node)
+                value = variable_declarator_value(node)
+                if not name or value is None:
+                    continue
+
+                kind = resource_from_node(
+                    source,
+                    value,
+                    aliases,
+                    destroyable_classes,
+                )
+                if kind:
+                    aliases[name] = kind
+                    if kind == "signal_manager":
+                        fields.add(name)
+                else:
+                    field = field_name_from_node(
+                        source,
+                        value,
+                        aliases,
+                        module_vars,
+                    )
+                    if field:
+                        aliases[name] = f"field:{field}"
+            elif node.type == "assignment_expression":
+                left = node.child_by_field_name("left")
+                right = node.child_by_field_name("right")
+                if left is None or right is None:
+                    continue
+
+                kind = resource_from_node(
+                    source,
+                    right,
+                    aliases,
+                    destroyable_classes,
+                )
+                if kind != "signal_manager":
+                    continue
+
+                left_field = field_name_from_node(
+                    source,
+                    left,
+                    aliases,
+                    module_vars,
+                )
+                if left_field:
+                    fields.add(left_field)
+                elif left.type == "identifier":
+                    name = identifier_name(source, left)
+                    if name:
+                        fields.add(name)
+
+    return fields
+
+
+def collect_cleanup_from_methods(
+    source: str,
+    methods: list[Node],
+    module_vars: set[str],
+    signal_group_fields: set[str] | None = None,
+) -> ResourceTracker:
+    tracker = ResourceTracker.empty()
+    signal_group_fields = signal_group_fields or set()
+    for method in methods:
+        body = method.child_by_field_name("body")
+        if body is None:
+            continue
+
+        aliases: dict[str, str] = {}
+        collector = CleanupCollector(
+            source,
+            aliases,
+            module_vars,
+            signal_group_fields,
+            tracker,
+        )
 
         for node in iter_nodes(body):
             if node.type == "variable_declarator":

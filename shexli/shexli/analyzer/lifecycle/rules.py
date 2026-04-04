@@ -146,6 +146,7 @@ def append_lifecycle_findings(
         for name in created.signals
         if any(
             name.startswith(f"anonymous-signal:{child}:")
+            or name.startswith(f"{child}:")
             for child in owned_descendants
         )
     }
@@ -154,6 +155,7 @@ def append_lifecycle_findings(
         for name in created.signals
         if any(
             name.startswith(f"anonymous-signal:{child}:")
+            or name.startswith(f"{child}:")
             for child in created.menu_owned
         )
     }

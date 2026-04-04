@@ -81,6 +81,7 @@ JS_BUILTIN_CONTAINERS = {
 }
 SIGNAL_MANAGER_NEW_NAMES = {
     "SignalHandling",
+    "SignalManager",
 }
 NON_IMMEDIATE_EXECUTION_NODES = {
     "arrow_function",
@@ -134,6 +135,7 @@ class CleanupCollector:
     source: str
     aliases: dict[str, str]
     module_vars: set[str]
+    signal_group_fields: set[str]
     tracker: ResourceTracker
 
     def mark_call(self, node: Node) -> None:
@@ -149,6 +151,8 @@ class CleanupCollector:
             and function_parts[2] == "destroy"
         ):
             record_resource(self.tracker.objects, function_parts[1])
+            if function_parts[1] in self.signal_group_fields:
+                record_resource(self.tracker.signal_groups, function_parts[1])
             return
 
         if (
@@ -157,6 +161,8 @@ class CleanupCollector:
             and function_parts[1] == "destroy"
         ):
             record_resource(self.tracker.objects, function_parts[0])
+            if function_parts[0] in self.signal_group_fields:
+                record_resource(self.tracker.signal_groups, function_parts[0])
             return
 
         if len(function_parts) >= 3 and function_parts[0] == "this":
@@ -165,6 +171,11 @@ class CleanupCollector:
             record_resource(self.tracker.touched_refs, function_parts[0])
 
         args = call_arguments(node)
+        if call_name == "Context.monitors.disconnect":
+            for arg in args:
+                if arg.type == "this":
+                    record_resource(self.tracker.signal_groups, SELF_OWNER)
+                    return
         if call_name.endswith(".disconnect") or call_name == "disconnect":
             receiver = function_node.child_by_field_name("object")
             if not args and receiver is not None:
@@ -193,6 +204,28 @@ class CleanupCollector:
                             self.tracker.signal_groups,
                             self.aliases[name].split(":", 2)[2],
                         )
+        elif call_name.endswith(".disconnectAll"):
+            receiver = function_node.child_by_field_name("object")
+            if not args and receiver is not None:
+                field = field_name_from_node(
+                    self.source,
+                    receiver,
+                    self.aliases,
+                    self.module_vars,
+                )
+                if field:
+                    record_resource(self.tracker.signal_groups, field)
+        elif call_name.endswith(".destroy"):
+            receiver = function_node.child_by_field_name("object")
+            if not args and receiver is not None:
+                field = field_name_from_node(
+                    self.source,
+                    receiver,
+                    self.aliases,
+                    self.module_vars,
+                )
+                if field and field in self.signal_group_fields:
+                    record_resource(self.tracker.signal_groups, field)
         elif call_name in SOURCE_REMOVE_NAMES:
             for arg in args:
                 field = field_name_from_node(

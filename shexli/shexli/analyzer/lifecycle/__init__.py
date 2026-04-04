@@ -8,7 +8,11 @@ from .base import (
     method_reachability,
     owner_field_from_node,
 )
-from .collect import collect_cleanup_from_methods, collect_resources_from_methods
+from .collect import (
+    collect_cleanup_from_methods,
+    collect_resources_from_methods,
+    collect_signal_manager_fields,
+)
 from .preenable import collect_pre_enable_evidence
 
 __all__ = [
@@ -18,6 +22,7 @@ __all__ = [
     "collect_destroyable_class_names",
     "collect_pre_enable_evidence",
     "collect_resources_from_methods",
+    "collect_signal_manager_fields",
     "field_name_from_node",
     "method_reachability",
     "owner_field_from_node",
