@@ -90,6 +90,7 @@ NON_IMMEDIATE_EXECUTION_NODES = {
     "generator_function_declaration",
     "method_definition",
 }
+SELF_OWNER = "__self_owner__"
 
 
 @dataclass(slots=True)

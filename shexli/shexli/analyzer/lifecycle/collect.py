@@ -19,6 +19,7 @@ from ...ast import (
 from ..evidence import node_evidence
 from ..paths import PathMapper
 from .base import (
+    SELF_OWNER,
     SOURCE_ADD_NAMES,
     SOURCE_REMOVE_NAMES,
     CleanupCollector,
@@ -302,6 +303,12 @@ def collect_resources_from_methods(
                         owner_aliases,
                         module_vars,
                     )
+                    if (
+                        parent is None
+                        and parent_node is not None
+                        and parent_node.type == "this"
+                    ):
+                        parent = SELF_OWNER
                     if parent is None and local_parent_name is None:
                         continue
 

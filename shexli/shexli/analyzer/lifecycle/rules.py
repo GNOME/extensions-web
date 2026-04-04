@@ -6,6 +6,7 @@ from dataclasses import dataclass
 
 from ...models import Evidence, Finding
 from ...spec import RULES_BY_ID
+from .base import SELF_OWNER
 
 
 @dataclass(frozen=True, slots=True)
@@ -114,7 +115,7 @@ def _release_candidates(
 
 
 def _owned_descendants(created) -> set[str]:
-    roots = set(created.objects) | set(created.resource_refs)
+    roots = set(created.objects) | set(created.resource_refs) | {SELF_OWNER}
     descendants: set[str] = set()
     parent_edges = [*created.parent_owned.items(), *created.local_parent_owned.items()]
 
