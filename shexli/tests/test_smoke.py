@@ -1377,6 +1377,43 @@ export default class ExamplePrefs extends Adw.PreferencesWindow {
             rule_ids = {finding.rule_id for finding in result.findings}
             self.assertNotIn("EGO015", rule_ids)
 
+    def test_helper_created_local_child_signal_is_not_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"helper-child@example.com","name":"HelperChild","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import St from "gi://St";
+
+function createButton() {
+    return new St.Button({ label: "Run" });
+}
+
+export default class Extension {
+    enable() {
+        const box = new St.BoxLayout();
+        const btn = createButton();
+        btn.connect("clicked", () => {});
+        box.add_child(btn);
+        this._box = box;
+    }
+
+    disable() {
+        this._box.destroy();
+        this._box = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+
     def test_field_owned_child_widgets_are_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)

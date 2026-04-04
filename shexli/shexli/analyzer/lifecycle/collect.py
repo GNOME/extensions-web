@@ -66,6 +66,8 @@ def collect_resources_from_methods(
         menu_item_aliases: set[str] = set()
         local_ui_aliases: set[str] = set()
         local_menu_owned: set[str] = set()
+        local_parent_owned_names: set[str] = set()
+        method_signal_names: set[str] = set()
 
         for node in iter_nodes(body):
             if node.type == "variable_declarator":
@@ -303,7 +305,18 @@ def collect_resources_from_methods(
                             if signal_event
                             else f"{receiver_field}:{node.start_point.row + 1}"
                         )
+                    elif receiver is not None and receiver.type == "identifier":
+                        receiver_name = identifier_name(source, receiver)
+                        if receiver_name:
+                            signal_name = (
+                                "anonymous-signal:"
+                                f"{receiver_name}:"
+                                f"{signal_event}:{node.start_point.row + 1}"
+                                if signal_event
+                                else f"{receiver_name}:{node.start_point.row + 1}"
+                            )
                     record_resource(tracker.signals, signal_name, evidence)
+                    method_signal_names.add(signal_name)
 
                 if (
                     call_name in SOURCE_ADD_NAMES
@@ -405,14 +418,16 @@ def collect_resources_from_methods(
 
                         if arg.type == "identifier":
                             name = identifier_name(source, arg)
-                            if name and aliases.get(name) == "object":
+                            if name and not aliases.get(name, "").startswith("field:"):
                                 if parent is not None:
                                     tracker.local_parent_owned.setdefault(name, parent)
+                                    local_parent_owned_names.add(name)
                                 if local_parent_name:
                                     tracker.local_parent_owned.setdefault(
                                         name,
                                         local_parent_name,
                                     )
+                                    local_parent_owned_names.add(name)
                                 if is_menu_item_add:
                                     tracker.menu_owned.add(name)
                                     local_menu_owned.add(name)
@@ -440,6 +455,15 @@ def collect_resources_from_methods(
                     tracker.menu_owned.add(child)
                     local_menu_owned.add(child)
                     changed = True
+
+        owned_local_names = local_parent_owned_names | local_menu_owned
+        for signal_name in method_signal_names:
+            if any(
+                signal_name.startswith(f"anonymous-signal:{child}:")
+                or signal_name.startswith(f"{child}:")
+                for child in owned_local_names
+            ):
+                tracker.signals.pop(signal_name, None)
 
     return tracker
 
