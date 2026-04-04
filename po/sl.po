@@ -9,18 +9,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-06-22 09:50+0200\n"
+"POT-Creation-Date: 2026-04-03 15:18+0000\n"
+"PO-Revision-Date: 2026-04-04 10:21+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.8\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -359,9 +359,9 @@ msgstr "Prekliči"
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Za preprečevanje prejemanja neželenih sporočil je pred pošiljanjem opomb in "
 "poročil o napakah zahtevana <a href=\"%(login_url)s\">prijava na spletno "
@@ -534,23 +534,23 @@ msgstr ""
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"If this is your first extension, please see the documentation on <a href="
-"\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
-"Če je to vaša prva razširitev, si oglejte dokumentacijo na <a href=\"%(url)s"
-"\">gjs.guide</a> - navodila za ustvarjanje razširitve in pripravo za "
-"nalaganje."
+"Če je to vaša prva razširitev, si oglejte dokumentacijo na <a "
+"href=\"%(url)s\">gjs.guide</a> - navodila za ustvarjanje razširitve in "
+"pripravo za nalaganje."
 
 #: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Extensions distributed via this website are subject to the <a href=\"%(url)s"
-"\">Code of Conduct</a>."
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
 msgstr ""
-"Za razširitve, ki se razširjajo prek te spletne strani, velja <a href="
-"\"%(url)s\">Kodeks ravnanja</a>."
+"Za razširitve, ki se razširjajo prek te spletne strani, velja <a "
+"href=\"%(url)s\">Kodeks ravnanja</a>."
 
 #: sweettooth/extensions/templates/extensions/upload.html:39
 #: extensions-web-domain-django:1
@@ -613,6 +613,58 @@ msgstr "Objavi mnenje"
 msgid "Edit your comment"
 msgstr "Uredi mnenje"
 
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (poskusno)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli je odkril %(count)s težav, ki bi jih moral pregledovalec "
+"preveriti.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli je odkril %(count)s težavo, ki bi jo moral pregledovalec "
+"preveriti.\n"
+"    "
+msgstr[2] ""
+"\n"
+"    Shexli je odkril %(count)s težavi, ki bi ju moral pregledovalec "
+"preveriti.\n"
+"    "
+msgstr[3] ""
+"\n"
+"    Shexli je odkril %(count)s težave, ki bi jih moral pregledovalec "
+"preveriti.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli ni zaznal nobenih težav."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli te različice ne zmore analizirati."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli še ni dosegel rezultata."
+
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
@@ -643,11 +695,11 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
-"Vodnike za razvijalce najdete na <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"Vodnike za razvijalce najdete na <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 
 #: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
