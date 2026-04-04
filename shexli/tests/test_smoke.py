@@ -1255,6 +1255,54 @@ export default class Extension {
             rule_ids = {finding.rule_id for finding in result.findings}
             self.assertNotIn("EGO015", rule_ids)
 
+    def test_menu_owned_child_widget_signal_is_not_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"menu-child-signal@example.com","name":"MenuChildSignal","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import GObject from "gi://GObject";
+import St from "gi://St";
+import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
+import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
+
+const Indicator = GObject.registerClass(
+class Indicator extends PanelMenu.Button {
+    _init() {
+        super._init(0.0, "Indicator");
+        this._button = new St.Button({ label: "Run" });
+        this._button.connect("clicked", () => {});
+
+        const box = new St.BoxLayout();
+        box.add_child(this._button);
+
+        const item = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        item.add_child(box);
+        this.menu.addMenuItem(item);
+    }
+});
+
+export default class Extension {
+    enable() {
+        this._indicator = new Indicator();
+    }
+
+    disable() {
+        this._indicator.destroy();
+        this._indicator = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+
     def test_settimeout_requires_cleartimeout(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)

@@ -143,11 +143,11 @@ def append_lifecycle_findings(
             for child in (parent_owned_children | local_parent_owned_children)
         )
     }
-    menu_owned_activate_signals = {
+    menu_owned_signals = {
         name
         for name in created.signals
         if any(
-            name.startswith(f"anonymous-signal:{child}:activate:")
+            name.startswith(f"anonymous-signal:{child}:")
             for child in created.menu_owned
         )
     }
@@ -156,7 +156,7 @@ def append_lifecycle_findings(
             continue
 
         if rule.created_attr == "signals":
-            suppress_names = parent_owned_signals | menu_owned_activate_signals
+            suppress_names = parent_owned_signals | menu_owned_signals
         elif rule.rule_id == "EGO014":
             suppress_names = parent_owned_children
         else:

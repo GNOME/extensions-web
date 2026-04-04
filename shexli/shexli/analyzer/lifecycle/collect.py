@@ -50,6 +50,7 @@ def collect_resources_from_methods(
         owner_aliases: dict[str, str] = {}
         cleared_sources: set[str] = set()
         menu_item_aliases: set[str] = set()
+        local_menu_owned: set[str] = set()
 
         for node in iter_nodes(body):
             if node.type == "variable_declarator":
@@ -255,6 +256,11 @@ def collect_resources_from_methods(
                 }:
                     is_menu_item_add = callee_parts[-1] == "addMenuItem"
                     parent_node = function_node.child_by_field_name("object")
+                    local_parent_name = None
+                    if parent_node is not None and parent_node.type == "identifier":
+                        parent_name = identifier_name(source, parent_node)
+                        if parent_name and aliases.get(parent_name) == "object":
+                            local_parent_name = parent_name
                     parent = owner_field_from_node(
                         source,
                         parent_node if parent_node is not None else function_node,
@@ -262,7 +268,7 @@ def collect_resources_from_methods(
                         owner_aliases,
                         module_vars,
                     )
-                    if parent is None:
+                    if parent is None and local_parent_name is None:
                         continue
 
                     for arg in call_arguments(node):
@@ -273,16 +279,29 @@ def collect_resources_from_methods(
                             module_vars,
                         )
                         if child and child != parent:
-                            tracker.parent_owned.setdefault(child, parent)
+                            if parent is not None:
+                                tracker.parent_owned.setdefault(child, parent)
                             if is_menu_item_add:
                                 tracker.menu_owned.add(child)
+                            if local_parent_name:
+                                tracker.local_parent_owned.setdefault(
+                                    child,
+                                    local_parent_name,
+                                )
 
                         if arg.type == "identifier":
                             name = identifier_name(source, arg)
                             if name and aliases.get(name) == "object":
-                                tracker.local_parent_owned.setdefault(name, parent)
+                                if parent is not None:
+                                    tracker.local_parent_owned.setdefault(name, parent)
+                                if local_parent_name:
+                                    tracker.local_parent_owned.setdefault(
+                                        name,
+                                        local_parent_name,
+                                    )
                                 if is_menu_item_add:
                                     tracker.menu_owned.add(name)
+                                    local_menu_owned.add(name)
 
                 if call_name in SOURCE_REMOVE_NAMES:
                     for arg in call_arguments(node):
@@ -294,6 +313,19 @@ def collect_resources_from_methods(
                         )
                         if field:
                             cleared_sources.add(field)
+
+        changed = True
+        while changed:
+            changed = False
+            for child, parent in tracker.parent_owned.items():
+                if parent in tracker.menu_owned and child not in tracker.menu_owned:
+                    tracker.menu_owned.add(child)
+                    changed = True
+            for child, parent in tracker.local_parent_owned.items():
+                if parent in tracker.menu_owned and child not in tracker.menu_owned:
+                    tracker.menu_owned.add(child)
+                    local_menu_owned.add(child)
+                    changed = True
 
     return tracker
 
