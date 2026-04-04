@@ -16,6 +16,7 @@ from ..ast import (
     parse_js,
     top_level_class_methods,
     top_level_class_names,
+    top_level_class_superclasses,
     top_level_function_methods,
     top_level_variable_names,
 )
@@ -530,6 +531,7 @@ def check_js_file(
     entrypoint_method_nodes = {
         id(node) for method_nodes in methods.values() for node in method_nodes
     }
+    class_superclasses = top_level_class_superclasses(text, root)
     for class_name, class_methods in top_level_class_methods(text, root).items():
         class_nodes = [
             node for method_nodes in class_methods.values() for node in method_nodes
@@ -586,12 +588,19 @@ def check_js_file(
             class_disable_methods,
             set(),
         )
+        suppress_root_fields: set[str] = set()
+        if class_superclasses.get(class_name) in {
+            "PopupMenuSection",
+            "PopupMenu.PopupMenuSection",
+        }:
+            suppress_root_fields.update({"actor", "box"})
         append_lifecycle_findings(
             ctx.findings,
             class_created,
             class_cleaned,
             include_object_cleanup=class_name not in destroyable_classes,
             release_container_names=set(),
+            suppress_root_fields=suppress_root_fields,
         )
         class_soup_session_fields = _soup_session_fields(text, class_enable_methods)
         class_aborted_soup_sessions = _aborted_soup_session_fields(

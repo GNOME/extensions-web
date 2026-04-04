@@ -137,9 +137,10 @@ def append_lifecycle_findings(
     cleaned,
     include_object_cleanup: bool = True,
     release_container_names: set[str] | None = None,
+    suppress_root_fields: set[str] | None = None,
 ) -> None:
     release_container_names = release_container_names or set()
-    owned_descendants = _owned_descendants(created)
+    owned_descendants = _owned_descendants(created) | (suppress_root_fields or set())
     parent_owned_signals = {
         name
         for name in created.signals

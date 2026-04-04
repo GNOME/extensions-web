@@ -1526,6 +1526,98 @@ export default class Extension {
             self.assertNotIn("EGO014", rule_ids)
             self.assertNotIn("EGO027", rule_ids)
 
+    def test_popup_menu_section_actor_is_framework_owned(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"popup-menu-section-owned@example.com","name":"PopupMenuSectionOwned","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import St from "gi://St";
+import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+
+class WindowPreviewList extends PopupMenu.PopupMenuSection {
+    constructor() {
+        super();
+        this.actor = new St.ScrollView();
+        this.actor.connect("scroll-event", this._onScrollEvent.bind(this));
+        this.grid = new St.Widget();
+        this.box.add_child(this.grid);
+    }
+
+    _onScrollEvent() {}
+
+    destroy() {
+        super.destroy();
+    }
+}
+
+export default class E extends Extension {
+    enable() {
+        this._list = new WindowPreviewList();
+    }
+
+    disable() {
+        this._list.destroy();
+        this._list = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO014", rule_ids)
+            self.assertNotIn("EGO027", rule_ids)
+
+    def test_signal_handling_wrapper_is_treated_as_signal_group(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"signal-handling@example.com","name":"SignalHandling","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import GObject from "gi://GObject";
+import St from "gi://St";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+
+class SignalHandling {
+    connect(obj, key, fun) {
+        return obj.connect(key, fun);
+    }
+
+    disconnect() {}
+}
+
+export default class E extends Extension {
+    enable() {
+        this._signals = new SignalHandling();
+        this._button = new St.Button({ label: "Run" });
+        this._signals.connect(this._button, "clicked", () => {});
+    }
+
+    disable() {
+        this._signals.disconnect();
+        this._button.destroy();
+        this._button = null;
+        this._signals = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+
     def test_settimeout_requires_cleartimeout(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)

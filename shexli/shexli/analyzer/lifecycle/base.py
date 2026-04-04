@@ -79,6 +79,9 @@ JS_BUILTIN_CONTAINERS = {
     "WeakMap",
     "WeakSet",
 }
+SIGNAL_MANAGER_NEW_NAMES = {
+    "SignalHandling",
+}
 NON_IMMEDIATE_EXECUTION_NODES = {
     "arrow_function",
     "class",
@@ -163,6 +166,17 @@ class CleanupCollector:
 
         args = call_arguments(node)
         if call_name.endswith(".disconnect") or call_name == "disconnect":
+            receiver = function_node.child_by_field_name("object")
+            if not args and receiver is not None:
+                field = field_name_from_node(
+                    self.source,
+                    receiver,
+                    self.aliases,
+                    self.module_vars,
+                )
+                if field:
+                    record_resource(self.tracker.signal_groups, field)
+                    return
             for arg in args:
                 field = field_name_from_node(
                     self.source,
@@ -294,6 +308,8 @@ def resource_from_node(
             constructor_name = ".".join(constructor_parts)
             if constructor_name in JS_BUILTIN_CONTAINERS:
                 return "container"
+            if constructor_name in SIGNAL_MANAGER_NEW_NAMES:
+                return "signal_manager"
             if constructor_name in RESOURCE_REF_NEW_NAMES:
                 return "resource_ref"
             if constructor_parts and (

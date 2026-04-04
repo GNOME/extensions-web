@@ -469,6 +469,60 @@ def top_level_class_methods(
     return _top_level_classes(source, root)
 
 
+def top_level_class_superclasses(source: str, root: Node) -> dict[str, str]:
+    classes: dict[str, str] = {}
+
+    for child in root.children:
+        if child.type == "class_declaration":
+            name_node = child.child_by_field_name("name")
+            superclass = child.child_by_field_name("superclass")
+            if superclass is None:
+                heritage = child_by_type(child, "class_heritage")
+                if heritage is not None and heritage.named_children:
+                    superclass = heritage.named_children[0]
+            if name_node is None or superclass is None:
+                continue
+
+            classes[node_text(source, name_node)] = node_text(source, superclass)
+            continue
+
+        if child.type not in {"lexical_declaration", "variable_declaration"}:
+            continue
+
+        for declarator in child.named_children:
+            if declarator.type != "variable_declarator":
+                continue
+
+            name_node = declarator.child_by_field_name("name")
+            value_node = declarator.child_by_field_name("value")
+            if name_node is None or value_node is None:
+                continue
+
+            class_node = None
+            if value_node.type in {"class", "class_declaration"}:
+                class_node = value_node
+            elif value_node.type in {"call_expression", "new_expression"}:
+                for argument in call_arguments(value_node):
+                    if argument.type in {"class", "class_declaration"}:
+                        class_node = argument
+                        break
+
+            if class_node is None:
+                continue
+
+            superclass = class_node.child_by_field_name("superclass")
+            if superclass is None:
+                heritage = child_by_type(class_node, "class_heritage")
+                if heritage is not None and heritage.named_children:
+                    superclass = heritage.named_children[0]
+            if superclass is None:
+                continue
+
+            classes[node_text(source, name_node)] = node_text(source, superclass)
+
+    return classes
+
+
 def top_level_function_methods(source: str, root: Node) -> dict[str, list[Node]]:
     methods: dict[str, list[Node]] = {}
 

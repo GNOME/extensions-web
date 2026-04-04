@@ -60,6 +60,7 @@ def collect_resources_from_methods(
         aliases: dict[str, str] = {}
         owner_aliases: dict[str, str] = {}
         cleared_sources: set[str] = set()
+        signal_manager_fields: set[str] = set()
         menu_item_aliases: set[str] = set()
         local_ui_aliases: set[str] = set()
         local_menu_owned: set[str] = set()
@@ -78,6 +79,8 @@ def collect_resources_from_methods(
                     )
                     if kind:
                         aliases[name] = kind
+                        if kind == "signal_manager":
+                            signal_manager_fields.add(name)
                     else:
                         field = field_name_from_node(
                             source,
@@ -130,6 +133,8 @@ def collect_resources_from_methods(
                         destroyable_classes,
                     )
                     evidence = node_evidence(path, source, node, mapper)
+                    if kind == "signal_manager":
+                        signal_manager_fields.add(left_field)
                     if kind == "signal":
                         record_resource(tracker.signals, left_field, evidence)
                     elif kind == "source":
@@ -210,6 +215,17 @@ def collect_resources_from_methods(
 
                     if receiver is not None and receiver.type == "identifier":
                         receiver_name = identifier_name(source, receiver)
+                        if (
+                            receiver_name
+                            and aliases.get(receiver_name) == "signal_manager"
+                        ):
+                            evidence = node_evidence(path, source, node, mapper)
+                            record_resource(
+                                tracker.signal_groups,
+                                receiver_name,
+                                evidence,
+                            )
+                            continue
                         if receiver_name and (
                             aliases.get(receiver_name) == "object"
                             or receiver_name in local_ui_aliases
@@ -235,6 +251,28 @@ def collect_resources_from_methods(
                         else f"anonymous-signal:{node.start_point.row + 1}"
                     )
                     if receiver_field:
+                        if receiver_field in signal_manager_fields:
+                            record_resource(
+                                tracker.signal_groups,
+                                receiver_field,
+                                evidence,
+                            )
+                            continue
+                        receiver_name = (
+                            identifier_name(source, receiver)
+                            if receiver is not None and receiver.type == "identifier"
+                            else None
+                        )
+                        if (
+                            receiver_name
+                            and aliases.get(receiver_name) == "signal_manager"
+                        ):
+                            record_resource(
+                                tracker.signal_groups,
+                                receiver_field,
+                                evidence,
+                            )
+                            continue
                         signal_name = (
                             "anonymous-signal:"
                             f"{receiver_field}:"
