@@ -1377,6 +1377,56 @@ export default class ExamplePrefs extends Adw.PreferencesWindow {
             rule_ids = {finding.rule_id for finding in result.findings}
             self.assertNotIn("EGO015", rule_ids)
 
+    def test_field_owned_child_widgets_are_not_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"field-owned-children@example.com","name":"FieldOwnedChildren","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                """
+import GObject from "gi://GObject";
+import St from "gi://St";
+import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
+
+const Indicator = GObject.registerClass(
+class Indicator extends PanelMenu.Button {
+    _init() {
+        super._init(0.0, "Indicator");
+        this._container = new St.BoxLayout();
+
+        const bottomArea = new St.BoxLayout();
+        const inputArea = new St.BoxLayout();
+        this._input = new St.Entry();
+        this._input.clutter_text.connect("activate", () => {});
+        inputArea.add_child(this._input);
+        bottomArea.add_child(inputArea);
+        this._container.add_child(bottomArea);
+        this.add_child(this._container);
+    }
+});
+
+export default class Extension {
+    enable() {
+        this._indicator = new Indicator();
+    }
+
+    disable() {
+        this._indicator.destroy();
+        this._indicator = null;
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO014", rule_ids)
+            self.assertNotIn("EGO027", rule_ids)
+
     def test_settimeout_requires_cleartimeout(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)

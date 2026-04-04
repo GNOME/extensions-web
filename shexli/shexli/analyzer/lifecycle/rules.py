@@ -113,6 +113,23 @@ def _release_candidates(
     return candidates
 
 
+def _owned_descendants(created) -> set[str]:
+    roots = set(created.objects) | set(created.resource_refs)
+    descendants: set[str] = set()
+    parent_edges = [*created.parent_owned.items(), *created.local_parent_owned.items()]
+
+    changed = True
+    while changed:
+        changed = False
+        for child, parent in parent_edges:
+            if parent in roots or parent in descendants:
+                if child not in descendants:
+                    descendants.add(child)
+                    changed = True
+
+    return descendants
+
+
 def append_lifecycle_findings(
     findings: list[Finding],
     created,
@@ -121,26 +138,13 @@ def append_lifecycle_findings(
     release_container_names: set[str] | None = None,
 ) -> None:
     release_container_names = release_container_names or set()
-    parent_owned_children = {
-        child
-        for child, parent in created.parent_owned.items()
-        if parent in created.objects or parent in created.resource_refs
-    }
-    local_parent_owned_children = {
-        child
-        for child, parent in created.local_parent_owned.items()
-        if (
-            parent in created.objects
-            or parent in created.resource_refs
-            or parent in parent_owned_children
-        )
-    }
+    owned_descendants = _owned_descendants(created)
     parent_owned_signals = {
         name
         for name in created.signals
         if any(
             name.startswith(f"anonymous-signal:{child}:")
-            for child in (parent_owned_children | local_parent_owned_children)
+            for child in owned_descendants
         )
     }
     menu_owned_signals = {
@@ -158,7 +162,7 @@ def append_lifecycle_findings(
         if rule.created_attr == "signals":
             suppress_names = parent_owned_signals | menu_owned_signals
         elif rule.rule_id == "EGO014":
-            suppress_names = parent_owned_children
+            suppress_names = owned_descendants
         else:
             suppress_names = set()
 
@@ -192,5 +196,5 @@ def append_lifecycle_findings(
                 "Owned references that are cleaned up in `disable()` should "
                 "also be released with `null` or `undefined`."
             ),
-            suppress_names=parent_owned_children - release_container_names,
+            suppress_names=owned_descendants - release_container_names,
         )
