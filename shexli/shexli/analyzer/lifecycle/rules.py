@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from ...models import Evidence, Finding
-from ...spec import RULES_BY_ID
+from ...spec import RULES_BY_ID, R
 from .base import SELF_OWNER
 
 
@@ -19,7 +19,7 @@ class LifecycleRuleSpec:
 
 LIFECYCLE_RULES = (
     LifecycleRuleSpec(
-        rule_id="EGO015",
+        rule_id=R.EGO015,
         created_attr="signals",
         cleaned_attr="signals",
         message=(
@@ -28,7 +28,7 @@ LIFECYCLE_RULES = (
         ),
     ),
     LifecycleRuleSpec(
-        rule_id="EGO015",
+        rule_id=R.EGO015,
         created_attr="signal_groups",
         cleaned_attr="signal_groups",
         message=(
@@ -37,7 +37,7 @@ LIFECYCLE_RULES = (
         ),
     ),
     LifecycleRuleSpec(
-        rule_id="EGO016",
+        rule_id=R.EGO016,
         created_attr="sources",
         cleaned_attr="sources",
         message=(
@@ -46,7 +46,7 @@ LIFECYCLE_RULES = (
         ),
     ),
     LifecycleRuleSpec(
-        rule_id="EGO016",
+        rule_id=R.EGO016,
         created_attr="source_groups",
         cleaned_attr="source_groups",
         message=(
@@ -55,7 +55,7 @@ LIFECYCLE_RULES = (
         ),
     ),
     LifecycleRuleSpec(
-        rule_id="EGO014",
+        rule_id=R.EGO014,
         created_attr="objects",
         cleaned_attr="objects",
         message=(
@@ -64,7 +64,7 @@ LIFECYCLE_RULES = (
         ),
     ),
     LifecycleRuleSpec(
-        rule_id="EGO014",
+        rule_id=R.EGO014,
         created_attr="object_groups",
         cleaned_attr="object_groups",
         message=(
@@ -160,12 +160,12 @@ def append_lifecycle_findings(
         )
     }
     for rule in LIFECYCLE_RULES:
-        if not include_object_cleanup and rule.rule_id == "EGO014":
+        if not include_object_cleanup and rule.rule_id == R.EGO014:
             continue
 
         if rule.created_attr == "signals":
             suppress_names = parent_owned_signals | menu_owned_signals
-        elif rule.rule_id == "EGO014":
+        elif rule.rule_id == R.EGO014:
             suppress_names = owned_descendants
         else:
             suppress_names = set()
@@ -181,7 +181,7 @@ def append_lifecycle_findings(
 
     if created.recreated_sources:
         findings.append(
-            RULES_BY_ID["EGO035"].make_finding(
+            RULES_BY_ID[R.EGO035].make_finding(
                 (
                     "Main loop sources should be removed before creating a "
                     "new source on the same field."
@@ -195,7 +195,7 @@ def append_lifecycle_findings(
             findings,
             _release_candidates(created, release_container_names),
             cleaned.released_refs,
-            "EGO027",
+            R.EGO027,
             (
                 "Owned references that are cleaned up in `disable()` should "
                 "also be released with `null` or `undefined`."

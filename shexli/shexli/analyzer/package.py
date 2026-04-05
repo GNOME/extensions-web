@@ -9,7 +9,7 @@ from xml.etree import ElementTree
 
 from ..ast import call_callee_parts, iter_nodes, member_expression_parts, parse_js
 from ..models import AnalysisLimits, Evidence, Finding
-from ..spec import RULES_BY_ID
+from ..spec import RULES_BY_ID, R
 from .evidence import display_evidence
 from .paths import PathMapper
 from .safety import read_text_with_limit
@@ -178,7 +178,7 @@ def check_package_files(
 
     if binary_hits:
         findings.append(
-            RULES_BY_ID["EGO022"].make_finding(
+            RULES_BY_ID[R.EGO022].make_finding(
                 "Package contains files that look like bundled binaries or libraries.",
                 binary_hits[:10],
             )
@@ -186,7 +186,7 @@ def check_package_files(
 
     if unnecessary_hits:
         findings.append(
-            RULES_BY_ID["EGO025"].make_finding(
+            RULES_BY_ID[R.EGO025].make_finding(
                 "Package contains files that often should not be shipped for review.",
                 unnecessary_hits[:10],
             )
@@ -194,7 +194,7 @@ def check_package_files(
 
     if compiled_schema_hits:
         findings.append(
-            RULES_BY_ID["EGO025"].make_finding(
+            RULES_BY_ID[R.EGO025].make_finding(
                 "Compiled GSettings schemas should not be shipped for 45+ packages.",
                 compiled_schema_hits[:10],
             )
@@ -202,7 +202,7 @@ def check_package_files(
 
     if script_mismatch_hits:
         findings.append(
-            RULES_BY_ID["EGO025"].make_finding(
+            RULES_BY_ID[R.EGO025].make_finding(
                 "Package contains `.sh` scripts with a non-shell shebang.",
                 script_mismatch_hits[:10],
             )
@@ -237,7 +237,7 @@ def check_schema_files(
 
             if not schema_id.startswith("org.gnome.shell.extensions"):
                 findings.append(
-                    RULES_BY_ID["EGO009"].make_finding(
+                    RULES_BY_ID[R.EGO009].make_finding(
                         (
                             "GSettings schema id must start with "
                             "`org.gnome.shell.extensions`."
@@ -254,7 +254,7 @@ def check_schema_files(
 
             if not schema_path_attr.startswith("/org/gnome/shell/extensions"):
                 findings.append(
-                    RULES_BY_ID["EGO010"].make_finding(
+                    RULES_BY_ID[R.EGO010].make_finding(
                         (
                             "GSettings schema path must start with "
                             "`/org/gnome/shell/extensions`."
@@ -271,7 +271,7 @@ def check_schema_files(
 
             if schema_path.name != schema_file_expected:
                 findings.append(
-                    RULES_BY_ID["EGO012"].make_finding(
+                    RULES_BY_ID[R.EGO012].make_finding(
                         (
                             "GSettings schema filename must match "
                             "`<schema-id>.gschema.xml`."
@@ -323,7 +323,7 @@ def check_gsettings_usage(
 
     if uses_settings and not any(path.name.endswith(".gschema.xml") for path in files):
         findings.append(
-            RULES_BY_ID["EGO011"].make_finding(
+            RULES_BY_ID[R.EGO011].make_finding(
                 "Extension appears to use GSettings but no "
                 "`.gschema.xml` file is included in the package."
             )

@@ -2,14 +2,66 @@
 
 from __future__ import annotations
 
+from enum import StrEnum
+
 from .models import RuleSpec
+
+
+class RuleCode(StrEnum):
+    EGO001 = "EGO001"
+    EGO002 = "EGO002"
+    EGO003 = "EGO003"
+    EGO004 = "EGO004"
+    EGO005 = "EGO005"
+    EGO006 = "EGO006"
+    EGO007 = "EGO007"
+    EGO008 = "EGO008"
+    EGO009 = "EGO009"
+    EGO010 = "EGO010"
+    EGO011 = "EGO011"
+    EGO012 = "EGO012"
+    EGO013 = "EGO013"
+    EGO014 = "EGO014"
+    EGO015 = "EGO015"
+    EGO016 = "EGO016"
+    EGO017 = "EGO017"
+    EGO018 = "EGO018"
+    EGO019 = "EGO019"
+    EGO020 = "EGO020"
+    EGO021 = "EGO021"
+    EGO022 = "EGO022"
+    EGO023 = "EGO023"
+    EGO024 = "EGO024"
+    EGO025 = "EGO025"
+    EGO026 = "EGO026"
+    EGO027 = "EGO027"
+    EGO028 = "EGO028"
+    EGO029 = "EGO029"
+    EGO030 = "EGO030"
+    EGO031 = "EGO031"
+    EGO032 = "EGO032"
+    EGO033 = "EGO033"
+    EGO034 = "EGO034"
+    EGO035 = "EGO035"
+    EGO036 = "EGO036"
+    EGO037 = "EGO037"
+    EGO_C49_001 = "EGO-C49-001"
+    EGO_C49_002 = "EGO-C49-002"
+    EGO_C49_003 = "EGO-C49-003"
+    EGO_C49_004 = "EGO-C49-004"
+    EGO_C49_005 = "EGO-C49-005"
+    EGO_C50_001 = "EGO-C50-001"
+    EGO_C50_002 = "EGO-C50-002"
+
+
+R = RuleCode
 
 SPEC_VERSION = "2026-04-02"
 GUIDELINES_URL = "https://gjs.guide/extensions/review-guidelines/review-guidelines.html"
 
 RULES = [
     RuleSpec(
-        rule_id="EGO001",
+        rule_id=RuleCode.EGO001,
         title="metadata.json must exist",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -19,7 +71,7 @@ RULES = [
         rationale="Every extension ships metadata.json and review depends on it.",
     ),
     RuleSpec(
-        rule_id="EGO002",
+        rule_id=RuleCode.EGO002,
         title="metadata.json must be valid JSON",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -29,7 +81,7 @@ RULES = [
         rationale="Malformed metadata blocks review and installation.",
     ),
     RuleSpec(
-        rule_id="EGO003",
+        rule_id=RuleCode.EGO003,
         title="metadata uuid must have valid format and namespace",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -42,7 +94,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO004",
+        rule_id=RuleCode.EGO004,
         title=(
             "metadata shell-version must only include plausible stable "
             "releases and at most one development release"
@@ -55,7 +107,7 @@ RULES = [
         rationale="Extensions must not claim future shell support.",
     ),
     RuleSpec(
-        rule_id="EGO005",
+        rule_id=RuleCode.EGO005,
         title="metadata session-modes must be omitted when only user mode is declared",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -65,7 +117,7 @@ RULES = [
         rationale="Single user mode must not be redundantly declared.",
     ),
     RuleSpec(
-        rule_id="EGO006",
+        rule_id=RuleCode.EGO006,
         title="metadata session-modes may only contain user and unlock-dialog",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -75,7 +127,7 @@ RULES = [
         rationale="Only two session modes are valid for published extensions.",
     ),
     RuleSpec(
-        rule_id="EGO007",
+        rule_id=RuleCode.EGO007,
         title="metadata donations may only contain allowed keys",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -90,7 +142,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO008",
+        rule_id=RuleCode.EGO008,
         title="extensions using unlock-dialog must document it in disable() comments",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#session-modes",
@@ -100,7 +152,7 @@ RULES = [
         rationale="unlock-dialog requires reviewer justification and extra caution.",
     ),
     RuleSpec(
-        rule_id="EGO009",
+        rule_id=RuleCode.EGO009,
         title="GSettings schema id must use org.gnome.shell.extensions base",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -110,7 +162,7 @@ RULES = [
         rationale="Schema namespace is fixed by review rules.",
     ),
     RuleSpec(
-        rule_id="EGO010",
+        rule_id=RuleCode.EGO010,
         title="GSettings schema path must use /org/gnome/shell/extensions base",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -120,7 +172,7 @@ RULES = [
         rationale="Schema path is fixed by review rules.",
     ),
     RuleSpec(
-        rule_id="EGO011",
+        rule_id=RuleCode.EGO011,
         title="GSettings schema XML must be present in package",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -130,7 +182,7 @@ RULES = [
         rationale="Schema XML must ship in the extension package.",
     ),
     RuleSpec(
-        rule_id="EGO012",
+        rule_id=RuleCode.EGO012,
         title="GSettings schema XML filename must match schema id",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -140,7 +192,7 @@ RULES = [
         rationale="Reviewer expects exact `<schema-id>.gschema.xml` naming.",
     ),
     RuleSpec(
-        rule_id="EGO013",
+        rule_id=RuleCode.EGO013,
         title=(
             "extension must not create GObject instances or modify shell "
             "before enable()"
@@ -156,7 +208,7 @@ RULES = [
         rationale=("Initialization must stay free of runtime shell modifications."),
     ),
     RuleSpec(
-        rule_id="EGO014",
+        rule_id=RuleCode.EGO014,
         title="objects created by extension should be destroyed in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#destroy-all-objects",
@@ -169,7 +221,7 @@ RULES = [
         rationale="Cleanup leaks are a central review concern.",
     ),
     RuleSpec(
-        rule_id="EGO015",
+        rule_id=RuleCode.EGO015,
         title="signals connected by extension should be disconnected in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#disconnect-all-signals",
@@ -182,7 +234,7 @@ RULES = [
         rationale="Signal leaks are common and reviewable statically.",
     ),
     RuleSpec(
-        rule_id="EGO016",
+        rule_id=RuleCode.EGO016,
         title="main loop sources should be removed in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#remove-main-loop-sources",
@@ -195,7 +247,7 @@ RULES = [
         rationale="Unremoved sources can outlive the extension lifecycle.",
     ),
     RuleSpec(
-        rule_id="EGO017",
+        rule_id=RuleCode.EGO017,
         title="deprecated modules must not be imported",
         severity="error",
         source_url=f"{GUIDELINES_URL}#do-not-use-deprecated-modules",
@@ -207,7 +259,7 @@ RULES = [
         rationale="Deprecated modules are explicitly disallowed.",
     ),
     RuleSpec(
-        rule_id="EGO018",
+        rule_id=RuleCode.EGO018,
         title="Gtk, Gdk and Adw must not be imported in shell process files",
         severity="error",
         source_url=f"{GUIDELINES_URL}#do-not-import-gtk-libraries-in-gnome-shell",
@@ -217,7 +269,7 @@ RULES = [
         rationale="GTK libraries conflict with shell process libraries.",
     ),
     RuleSpec(
-        rule_id="EGO019",
+        rule_id=RuleCode.EGO019,
         title="Clutter, Meta, St and Shell must not be imported in prefs process files",
         severity="error",
         source_url=f"{GUIDELINES_URL}#do-not-import-gnome-shell-libraries-in-preferences",
@@ -227,7 +279,7 @@ RULES = [
         rationale="Shell libraries conflict with preferences process libraries.",
     ),
     RuleSpec(
-        rule_id="EGO020",
+        rule_id=RuleCode.EGO020,
         title="extension code must not be minified or obfuscated",
         severity="manual_review",
         source_url=f"{GUIDELINES_URL}#code-must-not-be-obfuscated",
@@ -242,7 +294,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO021",
+        rule_id=RuleCode.EGO021,
         title="extension must not log excessively",
         severity="manual_review",
         source_url=f"{GUIDELINES_URL}#no-excessive-logging",
@@ -257,7 +309,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO022",
+        rule_id=RuleCode.EGO022,
         title="binary executables and libraries must not be bundled",
         severity="error",
         source_url=f"{GUIDELINES_URL}#scripts-and-binaries",
@@ -267,7 +319,7 @@ RULES = [
         rationale="Binary payloads are explicitly disallowed.",
     ),
     RuleSpec(
-        rule_id="EGO023",
+        rule_id=RuleCode.EGO023,
         title="telemetry tools must not be used",
         severity="manual_review",
         source_url=f"{GUIDELINES_URL}#do-not-use-telemetry-tools",
@@ -283,7 +335,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO024",
+        rule_id=RuleCode.EGO024,
         title=(
             "privileged subprocesses should use pkexec and target "
             "non-user-writable files"
@@ -302,7 +354,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO025",
+        rule_id=RuleCode.EGO025,
         title="unnecessary build and translation artifacts should not be shipped",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#don-t-include-unnecessary-files",
@@ -312,7 +364,7 @@ RULES = [
         rationale="Reviewers may reject packages with unreasonable extra data.",
     ),
     RuleSpec(
-        rule_id="EGO026",
+        rule_id=RuleCode.EGO026,
         title="JavaScript files should be reachable from extension.js or prefs.js",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#don-t-include-unnecessary-files",
@@ -325,7 +377,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO027",
+        rule_id=RuleCode.EGO027,
         title="owned object references should be released in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#destroy-all-objects",
@@ -342,7 +394,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO028",
+        rule_id=RuleCode.EGO028,
         title="extensions should not use synchronous subprocess APIs in shell code",
         severity="warning",
         source_url="https://gjs.guide/guides/gio/subprocesses.html",
@@ -357,7 +409,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO029",
+        rule_id=RuleCode.EGO029,
         title="extensions should not call run_dispose in extension code",
         severity="warning",
         source_url=(
@@ -373,7 +425,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO030",
+        rule_id=RuleCode.EGO030,
         title="extensions should avoid synchronous file IO in shell code",
         severity="warning",
         source_url="https://gjs.guide/guides/gio/file-operations.html",
@@ -388,7 +440,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO031",
+        rule_id=RuleCode.EGO031,
         title="extensions should not use imports._gi directly",
         severity="warning",
         source_url="https://gjs.guide/extensions/topics/extension.html#injectionmanager",
@@ -401,7 +453,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO032",
+        rule_id=RuleCode.EGO032,
         title=(
             "45+ preferences should use fillPreferencesWindow instead of "
             "getPreferencesWidget"
@@ -422,7 +474,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO033",
+        rule_id=RuleCode.EGO033,
         title=(
             "preferences classes should not retain window-scoped objects on "
             "instance fields without close-request cleanup"
@@ -442,7 +494,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO034",
+        rule_id=RuleCode.EGO034,
         title="extensions should not manually load the default stylesheet.css",
         severity="warning",
         source_url="https://gjs.guide/extensions/overview/anatomy.html#stylesheet-css",
@@ -458,7 +510,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO035",
+        rule_id=RuleCode.EGO035,
         title="main loop sources should be removed before being recreated",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#remove-main-loop-sources",
@@ -474,7 +526,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO036",
+        rule_id=RuleCode.EGO036,
         title=(
             "extensions should not use lookupByURL or lookupByUUID for "
             "current extension access"
@@ -496,7 +548,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO037",
+        rule_id=RuleCode.EGO037,
         title="Soup.Session instances should be aborted during cleanup",
         severity="warning",
         source_url=(
@@ -514,7 +566,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO-C49-001",
+        rule_id=RuleCode.EGO_C49_001,
         title=(
             "extensions targeting GNOME 49 must not use "
             "DoNotDisturbSwitch from calendar.js"
@@ -532,7 +584,7 @@ RULES = [
         rationale="DoNotDisturbSwitch is removed in GNOME Shell 49.",
     ),
     RuleSpec(
-        rule_id="EGO-C49-002",
+        rule_id=RuleCode.EGO_C49_002,
         title=(
             "extensions targeting GNOME 49 must not use removed "
             "Clutter action classes"
@@ -551,7 +603,7 @@ RULES = [
         rationale="ClickAction and TapAction were removed in GNOME Shell 49.",
     ),
     RuleSpec(
-        rule_id="EGO-C49-003",
+        rule_id=RuleCode.EGO_C49_003,
         title=(
             "extensions targeting GNOME 49 must not call maximize or "
             "unmaximize with Meta.MaximizeFlags"
@@ -571,7 +623,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO-C49-004",
+        rule_id=RuleCode.EGO_C49_004,
         title="extensions targeting GNOME 49 must not call Meta.Window.get_maximized",
         severity="error",
         source_url="https://gjs.guide/extensions/upgrading/gnome-shell-49.html#meta-window",
@@ -584,7 +636,7 @@ RULES = [
         rationale="Meta.Window.get_maximized() was removed in GNOME Shell 49.",
     ),
     RuleSpec(
-        rule_id="EGO-C49-005",
+        rule_id=RuleCode.EGO_C49_005,
         title=(
             "extensions targeting GNOME 49 must not call "
             "Meta.CursorTracker.set_pointer_visible"
@@ -603,7 +655,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO-C50-001",
+        rule_id=RuleCode.EGO_C50_001,
         title=(
             "extensions targeting GNOME 50 must not rely on removed "
             "global.display restart signals"
@@ -623,7 +675,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id="EGO-C50-002",
+        rule_id=RuleCode.EGO_C50_002,
         title="extensions targeting GNOME 50 must not call RunDialog._restart",
         severity="error",
         source_url="https://gjs.guide/extensions/upgrading/gnome-shell-50.html#restart",

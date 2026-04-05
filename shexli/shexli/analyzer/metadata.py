@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from ..models import AnalysisLimits, Evidence, Finding
-from ..spec import RULES_BY_ID
+from ..spec import RULES_BY_ID, R
 from .paths import PathMapper
 from .safety import read_text_with_limit
 
@@ -102,7 +102,7 @@ def parse_metadata(
         text = read_text_with_limit(metadata_path, limits, encoding="utf-8")
     except UnicodeDecodeError:
         findings.append(
-            RULES_BY_ID["EGO002"].make_finding(
+            RULES_BY_ID[R.EGO002].make_finding(
                 "`metadata.json` is not valid UTF-8 text.",
                 [
                     _metadata_evidence(
@@ -119,7 +119,7 @@ def parse_metadata(
         return json.loads(text)
     except json.JSONDecodeError as exc:
         findings.append(
-            RULES_BY_ID["EGO002"].make_finding(
+            RULES_BY_ID[R.EGO002].make_finding(
                 f"`metadata.json` is invalid JSON: {exc.msg}.",
                 [
                     _metadata_evidence(
@@ -145,7 +145,7 @@ def _check_uuid(
     uuid = metadata.get("uuid")
     if not isinstance(uuid, str) or not validate_uuid(uuid):
         findings.append(
-            RULES_BY_ID["EGO003"].make_finding(
+            RULES_BY_ID[R.EGO003].make_finding(
                 (
                     "Field `uuid` must match EGO UUID constraints and must "
                     "not end with `gnome.org` or a subdomain of it."
@@ -164,7 +164,7 @@ def _check_shell_versions(
     shell_versions = metadata.get("shell-version")
     if not isinstance(shell_versions, list) or not shell_versions:
         findings.append(
-            RULES_BY_ID["EGO004"].make_finding(
+            RULES_BY_ID[R.EGO004].make_finding(
                 (
                     "Field `shell-version` must be a non-empty list of "
                     "supported GNOME Shell versions."
@@ -203,7 +203,7 @@ def _check_shell_versions(
 
     if invalid or dev_count > 1 or future:
         findings.append(
-            RULES_BY_ID["EGO004"].make_finding(
+            RULES_BY_ID[R.EGO004].make_finding(
                 (
                     "Field `shell-version` contains invalid values, "
                     "more than one development release, or implausible "
@@ -236,11 +236,8 @@ def _check_session_modes(
         mode not in allowed for mode in session_modes
     ):
         findings.append(
-            RULES_BY_ID["EGO006"].make_finding(
-                (
-                    "Field `session-modes` may only contain `user` and "
-                    "`unlock-dialog`."
-                ),
+            RULES_BY_ID[R.EGO006].make_finding(
+                ("Field `session-modes` may only contain `user` and `unlock-dialog`."),
                 [
                     _metadata_evidence(
                         metadata_path,
@@ -252,7 +249,7 @@ def _check_session_modes(
         )
     elif set(session_modes) == {"user"}:
         findings.append(
-            RULES_BY_ID["EGO005"].make_finding(
+            RULES_BY_ID[R.EGO005].make_finding(
                 (
                     "Field `session-modes` should be omitted when it "
                     "only contains `user`."
@@ -280,7 +277,7 @@ def _check_donations(
 
     if not isinstance(donations, dict):
         findings.append(
-            RULES_BY_ID["EGO007"].make_finding(
+            RULES_BY_ID[R.EGO007].make_finding(
                 (
                     "Field `donations` must be an object keyed by supported "
                     "donation provider names."
@@ -293,7 +290,7 @@ def _check_donations(
     unknown = [key for key in donations if key not in DONATION_ALLOWED_KEYS]
     if unknown:
         findings.append(
-            RULES_BY_ID["EGO007"].make_finding(
+            RULES_BY_ID[R.EGO007].make_finding(
                 "Field `donations` contains unsupported donation types.",
                 [
                     _metadata_evidence(
@@ -310,7 +307,7 @@ def _check_donations(
 
         if not normalized:
             findings.append(
-                RULES_BY_ID["EGO007"].make_finding(
+                RULES_BY_ID[R.EGO007].make_finding(
                     f"Donation type `{key}` must contain at least one value.",
                     [_metadata_evidence(metadata_path, mapper, f"{key}={values!r}")],
                 )
@@ -319,7 +316,7 @@ def _check_donations(
 
         if len(normalized) > 3:
             findings.append(
-                RULES_BY_ID["EGO007"].make_finding(
+                RULES_BY_ID[R.EGO007].make_finding(
                     f"Donation type `{key}` must not contain more than 3 values.",
                     [_metadata_evidence(metadata_path, mapper, f"{key}={values!r}")],
                 )
@@ -327,7 +324,7 @@ def _check_donations(
 
         if any(not isinstance(value, str) for value in normalized):
             findings.append(
-                RULES_BY_ID["EGO007"].make_finding(
+                RULES_BY_ID[R.EGO007].make_finding(
                     f"Donation type `{key}` must be a string or a list of strings.",
                     [_metadata_evidence(metadata_path, mapper, f"{key}={values!r}")],
                 )
@@ -341,7 +338,7 @@ def _check_donations(
             parsed = urlparse(value)
             if parsed.scheme not in {"http", "https"} or not parsed.netloc:
                 findings.append(
-                    RULES_BY_ID["EGO007"].make_finding(
+                    RULES_BY_ID[R.EGO007].make_finding(
                         "Custom donation URLs must use `http` or `https`.",
                         [
                             _metadata_evidence(

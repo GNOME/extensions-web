@@ -15,6 +15,7 @@ from ..ast import (
     top_level_function_methods,
 )
 from ..models import Evidence
+from ..spec import R
 from .context import CheckContext
 from .spawn import (
     SPAWN_CALL_NAMES,
@@ -98,7 +99,7 @@ def check_subprocess_calls(
 
     if privileged_evidences:
         ctx.add_finding(
-            "EGO024",
+            R.EGO024,
             (
                 "Privileged subprocess patterns must use `pkexec`, not "
                 "`sudo`, `su`, `doas`, or similar wrappers."
@@ -108,7 +109,7 @@ def check_subprocess_calls(
 
     if sync_evidences:
         ctx.add_finding(
-            "EGO028",
+            R.EGO028,
             (
                 "Shell code should avoid synchronous subprocess APIs like "
                 "`GLib.spawn_command_line_sync()` and `GLib.spawn_sync()`."
@@ -230,14 +231,14 @@ def check_api_misuse(
 
     if run_dispose_evidences:
         ctx.add_finding(
-            "EGO029",
+            R.EGO029,
             "Extension code should not call `run_dispose()`.",
             run_dispose_evidences,
         )
 
     if sync_io_evidences:
         ctx.add_finding(
-            "EGO030",
+            R.EGO030,
             (
                 "Shell code should avoid synchronous file IO APIs like "
                 "`GLib.file_get_contents()` and `Gio.File.load_contents()`."
@@ -247,7 +248,7 @@ def check_api_misuse(
 
     if stylesheet_evidences:
         ctx.add_finding(
-            "EGO034",
+            R.EGO034,
             (
                 "Extensions should not manually load or unload the default "
                 "`stylesheet.css`; GNOME Shell handles it automatically."
@@ -257,7 +258,7 @@ def check_api_misuse(
 
     if extension_lookup_evidences:
         ctx.add_finding(
-            "EGO036",
+            R.EGO036,
             (
                 "Use `this`, `this.getSettings()` or `this.path` instead of "
                 "`lookupByURL()` or `lookupByUUID()` for the current "
@@ -342,7 +343,7 @@ def check_version_compatibility(
                 and "DoNotDisturbSwitch" in item.snippet
             ):
                 ctx.add_finding(
-                    "EGO-C49-001",
+                    R.EGO_C49_001,
                     (
                         "This extension explicitly targets GNOME Shell "
                         "49 but still imports `DoNotDisturbSwitch` from "
@@ -357,7 +358,7 @@ def check_version_compatibility(
             root,
             [
                 (
-                    "EGO-C49-002",
+                    R.EGO_C49_002,
                     (
                         "This extension explicitly targets GNOME Shell 49 "
                         "but still uses removed `Clutter.ClickAction` or "
@@ -366,7 +367,7 @@ def check_version_compatibility(
                     _is_removed_clutter_action,
                 ),
                 (
-                    "EGO-C49-003",
+                    R.EGO_C49_003,
                     (
                         "This extension explicitly targets GNOME Shell 49 "
                         "but still passes `Meta.MaximizeFlags` to "
@@ -375,7 +376,7 @@ def check_version_compatibility(
                     _uses_removed_maximize_flags,
                 ),
                 (
-                    "EGO-C49-004",
+                    R.EGO_C49_004,
                     (
                         "This extension explicitly targets GNOME Shell 49 "
                         "but still calls removed "
@@ -388,7 +389,7 @@ def check_version_compatibility(
                     ),
                 ),
                 (
-                    "EGO-C49-005",
+                    R.EGO_C49_005,
                     (
                         "This extension explicitly targets GNOME Shell 49 "
                         "but still calls removed "
@@ -416,7 +417,7 @@ def check_version_compatibility(
         root,
         [
             (
-                "EGO-C50-001",
+                R.EGO_C50_001,
                 (
                     "This extension explicitly targets GNOME Shell 50 but "
                     "still relies on removed `global.display` "
@@ -425,7 +426,7 @@ def check_version_compatibility(
                 lambda source, node: _connects_removed_display_signal(source, node),
             ),
             (
-                "EGO-C50-002",
+                R.EGO_C50_002,
                 (
                     "This extension explicitly targets GNOME Shell 50 but "
                     "still calls `RunDialog._restart()`."

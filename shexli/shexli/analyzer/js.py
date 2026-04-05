@@ -36,6 +36,7 @@ from .lifecycle import (
 )
 from .lifecycle.base import JS_BUILTIN_CONTAINERS, SOURCE_ADD_NAMES
 from .lifecycle.rules import append_lifecycle_findings
+from ..spec import R
 from .reachability import ENTRYPOINT_CONTEXTS
 
 DEPRECATED_IMPORT_TOKENS = ("ByteArray", "Lang", "Mainloop")
@@ -383,7 +384,7 @@ def check_js_file(
 
         if evidences:
             ctx.add_finding(
-                "EGO017",
+                R.EGO017,
                 f"Deprecated module `{token}` is imported.",
                 evidences,
             )
@@ -405,14 +406,14 @@ def check_js_file(
         )
     if imports_gi_evidences:
         ctx.add_finding(
-            "EGO031",
+            R.EGO031,
             "Direct use of `imports._gi` is discouraged in extensions.",
             imports_gi_evidences,
         )
 
     if is_shell:
         _check_forbidden_imports(
-            "EGO018",
+            R.EGO018,
             ctx,
             js_imports,
             SHELL_FORBIDDEN_TOKENS,
@@ -421,7 +422,7 @@ def check_js_file(
 
     if is_prefs:
         _check_forbidden_imports(
-            "EGO019",
+            R.EGO019,
             ctx,
             js_imports,
             PREFS_FORBIDDEN_TOKENS,
@@ -450,7 +451,7 @@ def check_js_file(
 
         if prefs_widget_evidences:
             ctx.add_finding(
-                "EGO032",
+                R.EGO032,
                 (
                     "45+ preferences code should use `fillPreferencesWindow()` "
                     "instead of `getPreferencesWidget()`."
@@ -462,7 +463,7 @@ def check_js_file(
         prefs_retained_evidences = _prefs_retains_window_objects(text, methods, ctx)
         if prefs_retained_evidences:
             ctx.add_finding(
-                "EGO033",
+                R.EGO033,
                 (
                     "Preferences code stores window-scoped objects on the "
                     "exported prefs class without `close-request` cleanup."
@@ -508,7 +509,7 @@ def check_js_file(
     pre_enable_evidence.extend(constructor_custom_refs.values())
     if pre_enable_evidence:
         ctx.add_finding(
-            "EGO013",
+            R.EGO013,
             (
                 "Resource creation or signal/source setup was found "
                 "outside `enable()`."
@@ -554,7 +555,7 @@ def check_js_file(
     missing_soup_abort = sorted(set(soup_session_fields) - aborted_soup_sessions)
     if missing_soup_abort:
         ctx.add_finding(
-            "EGO037",
+            R.EGO037,
             "Soup.Session instances should be aborted during cleanup.",
             [
                 ctx.node_evidence(text, soup_session_fields[name][0])
@@ -665,7 +666,7 @@ def check_js_file(
         )
         if missing_class_soup_abort:
             ctx.add_finding(
-                "EGO037",
+                R.EGO037,
                 "Soup.Session instances should be aborted during cleanup.",
                 [
                     ctx.node_evidence(text, class_soup_session_fields[name][0])
@@ -691,7 +692,7 @@ def check_js_file(
 
         if not comment_near_disable:
             ctx.add_finding(
-                "EGO008",
+                R.EGO008,
                 (
                     "Extensions using `unlock-dialog` should document "
                     "the reason in `disable()` comments."
