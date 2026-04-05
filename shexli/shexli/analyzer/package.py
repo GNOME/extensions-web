@@ -7,6 +7,7 @@ import stat
 from pathlib import Path
 from xml.etree import ElementTree
 
+from ..ast import call_callee_parts, iter_nodes, member_expression_parts, parse_js
 from ..models import AnalysisLimits, Evidence, Finding
 from ..spec import RULES_BY_ID
 from .evidence import display_evidence
@@ -299,10 +300,25 @@ def check_gsettings_usage(
         except UnicodeDecodeError:
             text = None
 
-        if text and (
-            "Gio.Settings" in text or ".getSettings(" in text or "getSettings()" in text
-        ):
-            uses_settings = True
+        if text is None:
+            continue
+
+        tree = parse_js(text)
+        for node in iter_nodes(tree.root_node):
+            if node.type == "new_expression":
+                constructor = node.child_by_field_name("constructor")
+                if constructor is not None and member_expression_parts(
+                    text, constructor
+                ) == ["Gio", "Settings"]:
+                    uses_settings = True
+                    break
+            elif node.type == "call_expression":
+                parts = call_callee_parts(text, node)
+                if parts and parts[-1] == "getSettings":
+                    uses_settings = True
+                    break
+
+        if uses_settings:
             break
 
     if uses_settings and not any(path.name.endswith(".gschema.xml") for path in files):
