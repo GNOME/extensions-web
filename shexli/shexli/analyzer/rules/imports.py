@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from tree_sitter import Node
 
-from ...ast import iter_nodes, member_expression_parts, node_text
+from ...ast import member_expression_parts, node_text
 from ...spec import R
 from ..context import CheckContext
-from ..engine import FileRule
+from ..engine import FileRule, NodeRule
 
 DEPRECATED_IMPORT_TOKENS = ("ByteArray", "Lang", "Mainloop")
 SHELL_FORBIDDEN_TOKENS = frozenset({"Gtk", "Gdk", "Adw"})
@@ -40,33 +40,34 @@ class DeprecatedImportsRule(FileRule):
                 )
 
 
-class ImportsGiRule:
-    """FileRule: EGO031 — direct use of imports._gi."""
+class ImportsGiRule(NodeRule):
+    """NodeRule: EGO031 — direct use of imports._gi."""
 
-    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
-        evidences = []
-        seen_lines: set[int] = set()
+    node_types: frozenset[str] = frozenset({"member_expression"})
 
-        for node in iter_nodes(root):
-            if node.type != "member_expression":
-                continue
-            parts = member_expression_parts(text, node)
-            if len(parts) >= 2 and parts[0] == "imports" and parts[1] == "_gi":
-                line = node.start_point.row + 1
-                if line not in seen_lines:
-                    seen_lines.add(line)
-                    evidences.append(
-                        ctx.display_evidence(
-                            line=line,
-                            snippet=node_text(text, node)[:300],
-                        )
+    def __init__(self) -> None:
+        self._evidences: list = []
+        self._seen_lines: set[int] = set()
+
+    def visit(self, node: Node, text: str, ctx: CheckContext) -> None:
+        parts = member_expression_parts(text, node)
+        if len(parts) >= 2 and parts[0] == "imports" and parts[1] == "_gi":
+            line = node.start_point.row + 1
+            if line not in self._seen_lines:
+                self._seen_lines.add(line)
+                self._evidences.append(
+                    ctx.display_evidence(
+                        line=line,
+                        snippet=node_text(text, node)[:300],
                     )
+                )
 
-        if evidences:
+    def finalize(self, root: Node, text: str, ctx: CheckContext) -> None:
+        if self._evidences:
             ctx.add_finding(
                 R.EGO031,
                 "Direct use of `imports._gi` is discouraged in extensions.",
-                evidences,
+                self._evidences,
             )
 
 

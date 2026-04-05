@@ -4,29 +4,29 @@ from __future__ import annotations
 
 from tree_sitter import Node
 
-from ...ast import call_callee_parts, iter_nodes
+from ...ast import call_callee_parts
 from ...spec import R
 from ..context import CheckContext
+from ..engine import NodeRule
 
 
-class ClipboardRule:
-    """FileRule: EGO039 — direct clipboard access via St.Clipboard.get_default()."""
+class ClipboardRule(NodeRule):
+    """NodeRule: EGO039 — direct clipboard access via St.Clipboard.get_default()."""
 
-    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
-        evidences = []
+    node_types: frozenset[str] = frozenset({"call_expression"})
 
-        for node in iter_nodes(root):
-            if node.type != "call_expression":
-                continue
+    def __init__(self) -> None:
+        self._evidences: list = []
 
-            parts = call_callee_parts(text, node)
-            if parts == ["St", "Clipboard", "get_default"]:
-                evidences.append(ctx.node_evidence(text, node))
+    def visit(self, node: Node, text: str, ctx: CheckContext) -> None:
+        if call_callee_parts(text, node) == ["St", "Clipboard", "get_default"]:
+            self._evidences.append(ctx.node_evidence(text, node))
 
-        if evidences:
+    def finalize(self, root: Node, text: str, ctx: CheckContext) -> None:
+        if self._evidences:
             ctx.add_finding(
                 R.EGO039,
                 "Direct clipboard access via `St.Clipboard.get_default()` "
                 "requires reviewer scrutiny.",
-                evidences,
+                self._evidences,
             )

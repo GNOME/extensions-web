@@ -38,9 +38,12 @@ def check_js_file(
     js_imports = imports_in_program(text, root) + legacy_imports_in_program(text, root)
 
     JSFileEngine(
+        node_rules=[
+            ImportsGiRule(),
+            ClipboardRule(),
+        ],
         file_rules=[
             DeprecatedImportsRule(js_imports),
-            ImportsGiRule(),
             ForbiddenLibsRule(js_imports),
             PrefsRule(metadata),
             SessionModesRule(metadata),
@@ -49,7 +52,6 @@ def check_js_file(
             ApiMisuseRule(),
             VersionCompatRule(js_imports),
             ExcessiveLoggingRule(),
-            ClipboardRule(),
             ObfuscationRule(),
         ],
     ).run(root, text, ctx)

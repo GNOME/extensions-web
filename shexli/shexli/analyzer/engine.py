@@ -11,12 +11,19 @@ from .context import CheckContext
 
 
 class NodeRule(ABC):
-    """Rule that visits individual AST nodes during a single traversal pass."""
+    """Rule that visits individual AST nodes during a single traversal pass.
+
+    ``finalize()`` is called once after the full walk so the rule can flush
+    accumulated state into findings.  The default implementation is a no-op.
+    """
 
     node_types: frozenset[str]
 
     @abstractmethod
     def visit(self, node: Node, text: str, ctx: CheckContext) -> None: ...
+
+    def finalize(self, root: Node, text: str, ctx: CheckContext) -> None:
+        pass
 
 
 class FileRule(ABC):
@@ -62,5 +69,7 @@ class JSFileEngine:
                 if handlers:
                     for handler in handlers:
                         handler.visit(node, text, ctx)
+            for rule in self._node_rules:
+                rule.finalize(root, text, ctx)
         for rule in self._file_rules:
             rule.check(root, text, ctx)
