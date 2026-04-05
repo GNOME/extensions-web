@@ -119,15 +119,6 @@ def legacy_import_hits(text: str, token: str) -> list[tuple[int, str]]:
     return hits
 
 
-def imports_gi_hits(text: str) -> list[tuple[int, str]]:
-    hits: list[tuple[int, str]] = []
-    for idx, line in enumerate(text.splitlines(), start=1):
-        normalized = line.replace(" ", "")
-        if "imports._gi" in normalized:
-            hits.append((idx, line.strip()))
-
-    return hits
-
 
 def _soup_session_fields(text: str, methods: list) -> dict[str, list]:
     fields: dict[str, list] = {}
@@ -397,10 +388,21 @@ def check_js_file(
                 evidences,
             )
 
-    imports_gi_evidences = [
-        ctx.display_evidence(line=line, snippet=snippet[:300])
-        for line, snippet in imports_gi_hits(text)
-    ]
+    imports_gi_evidences = []
+    seen_imports_gi_lines: set[int] = set()
+    for node in iter_nodes(root):
+        if node.type != "member_expression":
+            continue
+        parts = member_expression_parts(text, node)
+        if len(parts) < 2 or parts[0] != "imports" or parts[1] != "_gi":
+            continue
+        line = node.start_point.row + 1
+        if line in seen_imports_gi_lines:
+            continue
+        seen_imports_gi_lines.add(line)
+        imports_gi_evidences.append(
+            ctx.display_evidence(line=line, snippet=node_text(text, node)[:300])
+        )
     if imports_gi_evidences:
         ctx.add_finding(
             "EGO031",
