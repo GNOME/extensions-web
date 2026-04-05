@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from ..models import Finding
@@ -16,6 +16,8 @@ class CheckContext:
     path: Path
     mapper: PathMapper
     findings: list[Finding]
+    target_versions: set[int] = field(default_factory=set)
+    file_contexts: set[str] = field(default_factory=set)
 
     def add_finding(self, rule_id: str, message: str, evidence=None) -> None:
         self.findings.append(RULES_BY_ID[rule_id].make_finding(message, evidence))

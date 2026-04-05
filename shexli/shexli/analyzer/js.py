@@ -20,12 +20,10 @@ from ..ast import (
     top_level_function_methods,
     top_level_variable_names,
 )
-from .compat import (
-    check_api_misuse,
-    check_subprocess_calls,
-    check_version_compatibility,
-)
+from ..spec import R
+from .compat import ApiMisuseRule, SubprocessRule, VersionCompatRule
 from .context import CheckContext
+from .engine import JSFileEngine
 from .lifecycle import (
     collect_cleanup_from_methods,
     collect_destroyable_class_names,
@@ -36,7 +34,6 @@ from .lifecycle import (
 )
 from .lifecycle.base import JS_BUILTIN_CONTAINERS, SOURCE_ADD_NAMES
 from .lifecycle.rules import append_lifecycle_findings
-from ..spec import R
 from .reachability import ENTRYPOINT_CONTEXTS
 
 DEPRECATED_IMPORT_TOKENS = ("ByteArray", "Lang", "Mainloop")
@@ -359,6 +356,8 @@ def check_js_file(
     target_versions: set[int],
     contexts: set[str],
 ) -> None:
+    ctx.target_versions = target_versions
+    ctx.file_contexts = contexts
     is_prefs = "prefs" in contexts
     is_shell = "shell" in contexts
     path = ctx.path
@@ -707,12 +706,10 @@ def check_js_file(
                 ],
             )
 
-    check_subprocess_calls(ctx, text, root, contexts)
-    check_api_misuse(ctx, text, root, contexts)
-    check_version_compatibility(
-        ctx,
-        text,
-        root,
-        js_imports,
-        target_versions,
-    )
+    JSFileEngine(
+        file_rules=[
+            SubprocessRule(),
+            ApiMisuseRule(),
+            VersionCompatRule(js_imports),
+        ],
+    ).run(root, text, ctx)

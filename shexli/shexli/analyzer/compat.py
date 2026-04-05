@@ -17,6 +17,7 @@ from ..ast import (
 from ..models import Evidence
 from ..spec import R
 from .context import CheckContext
+from .engine import FileRule
 from .spawn import (
     SPAWN_CALL_NAMES,
     extract_literal_argv,
@@ -455,3 +456,35 @@ def _connects_removed_display_signal(source: str, node: Node) -> bool:
 
     signal = extract_literal_string(source, args[0])
     return signal in GNOME50_REMOVED_DISPLAY_SIGNALS
+
+
+# ---------------------------------------------------------------------------
+# FileRule wrappers — consumed by JSFileEngine in js.py
+# ---------------------------------------------------------------------------
+
+
+class SubprocessRule(FileRule):
+    """FileRule: checks for privileged and synchronous subprocess calls."""
+
+    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
+        check_subprocess_calls(ctx, text, root, ctx.file_contexts)
+
+
+class ApiMisuseRule(FileRule):
+    """FileRule: checks for run_dispose, sync IO, stylesheet misuse,
+    and extension lookup."""
+
+    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
+        check_api_misuse(ctx, text, root, ctx.file_contexts)
+
+
+class VersionCompatRule(FileRule):
+    """FileRule: checks for compatibility issues with targeted GNOME Shell versions."""
+
+    def __init__(self, js_imports: list) -> None:
+        self._js_imports = js_imports
+
+    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
+        check_version_compatibility(
+            ctx, text, root, self._js_imports, ctx.target_versions
+        )
