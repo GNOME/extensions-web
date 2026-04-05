@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-07-19 23:17+1000\n"
+"POT-Creation-Date: 2026-04-03 15:18+0000\n"
+"PO-Revision-Date: 2026-04-04 07:46+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -619,6 +619,53 @@ msgstr "Отправить комментарий"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "Отредактируйте свой комментарий"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (экспериментально)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli обнаружено %(count)s проблема, которая, возможно, требует "
+"внимания рецензента.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli обнаружено %(count)s проблемы, которые, возможно, требуют "
+"внимания рецензента.\n"
+"    "
+msgstr[2] ""
+"\n"
+"    Shexli обнаружено %(count)s проблем, которые, возможно, требуют внимания "
+"рецензента.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli не найдено никаких проблем."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli не удалось проанализировать эту версию."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli ещё не сообщало о результатах"
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
