@@ -35,9 +35,11 @@ def node_text(source: str, node: Node) -> str:
 
 
 def iter_nodes(node: Node):
-    yield node
-    for child in node.children:
-        yield from iter_nodes(child)
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        yield current
+        stack.extend(reversed(current.children))
 
 
 def child_by_type(node: Node, node_type: str) -> Node | None:
