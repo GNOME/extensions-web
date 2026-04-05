@@ -10,12 +10,15 @@ from ..ast import (
 from .compat import ApiMisuseRule, SubprocessRule, VersionCompatRule
 from .context import CheckContext
 from .engine import JSFileEngine
+from .rules.clipboard import ClipboardRule
 from .rules.imports import (
     DeprecatedImportsRule,
     ForbiddenLibsRule,
     ImportsGiRule,
 )
 from .rules.lifecycle import LifecycleRule
+from .rules.logging import ExcessiveLoggingRule
+from .rules.obfuscation import ObfuscationRule
 from .rules.prefs import PrefsRule
 from .rules.session_modes import SessionModesRule
 
@@ -45,5 +48,8 @@ def check_js_file(
             SubprocessRule(),
             ApiMisuseRule(),
             VersionCompatRule(js_imports),
+            ExcessiveLoggingRule(),
+            ClipboardRule(),
+            ObfuscationRule(),
         ],
     ).run(root, text, ctx)

@@ -45,6 +45,8 @@ class RuleCode(StrEnum):
     EGO035 = "EGO035"
     EGO036 = "EGO036"
     EGO037 = "EGO037"
+    EGO038 = "EGO038"
+    EGO039 = "EGO039"
     EGO_C49_001 = "EGO-C49-001"
     EGO_C49_002 = "EGO-C49-002"
     EGO_C49_003 = "EGO-C49-003"
@@ -138,7 +140,7 @@ RULES = [
             "value constraints"
         ),
         rationale=(
-            "Donation types and shapes are deterministic in ego metadata " "handling."
+            "Donation types and shapes are deterministic in ego metadata handling."
         ),
     ),
     RuleSpec(
@@ -254,7 +256,7 @@ RULES = [
         source_section="Do not use deprecated modules",
         static_checkable=True,
         detection_strategy=(
-            "AST import detection including ES modules and legacy " "imports.* usage"
+            "AST import detection including ES modules and legacy imports.* usage"
         ),
         rationale="Deprecated modules are explicitly disallowed.",
     ),
@@ -284,13 +286,13 @@ RULES = [
         severity="manual_review",
         source_url=f"{GUIDELINES_URL}#code-must-not-be-obfuscated",
         source_section="Code must not be obfuscated",
-        static_checkable=False,
+        static_checkable=True,
         detection_strategy=(
-            "deferred until a non-heuristic readability classifier exists"
+            "heuristic: average identifier length < 2 on files with > 500 bytes"
         ),
         rationale=(
-            "This rule is important, but the current module avoids "
-            "heuristic enforcement."
+            "Reviewers cannot audit obfuscated code; minification and name "
+            "mangling are explicitly disallowed."
         ),
     ),
     RuleSpec(
@@ -401,7 +403,7 @@ RULES = [
         source_section="Complete Examples",
         static_checkable=True,
         detection_strategy=(
-            "AST detection of synchronous GLib subprocess calls in shell " "context"
+            "AST detection of synchronous GLib subprocess calls in shell context"
         ),
         rationale=(
             "Synchronous subprocess APIs can block the shell main loop and "
@@ -413,8 +415,7 @@ RULES = [
         title="extensions should not call run_dispose in extension code",
         severity="warning",
         source_url=(
-            "https://gjs-docs.gnome.org/gobject20~2.0/gobject.object"
-            "#method-run_dispose"
+            "https://gjs-docs.gnome.org/gobject20~2.0/gobject.object#method-run_dispose"
         ),
         source_section="GObject.Object.run_dispose",
         static_checkable=True,
@@ -460,7 +461,7 @@ RULES = [
         ),
         severity="warning",
         source_url=(
-            "https://gjs.guide/extensions/upgrading/gnome-shell-45.html" "#preferences"
+            "https://gjs.guide/extensions/upgrading/gnome-shell-45.html#preferences"
         ),
         source_section="Preferences",
         static_checkable=True,
@@ -533,8 +534,7 @@ RULES = [
         ),
         severity="warning",
         source_url=(
-            "https://gjs.guide/extensions/upgrading/gnome-shell-45.html"
-            "#extensionutils"
+            "https://gjs.guide/extensions/upgrading/gnome-shell-45.html#extensionutils"
         ),
         source_section="`extensionUtils`",
         static_checkable=True,
@@ -551,9 +551,7 @@ RULES = [
         rule_id=RuleCode.EGO037,
         title="Soup.Session instances should be aborted during cleanup",
         severity="warning",
-        source_url=(
-            "https://gjs-docs.gnome.org/soup30~3.0/soup.session" "#method-abort"
-        ),
+        source_url=("https://gjs-docs.gnome.org/soup30~3.0/soup.session#method-abort"),
         source_section="Soup.Session.abort",
         static_checkable=True,
         detection_strategy=(
@@ -563,6 +561,35 @@ RULES = [
         rationale=(
             "Retained Soup.Session instances should be aborted when the "
             "owning object or extension is destroyed."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO038,
+        title="extension files should not contain excessive ungated console logging",
+        severity="warning",
+        source_url=f"{GUIDELINES_URL}#no-excessive-logging",
+        source_section="No excessive logging",
+        static_checkable=True,
+        detection_strategy=(
+            "AST count of console.log/warn/error calls outside if-debug "
+            "guards; threshold > 5 ungated calls per file"
+        ),
+        rationale=(
+            "Excessive console output is noisy in production and may indicate "
+            "forgotten debug instrumentation."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO039,
+        title="extensions should not access the clipboard directly",
+        severity="manual_review",
+        source_url=f"{GUIDELINES_URL}#clipboard-access-must-be-declared",
+        source_section="Review Guidelines",
+        static_checkable=True,
+        detection_strategy="AST detection of St.Clipboard.get_default() calls",
+        rationale=(
+            "Direct clipboard access is a privacy concern and requires "
+            "reviewer scrutiny."
         ),
     ),
     RuleSpec(
@@ -579,15 +606,14 @@ RULES = [
         source_section="Do Not Disturb Toggle",
         static_checkable=True,
         detection_strategy=(
-            "AST import detection gated by explicit shell-version " "membership for 49"
+            "AST import detection gated by explicit shell-version membership for 49"
         ),
         rationale="DoNotDisturbSwitch is removed in GNOME Shell 49.",
     ),
     RuleSpec(
         rule_id=RuleCode.EGO_C49_002,
         title=(
-            "extensions targeting GNOME 49 must not use removed "
-            "Clutter action classes"
+            "extensions targeting GNOME 49 must not use removed Clutter action classes"
         ),
         severity="error",
         source_url=(
@@ -650,8 +676,7 @@ RULES = [
             "explicit shell-version membership for 49"
         ),
         rationale=(
-            "Meta.CursorTracker.set_pointer_visible() was replaced in "
-            "GNOME Shell 49."
+            "Meta.CursorTracker.set_pointer_visible() was replaced in GNOME Shell 49."
         ),
     ),
     RuleSpec(
