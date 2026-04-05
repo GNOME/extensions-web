@@ -69,13 +69,27 @@ def _shebang_interpreter(text: str) -> str | None:
     if interpreter != "env":
         return interpreter
 
-    if len(parts) >= 3 and parts[1] == "-S":
-        return Path(parts[2]).name
+    # Skip env flags to find the actual command.
+    # Flags that consume the next token as their argument:
+    _ENV_FLAGS_WITH_VALUE = {"-u", "--unset", "-C", "--chdir"}
+    i = 1
+    while i < len(parts):
+        part = parts[i]
+        if part == "--":
+            i += 1
+            break
+        if not part.startswith("-"):
+            break
+        if part == "-S":
+            # -S passes the remainder as a split command line
+            i += 1
+            break
+        if part in _ENV_FLAGS_WITH_VALUE:
+            i += 2
+        else:
+            i += 1
 
-    if len(parts) >= 2:
-        return Path(parts[1]).name
-
-    return None
+    return Path(parts[i]).name if i < len(parts) else None
 
 
 def check_package_files(
