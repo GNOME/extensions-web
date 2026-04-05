@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from tree_sitter import Node
 
+from ...api_data import API
 from ...ast import (
     call_callee_parts,
     connect_callback_methods_for_events,
@@ -17,7 +18,6 @@ from ...ast import (
     top_level_function_methods,
     top_level_variable_names,
 )
-from ...api_data import API
 from ...spec import R
 from ..context import CheckContext
 from ..engine import FileRule
@@ -399,6 +399,7 @@ class LifecycleRule(FileRule):
             destroyable_classes,
             module_vars,
         )
+        cross_file_index = ctx.cross_file_index
 
         created = collect_resources_from_methods(
             text,
@@ -408,12 +409,14 @@ class LifecycleRule(FileRule):
             destroyable_classes,
             module_vars,
             signal_manager_fields,
+            cross_file_index=cross_file_index,
         )
         cleaned = collect_cleanup_from_methods(
             text,
             disable_methods,
             module_vars,
             set(created.signal_groups) | signal_manager_fields,
+            cross_file_index=cross_file_index,
         )
         pre_enable_evidence = collect_pre_enable_evidence(
             text, ctx.path, root, methods, ctx.mapper

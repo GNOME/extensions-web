@@ -31,6 +31,8 @@ from .base import (
     record_resource,
     resource_from_node,
 )
+from .cross_file import collect_cross_file_cleanup, collect_cross_file_resources
+from .types import CrossFileIndex
 
 LOCAL_UI_NAMESPACE_ROOTS = {
     "Adw",
@@ -51,6 +53,7 @@ def collect_resources_from_methods(
     destroyable_classes: set[str],
     module_vars: set[str],
     known_signal_manager_fields: set[str] | None = None,
+    cross_file_index: CrossFileIndex | None = None,
 ) -> ResourceTracker:
     tracker = ResourceTracker.empty()
     known_signal_manager_fields = known_signal_manager_fields or set()
@@ -465,6 +468,11 @@ def collect_resources_from_methods(
             ):
                 tracker.signals.pop(signal_name, None)
 
+    if cross_file_index:
+        collect_cross_file_resources(
+            tracker, cross_file_index, source, methods, mapper, destroyable_classes
+        )
+
     return tracker
 
 
@@ -544,6 +552,7 @@ def collect_cleanup_from_methods(
     methods: list[Node],
     module_vars: set[str],
     signal_group_fields: set[str] | None = None,
+    cross_file_index: CrossFileIndex | None = None,
 ) -> ResourceTracker:
     tracker = ResourceTracker.empty()
     signal_group_fields = signal_group_fields or set()
@@ -662,6 +671,9 @@ def collect_cleanup_from_methods(
                     loop_var,
                     match_first_argument=True,
                 )
+
+    if cross_file_index:
+        collect_cross_file_cleanup(tracker, cross_file_index, source, methods)
 
     return tracker
 

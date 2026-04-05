@@ -7,6 +7,7 @@ from pathlib import Path
 
 from shexli import AnalysisLimits, analyze_path
 from shexli.analyzer.evidence import node_evidence
+from shexli.analyzer.lifecycle.cross_file import build_cross_file_indices_per_file
 from shexli.analyzer.paths import PathMapper
 from shexli.ast import iter_nodes, parse_js
 
@@ -1985,6 +1986,434 @@ export default class E extends Extension {
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
             self.assertIn("EGO016", rule_ids)
+
+
+class LifecycleEgo014Test(unittest.TestCase):
+    """EGO014 — objects created in enable() must be destroyed in disable()."""
+
+    _METADATA = (
+        '{"uuid":"ego014@example.com","name":"EGO014",'
+        '"description":"","shell-version":["46"]}'
+    )
+
+    def _make_pkg(self, tmpdir: str, extension_js: str) -> Path:
+        root = Path(tmpdir)
+        (root / "metadata.json").write_text(self._METADATA, encoding="utf-8")
+        (root / "extension.js").write_text(extension_js.strip(), encoding="utf-8")
+        return root
+
+    def test_st_widget_not_destroyed_triggers_ego014(self) -> None:
+        """St widget created in enable() but only nulled, never destroyed."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = self._make_pkg(
+                tmpdir,
+                """
+import St from "gi://St";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+export default class E extends Extension {
+    enable() {
+        this._label = new St.Label({ text: "hello" });
+    }
+    disable() {
+        this._label = null;
+    }
+}
+""",
+            )
+            result = analyze_path(root)
+            rule_ids = {f.rule_id for f in result.findings}
+            self.assertIn("EGO014", rule_ids)
+
+    def test_st_widget_properly_destroyed_suppresses_ego014(self) -> None:
+        """St widget destroyed before null release must not trigger EGO014."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = self._make_pkg(
+                tmpdir,
+                """
+import St from "gi://St";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+export default class E extends Extension {
+    enable() {
+        this._label = new St.Label({ text: "hello" });
+    }
+    disable() {
+        this._label.destroy();
+        this._label = null;
+    }
+}
+""",
+            )
+            result = analyze_path(root)
+            rule_ids = {f.rule_id for f in result.findings}
+            self.assertNotIn("EGO014", rule_ids)
+
+
+class CrossFileLifecycleTest(unittest.TestCase):
+    """
+    Cross-file lifecycle tests.
+
+    Tests marked with the comment "# Phase 6" document behaviour that
+    requires cross-file method_reachability and are expected to FAIL until
+    Phase 6 is implemented.  All other tests must pass on the current
+    codebase.
+    """
+
+    _METADATA = (
+        '{"uuid":"xfile@example.com","name":"XFile",'
+        '"description":"","shell-version":["46"]}'
+    )
+
+    def _make_pkg(self, root: Path, extension_js: str, helper_js: str) -> None:
+        (root / "metadata.json").write_text(self._METADATA, encoding="utf-8")
+        (root / "extension.js").write_text(extension_js.strip(), encoding="utf-8")
+        (root / "helper.js").write_text(helper_js.strip(), encoding="utf-8")
+
+    # ------------------------------------------------------------------
+    # Regression tests — must pass before and after Phase 6
+    # ------------------------------------------------------------------
+
+    def test_cross_file_signal_with_cleanup_does_not_trigger_ego015(self) -> None:
+        """Imported helper assigns and disconnects signal via `this`-parameter."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self._make_pkg(
+                root,
+                extension_js="""
+import { connectAll, disconnectAll } from "./helper.js";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+export default class E extends Extension {
+    enable() { connectAll(this); }
+    disable() { disconnectAll(this); }
+}
+""",
+                helper_js="""
+export function connectAll(ext) {
+    ext._signalId = global.display.connect("notify::focus-window", () => {});
+}
+export function disconnectAll(ext) {
+    global.display.disconnect(ext._signalId);
+    ext._signalId = null;
+}
+""",
+            )
+            result = analyze_path(root)
+            rule_ids = {f.rule_id for f in result.findings}
+            self.assertNotIn("EGO015", rule_ids)
+
+    def test_cross_file_source_with_cleanup_does_not_trigger_ego016(self) -> None:
+        """Imported helper adds and removes GLib source via `this`-parameter."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self._make_pkg(
+                root,
+                extension_js="""
+import { startTimer, stopTimer } from "./helper.js";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+export default class E extends Extension {
+    enable() { startTimer(this); }
+    disable() { stopTimer(this); }
+}
+""",
+                helper_js="""
+import GLib from "gi://GLib";
+export function startTimer(ext) {
+    ext._timerId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 60, () => {
+        return GLib.SOURCE_CONTINUE;
+    });
+}
+export function stopTimer(ext) {
+    if (ext._timerId) {
+        GLib.source_remove(ext._timerId);
+        ext._timerId = null;
+    }
+}
+""",
+            )
+            result = analyze_path(root)
+            rule_ids = {f.rule_id for f in result.findings}
+            self.assertNotIn("EGO016", rule_ids)
+
+    # ------------------------------------------------------------------
+    # Phase 6 tests — currently fail; must pass after Phase 6
+    # ------------------------------------------------------------------
+
+    def test_cross_file_signal_without_cleanup_triggers_ego015(self) -> None:
+        """Imported helper assigns signal via `this`-parameter but never disconnects.
+
+        Phase 6: extension.js analysis must follow connectAll() into helper.js,
+        discover ext._signalId assignment, and flag the missing disconnect.
+        """
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self._make_pkg(
+                root,
+                extension_js="""
+import { connectAll } from "./helper.js";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+export default class E extends Extension {
+    enable() { connectAll(this); }
+    disable() {}
+}
+""",
+                helper_js="""
+export function connectAll(ext) {
+    ext._signalId = global.display.connect("notify::focus-window", () => {});
+}
+""",
+            )
+            result = analyze_path(root)
+            rule_ids = {f.rule_id for f in result.findings}
+            self.assertIn("EGO015", rule_ids)  # Phase 6
+
+    def test_cross_file_source_without_cleanup_triggers_ego016(self) -> None:
+        """Imported helper adds GLib source via `this`-parameter but never removes it.
+
+        Phase 6: extension.js analysis must follow startTimer() into helper.js,
+        discover ext._timerId assignment, and flag the missing removal.
+        """
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self._make_pkg(
+                root,
+                extension_js="""
+import { startTimer } from "./helper.js";
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+export default class E extends Extension {
+    enable() { startTimer(this); }
+    disable() {}
+}
+""",
+                helper_js="""
+import GLib from "gi://GLib";
+export function startTimer(ext) {
+    ext._timerId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 60, () => {
+        return GLib.SOURCE_CONTINUE;
+    });
+}
+""",
+            )
+            result = analyze_path(root)
+            rule_ids = {f.rule_id for f in result.findings}
+            self.assertIn("EGO016", rule_ids)  # Phase 6
+
+    def test_cross_file_helper_cache_is_scoped_by_helper_path(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "a").mkdir()
+            (root / "b").mkdir()
+            a_entry = root / "a" / "entry.js"
+            b_entry = root / "b" / "entry.js"
+            a_helper = root / "a" / "helper.js"
+            b_helper = root / "b" / "helper.js"
+
+            a_entry.write_text(
+                'import { connectAll } from "./helper.js";\nconnectAll(this);\n',
+                encoding="utf-8",
+            )
+            b_entry.write_text(
+                'import { connectAll } from "./helper.js";\nconnectAll(this);\n',
+                encoding="utf-8",
+            )
+            a_helper.write_text(
+                """
+export function connectAll(ext) {
+    ext._signalId = global.display.connect("notify::focus-window", () => {});
+}
+""".strip(),
+                encoding="utf-8",
+            )
+            b_helper.write_text(
+                """
+export function connectAll(ext) {
+    ext._timerId = 42;
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            indices = build_cross_file_indices_per_file([a_entry, b_entry])
+
+            self.assertIn(a_entry, indices)
+            self.assertIn(b_entry, indices)
+            self.assertEqual(indices[a_entry]["connectAll"].path, a_helper)
+            self.assertEqual(indices[b_entry]["connectAll"].path, b_helper)
+            self.assertIn("_signalId", indices[a_entry]["connectAll"].source)
+            self.assertIn("_timerId", indices[b_entry]["connectAll"].source)
+
+
+class IterNodesTest(unittest.TestCase):
+    def test_deep_nesting_does_not_raise_recursion_error(self) -> None:
+        # Generate a JS expression with nesting depth well above Python's
+        # default recursion limit (~1000) to verify the iterative traversal.
+        source = "a" + "||a" * 2000
+        tree = parse_js(source)
+        nodes = list(iter_nodes(tree.root_node))
+        self.assertGreater(len(nodes), 0)
+
+    def test_preorder_traversal_order_is_preserved(self) -> None:
+        source = "a + b"
+        tree = parse_js(source)
+        types = [n.type for n in iter_nodes(tree.root_node)]
+        # Root (program) must come before its children
+        self.assertEqual(types[0], "program")
+        # binary_expression must appear before its operands
+        bin_idx = types.index("binary_expression")
+        ident_idx = types.index("identifier")
+        self.assertLess(bin_idx, ident_idx)
+
+
+class ValidateUuidTest(unittest.TestCase):
+    def setUp(self) -> None:
+        from shexli.analyzer.metadata import validate_uuid
+
+        self.validate_uuid = validate_uuid
+
+    def test_valid_uuid(self) -> None:
+        self.assertTrue(self.validate_uuid("my-extension@example.com"))
+        self.assertTrue(self.validate_uuid("ext@author.io"))
+        self.assertTrue(self.validate_uuid("ext@nodot"))
+
+    def test_missing_at(self) -> None:
+        self.assertFalse(self.validate_uuid("noatsign"))
+
+    def test_empty_local_part(self) -> None:
+        self.assertFalse(self.validate_uuid("@example.com"))
+
+    def test_gnome_org_rejected(self) -> None:
+        self.assertFalse(self.validate_uuid("ext@gnome.org"))
+        self.assertFalse(self.validate_uuid("ext@extensions.gnome.org"))
+
+    def test_single_char_rejected(self) -> None:
+        self.assertFalse(self.validate_uuid("a"))
+
+
+class ParseVersionStringTest(unittest.TestCase):
+    def setUp(self) -> None:
+        from shexli.analyzer.metadata import InvalidShellVersion, parse_version_string
+
+        self.parse = parse_version_string
+        self.Invalid = InvalidShellVersion
+
+    def test_modern_single_version(self) -> None:
+        self.assertEqual(self.parse("46")[0], 46)
+        self.assertEqual(self.parse("50")[0], 50)
+
+    def test_four_component_is_rejected(self) -> None:
+        with self.assertRaises(self.Invalid):
+            self.parse("3.36.0.1")
+
+    def test_three_component_pre40(self) -> None:
+        major, minor, point = self.parse("3.36.2")
+        self.assertEqual((major, minor, point), (3, 36, 2))
+
+    def test_invalid_string_rejected(self) -> None:
+        with self.assertRaises(self.Invalid):
+            self.parse("not-a-version")
+
+
+class ShebangInterpreterTest(unittest.TestCase):
+    def setUp(self) -> None:
+        from shexli.analyzer.package import _shebang_interpreter
+
+        self.interp = _shebang_interpreter
+
+    def test_plain_bash(self) -> None:
+        self.assertEqual(self.interp("#!/bin/bash\n"), "bash")
+
+    def test_env_bash(self) -> None:
+        self.assertEqual(self.interp("#!/usr/bin/env bash\n"), "bash")
+
+    def test_env_S_flag(self) -> None:
+        self.assertEqual(self.interp("#!/usr/bin/env -S bash\n"), "bash")
+
+    def test_env_u_flag_with_arg(self) -> None:
+        self.assertEqual(self.interp("#!/usr/bin/env -u FOO bash\n"), "bash")
+
+    def test_env_multiple_flags(self) -> None:
+        self.assertEqual(self.interp("#!/usr/bin/env -u FOO -C /tmp bash\n"), "bash")
+
+    def test_env_double_dash(self) -> None:
+        self.assertEqual(self.interp("#!/usr/bin/env -- bash\n"), "bash")
+
+    def test_env_python(self) -> None:
+        self.assertEqual(self.interp("#!/usr/bin/env python3\n"), "python3")
+
+    def test_empty_shebang(self) -> None:
+        self.assertIsNone(self.interp("#!\n"))
+
+    def test_no_shebang(self) -> None:
+        self.assertIsNone(self.interp("echo hello\n"))
+
+
+class GSettingsUsageAstTest(unittest.TestCase):
+    """check_gsettings_usage must not fire on GSettings mentions in comments."""
+
+    def _run(self, js_source: str) -> set[str]:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"gs-test@example.com","name":"GS","description":"",'
+                '"shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(js_source, encoding="utf-8")
+            result = analyze_path(root)
+            return {f.rule_id for f in result.findings}
+
+    def test_gio_settings_in_code_triggers_ego011(self) -> None:
+        rule_ids = self._run(
+            'import Gio from "gi://Gio";\n'
+            "const s = new Gio.Settings("
+            "{schema_id: 'org.gnome.shell.extensions.gs-test'});\n"
+        )
+        self.assertIn("EGO011", rule_ids)
+
+    def test_gio_settings_in_comment_does_not_trigger_ego011(self) -> None:
+        rule_ids = self._run(
+            "// Uses Gio.Settings for preferences\n"
+            "export default class E { enable() {} disable() {} }\n"
+        )
+        self.assertNotIn("EGO011", rule_ids)
+
+    def test_get_settings_call_triggers_ego011(self) -> None:
+        rule_ids = self._run(
+            'import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";\n'
+            "export default class E extends Extension {\n"
+            "    enable() { this._s = this.getSettings(); }\n"
+            "    disable() { this._s = null; }\n"
+            "}\n"
+        )
+        self.assertIn("EGO011", rule_ids)
+
+
+class DonationUrlValidationTest(unittest.TestCase):
+    def _run_with_donations(self, donations: dict) -> set[str]:
+        import json
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            metadata = {
+                "uuid": "don@example.com",
+                "name": "D",
+                "description": "",
+                "shell-version": ["46"],
+                "donations": donations,
+            }
+            (root / "metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
+            result = analyze_path(root)
+            return {f.rule_id for f in result.findings}
+
+    def test_valid_custom_url_accepted(self) -> None:
+        rule_ids = self._run_with_donations({"custom": "https://example.com/donate"})
+        self.assertNotIn("EGO007", rule_ids)
+
+    def test_scheme_only_url_rejected(self) -> None:
+        rule_ids = self._run_with_donations({"custom": "https://"})
+        self.assertIn("EGO007", rule_ids)
+
+    def test_non_http_scheme_rejected(self) -> None:
+        rule_ids = self._run_with_donations({"custom": "ftp://example.com/donate"})
+        self.assertIn("EGO007", rule_ids)
 
 
 if __name__ == "__main__":

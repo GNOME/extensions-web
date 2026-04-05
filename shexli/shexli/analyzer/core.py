@@ -12,6 +12,7 @@ from ..spec import RULES_BY_ID, SPEC_VERSION, R
 from .context import CheckContext
 from .evidence import display_evidence
 from .js import check_js_file
+from .lifecycle.cross_file import build_cross_file_indices_per_file
 from .metadata import check_metadata, metadata_target_versions, parse_metadata
 from .package import (
     check_gsettings_usage,
@@ -125,6 +126,7 @@ def analyze_path(
         check_package_files(files, findings, mapper, limits, target_versions)
         check_schema_files(files, findings, mapper, limits)
         check_gsettings_usage(js_files, files, findings, limits)
+        cross_file_indices = build_cross_file_indices_per_file(analyzed_js_files)
 
         if unreachable_js_files:
             findings.append(
@@ -147,6 +149,7 @@ def analyze_path(
                 continue
 
             ctx = CheckContext(path, mapper, findings)
+            ctx.cross_file_index = cross_file_indices.get(path)
             check_js_file(
                 ctx,
                 text,
