@@ -88,11 +88,11 @@ def walk_regular_files(root: Path, limits: AnalysisLimits) -> list[Path]:
         if total_size > limits.max_total_file_bytes:
             raise AnalysisLimitError("Package exceeds total file size limit.")
 
-        files.append(path)
-        if len(files) > limits.max_files:
+        if len(files) >= limits.max_files:
             raise AnalysisLimitError(
-                f"Package contains too many files ({len(files)} > {limits.max_files})."
+                f"Package contains too many files (> {limits.max_files})."
             )
+        files.append(path)
 
     return files
 
