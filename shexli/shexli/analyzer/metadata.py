@@ -38,7 +38,7 @@ def parse_version_string(version_string: str) -> tuple[int, int, int]:
     version = version_string.split(".")
     version_parts = len(version)
 
-    if version_parts < 1 or version_parts > 4:
+    if version_parts < 1 or version_parts > 3:
         raise InvalidShellVersion()
 
     try:
@@ -70,6 +70,10 @@ def validate_uuid(uuid: str) -> bool:
         return False
 
     if re.search(r"[.@]gnome\.org$", uuid) is not None:
+        return False
+
+    at = uuid.find("@")
+    if at <= 0:
         return False
 
     return True
@@ -335,7 +339,7 @@ def _check_donations(
 
         for value in normalized:
             parsed = urlparse(value)
-            if parsed.scheme not in {"http", "https"}:
+            if parsed.scheme not in {"http", "https"} or not parsed.netloc:
                 findings.append(
                     RULES_BY_ID["EGO007"].make_finding(
                         "Custom donation URLs must use `http` or `https`.",
