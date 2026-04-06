@@ -76,6 +76,9 @@ class ApiMisuseRule(FileRule):
             if not args:
                 continue
 
+            if args[0].text is None:
+                continue
+
             arg_text = args[0].text.decode("utf-8")
             literal = extract_literal_string(text, args[0])
             if literal == "stylesheet.css" or arg_text in stylesheet_aliases:

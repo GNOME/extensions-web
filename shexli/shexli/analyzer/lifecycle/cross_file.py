@@ -101,7 +101,7 @@ def build_cross_file_index(
     ext_source: str,
     ext_root: Node,
     pkg_dir: Path,
-    parsed_helpers: dict[Path, tuple[str, object]] | None = None,
+    parsed_helpers: dict[Path, tuple[str, Node]] | None = None,
 ) -> CrossFileIndex:
     """Return an index of imported helper functions usable as ``fn(this)``.
 
@@ -188,7 +188,7 @@ def build_cross_file_indices_per_file(
     not overwrite each other.  Helper files are parsed once via a shared cache.
     """
     result: dict[Path, CrossFileIndex] = {}
-    parsed_helpers: dict[Path, tuple[str, object]] = {}
+    parsed_helpers: dict[Path, tuple[str, Node]] = {}
     for js_file in js_files:
         try:
             source = js_file.read_text(encoding="utf-8")

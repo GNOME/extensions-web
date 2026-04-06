@@ -45,7 +45,7 @@ def parse_version_string(version_string: str) -> tuple[int, int, int]:
         major = int(version[0])
         minor = version[1] if version_parts > 1 else -1
         if major >= 40 and minor in prerelease_versions:
-            minor = prerelease_versions.get(minor)
+            minor = prerelease_versions[minor]
         else:
             minor = int(minor)
     except ValueError as exc:

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 
 from ...models import Evidence, Finding
@@ -78,8 +78,8 @@ LIFECYCLE_RULES = (
 
 def _append_missing_lifecycle_findings(
     findings: list[Finding],
-    created_resources: dict[str, Evidence | None],
-    cleaned_resources: dict[str, Evidence | None],
+    created_resources: Mapping[str, Evidence | None],
+    cleaned_resources: Mapping[str, Evidence | None],
     rule_id: str,
     message: str,
     suppress_names: set[str] | None = None,
@@ -90,10 +90,16 @@ def _append_missing_lifecycle_findings(
     if not missing_names:
         return
 
+    evidences = [
+        e for name in missing_names if (e := created_resources[name]) is not None
+    ]
+    if not evidences:
+        return
+
     findings.append(
         RULES_BY_ID[rule_id].make_finding(
             message,
-            [created_resources[name] for name in missing_names],
+            evidences,
         )
     )
 
@@ -188,7 +194,7 @@ def append_lifecycle_findings(
                     "Main loop sources should be removed before creating a "
                     "new source on the same field."
                 ),
-                list(created.recreated_sources.values()),
+                [e for e in created.recreated_sources.values() if e is not None],
             )
         )
 

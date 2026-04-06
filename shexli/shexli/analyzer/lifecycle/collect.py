@@ -120,6 +120,8 @@ class ResourceCollector:
 
         if value.type == "new_expression":
             constructor = value.child_by_field_name("constructor")
+            if constructor is None:
+                return
             constructor_parts = member_expression_parts(self.source, constructor)
             constructor_name = ".".join(constructor_parts)
             if constructor_name.startswith("PopupMenu.Popup"):
@@ -193,6 +195,8 @@ class ResourceCollector:
                     self.owner_aliases[name] = owner
                 if right.type == "new_expression":
                     constructor = right.child_by_field_name("constructor")
+                    if constructor is None:
+                        return
                     constructor_parts = member_expression_parts(
                         self.source,
                         constructor,
