@@ -7,9 +7,9 @@ from ..ast import (
     legacy_imports_in_program,
     parse_js,
 )
-from .compat import ApiMisuseRule, SubprocessRule, VersionCompatRule
 from .context import CheckContext
 from .engine import JSFileEngine
+from .rules.api_misuse import ApiMisuseRule
 from .rules.clipboard import ClipboardRule
 from .rules.imports import (
     DeprecatedImportsRule,
@@ -21,6 +21,8 @@ from .rules.logging import ExcessiveLoggingRule
 from .rules.obfuscation import ObfuscationRule
 from .rules.prefs import PrefsRule
 from .rules.session_modes import SessionModesRule
+from .rules.subprocess import SubprocessRule
+from .rules.version_compat import VersionCompatRule
 
 
 def check_js_file(
