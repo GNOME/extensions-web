@@ -17,6 +17,7 @@ from ...ast import (
     top_level_function_methods,
     top_level_variable_names,
 )
+from ...api_data import API
 from ...spec import R
 from ..context import CheckContext
 from ..engine import FileRule
@@ -34,14 +35,7 @@ from ..reachability import ENTRYPOINT_CONTEXTS
 
 # Framework root superclasses whose GObject-root fields are managed by the
 # framework itself (PopupMenu pattern).
-_FRAMEWORK_ROOT_SUPERCLASSES = frozenset(
-    {
-        "PopupMenuSection",
-        "PopupMenu.PopupMenuSection",
-        "CollapsibleGroup",
-        "ChildMenu",
-    }
-)
+_FRAMEWORK_ROOT_SUPERCLASSES = API.lifecycle.framework_root_superclasses
 
 
 # ---------------------------------------------------------------------------

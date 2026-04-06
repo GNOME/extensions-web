@@ -6,6 +6,7 @@ from dataclasses import dataclass
 
 from tree_sitter import Node
 
+from ...api_data import API
 from ...ast import (
     bound_this_callback_methods,
     call_arguments,
@@ -22,51 +23,15 @@ from ...ast import (
 )
 from ...models import Evidence
 
-TOP_LEVEL_FORBIDDEN_NEW_PREFIXES = {
-    "Gio",
-    "St",
-    "Clutter",
-    "Meta",
-    "Shell",
-    "Secret",
-    "Gtk",
-    "Gdk",
-    "Adw",
-}
-DESTROYABLE_NAMESPACE_ROOTS = {
-    "Clutter",
-    "PanelMenu",
-    "PopupMenu",
-    "QuickSettings",
-    "St",
-}
-DESTROYABLE_SUPERCLASS_NAMES = {
-    "QuickToggle",
-    "SystemIndicator",
-}
-RESOURCE_REF_CALL_NAMES = {
-    "Gio.DBusProxy.new_sync",
-    "Gio.DBusExportedObject.wrapJSObject",
-    "Shell.AppSystem.get_default",
-    "Shell.WindowTracker.get_default",
-}
-RESOURCE_REF_NEW_NAMES = {
-    "Gio.Settings",
-}
-SOURCE_ADD_NAMES = {
-    "GLib.timeout_add",
-    "GLib.timeout_add_seconds",
-    "GLib.idle_add",
-    "setInterval",
-    "setTimeout",
-}
-SOURCE_REMOVE_NAMES = {
-    "GLib.Source.remove",
-    "GLib.source_remove",
-    "clearInterval",
-    "clearTimeout",
-    "source_remove",
-}
+TOP_LEVEL_FORBIDDEN_NEW_PREFIXES = API.lifecycle.forbidden_new_prefixes
+DESTROYABLE_NAMESPACE_ROOTS = API.lifecycle.destroyable_namespace_roots
+DESTROYABLE_SUPERCLASS_NAMES = API.lifecycle.destroyable_superclass_names
+RESOURCE_REF_CALL_NAMES = API.lifecycle.resource_ref_call_names
+RESOURCE_REF_NEW_NAMES = API.lifecycle.resource_ref_new_names
+SOURCE_ADD_NAMES = API.lifecycle.source_add_names
+SOURCE_REMOVE_NAMES = API.lifecycle.source_remove_names
+SIGNAL_MANAGER_NEW_NAMES = API.lifecycle.signal_manager_new_names
+
 JS_BUILTIN_CONTAINERS = {
     "Array",
     "Date",
@@ -78,10 +43,6 @@ JS_BUILTIN_CONTAINERS = {
     "URL",
     "WeakMap",
     "WeakSet",
-}
-SIGNAL_MANAGER_NEW_NAMES = {
-    "SignalHandling",
-    "SignalManager",
 }
 NON_IMMEDIATE_EXECUTION_NODES = {
     "arrow_function",

@@ -1,0 +1,146 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# GNOME Shell extension API data for shexli.
+# Bump spec_version whenever any list changes.
+
+spec_version = "2026-04-05"
+
+# ---------------------------------------------------------------------------
+# imports (EGO017, EGO018, EGO019)
+# ---------------------------------------------------------------------------
+
+[imports]
+# Modules that are deprecated and must not be imported (EGO017)
+deprecated_modules = ["ByteArray", "Lang", "Mainloop"]
+
+# GI namespaces forbidden in shell-process files (EGO018)
+shell_forbidden_libs = ["Gtk", "Gdk", "Adw"]
+
+# GI namespaces forbidden in preferences-process files (EGO019)
+prefs_forbidden_libs = ["Clutter", "Meta", "St", "Shell"]
+
+# ---------------------------------------------------------------------------
+# subprocess (EGO024, EGO028)
+# ---------------------------------------------------------------------------
+
+[subprocess]
+# All spawn API call names tracked for privilege / sync analysis
+spawn_calls = [
+    "GLib.spawn_async",
+    "GLib.spawn_async_with_pipes",
+    "GLib.spawn_command_line_async",
+    "GLib.spawn_command_line_sync",
+    "Shell.Util.spawn",
+    "Shell.Util.spawn_async",
+    "Shell.Util.spawnCommandLine",
+    "Shell.Util.trySpawn",
+    "Shell.Util.trySpawnCommandLine",
+    "Gio.Subprocess.new",
+]
+
+# Synchronous spawn APIs that block the shell main loop (EGO028)
+sync_spawn_calls = [
+    "GLib.spawn_command_line_sync",
+    "GLib.spawn_sync",
+]
+
+# Synchronous file-IO APIs that block the shell main loop (EGO030)
+sync_file_io_calls = ["GLib.file_get_contents"]
+
+# Shell privilege-escalation command names that must use pkexec (EGO024)
+privilege_commands = ["sudo", "su", "doas", "run0"]
+
+# ---------------------------------------------------------------------------
+# api_misuse (EGO036)
+# ---------------------------------------------------------------------------
+
+[api_misuse]
+# Extension lookup helpers that should be replaced with `this` (EGO036)
+extension_lookup_calls = [
+    "Extension.lookupByURL",
+    "Extension.lookupByUUID",
+    "ExtensionPreferences.lookupByURL",
+    "ExtensionPreferences.lookupByUUID",
+]
+
+# ---------------------------------------------------------------------------
+# lifecycle (EGO013–EGO016, EGO027, EGO035, EGO037)
+# ---------------------------------------------------------------------------
+
+[lifecycle]
+# GI namespace prefixes whose constructors are forbidden at top-level (EGO013)
+forbidden_new_prefixes = [
+    "Adw",
+    "Clutter",
+    "Gdk",
+    "Gio",
+    "Gtk",
+    "Meta",
+    "Secret",
+    "Shell",
+    "St",
+]
+
+# Namespace roots that indicate a destroyable GObject subclass (EGO014)
+destroyable_namespace_roots = [
+    "Clutter",
+    "PanelMenu",
+    "PopupMenu",
+    "QuickSettings",
+    "St",
+]
+
+# Specific superclass names that indicate a destroyable GObject subclass (EGO014)
+destroyable_superclass_names = ["QuickToggle", "SystemIndicator"]
+
+# Call expressions that create resource references requiring cleanup (EGO014)
+resource_ref_call_names = [
+    "Gio.DBusProxy.new_sync",
+    "Gio.DBusExportedObject.wrapJSObject",
+    "Shell.AppSystem.get_default",
+    "Shell.WindowTracker.get_default",
+]
+
+# Constructor names that create resource references requiring cleanup (EGO014)
+resource_ref_new_names = ["Gio.Settings"]
+
+# GLib/JS source-creation calls tracked for cleanup (EGO016)
+source_add_names = [
+    "GLib.idle_add",
+    "GLib.timeout_add",
+    "GLib.timeout_add_seconds",
+    "setInterval",
+    "setTimeout",
+]
+
+# GLib/JS source-removal calls that satisfy EGO016 cleanup (EGO016)
+source_remove_names = [
+    "GLib.Source.remove",
+    "GLib.source_remove",
+    "clearInterval",
+    "clearTimeout",
+    "source_remove",
+]
+
+# Constructor names that indicate a SignalManager-style helper (EGO015)
+signal_manager_new_names = ["SignalHandling", "SignalManager"]
+
+# Superclass names whose GObject-root fields are managed by the framework
+framework_root_superclasses = [
+    "ChildMenu",
+    "CollapsibleGroup",
+    "PopupMenu.PopupMenuSection",
+    "PopupMenuSection",
+]
+
+# ---------------------------------------------------------------------------
+# compat — version-specific removed APIs
+# ---------------------------------------------------------------------------
+
+[compat.gnome49]
+# Clutter classes removed in GNOME Shell 49 (EGO-C49-002)
+removed_clutter_classes = ["Clutter.ClickAction", "Clutter.TapAction"]
+
+[compat.gnome50]
+# global.display signals removed in GNOME Shell 50 (EGO-C50-001)
+removed_display_signals = ["restart", "show-restart-message"]

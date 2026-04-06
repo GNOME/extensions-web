@@ -6,6 +6,7 @@ from collections.abc import Callable
 
 from tree_sitter import Node
 
+from ..api_data import API
 from ..ast import (
     call_arguments,
     call_callee_parts,
@@ -26,29 +27,13 @@ from .spawn import (
     extract_spawn_argv,
 )
 
-NON_PKEXEC_PRIVILEGE_COMMANDS = {"sudo", "su", "doas", "run0"}
+NON_PKEXEC_PRIVILEGE_COMMANDS = API.subprocess.privilege_commands
 PRIVILEGED_WRAPPER_CALL_NAMES = {"runProcess"}
-SHELL_SYNC_SPAWN_CALL_NAMES = {
-    "GLib.spawn_command_line_sync",
-    "GLib.spawn_sync",
-}
-SHELL_SYNC_FILE_IO_CALL_NAMES = {
-    "GLib.file_get_contents",
-}
-EXTENSION_LOOKUP_CALL_NAMES = {
-    "Extension.lookupByURL",
-    "Extension.lookupByUUID",
-    "ExtensionPreferences.lookupByURL",
-    "ExtensionPreferences.lookupByUUID",
-}
-GNOME49_SIGNAL_REMOVED_CLASSES = {
-    "Clutter.ClickAction",
-    "Clutter.TapAction",
-}
-GNOME50_REMOVED_DISPLAY_SIGNALS = {
-    "restart",
-    "show-restart-message",
-}
+SHELL_SYNC_SPAWN_CALL_NAMES = API.subprocess.sync_spawn_calls
+SHELL_SYNC_FILE_IO_CALL_NAMES = API.subprocess.sync_file_io_calls
+EXTENSION_LOOKUP_CALL_NAMES = API.api_misuse.extension_lookup_calls
+GNOME49_SIGNAL_REMOVED_CLASSES = API.compat.gnome49.removed_clutter_classes
+GNOME50_REMOVED_DISPLAY_SIGNALS = API.compat.gnome50.removed_display_signals
 
 
 def check_subprocess_calls(
@@ -432,8 +417,10 @@ def check_version_compatibility(
                     "This extension explicitly targets GNOME Shell 50 but "
                     "still calls `RunDialog._restart()`."
                 ),
-                lambda source, node: imports_run_dialog
-                and _calls_removed_method(source, node, {"_restart"}),
+                lambda source, node: (
+                    imports_run_dialog
+                    and _calls_removed_method(source, node, {"_restart"})
+                ),
             ),
         ],
     )

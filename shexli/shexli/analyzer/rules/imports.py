@@ -4,14 +4,15 @@ from __future__ import annotations
 
 from tree_sitter import Node
 
+from ...api_data import API
 from ...ast import member_expression_parts, node_text
 from ...spec import R
 from ..context import CheckContext
 from ..engine import FileRule, NodeRule
 
-DEPRECATED_IMPORT_TOKENS = ("ByteArray", "Lang", "Mainloop")
-SHELL_FORBIDDEN_TOKENS = frozenset({"Gtk", "Gdk", "Adw"})
-PREFS_FORBIDDEN_TOKENS = frozenset({"Clutter", "Meta", "St", "Shell"})
+DEPRECATED_IMPORT_TOKENS = API.imports.deprecated_modules
+SHELL_FORBIDDEN_TOKENS = API.imports.shell_forbidden_libs
+PREFS_FORBIDDEN_TOKENS = API.imports.prefs_forbidden_libs
 
 
 
