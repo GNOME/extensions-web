@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from tree_sitter import Node
 
@@ -60,24 +60,20 @@ SELF_OWNER = "__self_owner__"
 
 @dataclass(slots=True)
 class ResourceTracker:
-    signals: dict[str, Evidence | None]
-    sources: dict[str, Evidence | None]
-    recreated_sources: dict[str, Evidence | None]
-    objects: dict[str, Evidence | None]
-    resource_refs: dict[str, Evidence | None]
-    containers: dict[str, Evidence | None]
-    parent_owned: dict[str, str]
-    local_parent_owned: dict[str, str]
-    menu_owned: set[str]
-    signal_groups: dict[str, Evidence | None]
-    source_groups: dict[str, Evidence | None]
-    object_groups: dict[str, Evidence | None]
-    released_refs: dict[str, Evidence | None]
-    touched_refs: dict[str, Evidence | None]
-
-    @classmethod
-    def empty(cls) -> ResourceTracker:
-        return cls({}, {}, {}, {}, {}, {}, {}, {}, set(), {}, {}, {}, {}, {})
+    signals: dict[str, Evidence | None] = field(default_factory=dict)
+    sources: dict[str, Evidence | None] = field(default_factory=dict)
+    recreated_sources: dict[str, Evidence | None] = field(default_factory=dict)
+    objects: dict[str, Evidence | None] = field(default_factory=dict)
+    resource_refs: dict[str, Evidence | None] = field(default_factory=dict)
+    containers: dict[str, Evidence | None] = field(default_factory=dict)
+    parent_owned: dict[str, str] = field(default_factory=dict)
+    local_parent_owned: dict[str, str] = field(default_factory=dict)
+    menu_owned: set[str] = field(default_factory=set)
+    signal_groups: dict[str, Evidence | None] = field(default_factory=dict)
+    source_groups: dict[str, Evidence | None] = field(default_factory=dict)
+    object_groups: dict[str, Evidence | None] = field(default_factory=dict)
+    released_refs: dict[str, Evidence | None] = field(default_factory=dict)
+    touched_refs: dict[str, Evidence | None] = field(default_factory=dict)
 
 
 def record_resource(

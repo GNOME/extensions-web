@@ -2,26 +2,27 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 
 from ...models import Evidence, Finding
 from ...spec import RULES_BY_ID, R
-from .base import SELF_OWNER
+from .base import SELF_OWNER, ResourceTracker
 
 
 @dataclass(frozen=True, slots=True)
 class LifecycleRuleSpec:
     rule_id: str
-    created_attr: str
-    cleaned_attr: str
+    get_created: Callable[[ResourceTracker], dict[str, Evidence | None]]
+    get_cleaned: Callable[[ResourceTracker], dict[str, Evidence | None]]
     message: str
 
 
 LIFECYCLE_RULES = (
     LifecycleRuleSpec(
         rule_id=R.EGO015,
-        created_attr="signals",
-        cleaned_attr="signals",
+        get_created=lambda t: t.signals,
+        get_cleaned=lambda t: t.signals,
         message=(
             "Signals assigned in `enable()` are missing matching disconnect "
             "calls in `disable()` or its helper methods."
@@ -29,8 +30,8 @@ LIFECYCLE_RULES = (
     ),
     LifecycleRuleSpec(
         rule_id=R.EGO015,
-        created_attr="signal_groups",
-        cleaned_attr="signal_groups",
+        get_created=lambda t: t.signal_groups,
+        get_cleaned=lambda t: t.signal_groups,
         message=(
             "Signal handler collections created in `enable()` are missing "
             "matching disconnect loops in `disable()` or its helper methods."
@@ -38,8 +39,8 @@ LIFECYCLE_RULES = (
     ),
     LifecycleRuleSpec(
         rule_id=R.EGO016,
-        created_attr="sources",
-        cleaned_attr="sources",
+        get_created=lambda t: t.sources,
+        get_cleaned=lambda t: t.sources,
         message=(
             "Main loop sources assigned in `enable()` are missing matching "
             "removals in `disable()` or its helper methods."
@@ -47,8 +48,8 @@ LIFECYCLE_RULES = (
     ),
     LifecycleRuleSpec(
         rule_id=R.EGO016,
-        created_attr="source_groups",
-        cleaned_attr="source_groups",
+        get_created=lambda t: t.source_groups,
+        get_cleaned=lambda t: t.source_groups,
         message=(
             "Main loop source collections created in `enable()` are missing "
             "matching removal loops in `disable()` or its helper methods."
@@ -56,8 +57,8 @@ LIFECYCLE_RULES = (
     ),
     LifecycleRuleSpec(
         rule_id=R.EGO014,
-        created_attr="objects",
-        cleaned_attr="objects",
+        get_created=lambda t: t.objects,
+        get_cleaned=lambda t: t.objects,
         message=(
             "Objects assigned in `enable()` are missing matching `.destroy()` "
             "calls in `disable()` or its helper methods."
@@ -65,8 +66,8 @@ LIFECYCLE_RULES = (
     ),
     LifecycleRuleSpec(
         rule_id=R.EGO014,
-        created_attr="object_groups",
-        cleaned_attr="object_groups",
+        get_created=lambda t: t.object_groups,
+        get_cleaned=lambda t: t.object_groups,
         message=(
             "Object collections created in `enable()` are missing matching "
             "destroy loops in `disable()` or its helper methods."
@@ -98,7 +99,7 @@ def _append_missing_lifecycle_findings(
 
 
 def _release_candidates(
-    created,
+    created: ResourceTracker,
     release_container_names: set[str],
 ) -> dict[str, Evidence]:
     candidates: dict[str, Evidence] = {}
@@ -114,7 +115,7 @@ def _release_candidates(
     return candidates
 
 
-def _owned_descendants(created) -> set[str]:
+def _owned_descendants(created: ResourceTracker) -> set[str]:
     roots = set(created.objects) | set(created.resource_refs) | {SELF_OWNER}
     descendants: set[str] = set()
     parent_edges = [*created.parent_owned.items(), *created.local_parent_owned.items()]
@@ -133,8 +134,8 @@ def _owned_descendants(created) -> set[str]:
 
 def append_lifecycle_findings(
     findings: list[Finding],
-    created,
-    cleaned,
+    created: ResourceTracker,
+    cleaned: ResourceTracker,
     include_object_cleanup: bool = True,
     release_container_names: set[str] | None = None,
     suppress_root_fields: set[str] | None = None,
@@ -163,7 +164,8 @@ def append_lifecycle_findings(
         if not include_object_cleanup and rule.rule_id == R.EGO014:
             continue
 
-        if rule.created_attr == "signals":
+        created_resources = rule.get_created(created)
+        if created_resources is created.signals:
             suppress_names = parent_owned_signals | menu_owned_signals
         elif rule.rule_id == R.EGO014:
             suppress_names = owned_descendants
@@ -172,8 +174,8 @@ def append_lifecycle_findings(
 
         _append_missing_lifecycle_findings(
             findings,
-            getattr(created, rule.created_attr),
-            getattr(cleaned, rule.cleaned_attr),
+            created_resources,
+            rule.get_cleaned(cleaned),
             rule.rule_id,
             rule.message,
             suppress_names=suppress_names,
