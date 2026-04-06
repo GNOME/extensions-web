@@ -6,21 +6,21 @@
 spec_version = "2026-04-05"
 
 # ---------------------------------------------------------------------------
-# imports (EGO017, EGO018, EGO019)
+# imports (EGO_I_001, EGO_I_002, EGO_I_003)
 # ---------------------------------------------------------------------------
 
 [imports]
-# Modules that are deprecated and must not be imported (EGO017)
+# Modules that are deprecated and must not be imported (EGO_I_001)
 deprecated_modules = ["ByteArray", "Lang", "Mainloop"]
 
-# GI namespaces forbidden in shell-process files (EGO018)
+# GI namespaces forbidden in shell-process files (EGO_I_002)
 shell_forbidden_libs = ["Gtk", "Gdk", "Adw"]
 
-# GI namespaces forbidden in preferences-process files (EGO019)
+# GI namespaces forbidden in preferences-process files (EGO_I_003)
 prefs_forbidden_libs = ["Clutter", "Meta", "St", "Shell"]
 
 # ---------------------------------------------------------------------------
-# subprocess (EGO024, EGO028)
+# subprocess (EGO_X_001, EGO_X_002)
 # ---------------------------------------------------------------------------
 
 [subprocess]
@@ -38,24 +38,24 @@ spawn_calls = [
     "Gio.Subprocess.new",
 ]
 
-# Synchronous spawn APIs that block the shell main loop (EGO028)
+# Synchronous spawn APIs that block the shell main loop (EGO_X_002)
 sync_spawn_calls = [
     "GLib.spawn_command_line_sync",
     "GLib.spawn_sync",
 ]
 
-# Synchronous file-IO APIs that block the shell main loop (EGO030)
+# Synchronous file-IO APIs that block the shell main loop (EGO_X_004)
 sync_file_io_calls = ["GLib.file_get_contents"]
 
-# Shell privilege-escalation command names that must use pkexec (EGO024)
+# Shell privilege-escalation command names that must use pkexec (EGO_X_001)
 privilege_commands = ["sudo", "su", "doas", "run0"]
 
 # ---------------------------------------------------------------------------
-# api_misuse (EGO036)
+# api_misuse (EGO_X_006)
 # ---------------------------------------------------------------------------
 
 [api_misuse]
-# Extension lookup helpers that should be replaced with `this` (EGO036)
+# Extension lookup helpers that should be replaced with `this` (EGO_X_006)
 extension_lookup_calls = [
     "Extension.lookupByURL",
     "Extension.lookupByUUID",
@@ -64,11 +64,11 @@ extension_lookup_calls = [
 ]
 
 # ---------------------------------------------------------------------------
-# lifecycle (EGO013–EGO016, EGO027, EGO035, EGO037)
+# lifecycle (EGO_L_001–EGO_L_004, EGO_L_005, EGO_L_007, EGO_L_008)
 # ---------------------------------------------------------------------------
 
 [lifecycle]
-# GI namespace prefixes whose constructors are forbidden at top-level (EGO013)
+# GI namespace prefixes whose constructors are forbidden at top-level (EGO_L_001)
 forbidden_new_prefixes = [
     "Adw",
     "Clutter",
@@ -81,7 +81,7 @@ forbidden_new_prefixes = [
     "St",
 ]
 
-# Namespace roots that indicate a destroyable GObject subclass (EGO014)
+# Namespace roots that indicate a destroyable GObject subclass (EGO_L_002)
 destroyable_namespace_roots = [
     "Clutter",
     "PanelMenu",
@@ -90,10 +90,10 @@ destroyable_namespace_roots = [
     "St",
 ]
 
-# Specific superclass names that indicate a destroyable GObject subclass (EGO014)
+# Specific superclass names that indicate a destroyable GObject subclass (EGO_L_002)
 destroyable_superclass_names = ["QuickToggle", "SystemIndicator"]
 
-# Call expressions that create resource references requiring cleanup (EGO014)
+# Call expressions that create resource references requiring cleanup (EGO_L_002)
 resource_ref_call_names = [
     "Gio.DBusProxy.new_sync",
     "Gio.DBusExportedObject.wrapJSObject",
@@ -101,10 +101,10 @@ resource_ref_call_names = [
     "Shell.WindowTracker.get_default",
 ]
 
-# Constructor names that create resource references requiring cleanup (EGO014)
+# Constructor names that create resource references requiring cleanup (EGO_L_002)
 resource_ref_new_names = ["Gio.Settings"]
 
-# GLib/JS source-creation calls tracked for cleanup (EGO016)
+# GLib/JS source-creation calls tracked for cleanup (EGO_L_004)
 source_add_names = [
     "GLib.idle_add",
     "GLib.timeout_add",
@@ -113,7 +113,7 @@ source_add_names = [
     "setTimeout",
 ]
 
-# GLib/JS source-removal calls that satisfy EGO016 cleanup (EGO016)
+# GLib/JS source-removal calls that satisfy EGO_L_004 cleanup (EGO_L_004)
 source_remove_names = [
     "GLib.Source.remove",
     "GLib.source_remove",
@@ -122,7 +122,7 @@ source_remove_names = [
     "source_remove",
 ]
 
-# Constructor names that indicate a SignalManager-style helper (EGO015)
+# Constructor names that indicate a SignalManager-style helper (EGO_L_003)
 signal_manager_new_names = ["SignalHandling", "SignalManager"]
 
 # Superclass names whose GObject-root fields are managed by the framework

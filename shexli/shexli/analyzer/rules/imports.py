@@ -17,7 +17,7 @@ PREFS_FORBIDDEN_TOKENS = API.imports.prefs_forbidden_libs
 
 
 class DeprecatedImportsRule(FileRule):
-    """FileRule: EGO017 — deprecated module imports (ByteArray, Lang, Mainloop)."""
+    """FileRule: EGO_I_001 — deprecated module imports (ByteArray, Lang, Mainloop)."""
 
     def __init__(self, js_imports: list) -> None:
         self._js_imports = js_imports
@@ -35,14 +35,14 @@ class DeprecatedImportsRule(FileRule):
 
             if evidences:
                 ctx.add_finding(
-                    R.EGO017,
+                    R.EGO_I_001,
                     f"Deprecated module `{token}` is imported.",
                     evidences,
                 )
 
 
 class ImportsGiRule(NodeRule):
-    """NodeRule: EGO031 — direct use of imports._gi."""
+    """NodeRule: EGO_I_004 — direct use of imports._gi."""
 
     node_types: frozenset[str] = frozenset({"member_expression"})
 
@@ -66,14 +66,14 @@ class ImportsGiRule(NodeRule):
     def finalize(self, root: Node, text: str, ctx: CheckContext) -> None:
         if self._evidences:
             ctx.add_finding(
-                R.EGO031,
+                R.EGO_I_004,
                 "Direct use of `imports._gi` is discouraged in extensions.",
                 self._evidences,
             )
 
 
 class ForbiddenLibsRule(FileRule):
-    """FileRule: EGO018/EGO019 — GTK libs in shell, Shell libs in prefs."""
+    """FileRule: EGO_I_002/EGO_I_003 — GTK libs in shell, Shell libs in prefs."""
 
     def __init__(self, js_imports: list) -> None:
         self._js_imports = js_imports
@@ -81,14 +81,14 @@ class ForbiddenLibsRule(FileRule):
     def check(self, root: Node, text: str, ctx: CheckContext) -> None:
         if "shell" in ctx.file_contexts:
             self._check_forbidden(
-                R.EGO018,
+                R.EGO_I_002,
                 ctx,
                 SHELL_FORBIDDEN_TOKENS,
                 "GTK library `{token}` must not be imported in shell process files.",
             )
         if "prefs" in ctx.file_contexts:
             self._check_forbidden(
-                R.EGO019,
+                R.EGO_I_003,
                 ctx,
                 PREFS_FORBIDDEN_TOKENS,
                 "GNOME Shell library `{token}` must not be imported "

@@ -8,45 +8,45 @@ from .models import RuleSpec
 
 
 class RuleCode(StrEnum):
-    EGO001 = "EGO001"
-    EGO002 = "EGO002"
-    EGO003 = "EGO003"
-    EGO004 = "EGO004"
-    EGO005 = "EGO005"
-    EGO006 = "EGO006"
-    EGO007 = "EGO007"
-    EGO008 = "EGO008"
-    EGO009 = "EGO009"
-    EGO010 = "EGO010"
-    EGO011 = "EGO011"
-    EGO012 = "EGO012"
-    EGO013 = "EGO013"
-    EGO014 = "EGO014"
-    EGO015 = "EGO015"
-    EGO016 = "EGO016"
-    EGO017 = "EGO017"
-    EGO018 = "EGO018"
-    EGO019 = "EGO019"
-    EGO020 = "EGO020"
-    EGO021 = "EGO021"
-    EGO022 = "EGO022"
-    EGO023 = "EGO023"
-    EGO024 = "EGO024"
-    EGO025 = "EGO025"
-    EGO026 = "EGO026"
-    EGO027 = "EGO027"
-    EGO028 = "EGO028"
-    EGO029 = "EGO029"
-    EGO030 = "EGO030"
-    EGO031 = "EGO031"
-    EGO032 = "EGO032"
-    EGO033 = "EGO033"
-    EGO034 = "EGO034"
-    EGO035 = "EGO035"
-    EGO036 = "EGO036"
-    EGO037 = "EGO037"
-    EGO038 = "EGO038"
-    EGO039 = "EGO039"
+    EGO_M_001 = "EGO-M-001"
+    EGO_M_002 = "EGO-M-002"
+    EGO_M_003 = "EGO-M-003"
+    EGO_M_004 = "EGO-M-004"
+    EGO_M_005 = "EGO-M-005"
+    EGO_M_006 = "EGO-M-006"
+    EGO_M_007 = "EGO-M-007"
+    EGO_M_008 = "EGO-M-008"
+    EGO_P_001 = "EGO-P-001"
+    EGO_P_002 = "EGO-P-002"
+    EGO_P_003 = "EGO-P-003"
+    EGO_P_004 = "EGO-P-004"
+    EGO_P_005 = "EGO-P-005"
+    EGO_P_006 = "EGO-P-006"
+    EGO_P_007 = "EGO-P-007"
+    EGO_I_001 = "EGO-I-001"
+    EGO_I_002 = "EGO-I-002"
+    EGO_I_003 = "EGO-I-003"
+    EGO_I_004 = "EGO-I-004"
+    EGO_L_001 = "EGO-L-001"
+    EGO_L_002 = "EGO-L-002"
+    EGO_L_003 = "EGO-L-003"
+    EGO_L_004 = "EGO-L-004"
+    EGO_L_005 = "EGO-L-005"
+    EGO_L_006 = "EGO-L-006"
+    EGO_L_007 = "EGO-L-007"
+    EGO_L_008 = "EGO-L-008"
+    EGO_X_001 = "EGO-X-001"
+    EGO_X_002 = "EGO-X-002"
+    EGO_X_003 = "EGO-X-003"
+    EGO_X_004 = "EGO-X-004"
+    EGO_X_005 = "EGO-X-005"
+    EGO_X_006 = "EGO-X-006"
+    EGO_A_001 = "EGO-A-001"
+    EGO_A_002 = "EGO-A-002"
+    EGO_A_003 = "EGO-A-003"
+    EGO_A_004 = "EGO-A-004"
+    EGO_A_005 = "EGO-A-005"
+    EGO_C45_001 = "EGO-C45-001"
     EGO_C49_001 = "EGO-C49-001"
     EGO_C49_002 = "EGO-C49-002"
     EGO_C49_003 = "EGO-C49-003"
@@ -56,6 +56,7 @@ class RuleCode(StrEnum):
     EGO_C50_002 = "EGO-C50-002"
 
 
+
 R = RuleCode
 
 SPEC_VERSION = "2026-04-02"
@@ -63,7 +64,7 @@ GUIDELINES_URL = "https://gjs.guide/extensions/review-guidelines/review-guidelin
 
 RULES = [
     RuleSpec(
-        rule_id=RuleCode.EGO001,
+        rule_id=RuleCode.EGO_M_001,
         title="metadata.json must exist",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -73,7 +74,7 @@ RULES = [
         rationale="Every extension ships metadata.json and review depends on it.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO002,
+        rule_id=RuleCode.EGO_M_002,
         title="metadata.json must be valid JSON",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -83,7 +84,7 @@ RULES = [
         rationale="Malformed metadata blocks review and installation.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO003,
+        rule_id=RuleCode.EGO_M_003,
         title="metadata uuid must have valid format and namespace",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -96,7 +97,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO004,
+        rule_id=RuleCode.EGO_M_004,
         title=(
             "metadata shell-version must only include plausible stable "
             "releases and at most one development release"
@@ -109,7 +110,7 @@ RULES = [
         rationale="Extensions must not claim future shell support.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO005,
+        rule_id=RuleCode.EGO_M_005,
         title="metadata session-modes must be omitted when only user mode is declared",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -119,7 +120,7 @@ RULES = [
         rationale="Single user mode must not be redundantly declared.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO006,
+        rule_id=RuleCode.EGO_M_006,
         title="metadata session-modes may only contain user and unlock-dialog",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -129,7 +130,7 @@ RULES = [
         rationale="Only two session modes are valid for published extensions.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO007,
+        rule_id=RuleCode.EGO_M_007,
         title="metadata donations may only contain allowed keys",
         severity="error",
         source_url=f"{GUIDELINES_URL}#metadata-json-must-be-well-formed",
@@ -144,7 +145,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO008,
+        rule_id=RuleCode.EGO_M_008,
         title="extensions using unlock-dialog must document it in disable() comments",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#session-modes",
@@ -154,7 +155,7 @@ RULES = [
         rationale="unlock-dialog requires reviewer justification and extra caution.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO009,
+        rule_id=RuleCode.EGO_P_001,
         title="GSettings schema id must use org.gnome.shell.extensions base",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -164,7 +165,7 @@ RULES = [
         rationale="Schema namespace is fixed by review rules.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO010,
+        rule_id=RuleCode.EGO_P_002,
         title="GSettings schema path must use /org/gnome/shell/extensions base",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -174,7 +175,7 @@ RULES = [
         rationale="Schema path is fixed by review rules.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO011,
+        rule_id=RuleCode.EGO_P_003,
         title="GSettings schema XML must be present in package",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -184,7 +185,7 @@ RULES = [
         rationale="Schema XML must ship in the extension package.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO012,
+        rule_id=RuleCode.EGO_P_004,
         title="GSettings schema XML filename must match schema id",
         severity="error",
         source_url=f"{GUIDELINES_URL}#gsettings-schemas",
@@ -194,7 +195,85 @@ RULES = [
         rationale="Reviewer expects exact `<schema-id>.gschema.xml` naming.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO013,
+        rule_id=RuleCode.EGO_P_005,
+        title="binary executables and libraries must not be bundled",
+        severity="error",
+        source_url=f"{GUIDELINES_URL}#scripts-and-binaries",
+        source_section="Scripts and Binaries",
+        static_checkable=True,
+        detection_strategy="file extension and executable magic heuristic",
+        rationale="Binary payloads are explicitly disallowed.",
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_P_006,
+        title="unnecessary build and translation artifacts should not be shipped",
+        severity="warning",
+        source_url=f"{GUIDELINES_URL}#don-t-include-unnecessary-files",
+        source_section="Don't include unnecessary files",
+        static_checkable=True,
+        detection_strategy="package file pattern scan",
+        rationale="Reviewers may reject packages with unreasonable extra data.",
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_P_007,
+        title="JavaScript files should be reachable from extension.js or prefs.js",
+        severity="warning",
+        source_url=f"{GUIDELINES_URL}#don-t-include-unnecessary-files",
+        source_section="Don't include unnecessary files",
+        static_checkable=True,
+        detection_strategy="import graph reachability from extension.js and prefs.js",
+        rationale=(
+            "Shipped JS modules that are unreachable from known entrypoints "
+            "are usually unnecessary package contents."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_I_001,
+        title="deprecated modules must not be imported",
+        severity="error",
+        source_url=f"{GUIDELINES_URL}#do-not-use-deprecated-modules",
+        source_section="Do not use deprecated modules",
+        static_checkable=True,
+        detection_strategy=(
+            "AST import detection including ES modules and legacy imports.* usage"
+        ),
+        rationale="Deprecated modules are explicitly disallowed.",
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_I_002,
+        title="Gtk, Gdk and Adw must not be imported in shell process files",
+        severity="error",
+        source_url=f"{GUIDELINES_URL}#do-not-import-gtk-libraries-in-gnome-shell",
+        source_section="Do not import GTK libraries in GNOME Shell",
+        static_checkable=True,
+        detection_strategy="AST import detection in non-prefs JS files",
+        rationale="GTK libraries conflict with shell process libraries.",
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_I_003,
+        title="Clutter, Meta, St and Shell must not be imported in prefs process files",
+        severity="error",
+        source_url=f"{GUIDELINES_URL}#do-not-import-gnome-shell-libraries-in-preferences",
+        source_section="Do not import GNOME Shell libraries in Preferences",
+        static_checkable=True,
+        detection_strategy="AST import detection in prefs.js and prefs modules",
+        rationale="Shell libraries conflict with preferences process libraries.",
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_I_004,
+        title="extensions should not use imports._gi directly",
+        severity="warning",
+        source_url="https://gjs.guide/extensions/topics/extension.html#injectionmanager",
+        source_section="InjectionManager",
+        static_checkable=True,
+        detection_strategy="AST and text detection of imports._gi usage",
+        rationale=(
+            "Direct use of imports._gi is discouraged in extensions and "
+            "should be replaced with supported extension APIs."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_L_001,
         title=(
             "extension must not create GObject instances or modify shell "
             "before enable()"
@@ -210,7 +289,7 @@ RULES = [
         rationale=("Initialization must stay free of runtime shell modifications."),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO014,
+        rule_id=RuleCode.EGO_L_002,
         title="objects created by extension should be destroyed in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#destroy-all-objects",
@@ -223,7 +302,7 @@ RULES = [
         rationale="Cleanup leaks are a central review concern.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO015,
+        rule_id=RuleCode.EGO_L_003,
         title="signals connected by extension should be disconnected in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#disconnect-all-signals",
@@ -236,7 +315,7 @@ RULES = [
         rationale="Signal leaks are common and reviewable statically.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO016,
+        rule_id=RuleCode.EGO_L_004,
         title="main loop sources should be removed in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#remove-main-loop-sources",
@@ -249,137 +328,7 @@ RULES = [
         rationale="Unremoved sources can outlive the extension lifecycle.",
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO017,
-        title="deprecated modules must not be imported",
-        severity="error",
-        source_url=f"{GUIDELINES_URL}#do-not-use-deprecated-modules",
-        source_section="Do not use deprecated modules",
-        static_checkable=True,
-        detection_strategy=(
-            "AST import detection including ES modules and legacy imports.* usage"
-        ),
-        rationale="Deprecated modules are explicitly disallowed.",
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO018,
-        title="Gtk, Gdk and Adw must not be imported in shell process files",
-        severity="error",
-        source_url=f"{GUIDELINES_URL}#do-not-import-gtk-libraries-in-gnome-shell",
-        source_section="Do not import GTK libraries in GNOME Shell",
-        static_checkable=True,
-        detection_strategy="AST import detection in non-prefs JS files",
-        rationale="GTK libraries conflict with shell process libraries.",
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO019,
-        title="Clutter, Meta, St and Shell must not be imported in prefs process files",
-        severity="error",
-        source_url=f"{GUIDELINES_URL}#do-not-import-gnome-shell-libraries-in-preferences",
-        source_section="Do not import GNOME Shell libraries in Preferences",
-        static_checkable=True,
-        detection_strategy="AST import detection in prefs.js and prefs modules",
-        rationale="Shell libraries conflict with preferences process libraries.",
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO020,
-        title="extension code must not be minified or obfuscated",
-        severity="manual_review",
-        source_url=f"{GUIDELINES_URL}#code-must-not-be-obfuscated",
-        source_section="Code must not be obfuscated",
-        static_checkable=True,
-        detection_strategy=(
-            "heuristic: average identifier length < 2 on files with > 500 bytes"
-        ),
-        rationale=(
-            "Reviewers cannot audit obfuscated code; minification and name "
-            "mangling are explicitly disallowed."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO021,
-        title="extension must not log excessively",
-        severity="manual_review",
-        source_url=f"{GUIDELINES_URL}#no-excessive-logging",
-        source_section="No excessive logging",
-        static_checkable=False,
-        detection_strategy=(
-            "deferred until policy-level logging thresholds are defined in ego"
-        ),
-        rationale=(
-            "Excessive is policy-dependent; the current module avoids "
-            "heuristic thresholds."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO022,
-        title="binary executables and libraries must not be bundled",
-        severity="error",
-        source_url=f"{GUIDELINES_URL}#scripts-and-binaries",
-        source_section="Scripts and Binaries",
-        static_checkable=True,
-        detection_strategy="file extension and executable magic heuristic",
-        rationale="Binary payloads are explicitly disallowed.",
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO023,
-        title="telemetry tools must not be used",
-        severity="manual_review",
-        source_url=f"{GUIDELINES_URL}#do-not-use-telemetry-tools",
-        source_section="Do not use telemetry tools",
-        static_checkable=False,
-        detection_strategy=(
-            "deferred until telemetry signatures are formalized without "
-            "keyword heuristics"
-        ),
-        rationale=(
-            "This rule should be enforced with a curated signature "
-            "database, not token guesses."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO024,
-        title=(
-            "privileged subprocesses should use pkexec and target "
-            "non-user-writable files"
-        ),
-        severity="warning",
-        source_url=f"{GUIDELINES_URL}#privileged-subprocess-must-not-be-user-writable",
-        source_section="Privileged Subprocess must not be user-writable",
-        static_checkable=True,
-        detection_strategy=(
-            "AST detection of explicit privileged wrappers in subprocess "
-            "APIs; file writability remains manual-review-only"
-        ),
-        rationale=(
-            "Direct use of sudo-like wrappers is statically observable "
-            "even if full target provenance is not."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO025,
-        title="unnecessary build and translation artifacts should not be shipped",
-        severity="warning",
-        source_url=f"{GUIDELINES_URL}#don-t-include-unnecessary-files",
-        source_section="Don't include unnecessary files",
-        static_checkable=True,
-        detection_strategy="package file pattern scan",
-        rationale="Reviewers may reject packages with unreasonable extra data.",
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO026,
-        title="JavaScript files should be reachable from extension.js or prefs.js",
-        severity="warning",
-        source_url=f"{GUIDELINES_URL}#don-t-include-unnecessary-files",
-        source_section="Don't include unnecessary files",
-        static_checkable=True,
-        detection_strategy="import graph reachability from extension.js and prefs.js",
-        rationale=(
-            "Shipped JS modules that are unreachable from known entrypoints "
-            "are usually unnecessary package contents."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO027,
+        rule_id=RuleCode.EGO_L_005,
         title="owned object references should be released in disable()",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#destroy-all-objects",
@@ -396,86 +345,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO028,
-        title="extensions should not use synchronous subprocess APIs in shell code",
-        severity="warning",
-        source_url="https://gjs.guide/guides/gio/subprocesses.html",
-        source_section="Complete Examples",
-        static_checkable=True,
-        detection_strategy=(
-            "AST detection of synchronous GLib subprocess calls in shell context"
-        ),
-        rationale=(
-            "Synchronous subprocess APIs can block the shell main loop and "
-            "freeze the session."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO029,
-        title="extensions should not call run_dispose in extension code",
-        severity="warning",
-        source_url=(
-            "https://gjs-docs.gnome.org/gobject20~2.0/gobject.object#method-run_dispose"
-        ),
-        source_section="GObject.Object.run_dispose",
-        static_checkable=True,
-        detection_strategy="AST detection of run_dispose() calls",
-        rationale=(
-            "run_dispose() is intended for object system implementations, "
-            "not extension lifecycle cleanup."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO030,
-        title="extensions should avoid synchronous file IO in shell code",
-        severity="warning",
-        source_url="https://gjs.guide/guides/gio/file-operations.html",
-        source_section="File Operations",
-        static_checkable=True,
-        detection_strategy=(
-            "AST detection of synchronous file read APIs in shell context"
-        ),
-        rationale=(
-            "Synchronous file IO can block the shell main loop and should "
-            "be replaced with async file APIs."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO031,
-        title="extensions should not use imports._gi directly",
-        severity="warning",
-        source_url="https://gjs.guide/extensions/topics/extension.html#injectionmanager",
-        source_section="InjectionManager",
-        static_checkable=True,
-        detection_strategy="AST and text detection of imports._gi usage",
-        rationale=(
-            "Direct use of imports._gi is discouraged in extensions and "
-            "should be replaced with supported extension APIs."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO032,
-        title=(
-            "45+ preferences should use fillPreferencesWindow instead of "
-            "getPreferencesWidget"
-        ),
-        severity="warning",
-        source_url=(
-            "https://gjs.guide/extensions/upgrading/gnome-shell-45.html#preferences"
-        ),
-        source_section="Preferences",
-        static_checkable=True,
-        detection_strategy=(
-            "AST detection of getPreferencesWidget() in prefs code gated by "
-            "45+ target versions"
-        ),
-        rationale=(
-            "GNOME Shell 45+ preferences code should use "
-            "fillPreferencesWindow() rather than getPreferencesWidget()."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO033,
+        rule_id=RuleCode.EGO_L_006,
         title=(
             "preferences classes should not retain window-scoped objects on "
             "instance fields without close-request cleanup"
@@ -495,23 +365,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO034,
-        title="extensions should not manually load the default stylesheet.css",
-        severity="warning",
-        source_url="https://gjs.guide/extensions/overview/anatomy.html#stylesheet-css",
-        source_section="`stylesheet.css`",
-        static_checkable=True,
-        detection_strategy=(
-            "AST detection of `theme.load_stylesheet()` or "
-            "`theme.unload_stylesheet()` on the default stylesheet.css"
-        ),
-        rationale=(
-            "GNOME Shell automatically loads the packaged stylesheet.css, so "
-            "manual load/unload code is usually unnecessary and reviewable."
-        ),
-    ),
-    RuleSpec(
-        rule_id=RuleCode.EGO035,
+        rule_id=RuleCode.EGO_L_007,
         title="main loop sources should be removed before being recreated",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#remove-main-loop-sources",
@@ -527,7 +381,103 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO036,
+        rule_id=RuleCode.EGO_L_008,
+        title="Soup.Session instances should be aborted during cleanup",
+        severity="warning",
+        source_url=("https://gjs-docs.gnome.org/soup30~3.0/soup.session#method-abort"),
+        source_section="Soup.Session.abort",
+        static_checkable=True,
+        detection_strategy=(
+            "AST detection of `new Soup.Session()` assigned to instance "
+            "fields without a matching `.abort()` call in cleanup methods"
+        ),
+        rationale=(
+            "Retained Soup.Session instances should be aborted when the "
+            "owning object or extension is destroyed."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_X_001,
+        title=(
+            "privileged subprocesses should use pkexec and target "
+            "non-user-writable files"
+        ),
+        severity="warning",
+        source_url=f"{GUIDELINES_URL}#privileged-subprocess-must-not-be-user-writable",
+        source_section="Privileged Subprocess must not be user-writable",
+        static_checkable=True,
+        detection_strategy=(
+            "AST detection of explicit privileged wrappers in subprocess "
+            "APIs; file writability remains manual-review-only"
+        ),
+        rationale=(
+            "Direct use of sudo-like wrappers is statically observable "
+            "even if full target provenance is not."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_X_002,
+        title="extensions should not use synchronous subprocess APIs in shell code",
+        severity="warning",
+        source_url="https://gjs.guide/guides/gio/subprocesses.html",
+        source_section="Complete Examples",
+        static_checkable=True,
+        detection_strategy=(
+            "AST detection of synchronous GLib subprocess calls in shell context"
+        ),
+        rationale=(
+            "Synchronous subprocess APIs can block the shell main loop and "
+            "freeze the session."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_X_003,
+        title="extensions should not call run_dispose in extension code",
+        severity="warning",
+        source_url=(
+            "https://gjs-docs.gnome.org/gobject20~2.0/gobject.object#method-run_dispose"
+        ),
+        source_section="GObject.Object.run_dispose",
+        static_checkable=True,
+        detection_strategy="AST detection of run_dispose() calls",
+        rationale=(
+            "run_dispose() is intended for object system implementations, "
+            "not extension lifecycle cleanup."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_X_004,
+        title="extensions should avoid synchronous file IO in shell code",
+        severity="warning",
+        source_url="https://gjs.guide/guides/gio/file-operations.html",
+        source_section="File Operations",
+        static_checkable=True,
+        detection_strategy=(
+            "AST detection of synchronous file read APIs in shell context"
+        ),
+        rationale=(
+            "Synchronous file IO can block the shell main loop and should "
+            "be replaced with async file APIs."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_X_005,
+        title="extensions should not manually load the default stylesheet.css",
+        severity="warning",
+        source_url="https://gjs.guide/extensions/overview/anatomy.html#stylesheet-css",
+        source_section="`stylesheet.css`",
+        static_checkable=True,
+        detection_strategy=(
+            "AST detection of `theme.load_stylesheet()` or "
+            "`theme.unload_stylesheet()` on the default stylesheet.css"
+        ),
+        rationale=(
+            "GNOME Shell automatically loads the packaged stylesheet.css, so "
+            "manual load/unload code is usually unnecessary and reviewable."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_X_006,
         title=(
             "extensions should not use lookupByURL or lookupByUUID for "
             "current extension access"
@@ -548,23 +498,53 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO037,
-        title="Soup.Session instances should be aborted during cleanup",
-        severity="warning",
-        source_url=("https://gjs-docs.gnome.org/soup30~3.0/soup.session#method-abort"),
-        source_section="Soup.Session.abort",
+        rule_id=RuleCode.EGO_A_001,
+        title="extension code must not be minified or obfuscated",
+        severity="manual_review",
+        source_url=f"{GUIDELINES_URL}#code-must-not-be-obfuscated",
+        source_section="Code must not be obfuscated",
         static_checkable=True,
         detection_strategy=(
-            "AST detection of `new Soup.Session()` assigned to instance "
-            "fields without a matching `.abort()` call in cleanup methods"
+            "heuristic: average identifier length < 2 on files with > 500 bytes"
         ),
         rationale=(
-            "Retained Soup.Session instances should be aborted when the "
-            "owning object or extension is destroyed."
+            "Reviewers cannot audit obfuscated code; minification and name "
+            "mangling are explicitly disallowed."
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO038,
+        rule_id=RuleCode.EGO_A_002,
+        title="extension must not log excessively",
+        severity="manual_review",
+        source_url=f"{GUIDELINES_URL}#no-excessive-logging",
+        source_section="No excessive logging",
+        static_checkable=False,
+        detection_strategy=(
+            "deferred until policy-level logging thresholds are defined in ego"
+        ),
+        rationale=(
+            "Excessive is policy-dependent; the current module avoids "
+            "heuristic thresholds."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_A_003,
+        title="telemetry tools must not be used",
+        severity="manual_review",
+        source_url=f"{GUIDELINES_URL}#do-not-use-telemetry-tools",
+        source_section="Do not use telemetry tools",
+        static_checkable=False,
+        detection_strategy=(
+            "deferred until telemetry signatures are formalized without "
+            "keyword heuristics"
+        ),
+        rationale=(
+            "This rule should be enforced with a curated signature "
+            "database, not token guesses."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_A_004,
         title="extension files should not contain excessive ungated console logging",
         severity="warning",
         source_url=f"{GUIDELINES_URL}#no-excessive-logging",
@@ -580,7 +560,7 @@ RULES = [
         ),
     ),
     RuleSpec(
-        rule_id=RuleCode.EGO039,
+        rule_id=RuleCode.EGO_A_005,
         title="extensions should not access the clipboard directly",
         severity="manual_review",
         source_url=f"{GUIDELINES_URL}#clipboard-access-must-be-declared",
@@ -590,6 +570,27 @@ RULES = [
         rationale=(
             "Direct clipboard access is a privacy concern and requires "
             "reviewer scrutiny."
+        ),
+    ),
+    RuleSpec(
+        rule_id=RuleCode.EGO_C45_001,
+        title=(
+            "45+ preferences should use fillPreferencesWindow instead of "
+            "getPreferencesWidget"
+        ),
+        severity="warning",
+        source_url=(
+            "https://gjs.guide/extensions/upgrading/gnome-shell-45.html#preferences"
+        ),
+        source_section="Preferences",
+        static_checkable=True,
+        detection_strategy=(
+            "AST detection of getPreferencesWidget() in prefs code gated by "
+            "45+ target versions"
+        ),
+        rationale=(
+            "GNOME Shell 45+ preferences code should use "
+            "fillPreferencesWindow() rather than getPreferencesWidget()."
         ),
     ),
     RuleSpec(
@@ -712,6 +713,7 @@ RULES = [
         ),
         rationale="RunDialog._restart() was removed in GNOME Shell 50.",
     ),
+
 ]
 
 RULES_BY_ID = {rule.rule_id: rule for rule in RULES}

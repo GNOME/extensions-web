@@ -29,9 +29,9 @@ class SmokeTest(unittest.TestCase):
     def test_bad_extension_reports_findings(self) -> None:
         result = analyze_path(DATA_DIR / "bad_extension")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertIn("EGO003", rule_ids)
-        self.assertIn("EGO004", rule_ids)
-        self.assertIn("EGO018", rule_ids)
+        self.assertIn("EGO-M-003", rule_ids)
+        self.assertIn("EGO-M-004", rule_ids)
+        self.assertIn("EGO-I-002", rule_ids)
 
     def test_multiline_node_snippet_preserves_space_indent(self) -> None:
         snippet = self._call_expression_snippet_containing(
@@ -85,14 +85,14 @@ class E {
     def test_legacy_imports_gi_detect_shell_forbidden_imports(self) -> None:
         result = analyze_path(DATA_DIR / "legacy_shell_import")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertIn("EGO018", rule_ids)
+        self.assertIn("EGO-I-002", rule_ids)
 
     def test_good_cleanup_avoids_lifecycle_findings(self) -> None:
         result = analyze_path(DATA_DIR / "good_cleanup")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertNotIn("EGO014", rule_ids)
-        self.assertNotIn("EGO015", rule_ids)
-        self.assertNotIn("EGO016", rule_ids)
+        self.assertNotIn("EGO-L-002", rule_ids)
+        self.assertNotIn("EGO-L-003", rule_ids)
+        self.assertNotIn("EGO-L-004", rule_ids)
 
     def test_destroy_signal_bound_cleanup_suppresses_object_group_warning(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -145,27 +145,27 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO014", rule_ids)
+            self.assertNotIn("EGO-L-002", rule_ids)
 
     def test_glib_source_remove_counts_as_cleanup(self) -> None:
         result = analyze_path(DATA_DIR / "source_remove_cleanup")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertNotIn("EGO016", rule_ids)
+        self.assertNotIn("EGO-L-004", rule_ids)
 
     def test_builtin_map_does_not_require_destroy(self) -> None:
         result = analyze_path(DATA_DIR / "builtin_map_cleanup")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertNotIn("EGO014", rule_ids)
+        self.assertNotIn("EGO-L-002", rule_ids)
 
     def test_bad_donations_are_rejected(self) -> None:
         result = analyze_path(DATA_DIR / "bad_donations")
         rule_ids = [finding.rule_id for finding in result.findings]
-        self.assertIn("EGO007", rule_ids)
+        self.assertIn("EGO-M-007", rule_ids)
 
     def test_bad_subprocess_is_flagged(self) -> None:
         result = analyze_path(DATA_DIR / "bad_subprocess")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertIn("EGO024", rule_ids)
+        self.assertIn("EGO-X-001", rule_ids)
 
     def test_privileged_subprocess_wrapper_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -196,7 +196,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO024", rule_ids)
+            self.assertIn("EGO-X-001", rule_ids)
 
     def test_privileged_runprocess_literal_argv_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -226,7 +226,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO024", rule_ids)
+            self.assertIn("EGO-X-001", rule_ids)
 
     def test_privileged_runprocess_with_dynamic_tail_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -257,7 +257,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO024", rule_ids)
+            self.assertIn("EGO-X-001", rule_ids)
 
     def test_sync_subprocess_in_shell_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -279,7 +279,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO028", rule_ids)
+            self.assertIn("EGO-X-002", rule_ids)
 
     def test_run_dispose_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -300,7 +300,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO029", rule_ids)
+            self.assertIn("EGO-X-003", rule_ids)
 
     def test_sync_file_io_in_shell_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -325,7 +325,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO030", rule_ids)
+            self.assertIn("EGO-X-004", rule_ids)
 
     def test_imports_gi_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -344,7 +344,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO031", rule_ids)
+            self.assertIn("EGO-I-004", rule_ids)
 
     def test_get_preferences_widget_is_flagged_for_45_plus(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -363,7 +363,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO032", rule_ids)
+            self.assertIn("EGO-C45-001", rule_ids)
 
     def test_get_preferences_widget_is_not_flagged_before_45(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -382,7 +382,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO032", rule_ids)
+            self.assertNotIn("EGO-C45-001", rule_ids)
 
     def test_prefs_retained_instance_objects_require_close_request_cleanup(
         self,
@@ -414,7 +414,7 @@ export default class Prefs extends ExtensionPreferences {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO033", rule_ids)
+            self.assertIn("EGO-L-006", rule_ids)
 
     def test_prefs_close_request_cleanup_suppresses_retained_object_warning(
         self,
@@ -447,7 +447,7 @@ export default class Prefs extends ExtensionPreferences {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO033", rule_ids)
+            self.assertNotIn("EGO-L-006", rule_ids)
 
     def test_constructor_resource_ref_requires_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -479,7 +479,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO027", rule_ids)
+            self.assertIn("EGO-L-005", rule_ids)
 
     def test_constructor_custom_ref_requires_release_and_is_pre_enable(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -510,8 +510,8 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO013", rule_ids)
-            self.assertIn("EGO027", rule_ids)
+            self.assertIn("EGO-L-001", rule_ids)
+            self.assertIn("EGO-L-005", rule_ids)
 
     def test_entrypoint_factory_new_ref_requires_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -538,7 +538,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO027", rule_ids)
+            self.assertIn("EGO-L-005", rule_ids)
 
     def test_manual_default_stylesheet_loading_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -568,7 +568,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO034", rule_ids)
+            self.assertIn("EGO-X-005", rule_ids)
 
     def test_lookup_helpers_for_current_extension_are_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -595,7 +595,7 @@ export default class Prefs extends ExtensionPreferences {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO036", rule_ids)
+            self.assertIn("EGO-X-006", rule_ids)
 
     def test_missing_soup_session_abort_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -632,7 +632,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO037", rule_ids)
+            self.assertIn("EGO-L-008", rule_ids)
 
     def test_entrypoint_local_class_refs_require_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -664,7 +664,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO027", rule_ids)
+            self.assertIn("EGO-L-005", rule_ids)
 
     def test_gnome49_rules_are_version_gated(self) -> None:
         result = analyze_path(DATA_DIR / "gnome49_break")
@@ -684,17 +684,17 @@ export default class E extends Extension {
     def test_prefs_import_graph_does_not_trigger_shell_import_rule(self) -> None:
         result = analyze_path(DATA_DIR / "prefs_import_context")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertNotIn("EGO018", rule_ids)
+        self.assertNotIn("EGO-I-002", rule_ids)
 
     def test_literal_dynamic_imports_are_included_in_context_graph(self) -> None:
         result = analyze_path(DATA_DIR / "dynamic_import_context")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertNotIn("EGO018", rule_ids)
+        self.assertNotIn("EGO-I-002", rule_ids)
 
     def test_legacy_imports_are_included_in_context_graph(self) -> None:
         result = analyze_path(DATA_DIR / "legacy_import_context")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertNotIn("EGO026", rule_ids)
+        self.assertNotIn("EGO-P-007", rule_ids)
 
     def test_reexport_chain_is_included_in_context_graph(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -733,17 +733,17 @@ export function run() {}
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO026", rule_ids)
+            self.assertNotIn("EGO-P-007", rule_ids)
 
     def test_unreachable_js_files_are_flagged(self) -> None:
         result = analyze_path(DATA_DIR / "unreachable_js")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertIn("EGO026", rule_ids)
+        self.assertIn("EGO-P-007", rule_ids)
 
     def test_owned_refs_should_be_released_after_cleanup(self) -> None:
         result = analyze_path(DATA_DIR / "release_owned_ref")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertIn("EGO027", rule_ids)
+        self.assertIn("EGO-L-005", rule_ids)
 
     def test_module_global_parent_owned_refs_should_still_be_released(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -773,23 +773,23 @@ export function run() {}
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO027", rule_ids)
+            self.assertIn("EGO-L-005", rule_ids)
 
     def test_legacy_global_containers_should_be_released(self) -> None:
         result = analyze_path(DATA_DIR / "legacy_global_release")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertIn("EGO027", rule_ids)
+        self.assertIn("EGO-L-005", rule_ids)
 
     def test_legacy_global_scope_side_effects_are_flagged(self) -> None:
         result = analyze_path(DATA_DIR / "legacy_global_scope")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertIn("EGO013", rule_ids)
+        self.assertIn("EGO-L-001", rule_ids)
 
     def test_gjs_module_spawn_marks_target_as_reachable(self) -> None:
         result = analyze_path(DATA_DIR / "gjs_module_spawn")
         rule_ids = {finding.rule_id for finding in result.findings}
-        self.assertNotIn("EGO026", rule_ids)
-        self.assertNotIn("EGO018", rule_ids)
+        self.assertNotIn("EGO-P-007", rule_ids)
+        self.assertNotIn("EGO-I-002", rule_ids)
 
     def test_removed_apis_do_not_flag_without_target_version(self) -> None:
         result = analyze_path(DATA_DIR / "gnome48_ok")
@@ -849,7 +849,7 @@ export function run() {}
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO025", rule_ids)
+            self.assertIn("EGO-P-006", rule_ids)
 
     def test_screenshots_folder_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -868,7 +868,7 @@ export function run() {}
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO025", rule_ids)
+            self.assertIn("EGO-P-006", rule_ids)
 
     def test_non_shell_shebang_in_sh_script_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -890,7 +890,7 @@ export function run() {}
 
             result = analyze_path(root)
             findings = [
-                finding for finding in result.findings if finding.rule_id == "EGO025"
+                finding for finding in result.findings if finding.rule_id == "EGO-P-006"
             ]
             self.assertTrue(
                 any(
@@ -919,7 +919,7 @@ export function run() {}
 
             result = analyze_path(root)
             findings = [
-                finding for finding in result.findings if finding.rule_id == "EGO025"
+                finding for finding in result.findings if finding.rule_id == "EGO-P-006"
             ]
             self.assertFalse(
                 any(
@@ -984,7 +984,7 @@ export function run() {}
 
             result = analyze_path(root)
             findings = [
-                finding for finding in result.findings if finding.rule_id == "EGO025"
+                finding for finding in result.findings if finding.rule_id == "EGO-P-006"
             ]
             self.assertTrue(
                 any(
@@ -1013,7 +1013,7 @@ export function run() {}
 
             result = analyze_path(root)
             findings = [
-                finding for finding in result.findings if finding.rule_id == "EGO008"
+                finding for finding in result.findings if finding.rule_id == "EGO-M-008"
             ]
             self.assertEqual(len(findings), 1)
 
@@ -1053,7 +1053,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO016", rule_ids)
+            self.assertIn("EGO-L-004", rule_ids)
 
     def test_untracked_timeout_source_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1079,7 +1079,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO016", rule_ids)
+            self.assertIn("EGO-L-004", rule_ids)
 
     def test_untracked_signal_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1103,7 +1103,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO015", rule_ids)
+            self.assertIn("EGO-L-003", rule_ids)
 
     def test_untracked_connect_after_signal_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1127,7 +1127,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO015", rule_ids)
+            self.assertIn("EGO-L-003", rule_ids)
 
     def test_duplicate_signal_findings_are_merged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1169,7 +1169,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             signal_findings = [
-                finding for finding in result.findings if finding.rule_id == "EGO015"
+                finding for finding in result.findings if finding.rule_id == "EGO-L-003"
             ]
             self.assertEqual(len(signal_findings), 1)
             self.assertGreaterEqual(len(signal_findings[0].evidence), 2)
@@ -1213,7 +1213,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_single_quoted_menu_owned_activate_signal_is_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1254,7 +1254,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_menu_owned_child_widget_signal_is_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1302,7 +1302,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_local_object_signal_is_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1343,7 +1343,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_local_ui_widget_signal_is_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1376,7 +1376,7 @@ export default class ExamplePrefs extends Adw.PreferencesWindow {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_helper_created_local_child_signal_is_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1413,7 +1413,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_field_owned_child_widgets_are_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1461,9 +1461,9 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
-            self.assertNotIn("EGO014", rule_ids)
-            self.assertNotIn("EGO027", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
+            self.assertNotIn("EGO-L-002", rule_ids)
+            self.assertNotIn("EGO-L-005", rule_ids)
 
     def test_self_root_child_widgets_are_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1507,7 +1507,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_add_child_wrapper_preserves_ui_ownership(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1560,9 +1560,9 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
-            self.assertNotIn("EGO014", rule_ids)
-            self.assertNotIn("EGO027", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
+            self.assertNotIn("EGO-L-002", rule_ids)
+            self.assertNotIn("EGO-L-005", rule_ids)
 
     def test_popup_menu_section_actor_is_framework_owned(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1609,9 +1609,9 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
-            self.assertNotIn("EGO014", rule_ids)
-            self.assertNotIn("EGO027", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
+            self.assertNotIn("EGO-L-002", rule_ids)
+            self.assertNotIn("EGO-L-005", rule_ids)
 
     def test_transitive_child_menu_roots_are_framework_owned(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1658,7 +1658,10 @@ export default class E extends Extension {
             )
 
             result = analyze_path(root)
-            self.assertNotIn("EGO015", {finding.rule_id for finding in result.findings})
+            self.assertNotIn(
+                "EGO-L-003",
+                {finding.rule_id for finding in result.findings},
+            )
 
     def test_signal_handling_wrapper_is_treated_as_signal_group(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1701,7 +1704,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_signal_manager_destroy_is_treated_as_signal_group(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1738,7 +1741,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_settimeout_requires_cleartimeout(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1762,7 +1765,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO016", rule_ids)
+            self.assertIn("EGO-L-004", rule_ids)
 
     def test_recreating_timeout_without_clear_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1789,7 +1792,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO035", rule_ids)
+            self.assertIn("EGO-L-007", rule_ids)
 
     def test_placeholder_stylesheet_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1809,7 +1812,7 @@ export default class Extension {
 
             result = analyze_path(root)
             findings = [
-                finding for finding in result.findings if finding.rule_id == "EGO025"
+                finding for finding in result.findings if finding.rule_id == "EGO-P-006"
             ]
             self.assertTrue(
                 any(
@@ -1836,7 +1839,7 @@ let SCHEMA = new Secret.Schema('org.example', 0, {});
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO013", rule_ids)
+            self.assertIn("EGO-L-001", rule_ids)
 
     def test_shell_singleton_getters_in_global_scope_are_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1863,7 +1866,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO013", rule_ids)
+            self.assertIn("EGO-L-001", rule_ids)
 
     def test_top_level_object_literal_is_not_flagged_as_pre_enable_resource(
         self,
@@ -1891,7 +1894,7 @@ export default class Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertNotIn("EGO013", rule_ids)
+            self.assertNotIn("EGO-L-001", rule_ids)
 
     def test_legacy_helper_timeout_reachable_from_enable_is_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1921,7 +1924,7 @@ function _tick() {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO016", rule_ids)
+            self.assertIn("EGO-L-004", rule_ids)
 
     def test_runtime_method_anonymous_timeout_requires_cleanup(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1950,7 +1953,7 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO016", rule_ids)
+            self.assertIn("EGO-L-004", rule_ids)
 
     def test_bound_this_method_timeout_requires_cleanup(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -1985,14 +1988,14 @@ export default class E extends Extension {
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO016", rule_ids)
+            self.assertIn("EGO-L-004", rule_ids)
 
 
 class LifecycleEgo014Test(unittest.TestCase):
-    """EGO014 — objects created in enable() must be destroyed in disable()."""
+    """EGO_L_002 — objects created in enable() must be destroyed in disable()."""
 
     _METADATA = (
-        '{"uuid":"ego014@example.com","name":"EGO014",'
+        '{"uuid":"ego014@example.com","name":"EGO-L-002",'
         '"description":"","shell-version":["46"]}'
     )
 
@@ -2022,10 +2025,10 @@ export default class E extends Extension {
             )
             result = analyze_path(root)
             rule_ids = {f.rule_id for f in result.findings}
-            self.assertIn("EGO014", rule_ids)
+            self.assertIn("EGO-L-002", rule_ids)
 
     def test_st_widget_properly_destroyed_suppresses_ego014(self) -> None:
-        """St widget destroyed before null release must not trigger EGO014."""
+        """St widget destroyed before null release must not trigger EGO_L_002."""
         with tempfile.TemporaryDirectory() as tmpdir:
             root = self._make_pkg(
                 tmpdir,
@@ -2045,7 +2048,7 @@ export default class E extends Extension {
             )
             result = analyze_path(root)
             rule_ids = {f.rule_id for f in result.findings}
-            self.assertNotIn("EGO014", rule_ids)
+            self.assertNotIn("EGO-L-002", rule_ids)
 
 
 class CrossFileLifecycleTest(unittest.TestCase):
@@ -2098,7 +2101,7 @@ export function disconnectAll(ext) {
             )
             result = analyze_path(root)
             rule_ids = {f.rule_id for f in result.findings}
-            self.assertNotIn("EGO015", rule_ids)
+            self.assertNotIn("EGO-L-003", rule_ids)
 
     def test_cross_file_source_with_cleanup_does_not_trigger_ego016(self) -> None:
         """Imported helper adds and removes GLib source via `this`-parameter."""
@@ -2131,7 +2134,7 @@ export function stopTimer(ext) {
             )
             result = analyze_path(root)
             rule_ids = {f.rule_id for f in result.findings}
-            self.assertNotIn("EGO016", rule_ids)
+            self.assertNotIn("EGO-L-004", rule_ids)
 
     # ------------------------------------------------------------------
     # Phase 6 tests — currently fail; must pass after Phase 6
@@ -2163,7 +2166,7 @@ export function connectAll(ext) {
             )
             result = analyze_path(root)
             rule_ids = {f.rule_id for f in result.findings}
-            self.assertIn("EGO015", rule_ids)  # Phase 6
+            self.assertIn("EGO-L-003", rule_ids)  # Phase 6
 
     def test_cross_file_source_without_cleanup_triggers_ego016(self) -> None:
         """Imported helper adds GLib source via `this`-parameter but never removes it.
@@ -2194,7 +2197,7 @@ export function startTimer(ext) {
             )
             result = analyze_path(root)
             rule_ids = {f.rule_id for f in result.findings}
-            self.assertIn("EGO016", rule_ids)  # Phase 6
+            self.assertIn("EGO-L-004", rule_ids)  # Phase 6
 
     def test_cross_file_helper_cache_is_scoped_by_helper_path(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -2366,14 +2369,14 @@ class GSettingsUsageAstTest(unittest.TestCase):
             "const s = new Gio.Settings("
             "{schema_id: 'org.gnome.shell.extensions.gs-test'});\n"
         )
-        self.assertIn("EGO011", rule_ids)
+        self.assertIn("EGO-P-003", rule_ids)
 
     def test_gio_settings_in_comment_does_not_trigger_ego011(self) -> None:
         rule_ids = self._run(
             "// Uses Gio.Settings for preferences\n"
             "export default class E { enable() {} disable() {} }\n"
         )
-        self.assertNotIn("EGO011", rule_ids)
+        self.assertNotIn("EGO-P-003", rule_ids)
 
     def test_get_settings_call_triggers_ego011(self) -> None:
         rule_ids = self._run(
@@ -2383,7 +2386,7 @@ class GSettingsUsageAstTest(unittest.TestCase):
             "    disable() { this._s = null; }\n"
             "}\n"
         )
-        self.assertIn("EGO011", rule_ids)
+        self.assertIn("EGO-P-003", rule_ids)
 
 
 class DonationUrlValidationTest(unittest.TestCase):
@@ -2405,15 +2408,15 @@ class DonationUrlValidationTest(unittest.TestCase):
 
     def test_valid_custom_url_accepted(self) -> None:
         rule_ids = self._run_with_donations({"custom": "https://example.com/donate"})
-        self.assertNotIn("EGO007", rule_ids)
+        self.assertNotIn("EGO-M-007", rule_ids)
 
     def test_scheme_only_url_rejected(self) -> None:
         rule_ids = self._run_with_donations({"custom": "https://"})
-        self.assertIn("EGO007", rule_ids)
+        self.assertIn("EGO-M-007", rule_ids)
 
     def test_non_http_scheme_rejected(self) -> None:
         rule_ids = self._run_with_donations({"custom": "ftp://example.com/donate"})
-        self.assertIn("EGO007", rule_ids)
+        self.assertIn("EGO-M-007", rule_ids)
 
 
 if __name__ == "__main__":

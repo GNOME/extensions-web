@@ -16,7 +16,7 @@ from ..lifecycle import method_reachability
 
 
 class SessionModesRule(FileRule):
-    """FileRule: EGO008 — unlock-dialog must be documented in disable()."""
+    """FileRule: EGO_M_008 — unlock-dialog must be documented in disable()."""
 
     def __init__(self, metadata: dict | None) -> None:
         self._metadata = metadata
@@ -47,7 +47,7 @@ class SessionModesRule(FileRule):
 
         if not comment_near_disable:
             ctx.add_finding(
-                R.EGO008,
+                R.EGO_M_008,
                 (
                     "Extensions using `unlock-dialog` should document "
                     "the reason in `disable()` comments."

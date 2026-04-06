@@ -20,9 +20,8 @@ from ..spawn import extract_literal_string
 _SHELL_SYNC_FILE_IO_CALL_NAMES = API.subprocess.sync_file_io_calls
 _EXTENSION_LOOKUP_CALL_NAMES = API.api_misuse.extension_lookup_calls
 
-
 class ApiMisuseRule(FileRule):
-    """FileRule: EGO029/EGO030/EGO034/EGO036 — run_dispose, sync IO,
+    """FileRule: EGO_X_003/EGO_X_004/EGO_X_005/EGO_X_006 — run_dispose, sync IO,
     stylesheet misuse, and extension lookup."""
 
     def check(self, root: Node, text: str, ctx: CheckContext) -> None:
@@ -84,14 +83,14 @@ class ApiMisuseRule(FileRule):
 
         if run_dispose_evidences:
             ctx.add_finding(
-                R.EGO029,
+                R.EGO_X_003,
                 "Extension code should not call `run_dispose()`.",
                 run_dispose_evidences,
             )
 
         if sync_io_evidences:
             ctx.add_finding(
-                R.EGO030,
+                R.EGO_X_004,
                 (
                     "Shell code should avoid synchronous file IO APIs like "
                     "`GLib.file_get_contents()` and `Gio.File.load_contents()`."
@@ -101,7 +100,7 @@ class ApiMisuseRule(FileRule):
 
         if stylesheet_evidences:
             ctx.add_finding(
-                R.EGO034,
+                R.EGO_X_005,
                 (
                     "Extensions should not manually load or unload the default "
                     "`stylesheet.css`; GNOME Shell handles it automatically."
@@ -111,7 +110,7 @@ class ApiMisuseRule(FileRule):
 
         if extension_lookup_evidences:
             ctx.add_finding(
-                R.EGO036,
+                R.EGO_X_006,
                 (
                     "Use `this`, `this.getSettings()` or `this.path` instead of "
                     "`lookupByURL()` or `lookupByUUID()` for the current "

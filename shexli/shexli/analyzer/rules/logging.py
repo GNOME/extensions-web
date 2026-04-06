@@ -51,9 +51,8 @@ def _condition_is_debug(node: Node) -> bool:
                 return True
     return False
 
-
 class ExcessiveLoggingRule(FileRule):
-    """FileRule: EGO038 — excessive ungated console.log/warn/error calls."""
+    """FileRule: EGO_A_004 — excessive ungated console.log/warn/error calls."""
 
     def check(self, root: Node, text: str, ctx: CheckContext) -> None:
         evidences = []
@@ -76,7 +75,7 @@ class ExcessiveLoggingRule(FileRule):
 
         if len(evidences) > _THRESHOLD:
             ctx.add_finding(
-                R.EGO038,
+                R.EGO_A_004,
                 (
                     f"File contains {len(evidences)} ungated "
                     f"console.log/warn/error calls (threshold: {_THRESHOLD})."

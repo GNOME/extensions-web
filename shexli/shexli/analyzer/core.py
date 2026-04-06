@@ -106,7 +106,7 @@ def analyze_path(
 
         if not metadata_file.exists():
             findings.append(
-                RULES_BY_ID[R.EGO001].make_finding(
+                RULES_BY_ID[R.EGO_M_001].make_finding(
                     "Missing required file `metadata.json`."
                 )
             )
@@ -130,7 +130,7 @@ def analyze_path(
 
         if unreachable_js_files:
             findings.append(
-                RULES_BY_ID[R.EGO026].make_finding(
+                RULES_BY_ID[R.EGO_P_007].make_finding(
                     (
                         "Some JavaScript files are not reachable from "
                         "`extension.js` or `prefs.js` imports."

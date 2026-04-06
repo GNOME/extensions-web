@@ -347,7 +347,7 @@ def _check_class_lifecycle(
     )
     if missing_class_soup_abort:
         ctx.add_finding(
-            R.EGO037,
+            R.EGO_L_008,
             "Soup.Session instances should be aborted during cleanup.",
             [
                 ctx.node_evidence(text, class_soup_session_fields[name][0])
@@ -360,9 +360,9 @@ class LifecycleRule(FileRule):
     """
     FileRule: lifecycle analysis for entrypoint and non-entrypoint classes.
 
-    Covers EGO013 (pre-enable resources), EGO014–EGO016/EGO027 (lifecycle
-    cleanup via append_lifecycle_findings), EGO035 (source recreation), and
-    EGO037 (Soup.Session abort).
+    Covers EGO_L_001 (pre-enable resources), EGO_L_002–EGO_L_004/EGO_L_005 (lifecycle
+    cleanup via append_lifecycle_findings), EGO_L_007 (source recreation), and
+    EGO_L_008 (Soup.Session abort).
     """
 
     def check(self, root: Node, text: str, ctx: CheckContext) -> None:
@@ -431,7 +431,7 @@ class LifecycleRule(FileRule):
         pre_enable_evidence.extend(constructor_custom_refs.values())
         if pre_enable_evidence:
             ctx.add_finding(
-                R.EGO013,
+                R.EGO_L_001,
                 (
                     "Resource creation or signal/source setup was found "
                     "outside `enable()`."
@@ -477,7 +477,7 @@ class LifecycleRule(FileRule):
         missing_soup_abort = sorted(set(soup_session_fields) - aborted_soup_sessions)
         if missing_soup_abort:
             ctx.add_finding(
-                R.EGO037,
+                R.EGO_L_008,
                 "Soup.Session instances should be aborted during cleanup.",
                 [
                     ctx.node_evidence(text, soup_session_fields[name][0])

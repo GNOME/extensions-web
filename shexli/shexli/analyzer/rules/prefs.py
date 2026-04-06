@@ -83,7 +83,10 @@ def _retains_window_objects(
 
 
 class PrefsRule(FileRule):
-    """FileRule: EGO032/EGO033 — getPreferencesWidget and retained prefs fields."""
+    """FileRule: EGO_C45_001/EGO_L_006.
+
+    Covers getPreferencesWidget and retained prefs fields.
+    """
 
     def __init__(self, metadata: dict | None) -> None:
         self._metadata = metadata
@@ -110,7 +113,7 @@ class PrefsRule(FileRule):
 
             if prefs_widget_evidences:
                 ctx.add_finding(
-                    R.EGO032,
+                    R.EGO_C45_001,
                     (
                         "45+ preferences code should use `fillPreferencesWindow()` "
                         "instead of `getPreferencesWidget()`."
@@ -121,7 +124,7 @@ class PrefsRule(FileRule):
         retained_evidences = _retains_window_objects(text, methods, ctx)
         if retained_evidences:
             ctx.add_finding(
-                R.EGO033,
+                R.EGO_L_006,
                 (
                     "Preferences code stores window-scoped objects on the "
                     "exported prefs class without `close-request` cleanup."

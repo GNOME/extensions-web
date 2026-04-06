@@ -78,9 +78,8 @@ def _argv_spawn_wrapper_functions(text: str, root: Node) -> set[str]:
 
     return wrappers
 
-
 class SubprocessRule(FileRule):
-    """FileRule: EGO024/EGO028 — privileged and synchronous subprocess calls."""
+    """FileRule: EGO_X_001/EGO_X_002 — privileged and synchronous subprocess calls."""
 
     def check(self, root: Node, text: str, ctx: CheckContext) -> None:
         privileged_evidences: list[Evidence] = []
@@ -134,7 +133,7 @@ class SubprocessRule(FileRule):
 
         if privileged_evidences:
             ctx.add_finding(
-                R.EGO024,
+                R.EGO_X_001,
                 (
                     "Privileged subprocess patterns must use `pkexec`, not "
                     "`sudo`, `su`, `doas`, or similar wrappers."
@@ -144,7 +143,7 @@ class SubprocessRule(FileRule):
 
         if sync_evidences:
             ctx.add_finding(
-                R.EGO028,
+                R.EGO_X_002,
                 (
                     "Shell code should avoid synchronous subprocess APIs like "
                     "`GLib.spawn_command_line_sync()` and `GLib.spawn_sync()`."

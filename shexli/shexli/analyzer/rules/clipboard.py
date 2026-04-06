@@ -11,7 +11,7 @@ from ..engine import NodeRule
 
 
 class ClipboardRule(NodeRule):
-    """NodeRule: EGO039 — direct clipboard access via St.Clipboard.get_default()."""
+    """NodeRule: EGO_A_005 — direct clipboard access via St.Clipboard.get_default()."""
 
     node_types: frozenset[str] = frozenset({"call_expression"})
 
@@ -25,7 +25,7 @@ class ClipboardRule(NodeRule):
     def finalize(self, root: Node, text: str, ctx: CheckContext) -> None:
         if self._evidences:
             ctx.add_finding(
-                R.EGO039,
+                R.EGO_A_005,
                 "Direct clipboard access via `St.Clipboard.get_default()` "
                 "requires reviewer scrutiny.",
                 self._evidences,

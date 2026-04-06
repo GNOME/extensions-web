@@ -31,7 +31,7 @@ _MINIFIED_MAX_LINES = 4
 
 
 class ObfuscationRule(FileRule):
-    """FileRule: EGO020 — minification / obfuscation heuristic."""
+    """FileRule: EGO_A_001 — minification / obfuscation heuristic."""
 
     def check(self, root: Node, text: str, ctx: CheckContext) -> None:
         if len(text.encode()) < _MIN_FILE_BYTES:
@@ -61,7 +61,7 @@ class ObfuscationRule(FileRule):
 
         avg_len = sum(len(i) for i in scored) / len(scored)
         ctx.add_finding(
-            R.EGO020,
+            R.EGO_A_001,
             (
                 f"File appears obfuscated: {ratio:.0%} of identifiers are "
                 f"1–2 characters (avg length {avg_len:.1f})."
@@ -87,7 +87,7 @@ class ObfuscationRule(FileRule):
             return
 
         ctx.add_finding(
-            R.EGO020,
+            R.EGO_A_001,
             (
                 f"File appears minified: {file_bytes} bytes "
                 f"compressed into {len(non_empty)} line(s)."
