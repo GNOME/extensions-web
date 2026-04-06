@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the extensions-web package.
 # liushuyu liushuyu011@gmail.com, 2019.
 # Dingzhong Chen <wsxy162@gmail.com>, 2019.
-# lumingzh <lumingzh@qq.com>, 2023-2025.
+# lumingzh <lumingzh@qq.com>, 2023-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-06-23 12:38+0800\n"
+"POT-Creation-Date: 2026-04-03 15:18+0000\n"
+"PO-Revision-Date: 2026-04-06 08:10+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 48.0\n"
+"X-Generator: Gtranslator 50.0\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -367,7 +367,7 @@ msgstr "你的意见"
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr "留下评论……"
+msgstr "留下评论…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
@@ -583,14 +583,50 @@ msgstr "发布评论"
 msgid "Edit your comment"
 msgstr "编辑您的评论"
 
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli（实验性）"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli 发现了 %(count)s 个可能需要审阅人注意的问题。\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli 未发现任何问题。"
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli 无法分析此版本。"
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli 尚未产生结果。"
+
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
 "upload/'>same form</a> you've posted this version."
 msgstr ""
-"你在上传下个版本时可以使用和你发布这个版本时<a href='https://extensions."
-"gnome.org/upload/'>相同的表格</a>。"
+"你在上传下个版本时可以使用和你发布这个版本时<a href='https://"
+"extensions.gnome.org/upload/'>相同的表格</a>。"
 
 #: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
@@ -609,8 +645,8 @@ msgstr "如果你想停用一个已批准的版本，请点击你的扩展页面
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
 "你可以在 <a href='https://gjs.guide/extensions/'>gjs.guide</a> 找到开发者指"
 "南。"
