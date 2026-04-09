@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-09-28 17:07+0200\n"
-"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"POT-Creation-Date: 2026-04-03 15:18+0000\n"
+"PO-Revision-Date: 2026-04-04 13:13+0200\n"
+"Last-Translator: Марко Костић <marko.m.kostic@gmail.com>\n"
 "Language-Team: Serbian <gnome-sr@googlegroups.com>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -607,6 +607,58 @@ msgstr "Објави напомену"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "Уредите вашу напомену"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Шексли (пробно)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Шексли је пронашао %(count)s проблем који може захтевати пажњу "
+"оцењивача.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Шексли је пронашао %(count)s проблема који могу захтевати пажњу "
+"оцењивача.\n"
+"    "
+msgstr[2] ""
+"\n"
+"    Шексли је пронашао %(count)s проблема који могу захтевати пажњу "
+"оцењивача.\n"
+"    "
+msgstr[3] ""
+"\n"
+"    Шексли је пронашао %(count)s проблем који може захтевати пажњу "
+"оцењивача.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Шексли није пронашао никакве проблеме."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Шексли није могао да анализира ово издање."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Шексли још увек није дао резултат."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
