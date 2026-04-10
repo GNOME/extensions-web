@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "shexli"
-version = "0.2.0"
+version = "0.2.1"
 description = "Static analyzer for GNOME Shell extension reviews"
 readme = "README.md"
 license = {file = "COPYING"}
@@ -23,3 +23,6 @@ shexli = "shexli.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["shexli*"]
+
+[tool.setuptools.package-data]
+shexli = ["data/*.toml"]

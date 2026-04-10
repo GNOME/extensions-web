@@ -1,36 +1,21 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-"""Shared rule-facing constants loaded from the versioned API TOML."""
+"""Shared rule-facing constants derived from the canonical API data."""
 
 from __future__ import annotations
 
-import tomllib
-from pathlib import Path
+from ...api_data import API
 
-_DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "api.toml"
-
-with _DATA_PATH.open("rb") as fp:
-    _DATA = tomllib.load(fp)
-
-_IMPORTS = _DATA["imports"]
-_SUBPROCESS = _DATA["subprocess"]
-_API_MISUSE = _DATA["api_misuse"]
-_COMPAT = _DATA["compat"]
-
-DEPRECATED_IMPORT_TOKENS = tuple(_IMPORTS["deprecated_modules"])
-SHELL_FORBIDDEN_TOKENS = frozenset(_IMPORTS["shell_forbidden_libs"])
-PREFS_FORBIDDEN_TOKENS = frozenset(_IMPORTS["prefs_forbidden_libs"])
-SYNC_FILE_IO_CALL_NAMES = frozenset(_SUBPROCESS["sync_file_io_calls"])
-EXTENSION_LOOKUP_CALL_NAMES = frozenset(_API_MISUSE["extension_lookup_calls"])
-SPAWN_CALL_NAMES = frozenset(_SUBPROCESS["spawn_calls"])
-NON_PKEXEC_PRIVILEGE_COMMANDS = frozenset(_SUBPROCESS["privilege_commands"])
-SHELL_SYNC_SPAWN_CALL_NAMES = frozenset(_SUBPROCESS["sync_spawn_calls"])
-GNOME49_SIGNAL_REMOVED_CLASSES = frozenset(
-    _COMPAT["gnome49"]["removed_clutter_classes"]
-)
-GNOME50_REMOVED_DISPLAY_SIGNALS = frozenset(
-    _COMPAT["gnome50"]["removed_display_signals"]
-)
+DEPRECATED_IMPORT_TOKENS = API.imports.deprecated_modules
+SHELL_FORBIDDEN_TOKENS = API.imports.shell_forbidden_libs
+PREFS_FORBIDDEN_TOKENS = API.imports.prefs_forbidden_libs
+SYNC_FILE_IO_CALL_NAMES = API.subprocess.sync_file_io_calls
+EXTENSION_LOOKUP_CALL_NAMES = API.api_misuse.extension_lookup_calls
+SPAWN_CALL_NAMES = API.subprocess.spawn_calls
+NON_PKEXEC_PRIVILEGE_COMMANDS = API.subprocess.privilege_commands
+SHELL_SYNC_SPAWN_CALL_NAMES = API.subprocess.sync_spawn_calls
+GNOME49_SIGNAL_REMOVED_CLASSES = API.compat.gnome49.removed_clutter_classes
+GNOME50_REMOVED_DISPLAY_SIGNALS = API.compat.gnome50.removed_display_signals
 
 __all__ = [
     "DEPRECATED_IMPORT_TOKENS",

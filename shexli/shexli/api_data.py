@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import tomllib
 from dataclasses import dataclass
+from importlib.resources import files
 from pathlib import Path
 
 _DATA_DIR = Path(__file__).parent / "data"
@@ -71,8 +72,12 @@ class ApiData:
 
 
 def _load() -> ApiData:
-    with (_DATA_DIR / "api.toml").open("rb") as fp:
-        data = tomllib.load(fp)
+    try:
+        with files("shexli.data").joinpath("api.toml").open("rb") as fp:
+            data = tomllib.load(fp)
+    except (FileNotFoundError, ModuleNotFoundError):
+        with (_DATA_DIR / "api.toml").open("rb") as fp:
+            data = tomllib.load(fp)
 
     i = data["imports"]
     s = data["subprocess"]
