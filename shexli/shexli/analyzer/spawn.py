@@ -2,20 +2,10 @@
 
 from __future__ import annotations
 
+from ..api_data import API
 from ..ast import array_elements, call_arguments, call_callee_parts, node_text
 
-SPAWN_CALL_NAMES = {
-    "GLib.spawn_async",
-    "GLib.spawn_async_with_pipes",
-    "GLib.spawn_command_line_async",
-    "GLib.spawn_command_line_sync",
-    "Shell.Util.spawn",
-    "Shell.Util.spawn_async",
-    "Shell.Util.spawnCommandLine",
-    "Shell.Util.trySpawn",
-    "Shell.Util.trySpawnCommandLine",
-    "Gio.Subprocess.new",
-}
+SPAWN_CALL_NAMES = API.subprocess.spawn_calls
 
 
 def extract_literal_string(

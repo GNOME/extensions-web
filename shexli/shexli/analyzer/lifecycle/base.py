@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from tree_sitter import Node
 
+from ...api_data import API
 from ...ast import (
     bound_this_callback_methods,
     call_arguments,
@@ -22,51 +23,15 @@ from ...ast import (
 )
 from ...models import Evidence
 
-TOP_LEVEL_FORBIDDEN_NEW_PREFIXES = {
-    "Gio",
-    "St",
-    "Clutter",
-    "Meta",
-    "Shell",
-    "Secret",
-    "Gtk",
-    "Gdk",
-    "Adw",
-}
-DESTROYABLE_NAMESPACE_ROOTS = {
-    "Clutter",
-    "PanelMenu",
-    "PopupMenu",
-    "QuickSettings",
-    "St",
-}
-DESTROYABLE_SUPERCLASS_NAMES = {
-    "QuickToggle",
-    "SystemIndicator",
-}
-RESOURCE_REF_CALL_NAMES = {
-    "Gio.DBusProxy.new_sync",
-    "Gio.DBusExportedObject.wrapJSObject",
-    "Shell.AppSystem.get_default",
-    "Shell.WindowTracker.get_default",
-}
-RESOURCE_REF_NEW_NAMES = {
-    "Gio.Settings",
-}
-SOURCE_ADD_NAMES = {
-    "GLib.timeout_add",
-    "GLib.timeout_add_seconds",
-    "GLib.idle_add",
-    "setInterval",
-    "setTimeout",
-}
-SOURCE_REMOVE_NAMES = {
-    "GLib.Source.remove",
-    "GLib.source_remove",
-    "clearInterval",
-    "clearTimeout",
-    "source_remove",
-}
+TOP_LEVEL_FORBIDDEN_NEW_PREFIXES = API.lifecycle.forbidden_new_prefixes
+DESTROYABLE_NAMESPACE_ROOTS = API.lifecycle.destroyable_namespace_roots
+DESTROYABLE_SUPERCLASS_NAMES = API.lifecycle.destroyable_superclass_names
+RESOURCE_REF_CALL_NAMES = API.lifecycle.resource_ref_call_names
+RESOURCE_REF_NEW_NAMES = API.lifecycle.resource_ref_new_names
+SOURCE_ADD_NAMES = API.lifecycle.source_add_names
+SOURCE_REMOVE_NAMES = API.lifecycle.source_remove_names
+SIGNAL_MANAGER_NEW_NAMES = API.lifecycle.signal_manager_new_names
+
 JS_BUILTIN_CONTAINERS = {
     "Array",
     "Date",
@@ -90,28 +55,25 @@ NON_IMMEDIATE_EXECUTION_NODES = {
     "generator_function_declaration",
     "method_definition",
 }
+SELF_OWNER = "__self_owner__"
 
 
 @dataclass(slots=True)
 class ResourceTracker:
-    signals: dict[str, Evidence | None]
-    sources: dict[str, Evidence | None]
-    recreated_sources: dict[str, Evidence | None]
-    objects: dict[str, Evidence | None]
-    resource_refs: dict[str, Evidence | None]
-    containers: dict[str, Evidence | None]
-    parent_owned: dict[str, str]
-    local_parent_owned: dict[str, str]
-    menu_owned: set[str]
-    signal_groups: dict[str, Evidence | None]
-    source_groups: dict[str, Evidence | None]
-    object_groups: dict[str, Evidence | None]
-    released_refs: dict[str, Evidence | None]
-    touched_refs: dict[str, Evidence | None]
-
-    @classmethod
-    def empty(cls) -> ResourceTracker:
-        return cls({}, {}, {}, {}, {}, {}, {}, {}, set(), {}, {}, {}, {}, {})
+    signals: dict[str, Evidence | None] = field(default_factory=dict)
+    sources: dict[str, Evidence | None] = field(default_factory=dict)
+    recreated_sources: dict[str, Evidence | None] = field(default_factory=dict)
+    objects: dict[str, Evidence | None] = field(default_factory=dict)
+    resource_refs: dict[str, Evidence | None] = field(default_factory=dict)
+    containers: dict[str, Evidence | None] = field(default_factory=dict)
+    parent_owned: dict[str, str] = field(default_factory=dict)
+    local_parent_owned: dict[str, str] = field(default_factory=dict)
+    menu_owned: set[str] = field(default_factory=set)
+    signal_groups: dict[str, Evidence | None] = field(default_factory=dict)
+    source_groups: dict[str, Evidence | None] = field(default_factory=dict)
+    object_groups: dict[str, Evidence | None] = field(default_factory=dict)
+    released_refs: dict[str, Evidence | None] = field(default_factory=dict)
+    touched_refs: dict[str, Evidence | None] = field(default_factory=dict)
 
 
 def record_resource(
@@ -130,6 +92,7 @@ class CleanupCollector:
     source: str
     aliases: dict[str, str]
     module_vars: set[str]
+    signal_group_fields: set[str]
     tracker: ResourceTracker
 
     def mark_call(self, node: Node) -> None:
@@ -145,6 +108,8 @@ class CleanupCollector:
             and function_parts[2] == "destroy"
         ):
             record_resource(self.tracker.objects, function_parts[1])
+            if function_parts[1] in self.signal_group_fields:
+                record_resource(self.tracker.signal_groups, function_parts[1])
             return
 
         if (
@@ -153,6 +118,8 @@ class CleanupCollector:
             and function_parts[1] == "destroy"
         ):
             record_resource(self.tracker.objects, function_parts[0])
+            if function_parts[0] in self.signal_group_fields:
+                record_resource(self.tracker.signal_groups, function_parts[0])
             return
 
         if len(function_parts) >= 3 and function_parts[0] == "this":
@@ -161,7 +128,23 @@ class CleanupCollector:
             record_resource(self.tracker.touched_refs, function_parts[0])
 
         args = call_arguments(node)
+        if call_name == "Context.monitors.disconnect":
+            for arg in args:
+                if arg.type == "this":
+                    record_resource(self.tracker.signal_groups, SELF_OWNER)
+                    return
         if call_name.endswith(".disconnect") or call_name == "disconnect":
+            receiver = function_node.child_by_field_name("object")
+            if not args and receiver is not None:
+                field = field_name_from_node(
+                    self.source,
+                    receiver,
+                    self.aliases,
+                    self.module_vars,
+                )
+                if field:
+                    record_resource(self.tracker.signal_groups, field)
+                    return
             for arg in args:
                 field = field_name_from_node(
                     self.source,
@@ -178,6 +161,28 @@ class CleanupCollector:
                             self.tracker.signal_groups,
                             self.aliases[name].split(":", 2)[2],
                         )
+        elif call_name.endswith(".disconnectAll"):
+            receiver = function_node.child_by_field_name("object")
+            if not args and receiver is not None:
+                field = field_name_from_node(
+                    self.source,
+                    receiver,
+                    self.aliases,
+                    self.module_vars,
+                )
+                if field:
+                    record_resource(self.tracker.signal_groups, field)
+        elif call_name.endswith(".destroy"):
+            receiver = function_node.child_by_field_name("object")
+            if not args and receiver is not None:
+                field = field_name_from_node(
+                    self.source,
+                    receiver,
+                    self.aliases,
+                    self.module_vars,
+                )
+                if field and field in self.signal_group_fields:
+                    record_resource(self.tracker.signal_groups, field)
         elif call_name in SOURCE_REMOVE_NAMES:
             for arg in args:
                 field = field_name_from_node(
@@ -293,6 +298,8 @@ def resource_from_node(
             constructor_name = ".".join(constructor_parts)
             if constructor_name in JS_BUILTIN_CONTAINERS:
                 return "container"
+            if constructor_name in SIGNAL_MANAGER_NEW_NAMES:
+                return "signal_manager"
             if constructor_name in RESOURCE_REF_NEW_NAMES:
                 return "resource_ref"
             if constructor_parts and (

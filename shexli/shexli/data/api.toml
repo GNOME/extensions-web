@@ -1,0 +1,146 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# GNOME Shell extension API data for shexli.
+# Bump spec_version whenever any list changes.
+
+spec_version = "2026-04-05"
+
+# ---------------------------------------------------------------------------
+# imports (EGO_I_001, EGO_I_002, EGO_I_003)
+# ---------------------------------------------------------------------------
+
+[imports]
+# Modules that are deprecated and must not be imported (EGO_I_001)
+deprecated_modules = ["ByteArray", "Lang", "Mainloop"]
+
+# GI namespaces forbidden in shell-process files (EGO_I_002)
+shell_forbidden_libs = ["Gtk", "Gdk", "Adw"]
+
+# GI namespaces forbidden in preferences-process files (EGO_I_003)
+prefs_forbidden_libs = ["Clutter", "Meta", "St", "Shell"]
+
+# ---------------------------------------------------------------------------
+# subprocess (EGO_X_001, EGO_X_002)
+# ---------------------------------------------------------------------------
+
+[subprocess]
+# All spawn API call names tracked for privilege / sync analysis
+spawn_calls = [
+    "GLib.spawn_async",
+    "GLib.spawn_async_with_pipes",
+    "GLib.spawn_command_line_async",
+    "GLib.spawn_command_line_sync",
+    "Shell.Util.spawn",
+    "Shell.Util.spawn_async",
+    "Shell.Util.spawnCommandLine",
+    "Shell.Util.trySpawn",
+    "Shell.Util.trySpawnCommandLine",
+    "Gio.Subprocess.new",
+]
+
+# Synchronous spawn APIs that block the shell main loop (EGO_X_002)
+sync_spawn_calls = [
+    "GLib.spawn_command_line_sync",
+    "GLib.spawn_sync",
+]
+
+# Synchronous file-IO APIs that block the shell main loop (EGO_X_004)
+sync_file_io_calls = ["GLib.file_get_contents"]
+
+# Shell privilege-escalation command names that must use pkexec (EGO_X_001)
+privilege_commands = ["sudo", "su", "doas", "run0"]
+
+# ---------------------------------------------------------------------------
+# api_misuse (EGO_X_006)
+# ---------------------------------------------------------------------------
+
+[api_misuse]
+# Extension lookup helpers that should be replaced with `this` (EGO_X_006)
+extension_lookup_calls = [
+    "Extension.lookupByURL",
+    "Extension.lookupByUUID",
+    "ExtensionPreferences.lookupByURL",
+    "ExtensionPreferences.lookupByUUID",
+]
+
+# ---------------------------------------------------------------------------
+# lifecycle (EGO_L_001–EGO_L_004, EGO_L_005, EGO_L_007, EGO_L_008)
+# ---------------------------------------------------------------------------
+
+[lifecycle]
+# GI namespace prefixes whose constructors are forbidden at top-level (EGO_L_001)
+forbidden_new_prefixes = [
+    "Adw",
+    "Clutter",
+    "Gdk",
+    "Gio",
+    "Gtk",
+    "Meta",
+    "Secret",
+    "Shell",
+    "St",
+]
+
+# Namespace roots that indicate a destroyable GObject subclass (EGO_L_002)
+destroyable_namespace_roots = [
+    "Clutter",
+    "PanelMenu",
+    "PopupMenu",
+    "QuickSettings",
+    "St",
+]
+
+# Specific superclass names that indicate a destroyable GObject subclass (EGO_L_002)
+destroyable_superclass_names = ["QuickToggle", "SystemIndicator"]
+
+# Call expressions that create resource references requiring cleanup (EGO_L_002)
+resource_ref_call_names = [
+    "Gio.DBusProxy.new_sync",
+    "Gio.DBusExportedObject.wrapJSObject",
+    "Shell.AppSystem.get_default",
+    "Shell.WindowTracker.get_default",
+]
+
+# Constructor names that create resource references requiring cleanup (EGO_L_002)
+resource_ref_new_names = ["Gio.Settings"]
+
+# GLib/JS source-creation calls tracked for cleanup (EGO_L_004)
+source_add_names = [
+    "GLib.idle_add",
+    "GLib.timeout_add",
+    "GLib.timeout_add_seconds",
+    "setInterval",
+    "setTimeout",
+]
+
+# GLib/JS source-removal calls that satisfy EGO_L_004 cleanup (EGO_L_004)
+source_remove_names = [
+    "GLib.Source.remove",
+    "GLib.source_remove",
+    "clearInterval",
+    "clearTimeout",
+    "source_remove",
+]
+
+# Constructor names that indicate a SignalManager-style helper (EGO_L_003)
+signal_manager_new_names = ["SignalHandling", "SignalManager"]
+
+# Superclass names whose GObject-root fields are managed by the framework
+framework_root_superclasses = [
+    "ChildMenu",
+    "CollapsibleGroup",
+    "PopupMenu.PopupMenuSection",
+    "PopupMenuSection",
+]
+
+# ---------------------------------------------------------------------------
+# compat — version-specific removed APIs
+# ---------------------------------------------------------------------------
+
+[compat.gnome49]
+# Clutter classes removed in GNOME Shell 49 (EGO-C49-002)
+removed_clutter_classes = ["Clutter.ClickAction", "Clutter.TapAction"]
+
+[compat.gnome50]
+# global.display signals removed in GNOME Shell 50 (EGO-C50-001)
+removed_display_signals = ["restart", "show-restart-message"]
