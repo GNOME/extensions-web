@@ -7,7 +7,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from unittest.mock import patch
 
-from shexli import analyze_path
 from shexli.analyzer.engine import ExtensionModel, PathMapper
 from shexli.analyzer.evidence import node_evidence
 from shexli.analyzer.facts import (
@@ -67,6 +66,8 @@ from shexli.analyzer.rules.session_modes import SessionModesRule
 from shexli.analyzer.rules.subprocess import SubprocessRule
 from shexli.ast import iter_nodes, parse_js
 from shexli.models import AnalysisLimits
+
+from shexli import analyze_path
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
@@ -1920,7 +1921,7 @@ export default class Extension {
                 )
             )
 
-    def test_secret_schema_in_global_scope_is_flagged(self) -> None:
+    def test_secret_schema_in_prefs_global_scope_is_not_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             (root / "metadata.json").write_text(
@@ -1937,7 +1938,38 @@ let SCHEMA = new Secret.Schema('org.example', 0, {});
 
             result = analyze_path(root)
             rule_ids = {finding.rule_id for finding in result.findings}
-            self.assertIn("EGO-L-001", rule_ids)
+            self.assertNotIn("EGO-L-001", rule_ids)
+
+    def test_prefs_mainloop_source_is_not_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"prefs-source@example.com","name":"PrefsSource","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "prefs.js").write_text(
+                """
+import GLib from "gi://GLib";
+import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+
+export default class Prefs extends ExtensionPreferences {
+    fillPreferencesWindow(window) {
+        this._source = GLib.timeout_add(
+            GLib.PRIORITY_DEFAULT,
+            10,
+            () => GLib.SOURCE_REMOVE,
+        );
+        window.set_title("Prefs");
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO-L-004", rule_ids)
+            self.assertNotIn("EGO-L-007", rule_ids)
 
     def test_shell_singleton_getters_in_global_scope_are_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

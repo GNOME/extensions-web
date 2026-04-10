@@ -17,7 +17,7 @@ from ..api import (
     ExtensionFacts,
     ExtensionRule,
 )
-from .common import missing_evidences, owned_descendants
+from .common import is_prefs_only_context, missing_evidences, owned_descendants
 
 
 class LifecycleObjectsRule(ExtensionRule):
@@ -28,6 +28,8 @@ class LifecycleObjectsRule(ExtensionRule):
         destroy_fact = facts.get_fact(ObjectDestroyFact)
 
         for path, create_observations in create_fact.by_path.items():
+            if is_prefs_only_context(facts.model, path):
+                continue
             destroy_by_scope = {
                 observation.scope_id: observation
                 for observation in destroy_fact.by_path.get(path, [])

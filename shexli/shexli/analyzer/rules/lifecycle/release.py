@@ -18,7 +18,12 @@ from ..api import (
     ExtensionFacts,
     ExtensionRule,
 )
-from .common import missing_evidences, owned_descendants, release_candidates
+from .common import (
+    is_prefs_only_context,
+    missing_evidences,
+    owned_descendants,
+    release_candidates,
+)
 
 
 class LifecycleReleaseRule(ExtensionRule):
@@ -30,6 +35,8 @@ class LifecycleReleaseRule(ExtensionRule):
         release_fact = facts.get_fact(RefReleaseFact)
 
         for path, assign_observations in assign_fact.by_path.items():
+            if is_prefs_only_context(facts.model, path):
+                continue
             object_create_by_scope = {
                 observation.scope_id: observation
                 for observation in object_create_fact.by_path.get(path, [])

@@ -3,12 +3,20 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+from pathlib import Path
 from typing import TYPE_CHECKING
+
+from ...engine import ExtensionModel, JSContext
 
 if TYPE_CHECKING:
     from shexli.models import Evidence
 
 SELF_OWNER = "__self_owner__"
+
+
+def is_prefs_only_context(model: ExtensionModel, path: Path) -> bool:
+    contexts = model.entrypoint_contexts.get(path, set())
+    return contexts == {JSContext.PREFERENCES}
 
 
 def owned_descendants(

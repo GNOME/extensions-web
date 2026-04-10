@@ -18,7 +18,7 @@ from ..api import (
     ExtensionFacts,
     ExtensionRule,
 )
-from .common import missing_evidences
+from .common import is_prefs_only_context, missing_evidences
 
 
 class LifecycleSourcesRule(ExtensionRule):
@@ -30,6 +30,8 @@ class LifecycleSourcesRule(ExtensionRule):
         recreate_fact = facts.get_fact(SourceRecreateFact)
 
         for path, add_observations in add_fact.by_path.items():
+            if is_prefs_only_context(facts.model, path):
+                continue
             remove_by_scope = {
                 observation.scope_id: observation
                 for observation in remove_fact.by_path.get(path, [])

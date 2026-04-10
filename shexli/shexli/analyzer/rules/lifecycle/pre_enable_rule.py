@@ -11,6 +11,7 @@ from ..api import (
     ExtensionFacts,
     ExtensionRule,
 )
+from .common import is_prefs_only_context
 
 
 class LifecyclePreEnableRule(ExtensionRule):
@@ -18,7 +19,9 @@ class LifecyclePreEnableRule(ExtensionRule):
 
     def check(self, facts: ExtensionFacts, ctx: ExtensionCheckContext) -> None:
         fact = facts.get_fact(PreEnableObservationFact)
-        for observations in fact.by_path.values():
+        for path, observations in fact.by_path.items():
+            if is_prefs_only_context(facts.model, path):
+                continue
             evidences = [observation.evidence for observation in observations]
             if evidences:
                 ctx.add_finding(

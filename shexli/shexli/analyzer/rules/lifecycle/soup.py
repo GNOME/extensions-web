@@ -17,6 +17,7 @@ from ..api import (
     ExtensionFacts,
     ExtensionRule,
 )
+from .common import is_prefs_only_context
 
 
 class LifecycleSoupRule(ExtensionRule):
@@ -27,6 +28,8 @@ class LifecycleSoupRule(ExtensionRule):
         abort_fact = facts.get_fact(SoupSessionAbortFact)
 
         for path, create_observations in create_fact.by_path.items():
+            if is_prefs_only_context(facts.model, path):
+                continue
             aborted_by_scope: dict[int, set[str]] = {}
             for observation in abort_fact.by_path.get(path, []):
                 aborted_by_scope.setdefault(observation.scope_id, set()).add(
