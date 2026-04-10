@@ -2828,7 +2828,7 @@ export default class Prefs {
         ext_source = """
 export default class E {
     disable() {
-        // unlock-dialog cleanup reason
+        // Session Modes: unlock-dialog cleanup reason
         this._thing = null;
     }
 }
@@ -2864,6 +2864,129 @@ export default class E {
         self.assertEqual(len(prefs_fact.get_preferences_widget_nodes), 1)
         self.assertEqual(len(prefs_fact.state_assignment_nodes), 1)
         self.assertEqual(len(prefs_fact.close_request_cleanup_nodes), 0)
+        self.assertEqual(len(session_modes_fact.disable_method_nodes), 1)
+        self.assertEqual(len(session_modes_fact.commented_disable_nodes), 1)
+
+    def test_block_comment_before_disable_is_observed(self) -> None:
+        ext_source = """
+export default class E {
+    /*
+    Session Modes:
+    This extension uses "unlock-dialog" session mode for some lockscreen features.
+    */
+    disable() {
+        this._thing = null;
+    }
+}
+""".strip()
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        ext_tree = parse_js(ext_source)
+        ext_path = Path("/tmp/extension.js")
+        ext_file_model = JSFileModelBuilder().build(
+            ext_path,
+            ext_source,
+            ext_tree.root_node,
+            mapper,
+        )
+        extension_model = ExtensionModel(
+            cross_file_index={},
+            root_dir=Path("/tmp"),
+            metadata=Metadata.missing(Path("/tmp/metadata.json")),
+            target_versions=set(),
+            js_file_count=1,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=mapper,
+            files={ext_path: ext_file_model},
+        )
+        store = FactStore(extension_model, file_fact_builders=FILE_FACT_BUILDERS)
+
+        session_modes_fact = store.get_file_fact(ext_path, SessionModesFact)
+
+        self.assertEqual(len(session_modes_fact.disable_method_nodes), 1)
+        self.assertEqual(len(session_modes_fact.commented_disable_nodes), 1)
+
+    def test_non_session_comment_before_disable_is_ignored(self) -> None:
+        ext_source = """
+export default class E {
+    /* cleanup reason */
+    disable() {
+        this._thing = null;
+    }
+}
+""".strip()
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        ext_tree = parse_js(ext_source)
+        ext_path = Path("/tmp/extension.js")
+        ext_file_model = JSFileModelBuilder().build(
+            ext_path,
+            ext_source,
+            ext_tree.root_node,
+            mapper,
+        )
+        extension_model = ExtensionModel(
+            cross_file_index={},
+            root_dir=Path("/tmp"),
+            metadata=Metadata.missing(Path("/tmp/metadata.json")),
+            target_versions=set(),
+            js_file_count=1,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=mapper,
+            files={ext_path: ext_file_model},
+        )
+        store = FactStore(extension_model, file_fact_builders=FILE_FACT_BUILDERS)
+
+        session_modes_fact = store.get_file_fact(ext_path, SessionModesFact)
+
+        self.assertEqual(len(session_modes_fact.disable_method_nodes), 1)
+        self.assertEqual(len(session_modes_fact.commented_disable_nodes), 0)
+
+    def test_unlock_comment_before_disable_is_observed(self) -> None:
+        ext_source = """
+export default class E {
+    /* unlock dialog cleanup */
+    disable() {
+        this._thing = null;
+    }
+}
+""".strip()
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        ext_tree = parse_js(ext_source)
+        ext_path = Path("/tmp/extension.js")
+        ext_file_model = JSFileModelBuilder().build(
+            ext_path,
+            ext_source,
+            ext_tree.root_node,
+            mapper,
+        )
+        extension_model = ExtensionModel(
+            cross_file_index={},
+            root_dir=Path("/tmp"),
+            metadata=Metadata.missing(Path("/tmp/metadata.json")),
+            target_versions=set(),
+            js_file_count=1,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=mapper,
+            files={ext_path: ext_file_model},
+        )
+        store = FactStore(extension_model, file_fact_builders=FILE_FACT_BUILDERS)
+
+        session_modes_fact = store.get_file_fact(ext_path, SessionModesFact)
+
         self.assertEqual(len(session_modes_fact.disable_method_nodes), 1)
         self.assertEqual(len(session_modes_fact.commented_disable_nodes), 1)
 

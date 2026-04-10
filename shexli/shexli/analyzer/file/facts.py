@@ -233,21 +233,39 @@ class SessionModesFactsCollector:
             source, root
         ) or legacy_entrypoint_methods(source, root)
         disable_methods = method_reachability(source, methods, ["disable"])
-        disable_texts = [
-            node_text(source, body)
-            for method in disable_methods
-            if (body := method.child_by_field_name("body")) is not None
-        ]
-
         commented_disable_nodes = [
-            method
-            for method, block in zip(disable_methods, disable_texts, strict=False)
-            if "//" in block[:400] or "/*" in block[:400]
+            comment_node
+            for method in disable_methods
+            if (comment_node := self._disable_comment_node(source, method)) is not None
         ]
         return SessionModesFacts(
             disable_method_nodes=disable_methods,
             commented_disable_nodes=commented_disable_nodes,
         )
+
+    def _disable_comment_node(self, source: str, method: Node) -> Node | None:
+        comment_node = method.prev_named_sibling
+        if (
+            comment_node is not None
+            and comment_node.type == "comment"
+            and self._is_session_comment(source, comment_node)
+        ):
+            return comment_node
+
+        body = method.child_by_field_name("body")
+        if body is None:
+            return None
+
+        for child in body.named_children:
+            if child.type == "comment" and self._is_session_comment(source, child):
+                return child
+            return None
+
+        return None
+
+    def _is_session_comment(self, source: str, comment_node: Node) -> bool:
+        comment_text = node_text(source, comment_node).lower()
+        return "session" in comment_text or "unlock" in comment_text
 
 
 class StylesheetBindingCollector:
