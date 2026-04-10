@@ -2,62 +2,64 @@
 
 from __future__ import annotations
 
-from tree_sitter import Node
-
-from ...ast import (
-    default_export_class_methods,
-    legacy_entrypoint_methods,
-    node_text,
-)
 from ...spec import R
-from ..context import CheckContext
-from ..engine import FileRule
-from ..lifecycle import method_reachability
+from ..facts.extension import (
+    SessionModesExtensionFact,
+)
+from .api import (
+    ExtensionCheckContext,
+    ExtensionFacts,
+    ExtensionRule,
+)
 
 
-class SessionModesRule(FileRule):
-    """FileRule: EGO_M_008 — unlock-dialog must be documented in disable()."""
+class SessionModesRule(ExtensionRule):
+    """ExtensionRule: EGO_M_008 — unlock-dialog must be documented in disable()."""
 
-    def __init__(self, metadata: dict | None) -> None:
-        self._metadata = metadata
+    required_extension_facts = (SessionModesExtensionFact,)
 
-    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
+    def check(self, facts: ExtensionFacts, ctx: ExtensionCheckContext) -> None:
+        metadata = facts.model.metadata
+        package_file = facts.model.package_file(
+            facts.model.EXTENSION_ENTRYPOINT_PACKAGE_PATH
+        )
+        path = (
+            package_file.path
+            if package_file is not None and package_file.path in facts.model.files
+            else None
+        )
+
         if (
-            ctx.path.name != "extension.js"
-            or "shell" not in ctx.file_contexts
-            or not self._metadata
-            or not self._metadata.get("session-modes")
-            or "unlock-dialog" not in self._metadata["session-modes"]
+            path is None
+            or not metadata.is_valid
+            or not metadata.session_modes
+            or "unlock-dialog" not in metadata.session_modes
         ):
             return
 
-        methods = default_export_class_methods(text, root) or legacy_entrypoint_methods(
-            text, root
-        )
-        disable_methods = method_reachability(text, methods, ["disable"])
+        session_fact = facts.get_fact(SessionModesExtensionFact)
+        disable_observation = session_fact.disable_observation
+        if (
+            disable_observation is not None
+            and disable_observation.comment_evidence is not None
+        ):
+            return
 
-        disable_texts = [
-            node_text(text, body)
-            for method in disable_methods
-            if (body := method.child_by_field_name("body")) is not None
-        ]
-        comment_near_disable = any(
-            "//" in block[:400] or "/*" in block[:400] for block in disable_texts
+        evidence = (
+            [disable_observation.method_evidence]
+            if disable_observation is not None
+            else [
+                ctx.display_evidence(
+                    path,
+                    snippet="unlock-dialog declared but disable() was not found",
+                )
+            ]
         )
-
-        if not comment_near_disable:
-            ctx.add_finding(
-                R.EGO_M_008,
-                (
-                    "Extensions using `unlock-dialog` should document "
-                    "the reason in `disable()` comments."
-                ),
-                [
-                    ctx.display_evidence(
-                        snippet=(
-                            "unlock-dialog declared but no nearby "
-                            "disable() comment found"
-                        )
-                    )
-                ],
-            )
+        ctx.add_finding(
+            R.EGO_M_008,
+            (
+                "Extensions using `unlock-dialog` should document "
+                "the reason in `disable()` comments."
+            ),
+            evidence,
+        )

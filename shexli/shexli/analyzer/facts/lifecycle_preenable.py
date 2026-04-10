@@ -13,9 +13,9 @@ from ...ast import (
     top_level_statements,
 )
 from ...models import Evidence
+from ..engine import PathMapper
 from ..evidence import node_evidence
-from ..paths import PathMapper
-from .base import (
+from ..lifecycle.base import (
     SOURCE_ADD_NAMES,
     TOP_LEVEL_FORBIDDEN_NEW_PREFIXES,
     iter_immediate_nodes,

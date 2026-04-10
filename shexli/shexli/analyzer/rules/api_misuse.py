@@ -2,87 +2,66 @@
 
 from __future__ import annotations
 
-from tree_sitter import Node
-
-from ...api_data import API
-from ...ast import (
-    call_arguments,
-    call_callee_parts,
-    identifier_name,
-    iter_nodes,
-)
-from ...models import Evidence
 from ...spec import R
-from ..context import CheckContext
-from ..engine import FileRule
-from ..spawn import extract_literal_string
+from ..engine import JSContext
+from ..facts.file import StylesheetBindingFact
+from .api import JSFileCheckContext, JSFileFacts, JSFileRule
+from .constants import (
+    EXTENSION_LOOKUP_CALL_NAMES,
+    SYNC_FILE_IO_CALL_NAMES,
+)
 
-_SHELL_SYNC_FILE_IO_CALL_NAMES = API.subprocess.sync_file_io_calls
-_EXTENSION_LOOKUP_CALL_NAMES = API.api_misuse.extension_lookup_calls
 
-class ApiMisuseRule(FileRule):
-    """FileRule: EGO_X_003/EGO_X_004/EGO_X_005/EGO_X_006 — run_dispose, sync IO,
+class ApiMisuseRule(JSFileRule):
+    """JSFileRule: EGO_X_003/EGO_X_004/EGO_X_005/EGO_X_006 — run_dispose, sync IO,
     stylesheet misuse, and extension lookup."""
 
-    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
-        run_dispose_evidences: list[Evidence] = []
-        sync_io_evidences: list[Evidence] = []
-        stylesheet_evidences: list[Evidence] = []
-        extension_lookup_evidences: list[Evidence] = []
-        stylesheet_aliases: set[str] = set()
+    required_file_facts = (StylesheetBindingFact,)
 
-        for node in iter_nodes(root):
-            if node.type == "variable_declarator":
-                name = node.child_by_field_name("name")
-                value = node.child_by_field_name("value")
-                if name is None or value is None or value.type != "call_expression":
-                    continue
+    def check(self, facts: JSFileFacts, ctx: JSFileCheckContext) -> None:
+        text = facts.model.text
+        stylesheet_binding_fact = facts.get_fact(StylesheetBindingFact)
 
-                call_name = ".".join(call_callee_parts(text, value))
-                args = call_arguments(value)
-                if (
-                    call_name.endswith(".get_child")
-                    and args
-                    and extract_literal_string(text, args[0]) == "stylesheet.css"
-                ):
-                    alias = identifier_name(text, name)
-                    if alias:
-                        stylesheet_aliases.add(alias)
-                continue
+        run_dispose_evidences = []
+        sync_io_evidences = []
+        stylesheet_evidences = []
+        extension_lookup_evidences = []
 
-            if node.type != "call_expression":
-                continue
+        # run_dispose
+        for site in facts.model.calls.find_suffix("run_dispose"):
+            run_dispose_evidences.append(ctx.node_evidence(text, site.node))
 
-            call_name = ".".join(call_callee_parts(text, node))
-            if "shell" in ctx.file_contexts and (
-                call_name in _SHELL_SYNC_FILE_IO_CALL_NAMES
-                or call_name.endswith(".load_contents")
-                or call_name.endswith(".load_bytes")
-            ):
-                sync_io_evidences.append(ctx.node_evidence(text, node))
+        # extension lookup
+        for call_str in EXTENSION_LOOKUP_CALL_NAMES:
+            parts = tuple(call_str.split("."))
+            for site in facts.model.calls.find(*parts):
+                extension_lookup_evidences.append(ctx.node_evidence(text, site.node))
 
-            if call_name.endswith(".run_dispose") or call_name == "run_dispose":
-                run_dispose_evidences.append(ctx.node_evidence(text, node))
+        if JSContext.EXTENSION in ctx.contexts:
+            # Synchronous file IO
+            seen: set[int] = set()
+            for call_str in SYNC_FILE_IO_CALL_NAMES:
+                parts = tuple(call_str.split("."))
+                for site in facts.model.calls.find(*parts):
+                    if id(site.node) not in seen:
+                        seen.add(id(site.node))
+                        sync_io_evidences.append(ctx.node_evidence(text, site.node))
+            for suffix in [("load_contents",), ("load_bytes",)]:
+                for site in facts.model.calls.find_suffix(*suffix):
+                    if id(site.node) not in seen:
+                        seen.add(id(site.node))
+                        sync_io_evidences.append(ctx.node_evidence(text, site.node))
 
-            if call_name in _EXTENSION_LOOKUP_CALL_NAMES:
-                extension_lookup_evidences.append(ctx.node_evidence(text, node))
-
-            if "shell" not in ctx.file_contexts or not call_name.endswith(
-                (".load_stylesheet", ".unload_stylesheet")
-            ):
-                continue
-
-            args = call_arguments(node)
-            if not args:
-                continue
-
-            if args[0].text is None:
-                continue
-
-            arg_text = args[0].text.decode("utf-8")
-            literal = extract_literal_string(text, args[0])
-            if literal == "stylesheet.css" or arg_text in stylesheet_aliases:
-                stylesheet_evidences.append(ctx.node_evidence(text, node))
+            # Stylesheet misuse
+            for suffix in [("load_stylesheet",), ("unload_stylesheet",)]:
+                for site in facts.model.calls.find_suffix(*suffix):
+                    if not site.arg_literals:
+                        continue
+                    if (
+                        site.arg_literals[0] == "stylesheet.css"
+                        or site.arg_identifiers[0] in stylesheet_binding_fact.bindings
+                    ):
+                        stylesheet_evidences.append(ctx.node_evidence(text, site.node))
 
         if run_dispose_evidences:
             ctx.add_finding(

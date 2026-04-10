@@ -2,21 +2,12 @@
 
 from __future__ import annotations
 
-from tree_sitter import Node
-
-from ...ast import iter_nodes
 from ...spec import R
-from ..context import CheckContext
-from ..engine import FileRule
+from ..facts.file import FileShapeFact
+from .api import JSFileCheckContext, JSFileFacts, JSFileRule
 
 # Files smaller than this are not checked to avoid false positives on stubs.
 _MIN_FILE_BYTES = 500
-
-# Single-character identifiers that are legitimate in normal JS code.
-# Includes gettext alias (_), loop variables, common short names.
-_CONVENTIONAL_SINGLE = frozenset({
-    "_", "i", "j", "k", "n", "x", "y", "e", "t", "s", "v", "r", "p",
-})
 
 # Fraction of non-conventional short (1–2 char) identifiers above which
 # the file is considered name-mangled.
@@ -30,74 +21,70 @@ _MINIFIED_LINE_BYTES = 500
 _MINIFIED_MAX_LINES = 4
 
 
-class ObfuscationRule(FileRule):
-    """FileRule: EGO_A_001 — minification / obfuscation heuristic."""
+class ObfuscationRule(JSFileRule):
+    """JSFileRule: EGO_A_001 — minification / obfuscation heuristic."""
 
-    def check(self, root: Node, text: str, ctx: CheckContext) -> None:
-        if len(text.encode()) < _MIN_FILE_BYTES:
+    required_file_facts = (FileShapeFact,)
+
+    def check(self, facts: JSFileFacts, ctx: JSFileCheckContext) -> None:
+        file_shape = facts.get_fact(FileShapeFact)
+        if file_shape.file_size_bytes < _MIN_FILE_BYTES:
             return
 
-        self._check_name_mangling(root, ctx)
-        self._check_minified_layout(text, ctx)
+        _check_name_mangling(file_shape, ctx)
+        _check_minified_layout(file_shape, ctx)
 
-    def _check_name_mangling(self, root: Node, ctx: CheckContext) -> None:
-        idents = [
-            node.text.decode()
-            for node in iter_nodes(root)
-            if node.type == "identifier" and node.text is not None
-        ]
-        if len(idents) < _MIN_IDENT_COUNT:
-            return
 
-        # Exclude conventional single-char names before scoring.
-        scored = [i for i in idents if i not in _CONVENTIONAL_SINGLE]
-        if not scored:
-            return
+def _check_name_mangling(file_shape: FileShapeFact, ctx: JSFileCheckContext) -> None:
+    if file_shape.scored_identifier_count < _MIN_IDENT_COUNT:
+        return
 
-        short = sum(1 for i in scored if len(i) <= 2)
-        ratio = short / len(scored)
-        if ratio < _SHORT_IDENT_RATIO:
-            return
+    ratio = file_shape.short_identifier_ratio
+    avg_len = file_shape.avg_identifier_length
+    if ratio is None or avg_len is None:
+        return
 
-        avg_len = sum(len(i) for i in scored) / len(scored)
-        ctx.add_finding(
-            R.EGO_A_001,
-            (
-                f"File appears obfuscated: {ratio:.0%} of identifiers are "
-                f"1–2 characters (avg length {avg_len:.1f})."
-            ),
-            [
-                ctx.display_evidence(
-                    snippet=(
-                        f"short identifier ratio: {ratio:.0%}, "
-                        f"identifiers scored: {len(scored)}"
-                    )
+    if ratio < _SHORT_IDENT_RATIO:
+        return
+
+    ctx.add_finding(
+        R.EGO_A_001,
+        (
+            f"File appears obfuscated: {ratio:.0%} of identifiers are "
+            f"1–2 characters (avg length {avg_len:.1f})."
+        ),
+        [
+            ctx.display_evidence(
+                snippet=(
+                    f"short identifier ratio: {ratio:.0%}, "
+                    f"identifiers scored: {file_shape.scored_identifier_count}"
                 )
-            ],
-        )
+            )
+        ],
+    )
 
-    def _check_minified_layout(self, text: str, ctx: CheckContext) -> None:
-        lines = text.splitlines()
-        non_empty = [l for l in lines if l.strip()]
-        if len(non_empty) > _MINIFIED_MAX_LINES:
-            return
 
-        file_bytes = len(text.encode())
-        if file_bytes < _MINIFIED_LINE_BYTES * _MINIFIED_MAX_LINES:
-            return
+def _check_minified_layout(file_shape: FileShapeFact, ctx: JSFileCheckContext) -> None:
+    if file_shape.non_empty_line_count > _MINIFIED_MAX_LINES:
+        return
 
-        ctx.add_finding(
-            R.EGO_A_001,
-            (
-                f"File appears minified: {file_bytes} bytes "
-                f"compressed into {len(non_empty)} line(s)."
-            ),
-            [
-                ctx.display_evidence(
-                    snippet=(
-                        f"file size: {file_bytes} bytes, "
-                        f"non-empty lines: {len(non_empty)}"
-                    )
+    file_bytes = file_shape.file_size_bytes
+    if file_bytes < _MINIFIED_LINE_BYTES * _MINIFIED_MAX_LINES:
+        return
+
+    ctx.add_finding(
+        R.EGO_A_001,
+        (
+            f"File appears minified: {file_bytes} bytes "
+            f"compressed into {file_shape.non_empty_line_count} line(s)."
+        ),
+        [
+            ctx.display_evidence(
+                snippet=(
+                    "file size: "
+                    f"{file_bytes} bytes, non-empty lines: "
+                    f"{file_shape.non_empty_line_count}"
                 )
-            ],
-        )
+            )
+        ],
+    )

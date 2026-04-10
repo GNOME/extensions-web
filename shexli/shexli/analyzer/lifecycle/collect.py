@@ -17,8 +17,8 @@ from ...ast import (
     variable_declarator_name,
     variable_declarator_value,
 )
+from ..engine import PathMapper
 from ..evidence import node_evidence
-from ..paths import PathMapper
 from .base import (
     SELF_OWNER,
     SOURCE_ADD_NAMES,

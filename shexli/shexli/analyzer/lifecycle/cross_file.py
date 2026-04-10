@@ -26,8 +26,8 @@ from ...ast import (
     parse_js,
     top_level_function_methods,
 )
+from ..engine import PathMapper
 from ..evidence import node_evidence
-from ..paths import PathMapper
 from .base import (
     SOURCE_ADD_NAMES,
     SOURCE_REMOVE_NAMES,
@@ -52,7 +52,9 @@ if TYPE_CHECKING:
     from .types import CrossFileIndex
 
 
-def _local_import_names(ext_source: str, ext_root: Node) -> dict[str, tuple[str, str]]:
+def _local_import_names(
+    extension_source: str, extension_root: Node
+) -> dict[str, tuple[str, str]]:
     """Return ``{local_name: (exported_name, module_path)}`` for relative imports.
 
     For ``import { connectAll as start } from './mod.js'`` the local name is
@@ -61,7 +63,7 @@ def _local_import_names(ext_source: str, ext_root: Node) -> dict[str, tuple[str,
     call-site matching works even when imports are aliased.
     """
     result: dict[str, tuple[str, str]] = {}
-    for child in ext_root.children:
+    for child in extension_root.children:
         if child.type != "import_statement":
             continue
         module_node = None
@@ -71,7 +73,9 @@ def _local_import_names(ext_source: str, ext_root: Node) -> dict[str, tuple[str,
         if module_node is None:
             continue
         module = (
-            ext_source.encode("utf-8")[module_node.start_byte : module_node.end_byte]
+            extension_source.encode("utf-8")[
+                module_node.start_byte : module_node.end_byte
+            ]
             .decode("utf-8")
             .strip("\"'")
         )
@@ -90,16 +94,18 @@ def _local_import_names(ext_source: str, ext_root: Node) -> dict[str, tuple[str,
                                 alias_node if alias_node is not None else exported_node
                             )
                             if exported_node is not None and local_node is not None:
-                                exported = identifier_name(ext_source, exported_node)
-                                local = identifier_name(ext_source, local_node)
+                                exported = identifier_name(
+                                    extension_source, exported_node
+                                )
+                                local = identifier_name(extension_source, local_node)
                                 if exported and local:
                                     result[local] = (exported, module)
     return result
 
 
 def build_cross_file_index(
-    ext_source: str,
-    ext_root: Node,
+    extension_source: str,
+    extension_root: Node,
     pkg_dir: Path,
     parsed_helpers: dict[Path, tuple[str, Node]] | None = None,
 ) -> CrossFileIndex:
@@ -109,7 +115,7 @@ def build_cross_file_index(
     works even when imports are aliased (``import { foo as bar }``).
     """
     index: CrossFileIndex = {}
-    local_names = _local_import_names(ext_source, ext_root)
+    local_names = _local_import_names(extension_source, extension_root)
     if not local_names:
         return index
 
@@ -211,24 +217,24 @@ def build_cross_file_indices_per_file(
 def collect_cross_file_resources(
     tracker: ResourceTracker,
     index: CrossFileIndex,
-    ext_source: str,
-    ext_methods: list[Node],
+    extension_source: str,
+    extension_methods: list[Node],
     mapper: PathMapper,
     destroyable_classes: set[str],
 ) -> None:
     """
-    For each call ``fn(this)`` found in *ext_methods* where ``fn`` is in
+    For each call ``fn(this)`` found in *extension_methods* where ``fn`` is in
     *index*, process the helper body and record signals/sources/objects
     assigned to the ``this``-proxy parameter.
     """
-    for method in ext_methods:
+    for method in extension_methods:
         body = method.child_by_field_name("body")
         if body is None:
             continue
         for node in iter_nodes(body):
             if node.type != "call_expression":
                 continue
-            parts = call_callee_parts(ext_source, node)
+            parts = call_callee_parts(extension_source, node)
             if len(parts) != 1 or parts[0] not in index:
                 continue
             args = call_arguments(node)
@@ -308,22 +314,22 @@ def _scan_helper_resources(
 def collect_cross_file_cleanup(
     tracker: ResourceTracker,
     index: CrossFileIndex,
-    ext_source: str,
-    ext_methods: list[Node],
+    extension_source: str,
+    extension_methods: list[Node],
 ) -> None:
     """
-    For each call ``fn(this)`` in *ext_methods* where ``fn`` is in *index*,
+    For each call ``fn(this)`` in *extension_methods* where ``fn`` is in *index*,
     process the helper body and record signals/sources released via the
     ``this``-proxy parameter.
     """
-    for method in ext_methods:
+    for method in extension_methods:
         body = method.child_by_field_name("body")
         if body is None:
             continue
         for node in iter_nodes(body):
             if node.type != "call_expression":
                 continue
-            parts = call_callee_parts(ext_source, node)
+            parts = call_callee_parts(extension_source, node)
             if len(parts) != 1 or parts[0] not in index:
                 continue
             args = call_arguments(node)
@@ -356,14 +362,15 @@ def _scan_helper_cleanup(tracker: ResourceTracker, entry: CrossFileEntry) -> Non
             call_name = ".".join(call_callee_parts(entry.source, node))
             args = call_arguments(node)
 
-            # obj.disconnect(ext._field)  or  obj.disconnect(ext._field, ...)
+            # obj.disconnect(extension._field) or
+            # obj.disconnect(extension._field, ...)
             if call_name.endswith(".disconnect") or call_name == "disconnect":
                 for arg in args:
                     parts = member_expression_parts(entry.source, arg)
                     if len(parts) == 2 and parts[0] == this_proxy:
                         record_resource(tracker.signals, parts[1])
 
-            # GLib.source_remove(ext._field)
+            # GLib.source_remove(extension._field)
             if call_name in SOURCE_REMOVE_NAMES:
                 for arg in args:
                     parts = member_expression_parts(entry.source, arg)

@@ -2,31 +2,19 @@
 
 from __future__ import annotations
 
-from tree_sitter import Node
-
-from ...ast import call_callee_parts
 from ...spec import R
-from ..context import CheckContext
-from ..engine import NodeRule
+from .api import JSFileCheckContext, JSFileFacts, JSFileRule
 
 
-class ClipboardRule(NodeRule):
-    """NodeRule: EGO_A_005 — direct clipboard access via St.Clipboard.get_default()."""
+class ClipboardRule(JSFileRule):
+    """JSFileRule: EGO_A_005 — St.Clipboard.get_default() direct access."""
 
-    node_types: frozenset[str] = frozenset({"call_expression"})
-
-    def __init__(self) -> None:
-        self._evidences: list = []
-
-    def visit(self, node: Node, text: str, ctx: CheckContext) -> None:
-        if call_callee_parts(text, node) == ["St", "Clipboard", "get_default"]:
-            self._evidences.append(ctx.node_evidence(text, node))
-
-    def finalize(self, root: Node, text: str, ctx: CheckContext) -> None:
-        if self._evidences:
+    def check(self, facts: JSFileFacts, ctx: JSFileCheckContext) -> None:
+        sites = facts.model.calls.find("St", "Clipboard", "get_default")
+        if sites:
             ctx.add_finding(
                 R.EGO_A_005,
                 "Direct clipboard access via `St.Clipboard.get_default()` "
                 "requires reviewer scrutiny.",
-                self._evidences,
+                [ctx.node_evidence(facts.model.text, s.node) for s in sites],
             )

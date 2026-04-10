@@ -2,26 +2,36 @@
 
 from __future__ import annotations
 
+import stat
 import tempfile
 import zipfile
 from collections import Counter
 from pathlib import Path
+from typing import Any, cast
 
+from ..ast import parse_js
 from ..models import AnalysisLimits, AnalysisResult, Finding
-from ..spec import RULES_BY_ID, SPEC_VERSION, R
-from .context import CheckContext
-from .evidence import display_evidence
-from .js import check_js_file
-from .lifecycle.cross_file import build_cross_file_indices_per_file
-from .metadata import check_metadata, metadata_target_versions, parse_metadata
-from .package import (
-    check_gsettings_usage,
-    check_package_files,
-    check_schema_files,
-    metadata_path,
+from ..spec import RULES, SPEC_VERSION
+from .engine import (
+    ExtensionModel,
+    JSContext,
+    PackageFile,
+    PathMapper,
+    PathMode,
 )
-from .paths import PathMapper, PathMode
+from .evidence import display_evidence, import_evidence, node_evidence
+from .facts import EXTENSION_FACT_BUILDERS, FILE_FACT_BUILDERS, FactStore
+from .file import JSFileModelBuilder
+from .lifecycle.cross_file import build_cross_file_indices_per_file
+from .metadata import metadata_target_versions, parse_metadata
 from .reachability import reachable_js_contexts
+from .rules import EXTENSION_RULES, JS_FILE_RULES
+from .rules.api import (
+    ExtensionCheckContext,
+    ExtensionFacts,
+    JSFileCheckContext,
+    JSFileFacts,
+)
 from .safety import read_text_with_limit, validate_archive, walk_regular_files
 
 
@@ -68,6 +78,46 @@ def _dedupe_findings(findings: list[Finding]) -> list[Finding]:
     return [merged[key] for key in order]
 
 
+def _check_js_file(
+    ctx: JSFileCheckContext,
+    facts: JSFileFacts,
+    fact_store: FactStore,
+    target_versions: set[int],
+    contexts: set[JSContext],
+) -> None:
+    ctx.target_versions = target_versions
+    ctx.contexts = contexts
+
+    for rule in JS_FILE_RULES:
+        if rule.applies(ctx):
+            for fact_type in rule.required_file_facts:
+                fact_store.get_file_fact(facts.model.path, fact_type)
+            rule.check(facts, ctx)
+
+
+def _build_package_files(
+    files: list[Path],
+    mapper: PathMapper,
+) -> list[PackageFile]:
+    package_files: list[PackageFile] = []
+    for path in files:
+        try:
+            mode = path.stat().st_mode
+        except OSError:
+            is_executable = False
+        else:
+            is_executable = stat.S_ISREG(mode) and bool(mode & stat.S_IXUSR)
+        package_files.append(
+            PackageFile(
+                path=path,
+                package_path=mapper.package_path(path),
+                suffix=path.suffix.lower(),
+                is_executable=is_executable,
+            )
+        )
+    return package_files
+
+
 def analyze_path(
     input_path: str | Path,
     path_mode: PathMode = "cli",
@@ -102,61 +152,106 @@ def analyze_path(
             is_zip=is_zip,
         )
         findings: list[Finding] = []
-        metadata_file = metadata_path(root)
-
-        if not metadata_file.exists():
-            findings.append(
-                RULES_BY_ID[R.EGO_M_001].make_finding(
-                    "Missing required file `metadata.json`."
-                )
-            )
-            metadata = None
-        else:
-            metadata = parse_metadata(metadata_file, findings, mapper, limits)
-            if metadata is not None:
-                check_metadata(metadata, metadata_file, findings, mapper)
-
+        metadata = parse_metadata(
+            root / ExtensionModel.METADATA_PACKAGE_PATH, mapper, limits
+        )
         target_versions = metadata_target_versions(metadata)
         files = walk_regular_files(root, limits)
+        package_files = _build_package_files(files, mapper)
         js_files = [path for path in files if path.suffix in {".js", ".mjs"}]
         js_contexts = reachable_js_contexts(root, js_files, limits)
         analyzed_js_files = sorted(js_contexts)
         unreachable_js_files = sorted(set(js_files) - set(analyzed_js_files))
 
-        check_package_files(files, findings, mapper, limits, target_versions)
-        check_schema_files(files, findings, mapper, limits)
-        check_gsettings_usage(js_files, files, findings, limits)
-        cross_file_indices = build_cross_file_indices_per_file(analyzed_js_files)
-
-        if unreachable_js_files:
-            findings.append(
-                RULES_BY_ID[R.EGO_P_007].make_finding(
-                    (
-                        "Some JavaScript files are not reachable from "
-                        "`extension.js` or `prefs.js` imports."
-                    ),
-                    [
-                        display_evidence(path, mapper)
-                        for path in unreachable_js_files[:20]
-                    ],
-                )
-            )
-
+        file_models = {}
         for path in analyzed_js_files:
             try:
                 text = read_text_with_limit(path, limits, encoding="utf-8")
             except UnicodeDecodeError:
                 continue
 
-            ctx = CheckContext(path, mapper, findings)
-            ctx.cross_file_index = cross_file_indices.get(path)
-            check_js_file(
+            root_node = parse_js(text).root_node
+            file_models[path] = JSFileModelBuilder().build(
+                path, text, root_node, mapper
+            )
+
+        extension_model = ExtensionModel(
+            cross_file_index=build_cross_file_indices_per_file(sorted(file_models)),
+            root_dir=root,
+            metadata=metadata,
+            target_versions=target_versions,
+            js_file_count=len(file_models),
+            entrypoint_contexts=js_contexts,
+            unreachable_js_files=unreachable_js_files,
+            package_files=package_files,
+            all_files=files,
+            js_files=js_files,
+            limits=limits,
+            mapper=mapper,
+            files=file_models,
+        )
+        fact_store = FactStore(
+            extension_model,
+            file_fact_builders=FILE_FACT_BUILDERS,
+            extension_fact_builders=EXTENSION_FACT_BUILDERS,
+        )
+
+        for path in sorted(file_models):
+            ctx = JSFileCheckContext(
+                path=path,
+                make_finding=lambda rule_id, message, evidence=None: RULES[
+                    rule_id
+                ].make_finding(message, evidence),
+                add_finding=findings.append,
+                display_evidence=lambda *, line=None, snippet="", path=path: (
+                    display_evidence(path, mapper, line=line, snippet=snippet)
+                ),
+                import_evidence=lambda item, path=path: import_evidence(
+                    path, mapper, item
+                ),
+                node_evidence=lambda source, node, path=path: node_evidence(
+                    path,
+                    source,
+                    cast(Any, node),
+                    mapper,
+                ),
+            )
+            file_facts = JSFileFacts(
+                file_models[path],
+                lambda fact_type, path=path, fact_store=fact_store: (
+                    fact_store.get_file_fact(path, fact_type)
+                ),
+            )
+            _check_js_file(
                 ctx,
-                text,
-                metadata,
+                file_facts,
+                fact_store,
                 target_versions,
                 js_contexts[path],
             )
+
+        extension_ctx = ExtensionCheckContext(
+            make_finding=lambda rule_id, message, evidence=None: RULES[
+                rule_id
+            ].make_finding(message, evidence),
+            add_finding=findings.append,
+            display_evidence=lambda path, mapper=mapper: (
+                lambda *, line=None, snippet="": display_evidence(
+                    path, mapper, line=line, snippet=snippet
+                )
+            ),
+        )
+        extension_facts = ExtensionFacts(
+            extension_model,
+            lambda fact_type, fact_store=fact_store: fact_store.get_extension_fact(
+                fact_type
+            ),
+        )
+        for rule in EXTENSION_RULES:
+            if rule.applies(extension_model):
+                for fact_type in rule.required_extension_facts:
+                    fact_store.get_extension_fact(fact_type)
+                rule.check(extension_facts, extension_ctx)
 
         findings = _dedupe_findings(findings)
         severity_counts = Counter(finding.severity for finding in findings)
@@ -169,9 +264,9 @@ def analyze_path(
         artifacts = {
             "root": mapper.display_root(),
             "metadata_path": (
-                mapper.display_path(metadata_file) if metadata_file.exists() else None
+                mapper.display_path(metadata.path) if metadata.exists else None
             ),
-            "js_file_count": len(analyzed_js_files),
+            "js_file_count": len(file_models),
             "file_count": len(files),
             "limits": {
                 "max_files": limits.max_files,

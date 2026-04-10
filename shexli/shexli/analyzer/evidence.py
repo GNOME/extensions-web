@@ -8,7 +8,7 @@ from tree_sitter import Node
 
 from ..ast import node_text
 from ..models import Evidence
-from .paths import PathMapper
+from .engine import PathMapper
 
 
 def format_node_snippet(source: str, node: Node, *, limit: int = 300) -> str:

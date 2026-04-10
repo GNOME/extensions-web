@@ -3,13 +3,70 @@
 import tempfile
 import unittest
 import zipfile
+from dataclasses import dataclass
 from pathlib import Path
+from unittest.mock import patch
 
-from shexli import AnalysisLimits, analyze_path
+from shexli.analyzer.engine import ExtensionModel, PathMapper
 from shexli.analyzer.evidence import node_evidence
+from shexli.analyzer.facts import (
+    EXTENSION_FACT_BUILDERS,
+    FILE_FACT_BUILDERS,
+    ExtensionFactBuilder,
+    FactStore,
+    JSFileFactBuilder,
+)
+from shexli.analyzer.facts import (
+    lifecycle as lifecycle_facts,
+)
+from shexli.analyzer.facts.extension import (
+    ExtensionArtifactFact,
+    GSettingsUsageFact,
+    PrefsExtensionFact,
+    SessionModesExtensionFact,
+)
+from shexli.analyzer.facts.file import (
+    PrefsFact,
+    SessionModesFact,
+    SpawnWrapperFact,
+    StylesheetBindingFact,
+)
+from shexli.analyzer.facts.lifecycle import (
+    ObjectCreateFact,
+    ObjectDestroyFact,
+    PreEnableObservationFact,
+    RefAssignFact,
+    RefReleaseFact,
+    SignalConnectFact,
+    SignalDisconnectFact,
+    SoupSessionAbortFact,
+    SoupSessionCreateFact,
+    SourceAddFact,
+    SourceRecreateFact,
+    SourceRemoveFact,
+)
+from shexli.analyzer.file import JSFileModelBuilder
 from shexli.analyzer.lifecycle.cross_file import build_cross_file_indices_per_file
-from shexli.analyzer.paths import PathMapper
+from shexli.analyzer.metadata import Metadata
+from shexli.analyzer.rules.api import JSFileFacts
+from shexli.analyzer.rules.api_misuse import ApiMisuseRule
+from shexli.analyzer.rules.artifact import ExtensionArtifactRule
+from shexli.analyzer.rules.imports import ImportsGiRule
+from shexli.analyzer.rules.lifecycle import (
+    LifecycleObjectsRule,
+    LifecyclePreEnableRule,
+    LifecycleReleaseRule,
+    LifecycleSignalsRule,
+    LifecycleSoupRule,
+    LifecycleSourcesRule,
+)
+from shexli.analyzer.rules.metadata import MetadataValidationRule
+from shexli.analyzer.rules.prefs import PrefsRule
+from shexli.analyzer.rules.session_modes import SessionModesRule
+from shexli.analyzer.rules.subprocess import SubprocessRule
 from shexli.ast import iter_nodes, parse_js
+from shexli.cli import analyze_path
+from shexli.models import AnalysisLimits
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
@@ -2314,9 +2371,56 @@ class ParseVersionStringTest(unittest.TestCase):
             self.parse("not-a-version")
 
 
+class MetadataParsingTest(unittest.TestCase):
+    def setUp(self) -> None:
+        from shexli.analyzer.metadata import parse_metadata
+
+        self.parse_metadata = parse_metadata
+
+    def test_reflective_fields_expose_typed_known_values(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            metadata_path = root / "metadata.json"
+            metadata_path.write_text(
+                (
+                    '{"uuid":"example@test","shell-version":["46"],'
+                    '"session-modes":["user"],'
+                    '"donations":{"custom":"https://example.com"},'
+                    '"extra":true}'
+                ),
+                encoding="utf-8",
+            )
+            mapper = PathMapper(root, root, "embedded", False)
+
+            metadata = self.parse_metadata(metadata_path, mapper, AnalysisLimits())
+
+        self.assertTrue(metadata.is_valid)
+        self.assertEqual(metadata.uuid, "example@test")
+        self.assertEqual(metadata.shell_versions, ["46"])
+        self.assertEqual(metadata.session_modes, ["user"])
+        self.assertEqual(metadata.donations, {"custom": "https://example.com"})
+        self.assertEqual(metadata.unknown_fields, {"extra": True})
+        self.assertIsNotNone(metadata.raw_json)
+
+    def test_top_level_non_object_is_a_shape_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            metadata_path = root / "metadata.json"
+            metadata_path.write_text('["not-an-object"]', encoding="utf-8")
+            mapper = PathMapper(root, root, "embedded", False)
+
+            metadata = self.parse_metadata(metadata_path, mapper, AnalysisLimits())
+
+        self.assertFalse(metadata.is_valid)
+        self.assertIsNone(metadata.raw_json)
+        self.assertIsNotNone(metadata.parse_failure)
+        assert metadata.parse_failure is not None
+        self.assertEqual(metadata.parse_failure.kind, "shape")
+
+
 class ShebangInterpreterTest(unittest.TestCase):
     def setUp(self) -> None:
-        from shexli.analyzer.package import _shebang_interpreter
+        from shexli.analyzer.facts.extension import _shebang_interpreter
 
         self.interp = _shebang_interpreter
 
@@ -2417,6 +2521,711 @@ class DonationUrlValidationTest(unittest.TestCase):
     def test_non_http_scheme_rejected(self) -> None:
         rule_ids = self._run_with_donations({"custom": "ftp://example.com/donate"})
         self.assertIn("EGO-M-007", rule_ids)
+
+
+class FileModelBuilderTest(unittest.TestCase):
+    def test_call_and_new_expr_indices_keep_tuple_raw_parts_and_full_lists(
+        self,
+    ) -> None:
+        source = """
+import St from "gi://St";
+import Gio from "gi://Gio";
+
+const Clipboard = St.Clipboard;
+const css = theme.get_child("stylesheet.css");
+const GLibLegacy = imports._gi.GLib;
+
+function runProcess(argv) {
+    return Gio.Subprocess.new(argv, Gio.SubprocessFlags.NONE);
+}
+
+export default class E {
+    enable() {
+        Clipboard.get_default();
+        load_stylesheet(css);
+        runProcess(["sudo", "true"]);
+        new St.BoxLayout();
+    }
+}
+""".strip()
+        tree = parse_js(source)
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        model = JSFileModelBuilder().build(
+            Path("/tmp/extension.js"),
+            source,
+            tree.root_node,
+            mapper,
+        )
+
+        self.assertEqual(len(model.calls.all_calls), 5)
+        self.assertEqual(len(model.new_expressions.all_new_exprs), 1)
+        self.assertEqual(model.declarations.functions["runProcess"].name, "runProcess")
+        self.assertEqual(
+            model.declarations.classes["E"].superclass_parts,
+            [],
+        )
+        self.assertEqual(
+            model.declarations.classes["E"].methods["enable"].name,
+            "enable",
+        )
+
+        call_site = model.calls.find("St", "Clipboard", "get_default")[0]
+        self.assertEqual(call_site.raw_callee, ("Clipboard", "get_default"))
+        self.assertEqual(call_site.callee, ("St", "Clipboard", "get_default"))
+        self.assertEqual(call_site.guard_identifiers, frozenset())
+
+        spawn_site = model.calls.find("runProcess")[0]
+        self.assertEqual(spawn_site.literal_argv, None)
+        self.assertEqual(spawn_site.first_arg_argv_head, "sudo")
+
+        new_expr_site = model.new_expressions.all_new_exprs[0]
+        self.assertEqual(new_expr_site.raw_ctor, ("St", "BoxLayout"))
+        self.assertEqual(new_expr_site.ctor, ("St", "BoxLayout"))
+
+    def test_call_site_tracks_guard_identifiers(self) -> None:
+        source = """
+export default class E {
+    enable() {
+        if (this._debug) {
+            console.log("guarded");
+        }
+
+        console.log("plain");
+    }
+}
+""".strip()
+        tree = parse_js(source)
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        model = JSFileModelBuilder().build(
+            Path("/tmp/extension.js"),
+            source,
+            tree.root_node,
+            mapper,
+        )
+
+        log_sites = model.calls.find("console", "log")
+        self.assertEqual(len(log_sites), 2)
+        self.assertEqual(
+            [site.guard_identifiers for site in log_sites],
+            [frozenset({"this", "_debug"}), frozenset()],
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class _StringFileFact:
+    value: str
+
+
+@dataclass(frozen=True, slots=True)
+class _IntExtensionFact:
+    value: int
+
+
+@dataclass(frozen=True, slots=True)
+class _TupleFileFact:
+    value: tuple[str, int]
+
+
+class _CountingExtensionFactBuilder(ExtensionFactBuilder[_IntExtensionFact]):
+    fact_type = _IntExtensionFact
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def build(self, ctx) -> _IntExtensionFact:
+        self.calls += 1
+        return _IntExtensionFact(value=ctx.extension.js_file_count)
+
+
+class _CountingFileFactBuilder(JSFileFactBuilder[_StringFileFact]):
+    fact_type = _StringFileFact
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def build(self, ctx) -> _StringFileFact:
+        self.calls += 1
+        return _StringFileFact(value=ctx.file.path.name)
+
+
+class _DependentFileFactBuilder(JSFileFactBuilder[_TupleFileFact]):
+    fact_type = _TupleFileFact
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def build(self, ctx) -> _TupleFileFact:
+        self.calls += 1
+        name_fact = ctx.get_file_fact(_StringFileFact)
+        count_fact = ctx.get_extension_fact(_IntExtensionFact)
+        return _TupleFileFact(value=(name_fact.value, count_fact.value))
+
+
+class FactStoreTest(unittest.TestCase):
+    def test_fact_store_builds_file_and_extension_facts_lazily_and_caches(self) -> None:
+        source = "export default class E { enable() {} }"
+        tree = parse_js(source)
+        path = Path("/tmp/extension.js")
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        model = JSFileModelBuilder().build(path, source, tree.root_node, mapper)
+        extension_model = ExtensionModel(
+            cross_file_index={},
+            root_dir=Path("/tmp"),
+            metadata=Metadata.missing(Path("/tmp/metadata.json")),
+            target_versions=set(),
+            js_file_count=1,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False),
+            files={path: model},
+        )
+
+        file_builder = _CountingFileFactBuilder()
+        extension_builder = _CountingExtensionFactBuilder()
+        dependent_builder = _DependentFileFactBuilder()
+        store = FactStore(
+            extension_model,
+            file_fact_builders={
+                _StringFileFact: file_builder,
+                _TupleFileFact: dependent_builder,
+            },
+            extension_fact_builders={_IntExtensionFact: extension_builder},
+        )
+
+        fact = store.get_file_fact(path, _TupleFileFact)
+        self.assertEqual(fact.value, ("extension.js", 1))
+        self.assertEqual(file_builder.calls, 1)
+        self.assertEqual(extension_builder.calls, 1)
+        self.assertEqual(dependent_builder.calls, 1)
+
+        again = store.get_file_fact(path, _TupleFileFact)
+        extension_again = store.get_extension_fact(_IntExtensionFact)
+        self.assertIs(again, fact)
+        self.assertIs(
+            extension_again,
+            store.get_extension_fact(_IntExtensionFact),
+        )
+        self.assertEqual(file_builder.calls, 1)
+        self.assertEqual(extension_builder.calls, 1)
+        self.assertEqual(dependent_builder.calls, 1)
+
+
+class CheckContextFactAccessTest(unittest.TestCase):
+    def test_facts_surface_resolves_file_and_extension_facts_via_store(self) -> None:
+        source = "export default class E { enable() {} }"
+        tree = parse_js(source)
+        path = Path("/tmp/extension.js")
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        model = JSFileModelBuilder().build(path, source, tree.root_node, mapper)
+        extension_model = ExtensionModel(
+            cross_file_index={},
+            root_dir=Path("/tmp"),
+            metadata=Metadata.missing(Path("/tmp/metadata.json")),
+            target_versions=set(),
+            js_file_count=1,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False),
+            files={path: model},
+        )
+        store = FactStore(
+            extension_model,
+            file_fact_builders={_StringFileFact: _CountingFileFactBuilder()},
+            extension_fact_builders={
+                _IntExtensionFact: _CountingExtensionFactBuilder()
+            },
+        )
+        facts = JSFileFacts(model, lambda ft: store.get_file_fact(path, ft))
+
+        self.assertEqual(facts.get_fact(_StringFileFact).value, "extension.js")
+
+
+class FileFactBuilderTest(unittest.TestCase):
+    def test_usage_style_file_fact_builders_collect_typed_facts(self) -> None:
+        source = """
+import Gio from "gi://Gio";
+
+const css = theme.get_child("stylesheet.css");
+const GLibLegacy = imports._gi.GLib;
+
+function runProcess(argv) {
+    return Gio.Subprocess.new(argv, Gio.SubprocessFlags.NONE);
+}
+""".strip()
+        tree = parse_js(source)
+        path = Path("/tmp/helper.js")
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        model = JSFileModelBuilder().build(path, source, tree.root_node, mapper)
+        extension_model = ExtensionModel(
+            cross_file_index={},
+            root_dir=Path("/tmp"),
+            metadata=Metadata.missing(Path("/tmp/metadata.json")),
+            target_versions=set(),
+            js_file_count=1,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False),
+            files={path: model},
+        )
+        store = FactStore(extension_model, file_fact_builders=FILE_FACT_BUILDERS)
+
+        stylesheet_fact = store.get_file_fact(path, StylesheetBindingFact)
+        spawn_wrapper_fact = store.get_file_fact(path, SpawnWrapperFact)
+        imports_gi_sites = model.member_expressions.find_prefix("imports", "_gi")
+
+        self.assertEqual(stylesheet_fact.bindings, frozenset({"css"}))
+        self.assertEqual(spawn_wrapper_fact.wrappers, frozenset({"runProcess"}))
+        self.assertTrue(
+            any(site.parts == ("imports", "_gi", "GLib") for site in imports_gi_sites)
+        )
+
+    def test_policy_style_file_fact_builders_collect_typed_facts(self) -> None:
+        prefs_source = """
+export default class Prefs {
+    fillPreferencesWindow(window) {
+        this._dialog = new Dialog();
+    }
+
+    getPreferencesWidget() {
+        return null;
+    }
+}
+""".strip()
+        mapper = PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False)
+        prefs_tree = parse_js(prefs_source)
+        prefs_path = Path("/tmp/prefs.js")
+        prefs_model = JSFileModelBuilder().build(
+            prefs_path,
+            prefs_source,
+            prefs_tree.root_node,
+            mapper,
+        )
+
+        ext_source = """
+export default class E {
+    disable() {
+        // unlock-dialog cleanup reason
+        this._thing = null;
+    }
+}
+""".strip()
+        ext_tree = parse_js(ext_source)
+        ext_path = Path("/tmp/extension.js")
+        ext_file_model = JSFileModelBuilder().build(
+            ext_path,
+            ext_source,
+            ext_tree.root_node,
+            mapper,
+        )
+        extension_model = ExtensionModel(
+            cross_file_index={},
+            root_dir=Path("/tmp"),
+            metadata=Metadata.missing(Path("/tmp/metadata.json")),
+            target_versions=set(),
+            js_file_count=2,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False),
+            files={prefs_path: prefs_model, ext_path: ext_file_model},
+        )
+        store = FactStore(extension_model, file_fact_builders=FILE_FACT_BUILDERS)
+
+        prefs_fact = store.get_file_fact(prefs_path, PrefsFact)
+        session_modes_fact = store.get_file_fact(ext_path, SessionModesFact)
+
+        self.assertEqual(len(prefs_fact.get_preferences_widget_nodes), 1)
+        self.assertEqual(len(prefs_fact.state_assignment_nodes), 1)
+        self.assertEqual(len(prefs_fact.close_request_cleanup_nodes), 0)
+        self.assertEqual(len(session_modes_fact.disable_method_nodes), 1)
+        self.assertEqual(len(session_modes_fact.commented_disable_nodes), 1)
+
+
+class LifecycleIntermediateFactTest(unittest.TestCase):
+    def _build_extension_model(self, root: Path) -> ExtensionModel:
+        mapper = PathMapper(root, root, "embedded", False)
+        file_models = {}
+        js_files = sorted(root.glob("*.js"))
+        for path in js_files:
+            source = path.read_text(encoding="utf-8")
+            tree = parse_js(source)
+            file_models[path] = JSFileModelBuilder().build(
+                path,
+                source,
+                tree.root_node,
+                mapper,
+            )
+
+        return ExtensionModel(
+            cross_file_index=build_cross_file_indices_per_file(sorted(file_models)),
+            root_dir=root,
+            metadata=Metadata.missing(root / "metadata.json"),
+            target_versions=set(),
+            js_file_count=len(file_models),
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False),
+            files=file_models,
+        )
+
+    def test_private_lifecycle_inventory_fact_builds_once_and_indexes_by_path(
+        self,
+    ) -> None:
+        root = DATA_DIR / "good_cleanup"
+        extension_model = self._build_extension_model(root)
+        store = FactStore(
+            extension_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+
+        inventory = store.get_extension_fact(lifecycle_facts._LifecycleInventoryFact)
+        extension_inventory = inventory.by_path[root / "extension.js"]
+        self.assertGreaterEqual(len(extension_inventory.scopes), 1)
+        self.assertIs(
+            store.get_extension_fact(lifecycle_facts._LifecycleInventoryFact),
+            inventory,
+        )
+
+    def test_pre_enable_observation_fact_captures_bad_extension(self) -> None:
+        bad_root = DATA_DIR / "bad_extension"
+        bad_model = self._build_extension_model(bad_root)
+        bad_store = FactStore(
+            bad_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+        bad_path = bad_root / "extension.js"
+
+        self.assertTrue(
+            bad_store.get_extension_fact(PreEnableObservationFact).by_path[bad_path]
+        )
+
+    def test_signal_observation_facts_capture_connects_and_disconnects(self) -> None:
+        root = DATA_DIR / "good_cleanup"
+        extension_model = self._build_extension_model(root)
+        store = FactStore(
+            extension_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+        path = root / "extension.js"
+
+        connect_fact = store.get_extension_fact(SignalConnectFact)
+        disconnect_fact = store.get_extension_fact(SignalDisconnectFact)
+
+        self.assertGreaterEqual(len(connect_fact.by_path[path]), 1)
+        self.assertGreaterEqual(len(disconnect_fact.by_path[path]), 1)
+        self.assertTrue(connect_fact.by_path[path][0].signal_groups)
+        self.assertTrue(disconnect_fact.by_path[path][0].signal_groups)
+
+    def test_source_observation_facts_capture_add_remove_and_recreate(self) -> None:
+        remove_root = DATA_DIR / "source_remove_cleanup"
+        remove_model = self._build_extension_model(remove_root)
+        remove_store = FactStore(
+            remove_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+        remove_path = remove_root / "extension.js"
+
+        self.assertTrue(
+            remove_store.get_extension_fact(SourceAddFact)
+            .by_path[remove_path][0]
+            .sources
+        )
+        self.assertTrue(
+            remove_store.get_extension_fact(SourceRemoveFact)
+            .by_path[remove_path][0]
+            .sources
+        )
+
+        recreate_source = """
+export default class ExampleExtension {
+    enable() {
+        this._sourceId = GLib.timeout_add(
+            GLib.PRIORITY_DEFAULT, 1000, () => GLib.SOURCE_CONTINUE);
+        this._sourceId = GLib.timeout_add(
+            GLib.PRIORITY_DEFAULT, 1000, () => GLib.SOURCE_CONTINUE);
+    }
+}
+""".strip()
+        recreate_root = Path(tempfile.mkdtemp(prefix="shexli-source-recreate-"))
+        recreate_path = recreate_root / "extension.js"
+        recreate_path.write_text(recreate_source, encoding="utf-8")
+        recreate_model = self._build_extension_model(recreate_root)
+        recreate_store = FactStore(
+            recreate_model,
+            extension_fact_builders=EXTENSION_FACT_BUILDERS,
+        )
+        self.assertTrue(
+            recreate_store.get_extension_fact(SourceRecreateFact)
+            .by_path[recreate_path][0]
+            .recreated_sources
+        )
+
+    def test_object_and_ref_observation_facts_capture_lifecycle_events(self) -> None:
+        good_root = DATA_DIR / "good_cleanup"
+        good_model = self._build_extension_model(good_root)
+        good_store = FactStore(
+            good_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+        good_path = good_root / "extension.js"
+
+        self.assertTrue(
+            good_store.get_extension_fact(ObjectCreateFact)
+            .by_path[good_path][0]
+            .object_groups
+        )
+        self.assertTrue(
+            good_store.get_extension_fact(ObjectDestroyFact)
+            .by_path[good_path][0]
+            .object_groups
+        )
+
+        release_root = DATA_DIR / "release_owned_ref"
+        release_model = self._build_extension_model(release_root)
+        release_store = FactStore(
+            release_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+        release_path = release_root / "extension.js"
+
+        self.assertTrue(
+            release_store.get_extension_fact(RefAssignFact)
+            .by_path[release_path][0]
+            .resource_refs
+        )
+        self.assertTrue(
+            release_store.get_extension_fact(RefReleaseFact)
+            .by_path[release_path][0]
+            .released_refs
+        )
+
+    def test_soup_and_pre_enable_observation_facts_capture_events(self) -> None:
+        bad_root = DATA_DIR / "bad_extension"
+        bad_model = self._build_extension_model(bad_root)
+        bad_store = FactStore(
+            bad_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+        bad_path = bad_root / "extension.js"
+
+        self.assertTrue(
+            bad_store.get_extension_fact(PreEnableObservationFact).by_path[bad_path]
+        )
+
+        soup_source = """
+import Soup from "gi://Soup";
+
+export default class ExampleExtension {
+    enable() {
+        this._session = new Soup.Session();
+    }
+
+    disable() {
+        this._session.abort();
+        this._session = null;
+    }
+}
+""".strip()
+        soup_root = Path(tempfile.mkdtemp(prefix="shexli-soup-observations-"))
+        soup_path = soup_root / "extension.js"
+        soup_path.write_text(soup_source, encoding="utf-8")
+        soup_model = self._build_extension_model(soup_root)
+        soup_store = FactStore(
+            soup_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+
+        create_fact = soup_store.get_extension_fact(SoupSessionCreateFact)
+        abort_fact = soup_store.get_extension_fact(SoupSessionAbortFact)
+
+        self.assertEqual(
+            [obs.field_name for obs in create_fact.by_path[soup_path]],
+            ["_session"],
+        )
+        self.assertEqual(
+            [obs.field_name for obs in abort_fact.by_path[soup_path]],
+            ["_session"],
+        )
+
+    def test_observational_lifecycle_facts_do_not_expose_violation_buckets(
+        self,
+    ) -> None:
+        root = DATA_DIR / "good_cleanup"
+        extension_model = self._build_extension_model(root)
+        store = FactStore(
+            extension_model, extension_fact_builders=EXTENSION_FACT_BUILDERS
+        )
+        path = root / "extension.js"
+
+        connect = store.get_extension_fact(SignalConnectFact).by_path[path][0]
+        source_add = store.get_extension_fact(SourceAddFact).by_path[path][0]
+        object_create = store.get_extension_fact(ObjectCreateFact).by_path[path][0]
+
+        self.assertFalse(hasattr(connect, "missing_cleanup_evidences"))
+        self.assertFalse(hasattr(source_add, "missing_cleanup_evidences"))
+        self.assertFalse(hasattr(object_create, "missing_destroy_evidences"))
+
+
+class LifecycleObservationRuleDecisionTest(unittest.TestCase):
+    def test_bad_extension_still_emits_lifecycle_findings(self) -> None:
+        result = analyze_path(DATA_DIR / "bad_extension")
+        rule_ids = {finding.rule_id for finding in result.findings}
+
+        self.assertIn("EGO-L-001", rule_ids)
+        self.assertIn("EGO-L-003", rule_ids)
+        self.assertIn("EGO-L-004", rule_ids)
+
+    def test_release_and_soup_findings_still_come_from_observation_rules(self) -> None:
+        release_result = analyze_path(DATA_DIR / "release_owned_ref")
+        release_rule_ids = {finding.rule_id for finding in release_result.findings}
+        self.assertIn("EGO-L-005", release_rule_ids)
+
+        soup_root = Path(tempfile.mkdtemp(prefix="shexli-lifecycle-soup-rule-"))
+        (soup_root / "metadata.json").write_text(
+            '{"uuid":"soup@example.com","name":"Soup","description":"","shell-version":["46"]}',
+            encoding="utf-8",
+        )
+        (soup_root / "extension.js").write_text(
+            """
+import Soup from "gi://Soup";
+
+export default class ExampleExtension {
+    enable() {
+        this._session = new Soup.Session();
+    }
+
+    disable() {
+        this._session = null;
+    }
+}
+""".strip(),
+            encoding="utf-8",
+        )
+
+        soup_result = analyze_path(soup_root)
+        soup_rule_ids = {finding.rule_id for finding in soup_result.findings}
+        self.assertIn("EGO-L-008", soup_rule_ids)
+
+
+class RuleFactDependencyDeclarationTest(unittest.TestCase):
+    def test_rules_declare_required_file_facts(self) -> None:
+        self.assertEqual(ImportsGiRule.required_file_facts, ())
+        self.assertEqual(ApiMisuseRule.required_file_facts, (StylesheetBindingFact,))
+        self.assertEqual(SubprocessRule.required_file_facts, (SpawnWrapperFact,))
+
+    def test_prefs_and_session_rules_declare_required_extension_facts(self) -> None:
+        self.assertEqual(PrefsRule.required_extension_facts, (PrefsExtensionFact,))
+        self.assertEqual(
+            SessionModesRule.required_extension_facts, (SessionModesExtensionFact,)
+        )
+        self.assertEqual(MetadataValidationRule.required_extension_facts, ())
+        self.assertEqual(
+            ExtensionArtifactRule.required_extension_facts,
+            (ExtensionArtifactFact, GSettingsUsageFact),
+        )
+
+    def test_lifecycle_rules_declare_required_observation_facts(self) -> None:
+        self.assertEqual(
+            LifecyclePreEnableRule.required_extension_facts,
+            (PreEnableObservationFact,),
+        )
+        self.assertEqual(
+            LifecycleSignalsRule.required_extension_facts,
+            (SignalConnectFact, SignalDisconnectFact),
+        )
+        self.assertEqual(
+            LifecycleSourcesRule.required_extension_facts,
+            (SourceAddFact, SourceRemoveFact, SourceRecreateFact),
+        )
+        self.assertEqual(
+            LifecycleObjectsRule.required_extension_facts,
+            (ObjectCreateFact, ObjectDestroyFact),
+        )
+        self.assertEqual(
+            LifecycleReleaseRule.required_extension_facts,
+            (ObjectCreateFact, RefAssignFact, RefReleaseFact),
+        )
+        self.assertEqual(
+            LifecycleSoupRule.required_extension_facts,
+            (SoupSessionCreateFact, SoupSessionAbortFact),
+        )
+
+
+class FactCachingPerformanceTest(unittest.TestCase):
+    def test_analyze_path_builds_file_model_once_per_analyzed_js_file(self) -> None:
+        original_build = JSFileModelBuilder.build
+        with patch.object(
+            JSFileModelBuilder,
+            "build",
+            autospec=True,
+            side_effect=original_build,
+        ) as mock_build:
+            result = analyze_path(DATA_DIR / "dynamic_import_context")
+
+        self.assertEqual(
+            mock_build.call_count,
+            result.artifacts["js_file_count"],
+        )
+
+    def test_lifecycle_inventory_fact_is_cached_across_observation_ext_facts(
+        self,
+    ) -> None:
+        class _CountingLifecycleInventoryFactBuilder(
+            lifecycle_facts.LifecycleInventoryFactBuilder
+        ):
+            def __init__(self) -> None:
+                self.calls = 0
+
+            def build(self, ctx):
+                self.calls += 1
+                return super().build(ctx)
+
+        root = DATA_DIR / "bad_extension"
+        mapper = PathMapper(root, root, "embedded", False)
+        path = root / "extension.js"
+        source = path.read_text(encoding="utf-8")
+        tree = parse_js(source)
+        model = JSFileModelBuilder().build(path, source, tree.root_node, mapper)
+        extension_model = ExtensionModel(
+            cross_file_index=build_cross_file_indices_per_file([path]),
+            root_dir=root,
+            metadata=Metadata.missing(root / "metadata.json"),
+            target_versions=set(),
+            js_file_count=1,
+            entrypoint_contexts={},
+            unreachable_js_files=[],
+            package_files=[],
+            all_files=[],
+            js_files=[],
+            limits=AnalysisLimits(),
+            mapper=PathMapper(Path("/tmp"), Path("/tmp"), "embedded", False),
+            files={path: model},
+        )
+        counting_builder = _CountingLifecycleInventoryFactBuilder()
+        extension_fact_builders = dict(EXTENSION_FACT_BUILDERS)
+        extension_fact_builders[lifecycle_facts._LifecycleInventoryFact] = (
+            counting_builder
+        )
+        store = FactStore(
+            extension_model, extension_fact_builders=extension_fact_builders
+        )
+
+        store.get_extension_fact(SignalConnectFact)
+        store.get_extension_fact(SourceAddFact)
+        store.get_extension_fact(RefAssignFact)
+
+        self.assertEqual(counting_builder.calls, 1)
 
 
 if __name__ == "__main__":
