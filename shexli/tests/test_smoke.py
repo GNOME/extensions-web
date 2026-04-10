@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from unittest.mock import patch
 
+from shexli import analyze_path
 from shexli.analyzer.engine import ExtensionModel, PathMapper
 from shexli.analyzer.evidence import node_evidence
 from shexli.analyzer.facts import (
@@ -65,7 +66,6 @@ from shexli.analyzer.rules.prefs import PrefsRule
 from shexli.analyzer.rules.session_modes import SessionModesRule
 from shexli.analyzer.rules.subprocess import SubprocessRule
 from shexli.ast import iter_nodes, parse_js
-from shexli.cli import analyze_path
 from shexli.models import AnalysisLimits
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
@@ -888,7 +888,19 @@ export function run() {}
                 result.artifacts["metadata_path"],
                 f"{archive_path.resolve()}:metadata.json",
             )
-            self.assertEqual(result.artifacts["root"], str(archive_path.resolve()))
+
+    def test_cli_mode_preserves_relative_input_paths(self) -> None:
+        mapper = PathMapper(
+            root=Path("/tmp/ext"),
+            input_path=Path("uploaded-files/demo.zip"),
+            mode="cli",
+            is_zip=True,
+        )
+        self.assertEqual(
+            mapper.display_path(Path("/tmp/ext/extension.js")),
+            "uploaded-files/demo.zip:extension.js",
+        )
+        self.assertEqual(mapper.display_root(), "uploaded-files/demo.zip")
 
     def test_macosx_artifacts_are_flagged(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

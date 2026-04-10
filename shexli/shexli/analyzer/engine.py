@@ -52,10 +52,15 @@ class PathMapper:
         if self.mode == "embedded":
             return package_path
 
+        input_path = (
+            self.input_path
+            if not self.input_path.is_absolute()
+            else self.input_path.resolve()
+        )
         if self.is_zip:
-            return f"{self.input_path.resolve()}:{package_path}"
+            return f"{input_path}:{package_path}"
 
-        return str(path.resolve())
+        return str(input_path / package_path)
 
     def package_path(self, path: Path) -> str:
         """Return the exact relative package path for one filesystem path."""
@@ -66,7 +71,9 @@ class PathMapper:
         if self.mode == "embedded":
             return "."
 
-        return str(self.input_path.resolve())
+        if self.input_path.is_absolute():
+            return str(self.input_path.resolve())
+        return str(self.input_path)
 
 
 @dataclass(slots=True)
