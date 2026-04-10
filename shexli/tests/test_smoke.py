@@ -506,6 +506,35 @@ export default class Prefs extends ExtensionPreferences {
             rule_ids = {finding.rule_id for finding in result.findings}
             self.assertNotIn("EGO-L-006", rule_ids)
 
+    def test_prefs_signal_connections_do_not_require_disable_disconnects(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                '{"uuid":"prefs-signals@example.com","name":"PrefsSignals","description":"","shell-version":["46"]}',
+                encoding="utf-8",
+            )
+            (root / "prefs.js").write_text(
+                """
+import Gtk from "gi://Gtk";
+import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+
+export default class Prefs extends ExtensionPreferences {
+    fillPreferencesWindow(window) {
+        const button = new Gtk.Button();
+        button.connect("clicked", () => {});
+        window.set_child(button);
+    }
+}
+""".strip(),
+                encoding="utf-8",
+            )
+
+            result = analyze_path(root)
+            rule_ids = {finding.rule_id for finding in result.findings}
+            self.assertNotIn("EGO-L-003", rule_ids)
+
     def test_constructor_resource_ref_requires_release(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)

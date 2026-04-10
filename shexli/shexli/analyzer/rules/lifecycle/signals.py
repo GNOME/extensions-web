@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from ....spec import R
+from ...engine import JSContext
 
 if TYPE_CHECKING:
     from shexli.models import Evidence
@@ -28,6 +29,9 @@ class LifecycleSignalsRule(ExtensionRule):
         disconnect_fact = facts.get_fact(SignalDisconnectFact)
 
         for path, connect_observations in connect_fact.by_path.items():
+            contexts = facts.model.entrypoint_contexts.get(path, set())
+            if JSContext.PREFERENCES in contexts:
+                continue
             disconnect_by_scope = {
                 observation.scope_id: observation
                 for observation in disconnect_fact.by_path.get(path, [])
