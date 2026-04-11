@@ -7,12 +7,10 @@ from typing import Any
 from urllib.parse import unquote, urlencode, urlparse, urlunparse
 
 from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import BadRequest
 from django.core.paginator import InvalidPage, Paginator
 from django.core.validators import URLValidator
-from django.db import transaction
 from django.forms import Field, ValidationError
 from django.http import (
     Http404,
@@ -37,7 +35,9 @@ from django_filters.rest_framework import (
 )
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, extend_schema
+from knox.auth import TokenAuthentication
 from rest_framework import (
+    authentication,
     filters,
     mixins,
     parsers,
@@ -55,10 +55,9 @@ from rest_framework.test import APIRequestFactory
 
 from sweettooth.api.widgets import QueryArrayWidget
 from sweettooth.decorators import ajax_view, model_view
-from sweettooth.exceptions import DatabaseErrorWithMessages
 from sweettooth.extensions import models, serializers
 from sweettooth.extensions.documents import ExtensionDocument
-from sweettooth.extensions.forms import ImageUploadForm, UploadForm
+from sweettooth.extensions.forms import ImageUploadForm
 from sweettooth.extensions.templatetags.extension_icon import extension_icon
 
 from .renderers import ExtensionVersionZipRenderer
@@ -272,12 +271,32 @@ class ExtensionsVersionsViewSet(
 
 
 class ExtensionUploadView(CreateAPIView):
+    authentication_classes = [
+        authentication.SessionAuthentication,
+        TokenAuthentication,
+    ]
     parser_classes = [parsers.MultiPartParser]
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = serializers.ExtensionUploadSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, request=self.request)
+
+
+class ExtensionUploadPageView(LoginRequiredMixin, TemplateView):
+    template_name = "extensions/upload.html"
+
+    def get_context_data(self, **kwargs):
+        serializer = serializers.ExtensionUploadSerializer()
+        return super().get_context_data(
+            upload_api_url=reverse("extension-upload"),
+            source_name="source",
+            shell_license_name="shell_license_compliant",
+            shell_license_label=serializer.fields["shell_license_compliant"].label,
+            tos_name="tos_compliant",
+            tos_label=serializer.fields["tos_compliant"].label,
+            **kwargs,
+        )
 
 
 def get_versions_for_version_strings(version_strings):
@@ -796,71 +815,6 @@ def ajax_set_status_view(request, newstatus):
         svm=json.dumps(extension.visible_shell_version_map),
         mvs=render_to_string("extensions/multiversion_status.html", context),
     )
-
-
-def create_version(request, file_source):
-    try:
-        with transaction.atomic():
-            try:
-                metadata = models.parse_zipfile_metadata(file_source)
-                uuid = metadata["uuid"]
-            except (models.InvalidExtensionData, KeyError) as e:
-                messages.error(request, "Invalid extension data: %s" % (e.message,))
-                raise DatabaseErrorWithMessages
-
-            try:
-                extension = models.Extension.objects.get(uuid=uuid)
-                extension.update_from_metadata(metadata)
-            except models.Extension.DoesNotExist:
-                extension = models.Extension(creator=request.user, metadata=metadata)
-            else:
-                if request.user != extension.creator and not request.user.is_superuser:
-                    messages.error(
-                        request, "An extension with that UUID has already been added."
-                    )
-                    raise DatabaseErrorWithMessages
-
-            extension.full_clean()
-            extension.save()
-
-            if "version-name" in metadata:
-                version_name = metadata.pop("version-name").strip()
-            else:
-                version_name = None
-
-            version = models.ExtensionVersion(
-                extension=extension,
-                metadata=metadata,
-                source=file_source,
-                status=models.STATUS_UNREVIEWED,
-                version_name=version_name,
-            )
-
-            version.full_clean()
-            version.save()
-
-            return version, []
-    except (DatabaseErrorWithMessages, ValidationError) as e:
-        return None, e.messages
-
-
-@login_required
-def upload_file(request):
-    errors = []
-    if request.method == "POST":
-        form = UploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            file_source = form.cleaned_data["source"]
-            version, errors = create_version(request, file_source)
-            if version is not None:
-                models.submitted_for_review.send(
-                    sender=request, request=request, version=version
-                )
-                return redirect(version.extension)
-    else:
-        form = UploadForm()
-
-    return render(request, "extensions/upload.html", dict(form=form, errors=errors))
 
 
 class AwayView(TemplateView):

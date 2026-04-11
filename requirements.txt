@@ -286,7 +286,7 @@ dj-email-url==1.0.6 \
     --hash=sha256:55ffe3329e48f54f8a75aa36ece08f365e09d61f8a209773ef09a1d4760e699a \
     --hash=sha256:cbd08327fbb08b104eac160fb4703f375532e4c0243eb230f5b960daee7a96db
     # via extensions-web (pyproject.toml)
-Django==5.2.13 \
+django==5.2.13 \
     --hash=sha256:5788fce61da23788a8ce6f02583765ab060d396720924789f97fa42119d37f7a \
     --hash=sha256:a31589db5188d074c63f0945c3888fad104627dfcc236fb2b97f71f89da33bc4
     # via
@@ -342,9 +342,9 @@ django-rest-registration==0.8.2 \
     --hash=sha256:5e3e9e7dc3fabc6cd39f024c82e7d4d18cda0ca216b2a60f64e0b1c4c65af3d9 \
     --hash=sha256:930fee0b88acf845936cb522c23e0d197b75f89f37dc3758a83eb633c443aac8
     # via extensions-web (pyproject.toml)
-djangorestframework==3.15.2 \
-    --hash=sha256:2b8871b062ba1aefc2de01f773875441a961fefbf79f5eed1e32b2f096944b20 \
-    --hash=sha256:36fe88cd2d6c6bec23dca9804bab2ba5517a8bb9d8f47ebc68981b56840107ad
+djangorestframework==3.17.1 \
+    --hash=sha256:a6def5f447fe78ff853bff1d47a3c59bf38f5434b031780b351b0c73a62db1a5 \
+    --hash=sha256:c3c74dd3e83a5a3efc37b3c18d92bd6f86a6791c7b7d4dff62bb068500e76457
     # via
     #   django-rest-knox
     #   django-rest-registration

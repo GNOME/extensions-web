@@ -321,7 +321,7 @@ dj-email-url==1.0.6 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
-Django==5.2.13 \
+django==5.2.13 \
     --hash=sha256:5788fce61da23788a8ce6f02583765ab060d396720924789f97fa42119d37f7a \
     --hash=sha256:a31589db5188d074c63f0945c3888fad104627dfcc236fb2b97f71f89da33bc4
     # via
@@ -334,6 +334,8 @@ Django==5.2.13 \
     #   django-registration
     #   django-rest-knox
     #   django-rest-registration
+    #   django-stubs
+    #   django-stubs-ext
     #   djangorestframework
     #   drf-nested-routers
     #   drf-spectacular
@@ -398,9 +400,19 @@ django-rest-registration==0.8.2 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
-djangorestframework==3.15.2 \
-    --hash=sha256:2b8871b062ba1aefc2de01f773875441a961fefbf79f5eed1e32b2f096944b20 \
-    --hash=sha256:36fe88cd2d6c6bec23dca9804bab2ba5517a8bb9d8f47ebc68981b56840107ad
+django-stubs==5.2.9 \
+    --hash=sha256:2317a7130afdaa76f6ff7f623650d7f3bf1b6c86a60f95840e14e6ec6de1a7cd \
+    --hash=sha256:c192257120b08785cfe6f2f1c91f1797aceae8e9daa689c336e52c91e8f6a493
+    # via
+    #   djangorestframework-stubs
+    #   extensions-web (pyproject.toml)
+django-stubs-ext==6.0.1 \
+    --hash=sha256:17415759b9a3f4b4da7998ac3b08c7dc5137f9a019490b918aece1a8a4c2ade4 \
+    --hash=sha256:633b280f89c0cbb7e3ce2f2f842e0acc43d8091378e75f84921d6be675d052dc
+    # via django-stubs
+djangorestframework==3.17.1 \
+    --hash=sha256:a6def5f447fe78ff853bff1d47a3c59bf38f5434b031780b351b0c73a62db1a5 \
+    --hash=sha256:c3c74dd3e83a5a3efc37b3c18d92bd6f86a6791c7b7d4dff62bb068500e76457
     # via
     #   -c requirements.txt
     #   django-rest-knox
@@ -408,6 +420,10 @@ djangorestframework==3.15.2 \
     #   drf-nested-routers
     #   drf-spectacular
     #   extensions-web (pyproject.toml)
+djangorestframework-stubs==3.16.9 \
+    --hash=sha256:27b3e245d5f9c22ff6988d9e54388249f98f88608cc2b365b71e9f39dd096958 \
+    --hash=sha256:b1abb97490c90c85eabcd09b8ecbadae1b9360f21ad3021abf830227c0129697
+    # via extensions-web (pyproject.toml)
 drf-nested-routers==0.93.4 \
     --hash=sha256:01aa556b8c08608bb74fb34f6ca065a5183f2cda4dc0478192cc17a2581d71b0 \
     --hash=sha256:996b77f3f4dfaf64569e7b8f04e3919945f90f95366838ca5b8bed9dd709d6c5
@@ -964,12 +980,21 @@ tree-sitter-javascript==0.25.0 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
+types-pyyaml==6.0.12.20250915 \
+    --hash=sha256:0f8b54a528c303f0e6f7165687dd33fafa81c807fcac23f632b63aa624ced1d3 \
+    --hash=sha256:e7d4d9e064e89a3b3cae120b4990cd370874d2bf12fa5f46c97018dd5d3c9ab6
+    # via
+    #   django-stubs
+    #   djangorestframework-stubs
 typing-extensions==4.12.2 \
     --hash=sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d \
     --hash=sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8
     # via
     #   -c requirements.txt
     #   dj-database-url
+    #   django-stubs
+    #   django-stubs-ext
+    #   djangorestframework-stubs
     #   psycopg
 uritemplate==4.1.1 \
     --hash=sha256:4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0 \

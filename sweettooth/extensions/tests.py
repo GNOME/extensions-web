@@ -6,9 +6,10 @@ from typing import Any
 from uuid import uuid4
 from zipfile import ZipFile
 
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.files.base import File
-from django.test import TestCase, TransactionTestCase
+from django.test import Client, TestCase, TransactionTestCase
 from django.test.utils import override_settings
 from django.urls import reverse
 from rest_framework.test import APITransactionTestCase
@@ -325,32 +326,9 @@ class ReplaceMetadataTest(BasicUserTestCase, TestCase):
         new_zip.close()
 
 
-class UploadTest(BasicUserTestCase, TransactionTestCase):
-    def upload_file(
-        self,
-        zipfile: str,
-        extra_metadata: dict[str, Any] = {},
-        add_extension_js: bool | str = False,
-    ):
-        with get_test_zipfile(
-            zipfile, extra_metadata, add_extension_js=add_extension_js
-        ) as f:
-            return self.client.post(
-                reverse("extensions-upload-file"),
-                data={
-                    "source": f,
-                    "shell_license_compliant": True,
-                    "tos_compliant": True,
-                },
-                follow=True,
-            )
-
-    def test_upload_page_works(self):
-        response = self.client.get(reverse("extensions-upload-file"))
-        self.assertEqual(response.status_code, 200)
-
+class UploadTest:
     def test_upload_parsing(self):
-        response = self.upload_file("SimpleExtension", add_extension_js=True)
+        self.upload_file("SimpleExtension", add_extension_js=True)
         extension = models.Extension.objects.get(uuid="test-extension@mecheye.net")
         version1 = extension.versions.order_by("-version")[0]
 
@@ -359,12 +337,6 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
         self.assertEqual(extension.name, "Test Extension")
         self.assertEqual(extension.description, "Simple test metadata")
         self.assertEqual(extension.url, "http://test-metadata.gnome.org")
-
-        if not isinstance(self, APITransactionTestCase):
-            url = reverse(
-                "extensions-detail", kwargs=dict(pk=extension.pk, slug=extension.slug)
-            )
-            self.assertRedirects(response, url)
 
         version1.status = models.STATUS_ACTIVE
         version1.save()
@@ -500,7 +472,120 @@ class UploadTest(BasicUserTestCase, TransactionTestCase):
             self.assertNotIn("session-modes", version_metadata)
 
 
-class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
+@override_settings(OPENSEARCH_DSL_AUTOSYNC=False)
+class UploadPageAuthenticationTest(SilentDjangoRequestTest, TestCase):
+    def test_upload_page_redirects_anonymous_users_to_login(self):
+        response = self.client.get(reverse("extensions-upload-file"))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response["Location"].startswith("/accounts/login/"))
+        self.assertIn("next=/upload/", response["Location"])
+
+    def test_upload_api_rejects_anonymous_users(self):
+        with get_test_zipfile("SimpleExtension", add_extension_js=True) as f:
+            response = self.client.post(
+                reverse("extension-upload"),
+                data={
+                    "source": f,
+                    "shell_license_compliant": True,
+                    "tos_compliant": True,
+                },
+            )
+
+        self.assertEqual(response.status_code, 403)
+        with self.assertRaises(models.Extension.DoesNotExist):
+            models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+
+@override_settings(OPENSEARCH_DSL_AUTOSYNC=False)
+class UploadPageTest(BasicUserTestCase, TransactionTestCase):
+    def test_upload_page_works(self):
+        response = self.client.get(reverse("extensions-upload-file"))
+        self.assertEqual(response.status_code, 200)
+
+
+@override_settings(OPENSEARCH_DSL_AUTOSYNC=False)
+class UploadSessionTest(BasicUserTestCase, TransactionTestCase, UploadTest):
+    def upload_file(
+        self,
+        zipfile: str,
+        extra_metadata: dict[str, Any] = {},
+        add_extension_js: bool | str = False,
+    ):
+        with get_test_zipfile(
+            zipfile, extra_metadata, add_extension_js=add_extension_js
+        ) as f:
+            return self.client.post(
+                reverse("extension-upload"),
+                data={
+                    "source": f,
+                    "shell_license_compliant": True,
+                    "tos_compliant": True,
+                },
+                follow=True,
+            )
+
+    def test_upload_api_accepts_session_auth_with_csrf(self):
+        csrf_client = Client(enforce_csrf_checks=True)
+        self.assertTrue(
+            csrf_client.login(username=self.username, password=self.password)
+        )
+
+        response = csrf_client.get(reverse("extensions-upload-file"))
+        self.assertEqual(response.status_code, 200)
+
+        with get_test_zipfile("SimpleExtension", add_extension_js=True) as f:
+            response = csrf_client.post(
+                reverse("extension-upload"),
+                data={
+                    "source": f,
+                    "shell_license_compliant": True,
+                    "tos_compliant": True,
+                },
+                follow=True,
+            )
+
+        self.assertEqual(response.status_code, 403)
+        with self.assertRaises(models.Extension.DoesNotExist):
+            models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+        with get_test_zipfile("SimpleExtension", add_extension_js=True) as f:
+            response = csrf_client.post(
+                reverse("extension-upload"),
+                data={
+                    "source": f,
+                    "shell_license_compliant": True,
+                    "tos_compliant": True,
+                    "csrfmiddlewaretoken": csrf_client.cookies["csrftoken"].value,
+                },
+                follow=True,
+            )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(
+            response.data["link"],
+            models.ExtensionVersion.objects.get(
+                extension__uuid="test-extension@mecheye.net"
+            ).get_absolute_url(),
+        )
+
+    def test_missing_shell_version(self):
+        for file in ("SimpleExtensionMissingMetadata", "SimpleExtensionEmptyMetadata"):
+            response = self.upload_file(file, add_extension_js=True)
+
+            self.assertEqual(response.status_code, 400)
+            self.assertIn(
+                models.Extension.MESSAGE_SHELL_VERSION_MISSING, response.data[0]
+            )
+
+            with self.assertRaises(models.Extension.DoesNotExist):
+                models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+
+@override_settings(OPENSEARCH_DSL_AUTOSYNC=False)
+class UploadAPITest(
+    APITransactionTestCase, BasicAPIUserTestCase, SilentDjangoRequestTest, UploadTest
+):
     def upload_file(
         self,
         zipfile: str,
@@ -550,6 +635,55 @@ class UploadAPITest(APITransactionTestCase, BasicAPIUserTestCase, UploadTest):
 
         with self.assertRaises(models.Extension.DoesNotExist):
             models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+    def test_non_string_version_name(self):
+        response = self.upload_file(
+            "SimpleExtension",
+            extra_metadata={"version-name": 1.5},
+            add_extension_js=True,
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(
+            "The `version-name` field in `metadata.json` must be a string",
+            response.data["source"][0],
+        )
+
+        with self.assertRaises(models.Extension.DoesNotExist):
+            models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+    def test_cannot_upload_version_for_foreign_extension(self):
+        other_user = get_user_model().objects.create_user(
+            "OtherUser", "other@example.com", "password"
+        )
+        extension = models.Extension.objects.create_from_metadata(
+            {
+                "uuid": "test-extension@mecheye.net",
+                "name": "Existing Extension",
+                "description": "Owned by another user",
+                "shell-version": ["45"],
+            },
+            creator=other_user,
+        )
+        models.ExtensionVersion.objects.create(
+            extension=extension,
+            metadata={
+                "uuid": "test-extension@mecheye.net",
+                "name": "Existing Extension",
+                "description": "Owned by another user",
+                "shell-version": ["45"],
+            },
+            status=models.STATUS_ACTIVE,
+        )
+
+        response = self.upload_file("SimpleExtension", add_extension_js=True)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(
+            "An extension with that UUID has already been added",
+            response.data[0],
+        )
+        self.assertEqual(extension.versions.count(), 1)
 
 
 class ExtensionVersionTest(BasicUserTestCase, TestCase):
