@@ -196,10 +196,12 @@ class ExtensionUploadSerializer(serializers.Serializer):
                 raise serializers.ValidationError(e.messages)
             version.save()
 
-            models.submitted_for_review.send(
-                sender=validated_data["user"],
-                request=validated_data["request"],
-                version=version,
+            transaction.on_commit(
+                lambda: models.submitted_for_review.send(
+                    sender=validated_data["user"],
+                    request=validated_data["request"],
+                    version=version,
+                )
             )
 
             return version

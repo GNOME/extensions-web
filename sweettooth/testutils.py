@@ -1,14 +1,14 @@
 import logging
 
 from django.contrib.auth import get_user_model
-from django.test import TestCase
-from rest_framework.test import APITestCase
+from django.test import TestCase, TransactionTestCase
+from rest_framework.test import APITestCase, APITransactionTestCase
 
 from .auth.authentication import KnoxAuthTokenManager
 from .users.models import User
 
 
-class BasicUserTestCase(TestCase):
+class BasicUserMixin:
     def setUp(self):
         super().setUp()
 
@@ -22,7 +22,7 @@ class BasicUserTestCase(TestCase):
         self.client.login(username=self.username, password=self.password)
 
 
-class BasicAPIUserTestCase(APITestCase, BasicUserTestCase):
+class BasicAPIUserMixin:
     def setUp(self):
         super().setUp()
 
@@ -32,7 +32,25 @@ class BasicAPIUserTestCase(APITestCase, BasicUserTestCase):
         )
 
 
-class SilentDjangoRequestTest(TestCase):
+class BasicUserTestCase(BasicUserMixin, TestCase):
+    pass
+
+
+class BasicAPIUserTestCase(BasicAPIUserMixin, BasicUserMixin, APITestCase):
+    pass
+
+
+class BasicTransactionUserTestCase(BasicUserMixin, TransactionTestCase):
+    pass
+
+
+class BasicAPITransactionUserTestCase(
+    BasicAPIUserMixin, BasicUserMixin, APITransactionTestCase
+):
+    pass
+
+
+class SilentDjangoRequestMixin:
     def setUp(self) -> None:
         super().setUp()
 
@@ -46,3 +64,7 @@ class SilentDjangoRequestTest(TestCase):
 
         logger = logging.getLogger("django.request")
         logger.setLevel(self.previous_level)
+
+
+class SilentDjangoRequestTest(SilentDjangoRequestMixin, TestCase):
+    pass

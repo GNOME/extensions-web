@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.messages",
     "rest_framework",
+    "django_celery_beat",
+    "django_celery_results",
     "django_filters",
     "knox",
     "rest_registration",
@@ -216,6 +218,14 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
+
+CELERY_BROKER_URL = os.getenv("EGO_CELERY_BROKER_URL") or "amqp://rabbitmq:5672//"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_CACHE_BACKEND = "default"
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_TASK_DEFAULT_QUEUE = "default"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TIMEZONE = TIME_ZONE
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "GNOME Extensions",

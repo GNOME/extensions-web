@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Template
 labels:
-  app: extensions-web
-  template: extensions-web
+  app: extensions
+  template: extensions
 message: |
   The following service(s) have been created in your project: ${NAME}.
 
@@ -21,27 +21,94 @@ metadata:
     openshift.io/support-url: https://gitlab.gnome.org/Infrastructure/extensions-web/issues
     tags: gnome,python,nginx,uwsgi,extensions-web
     template.openshift.io/bindable: 'false'
-  name: extensions-web
+  name: extensions
 objects:
 - apiVersion: v1
   data:
-    administrator-email: ${EGO_ADMINISTRATOR_EMAIL}
-    administrator-name: ${EGO_ADMINISTRATOR_NAME}
-    allowed-host: ${APPLICATION_DOMAIN}
-    media-root: /extensions-web/www/uploaded-files
-    static-root: /extensions-web/www/static-files
-    xapian-db: /extensions-web/data/xapian.db
+    EGO_ADMINISTRATOR_EMAIL: ${EGO_ADMINISTRATOR_EMAIL}
+    EGO_ADMINISTRATOR_NAME: ${EGO_ADMINISTRATOR_NAME}
+    EGO_ALLOWED_HOST: ${APPLICATION_DOMAIN}
+    EGO_MEDIA_ROOT: /extensions-web/www/uploaded-files
+    EGO_STATIC_ROOT: /extensions-web/www/static-files
   kind: ConfigMap
   metadata:
     name: ${NAME}
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: nginx
+  data:
+    default.conf: |
+      server {
+          listen 8080 default_server;
+
+          charset utf-8;
+
+          sendfile on;
+          tcp_nopush on;
+          tcp_nodelay on;
+          server_tokens off;
+          client_max_body_size 16m;
+
+          keepalive_timeout 65;
+
+          gzip on;
+          gzip_types text/css text/html text/plain application/javascript application/json application/xml;
+
+          root /usr/share/nginx/html;
+
+          set_real_ip_from 10.0.0.0/8;
+          set_real_ip_from 172.16.0.0/12;
+          set_real_ip_from 192.168.0.0/16;
+
+          real_ip_header X-Forwarded-For;
+
+          add_header X-Content-Type-Options nosniff;
+          add_header X-Frame-Options SAMEORIGIN;
+
+          location /healthz {
+              access_log off;
+              return 200;
+          }
+
+          location = /favicon.ico {
+              log_not_found off;
+              access_log off;
+          }
+
+          location = /robots.txt {
+              allow all;
+              log_not_found off;
+              access_log off;
+          }
+
+          location /extension-data/ {
+              alias /extensions-web/www/uploaded-files/;
+          }
+
+          location /static/ {
+              location ~* \.(jpg|jpeg|gif|png|svg|ico|css|pdf|txt|bmp|js)$ {
+                  access_log off;
+                  expires 3d;
+              }
+
+              alias /extensions-web/www/static-files/;
+          }
+
+          location / {
+              uwsgi_pass 127.0.0.1:8001;
+              include uwsgi_params;
+          }
+      }
 - apiVersion: v1
   kind: Secret
   metadata:
     name: ${NAME}
   stringData:
-    database-url: ${EGO_DATABASE_URL}
-    email-url: ${EGO_EMAIL_URL}
-    secret-key: ${EGO_SECRET_KEY}
+    EGO_CELERY_BROKER_URL: ${EGO_CELERY_BROKER_URL}
+    EGO_DATABASE_URL: ${EGO_DATABASE_URL}
+    EGO_EMAIL_URL: ${EGO_EMAIL_URL}
+    EGO_SECRET_KEY: ${EGO_SECRET_KEY}
 - apiVersion: v1
   kind: Secret
   metadata:
@@ -60,7 +127,7 @@ objects:
       port: 80
       targetPort: 8080
     selector:
-      name: ${NAME}
+      app: ${NAME}
 - apiVersion: v1
   kind: Route
   metadata:
@@ -83,30 +150,16 @@ objects:
   kind: ImageStream
   metadata:
     annotations:
-      description: Keeps track of changes in the nginx:stable image
-    name: nginx
-  spec:
-    tags:
-    - from:
-        kind: DockerImage
-        name: nginx:stable
-      importPolicy:
-        scheduled: true
-      name: stable
-- apiVersion: v1
-  kind: ImageStream
-  metadata:
-    annotations:
       description: Keeps track of changes in the python image
     name: python
   spec:
     tags:
     - from:
         kind: DockerImage
-        name: python:3.9
+        name: python:3.12
       importPolicy:
         scheduled: true
-      name: '3.9'
+      name: '3.12'
 - apiVersion: v1
   kind: BuildConfig
   metadata:
@@ -134,22 +187,22 @@ objects:
         - name: EGO_SECRET_KEY
           valueFrom:
             secretKeyRef:
-              key: secret-key
+              key: EGO_SECRET_KEY
               name: ${NAME}
         - name: EGO_MEDIA_ROOT
           valueFrom:
             configMapKeyRef:
-              key: media-root
+              key: EGO_MEDIA_ROOT
               name: ${NAME}
         - name: EGO_STATIC_ROOT
           valueFrom:
             configMapKeyRef:
-              key: static-root
+              key: EGO_STATIC_ROOT
               name: ${NAME}
         forcePull: true
         from:
           kind: ImageStreamTag
-          name: python:3.9
+          name: python:3.12
       type: Docker
     triggers:
     - type: ImageChange
@@ -159,189 +212,242 @@ objects:
           name: gnome-gitlab
       type: GitLab
 - apiVersion: v1
-  kind: BuildConfig
-  metadata:
-    annotations:
-      description: Defines how to build the frontend
-      template.alpha.openshift.io/wait-for-ready: 'true'
-    name: frontend
-  spec:
-    output:
-      to:
-        kind: ImageStreamTag
-        name: frontend:latest
-    source:
-      contextDir: openshift/docker/nginx
-      git:
-        ref: ${SOURCE_REPOSITORY_REF}
-        uri: ${SOURCE_REPOSITORY_URL}
-      type: Git
-    strategy:
-      dockerStrategy:
-        forcePull: true
-        from:
-          kind: ImageStreamTag
-          name: nginx:stable
-      type: Docker
-    triggers:
-    - type: ImageChange
-    - type: ConfigChange
-- apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
-    name: extensions-claim
+    name: ${NAME}-data
   spec:
     accessModes:
     - ReadWriteOnce
     resources:
       requests:
         storage: 3096Mi
-- apiVersion: v1
-  kind: DeploymentConfig
+- apiVersion: apps/v1
+  kind: Deployment
   metadata:
     annotations:
-      description: Defines how to deploy the application server
-      template.alpha.openshift.io/wait-for-ready: 'true'
+      alpha.image.policy.openshift.io/resolve-names: '*'
+      app.openshift.io/route-disabled: "false"
+      image.openshift.io/triggers: >-
+        [{"from":{"kind":"ImageStreamTag","name":"${NAME}:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"extensions\")].image"}]
     name: ${NAME}
   spec:
-    replicas: 1
+    progressDeadlineSeconds: 600
+    replicas: ${REPLICAS}
+    revisionHistoryLimit: 10
     selector:
-      name: ${NAME}
+      matchLabels:
+        app: ${NAME}
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: ${NAME}
+          deployment: ${NAME}
+      spec:
+        containers:
+        - image: ghcr.io/nginxinc/nginx-unprivileged:stable-alpine-slim
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: nginx
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8080
+            timeoutSeconds: 1
+          volumeMounts:
+          - mountPath: /extensions-web/www
+            name: extensions-data
+            subPath: www
+          - mountPath: /etc/nginx/conf.d/default.conf
+            name: nginx
+            subPath: default.conf
+        - envFrom:
+          - configMapRef:
+              name: ${NAME}
+          - secretRef:
+              name: ${NAME}
+          image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8001
+            timeoutSeconds: 1
+          name: extensions
+          ports:
+          - containerPort: 8001
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8001
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8001
+            timeoutSeconds: 1
+          volumeMounts:
+          - mountPath: /extensions-web/www
+            name: extensions-data
+            subPath: www
+          - mountPath: /extensions-web/data
+            name: extensions-data
+            subPath: data
+          - mountPath: /extensions-web/tmp
+            name: extensions-data
+            subPath: tmp
+        volumes:
+        - name: extensions-data
+          persistentVolumeClaim:
+            claimName: ${NAME}-data
+        - configMap:
+            defaultMode: 420
+            name: nginx
+          name: nginx
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      alpha.image.policy.openshift.io/resolve-names: '*'
+      image.openshift.io/triggers: >-
+        [{"from":{"kind":"ImageStreamTag","name":"${NAME}:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"celery-worker\")].image"}]
+    name: ${NAME}-celery-worker
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: ${NAME}-celery-worker
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: ${NAME}-celery-worker
+          deployment: ${NAME}-celery-worker
+      spec:
+        containers:
+        - args:
+          - -A
+          - sweettooth
+          - worker
+          - --loglevel=INFO
+          command:
+          - celery
+          envFrom:
+          - configMapRef:
+              name: ${NAME}
+          - secretRef:
+              name: ${NAME}
+          image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
+          imagePullPolicy: IfNotPresent
+          name: celery-worker
+          volumeMounts:
+          - mountPath: /extensions-web/www
+            name: extensions-data
+            subPath: www
+          - mountPath: /extensions-web/data
+            name: extensions-data
+            subPath: data
+          - mountPath: /extensions-web/tmp
+            name: extensions-data
+            subPath: tmp
+        volumes:
+        - name: extensions-data
+          persistentVolumeClaim:
+            claimName: ${NAME}-data
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      alpha.image.policy.openshift.io/resolve-names: '*'
+      image.openshift.io/triggers: >-
+        [{"from":{"kind":"ImageStreamTag","name":"${NAME}:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"celery-beat\")].image"}]
+    name: ${NAME}-celery-beat
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: ${NAME}-celery-beat
     strategy:
       type: Recreate
     template:
       metadata:
         labels:
-          name: ${NAME}
-        name: ${NAME}
+          app: ${NAME}-celery-beat
+          deployment: ${NAME}-celery-beat
       spec:
         containers:
         - args:
-          - -c
-          - python manage.py collectstatic --noinput && python manage.py migrate &&
-            uwsgi --enable-threads --ini /extensions-web/wsgi.ini
+          - -A
+          - sweettooth
+          - beat
+          - --loglevel=INFO
           command:
-          - bash
-          env:
-          - name: EGO_DATABASE_URL
-            valueFrom:
-              secretKeyRef:
-                key: database-url
-                name: ${NAME}
-          - name: EGO_EMAIL_URL
-            valueFrom:
-              secretKeyRef:
-                key: email-url
-                name: ${NAME}
-          - name: EGO_SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                key: secret-key
-                name: ${NAME}
-          - name: EGO_ADMINISTRATOR_NAME
-            valueFrom:
-              configMapKeyRef:
-                key: administrator-name
-                name: ${NAME}
-          - name: EGO_ADMINISTRATOR_EMAIL
-            valueFrom:
-              configMapKeyRef:
-                key: administrator-email
-                name: ${NAME}
-          - name: EGO_MEDIA_ROOT
-            valueFrom:
-              configMapKeyRef:
-                key: media-root
-                name: ${NAME}
-          - name: EGO_STATIC_ROOT
-            valueFrom:
-              configMapKeyRef:
-                key: static-root
-                name: ${NAME}
-          - name: EGO_ALLOWED_HOST
-            valueFrom:
-              configMapKeyRef:
-                key: allowed-host
-                name: ${NAME}
-          - name: EGO_XAPIAN_DB
-            valueFrom:
-              configMapKeyRef:
-                key: xapian-db
-                name: ${NAME}
+          - celery
+          envFrom:
+          - configMapRef:
+              name: ${NAME}
+          - secretRef:
+              name: ${NAME}
           image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
-          livenessProbe:
-            initialDelaySeconds: 30
-            periodSeconds: 60
-            tcpSocket:
-              port: 8001
-            timeoutSeconds: 3
-          name: ${NAME}
-          ports:
-          - containerPort: 8001
-          readinessProbe:
-            initialDelaySeconds: 3
-            periodSeconds: 60
-            tcpSocket:
-              port: 8001
-            timeoutSeconds: 3
-          resources:
-            limits:
-              memory: ${MEMORY_LIMIT}
+          imagePullPolicy: IfNotPresent
+          name: celery-beat
           volumeMounts:
           - mountPath: /extensions-web/www
-            name: data-volume
+            name: extensions-data
             subPath: www
           - mountPath: /extensions-web/data
-            name: data-volume
+            name: extensions-data
             subPath: data
-        - args:
-          - -c
-          - envsubst '$EGO_NODE_ADDRESS' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
-            && nginx -g 'daemon off;'
-          command:
-          - bash
-          env:
-          - name: EGO_NODE_ADDRESS
-            value: ${EGO_NODE_ADDRESS}
-          image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/frontend:latest
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 45
-            periodSeconds: 60
-            timeoutSeconds: 3
-          name: frontend
-          ports:
-          - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 60
-            timeoutSeconds: 3
-          resources:
-            limits:
-              memory: 512Mi
-          volumeMounts:
-          - mountPath: /extensions-web/www
-            name: data-volume
-            subPath: www
+          - mountPath: /extensions-web/tmp
+            name: extensions-data
+            subPath: tmp
         volumes:
-        - name: data-volume
+        - name: extensions-data
           persistentVolumeClaim:
-            claimName: extensions-claim
-    triggers:
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-        - ${NAME}
-        from:
-          kind: ImageStreamTag
-          name: ${NAME}:latest
-      type: ImageChange
-    - type: ConfigChange
+            claimName: ${NAME}-data
 - apiVersion: batch/v1beta1
   kind: CronJob
   metadata:
@@ -356,52 +462,11 @@ objects:
               - python
               - manage.py
               - update_popularity
-              env:
-              - name: EGO_DATABASE_URL
-                valueFrom:
-                  secretKeyRef:
-                    key: database-url
-                    name: ${NAME}
-              - name: EGO_EMAIL_URL
-                valueFrom:
-                  secretKeyRef:
-                    key: email-url
-                    name: ${NAME}
-              - name: EGO_SECRET_KEY
-                valueFrom:
-                  secretKeyRef:
-                    key: secret-key
-                    name: ${NAME}
-              - name: EGO_ADMINISTRATOR_NAME
-                valueFrom:
-                  configMapKeyRef:
-                    key: administrator-name
-                    name: ${NAME}
-              - name: EGO_ADMINISTRATOR_EMAIL
-                valueFrom:
-                  configMapKeyRef:
-                    key: administrator-email
-                    name: ${NAME}
-              - name: EGO_MEDIA_ROOT
-                valueFrom:
-                  configMapKeyRef:
-                    key: media-root
-                    name: extensions-web
-              - name: EGO_STATIC_ROOT
-                valueFrom:
-                  configMapKeyRef:
-                    key: static-root
-                    name: extensions-web
-              - name: EGO_ALLOWED_HOST
-                valueFrom:
-                  configMapKeyRef:
-                    key: allowed-host
-                    name: ${NAME}
-              - name: EGO_XAPIAN_DB
-                valueFrom:
-                  configMapKeyRef:
-                    key: xapian-db
-                    name: ${NAME}
+              envFrom:
+              - configMapRef:
+                  name: ${NAME}
+              - secretRef:
+                  name: ${NAME}
               image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
               name: update-popularity
             restartPolicy: Never
@@ -420,52 +485,11 @@ objects:
               - python
               - manage.py
               - clean_users
-              env:
-              - name: EGO_DATABASE_URL
-                valueFrom:
-                  secretKeyRef:
-                    key: database-url
-                    name: ${NAME}
-              - name: EGO_EMAIL_URL
-                valueFrom:
-                  secretKeyRef:
-                    key: email-url
-                    name: ${NAME}
-              - name: EGO_SECRET_KEY
-                valueFrom:
-                  secretKeyRef:
-                    key: secret-key
-                    name: ${NAME}
-              - name: EGO_ADMINISTRATOR_NAME
-                valueFrom:
-                  configMapKeyRef:
-                    key: administrator-name
-                    name: ${NAME}
-              - name: EGO_ADMINISTRATOR_EMAIL
-                valueFrom:
-                  configMapKeyRef:
-                    key: administrator-email
-                    name: ${NAME}
-              - name: EGO_MEDIA_ROOT
-                valueFrom:
-                  configMapKeyRef:
-                    key: media-root
-                    name: extensions-web
-              - name: EGO_STATIC_ROOT
-                valueFrom:
-                  configMapKeyRef:
-                    key: static-root
-                    name: extensions-web
-              - name: EGO_ALLOWED_HOST
-                valueFrom:
-                  configMapKeyRef:
-                    key: allowed-host
-                    name: ${NAME}
-              - name: EGO_XAPIAN_DB
-                valueFrom:
-                  configMapKeyRef:
-                    key: xapian-db
-                    name: ${NAME}
+              envFrom:
+              - configMapRef:
+                  name: ${NAME}
+              - secretRef:
+                  name: ${NAME}
               image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/${NAME}:latest
               name: clean-users
             restartPolicy: Never
@@ -476,7 +500,12 @@ parameters:
   displayName: Name
   name: NAME
   required: true
-  value: extensions-web
+  value: extensions
+- description: Number of application replicas.
+  displayName: Replicas
+  name: REPLICAS
+  required: true
+  value: '3'
 - description: The OpenShift Namespace where the ImageStream resides.
   displayName: Namespace
   name: NAMESPACE
@@ -517,10 +546,10 @@ parameters:
   displayName: Email URL
   name: EGO_EMAIL_URL
   value: ''
-- description: Either DNS name or IP address. Should be 127.0.0.1 for Openshift.
-  displayName: Address of extensions-web container
-  name: EGO_NODE_ADDRESS
-  value: 127.0.0.1
+- description: Celery broker URL
+  displayName: Celery broker URL
+  name: EGO_CELERY_BROKER_URL
+  value: ''
 - description: Django secret key.
   displayName: Django secret key
   name: EGO_SECRET_KEY
@@ -533,4 +562,3 @@ parameters:
   displayName: Docker registry.
   name: DEFAULT_DOCKER_REGISTRY
   value: docker-registry.default.svc:5000
-

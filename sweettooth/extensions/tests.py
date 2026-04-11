@@ -12,12 +12,13 @@ from django.core.files.base import File
 from django.test import Client, TestCase, TransactionTestCase
 from django.test.utils import override_settings
 from django.urls import reverse
-from rest_framework.test import APITransactionTestCase
 
 from sweettooth.extensions import models, views
 from sweettooth.testutils import (
-    BasicAPIUserTestCase,
+    BasicAPITransactionUserTestCase,
+    BasicTransactionUserTestCase,
     BasicUserTestCase,
+    SilentDjangoRequestMixin,
     SilentDjangoRequestTest,
 )
 
@@ -505,7 +506,7 @@ class UploadPageTest(BasicUserTestCase, TransactionTestCase):
 
 
 @override_settings(OPENSEARCH_DSL_AUTOSYNC=False)
-class UploadSessionTest(BasicUserTestCase, TransactionTestCase, UploadTest):
+class UploadSessionTest(BasicTransactionUserTestCase, UploadTest):
     def upload_file(
         self,
         zipfile: str,
@@ -584,7 +585,7 @@ class UploadSessionTest(BasicUserTestCase, TransactionTestCase, UploadTest):
 
 @override_settings(OPENSEARCH_DSL_AUTOSYNC=False)
 class UploadAPITest(
-    APITransactionTestCase, BasicAPIUserTestCase, SilentDjangoRequestTest, UploadTest
+    SilentDjangoRequestMixin, BasicAPITransactionUserTestCase, UploadTest
 ):
     def upload_file(
         self,

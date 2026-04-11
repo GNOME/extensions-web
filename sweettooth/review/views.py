@@ -23,8 +23,13 @@ from django.views.decorators.http import require_POST
 from sweettooth.decorators import ajax_view, model_view
 from sweettooth.extensions import models
 from sweettooth.review.diffutils import get_chunks
-from sweettooth.review.models import CodeReview, ShexliResult, get_all_reviewers
+from sweettooth.review.models import CodeReview, ShexliResult
 from sweettooth.review.shexli import run_shexli_for_version
+from sweettooth.review.tasks import (
+    send_auto_approved_email,
+    send_review_submitted_email,
+    send_reviewed_email,
+)
 
 IMAGE_TYPES = {
     ".png": "image/png",
@@ -458,52 +463,6 @@ def send_mass_mail(
     return connection.send_messages(messages)
 
 
-def send_email_submitted(request, version):
-    extension = version.extension
-
-    url = request.build_absolute_uri(
-        reverse("review-version", kwargs=dict(pk=version.pk))
-    )
-
-    data = dict(url=url)
-
-    recipient_list = list(get_all_reviewers().values_list("email", flat=True))
-
-    message = render_mail(version, "submitted", data)
-    message.extra_headers.update(
-        {
-            "X-SweetTooth-Purpose": "NewExtension",
-            "X-SweetTooth-ExtensionCreator": extension.creator.username,
-        }
-    )
-
-    send_mass_mail(message.subject, message.body, recipient_list, message.extra_headers)
-
-
-def send_email_auto_approved(request, version):
-    extension = version.extension
-
-    review_url = request.build_absolute_uri(
-        reverse("review-version", kwargs=dict(pk=version.pk))
-    )
-    version_url = request.build_absolute_uri(version.get_absolute_url())
-
-    recipient_list = list(get_all_reviewers().values_list("email", flat=True))
-    recipient_list.append(extension.creator.email)
-
-    data = dict(version_url=version_url, review_url=review_url)
-
-    message = render_mail(version, "auto_approved", data)
-    message.extra_headers.update(
-        {
-            "X-SweetTooth-Purpose": "AutoApproved",
-            "X-SweetTooth-ExtensionCreator": extension.creator.username,
-        }
-    )
-
-    send_mass_mail(message.subject, message.body, recipient_list, message.extra_headers)
-
-
 def should_auto_approve_changeset(changes):
     for filename in itertools.chain(changes["changed"], changes["added"]):
         # metadata.json updates are safe.
@@ -567,6 +526,10 @@ def should_auto_approve(version: models.ExtensionVersion):
 
 
 def extension_submitted(sender, request, version: models.ExtensionVersion, **kwargs):
+    review_url = request.build_absolute_uri(
+        reverse("review-version", kwargs=dict(pk=version.pk))
+    )
+
     if should_auto_approve(version):
         CodeReview.objects.create(
             version=version,
@@ -577,10 +540,12 @@ def extension_submitted(sender, request, version: models.ExtensionVersion, **kwa
         )
         version.status = models.STATUS_ACTIVE
         version.save()
-        send_email_auto_approved(request, version)
+        send_auto_approved_email.delay(
+            version.pk,
+            review_url,
+            request.build_absolute_uri(version.get_absolute_url()),
+        )
     else:
-        send_email_submitted(request, version)
-
         unreviewed_versions = version.extension.versions.filter(
             version__lt=version.version,
             status__in=(models.STATUS_UNREVIEWED, models.STATUS_WAITING),
@@ -603,6 +568,10 @@ def extension_submitted(sender, request, version: models.ExtensionVersion, **kwa
             _version.status = models.STATUS_REJECTED
             _version.save()
 
+        send_review_submitted_email.delay(
+            version.pk,
+            review_url,
+        )
         run_shexli_for_version(version)
 
 
@@ -610,32 +579,13 @@ models.submitted_for_review.connect(extension_submitted)
 
 
 def send_email_on_reviewed(sender, request, version, review, **kwargs):
-    extension = version.extension
-
-    url = request.build_absolute_uri(
-        reverse("review-version", kwargs=dict(pk=version.pk))
+    send_reviewed_email.delay(
+        version.pk,
+        review.pk,
+        request.build_absolute_uri(
+            reverse("review-version", kwargs=dict(pk=version.pk))
+        ),
     )
-
-    data = dict(review=review, url=url)
-
-    recipient_list = list(
-        version.reviews.values_list("reviewer__email", flat=True).distinct()
-    )
-    recipient_list.append(extension.creator.email)
-
-    if review.reviewer.email in recipient_list:
-        # Don't spam the reviewer with his own review.
-        recipient_list.remove(review.reviewer.email)
-
-    message = render_mail(version, "reviewed", data)
-    message.extra_headers.update(
-        {
-            "X-SweetTooth-Purpose": "NewReview",
-            "X-SweetTooth-Reviewer": review.reviewer.username,
-        }
-    )
-
-    send_mass_mail(message.subject, message.body, recipient_list, message.extra_headers)
 
 
 models.reviewed.connect(send_email_on_reviewed)
