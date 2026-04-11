@@ -38,8 +38,7 @@ stages:
   before_script:
     - pip install -r requirements.dev.txt
   variables:
-    EGO_DEBUG: 1
-    EGO_SECRET_KEY: .
+    DJANGO_SETTINGS_MODULE: sweettooth.settings_test
     EGO_OPENSEARCH_ADDRESS: opensearch:9200
   needs: []
 
@@ -86,8 +85,6 @@ test collectstatic:
   stage: test
   script:
     - ./manage.py collectstatic --noinput
-  variables:
-    EGO_STATIC_ROOT: static
 
 check migrations:
   extends:

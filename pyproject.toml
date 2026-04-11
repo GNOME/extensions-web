@@ -24,7 +24,10 @@ classifiers = [
 dependencies = [
     "Django==5.2.13",
     "djangorestframework==3.17.1",
+    "celery==5.6.3",
     "django-autoslug==1.9.9",
+    "django-celery-beat==2.9.0",
+    "django-celery-results==2.6.0",
     "django-contrib-comments==2.2.0",
     "django-cors-headers==4.6.0",
     "django-filter==23.3",
@@ -34,8 +37,10 @@ dependencies = [
     "django-opensearch-dsl==0.7.0",
     "django-recaptcha==3.0.0",
     "django-registration==3.4",
+
     "drf-nested-routers==0.93.4",
     "drf-spectacular[sidecar]==0.26.5",
+
     "Pygments==2.20.0",
     "tree-sitter==0.25.2",
     "tree-sitter-javascript>=0.25.0",
@@ -50,6 +55,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "celery-types==0.26.0",
     "django-stubs==5.2.9",
     "djangorestframework-stubs==3.16.9",
     "pip-tools==7.5.3",
