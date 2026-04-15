@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -53,7 +53,7 @@ msgstr "ანგარიშის წაშლის გასაუქმე�
 
 #: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
-msgstr "მომხმარებლის სახელი ან ელ-ფოსტა"
+msgstr "მომხმარებლის სახელი ან ელფოსტა"
 
 #: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
@@ -79,7 +79,7 @@ msgstr "მნიშვნელობა შეიძლება შეიც�
 
 #: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
-msgstr "ელ-ფოსტა"
+msgstr "ელფოსტა"
 
 #: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
@@ -293,27 +293,7 @@ msgstr ""
 "ვერსიის სახელში დაშვებულია მხოლოდ ალფარიცხვითი სიმბოლოები (ლათინური), "
 "ჰარეები და წერტილები."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"მე ვეთანხმები, რომ extensions.gnome.org ვებგვერდის პერსონალს შეუძლია "
-"წაშალოს, შეცვალოს ან გადასცეს სხვას ჩემს მიერ ატვირთული გაფართოება"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "'metadata.json'-ში ველი 'uuid' აღმოჩენილი არაა"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "ამ UUID-ით გაფართოება უკვე დამატებულია"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "უნდა დაეთანხმოთ extensions.gnome.org-ის მომსახურების პირობებს"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -324,6 +304,30 @@ msgstr ""
 "გაფართოების ლიცენზიისა GNOME Shell-ის ლიცენზიასთან, გაფართოება, რომელიც მე "
 "ავტვირთე, შეიძლება გამოყენებული იქნას ნებისმიერი GNOME Shell-ის მომხმარებლის "
 "მიერ ლიცენზიით, რომელსაც GNOME Shell იყენებს"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"მე ვეთანხმები, რომ extensions.gnome.org ვებგვერდის პერსონალს შეუძლია "
+"წაშალოს, შეცვალოს ან გადასცეს სხვას ჩემს მიერ ატვირთული გაფართოება"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "'metadata.json'-ში ველი 'uuid' აღმოჩენილი არაა"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "ამ UUID-ით გაფართოება უკვე დამატებულია"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "'metadata.json'-ში ველი 'version-name' აღმოჩენილი არაა"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "უნდა დაეთანხმოთ extensions.gnome.org-ის მომსახურების პირობებს"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -494,12 +498,7 @@ msgstr "დაყენებული გაფართოებები"
 msgid "Shell settings"
 msgstr "გარსის მორგება"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "გაფართოების ატვირთვა"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -510,7 +509,7 @@ msgstr ""
 "ვერსიების ატვირთვა იგივე ფორმით ხდება. როცა თქვენი გაფართოების მიმოხილვა "
 "დასრულდება, ამის შესახებ ელფოსტაზე მოგწერთ."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -520,7 +519,7 @@ msgstr ""
 "იხილეთ <a href=\"%(url)s\">მიმოხილვის სახელმძღვანელო</a> რომ გაიგოთ, რა არის "
 "საჭირო დასტურის მისაღებად."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -532,7 +531,7 @@ msgstr ""
 "href=\"%(url)s\">gjs.guide</a> გაფართოების შექმნისა და მისი ასატვირთად "
 "მომზადებისთვის."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -542,7 +541,7 @@ msgstr ""
 "გაფართოებები, რომლებიც ვრცელდება ამ ვებგვერდით, ექვემდებარება <a "
 "href=\"%(url)s\">ამ ქცევის წესებს</a>."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -551,6 +550,25 @@ msgid ""
 msgstr ""
 "გაფართოებები, რომლებიც არღვევენ <a href=\"%(url)s\">ქცევის წესებს</a>, "
 "წაიშლება ვებსაიტიდან."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"ატვირთვამდე, შეგიძლიათ, გაუშვათ სტატიკური ანალიზის პროგრამა Shexli "
+"ლოკალურად, რომ ადრეულად დაიჭიროთ ზოგადი შეფუთვისა და გადახედვის შეცდომები."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "გაფართოების ატვირთვა"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "ატვირთვა ჩავარდა. თავიდან სცადეთ."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -600,6 +618,48 @@ msgstr "კომენტარის დაპოსტვა"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "ჩაასწორეთ თქვენი კომენტარი"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (ექსპერიმენტული)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli-მა იპოვა 1 პრობლემა, რომელსაც შეიძლება, გადამხედის ყურადღება "
+"სჭირდება.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli-მა იპოვა %(count)s პრობლემა, რომელსაც შეიძლება, გადამხედის "
+"ყურადღება სჭირდება.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli-მა პრობლემები ვერ იპოვა."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli-ს ამ ვერსიის ანალიზი არ შეუძლია."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli-ს ჯერ შედეგი არ გამოუტანია."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
