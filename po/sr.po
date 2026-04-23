@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-03 15:18+0000\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
 "PO-Revision-Date: 2026-04-04 13:13+0200\n"
 "Last-Translator: Марко Костић <marko.m.kostic@gmail.com>\n"
 "Language-Team: Serbian <gnome-sr@googlegroups.com>\n"
@@ -297,27 +297,7 @@ msgstr ""
 "Само словнобројевни знаци (на енглеском), размаци и тачке су дозвољени за "
 "назив издања."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Слажем се да особље „extensions.gnome.org“ веб сајта може да уклони, измени "
-"или да поново додели одржавање проширења које сам ја отпремио"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "Поље „uuid“ недостаје у „metadata.json“"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Проширење са тим УУИД-ом је већ додато"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "Морате се сложити са условима „extensions.gnome.org“ услуге"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -328,6 +308,30 @@ msgstr ""
 "контроверзном случају у погледу сагласности лиценце проширења са лиценцом "
 "Гномове Шкољке, ово проширење које сам ја отпремио може да користи сваки "
 "корисник Гномове Шкољке под условима лиценце коју користи Гномова Шкољка"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Слажем се да особље „extensions.gnome.org“ веб сајта може да уклони, измени "
+"или да поново додели одржавање проширења које сам ја отпремио"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Поље „uuid“ недостаје у „metadata.json“"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Проширење са тим УУИД-ом је већ додато"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "Поље `version-name` у датотеци `metadata.json` мора бити ниска"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Морате се сложити са условима „extensions.gnome.org“ услуге"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -499,12 +503,7 @@ msgstr "Инсталирана проширења"
 msgid "Shell settings"
 msgstr "Поставке шкољке"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Отпреми проширење"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -515,7 +514,7 @@ msgstr ""
 "издања се могу отпремити помоћу истог обрасца. Када ваше проширење буде било "
 "прегледано бићете обавештени о резултату путем е-поште."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -525,7 +524,7 @@ msgstr ""
 "Видите <a href=\"%(url)s\">Смернице за оцењивање</a> да сазнате шта је "
 "потребно за одобравање."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -537,7 +536,7 @@ msgstr ""
 "href=\"%(url)s\">gjs.guide</a> за смерницама при стварању проширења и његове "
 "припреме за отпремање."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -547,7 +546,7 @@ msgstr ""
 "Проширења расподељива путем овог веб сајта подлежу <a "
 "href=\"%(url)s\">Правилима понашања</a>."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -556,6 +555,23 @@ msgid ""
 msgstr ""
 "Проширења која крше <a href=\"%(url)s\">Правила понашања</a> биће уклоњена "
 "са овог веб сајта."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr "Пре отпремања можете локално покренути статички анализатор Шексли како бисте раније уочили уобичајене проблеме са паковањем и прегледом."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Отпреми проширење"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Отпремање није успело. Покушајте поново."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
