@@ -1,14 +1,14 @@
 # Korean translation for extensions-web.
-# Copyright (C) 2019-2025 extensions-web's contributors.
+# Copyright (C) 2019-2026 extensions-web's contributors.
 # This file is distributed under the same license as the extensions-web package.
-# Seong-ho Cho <shcho@gnome.org>, 2019-2025
+# Seong-ho Cho <shcho@gnome.org>, 2019-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-09-06 15:28+0900\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-04-25 14:43+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -254,7 +254,7 @@ msgstr "설치한 확장"
 
 #: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
-msgstr "metadata.json의 `shell-version`키 값을 지정해야 합니다."
+msgstr "metadata.json의 `shell-version`키 값을 지정해야 합니다"
 
 #: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
@@ -287,27 +287,7 @@ msgid ""
 msgstr ""
 "알파벳, 숫자 문자(영문), 공백 문자, 점 문자만 버전 이름에 넣을 수 있습니다."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"extensions.gnome.org 웹사이트 관리자가 본인이 업로드한 확장 기능을 제거하고, "
-"수정하거나, 관리 권한을 철회할 수 있음에 동의합니다"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "`metadata.json`에 `uuid` 필드가 빠졌습니다"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "해당 UUID를 가진 확장 기능은 이미 추가했습니다"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "extensions.gnome.org의 서비스 이용 조항에 동의해야 합니다"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -317,6 +297,30 @@ msgstr ""
 "이 확장 기능을 업로드하며 그놈 셸 라이선스와 확장 라이선스의 호환성 관련 분"
 "쟁 가능성 여부를 검증했으며, 본인이 업로드한 확장 기능은 그놈 셸의 라이선스 "
 "조항에 따라 그놈 셸 사용자가 사용함에 동의합니다"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"extensions.gnome.org 웹사이트 관리자가 본인이 업로드한 확장 기능을 제거하고, "
+"수정하거나, 관리 권한을 철회할 수 있음에 동의합니다"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json`에 `uuid` 필드가 빠졌습니다"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "해당 UUID를 가진 확장 기능은 이미 추가했습니다"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "`metadata.json`에 `version-name` 필드가 빠졌습니다"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "extensions.gnome.org의 서비스 이용 조항에 동의해야 합니다"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -484,12 +488,7 @@ msgstr "설치한 확장"
 msgid "Shell settings"
 msgstr "쉘 설정"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "이 확장 업로드"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -500,7 +499,7 @@ msgstr ""
 "방식으로 업로드할 수 있습니다. 확장 검토가 끝나면 결과 알림을 전자메일로 받"
 "을 수 있습니다."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -510,7 +509,7 @@ msgstr ""
 "승인에 필요한 준비 사항을 알아보려면 <a href=\"%(url)s\">검토 지침</a>을 확인"
 "하십시오."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -521,7 +520,7 @@ msgstr ""
 "첫 확장 기능일 경우, 확장 기능을 만들고 업로드를 준비하는 방법을 <a "
 "href=\"%(url)s\">gjs.guide</a>문서에서 확인하십시오."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -531,7 +530,7 @@ msgstr ""
 "이 웹사이트로 배포하는 확장 기능은 <a href=\"%(url)s\">활동 지침</a>을 준수해"
 "야 합니다."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -540,6 +539,25 @@ msgid ""
 msgstr ""
 "<a href=\"%(url)s\">활동 지침</a>을 위반한 확장 기능은 이 웹사이트에서 제거합"
 "니다."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"업로드 전, Shexli 정적 분석 프로그램을 실행하여 공통 패키징과 검토 문제를 로"
+"컬에서 우선 잡아야 합니다."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "이 확장 업로드"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "업로드 실패. 다시 시도하십시오."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -588,6 +606,42 @@ msgstr "댓글 게시"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "댓글 편집"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli(시험용)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli에서 검토자가 확인해야 할 문제 %(count)s건을 찾았습니다.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli에서 어떤 문제도 찾지 못했습니다."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli에서 이 버전을 분석할 수 없습니다."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli에서 아직 결과를 내지 못했습니다."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
