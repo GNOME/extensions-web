@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-03 15:18+0000\n"
-"PO-Revision-Date: 2026-04-04 10:21+0200\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-04-12 18:18+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -302,27 +302,7 @@ msgstr ""
 "Za ime različice so dovoljeni samo alfanumerični znaki (angleške abecede), "
 "presledki in pike."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Strinjam se, da lahko osebje spletišča extensions.gnome.org odstrani, "
-"spremeni ali prerazporedi vzdrževanje razširitve, ki sem jo naložil_a"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "Polje 'uuid' manjka v 'metadata.json'"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Razširitev s tem UUID je že bila dodana"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "Strinjati se morate s pogoji storitve extensions.gnome.org"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -333,6 +313,30 @@ msgstr ""
 "spornem primeru glede združljivosti dovoljenja razširitve z dovoljenje GNOME "
 "Shell razširitev, ki sem jo naložil_a, uporablja kateri koli uporabnik GNOME "
 "Shell pod pogoji dovoljenja, ki jo uporablja GNOME Shell"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Strinjam se, da lahko osebje spletišča extensions.gnome.org odstrani, "
+"spremeni ali prerazporedi vzdrževanje razširitve, ki sem jo naložil_a"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Polje 'uuid' manjka v 'metadata.json'"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Razširitev s tem UUID je že bila dodana"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "Polje `version-name` v datoteki `metadata.json` mora biti niz"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Strinjati se morate s pogoji storitve extensions.gnome.org"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -504,12 +508,7 @@ msgstr "Nameščene razširitve"
 msgid "Shell settings"
 msgstr "Nastavitve lupine"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Naloži razširitev"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -520,7 +519,7 @@ msgstr ""
 "različice lahko naložite z istim obrazcem. Ko bo razširitev pregledana, "
 "boste o rezultatu obveščeni po e-pošti."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -530,7 +529,7 @@ msgstr ""
 "Oglejte si <a href=\"%(url)s\">smernice za pregled</a> , če želite izvedeti, "
 "kaj je potrebno za odobritev."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -542,7 +541,7 @@ msgstr ""
 "href=\"%(url)s\">gjs.guide</a> - navodila za ustvarjanje razširitve in "
 "pripravo za nalaganje."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -552,7 +551,7 @@ msgstr ""
 "Za razširitve, ki se razširjajo prek te spletne strani, velja <a "
 "href=\"%(url)s\">Kodeks ravnanja</a>."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -561,6 +560,25 @@ msgid ""
 msgstr ""
 "Razširitve, ki kršijo <a href=\"%(url)s\">Kodeks ravnanja</a> , bodo "
 "odstranjene s tega spletnega mesta."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"Pred nalaganjem lahko krajevno zaženete statični analizator Shexli, da že v "
+"zgodnji fazi odkrijete pogoste težave pri izdelavi in pregledovanju paketov."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Naloži razširitev"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Nalaganje ni uspelo. Poskusite znova."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"

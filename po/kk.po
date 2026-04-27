@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2026-01-29 21:55+0500\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-04-16 22:33+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <Kazakh>\n"
 "Language: kk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -291,27 +291,7 @@ msgstr ""
 "Нұсқа аты үшін тек әріптік-сандық таңбалар (ағылш), бос орындар мен нүктелерге "
 "рұқсат етіледі."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Мен extensions.gnome.org сайтының қызметкерлері мен жүктеп салған кеңейтуді "
-"өшіруіне, өзгертуіне немесе қолдаушысын қайта тағайындауына келісемін"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "`metadata.json` ішінде `uuid` өрісі жетіспейді"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Ондай UUID бар кеңейту қосылып қойған"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "extensions.gnome.org қызмет көрсету шарттарымен келісуіңіз керек"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial case "
 "regarding the compatibility of extension's license with the GNOME Shell's "
@@ -322,6 +302,30 @@ msgstr ""
 "лицензиясымен үйлесімділігіне қатысты кез келген даулы жағдайда, мен жүктеп "
 "салған кеңейтуді кез келген GNOME Shell пайдаланушысы GNOME Shell пайдаланатын "
 "лицензия шарттарымен қолдана алатынына келісемін және растаймын"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Мен extensions.gnome.org сайтының қызметкерлері мен жүктеп салған кеңейтуді "
+"өшіруіне, өзгертуіне немесе қолдаушысын қайта тағайындауына келісемін"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json` ішінде `uuid` өрісі жетіспейді"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Ондай UUID бар кеңейту қосылып қойған"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "`metadata.json` файлындағы `version-name` өрісі жол (string) болуы тиіс"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "extensions.gnome.org қызмет көрсету шарттарымен келісуіңіз керек"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -491,12 +495,7 @@ msgstr "Орнатылған кеңейтулер"
 msgid "Shell settings"
 msgstr "Қоршам баптаулары"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Кеңейтуді жүктеп салу"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can be "
@@ -507,7 +506,7 @@ msgstr ""
 "нұсқаларды да осы пішін арқылы жүктеп салуға болады. Кеңейтуіңіз тексерілгеннен "
 "кейін нәтижесі туралы электрондық пошта арқылы хабардар боласыз."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -517,7 +516,7 @@ msgstr ""
 "Мақұлдау үшін не қажет екенін білу үшін <a href=\"%(url)s\">Тексеру ережелерін</"
 "a> қараңыз."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -529,7 +528,7 @@ msgstr ""
 "салуға дайындау нұсқаулары үшін <a href=\"%(url)s\">gjs.guide</a> сайтындағы "
 "құжаттаманы қараңыз."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -539,7 +538,7 @@ msgstr ""
 "Осы сайт арқылы таратылатын кеңейтулерге <a href=\"%(url)s\">Әдеп кодексі</a> "
 "қолданылады."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -547,6 +546,26 @@ msgid ""
 "removed from this website."
 msgstr ""
 "<a href=\"%(url)s\">Әдеп кодексін</a> бұзатын кеңейтулер осы сайттан өшіріледі."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"Жүктеп салмас бұрын, дестелеу және тексеру кезінде жиі кездесетін мәселелерді "
+"алдын ала анықтау үшін Shexli статикалық анализаторын жергілікті түрде "
+"орындауға болады."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Кеңейтуді жүктеп салу"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Жүктеп салу сәтсіз аяқталды. Қайталап көріңіз."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -596,6 +615,46 @@ msgstr "Пікірді жариялау"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "Пікіріңізді түзету"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (эксперименттік)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli тексерушінің назарын қажет ететін 1 мәселе тапты.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli тексерушінің назарын қажет ететін %(count)s мәселе тапты.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli ешқандай мәселе таппады."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli бұл нұсқаны анализдей алмады."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli әлі нәтиже шығарған жоқ."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1

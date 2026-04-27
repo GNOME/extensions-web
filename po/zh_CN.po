@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-03 15:18+0000\n"
-"PO-Revision-Date: 2026-04-06 08:10+0800\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-04-13 08:49+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -286,27 +286,7 @@ msgid ""
 "name."
 msgstr "仅允许字母数字字符（英文）、空格和点用于版本名称。"
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"我同意 extensions.gnome.org 网站的工作人员可以删除、修改或重新分配我已上传的"
-"扩展程序的维护者的身份"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "`metadata.json` 中缺失 `uuid` 字段"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "已添加具有该 UUID 的扩展程序"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "您必须同意 extensions.gnome.org 的服务条款"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -316,6 +296,30 @@ msgstr ""
 "通过上传此扩展，我同意并确认，在扩展许可证与 GNOME Shell 许可证的兼容性存在任"
 "何争议的情况下，我上传的扩展可以由任何 GNOME Shell 用户根据 GNOME Shell 使用"
 "的许可证条款使用"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"我同意 extensions.gnome.org 网站的工作人员可以删除、修改或重新分配我已上传的"
+"扩展程序的维护者的身份"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json` 中缺失 `uuid` 字段"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "已添加具有该 UUID 的扩展程序"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "`metadata.json` 中的 `version-name` 区域必须为字符串"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "您必须同意 extensions.gnome.org 的服务条款"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -483,12 +487,7 @@ msgstr "已安装的扩展"
 msgid "Shell settings"
 msgstr "Shell 设置"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "上传扩展"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -498,7 +497,7 @@ msgstr ""
 "上传您的扩展 Zip 文件以提交审核。可以使用同样的表单上传更新版本的扩展。一旦您"
 "的扩展被审阅，审核的结果将通过邮件通知给您。"
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -506,7 +505,7 @@ msgid ""
 "required for approval."
 msgstr "请参阅 <a href=\"%(url)s\">审核指南</a> 来了解批准所需的条件。"
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -517,7 +516,7 @@ msgstr ""
 "如果这是您的第一个扩展程序，请参阅 <a href=\"%(url)s\">gjs.guide</a> 上的文"
 "档，了解有关创建扩展程序和准备上传的说明。"
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -526,7 +525,7 @@ msgid ""
 msgstr ""
 "通过此网站发行的扩展遵守 <a href=\"%(url)s\">Code of Conduct</a> 协议。"
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -534,6 +533,24 @@ msgid ""
 "removed from this website."
 msgstr ""
 "违反 <a href=\"%(url)s\">Code of Conduct</a> 协议的扩展将会从此网站移除。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"在上传前，您可以本地运行 Shexli 静态分析器以尽早发现常见的打包和审查问题。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "上传扩展"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "上传失败。请重试。"
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
