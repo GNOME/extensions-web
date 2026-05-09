@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-09-13 20:39+0300\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-05-09 18:24+0300\n"
 "Last-Translator: Aurimas Černius <aurimas.cernius@mailo.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.9\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -297,27 +297,7 @@ msgstr ""
 "Versijos pavadinime gali būti tik alfaskaitmenys (angliški), tarpai ir "
 "taškai."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Sutinku, kad extensions.gnome.org tinklalapio darbuotojai gali pašalinti, "
-"keisti arba perskirti mano įkelto plėtinio priežiūrą"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "`metadata.json` faile trūksta lauko `uuid`"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Plėtinys su tokiu UUID jau buvo pridėtas"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "Turite sutikti su extensions.gnome.org naudojimosi sąlygomis"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -328,6 +308,30 @@ msgstr ""
 "atveju, susijusiu su plėtinio licencijos suderinamumu su GNOME Apvalkalo "
 "licencija, mano įkeltas plėtinys gali būti naudojamas bet kurio GNOME "
 "Apvalkalo naudotojo GNOME Apvalkalo licencijos sąlygomis"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Sutinku, kad extensions.gnome.org tinklalapio darbuotojai gali pašalinti, "
+"keisti arba perskirti mano įkelto plėtinio priežiūrą"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json` faile trūksta lauko `uuid`"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Plėtinys su tokiu UUID jau buvo pridėtas"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "Laukas „version-name“ „metadata.json“ faile turi būti simbolių eilutė"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Turite sutikti su extensions.gnome.org naudojimosi sąlygomis"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -499,12 +503,7 @@ msgstr "Įdiegti plėtiniai"
 msgid "Shell settings"
 msgstr "Apvalkalo nustatymai"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Įkelti plėtinį"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -515,7 +514,7 @@ msgstr ""
 "gali būti atnaujintos naudojant tą pačią formą. Kai jūsų plėtinys bus "
 "peržiūrėtas, jums bus pranešta el. paštu."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -524,7 +523,7 @@ msgid ""
 msgstr ""
 "Ko reikia patvirtinimui gauti rasite <a href=\"%(url)s\">peržiūros gide</a>."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -535,7 +534,7 @@ msgstr ""
 "Jei tai yra jūsų pirmas plėtinys, perskaitykite dokumentacijoje <a "
 "href=\"%(url)s\">gjs.guide</a>, kai sukurti plėtinį ir jį paruošti įkėlimui."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -545,7 +544,7 @@ msgstr ""
 "Šioje svetainėje platinamiems plėtiniams galioja <a href=\"%(url)s\">elgesio "
 "taisyklės</a>."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -554,6 +553,25 @@ msgid ""
 msgstr ""
 "Plėtiniai, kurie pažeidžia <a href=\"%(url)s\">elgesio taisykles</a>, bus "
 "pašalinti iš šios svetainės."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"Prieš nusiųsdami galite paleisti Shexli statinį analizatorių ir anksti "
+"aptikti dažnas pakavimo ar peržiūros problemas."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Įkelti plėtinį"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Nepavyko nusiųsti. Bandykite dar kartą."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -604,6 +622,50 @@ msgstr "Paskelbti komentarą"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "Taisyti savo komentarą"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (eksperimentinis)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli rado %(count)s problemą, kurią gali tekti peržiūrėti.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli rado %(count)sproblemas, kurias gali tekti peržiūrėti.\n"
+"    "
+msgstr[2] ""
+"\n"
+"    Shexli rado %(count)s problemų, kurias gali tekti peržiūrėti.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli nerado problemų."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli nepavyko išanalizuoti šios versijos."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli dar nepateikė rezultato."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
