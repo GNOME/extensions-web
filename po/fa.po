@@ -1,22 +1,22 @@
 # Persian translation for extensions-web.
 # Copyright (C) 2020 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
-# Danial Behzadi <dani.behzi@ubuntu.com>, 2020-2025.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2020-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-07-07 04:05+0330\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-05-18 21:02+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.6\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.9\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -286,27 +286,7 @@ msgid ""
 "name."
 msgstr "تنها نویسه‌های عددحرفی (انگلیسی)، فاصله و نقطه برای نام نگارش مجازند."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"موافقم که کارکنان پایگاه وب extensions.gnome.org می‌توانند افزونهٔ بارگذاشته‌ام را "
-"برداشته، تغییر داده یا نگه‌داریش را به دیگری اختصاص دهند"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "زمینهٔ uuid در metadata.json نیست"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "افزونه‌ای با این شناسهٔء یکتا از پیش اضافه شده"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "باید با شرایط خدمت extensions.gnome.org موافقت کنید"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial case "
 "regarding the compatibility of extension's license with the GNOME Shell's "
@@ -316,6 +296,30 @@ msgstr ""
 "با بارگذاری این افزونه موافقت و تأیید می‌کنم که در هر مورد مناقشه برانگیز مربوط "
 "به سازگاری پروانهٔ افزونه با پروانهٔ پوستهٔ گنوم، افزونهٔ بارگذاشته‌ام می‌تواند از سوی "
 "هر کاربر پوستهٔ گنوم با شرایط پروانهٔ استفاده شده به دست پوستهٔ گنوم استفاده شود"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"موافقم که کارکنان پایگاه وب extensions.gnome.org می‌توانند افزونهٔ بارگذاشته‌ام را "
+"برداشته، تغییر داده یا نگه‌داریش را به دیگری اختصاص دهند"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "زمینهٔ uuid در metadata.json نیست"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "افزونه‌ای با این شناسهٔء یکتا از پیش اضافه شده"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "زمینهٔ version-name در metadata.json باید رشته باشد"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "باید با شرایط خدمت extensions.gnome.org موافقت کنید"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -484,12 +488,7 @@ msgstr "افزونه‌های نصب‌شده"
 msgid "Shell settings"
 msgstr "تنظیمات پوسته"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "بارگذاری افزونه"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can be "
@@ -499,7 +498,7 @@ msgstr ""
 "بارگذاری پروندهٔ Zip افزونه برای باربینی. نگارش‌های بعدی می‌توانند از طریق همین فرم "
 "بار گذاشته شوند. پس از بررسی افزونه‌تان از طریق رایانامه از نتیجه آگاه خواهید شد."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -508,7 +507,7 @@ msgid ""
 msgstr ""
 "برای دانستن الزامات تأیید <a href=\"%(url)s\">رهنمودهای بازبینی</a> را ببینید."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -519,7 +518,7 @@ msgstr ""
 "اگر نخستین افزونه‌تان است، لطفاً برای مستندات <a href=\"%(url)s\">gjs.guide</a> را "
 "برای ایجاد افزونه و آماده کردنش برای بارگذاری را ببینید."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -529,7 +528,7 @@ msgstr ""
 "افزونه‌های توزیع شده از طریق این پایگاه وب مطابق <a href=\"%(url)s\">قواعد "
 "رفتاری</a> گنومند."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -538,6 +537,25 @@ msgid ""
 msgstr ""
 "افزونه‌هایی که <a href=\"%(url)s\">قواعد رفتاری</a> را زیر پا بگذراند از این "
 "پایگاه حذف خواهند شد."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch common "
+"packaging and review issues early."
+msgstr ""
+"می‌توانید پیش از بارگذاری تحلیلگر ایستای Shexli را برای یافتن زودهنگام مشکلات "
+"بسته‌بندی و بازبینی رایج اجرا کنید."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "بارگذاری افزونه"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "بارگذاری شکست خورد. لطفاً دوباره تلاش کنید."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -587,6 +605,46 @@ msgstr "فرستادن نظر"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "ویرایش نظرتان"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "‏Shexli (آزمایشی)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"‫‏    Shexli مشکلی یافت که ممکن است نیازمند توجّه باشد.\n"
+"    "
+msgstr[1] ""
+"\n"
+"‫‏    Shexli‏ %(count)s مشکل یافت که ممکن است نیازمند توجّه باشند.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "‏Shexli هیچ مشکلی را پیدا نکرد."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "‏Shexli نتوانست این نگارش را تحلیل کند."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "‏Shexli هنوز نتیجه‌ای نداده است."
 
 #: sweettooth/review/templates/review/review.html:73 extensions-web-domain-django:1
 msgid ""
