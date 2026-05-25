@@ -12,16 +12,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2026-02-25 18:13+0100\n"
-"Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-04-12 09:22+0900\n"
+"Last-Translator: Julien Humbert <julroy67@gmail.com>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-DL-Lang: fr\n"
 "X-DL-Module: extensions-web\n"
 "X-DL-Branch: master\n"
@@ -318,29 +318,7 @@ msgstr ""
 "Seuls les caractères alphanumériques (ang), les espaces et points sont "
 "autorisés pour les noms de version."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"J’accepte que le personnel du site Web extensions.gnome.org puisse "
-"supprimer, modifier ou réaffecter la maintenance de l’extension que je "
-"téléverse"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "Il manque le champ `uuid` au fichier `metadata.json`"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Une extension avec cet UUID a déjà été ajoutée"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr ""
-"Vous devez accepter les conditions d’utilisation de extensions.gnome.org"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -352,6 +330,34 @@ msgstr ""
 "l’extension téléversée puisse être utilisée par tout utilisateur de GNOME "
 "Shell selon les termes de la licence de ce dernier"
 
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"J’accepte que le personnel du site Web extensions.gnome.org puisse "
+"supprimer, modifier ou réaffecter la maintenance de l’extension que je "
+"téléverse"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Il manque le champ « uuid » au fichier « metadata.json »"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Une extension avec cet UUID a déjà été ajoutée"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr ""
+"Le champ « version-name » du fichier « metadata.json » doit être une chaîne "
+"de caractères"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr ""
+"Vous devez accepter les conditions d’utilisation de extensions.gnome.org"
+
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
 msgid "Proceed anyway"
@@ -360,7 +366,7 @@ msgstr "Continuer quand même"
 #: sweettooth/extensions/templates/extensions/away.html:3
 #: extensions-web-domain-django:1
 msgid "You are leaving GNOME Extensions website"
-msgstr "Vous allez quitter le site web des extensions de GNOME "
+msgstr "Vous allez quitter le site web des extensions de GNOME"
 
 #: sweettooth/extensions/templates/extensions/away.html:6
 #: extensions-web-domain-django:1
@@ -524,12 +530,7 @@ msgstr "Extensions installées"
 msgid "Shell settings"
 msgstr "Paramètres du Shell"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Téléverser l’extension"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -540,7 +541,7 @@ msgstr ""
 "ultérieures peuvent être téléversées de la même manière. Une fois votre "
 "extension examinée, vous serez informé du résultat par courriel."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -550,7 +551,7 @@ msgstr ""
 "Veuillez consulter les <a href=\"%(url)s\">lignes directrices d’examen</a> "
 "pour connaître les conditions d’approbation."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -562,7 +563,7 @@ msgstr ""
 "sur <a href=\"%(url)s\">gjs.guide</a> pour plus d’indications sur la "
 "création et le téléversement d’une extension."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -572,7 +573,7 @@ msgstr ""
 "Les extensions mises à disposition sur ce site web sont soumises au <a "
 "href=\"%(url)s\">code de conduite</a>."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -581,6 +582,26 @@ msgid ""
 msgstr ""
 "Les extensions qui violent le <a href=\"%(url)s\">code de conduite</a> "
 "seront supprimées de ce site web."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"Avant de procéder au téléversement, vous pouvez exécuter l’analyseur "
+"statique Shexli en local afin de détecter et réviser rapidement les "
+"problèmes courants liés à l’empaquetage."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Téléverser l’extension"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Échec du téléversement. Veuillez réessayer."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -630,6 +651,46 @@ msgstr "Envoyer le commentaire"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "Modifier le commentaire"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (expérimental)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli a détecté un problème qui pourrait nécessiter une relecture."
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli a détecté %(count)s problèmes qui pourraient nécessiter une relecture."
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli n’a détecté aucun problème."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli n’a pas pu analyser cette version."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli n’a pas encore produit de résultat."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
