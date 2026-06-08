@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-03 15:18+0000\n"
-"PO-Revision-Date: 2026-04-04 07:46+1000\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-04-17 22:02+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -306,28 +306,7 @@ msgstr ""
 "В названии версии допускаются только буквенно-цифровые символы (английские), "
 "пробелы и точки."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Я согласен с тем, что сотрудники веб-сайта extensions.gnome.org могут "
-"удалить, изменить или переназначить поддержку загруженного мной расширения"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "Поле «uuid» отсутствует в «metadata.json»"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Расширение с таким UUID уже добавлено"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr ""
-"Вы должны согласиться с условиями предоставляемыми extensions.gnome.org"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -338,6 +317,31 @@ msgstr ""
 "случае, касающемся совместимости лицензии расширения с лицензией GNOME "
 "Shell, загруженное мной расширение может использоваться любым пользователем "
 "GNOME Shell на условиях лицензии, используемой GNOME Shell"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Я согласен с тем, что сотрудники веб-сайта extensions.gnome.org могут "
+"удалить, изменить или переназначить поддержку загруженного мной расширения"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Поле «uuid» отсутствует в «metadata.json»"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Расширение с таким UUID уже добавлено"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "Содержимым поля «version-name» в «metadata.json» должна быть строкой"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr ""
+"Вы должны согласиться с условиями предоставляемыми extensions.gnome.org"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -511,12 +515,7 @@ msgstr "Установленные расширения"
 msgid "Shell settings"
 msgstr "Настройки оболочки"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Обновить расширение"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -528,7 +527,7 @@ msgstr ""
 "расширение будет рассмотрено, вы будете уведомлены о результате по "
 "электронной почте."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -538,7 +537,7 @@ msgstr ""
 "Пожалуйста, ознакомьтесь с <a href=\"%(url)s\">Рекомендациями по "
 "рассмотрению</a>, чтобы узнать, что требуется для утверждения."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -550,7 +549,7 @@ msgstr ""
 "href=\"%(url)s\">gjs.guide</a> для получения инструкций по созданию "
 "расширения и подготовке его к загрузке."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -560,7 +559,7 @@ msgstr ""
 "Расширения, распространяемые через этот веб-сайт, подпадают под действие <a "
 "href=\"%(url)s\">Кодекса поведения</a>."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -569,6 +568,26 @@ msgid ""
 msgstr ""
 "Расширения, нарушающие <a href=\"%(url)s\">Кодекс поведения</a>, будут "
 "удалены с этого веб-сайта."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"Перед загрузкой вы можете локально запустить статический анализатор Shexli, "
+"чтобы выявить распространенные проблемы с упаковкой и проанализировать их на "
+"ранней стадии."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Загрузить расширение"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Не удалось загрузить. Пожалуйста, повторите попытку."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -665,7 +684,7 @@ msgstr "Shexli не удалось проанализировать эту ве�
 #: sweettooth/review/templates/review/review.html:156
 #: extensions-web-domain-django:1
 msgid "Shexli has not produced a result yet."
-msgstr "Shexli ещё не сообщало о результатах"
+msgstr "Shexli ещё не сообщало о результатах."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
