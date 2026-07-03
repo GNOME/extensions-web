@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: extensions-web\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
 "POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-06-14 11:51+0200\n"
+"PO-Revision-Date: 2026-07-03 17:44+0200\n"
 "Last-Translator: Victoria Niedzielska <victorian@gnome.org>\n"
 "Language-Team: Polish <https://l10n.gnome.org/teams/pl/>\n"
 "Language: pl\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
-msgstr "Nie można zmieniać adresu email częściej niż co 7 dni"
+msgstr "Nie można zmieniać adresu e-mail częściej niż co 7 dni"
 
 #: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
@@ -56,7 +56,7 @@ msgstr "Anulowanie usunięcia konta nie wymaga podania hasła"
 
 #: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
-msgstr "Nazwa użytkownika lub adres email"
+msgstr "Nazwa użytkownika lub adres e-mail"
 
 #: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
@@ -65,7 +65,7 @@ msgid ""
 "using your username or you can request removal of duplicate accounts using "
 "GNOME Gitlab (%(url)s)."
 msgstr ""
-"Na jeden adres email zarejestrowano wiele kont. Możesz zalogować się za "
+"Na jeden adres e-mail zarejestrowano wiele kont. Możesz zalogować się za "
 "pomocą swojej nazwy użytkownika lub poprosić o usunięcie podwójnych kont za "
 "pomocą serwisu GitLab projektu GNOME (%(url)s)."
 
@@ -83,12 +83,12 @@ msgstr "Ta wartość może zawierać tylko litery, liczby i znaki @/./+/-/_."
 
 #: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
-msgstr "Adres email"
+msgstr "Adres e-mail"
 
 #: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
 #: extensions-web-domain-django:1
 msgid "You should not use email as username"
-msgstr "Nie należy używać adresu email jako nazwy użytkownika"
+msgstr "Nie należy używać adresu e-mail jako nazwy użytkownika"
 
 #: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
@@ -96,7 +96,7 @@ msgstr "Wybrana nazwa użytkownika zawiera zabronione słowa"
 
 #: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
-msgstr "Ten adres email jest już zarejestrowany"
+msgstr "Ten adres e-mail jest już zarejestrowany"
 
 #: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
@@ -135,7 +135,7 @@ msgstr "Anulowano usunięcie konta."
 #: sweettooth/auth/templates/profile/email_confirm.html:4
 #: extensions-web-domain-django:1
 msgid "Email confirmation"
-msgstr "Potwierdzenie adresu email"
+msgstr "Potwierdzenie adresu e-mail"
 
 #: sweettooth/auth/templates/profile/settings.html:4
 #: extensions-web-domain-django:1
@@ -211,12 +211,12 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Nie pamiętasz hasła? Proszę podać adres email poniżej, a wyślemy instrukcje "
+"Nie pamiętasz hasła? Proszę podać adres e-mail poniżej, a wyślemy instrukcje "
 "ustawienia nowego pocztą."
 
 #: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
-msgstr "Pomyślnie zaktualizowano adres email"
+msgstr "Pomyślnie zaktualizowano adres e-mail"
 
 #: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
@@ -242,7 +242,7 @@ msgstr "Błędne hasło"
 
 #: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
-msgstr "Przywróć adres email i hasło"
+msgstr "Przywróć adres e-mail i hasło"
 
 #: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
@@ -402,7 +402,7 @@ msgid ""
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
 "Recenzent przejrzy wysłane rozszerzenie, aby upewnić się, że nie ma w nim "
-"nic niebezpiecznego. Wyniki recenzji zostaną wysłane emailem."
+"nic niebezpiecznego. Wyniki recenzji wyślemy pocztą."
 
 #: sweettooth/extensions/templates/extensions/detail.html:113
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
@@ -510,7 +510,7 @@ msgid ""
 msgstr ""
 "Prześlij plik ZIP rozszerzenia, aby przekazać je do weryfikacji. Późniejsze "
 "wersje można przesłać za pomocą tego samego formularza. Po weryfikacji "
-"rozszerzenia otrzymasz powiadomienie emailem o wyniku."
+"rozszerzenia otrzymasz powiadomienie e-mailem o wyniku."
 
 #: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
