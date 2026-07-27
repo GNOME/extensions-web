@@ -7,69 +7,181 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-01-22 14:52+0000\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-07-20 16:56+0200\n"
+"Last-Translator: Carles Ferrando Garcia <carles.ferrando@gamil.com>\n"
+"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-04-05 19:42+0200\n"
-"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
-"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Carles Ferrando Garcia <carles.ferrando@gamil.com>\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.6\n"
+
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr ""
+"No podeu canviar el vostre correu electrònic més d'una vegada cada 7 dies"
+
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "El vostre nom conté paraules prohibides"
+
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "Suprimeix el meu compte"
+
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "El vostre compte s'eliminarà en 7 dies"
+
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+msgid "No"
+msgstr "No"
+
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "Sí"
+
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "Contrasenya actual"
+
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr ""
+"No cal que especifiqueu una contrasenya per cancel·lar l'eliminació del compte"
+
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
+msgid "Username or email"
+msgstr "Nom d'usuari o correu electrònic"
 
 #: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"Teniu diversos comptes registrats utilitzant un únic correu electrònic. Podeu "
+"iniciar la sessió utilitzant el vostre nom d'usuari o podeu sol·licitar "
+"l'eliminació de comptes duplicats utilitzant el Gitlab del GNOME (%(url)s)."
+
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Nom d'usuari"
 
-#: sweettooth/auth/forms.py:40 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Necessari. 30 caràcters o menys. Lletres, dígits i sols @/./+/-/_."
 
-#: sweettooth/auth/forms.py:41 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr ""
 "Aquest valor sols pot contenir lletres, nombres i els caràcters @/./+/-/_."
 
-#: sweettooth/auth/forms.py:43 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "Correu electrònic"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
-msgid "Password"
-msgstr "Contrasenya"
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "No heu d'utilitzar el correu com a nom d'usuari"
 
-#: sweettooth/auth/forms.py:45 extensions-web-domain-django:1
-msgid "Password confirmation"
-msgstr "Confirmació de contrasenya"
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "El vostre nom d'usuari conté paraules prohibides"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
-msgid "Enter the same password as above, for verification."
-msgstr "Entreu per verificar la mateixa contrasenya que més amunt."
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "Aquest correu electrònic ja està registrat"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "Aquest nom d'usuari ja està registrat"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:35
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "Registre"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "Registre del compte"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "Eliminació del compte"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr ""
+"El vostre compte està programat per eliminar-se. Podeu cancel·lar la "
+"supressió del compte en 7 dies."
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "S'ha cancel·lat l'eliminació del compte."
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "Confirmació del correu electrònic"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "Paràmetres"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "Envia"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "Restabliu la contrasenya"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr ""
+"El vostre compte està programat per a la seva supressió després de "
+"%(schedule_delete_after)s"
+
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "Heu oblidat la contrasenya?"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "Inicia sessió"
 
-#: sweettooth/auth/templates/registration/login.html:37
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "No teniu un compte?"
-
-#: sweettooth/auth/templates/registration/login.html:38
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "Registre"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -85,13 +197,12 @@ msgstr "Restabliu la contrasenya"
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
 msgid ""
-"The token for the password reset is incorrect. Please check your link and "
-"try again."
+"The token for the password reset is incorrect. Please check your link and try "
+"again."
 msgstr ""
 "El testimoni per al restabliment de la contrasenya és incorrecte. Comproveu "
 "l’enllaç i torneu-ho a provar."
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -103,46 +214,172 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Heu oblidat la contrasenya? Entreu el vostre correu electrònic més avall i "
-"us enviarem instruccions per configurar-ne una nova."
+"Heu oblidat la contrasenya? Entreu el vostre correu electrònic més avall i us "
+"enviarem instruccions per configurar-ne una nova."
 
-#: sweettooth/context_processors.py:13 extensions-web-domain-django:1
-msgid "Add yours"
-msgstr "Afegiu les vostres"
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "La vostra adreça electrònica s'ha actualitzat correctament"
 
-#: sweettooth/context_processors.py:17 extensions-web-domain-django:1
-msgid "Installed extensions"
-msgstr "Extensions instal·lades"
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "L'enllaç de confirmació ha caducat. Sol·liciteu-ne un de nou."
 
-#: sweettooth/context_processors.py:21 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "Sol·licitud incorrecta"
+
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "S'han desat les dades del perfil"
+
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr ""
+"El correu de confirmació s'ha enviat a la vostra nova adreça. Comproveu la "
+"vostra safata d'entrada."
+
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "La contrasenya és incorrecta"
+
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "Restaura el correu electrònic i restableix la contrasenya"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
 msgstr "Quant a"
 
-#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
 msgid "Extensions"
 msgstr "Extensions"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "Afegiu les vostres"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "Extensions instal·lades"
+
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "Heu de definir la clau `shell-version` a «metadata.json»"
+
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "Tipus de donació no admès: %s"
+
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr "No podeu especificar més de 3 valors per al tipus de donació «%s»"
+
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "S'ha d'especificar almenys un valor per al tipus de donació «%s»"
+
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr ""
+"El tipus de valor ha de ser una cadena o una llista de cadenes per al tipus "
+"de donació «%s»"
+
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "El nom de la versió no pot ser només espais o punts."
+
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr ""
+"Només es permeten caràcters alfanumèrics (anglès), espais i punts per al nom "
+"de la versió."
+
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial case "
+"regarding the compatibility of extension's license with the GNOME Shell's "
+"license, the extension uploaded by me may be used by any GNOME Shell user "
+"under the terms of the license used by GNOME Shell"
+msgstr ""
+"En pujar aquesta extensió estic d'acord i verifico que en qualsevol cas "
+"controvertit relatiu a la compatibilitat de la llicència de l'extensió amb la "
+"llicència del GNOME Shell, l'extensió que he penjat pot ser utilitzada per "
+"qualsevol usuari del GNOME Shell sota els termes de la llicència utilitzada "
+"pel GNOME Shell"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Estic d'acord que el personal del lloc web «extensions.gnome.org» pot "
+"eliminar, modificar o reassignar el manteniment de l'extensió que he pujat"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Falta el camp `uuid` a `metadata.json`"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Ja s'ha afegit una extensió amb aquest UUID"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "El camp `version-name` a `metadata.json` ha de ser una cadena"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Heu d'acceptar les condicions de servei de «extensions.gnome.org»"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "Continua igualment"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "Esteu sortint del lloc web d'extensions del GNOME"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "Deixareu el lloc web d'extensions del GNOME per anar a %(url)s."
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
 "Per desgràcia, per ajudar a prevenir el correu brossa, necessitem que <a "
 "href=\"%(login_url)s\"> inicieu la sessió a les extensions de GNOME Shell </"
 "a> per publicar un comentari o informar d’un error. Teniu compte, no?"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "Comentaris dels usuaris"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr "S'estan carregant els comentaris..."
+msgstr "S'estan carregant els comentaris…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
@@ -164,55 +401,95 @@ msgstr "Comentari"
 msgid "Rating"
 msgstr "Puntuació"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "Informe d'error"
-
-#: sweettooth/extensions/templates/extensions/detail.html:25
-#: extensions-web-domain-django:1
-msgid "Upgrade this extension"
-msgstr "Actualitza aquesta extensió"
-
-#: sweettooth/extensions/templates/extensions/detail.html:26
-#: extensions-web-domain-django:1
-msgid "Configure this extension"
-msgstr "Configura aquesta extensió"
-
-#: sweettooth/extensions/templates/extensions/detail.html:27
-#: extensions-web-domain-django:1
-msgid "Uninstall this extension"
-msgstr "Desinstal·la aquesta extensió"
-
-#: sweettooth/extensions/templates/extensions/detail.html:53
-#: extensions-web-domain-django:1
-msgid "Extension Homepage"
-msgstr "Pàgina d'inici de la extensió"
-
-#: sweettooth/extensions/templates/extensions/detail.html:58
-#: extensions-web-domain-django:1
-msgid "Download"
-msgstr "Descarrega"
-
-#: sweettooth/extensions/templates/extensions/detail.html:61
-#: extensions-web-domain-django:1
-msgid "Shell version…"
-msgstr "Versió del Shell…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:65
-#: extensions-web-domain-django:1
-msgid "Extension version…"
-msgstr "Versió de la extensió…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"Un revisor revisarà l’extensió que heu enviat per assegurar-vos que no hi "
-"ha res massa perillós. Se us enviarà per correu electrònic el resultat de "
-"la revisió."
+"Un revisor revisarà l’extensió que heu enviat per assegurar-vos que no hi ha "
+"res massa perillós. Se us enviarà per correu electrònic el resultat de la "
+"revisió."
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "Els comentaris estan desactivats per a aquesta extensió."
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s baixada"
+msgstr[1] "%(downloads)s baixades"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "Nombre de baixades"
+
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "Dona"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "Instal·la"
+
+#: sweettooth/extensions/templates/extensions/detail.html:46
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "Actualitza aquesta extensió"
+
+#: sweettooth/extensions/templates/extensions/detail.html:47
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "Configura aquesta extensió"
+
+#: sweettooth/extensions/templates/extensions/detail.html:48
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "Desinstal·la aquesta extensió"
+
+#: sweettooth/extensions/templates/extensions/detail.html:75
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "Pàgina d'inici de la extensió"
+
+#: sweettooth/extensions/templates/extensions/detail.html:81
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "Modes de sessió"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "Aquesta extensió s'executarà mentre la pantalla estigui bloquejada"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "Desbloqueja el diàleg"
+
+#: sweettooth/extensions/templates/extensions/detail.html:86
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "Baixa"
+
+#: sweettooth/extensions/templates/extensions/detail.html:89
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Versió del Shell…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:93
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "Versió de la extensió…"
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -230,11 +507,83 @@ msgstr "Extensions instal·lades"
 msgid "Shell settings"
 msgstr "Paràmetres de Shell"
 
-#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+#: sweettooth/extensions/templates/extensions/upload.html:12
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can be "
+"uploaded using the same form. Once your extension has been reviewed you will "
+"be notified of the result by e-mail."
+msgstr ""
+"Pugeu el fitxer Zip de l'extensió per a enviar-la a revisió. Les versions "
+"posteriors es poden penjar utilitzant el mateix formulari. Un cop revisada la "
+"vostra extensió, se us avisarà del resultat per correu electrònic."
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr ""
+"Consulteu les <a href=\"%(url)s\">Directrius de revisió</a> per saber què es "
+"requereix per a la seva aprovació."
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"Si aquesta és la vostra primera extensió, consulteu la documentació a <a "
+"href=\"%(url)s\">gjs.guide</a> per a indicacions sobre la creació d'una "
+"extensió i la preparació per a la pujada."
+
+#: sweettooth/extensions/templates/extensions/upload.html:29
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr ""
+"Les extensions distribuïdes a través d'aquest lloc web estan subjectes al <a "
+"href=\"%(url)s\">Codi de conducta</a>."
+
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr ""
+"Les extensions que vulnerin el <a href=\"%(url)s\">Codi de conducta</a> "
+"s'eliminaran d'aquest lloc web."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"Abans de pujar, podeu executar l'analitzador estàtic Shexli localment per "
+"trobar els problemes d'empaquetament i revisió habituals."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Puja l'extensió"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Ha fallat la pujada. Torneu-ho a provar."
+
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "Contingut"
 
-#: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Metadata"
 msgstr "Metadades"
 
@@ -279,6 +628,93 @@ msgstr "Publica el comentari"
 msgid "Edit your comment"
 msgstr "Edita el comentari"
 
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (experimental)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    El Shexli ha trobat 1 problema que pot necessitar atenció del revisor.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    El Shexli ha trobat %(count)s problemes que poden necessitar atenció del "
+"revisor.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "El Shexli no ha trobat cap problema."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "El Shexli no ha pogut analitzar aquesta versió."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "El Shexli encara no ha produït cap resultat."
+
+#: sweettooth/review/templates/review/review.html:73
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"Podeu pujar la versió següent pel <a href='https://extensions.gnome.org/"
+"upload/'>mateix formulari</a> pel qual heu publicat aquesta versió."
+
+#: sweettooth/review/templates/review/review.html:76
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr ""
+"Podeu canviar la icona de l'extensió fent clic a la icona de la pàgina de "
+"l'extensió."
+
+#: sweettooth/review/templates/review/review.html:79
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr ""
+"En cas que vulgueu inactivar una versió aprovada, feu clic a l'enllaç "
+"d'inactivar de la vostra pàgina de l'extensió."
+
+#: sweettooth/review/templates/review/review.html:82
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+msgstr ""
+"Podeu trobar guies de desenvolupament a <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+
+#: sweettooth/review/templates/review/review.html:85
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"Si necessiteu ajuda amb la vostra extensió, podeu preguntar-nos al <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>Canal de Matrix del GNOME</"
+"a>."
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "Darreres extensions al GNOME Shell"
@@ -288,47 +724,55 @@ msgstr "Darreres extensions al GNOME Shell"
 msgid "GNOME Shell Extensions"
 msgstr "Extensions de GNOME Shell"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
-msgid "User Profile"
-msgstr "Perfil de l'usuari"
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "Guia de desenvolupadors"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
-msgid "User Settings"
-msgstr "Paràmetres de l'usuari"
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "El lloc web està en manteniment. Torneu-ho a provar en uns minuts."
 
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
 msgid "Log out"
 msgstr "Tanca la sessió"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
+msgid "User Profile"
+msgstr "Perfil de l'usuari"
+
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
+msgid "User Settings"
+msgstr "Paràmetres de l'usuari"
+
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
-"Per controlar les extensions de GNOME Shell mitjançant aquest lloc, heu "
-"d’instal·lar la integració de GNOME Shell que consta de dues parts: "
-"l’extensió del navegador i la aplicació nadiua de missatgeria de l’amfitrió."
+"Per controlar les extensions del GNOME Shell mitjançant aquest lloc, heu "
+"d'instal·lar la integració del GNOME Shell que consta de dues parts: "
+"l'extensió del navegador i l'aplicació de missatgeria nativa de l'amfitrió"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr "Instal·la l'extensió del navegador d'integració de GNOME Shell"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
 msgstr "Prem aquí per instal·lar l'extensió del navegador"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Mireu la %spàgina wiki%s per les instruccions d'instal·lació del connector "
-"de l'amfitrió nadiu"
+"Mireu la %spàgina wiki%s per les instruccions d'instal·lació del connector de "
+"l'amfitrió nadiu"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
-"We cannot detect a running copy of GNOME on this system, so some parts of "
-"the interface may be disabled. See <a href=\"/about/#no-detection\">our "
+"We cannot detect a running copy of GNOME on this system, so some parts of the "
+"interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
 "No podem detectar una còpia en execució del GNOME en aquest sistema, de "
@@ -336,14 +780,13 @@ msgstr ""
 "href=\"/about/#no-detection\"> la nostra solució de problemes </a> per "
 "obtenir més informació."
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr ""
 "Les extensions de GNOME Shell no poden llistar les vostres extensions "
 "instal·lades."
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "Compatibles amb"
 
@@ -363,66 +806,28 @@ msgstr "Descarregues"
 msgid "Popularity"
 msgstr "Popularitat"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "Rellevància"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "Ordena per"
 
-#: sweettooth/static/js/templates/extensions/comments_list.mst:19
-#: extensions-web-domain-djangojs:1
-msgid "Show more reviews"
-msgstr "Mostra més comentaris"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "There are no comments. Be the first!"
-msgstr "No hi ha comentaris. Afegiu el primer!"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
 #: extensions-web-domain-djangojs:1
 msgid "Author"
 msgstr "Autor"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
+#: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "Què va mal?"
+msgid "Show more reviews"
+msgstr "Mostra més comentaris"
 
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
+#: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr ""
-"Les extensions de GNOME Shell no han detectat cap error amb aquesta "
-"extensió."
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "Informació de la versió"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Versió del Shell"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "Versió de la extensió"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "Desconegut"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "Què heu provat?"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "Detecta errors de forma automàtica"
+msgid "There are no comments. Be the first!"
+msgstr "No hi ha comentaris. Afegiu el primer!"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
@@ -433,3 +838,38 @@ msgstr "Extensió del sistema"
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
 msgstr "Heu desinstal·lat"
+
+#~ msgid "Password"
+#~ msgstr "Contrasenya"
+
+#~ msgid "Enter the same password as above, for verification."
+#~ msgstr "Entreu per verificar la mateixa contrasenya que més amunt."
+
+#~ msgid "Bug report"
+#~ msgstr "Informe d'error"
+
+#~ msgid "What's wrong?"
+#~ msgstr "Què va mal?"
+
+#~ msgid "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgstr ""
+#~ "Les extensions de GNOME Shell no han detectat cap error amb aquesta "
+#~ "extensió."
+
+#~ msgid "Version information"
+#~ msgstr "Informació de la versió"
+
+#~ msgid "Shell version"
+#~ msgstr "Versió del Shell"
+
+#~ msgid "Extension version"
+#~ msgstr "Versió de la extensió"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconegut"
+
+#~ msgid "What have you tried?"
+#~ msgstr "Què heu provat?"
+
+#~ msgid "Automatically detected errors"
+#~ msgstr "Detecta errors de forma automàtica"
