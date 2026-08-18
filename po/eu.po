@@ -7,8 +7,8 @@
 msgid ""
 msgstr "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-10-18 10:00+0100\n"
+"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"PO-Revision-Date: 2026-07-13 10:00+0100\n"
 "Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -280,31 +280,35 @@ msgid ""
 "name."
 msgstr "Karaktere alfanumerikoak (ingelesezkoak), zuriuneak eta puntuak soilik onartzen dira bertsio-izenerako."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr "Onartzen dut extensions.gnome.org webguneko langileek nik igotako hedapena kendu, aldatu edo bere mantenimendua beste norbaiti esleitu diezaioketela"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "`uuid` eremua falta da `metadata.json` fitxategian"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Badago lehendik UUID hori duen hedapen bat"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "extensions.gnome.org gunearen erabilera-baldintzak onartu behar dituzu"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
 "Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
 msgstr "Hedapen hau igotzean, onartzen dut nire hedapenaren lizentzia eta GNOME Shellen lizentziaren artean inola arazorik badago, nik igotako hedapena GNOME Shellen edozein erabiltzailek erabili ahal izango duela GNOME Shell beraren lizentziaren baldintzetan"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr "Onartzen dut extensions.gnome.org webguneko langileek nik igotako hedapena kendu, aldatu edo bere mantenimendua beste norbaiti esleitu diezaioketela"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`uuid` eremua falta da `metadata.json` fitxategian"
+
+#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Badago lehendik UUID hori duen hedapen bat"
+
+#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "`metadata.json` fitxategiko `version-name` eremuak kate bat izan behar du"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "extensions.gnome.org gunearen erabilera-baldintzak onartu behar dituzu"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -469,12 +473,7 @@ msgstr "Instalatutako hedapenak"
 msgid "Shell settings"
 msgstr "Shell ezarpenak"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Kargatu hedapena"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -482,7 +481,7 @@ msgid ""
 "will be notified of the result by e-mail."
 msgstr "Kargatu zure hedapenaren ZIP fitxategia, berrikusia izan dadin. Etorkizuneko bertsioak modu berean igo daitezke. Zure hedapena berrikusi ondoren, posta elektronikoz emango dizugu horren berri."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -490,7 +489,7 @@ msgid ""
 "required for approval."
 msgstr "Begiratu <a href=\"%(url)s\">Berrikuspenen gidalerroak</a> hedapena onartzeko bete behar direnak ezagutzeko."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -499,7 +498,7 @@ msgid ""
 "preparing it for upload."
 msgstr "Zure lehen hedapena bada, begiratu <a href=\"%(url)s\">gjs.guide</a> dokumentazioa hedapen bat nola sortu eta nola kargatu ikasteko."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -507,13 +506,30 @@ msgid ""
 "href=\"%(url)s\">Code of Conduct</a>."
 msgstr "Webgune honen bidez argitaratutako hedapenek <a href=\"%(url)s\">jokabide-kodea</a> bete behar dute."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
 "Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
 "removed from this website."
 msgstr "<a href=\"%(url)s\">Jokabide-kodea</a> bortxatzen duten hedapenak kendu egingo dira webgunetik."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr "Kargatu baino lehen, Shexli analizatzaile estatikoa exekutatu dezakezu lokalean paketatze-eta berrikuste-arazo arruntenak lehenago detektatzeko."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Kargatu hedapena"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Kargak huts egin du. Saiatu berriro."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -563,6 +579,44 @@ msgstr "Bidali iruzkina"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "Editatu zure iruzkina"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (esperimentala)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] "\n"
+"    Shexlik arreta behar duen arazo bat aurkitu du.\n"
+"    "
+msgstr[1] "\n"
+"    Shexlik arreta behar duten %(count)s arazo aurkitu ditu.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexlik ez du arazorik aurkitu."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexlik ezin du bertsio hau analizatu."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexlik ez du emaitzarik eman oraindik."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
