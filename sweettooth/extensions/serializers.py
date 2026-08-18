@@ -119,6 +119,13 @@ class ExtensionUploadSerializer(serializers.Serializer):
                 raise serializers.ValidationError(
                     _("The `uuid` field is missing in `metadata.json`")
                 )
+
+            url = self.metadata.get("url")
+            if not isinstance(url, str) or not url.strip():
+                raise serializers.ValidationError(
+                    _("The `url` field is missing in `metadata.json`")
+                )
+
             self.uuid = self.metadata["uuid"]
         except InvalidExtensionData as ex:
             raise serializers.ValidationError(ex.message) from ex

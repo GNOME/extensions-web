@@ -3,6 +3,7 @@
 import re
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core import mail
 from django.test.testcases import TestCase
@@ -11,6 +12,14 @@ from django_registration import validators
 from rest_framework import status
 from rest_framework.test import APIRequestFactory, APITestCase
 from rest_registration.api.views import login, register
+
+from sweettooth.extensions.models import (
+    STATUS_ACTIVE,
+    STATUS_REJECTED,
+    Extension,
+    ExtensionVersion,
+)
+from sweettooth.testutils import BasicUserTestCase
 
 from . import views
 from .forms import AutoFocusRegistrationForm, ProfileForm, RegistrationForm
@@ -446,3 +455,71 @@ class APIRegistrationTests(APIRegistrationDataTest):
         response = register(request)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class ProfileRejectedVersionsTest(BasicUserTestCase, TestCase):
+    def setUp(self):
+        super().setUp()
+
+        self.extension = Extension.objects.create_from_metadata(
+            {
+                "uuid": "rejected-extension@mecheye.net",
+                "name": "Rejected Extension",
+                "description": "Simple test metadata",
+                "url": "http://test-metadata.gnome.org",
+                "shell-version": ["45"],
+            },
+            creator=self.user,
+        )
+        self.version = ExtensionVersion.objects.create(
+            extension=self.extension, status=STATUS_REJECTED
+        )
+        self.profile_url = reverse("auth-profile", kwargs={"user": self.username})
+
+    def login_reviewer(self):
+        username = "Reviewer"
+        password = "another random password"
+        reviewer = User.objects.create_user(
+            username, "reviewer@non-existant.tld", password
+        )
+        reviewer.user_permissions.add(
+            Permission.objects.get(codename="can-review-extensions")
+        )
+
+        self.assertTrue(self.client.login(username=username, password=password))
+
+    def test_rejected_version_hidden_from_anonymous(self):
+        self.client.logout()
+
+        response = self.client.get(self.profile_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self.extension.name)
+
+    def test_rejected_version_hidden_from_author(self):
+        response = self.client.get(self.profile_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self.extension.name)
+
+    def test_rejected_version_visible_for_reviewer(self):
+        self.login_reviewer()
+
+        response = self.client.get(self.profile_url)
+
+        self.assertContains(response, self.extension.name)
+        self.assertContains(response, self.extension.uuid)
+        self.assertContains(
+            response, reverse("review-version", kwargs={"pk": self.version.pk})
+        )
+
+    def test_rejected_version_of_visible_extension_shown_for_reviewer(self):
+        ExtensionVersion.objects.create(extension=self.extension, status=STATUS_ACTIVE)
+        self.login_reviewer()
+
+        response = self.client.get(self.profile_url)
+
+        self.assertContains(response, self.extension.get_absolute_url())
+        self.assertContains(
+            response, reverse("review-version", kwargs={"pk": self.version.pk})
+        )

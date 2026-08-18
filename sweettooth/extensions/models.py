@@ -457,6 +457,9 @@ class ExtensionVersionManager(models.Manager):
     def waiting(self):
         return self.filter(status=STATUS_WAITING)
 
+    def rejected(self):
+        return self.filter(status=STATUS_REJECTED)
+
     def visible(self):
         return self.filter(status=STATUS_ACTIVE)
 
