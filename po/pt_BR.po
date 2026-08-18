@@ -8,18 +8,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/Infrastructure/extensions-web/"
-"issues\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-04-15 10:03-0300\n"
+"Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-08-18 16:55-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
-"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
+"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 50.0\n"
+"X-DL-VCS-Web: https://gitlab.gnome.org/Infrastructure/extensions-web/\n"
+"X-DL-Lang: pt_BR\n"
+"X-DL-Module: extensions-web\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -326,11 +331,15 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "O campo `uuid` está faltando no `metadata.json`"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "O campo `url` está faltando no `metadata.json`"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Uma extensão com esse UUID já foi adicionada"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
 msgstr "O campo `version-name` em `metadata.json` deve ser uma string"
 
