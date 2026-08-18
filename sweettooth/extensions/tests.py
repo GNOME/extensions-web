@@ -42,9 +42,14 @@ def get_test_zipfile(
                 with zipfile_in.open("metadata.json", "r") as metadata_fp:
                     metadata = json.load(metadata_fp)
 
-                zipfile.writestr(
-                    info, json.dumps(metadata | extra_metadata).encode("utf-8")
-                )
+                # `None` value in extra_metadata removes the key from metadata.json
+                metadata = {
+                    key: value
+                    for key, value in (metadata | extra_metadata).items()
+                    if value is not None
+                }
+
+                zipfile.writestr(info, json.dumps(metadata).encode("utf-8"))
                 continue
 
             zipfile.writestr(info, zipfile_in.read(info))
@@ -635,6 +640,23 @@ class UploadAPITest(
 
         with self.assertRaises(models.Extension.DoesNotExist):
             models.Extension.objects.get(uuid="test-extension@mecheye.net")
+
+    def test_missing_url(self):
+        for extra_metadata in ({"url": None}, {"url": ""}, {"url": "   "}, {"url": 42}):
+            response = self.upload_file(
+                "SimpleExtension",
+                extra_metadata=extra_metadata,
+                add_extension_js=True,
+            )
+
+            self.assertEqual(response.status_code, 400)
+            self.assertIn(
+                "The `url` field is missing in `metadata.json`",
+                response.data["source"][0],
+            )
+
+            with self.assertRaises(models.Extension.DoesNotExist):
+                models.Extension.objects.get(uuid="test-extension@mecheye.net")
 
     def test_non_string_version_name(self):
         response = self.upload_file(
