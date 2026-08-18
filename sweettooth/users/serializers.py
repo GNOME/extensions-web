@@ -6,10 +6,11 @@ from rest_framework import serializers
 
 class BaseUserProfileSerializer(serializers.ModelSerializer):
     avatar = serializers.CharField(read_only=True)
+    display_name = serializers.CharField(source="get_full_name", read_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = ["id", "username", "avatar"]
+        fields = ["id", "username", "avatar", "display_name"]
 
 
 class UserProfileSerializer(BaseUserProfileSerializer):
