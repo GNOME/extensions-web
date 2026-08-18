@@ -29,9 +29,8 @@ User = get_user_model()
 def profile(request, user):
     userobj = get_object_or_404(User, username=user)
 
-    is_editable = (request.user == userobj) or request.user.has_perm(
-        "review.can-review-extensions"
-    )
+    can_review = request.user.has_perm("review.can-review-extensions")
+    is_editable = (request.user == userobj) or can_review
 
     display_name = userobj.get_full_name() or userobj.username
     extensions = Extension.objects.visible().filter(creator=userobj).order_by("name")
@@ -45,6 +44,17 @@ def profile(request, user):
         unreviewed = []
         waiting = []
 
+    if can_review:
+        # Rejected extensions without an active version are invisible otherwise,
+        # so reviewers can not spot an extension reposted under a new uuid.
+        rejected = (
+            ExtensionVersion.objects.rejected()
+            .filter(extension__creator=userobj)
+            .order_by("extension__name", "-version")
+        )
+    else:
+        rejected = []
+
     return render(
         request,
         "profile/profile.html",
@@ -54,6 +64,7 @@ def profile(request, user):
             extensions=extensions,
             unreviewed=unreviewed,
             waiting=waiting,
+            rejected=rejected,
         ),
     )
 

@@ -52,5 +52,24 @@
   </li>
   {% endwith %}
   {% endfor %}
+
+  {% if rejected %}
+  <h3> These versions were rejected </h3>
+  <ul>
+    {% for version in rejected %}
+    {% with version.extension as extension %}
+    <li class="extension profile">
+      <h4 class="extension-name"><a href="{% url 'review-version' pk=version.pk %}">
+          <img src="{% extension_icon extension.icon %}" class="icon"> {{ extension.name }}
+      </a></h4>
+      <span class="version">({{ version.display_version }})</span>
+      <span class="uuid">{{ extension.uuid }}</span>
+
+      <p class="description">{{ extension.first_line_of_description }}</p>
+    </li>
+    {% endwith %}
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
 {% endblock %}
