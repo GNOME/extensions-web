@@ -3,68 +3,67 @@
 # This file is distributed under the same license as the extensions-web package.
 #
 # Marek Černocký <marek@manet.cz>, 2019, 2020.
+# Václav Koterec <kot.va@centrum.cz>, 2026.
+# Patrik Sivek <patriksivek@gnome.org>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2023-11-18 08:46+0000\n"
-"PO-Revision-Date: 2024-01-23 00:46+0100\n"
-"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
-"Language-Team: čeština <gnome-cs-list@gnome.org>\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-08-19 14:26+0200\n"
+"Last-Translator: Patrik Sivek <patriksivek@gnome.org>\n"
+"Language-Team: Czech\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Gtranslator 50.0\n"
+"X-DL-VCS-Web: https://gitlab.gnome.org/Infrastructure/extensions-web/\n"
+"X-DL-Lang: cs\n"
+"X-DL-Module: extensions-web\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
 
-#: sweettooth/auth/forms.py:102 sweettooth/auth/serializers.py:62
-#: extensions-web-domain-django:1
-msgid "You should not use email as username"
-msgstr "Jako uživatelské jméno byste neměli použít e-mail"
-
-#: sweettooth/auth/forms.py:105 extensions-web-domain-django:1
-msgid "Your username contains forbidden words"
-msgstr "Vaše uživatelské jméno obsahuje zakázaná slova"
-
-#: sweettooth/auth/forms.py:137 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
 msgstr "E-mail nemůžete změnit více než jednou za 7 dní"
 
-#: sweettooth/auth/forms.py:171 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
 msgstr "Vaše zobrazované jméno obsahuje zakázaná slova"
 
-#: sweettooth/auth/forms.py:215 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
 msgid "Delete my account"
 msgstr "Smazat můj účet"
 
-#: sweettooth/auth/forms.py:216 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
 msgid "Your account will be deleted in 7 days"
 msgstr "Váš účet bude smazán za 7 dní"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "No"
 msgstr "Ne"
 
-#: sweettooth/auth/forms.py:218 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
 msgid "Yes"
 msgstr "Ano"
 
-#: sweettooth/auth/forms.py:222 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
 msgid "Current password"
 msgstr "Současné heslo"
 
-#: sweettooth/auth/forms.py:223 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr "Ke zrušení odebrání účtu nemusíte zadávat heslo"
 
-#: sweettooth/auth/forms.py:44 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "Uživatelské jméno nebo e-mail"
 
-#: sweettooth/auth/forms.py:52 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
 msgid ""
 "You have multiple accounts registered using single email. You can log in "
@@ -75,27 +74,36 @@ msgstr ""
 "pomocí svého uživatelského jména nebo můžete požádat o odstranění "
 "duplicitních účtů pomocí Gitlabu GNOME (%(url)s)."
 
-#: sweettooth/auth/forms.py:83 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "Uživatelské jméno"
 
-#: sweettooth/auth/forms.py:87 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "Vyžadováno. 30 znaků nebo méně. Jen písmena, číslice a @/./+/-/_"
 
-#: sweettooth/auth/forms.py:91 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "Tato položka může obsahovat pouze písmena, číslice a znaky @/./+/-/_"
 
-#: sweettooth/auth/forms.py:95 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "E-mail"
 
-#: sweettooth/auth/serializers.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
+msgid "You should not use email as username"
+msgstr "Jako uživatelské jméno byste neměli použít e-mail"
+
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "Vaše uživatelské jméno obsahuje zakázaná slova"
+
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
 msgstr "Tento e-mail je již registrován"
 
-#: sweettooth/auth/serializers.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
 msgid "This username is already registered"
 msgstr "Toto uživatelské jméno je již registrováno"
 
@@ -258,35 +266,35 @@ msgstr "Přidat svoje"
 msgid "Installed extensions"
 msgstr "Nainstalovaná rozšíření"
 
-#: sweettooth/extensions/models.py:137 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
 msgstr "V souboru metadata.json musíte definovat klíč `shell-version`"
 
-#: sweettooth/extensions/models.py:202 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
 msgstr "Nepodporovaný typ daru: %s"
 
-#: sweettooth/extensions/models.py:207 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
 msgstr "Pro typ daru „%s“ nemůžete zadat více než 3 hodnoty"
 
-#: sweettooth/extensions/models.py:213 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
 msgstr "Alespoň jedna hodnota musí být zadána pro typ daru „%s“"
 
-#: sweettooth/extensions/models.py:220 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr "Typ hodnoty musí být řetězec nebo seznam řetězců pro typ daru „%s“"
 
-#: sweettooth/extensions/models.py:474 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
 msgstr "Název verze nesmí být pouze mezery nebo tečky."
 
-#: sweettooth/extensions/models.py:480 extensions-web-domain-django:1
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
@@ -294,27 +302,7 @@ msgstr ""
 "Pro název verze jsou povoleny pouze alfanumerické znaky (eng), mezery a "
 "tečky."
 
-#: sweettooth/extensions/serializers.py:105 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Souhlasím s tím, že personál webu extensions.gnome.org může odebrat, upravit "
-"nebo změnit správce mnou nahraného rozšíření"
-
-#: sweettooth/extensions/serializers.py:115 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "V souboru `metadata.json` chybí pole `uuid`"
-
-#: sweettooth/extensions/serializers.py:155 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Rozšíření s tímto UUID již bylo přidáno"
-
-#: sweettooth/extensions/serializers.py:89 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "Musíte souhlasit s podmínkami služby extensions.gnome.org"
-
-#: sweettooth/extensions/serializers.py:96 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -325,6 +313,34 @@ msgstr ""
 "kontroverzním případě týkajícím se kompatibility licence rozšíření s licencí "
 "GNOME Shell může mnou nahrané rozšíření používat jakýkoli uživatel prostředí "
 "GNOME za podmínek licence používané prostředím GNOME Shell"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Souhlasím s tím, že personál webu extensions.gnome.org může odebrat, upravit "
+"nebo změnit správce mnou nahraného rozšíření"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "V souboru `metadata.json` chybí pole `uuid`"
+
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "V souboru `metadata.json` chybí pole `url`"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Rozšíření s tímto UUID již bylo přidáno"
+
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "V souboru `metadata.json` musí být pole `version-name` řetězec."
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "Musíte souhlasit s podmínkami služby extensions.gnome.org"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -453,7 +469,7 @@ msgstr "Domovská stránka"
 #: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
-msgstr ""
+msgstr "Režim(y) sezení"
 
 #: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
@@ -463,7 +479,7 @@ msgstr "Toto rozšíření poběží při zamknuté obrazovce"
 #: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
-msgstr ""
+msgstr "Odemknout dialog"
 
 #: sweettooth/extensions/templates/extensions/detail.html:86
 #: extensions-web-domain-django:1
@@ -496,12 +512,7 @@ msgstr "Nainstalovaná rozšíření"
 msgid "Shell settings"
 msgstr "Nastavení Shellu"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Nahrát rozšíření"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -512,7 +523,7 @@ msgstr ""
 "lze nahrát pomocí stejného formuláře. Jakmile bude vaše rozšíření "
 "zkontrolováno, budete o výsledku informováni e-mailem."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -522,7 +533,7 @@ msgstr ""
 "Přečtěte si prosím <a href=\"%(url)s\">Pokyny pro kontrolu</a>, kde se "
 "dozvíte, co je potřeba ke schválení."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -533,6 +544,45 @@ msgstr ""
 "Pokud je toto vaše první rozšíření, přečtěte si prosím dokumentaci na <a "
 "href=\"%(url)s\">gjs.guide</a>, kde najdete pokyny k vytvoření rozšíření a "
 "jeho přípravě k nahrání."
+
+#: sweettooth/extensions/templates/extensions/upload.html:29
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr ""
+"Rozšíření distribuovaná prostřednictvím těchto webových stránek podléhají <a "
+"href=\"%(url)s\">kodexu chování</a>."
+
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr ""
+"Rozšíření, která porušují <a href=\"%(url)s\">kodex chování</a>, budou z "
+"těchto webových stránek odstraněna."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"Před nahráním můžete lokálně spustit statický analyzátor Shexli, abyste "
+"odhalili běžné problémy s balením a včas je zkontrolovali."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Nahrát rozšíření"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "Nahrávání se nezdařilo. Zkuste to prosím znovu."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -584,6 +634,52 @@ msgstr "Zveřejnit komentář"
 msgid "Edit your comment"
 msgstr "Upravte svůj komentář"
 
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (experimentální)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli nalezl 1 problém, který by mohl vyžadovat pozornost kontrolora.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    Shexli nalezl %(count)s problémy, který by mohly vyžadovat pozornost "
+"kontrolora.\n"
+"    "
+msgstr[2] ""
+"\n"
+"    Shexli nalezl %(count)s problémů, které by mohly vyžadovat pozornost "
+"kontrolora.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli nenašel žádné problémy."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli nedokázal analyzovat tuto verzi."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli zatím nepřinesl žádný výsledek."
+
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
 msgid ""
@@ -613,8 +709,8 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
 msgid ""
-"You can find developer guides in <a href='https://gjs.guide/extensions/'>gjs."
-"guide</a>."
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
 msgstr ""
 "Vývojářské příručky můžete najít na <a href='https://gjs.guide/"
 "extensions/'>gjs.guide</a>."
@@ -642,17 +738,21 @@ msgstr "Rozšíření GNOME Shellu"
 msgid "Developers Guide"
 msgstr "Vývojářská příručka"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "Webové stránky jsou v údržbě. Zkuste to prosím znovu za několik minut."
+
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
+msgid "Log out"
+msgstr "Odhlásit"
+
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
 msgid "User Profile"
 msgstr "Uživatelský profil"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
 msgid "User Settings"
 msgstr "Uživatelská nastavení"
-
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
-msgid "Log out"
-msgstr "Odhlásit"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
