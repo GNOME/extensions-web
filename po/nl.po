@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-04-19 14:17+0200\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-08-29 15:07+0200\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
@@ -326,11 +326,15 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "Het veld `uuid` ontbreekt in `metadata.json`"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "Het veld `url` ontbreekt in `metadata.json`"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Er is al een uitbreiding met die UUID toegevoegd"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
 msgstr "Het veld `version-name` in `metadata.json` moet een tekenreeks zijn"
 
