@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-04-16 22:33+0500\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-08-22 08:39+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <Kazakh>\n"
 "Language: kk\n"
@@ -57,9 +57,9 @@ msgstr "Пайдаланушы аты немесе электрондық пош
 #: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
 #, python-format
 msgid ""
-"You have multiple accounts registered using single email. You can log in using "
-"your username or you can request removal of duplicate accounts using GNOME "
-"Gitlab (%(url)s)."
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
 msgstr ""
 "Бір электрондық поштамен бірнеше тіркелгі тіркелген. Сіз пайдаланушы атыңыз "
 "арқылы кіре аласыз немесе GNOME Gitlab (%(url)s) арқылы қайталанатын "
@@ -72,7 +72,8 @@ msgstr "Пайдаланушы аты"
 #: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
-"Міндетті. 30 таңба немесе одан аз. Тек әріптер, сандар және @/./+/-/_ таңбалары."
+"Міндетті. 30 таңба немесе одан аз. Тек әріптер, сандар және @/./+/-/_ "
+"таңбалары."
 
 #: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
@@ -120,7 +121,8 @@ msgstr "Тіркелгіні өшіру"
 #: sweettooth/auth/templates/profile/account-removal.html:7
 #: extensions-web-domain-django:1
 msgid ""
-"You account is scheduled for removal. You can cancel account removal in 7 days."
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
 msgstr ""
 "Тіркелгіңіз өшіруге жоспарланған. Сіз 7 күн ішінде тіркелгіні өшіруден бас "
 "тарта аласыз."
@@ -192,8 +194,8 @@ msgstr "Парольді тастау"
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
 msgid ""
-"The token for the password reset is incorrect. Please check your link and try "
-"again."
+"The token for the password reset is incorrect. Please check your link and "
+"try again."
 msgstr ""
 "Парольді тастауға арналған токен қате. Сілтемені тексеріп, қайталап көріңіз."
 
@@ -208,8 +210,8 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Парольді ұмыттыңыз ба? Төменде электрондық пошта адресін енгізіңіз, біз жаңасын "
-"орнату нұсқауларын электрондық пошта арқылы жібереміз."
+"Парольді ұмыттыңыз ба? Төменде электрондық пошта адресін енгізіңіз, біз "
+"жаңасын орнату нұсқауларын электрондық пошта арқылы жібереміз."
 
 #: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
@@ -277,7 +279,8 @@ msgstr "\"%s\" демеушілік түрі үшін кем дегенде бі
 #: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
-msgstr "\"%s\" демеушілік түрі үшін мән түрі жол немесе жолдар тізімі болуы керек"
+msgstr ""
+"\"%s\" демеушілік түрі үшін мән түрі жол немесе жолдар тізімі болуы керек"
 
 #: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
@@ -288,20 +291,20 @@ msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr ""
-"Нұсқа аты үшін тек әріптік-сандық таңбалар (ағылш), бос орындар мен нүктелерге "
-"рұқсат етіледі."
+"Нұсқа аты үшін тек әріптік-сандық таңбалар (ағылш), бос орындар мен "
+"нүктелерге рұқсат етіледі."
 
 #: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
-"By uploading this extension I agree and verify that in any controversial case "
-"regarding the compatibility of extension's license with the GNOME Shell's "
-"license, the extension uploaded by me may be used by any GNOME Shell user under "
-"the terms of the license used by GNOME Shell"
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
 msgstr ""
 "Осы кеңейтуді жүктеп салу арқылы мен кеңейту лицензиясының GNOME Shell "
 "лицензиясымен үйлесімділігіне қатысты кез келген даулы жағдайда, мен жүктеп "
-"салған кеңейтуді кез келген GNOME Shell пайдаланушысы GNOME Shell пайдаланатын "
-"лицензия шарттарымен қолдана алатынына келісемін және растаймын"
+"салған кеңейтуді кез келген GNOME Shell пайдаланушысы GNOME Shell "
+"пайдаланатын лицензия шарттарымен қолдана алатынына келісемін және растаймын"
 
 #: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
 msgid ""
@@ -315,13 +318,18 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "`metadata.json` ішінде `uuid` өрісі жетіспейді"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "`metadata.json` ішінде `url` өрісі жетіспейді"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Ондай UUID бар кеңейту қосылып қойған"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
-msgstr "`metadata.json` файлындағы `version-name` өрісі жол (string) болуы тиіс"
+msgstr ""
+"`metadata.json` файлындағы `version-name` өрісі жол (string) болуы тиіс"
 
 #: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
@@ -353,12 +361,12 @@ msgstr "Бас тарту"
 #, python-format
 msgid ""
 "Unfortunately, to help prevent spam, we require that you <a "
-"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
-"Өкінішке орай, спамның алдын алу үшін пікір қалдыру немесе қате туралы хабарлау "
-"үшін сізден <a href=\"%(login_url)s\">GNOME Shell кеңейтулеріне кіруді</a> "
-"талап етеміз. Түсінесіз ғой, иә?"
+"Өкінішке орай, спамның алдын алу үшін пікір қалдыру немесе қате туралы "
+"хабарлау үшін сізден <a href=\"%(login_url)s\">GNOME Shell кеңейтулеріне "
+"кіруді</a> талап етеміз. Түсінесіз ғой, иә?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
@@ -393,11 +401,12 @@ msgstr "Рейтинг"
 #: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
 msgid ""
-"A reviewer will review the extension you submitted to make sure there's nothing "
-"too dangerous. You'll be emailed the result of the review."
+"A reviewer will review the extension you submitted to make sure there's "
+"nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
-"Рецензент сіз жіберген кеңейтуді ешқандай қауіпті нәрсе жоқтығына көз жеткізу "
-"үшін тексереді. Тексеру нәтижесі сізге электрондық пошта арқылы жіберіледі."
+"Рецензент сіз жіберген кеңейтуді ешқандай қауіпті нәрсе жоқтығына көз "
+"жеткізу үшін тексереді. Тексеру нәтижесі сізге электрондық пошта арқылы "
+"жіберіледі."
 
 #: sweettooth/extensions/templates/extensions/detail.html:113
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
@@ -498,13 +507,14 @@ msgstr "Қоршам баптаулары"
 #: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
-"Upload your extension Zip file to submit it for review. Later versions can be "
-"uploaded using the same form. Once your extension has been reviewed you will be "
-"notified of the result by e-mail."
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
 msgstr ""
 "Кеңейтуіңізді тексеруге жіберу үшін Zip файлын жүктеп салыңыз. Кейінгі "
-"нұсқаларды да осы пішін арқылы жүктеп салуға болады. Кеңейтуіңіз тексерілгеннен "
-"кейін нәтижесі туралы электрондық пошта арқылы хабардар боласыз."
+"нұсқаларды да осы пішін арқылы жүктеп салуға болады. Кеңейтуіңіз "
+"тексерілгеннен кейін нәтижесі туралы электрондық пошта арқылы хабардар "
+"боласыз."
 
 #: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
@@ -513,8 +523,8 @@ msgid ""
 "Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
 "required for approval."
 msgstr ""
-"Мақұлдау үшін не қажет екенін білу үшін <a href=\"%(url)s\">Тексеру ережелерін</"
-"a> қараңыз."
+"Мақұлдау үшін не қажет екенін білу үшін <a href=\"%(url)s\">Тексеру "
+"ережелерін</a> қараңыз."
 
 #: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
@@ -535,8 +545,8 @@ msgid ""
 "Extensions distributed via this website are subject to the <a "
 "href=\"%(url)s\">Code of Conduct</a>."
 msgstr ""
-"Осы сайт арқылы таратылатын кеңейтулерге <a href=\"%(url)s\">Әдеп кодексі</a> "
-"қолданылады."
+"Осы сайт арқылы таратылатын кеңейтулерге <a href=\"%(url)s\">Әдеп кодексі</"
+"a> қолданылады."
 
 #: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
@@ -545,7 +555,8 @@ msgid ""
 "Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
 "removed from this website."
 msgstr ""
-"<a href=\"%(url)s\">Әдеп кодексін</a> бұзатын кеңейтулер осы сайттан өшіріледі."
+"<a href=\"%(url)s\">Әдеп кодексін</a> бұзатын кеңейтулер осы сайттан "
+"өшіріледі."
 
 #: sweettooth/extensions/templates/extensions/upload.html:41
 #: extensions-web-domain-django:1
@@ -553,9 +564,9 @@ msgid ""
 "Before uploading, you can run the Shexli static analyzer locally to catch "
 "common packaging and review issues early."
 msgstr ""
-"Жүктеп салмас бұрын, дестелеу және тексеру кезінде жиі кездесетін мәселелерді "
-"алдын ала анықтау үшін Shexli статикалық анализаторын жергілікті түрде "
-"орындауға болады."
+"Жүктеп салмас бұрын, дестелеу және тексеру кезінде жиі кездесетін "
+"мәселелерді алдын ала анықтау үшін Shexli статикалық анализаторын жергілікті "
+"түрде орындауға болады."
 
 #: sweettooth/extensions/templates/extensions/upload.html:50
 #: extensions-web-domain-django:1
@@ -662,8 +673,8 @@ msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
 "upload/'>same form</a> you've posted this version."
 msgstr ""
-"Сіз келесі нұсқаны осы нұсқаны жариялаған <a href='https://extensions.gnome.org/"
-"upload/'>сол форма</a> арқылы жүктеп сала аласыз."
+"Сіз келесі нұсқаны осы нұсқаны жариялаған <a href='https://"
+"extensions.gnome.org/upload/'>сол форма</a> арқылы жүктеп сала аласыз."
 
 #: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
@@ -676,8 +687,8 @@ msgstr ""
 #: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
 msgid ""
-"In case you want to inactivate an approved version, click on inactivate link in "
-"your extension page."
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
 msgstr ""
 "Мақұлданған нұсқаны ажыратқыңыз келсе, кеңейту бетіндегі ажырату сілтемесін "
 "шертіңіз."
@@ -688,8 +699,8 @@ msgid ""
 "You can find developer guides in <a href='https://gjs.guide/"
 "extensions/'>gjs.guide</a>."
 msgstr ""
-"Әзірлеуші нұсқаулықтарын <a href='https://gjs.guide/extensions/'>gjs.guide</a> "
-"сайтынан таба аласыз."
+"Әзірлеуші нұсқаулықтарын <a href='https://gjs.guide/extensions/'>gjs.guide</"
+"a> сайтынан таба аласыз."
 
 #: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
@@ -733,9 +744,9 @@ msgstr "Пайдаланушы баптаулары"
 
 #: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
-"To control GNOME Shell extensions using this site you must install GNOME Shell "
-"integration that consists of two parts: browser extension and native host "
-"messaging application"
+"To control GNOME Shell extensions using this site you must install GNOME "
+"Shell integration that consists of two parts: browser extension and native "
+"host messaging application"
 msgstr ""
 "Осы сайт арқылы GNOME Shell кеңейтулерін басқару үшін екі бөліктен тұратын "
 "GNOME Shell интеграциясын орнатуыңыз керек: браузер кеңейтуі және негізгі "
@@ -753,18 +764,19 @@ msgstr "Браузер кеңейтуін орнату үшін осы жерд�
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Негізгі хосттың байланыстыратын сызығын орнату нұсқаулары үшін %swiki бетін%s "
-"қараңыз"
+"Негізгі хосттың байланыстыратын сызығын орнату нұсқаулары үшін %swiki "
+"бетін%s қараңыз"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
-"We cannot detect a running copy of GNOME on this system, so some parts of the "
-"interface may be disabled. See <a href=\"/about/#no-detection\">our "
+"We cannot detect a running copy of GNOME on this system, so some parts of "
+"the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
-"Біз бұл жүйеде жұмыс істеп тұрған GNOME көшірмесін анықтай алмадық, сондықтан "
-"интерфейстің кейбір бөліктері сөндірілуі мүмкін. Қосымша ақпарат алу үшін <a "
-"href=\"/about/#no-detection\">ақаулықтарды жою жазбамызды</a> қараңыз."
+"Біз бұл жүйеде жұмыс істеп тұрған GNOME көшірмесін анықтай алмадық, "
+"сондықтан интерфейстің кейбір бөліктері сөндірілуі мүмкін. Қосымша ақпарат "
+"алу үшін <a href=\"/about/#no-detection\">ақаулықтарды жою жазбамызды</a> "
+"қараңыз."
 
 #: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
