@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-04-04 13:13+0200\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-08-29 15:53+0200\n"
 "Last-Translator: Марко Костић <marko.m.kostic@gmail.com>\n"
 "Language-Team: Serbian <gnome-sr@googlegroups.com>\n"
 "Language: sr\n"
@@ -321,11 +321,15 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "Поље „uuid“ недостаје у „metadata.json“"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "Поље „url“ недостаје у „metadata.json“"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Проширење са тим УУИД-ом је већ додато"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
 msgstr "Поље `version-name` у датотеци `metadata.json` мора бити ниска"
 
@@ -561,7 +565,9 @@ msgstr ""
 msgid ""
 "Before uploading, you can run the Shexli static analyzer locally to catch "
 "common packaging and review issues early."
-msgstr "Пре отпремања можете локално покренути статички анализатор Шексли како бисте раније уочили уобичајене проблеме са паковањем и прегледом."
+msgstr ""
+"Пре отпремања можете локално покренути статички анализатор Шексли како бисте "
+"раније уочили уобичајене проблеме са паковањем и прегледом."
 
 #: sweettooth/extensions/templates/extensions/upload.html:50
 #: extensions-web-domain-django:1
