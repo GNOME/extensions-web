@@ -23,7 +23,7 @@ classifiers = [
 ]
 dependencies = [
     "Django==5.2.17",
-    "djangorestframework==3.17.1",
+    "djangorestframework==3.17.2",
     "django-autoslug==1.9.9",
     "django-contrib-comments==2.2.0",
     "django-cors-headers==4.6.0",
