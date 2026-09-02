@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-04-12 09:22+0900\n"
-"Last-Translator: Julien Humbert <julroy67@gmail.com>\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-08-22 09:43+0200\n"
+"Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -343,11 +343,15 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "Il manque le champ « uuid » au fichier « metadata.json »"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "Il manque le champ « url » au fichier « metadata.json »"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Une extension avec cet UUID a déjà été ajoutée"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
 msgstr ""
 "Le champ « version-name » du fichier « metadata.json » doit être une chaîne "
@@ -670,12 +674,11 @@ msgid_plural ""
 "    "
 msgstr[0] ""
 "\n"
-"    Shexli a détecté un problème qui pourrait nécessiter une relecture."
-"    "
+"    Shexli a détecté un problème qui pourrait nécessiter une relecture.    "
 msgstr[1] ""
 "\n"
-"    Shexli a détecté %(count)s problèmes qui pourraient nécessiter une relecture."
-"    "
+"    Shexli a détecté %(count)s problèmes qui pourraient nécessiter une "
+"relecture.    "
 
 #: sweettooth/review/templates/review/review.html:151
 #: extensions-web-domain-django:1
