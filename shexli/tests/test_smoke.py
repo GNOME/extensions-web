@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+import json
 import tempfile
 import unittest
 import zipfile
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from unittest.mock import patch
 
@@ -47,7 +49,7 @@ from shexli.analyzer.facts.lifecycle import (
 )
 from shexli.analyzer.file import JSFileModelBuilder
 from shexli.analyzer.lifecycle.cross_file import build_cross_file_indices_per_file
-from shexli.analyzer.metadata import Metadata
+from shexli.analyzer.metadata import Metadata, latest_stable_shell_major
 from shexli.analyzer.rules.api import JSFileFacts
 from shexli.analyzer.rules.api_misuse import ApiMisuseRule
 from shexli.analyzer.rules.artifact import ExtensionArtifactRule
@@ -85,11 +87,76 @@ class SmokeTest(unittest.TestCase):
         return node_evidence(Path("/tmp/extension.js"), source, node, mapper).snippet
 
     def test_bad_extension_reports_findings(self) -> None:
-        result = analyze_path(DATA_DIR / "bad_extension")
+        with patch(
+            "shexli.analyzer.rules.metadata.latest_stable_shell_major",
+            return_value=51,
+        ):
+            result = analyze_path(DATA_DIR / "bad_extension")
         rule_ids = {finding.rule_id for finding in result.findings}
         self.assertIn("EGO-M-003", rule_ids)
         self.assertIn("EGO-M-004", rule_ids)
         self.assertIn("EGO-I-002", rule_ids)
+
+    def test_latest_stable_shell_major_tracks_release_cadence(self) -> None:
+        self.assertEqual(latest_stable_shell_major(date(2021, 3, 1)), 40)
+        self.assertEqual(latest_stable_shell_major(date(2024, 3, 15)), 46)
+        self.assertEqual(latest_stable_shell_major(date(2024, 9, 20)), 47)
+        self.assertEqual(latest_stable_shell_major(date(2026, 3, 18)), 50)
+        self.assertEqual(latest_stable_shell_major(date(2026, 9, 1)), 51)
+        self.assertEqual(latest_stable_shell_major(date(2030, 9, 30)), 59)
+
+    def _analyze_shell_versions(self, shell_versions: list[str]) -> set[str]:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / "metadata.json").write_text(
+                json.dumps(
+                    {
+                        "uuid": "shell-version@example.com",
+                        "name": "ShellVersion",
+                        "description": "",
+                        "shell-version": shell_versions,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (root / "extension.js").write_text(
+                "export default class E { enable() {} disable() {} }",
+                encoding="utf-8",
+            )
+            result = analyze_path(root)
+            return {finding.rule_id for finding in result.findings}
+
+    def test_released_shell_versions_are_accepted(self) -> None:
+        with patch(
+            "shexli.analyzer.rules.metadata.latest_stable_shell_major",
+            return_value=51,
+        ):
+            rule_ids = self._analyze_shell_versions(["48", "49", "50", "51"])
+        self.assertNotIn("EGO-M-004", rule_ids)
+
+    def test_unreleased_prerelease_is_rejected(self) -> None:
+        with patch(
+            "shexli.analyzer.rules.metadata.latest_stable_shell_major",
+            return_value=50,
+        ):
+            rule_ids = self._analyze_shell_versions(["50", "51.beta"])
+        self.assertIn("EGO-M-004", rule_ids)
+
+    def test_unreleased_stable_version_is_rejected(self) -> None:
+        with patch(
+            "shexli.analyzer.rules.metadata.latest_stable_shell_major",
+            return_value=50,
+        ):
+            rule_ids = self._analyze_shell_versions(["51"])
+        self.assertIn("EGO-M-004", rule_ids)
+
+    def test_far_future_prerelease_is_rejected(self) -> None:
+        with patch(
+            "shexli.analyzer.rules.metadata.latest_stable_shell_major",
+            return_value=51,
+        ):
+            rule_ids = self._analyze_shell_versions(["53.beta"])
+        self.assertIn("EGO-M-004", rule_ids)
 
     def test_multiline_node_snippet_preserves_space_indent(self) -> None:
         snippet = self._call_expression_snippet_containing(

@@ -4,12 +4,32 @@
 import json
 import re
 from dataclasses import dataclass, field
+from datetime import date
 from pathlib import Path
 from typing import Literal
 
 from ..models import AnalysisLimits, Evidence
 from .engine import PathMapper
 from .safety import read_text_with_limit
+
+# In GNOME we've been releasing for long time every six months (March and
+# September).
+# So let's try to figure out the GNOME version, using GNOME 40 as the initial
+# reference.
+GNOME_SHELL_RELEASE_ANCHOR_MAJOR = 40
+GNOME_SHELL_RELEASE_ANCHOR_YEAR = 2021
+GNOME_SHELL_RELEASE_ANCHOR_MONTH = 3
+GNOME_SHELL_RELEASE_INTERVAL_MONTHS = 6
+
+
+def latest_stable_shell_major(today: date | None = None) -> int:
+    """Return the newest GNOME Shell major plausibly released by ``today``."""
+    today = date.today() if today is None else today
+    elapsed_months = (today.year - GNOME_SHELL_RELEASE_ANCHOR_YEAR) * 12 + (
+        today.month - GNOME_SHELL_RELEASE_ANCHOR_MONTH
+    )
+    cycles = max(0, elapsed_months) // GNOME_SHELL_RELEASE_INTERVAL_MONTHS
+    return GNOME_SHELL_RELEASE_ANCHOR_MAJOR + cycles
 
 
 class InvalidShellVersion(Exception):
