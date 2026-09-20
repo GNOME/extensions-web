@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-05-18 21:02+0330\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-09-20 16:50+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.6\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -309,11 +309,15 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "زمینهٔ uuid در metadata.json نیست"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "افزونه‌ای با این شناسهٔء یکتا از پیش اضافه شده"
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "زمینهٔ url در metadata.json نیست"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "افزونه‌ای با این شناسهٔ یکتا از پیش اضافه شده"
+
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
 msgstr "زمینهٔ version-name در metadata.json باید رشته باشد"
 
