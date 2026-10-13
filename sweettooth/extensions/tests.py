@@ -3,10 +3,13 @@ import os.path
 import tempfile
 from io import BytesIO
 from typing import Any
+from unittest import mock
 from uuid import uuid4
 from zipfile import ZipFile
 
+from django.contrib import admin
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.core.exceptions import ValidationError
 from django.core.files.base import File
 from django.test import Client, TestCase, TransactionTestCase
@@ -15,6 +18,7 @@ from django.urls import reverse
 from rest_framework.test import APITransactionTestCase
 
 from sweettooth.extensions import models, views
+from sweettooth.extensions.admin import ExtensionVersionAdmin
 from sweettooth.testutils import (
     BasicAPIUserTestCase,
     BasicUserTestCase,
@@ -1849,3 +1853,90 @@ class ExtensionDetailsTest(BasicUserTestCase, SilentDjangoRequestTest):
         )
 
         self.assertEqual(response.status_code, 400)
+
+
+@override_settings(CDN77_CDN_ID="1234", CDN77_TOKEN="token")
+@mock.patch("sweettooth.extensions.cdn.urllib.request.urlopen")
+class CdnPurgeTest(BasicUserTestCase, TestCase):
+    def setUp(self):
+        super().setUp()
+        self.extension = models.Extension.objects.create_from_metadata(
+            {
+                "uuid": "purge@mecheye.net",
+                "name": "Purge",
+                "description": "",
+                "shell-version": ["44"],
+            },
+            creator=self.user,
+        )
+
+    def create_version(self):
+        version = models.ExtensionVersion.objects.create(
+            extension=self.extension, status=models.STATUS_ACTIVE
+        )
+        version.source.name = f"purgemecheye.net.v{version.version}.shell-extension.zip"
+        version.save()
+        return version
+
+    def purged_paths(self, urlopen):
+        paths = []
+        for call in urlopen.call_args_list:
+            request = call.args[0]
+            self.assertEqual(
+                request.full_url, "https://api.cdn77.com/v3/cdn/1234/job/purge"
+            )
+            paths += json.loads(request.data)["paths"]
+        return paths
+
+    def test_review_reject_purges_zip(self, urlopen):
+        self.user.user_permissions.add(
+            Permission.objects.get(codename="can-review-extensions")
+        )
+        version = self.create_version()
+
+        with self.captureOnCommitCallbacks(execute=True):
+            response = self.client.post(
+                reverse("review-submit", kwargs={"pk": version.pk}),
+                {"status": "reject", "comments": "malware"},
+            )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            self.purged_paths(urlopen),
+            ["/extension-data/purgemecheye.net.v1.shell-extension.zip"],
+        )
+
+    def test_admin_bulk_reject_purges_zips(self, urlopen):
+        v1 = self.create_version()
+        v2 = self.create_version()
+
+        with self.captureOnCommitCallbacks(execute=True):
+            ExtensionVersionAdmin(models.ExtensionVersion, admin.site).reject(
+                None, models.ExtensionVersion.objects.filter(pk__in=[v1.pk, v2.pk])
+            )
+
+        self.assertCountEqual(
+            self.purged_paths(urlopen),
+            [
+                "/extension-data/purgemecheye.net.v1.shell-extension.zip",
+                "/extension-data/purgemecheye.net.v2.shell-extension.zip",
+            ],
+        )
+
+    def test_deleting_extension_purges_zips_and_images(self, urlopen):
+        self.create_version()
+        self.extension.screenshot.name = "screenshots/screenshot_1.png"
+        self.extension.icon.name = "icons/icon_1.png"
+        self.extension.save()
+
+        with self.captureOnCommitCallbacks(execute=True):
+            self.extension.delete()
+
+        self.assertCountEqual(
+            self.purged_paths(urlopen),
+            [
+                "/extension-data/purgemecheye.net.v1.shell-extension.zip",
+                "/extension-data/screenshots/screenshot_1.png",
+                "/extension-data/icons/icon_1.png",
+            ],
+        )

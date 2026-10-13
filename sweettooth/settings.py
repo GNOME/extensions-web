@@ -109,6 +109,9 @@ REST_KNOX = {
 
 BASE_URL = os.getenv("EGO_BASE_URL", "https://extensions.gnome.org")
 
+CDN77_CDN_ID = os.getenv("EGO_CDN77_CDN_ID", "")
+CDN77_TOKEN = os.getenv("EGO_CDN77_TOKEN", "")
+
 ROOT_URLCONF = "sweettooth.urls"
 
 TEMPLATES = [
@@ -140,7 +143,10 @@ WSGI_APPLICATION = "sweettooth.wsgi.application"
 # https://docs.djangoproject.com/en/stable/ref/settings/#databases
 DATABASES = {
     "default": dj_database_url.config(
-        env="EGO_DATABASE_URL", default="sqlite://./test.db"
+        env="EGO_DATABASE_URL",
+        default="sqlite://./test.db",
+        conn_max_age=600,
+        conn_health_checks=True,
     )
 }
 
@@ -187,7 +193,7 @@ MEDIA_URL = "/extension-data/"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/stable/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = os.getenv("EGO_STATIC_URL", "/static/")
 
 STATICFILES_DIRS = (os.path.join(SITE_ROOT, "static"),)
 

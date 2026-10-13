@@ -7,64 +7,173 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2019-11-25 19:56+0000\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-10-11 22:19+0800\n"
+"Last-Translator: Cheng-Chia Tseng <zerngjia@gmail.com>\n"
+"Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-05-23 16:11+0800\n"
-"Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 3.9\n"
 
-#: sweettooth/auth/forms.py:26 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
+msgid "You cannot change your email more than once every 7 days"
+msgstr "您每 7 天只能變更一次電子郵件"
+
+#: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
+msgid "Your display name contains forbidden words"
+msgstr "您的顯示名稱包含禁用詞語"
+
+#: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
+msgid "Delete my account"
+msgstr "刪除我的帳號"
+
+#: sweettooth/auth/forms.py:202 extensions-web-domain-django:1
+msgid "Your account will be deleted in 7 days"
+msgstr "您的帳號將在 7 天後刪除"
+
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+msgid "No"
+msgstr "否"
+
+#: sweettooth/auth/forms.py:204 extensions-web-domain-django:1
+msgid "Yes"
+msgstr "是"
+
+#: sweettooth/auth/forms.py:208 extensions-web-domain-django:1
+msgid "Current password"
+msgstr "目前密碼"
+
+#: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
+msgid "You don't need to specify a password to cancel account removal"
+msgstr "取消帳號刪除時不需要指定密碼"
+
+#: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
 msgstr "使用者名稱或電子郵件"
 
-#: sweettooth/auth/forms.py:46 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:39 extensions-web-domain-django:1
+#, python-format
+msgid ""
+"You have multiple accounts registered using single email. You can log in "
+"using your username or you can request removal of duplicate accounts using "
+"GNOME Gitlab (%(url)s)."
+msgstr ""
+"您有多個帳號註冊使用同一個電子郵件。您可以使用使用者名稱登入，或使用 GNOME "
+"GitLab（%(url)s）要求移除重複的帳號。"
+
+#: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
 msgstr "使用者名稱"
 
-#: sweettooth/auth/forms.py:47 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "必填。最多 30 個字元。只能有字母、數字和 @/./+/-/_。"
 
-#: sweettooth/auth/forms.py:48 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
 msgstr "此值只能有字母、數字及 @/./+/-/_ 字元。"
 
-#: sweettooth/auth/forms.py:50 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
 msgstr "電子郵件"
 
-#: sweettooth/auth/forms.py:56 extensions-web-domain-django:1
+#: sweettooth/auth/forms.py:89 sweettooth/auth/serializers.py:54
+#: extensions-web-domain-django:1
 msgid "You should not use email as username"
 msgstr "使用者名稱不應為電子郵件"
 
-#: sweettooth/auth/templates/registration/login.html:23
+#: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
+msgid "Your username contains forbidden words"
+msgstr "您的使用者名稱包含禁用詞語"
+
+#: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
+msgid "This email is already registered"
+msgstr "這個電子郵件已經註冊"
+
+#: sweettooth/auth/serializers.py:48 extensions-web-domain-django:1
+msgid "This username is already registered"
+msgstr "這個使用者名稱已經註冊"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:11
+#: sweettooth/auth/templates/registration/login.html:35
+#: sweettooth/auth/templates/registration/login_popup_form.html:19
+#: extensions-web-domain-django:1
+msgid "Register"
+msgstr "註冊"
+
+#: sweettooth/auth/templates/django_registration/registration_form.html:7
+#: extensions-web-domain-django:1
+msgid "Account Registration"
+msgstr "帳號註冊"
+
+#: sweettooth/auth/templates/profile/account-removal.html:4
+#: sweettooth/auth/templates/profile/settings.html:44
+#: extensions-web-domain-django:1
+msgid "Account removal"
+msgstr "帳號刪除"
+
+#: sweettooth/auth/templates/profile/account-removal.html:7
+#: extensions-web-domain-django:1
+msgid ""
+"You account is scheduled for removal. You can cancel account removal in 7 "
+"days."
+msgstr "您的帳號已排定刪除。您可以在 7 天內取消帳號刪除。"
+
+#: sweettooth/auth/templates/profile/account-removal.html:9
+#: extensions-web-domain-django:1
+msgid "Account removal is canceled."
+msgstr "帳號刪除已取消。"
+
+#: sweettooth/auth/templates/profile/email_confirm.html:4
+#: extensions-web-domain-django:1
+msgid "Email confirmation"
+msgstr "電子郵件確認"
+
+#: sweettooth/auth/templates/profile/settings.html:4
+#: extensions-web-domain-django:1
+msgid "Settings"
+msgstr "設定"
+
+#: sweettooth/auth/templates/profile/settings.html:40
+#: sweettooth/auth/templates/profile/settings.html:82
+#: extensions-web-domain-django:1
+msgid "Submit"
+msgstr "送出"
+
+#: sweettooth/auth/templates/profile/settings.html:41
+#: extensions-web-domain-django:1
+msgid "Change your password"
+msgstr "變更您的密碼"
+
+#. Translators: `schedule_delete_after` is a string representation of Python
+#. datetime object.
+#. It's a date-time after which account will be deleted.
+#: sweettooth/auth/templates/profile/settings.html:51
+#: extensions-web-domain-django:1
+#, python-format
+msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
+msgstr "您的帳號將在 %(schedule_delete_after)s 之後刪除"
+
+#: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
 #: extensions-web-domain-django:1
 msgid "Forgot your password?"
 msgstr "忘記密碼？"
 
-#: sweettooth/auth/templates/registration/login.html:32
+#: sweettooth/auth/templates/registration/login.html:30
 #: sweettooth/auth/templates/registration/login_popup_form.html:11
 #: sweettooth/templates/base.html:72 extensions-web-domain-django:1
 msgid "Log in"
 msgstr "登入"
 
-#: sweettooth/auth/templates/registration/login.html:36
+#: sweettooth/auth/templates/registration/login.html:34
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
 msgstr "沒有帳號？"
-
-#: sweettooth/auth/templates/registration/login.html:37
-#: sweettooth/auth/templates/registration/login_popup_form.html:19
-#: extensions-web-domain-django:1
-msgid "Register"
-msgstr "註冊"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
@@ -84,7 +193,6 @@ msgid ""
 "try again."
 msgstr "密碼重設的憑證不正確。請檢查連結後重試。"
 
-#: sweettooth/auth/templates/registration/password_reset_confirm.html:8
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
@@ -99,39 +207,161 @@ msgstr ""
 "忘記密碼？請在下方輸入您的電子郵件地址，而後我們會寄一封設定新密碼的指引至您"
 "的信箱。"
 
-#: sweettooth/context_processors.py:13 extensions-web-domain-django:1
-msgid "Add yours"
-msgstr "加入您的"
+#: sweettooth/auth/views.py:104 extensions-web-domain-django:1
+msgid "Your email address updated successfully"
+msgstr "您的電子郵件地址已成功更新"
 
-#: sweettooth/context_processors.py:17 extensions-web-domain-django:1
-msgid "Installed extensions"
-msgstr "安裝的擴充套件"
+#: sweettooth/auth/views.py:116 extensions-web-domain-django:1
+msgid "Your confirmation link expired. Please request new one."
+msgstr "您的確認連結已過期。請申請新的連結。"
 
-#: sweettooth/context_processors.py:21 extensions-web-domain-django:1
+#: sweettooth/auth/views.py:118 extensions-web-domain-django:1
+msgid "Wrong request"
+msgstr "錯誤的請求"
+
+#: sweettooth/auth/views.py:128 extensions-web-domain-django:1
+msgid "Profile data saved"
+msgstr "個人資料已儲存"
+
+#: sweettooth/auth/views.py:271 extensions-web-domain-django:1
+msgid "Confirmation mail is sent to your new address. Please check your inbox."
+msgstr "確認信已寄到您的新電子郵件地址。請檢查您的收件匣。"
+
+#: sweettooth/auth/views.py:298 extensions-web-domain-django:1
+msgid "Password is wrong"
+msgstr "密碼錯誤"
+
+#: sweettooth/auth/views.py:86 extensions-web-domain-django:1
+msgid "Restore email and reset password"
+msgstr "還原電子郵件並重設密碼"
+
+#: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
 msgstr "關於"
 
-#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+#: sweettooth/context_processors.py:7 extensions-web-domain-django:1
 msgid "Extensions"
 msgstr "擴充套件"
 
-#: sweettooth/extensions/templates/extensions/comments.html:18
+#: sweettooth/context_processors.py:8 extensions-web-domain-django:1
+msgid "Add yours"
+msgstr "加入您的"
+
+#: sweettooth/context_processors.py:9 extensions-web-domain-django:1
+msgid "Installed extensions"
+msgstr "安裝的擴充套件"
+
+#: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
+msgid "You must define `shell-version` key in metadata.json"
+msgstr "您必須在 metadata.json 中定義 `shell-version` 鍵"
+
+#: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
+#, python-format
+msgid "Unsupported donation type: %s"
+msgstr "不支援的捐款類型：%s"
+
+#: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
+#, python-format
+msgid "You can not specify more than 3 values for donation type \"%s\""
+msgstr "捐款類型「%s\\」不能指定超過 3 個值"
+
+#: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
+#, python-format
+msgid "At least one value must be specified for donation type \"%s\""
+msgstr "捐款類型「%s\\」至少要指定一個值"
+
+#: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
+#, python-format
+msgid "Value type must be string or list of strings for donation type \"%s\""
+msgstr "捐款類型「%s\\」的值類型必須是字串或字串清單"
+
+#: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
+msgid "Version name cannot be just spaces or dots."
+msgstr "版本名稱不能只有空格或點號。"
+
+#: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
+msgid ""
+"Only alphanumeric characters (eng), spaces, and dots are allowed for version "
+"name."
+msgstr "版本名稱只允許英數字元、空格與點號。"
+
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
+msgid ""
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
+msgstr ""
+"上傳此擴充套件即表示我同意並確認：在擴充套件授權與 GNOME Shell 授權相容性出現"
+"爭議的任何情況下，我所上傳的擴充套件可由任何 GNOME Shell 使用者依 GNOME "
+"Shell 使用的授權條款使用"
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"我同意 extensions.gnome.org 網站的工作人員可以移除、修改或重新指派我所上傳擴"
+"充套件的維護權"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "`metadata.json` 中缺少 `uuid` 欄位"
+
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "`metadata.json` 中缺少 `url` 欄位"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "具有該 UUID 的擴充套件已經新增"
+
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr "`metadata.json` 中的 `version-name` 欄位必須是字串"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "您必須同意 extensions.gnome.org 的服務條款"
+
+#: sweettooth/extensions/templates/extensions/away.html:10
+#: extensions-web-domain-django:1
+msgid "Proceed anyway"
+msgstr "仍要繼續"
+
+#: sweettooth/extensions/templates/extensions/away.html:3
+#: extensions-web-domain-django:1
+msgid "You are leaving GNOME Extensions website"
+msgstr "您正要離開 GNOME Extensions 網站"
+
+#: sweettooth/extensions/templates/extensions/away.html:6
+#: extensions-web-domain-django:1
+#, python-format
+msgid "You are going to leave GNOME Extensions website to %(url)s."
+msgstr "您正要離開 GNOME Extensions 網站前往 %(url)s。"
+
+#: sweettooth/extensions/templates/extensions/away.html:9
+#: extensions-web-domain-django:1
+msgid "Cancel"
+msgstr "取消"
+
+#: sweettooth/extensions/templates/extensions/comments.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
-"Unfortunately, to help prevent spam, we require that you <a href="
-"\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post a "
-"comment or report an error. You understand, right?"
+"Unfortunately, to help prevent spam, we require that you <a "
+"href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
+"a comment or report an error. You understand, right?"
 msgstr ""
-"很遺憾，為協助防止垃圾評論，我們需要您<a href=\"%(login_url)s\">登入至 "
-"GNOME Shell 擴充套件</a>以張貼評論及回報錯誤。還能理解嗎？"
+"很遺憾，為協助防止垃圾評論，我們需要您<a href=\"%(login_url)s\">登入至 GNOME "
+"Shell 擴充套件</a>以張貼評論及回報錯誤。還能理解嗎？"
 
-#: sweettooth/extensions/templates/extensions/comments.html:23
+#: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
 msgstr "使用者評論"
 
-#: sweettooth/extensions/templates/extensions/comments.html:25
+#: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
 msgstr "正在載入評論…"
@@ -156,47 +386,7 @@ msgstr "評論"
 msgid "Rating"
 msgstr "評分"
 
-#: sweettooth/extensions/templates/extensions/comments.html:9
-#: extensions-web-domain-django:1
-msgid "Bug report"
-msgstr "臭蟲回報"
-
-#: sweettooth/extensions/templates/extensions/detail.html:25
-#: extensions-web-domain-django:1
-msgid "Upgrade this extension"
-msgstr "升級此擴充套件"
-
-#: sweettooth/extensions/templates/extensions/detail.html:26
-#: extensions-web-domain-django:1
-msgid "Configure this extension"
-msgstr "設定此擴充套件"
-
-#: sweettooth/extensions/templates/extensions/detail.html:27
-#: extensions-web-domain-django:1
-msgid "Uninstall this extension"
-msgstr "解除安裝此擴充套件"
-
-#: sweettooth/extensions/templates/extensions/detail.html:53
-#: extensions-web-domain-django:1
-msgid "Extension Homepage"
-msgstr "擴充套件首頁"
-
-#: sweettooth/extensions/templates/extensions/detail.html:58
-#: extensions-web-domain-django:1
-msgid "Download"
-msgstr "下載"
-
-#: sweettooth/extensions/templates/extensions/detail.html:61
-#: extensions-web-domain-django:1
-msgid "Shell version…"
-msgstr "Shell 版本…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:65
-#: extensions-web-domain-django:1
-msgid "Extension version…"
-msgstr "擴充套件版本…"
-
-#: sweettooth/extensions/templates/extensions/detail.html:74
+#: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
 msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
@@ -204,6 +394,85 @@ msgid ""
 msgstr ""
 "會有一名審核員審核您送出的擴充套件，以確保沒有夾帶危險的東西。您將收到一封審"
 "核結果的電子郵件。"
+
+#: sweettooth/extensions/templates/extensions/detail.html:113
+#: sweettooth/extensions/templates/extensions/detail_edit.html:7
+#: extensions-web-domain-django:1
+msgid "Comments are disabled for this extension."
+msgstr "這個擴充套件的留言已停用。"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+#, python-format
+msgid "%(downloads)s download"
+msgid_plural "%(downloads)s downloads"
+msgstr[0] "%(downloads)s 次下載"
+
+#: sweettooth/extensions/templates/extensions/detail.html:21
+#: extensions-web-domain-django:1
+msgid "Number of Downloads"
+msgstr "下載次數"
+
+#: sweettooth/extensions/templates/extensions/detail.html:28
+#: sweettooth/extensions/templates/extensions/detail.html:33
+#: extensions-web-domain-django:1
+msgid "Donate"
+msgstr "捐款"
+
+#: sweettooth/extensions/templates/extensions/detail.html:43
+#: extensions-web-domain-django:1
+msgid "Install"
+msgstr "安裝"
+
+#: sweettooth/extensions/templates/extensions/detail.html:46
+#: extensions-web-domain-django:1
+msgid "Upgrade this extension"
+msgstr "升級此擴充套件"
+
+#: sweettooth/extensions/templates/extensions/detail.html:47
+#: extensions-web-domain-django:1
+msgid "Configure this extension"
+msgstr "設定此擴充套件"
+
+#: sweettooth/extensions/templates/extensions/detail.html:48
+#: extensions-web-domain-django:1
+msgid "Uninstall this extension"
+msgstr "解除安裝此擴充套件"
+
+#: sweettooth/extensions/templates/extensions/detail.html:75
+#: extensions-web-domain-django:1
+msgid "Extension Homepage"
+msgstr "擴充套件首頁"
+
+#: sweettooth/extensions/templates/extensions/detail.html:81
+#: extensions-web-domain-django:1
+msgid "Session Mode(s)"
+msgstr "工作階段模式"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "This extension will run while the screen is locked"
+msgstr "此擴充套件會在螢幕鎖定時執行"
+
+#: sweettooth/extensions/templates/extensions/detail.html:82
+#: extensions-web-domain-django:1
+msgid "Unlock Dialog"
+msgstr "解鎖對話框"
+
+#: sweettooth/extensions/templates/extensions/detail.html:86
+#: extensions-web-domain-django:1
+msgid "Download"
+msgstr "下載"
+
+#: sweettooth/extensions/templates/extensions/detail.html:89
+#: extensions-web-domain-django:1
+msgid "Shell version…"
+msgstr "Shell 版本…"
+
+#: sweettooth/extensions/templates/extensions/detail.html:93
+#: extensions-web-domain-django:1
+msgid "Extension version…"
+msgstr "擴充套件版本…"
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
@@ -221,11 +490,74 @@ msgstr "安裝的擴充套件"
 msgid "Shell settings"
 msgstr "Shell 設定"
 
-#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
+#: sweettooth/extensions/templates/extensions/upload.html:12
+#: extensions-web-domain-django:1
+msgid ""
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
+msgstr ""
+"上傳您的擴充套件 Zip 檔以提交審核。之後的版本可以使用同一個表單上傳。您的擴充"
+"套件審核完成後，會以電子郵件通知結果。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:17
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
+"required for approval."
+msgstr "請參閱<a href=\"%(url)s\">審核指南</a>了解通過審核需要什麼條件。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:22
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"If this is your first extension, please see the documentation on <a "
+"href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
+"preparing it for upload."
+msgstr ""
+"如果這是您的第一個擴充套件，請參閱 <a href=\"%(url)s\">gjs.guide</a> 上的文"
+"件，了解如何建立擴充套件並準備上傳。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:29
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions distributed via this website are subject to the <a "
+"href=\"%(url)s\">Code of Conduct</a>."
+msgstr "透過本網站發布的擴充套件受<a href=\"%(url)s\">行為準則</a>約束。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:34
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
+"removed from this website."
+msgstr "違反<a href=\"%(url)s\">行為準則</a>的擴充套件會從本網站移除。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"上傳前，您可以在本機執行 Shexli 靜態分析器，及早發現常見的打包與審核問題。"
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "上傳擴充套件"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "上傳失敗。請再試一次。"
+
+#: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
 msgstr "內容"
 
-#: sweettooth/ratings/admin.py:16 extensions-web-domain-django:1
+#: sweettooth/ratings/admin.py:13 extensions-web-domain-django:1
 msgid "Metadata"
 msgstr "中介資料"
 
@@ -269,6 +601,83 @@ msgstr "張貼評論"
 msgid "Edit your comment"
 msgstr "編輯評論"
 
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli（實驗性）"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    Shexli 發現 %(count)s 個可能需要審核者注意的問題。\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "Shexli 沒有發現任何問題。"
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "Shexli 無法分析這個版本。"
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "Shexli 尚未產生結果。"
+
+#: sweettooth/review/templates/review/review.html:73
+#: extensions-web-domain-django:1
+msgid ""
+"You can upload the next version by the <a href='https://extensions.gnome.org/"
+"upload/'>same form</a> you've posted this version."
+msgstr ""
+"您可以使用發布這個版本時的<a href='https://extensions.gnome.org/upload/'>同一"
+"個表單</a>上傳下一個版本。"
+
+#: sweettooth/review/templates/review/review.html:76
+#: extensions-web-domain-django:1
+msgid ""
+"You can change the extension icon by clicking on the icon in your extension "
+"page."
+msgstr "您可以點擊擴充套件頁面上的圖示來變更擴充套件圖示。"
+
+#: sweettooth/review/templates/review/review.html:79
+#: extensions-web-domain-django:1
+msgid ""
+"In case you want to inactivate an approved version, click on inactivate link "
+"in your extension page."
+msgstr "如果您想停用已核准的版本，請點擊擴充套件頁面上的停用連結。"
+
+#: sweettooth/review/templates/review/review.html:82
+#: extensions-web-domain-django:1
+msgid ""
+"You can find developer guides in <a href='https://gjs.guide/"
+"extensions/'>gjs.guide</a>."
+msgstr ""
+"您可以在 <a href='https://gjs.guide/extensions/'>gjs.guide</a> 找到開發者指"
+"南。"
+
+#: sweettooth/review/templates/review/review.html:85
+#: extensions-web-domain-django:1
+msgid ""
+"If you need any help with your extension, you can ask us on <a href='https://"
+"matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
+msgstr ""
+"如果您的擴充套件需要任何協助，可以在 <a href='https://matrix.to/#/"
+"#extensions:gnome.org'>GNOME Matrix 頻道</a>向我們詢問。"
+
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
 msgstr "GNOME Shell 擴充套件的最新擴充套件"
@@ -278,19 +687,27 @@ msgstr "GNOME Shell 擴充套件的最新擴充套件"
 msgid "GNOME Shell Extensions"
 msgstr "GNOME Shell 擴充套件"
 
-#: sweettooth/templates/usermenu.html:5 extensions-web-domain-django:1
-msgid "User Profile"
-msgstr "使用者資料"
+#: sweettooth/templates/base.html:96 extensions-web-domain-django:1
+msgid "Developers Guide"
+msgstr "開發者指南"
 
-#: sweettooth/templates/usermenu.html:6 extensions-web-domain-django:1
-msgid "User Settings"
-msgstr "使用者設定"
+#: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
+msgid "The website is under maintenance. Please retry in a few minutes."
+msgstr "網站正在維護中。請幾分鐘後再試。"
 
-#: sweettooth/templates/usermenu.html:7 extensions-web-domain-django:1
+#: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
 msgid "Log out"
 msgstr "登出"
 
-#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
+#: sweettooth/templates/usermenu.html:8 extensions-web-domain-django:1
+msgid "User Profile"
+msgstr "使用者資料"
+
+#: sweettooth/templates/usermenu.html:9 extensions-web-domain-django:1
+msgid "User Settings"
+msgstr "使用者設定"
+
+#: sweettooth/static/js/extensions.js:110 extensions-web-domain-djangojs:1
 msgid ""
 "To control GNOME Shell extensions using this site you must install GNOME "
 "Shell integration that consists of two parts: browser extension and native "
@@ -299,20 +716,20 @@ msgstr ""
 "您必須安裝 GNOME Shell 整合才能使用此網站控制 GNOME Shell 擴充套件。GNOME "
 "Shell 整合由兩個部分組成：「瀏覽器擴充元件」和「原生主機通訊應用程式」"
 
-#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
 msgstr "安裝 GNOME Shell 整合瀏覽器擴充元件"
 
-#: sweettooth/static/js/extensions.js:113 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
 msgstr "按一下此處安裝瀏覽器擴充元件"
 
-#: sweettooth/static/js/extensions.js:115 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr "請參閱 %sWiki 頁面%s取得原生主機連接器的安裝指引"
 
-#: sweettooth/static/js/extensions.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
 "We cannot detect a running copy of GNOME on this system, so some parts of "
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
@@ -321,12 +738,11 @@ msgstr ""
 "我們無法偵測此系統正在執行的 GNOME 複本，所以部分介面可能會被停用。請參閱<a "
 "href=\"/about/#no-detection\">我們的疑難雜解條目</a>以取得更多資訊。"
 
-#: sweettooth/static/js/extensions.js:136
-#: sweettooth/static/js/extensions.js:142 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
 msgstr "GNOME Shell 擴充套件無法列出您安裝的擴充套件。"
 
-#: sweettooth/static/js/fsui.js:124 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
 msgstr "與下述相容"
 
@@ -346,9 +762,18 @@ msgstr "下載量"
 msgid "Popularity"
 msgstr "熱門度"
 
-#: sweettooth/static/js/fsui.js:73 extensions-web-domain-djangojs:1
+#: sweettooth/static/js/fsui.js:44 extensions-web-domain-djangojs:1
+msgid "Relevance"
+msgstr "相關性"
+
+#: sweettooth/static/js/fsui.js:74 extensions-web-domain-djangojs:1
 msgid "Sort by"
 msgstr "排序依據"
+
+#: sweettooth/static/js/templates/extensions/comments_list.mst:10
+#: extensions-web-domain-djangojs:1
+msgid "Author"
+msgstr "作者"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
@@ -359,51 +784,6 @@ msgstr "顯示更多評論"
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
 msgstr "這裡尚無評論。來成為第一名評論者！"
-
-#: sweettooth/static/js/templates/extensions/comments_list.mst:4
-#: extensions-web-domain-djangojs:1
-msgid "Author"
-msgstr "作者"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:1
-#: extensions-web-domain-djangojs:1
-msgid "What's wrong?"
-msgstr "怎麼了？"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:17
-#: extensions-web-domain-djangojs:1
-msgid "GNOME Shell Extensions did not detect any errors with this extension."
-msgstr "GNOME Shell 擴充套件未偵測出此擴充套件的任何錯誤。"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:20
-#: extensions-web-domain-djangojs:1
-msgid "Version information"
-msgstr "版本資訊"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:22
-#: extensions-web-domain-djangojs:1
-msgid "Shell version"
-msgstr "Shell 版本"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Extension version"
-msgstr "擴充套件版本"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:23
-#: extensions-web-domain-djangojs:1
-msgid "Unknown"
-msgstr "未知"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:5
-#: extensions-web-domain-djangojs:1
-msgid "What have you tried?"
-msgstr "您試了什麼？"
-
-#: sweettooth/static/js/templates/extensions/error_report_template.mst:9
-#: extensions-web-domain-djangojs:1
-msgid "Automatically detected errors"
-msgstr "自動偵測到的錯誤"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1

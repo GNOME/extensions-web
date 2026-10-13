@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-05-09 18:24+0300\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-09-15 23:05+0300\n"
 "Last-Translator: Aurimas Černius <aurimas.cernius@mailo.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -321,11 +321,15 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "`metadata.json` faile trūksta lauko `uuid`"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "`metadata.json` faile trūksta lauko `url`"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Plėtinys su tokiu UUID jau buvo pridėtas"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
 msgstr "Laukas „version-name“ „metadata.json“ faile turi būti simbolių eilutė"
 

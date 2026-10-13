@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from sweettooth.extensions import cdn
 from sweettooth.extensions.models import (
     STATUS_ACTIVE,
     STATUS_REJECTED,
@@ -41,6 +42,7 @@ class ExtensionVersionAdmin(admin.ModelAdmin):
 
     def reject(self, request, queryset):
         queryset.update(status=STATUS_REJECTED)
+        cdn.purge(*(version.source for version in queryset))
 
 
 class ExtensionVersionInline(admin.TabularInline):

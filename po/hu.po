@@ -1,15 +1,15 @@
 # Hungarian translation for extensions-web.
-# Copyright (C) 2019, 2022, 2023, 2024, 2025 Free Software Foundation, Inc.
+# Copyright (C) 2019, 2022, 2023, 2024, 2025, 2026 Free Software Foundation, Inc.
 # This file is distributed under the same license as the extensions-web package.
 #
-# Balázs Meskó <mesko.balazs at fsf dot hu>, 2019.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2022, 2023, 2024, 2025.
+# Balázs Meskó <mesko.balazs at fsf dot hu>, 2019, 2026.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2022, 2023, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2025-06-22 07:03+0000\n"
-"PO-Revision-Date: 2025-09-01 14:07+0200\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-09-03 11:48+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
@@ -264,7 +264,7 @@ msgstr "Telepített kiterjesztések"
 
 #: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
-msgstr "Meg kell határoznia a „shell-version” kulcsot a metadata.json fájlban"
+msgstr "Meg kell határoznia a `shell-version` kulcsot a metadata.json fájlban"
 
 #: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
@@ -300,28 +300,7 @@ msgstr ""
 "Csak (angol) alfanumerikus karakterek, szóköz és pont engedélyezett a "
 "verziónévnél."
 
-#: sweettooth/extensions/serializers.py:107 extensions-web-domain-django:1
-msgid ""
-"I agree that a staff of extensions.gnome.org website may remove, modify or "
-"reassign maintainership of the extension uploaded by me"
-msgstr ""
-"Elfogadom, hogy az extensions.gnome.org webhely munkatársai eltávolíthatják, "
-"módosíthatják vagy átruházhatják az általam feltöltött kiterjesztés "
-"karbantartását"
-
-#: sweettooth/extensions/serializers.py:117 extensions-web-domain-django:1
-msgid "The `uuid` field is missing in `metadata.json`"
-msgstr "Az „uuid” mező hiányzik a „metadata.json” fájlból"
-
-#: sweettooth/extensions/serializers.py:156 extensions-web-domain-django:1
-msgid "An extension with that UUID has already been added"
-msgstr "Ezzel az UUID azonosítóval már hozzá lett adva egy kiterjesztés"
-
-#: sweettooth/extensions/serializers.py:91 extensions-web-domain-django:1
-msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr "El kell fogadnia az extensions.gnome.org szolgáltatási feltételeit"
-
-#: sweettooth/extensions/serializers.py:98 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
 "By uploading this extension I agree and verify that in any controversial "
 "case regarding the compatibility of extension's license with the GNOME "
@@ -333,6 +312,39 @@ msgstr ""
 "esetekben az általam feltöltött kiterjesztést bármely GNOME Shell "
 "felhasználó a GNOME Shell által használt licenc feltételei szerint "
 "használhatja."
+
+#: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
+msgid ""
+"I agree that a staff of extensions.gnome.org website may remove, modify or "
+"reassign maintainership of the extension uploaded by me"
+msgstr ""
+"Elfogadom, hogy az extensions.gnome.org webhely munkatársai eltávolíthatják, "
+"módosíthatják vagy átruházhatják az általam feltöltött kiterjesztés "
+"karbantartását"
+
+#: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
+msgid "The `uuid` field is missing in `metadata.json`"
+msgstr "Az `uuid` mező hiányzik a `metadata.json` fájlból"
+
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+#| msgid "The `uuid` field is missing in `metadata.json`"
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "Az `url` mező hiányzik a `metadata.json` fájlból"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
+msgid "An extension with that UUID has already been added"
+msgstr "Ezzel az UUID azonosítóval már hozzá lett adva egy kiterjesztés"
+
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
+#| msgid "The `uuid` field is missing in `metadata.json`"
+msgid "The `version-name` field in `metadata.json` must be a string"
+msgstr ""
+"A `metadata.json` fájlban lévő `version-name` mezőnek karakterláncnak kell len"
+"nie"
+
+#: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
+msgid "You must agree with the extensions.gnome.org terms of service"
+msgstr "El kell fogadnia az extensions.gnome.org szolgáltatási feltételeit"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -503,12 +515,7 @@ msgstr "Telepített kiterjesztések"
 msgid "Shell settings"
 msgstr "Shell beállítások"
 
-#: sweettooth/extensions/templates/extensions/upload.html:14
-#: extensions-web-domain-django:1
-msgid "Upload extension"
-msgstr "Kiterjesztés feltöltése"
-
-#: sweettooth/extensions/templates/extensions/upload.html:17
+#: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
 "Upload your extension Zip file to submit it for review. Later versions can "
@@ -520,7 +527,7 @@ msgstr ""
 "kiterjesztés felülvizsgálata megtörtént, e-mailben kap értesítést az "
 "eredményről."
 
-#: sweettooth/extensions/templates/extensions/upload.html:22
+#: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -530,7 +537,7 @@ msgstr ""
 "Nézze meg a <a href=\"%(url)s\">felülvizsgálati útmutatót</a> annak "
 "megismeréséhez, hogy mi szükséges az elfogadáshoz."
 
-#: sweettooth/extensions/templates/extensions/upload.html:27
+#: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
@@ -542,25 +549,44 @@ msgstr ""
 "href=\"%(url)s\">gjs.guide</a> oldalon lévő dokumentációt a kiterjesztés "
 "létrehozásához és a feltöltésre való előkészítéséhez szükséges utasításokért."
 
-#: sweettooth/extensions/templates/extensions/upload.html:34
+#: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
 "Extensions distributed via this website are subject to the <a "
 "href=\"%(url)s\">Code of Conduct</a>."
 msgstr ""
-"A webhelyen keresztül terjesztett kiterjesztésekre a <a href=\"%(url)s\">magat"
-"artási kódex</a> vonatkozik."
+"A webhelyen keresztül terjesztett kiterjesztésekre a <a "
+"href=\"%(url)s\">magatartási kódex</a> vonatkozik."
 
-#: sweettooth/extensions/templates/extensions/upload.html:39
+#: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
 #, python-format
 msgid ""
 "Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
 "removed from this website."
 msgstr ""
-"A <a href=\"%(url)s\">magatartási kódexet</a> megsértő kiterjesztések eltávolí"
-"tásra kerülnek erről a webhelyről."
+"A <a href=\"%(url)s\">magatartási kódexet</a> megsértő kiterjesztések "
+"eltávolításra kerülnek erről a webhelyről."
+
+#: sweettooth/extensions/templates/extensions/upload.html:41
+#: extensions-web-domain-django:1
+msgid ""
+"Before uploading, you can run the Shexli static analyzer locally to catch "
+"common packaging and review issues early."
+msgstr ""
+"A feltöltés előtt futtathatja helyileg a Shexli statikus elemzőt, hogy korán "
+"elkapja a gyakori csomagolási és ellenőrzési problémákat."
+
+#: sweettooth/extensions/templates/extensions/upload.html:50
+#: extensions-web-domain-django:1
+msgid "Upload extension"
+msgstr "Kiterjesztés feltöltése"
+
+#: sweettooth/extensions/templates/extensions/upload.html:54
+#: extensions-web-domain-django:1
+msgid "Upload failed. Please try again."
+msgstr "A feltöltés nem sikerült. Próbálja meg újra."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -610,6 +636,47 @@ msgstr "Megjegyzés közzététele"
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
 msgstr "Megjegyzés szerkesztése"
+
+#: sweettooth/review/templates/review/review.html:101
+#: extensions-web-domain-django:1
+msgid "Shexli (experimental)"
+msgstr "Shexli (kísérleti)"
+
+#: sweettooth/review/templates/review/review.html:117
+#: extensions-web-domain-django:1
+#, python-format
+msgid ""
+"\n"
+"    Shexli found 1 issue that may need reviewer attention.\n"
+"    "
+msgid_plural ""
+"\n"
+"    Shexli found %(count)s issues that may need reviewer attention.\n"
+"    "
+msgstr[0] ""
+"\n"
+"    A Shexli 1 problémát talált, amely ellenőrzői figyelmet igényel.\n"
+"    "
+msgstr[1] ""
+"\n"
+"    A Shexli %(count)s problémát talált, amely ellenőrzői figyelmet "
+"igényel.\n"
+"    "
+
+#: sweettooth/review/templates/review/review.html:151
+#: extensions-web-domain-django:1
+msgid "Shexli did not find any issues."
+msgstr "A Shexli nem talált problémát."
+
+#: sweettooth/review/templates/review/review.html:154
+#: extensions-web-domain-django:1
+msgid "Shexli could not analyze this version."
+msgstr "A Shexli nem tudta elemezni ezt a verziót."
+
+#: sweettooth/review/templates/review/review.html:156
+#: extensions-web-domain-django:1
+msgid "Shexli has not produced a result yet."
+msgstr "A Shexli még nem adott eredményt."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1

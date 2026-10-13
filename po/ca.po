@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
-"PO-Revision-Date: 2026-07-20 16:56+0200\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-09-18 20:17+0200\n"
 "Last-Translator: Carles Ferrando Garcia <carles.ferrando@gamil.com>\n"
 "Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
 "Language: ca\n"
@@ -50,7 +50,8 @@ msgstr "Contrasenya actual"
 #: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
 msgstr ""
-"No cal que especifiqueu una contrasenya per cancel·lar l'eliminació del compte"
+"No cal que especifiqueu una contrasenya per cancel·lar l'eliminació del "
+"compte"
 
 #: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
@@ -63,9 +64,10 @@ msgid ""
 "using your username or you can request removal of duplicate accounts using "
 "GNOME Gitlab (%(url)s)."
 msgstr ""
-"Teniu diversos comptes registrats utilitzant un únic correu electrònic. Podeu "
-"iniciar la sessió utilitzant el vostre nom d'usuari o podeu sol·licitar "
-"l'eliminació de comptes duplicats utilitzant el Gitlab del GNOME (%(url)s)."
+"Teniu diversos comptes registrats utilitzant un únic correu electrònic. "
+"Podeu iniciar la sessió utilitzant el vostre nom d'usuari o podeu "
+"sol·licitar l'eliminació de comptes duplicats utilitzant el Gitlab del GNOME "
+"(%(url)s)."
 
 #: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
@@ -197,8 +199,8 @@ msgstr "Restabliu la contrasenya"
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
 msgid ""
-"The token for the password reset is incorrect. Please check your link and try "
-"again."
+"The token for the password reset is incorrect. Please check your link and "
+"try again."
 msgstr ""
 "El testimoni per al restabliment de la contrasenya és incorrecte. Comproveu "
 "l’enllaç i torneu-ho a provar."
@@ -214,8 +216,8 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
-"Heu oblidat la contrasenya? Entreu el vostre correu electrònic més avall i us "
-"enviarem instruccions per configurar-ne una nova."
+"Heu oblidat la contrasenya? Entreu el vostre correu electrònic més avall i "
+"us enviarem instruccions per configurar-ne una nova."
 
 #: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
@@ -303,16 +305,16 @@ msgstr ""
 
 #: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
-"By uploading this extension I agree and verify that in any controversial case "
-"regarding the compatibility of extension's license with the GNOME Shell's "
-"license, the extension uploaded by me may be used by any GNOME Shell user "
-"under the terms of the license used by GNOME Shell"
+"By uploading this extension I agree and verify that in any controversial "
+"case regarding the compatibility of extension's license with the GNOME "
+"Shell's license, the extension uploaded by me may be used by any GNOME Shell "
+"user under the terms of the license used by GNOME Shell"
 msgstr ""
 "En pujar aquesta extensió estic d'acord i verifico que en qualsevol cas "
-"controvertit relatiu a la compatibilitat de la llicència de l'extensió amb la "
-"llicència del GNOME Shell, l'extensió que he penjat pot ser utilitzada per "
-"qualsevol usuari del GNOME Shell sota els termes de la llicència utilitzada "
-"pel GNOME Shell"
+"controvertit relatiu a la compatibilitat de la llicència de l'extensió amb "
+"la llicència del GNOME Shell, l'extensió que he penjat pot ser utilitzada "
+"per qualsevol usuari del GNOME Shell sota els termes de la llicència "
+"utilitzada pel GNOME Shell"
 
 #: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
 msgid ""
@@ -326,11 +328,15 @@ msgstr ""
 msgid "The `uuid` field is missing in `metadata.json`"
 msgstr "Falta el camp `uuid` a `metadata.json`"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "Falta el camp `url` a `metadata.json`"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
 msgstr "Ja s'ha afegit una extensió amb aquest UUID"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
 msgstr "El camp `version-name` a `metadata.json` ha de ser una cadena"
 
@@ -510,13 +516,13 @@ msgstr "Paràmetres de Shell"
 #: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
 msgid ""
-"Upload your extension Zip file to submit it for review. Later versions can be "
-"uploaded using the same form. Once your extension has been reviewed you will "
-"be notified of the result by e-mail."
+"Upload your extension Zip file to submit it for review. Later versions can "
+"be uploaded using the same form. Once your extension has been reviewed you "
+"will be notified of the result by e-mail."
 msgstr ""
 "Pugeu el fitxer Zip de l'extensió per a enviar-la a revisió. Les versions "
-"posteriors es poden penjar utilitzant el mateix formulari. Un cop revisada la "
-"vostra extensió, se us avisarà del resultat per correu electrònic."
+"posteriors es poden penjar utilitzant el mateix formulari. Un cop revisada "
+"la vostra extensió, se us avisarà del resultat per correu electrònic."
 
 #: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
@@ -766,13 +772,13 @@ msgstr "Prem aquí per instal·lar l'extensió del navegador"
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
-"Mireu la %spàgina wiki%s per les instruccions d'instal·lació del connector de "
-"l'amfitrió nadiu"
+"Mireu la %spàgina wiki%s per les instruccions d'instal·lació del connector "
+"de l'amfitrió nadiu"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
-"We cannot detect a running copy of GNOME on this system, so some parts of the "
-"interface may be disabled. See <a href=\"/about/#no-detection\">our "
+"We cannot detect a running copy of GNOME on this system, so some parts of "
+"the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
 "No podem detectar una còpia en execució del GNOME en aquest sistema, de "
@@ -851,7 +857,8 @@ msgstr "Heu desinstal·lat"
 #~ msgid "What's wrong?"
 #~ msgstr "Què va mal?"
 
-#~ msgid "GNOME Shell Extensions did not detect any errors with this extension."
+#~ msgid ""
+#~ "GNOME Shell Extensions did not detect any errors with this extension."
 #~ msgstr ""
 #~ "Les extensions de GNOME Shell no han detectat cap error amb aquesta "
 #~ "extensió."

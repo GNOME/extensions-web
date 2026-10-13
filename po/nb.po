@@ -2,28 +2,29 @@
 # Copyright (C) 2026 extensions-web's COPYRIGHT HOLDER
 # This file is distributed under the same license as the extensions-web package.
 # Kjartan Maraas <kmaraas@gnome.org>, 2026.
+# Roy-Magne Mo <rmo@sunnmore.net>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: extensions-web master\n"
 "Report-Msgid-Bugs-To: ykonotopov@gnome.org\n"
-"POT-Creation-Date: 2026-04-11 13:50+0000\n"
+"POT-Creation-Date: 2026-08-18 18:51+0000\n"
+"PO-Revision-Date: 2026-09-23 19:00+0200\n"
+"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
+"Language-Team: Norwegian Bokmål <nb@li.org>\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2026-07-10 15:40+0200\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
-"Language-Team: Norwegian Bokmål <nb@li.org>\n"
-"Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: sweettooth/auth/forms.py:123 extensions-web-domain-django:1
 msgid "You cannot change your email more than once every 7 days"
-msgstr ""
+msgstr "Du kan ikke endre e-postadressen din mer enn én gang hver 7. dag"
 
 #: sweettooth/auth/forms.py:157 extensions-web-domain-django:1
 msgid "Your display name contains forbidden words"
-msgstr ""
+msgstr "Visningsnavnet ditt inneholder forbudte ord"
 
 #: sweettooth/auth/forms.py:201 extensions-web-domain-django:1
 msgid "Delete my account"
@@ -47,7 +48,7 @@ msgstr "Nåværende passord"
 
 #: sweettooth/auth/forms.py:209 extensions-web-domain-django:1
 msgid "You don't need to specify a password to cancel account removal"
-msgstr ""
+msgstr "Du trenger ikke å oppgi et passord for å avbryte fjerning av kontoen"
 
 #: sweettooth/auth/forms.py:31 extensions-web-domain-django:1
 msgid "Username or email"
@@ -60,6 +61,9 @@ msgid ""
 "using your username or you can request removal of duplicate accounts using "
 "GNOME Gitlab (%(url)s)."
 msgstr ""
+"Du har flere kontoer registrert med samme e-post. Du kan logge inn med "
+"brukernavnet ditt eller be om fjerning av dupliserte kontoer med GNOME "
+"Gitlab (%(url)s)."
 
 #: sweettooth/auth/forms.py:70 extensions-web-domain-django:1
 msgid "Username"
@@ -67,11 +71,11 @@ msgstr "Brukernavn"
 
 #: sweettooth/auth/forms.py:74 extensions-web-domain-django:1
 msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
+msgstr "Nødvendig. 30 tegn eller færre. Kun bokstaver, tall og @/./+/-/_."
 
 #: sweettooth/auth/forms.py:78 extensions-web-domain-django:1
 msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
-msgstr ""
+msgstr "Denne verdien kan bare inneholde bokstaver, tall og @/./+/-/_-tegn."
 
 #: sweettooth/auth/forms.py:82 extensions-web-domain-django:1
 msgid "Email"
@@ -84,7 +88,7 @@ msgstr "Du bør ikke bruke e-post som brukernavn"
 
 #: sweettooth/auth/forms.py:92 extensions-web-domain-django:1
 msgid "Your username contains forbidden words"
-msgstr ""
+msgstr "Brukernavnet ditt inneholder forbudte ord"
 
 #: sweettooth/auth/serializers.py:42 extensions-web-domain-django:1
 msgid "This email is already registered"
@@ -104,13 +108,13 @@ msgstr "Registrer"
 #: sweettooth/auth/templates/django_registration/registration_form.html:7
 #: extensions-web-domain-django:1
 msgid "Account Registration"
-msgstr ""
+msgstr "Kontoregistrering"
 
 #: sweettooth/auth/templates/profile/account-removal.html:4
 #: sweettooth/auth/templates/profile/settings.html:44
 #: extensions-web-domain-django:1
 msgid "Account removal"
-msgstr ""
+msgstr "Fjerning av konto"
 
 #: sweettooth/auth/templates/profile/account-removal.html:7
 #: extensions-web-domain-django:1
@@ -118,11 +122,13 @@ msgid ""
 "You account is scheduled for removal. You can cancel account removal in 7 "
 "days."
 msgstr ""
+"Kontoen din er satt opp for fjerning. Du kan avbryte fjerningen innen 7 "
+"dager."
 
 #: sweettooth/auth/templates/profile/account-removal.html:9
 #: extensions-web-domain-django:1
 msgid "Account removal is canceled."
-msgstr ""
+msgstr "Fjerningen av kontoen er avbrutt."
 
 #: sweettooth/auth/templates/profile/email_confirm.html:4
 #: extensions-web-domain-django:1
@@ -152,7 +158,7 @@ msgstr "Endre ditt passord"
 #: extensions-web-domain-django:1
 #, python-format
 msgid "Your account is scheduled for removal after %(schedule_delete_after)s"
-msgstr ""
+msgstr "Kontoen din er planlagt for fjerning etter %(schedule_delete_after)s"
 
 #: sweettooth/auth/templates/registration/login.html:21
 #: sweettooth/auth/templates/registration/login_popup_form.html:14
@@ -170,18 +176,18 @@ msgstr "Logg inn"
 #: sweettooth/auth/templates/registration/login_popup_form.html:17
 #: extensions-web-domain-django:1
 msgid "Don't have an account?"
-msgstr ""
+msgstr "Har du ikke en konto?"
 
 #: sweettooth/auth/templates/registration/login.html:6
 #: extensions-web-domain-django:1
 msgid "User Login"
-msgstr ""
+msgstr "Brukerinnlogging"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:12
 #: sweettooth/auth/templates/registration/password_reset_form.html:12
 #: extensions-web-domain-django:1
 msgid "Reset your password"
-msgstr ""
+msgstr "Tilbakestill passordet ditt"
 
 #: sweettooth/auth/templates/registration/password_reset_confirm.html:15
 #: extensions-web-domain-django:1
@@ -189,11 +195,13 @@ msgid ""
 "The token for the password reset is incorrect. Please check your link and "
 "try again."
 msgstr ""
+"Tokenet for tilbakestilling av passord er feil. Sjekk lenken din og prøv på "
+"nytt."
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:7
 #: extensions-web-domain-django:1
 msgid "Password reset"
-msgstr ""
+msgstr "Tilbakestill passord"
 
 #: sweettooth/auth/templates/registration/password_reset_form.html:8
 #: extensions-web-domain-django:1
@@ -201,26 +209,29 @@ msgid ""
 "Forgot your password? Enter your e-mail address below, and we’ll e-mail "
 "instructions for setting a new one."
 msgstr ""
+"Glemt passordet? Skriv inn e-postadressen din nedenfor, så sender vi "
+"instruksjoner for å angi et nytt."
 
 #: sweettooth/auth/views.py:104 extensions-web-domain-django:1
 msgid "Your email address updated successfully"
-msgstr ""
+msgstr "E-postadressen din er oppdatert"
 
 #: sweettooth/auth/views.py:116 extensions-web-domain-django:1
 msgid "Your confirmation link expired. Please request new one."
-msgstr ""
+msgstr "Bekreftelseslenken din har utløpt. Be om en ny."
 
 #: sweettooth/auth/views.py:118 extensions-web-domain-django:1
 msgid "Wrong request"
-msgstr ""
+msgstr "Feil forespørsel"
 
 #: sweettooth/auth/views.py:128 extensions-web-domain-django:1
 msgid "Profile data saved"
-msgstr ""
+msgstr "Profilopplysningene er lagret"
 
 #: sweettooth/auth/views.py:271 extensions-web-domain-django:1
 msgid "Confirmation mail is sent to your new address. Please check your inbox."
 msgstr ""
+"En bekreftelse er sendt til den nye adressen din. Sjekk innboksen din."
 
 #: sweettooth/auth/views.py:298 extensions-web-domain-django:1
 msgid "Password is wrong"
@@ -228,7 +239,7 @@ msgstr "Passordet er feil"
 
 #: sweettooth/auth/views.py:86 extensions-web-domain-django:1
 msgid "Restore email and reset password"
-msgstr ""
+msgstr "Gjenopprett e-post og tilbakestill passord"
 
 #: sweettooth/context_processors.py:10 extensions-web-domain-django:1
 msgid "About"
@@ -244,41 +255,44 @@ msgstr "Legg til dine"
 
 #: sweettooth/context_processors.py:9 extensions-web-domain-django:1
 msgid "Installed extensions"
-msgstr ""
+msgstr "Installerte utvidelser"
 
 #: sweettooth/extensions/models.py:127 extensions-web-domain-django:1
 msgid "You must define `shell-version` key in metadata.json"
-msgstr ""
+msgstr "Du må definere `shell-version`-nøkkelen i metadata.json"
 
 #: sweettooth/extensions/models.py:192 extensions-web-domain-django:1
 #, python-format
 msgid "Unsupported donation type: %s"
-msgstr ""
+msgstr "Donasjonstypen støttes ikke: %s"
 
 #: sweettooth/extensions/models.py:197 extensions-web-domain-django:1
 #, python-format
 msgid "You can not specify more than 3 values for donation type \"%s\""
-msgstr ""
+msgstr "Du kan ikke angi mer enn 3 verdier for donasjonstype «%s»"
 
 #: sweettooth/extensions/models.py:203 extensions-web-domain-django:1
 #, python-format
 msgid "At least one value must be specified for donation type \"%s\""
-msgstr ""
+msgstr "Minst én verdi må angis for donasjonstype «%s»"
 
 #: sweettooth/extensions/models.py:210 extensions-web-domain-django:1
 #, python-format
 msgid "Value type must be string or list of strings for donation type \"%s\""
 msgstr ""
+"Verditypen må være streng eller liste av strenger for donasjonstype «%s»"
 
 #: sweettooth/extensions/models.py:471 extensions-web-domain-django:1
 msgid "Version name cannot be just spaces or dots."
-msgstr ""
+msgstr "Versjonsnavn kan ikke bare bestå av mellomrom eller punktum."
 
 #: sweettooth/extensions/models.py:477 extensions-web-domain-django:1
 msgid ""
 "Only alphanumeric characters (eng), spaces, and dots are allowed for version "
 "name."
 msgstr ""
+"Kun alfanumeriske tegn (engelske), mellomrom og punktum er tillatt i "
+"versjonsnavn."
 
 #: sweettooth/extensions/serializers.py:101 extensions-web-domain-django:1
 msgid ""
@@ -287,28 +301,38 @@ msgid ""
 "Shell's license, the extension uploaded by me may be used by any GNOME Shell "
 "user under the terms of the license used by GNOME Shell"
 msgstr ""
+"Ved å laste opp denne utvidelsen godtar og bekrefter jeg at i alle omstridte"
+" tilfeller som gjelder om lisensen til utvidelsen er kompatibel med lisensen"
+" til GNOME Shell, kan utvidelsen jeg laster opp, brukes av alle GNOME Shell-"
+"brukere på vilkårene i lisensen GNOME Shell bruker"
 
 #: sweettooth/extensions/serializers.py:110 extensions-web-domain-django:1
 msgid ""
 "I agree that a staff of extensions.gnome.org website may remove, modify or "
 "reassign maintainership of the extension uploaded by me"
 msgstr ""
+"Jeg godtar at de ansatte på nettstedet extensions.gnome.org kan fjerne, "
+"endre eller overføre vedlikeholdsansvaret for utvidelsen jeg har lastet opp"
 
 #: sweettooth/extensions/serializers.py:120 extensions-web-domain-django:1
 msgid "The `uuid` field is missing in `metadata.json`"
-msgstr ""
+msgstr "Feltet `uuid` mangler i `metadata.json`"
 
-#: sweettooth/extensions/serializers.py:159 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:126 extensions-web-domain-django:1
+msgid "The `url` field is missing in `metadata.json`"
+msgstr "Feltet `url` mangler i `metadata.json`"
+
+#: sweettooth/extensions/serializers.py:164 extensions-web-domain-django:1
 msgid "An extension with that UUID has already been added"
-msgstr ""
+msgstr "En utvidelse med den UUID-en er allerede lagt til"
 
-#: sweettooth/extensions/serializers.py:175 extensions-web-domain-django:1
+#: sweettooth/extensions/serializers.py:180 extensions-web-domain-django:1
 msgid "The `version-name` field in `metadata.json` must be a string"
-msgstr ""
+msgstr "Feltet `version-name` i `metadata.json` må være en streng"
 
 #: sweettooth/extensions/serializers.py:94 extensions-web-domain-django:1
 msgid "You must agree with the extensions.gnome.org terms of service"
-msgstr ""
+msgstr "Du må godta brukervilkårene for extensions.gnome.org"
 
 #: sweettooth/extensions/templates/extensions/away.html:10
 #: extensions-web-domain-django:1
@@ -318,13 +342,13 @@ msgstr "Fortsett likevel"
 #: sweettooth/extensions/templates/extensions/away.html:3
 #: extensions-web-domain-django:1
 msgid "You are leaving GNOME Extensions website"
-msgstr ""
+msgstr "Du forlater nettstedet GNOME-utvidelser"
 
 #: sweettooth/extensions/templates/extensions/away.html:6
 #: extensions-web-domain-django:1
 #, python-format
 msgid "You are going to leave GNOME Extensions website to %(url)s."
-msgstr ""
+msgstr "Du forlater nettstedet GNOME-utvidelser og går til %(url)s."
 
 #: sweettooth/extensions/templates/extensions/away.html:9
 #: extensions-web-domain-django:1
@@ -339,36 +363,39 @@ msgid ""
 "href=\"%(login_url)s\">log in to GNOME Shell Extensions</a> in order to post "
 "a comment or report an error. You understand, right?"
 msgstr ""
+"For å forhindre søppelpost må du dessverre <a href=\"%(login_url)s\">logge "
+"inn på GNOME Shell-utvidelser</a> for å skrive en kommentar eller rapportere"
+" en feil. Det forstår du, ikke sant?"
 
 #: sweettooth/extensions/templates/extensions/comments.html:22
 #: extensions-web-domain-django:1
 msgid "User Reviews"
-msgstr ""
+msgstr "Brukeranmeldelser"
 
 #: sweettooth/extensions/templates/extensions/comments.html:24
 #: extensions-web-domain-django:1
 msgid "Loading reviews…"
-msgstr ""
+msgstr "Laster anmeldelser…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:3
 #: extensions-web-domain-django:1
 msgid "Your opinion"
-msgstr ""
+msgstr "Din mening"
 
 #: sweettooth/extensions/templates/extensions/comments.html:6
 #: extensions-web-domain-django:1
 msgid "Leave a…"
-msgstr ""
+msgstr "Legg igjen en…"
 
 #: sweettooth/extensions/templates/extensions/comments.html:7
 #: extensions-web-domain-django:1
 msgid "Comment"
-msgstr "Komentar"
+msgstr "Kommentar"
 
 #: sweettooth/extensions/templates/extensions/comments.html:8
 #: extensions-web-domain-django:1
 msgid "Rating"
-msgstr ""
+msgstr "Vurdering"
 
 #: sweettooth/extensions/templates/extensions/detail.html:102
 #: extensions-web-domain-django:1
@@ -376,20 +403,22 @@ msgid ""
 "A reviewer will review the extension you submitted to make sure there's "
 "nothing too dangerous. You'll be emailed the result of the review."
 msgstr ""
+"Utvidelsen du har sendt inn, vil bli vurdert for å sikre at den ikke er "
+"farlig. Du får resultatet av vurderingen på e-post."
 
 #: sweettooth/extensions/templates/extensions/detail.html:113
 #: sweettooth/extensions/templates/extensions/detail_edit.html:7
 #: extensions-web-domain-django:1
 msgid "Comments are disabled for this extension."
-msgstr ""
+msgstr "Kommentarer er slått av for denne utvidelsen."
 
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
 #, python-format
 msgid "%(downloads)s download"
 msgid_plural "%(downloads)s downloads"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(downloads)s nedlasting"
+msgstr[1] "%(downloads)s nedlastinger"
 
 #: sweettooth/extensions/templates/extensions/detail.html:21
 #: extensions-web-domain-django:1
@@ -425,22 +454,22 @@ msgstr "Avinstaller denne utvidelsen"
 #: sweettooth/extensions/templates/extensions/detail.html:75
 #: extensions-web-domain-django:1
 msgid "Extension Homepage"
-msgstr ""
+msgstr "Hjemmeside for utvidelsen"
 
 #: sweettooth/extensions/templates/extensions/detail.html:81
 #: extensions-web-domain-django:1
 msgid "Session Mode(s)"
-msgstr ""
+msgstr "Øktmodus(er)"
 
 #: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "This extension will run while the screen is locked"
-msgstr ""
+msgstr "Denne utvidelsen vil kjøre mens skjermen er låst"
 
 #: sweettooth/extensions/templates/extensions/detail.html:82
 #: extensions-web-domain-django:1
 msgid "Unlock Dialog"
-msgstr ""
+msgstr "Opplåsingsdialog"
 
 #: sweettooth/extensions/templates/extensions/detail.html:86
 #: extensions-web-domain-django:1
@@ -450,17 +479,17 @@ msgstr "Last ned"
 #: sweettooth/extensions/templates/extensions/detail.html:89
 #: extensions-web-domain-django:1
 msgid "Shell version…"
-msgstr ""
+msgstr "Shell-versjon…"
 
 #: sweettooth/extensions/templates/extensions/detail.html:93
 #: extensions-web-domain-django:1
 msgid "Extension version…"
-msgstr ""
+msgstr "Utvidelsesversjon…"
 
 #: sweettooth/extensions/templates/extensions/list.html:13
 #: extensions-web-domain-django:1
 msgid "Search for extensions…"
-msgstr ""
+msgstr "Søk etter utvidelser…"
 
 #: sweettooth/extensions/templates/extensions/local.html:3
 #: sweettooth/extensions/templates/extensions/local.html:8
@@ -471,7 +500,7 @@ msgstr "Installerte utvidelser"
 #: sweettooth/extensions/templates/extensions/local.html:5
 #: extensions-web-domain-django:1
 msgid "Shell settings"
-msgstr ""
+msgstr "Shell-innstillinger"
 
 #: sweettooth/extensions/templates/extensions/upload.html:12
 #: extensions-web-domain-django:1
@@ -480,6 +509,9 @@ msgid ""
 "be uploaded using the same form. Once your extension has been reviewed you "
 "will be notified of the result by e-mail."
 msgstr ""
+"Last opp utvidelsens Zip-fil for å sende den til vurdering. Senere versjoner"
+" kan lastes opp ved hjelp av samme skjema. Når utvidelsen din er vurdert, "
+"får du beskjed om resultatet på e-post."
 
 #: sweettooth/extensions/templates/extensions/upload.html:17
 #: extensions-web-domain-django:1
@@ -488,6 +520,8 @@ msgid ""
 "Please see the <a href=\"%(url)s\">Review Guidelines</a> to learn what is "
 "required for approval."
 msgstr ""
+"Se <a href=\"%(url)s\">retningslinjene for vurdering</a> for å finne ut hva "
+"som kreves for godkjenning."
 
 #: sweettooth/extensions/templates/extensions/upload.html:22
 #: extensions-web-domain-django:1
@@ -497,6 +531,9 @@ msgid ""
 "href=\"%(url)s\">gjs.guide</a> for directions on creating an extension and "
 "preparing it for upload."
 msgstr ""
+"Hvis dette er din første utvidelse, se dokumentasjonen på <a "
+"href=\"%(url)s\">gjs.guide</a> for instruksjoner om å lage en utvidelse og "
+"forberede den for opplasting."
 
 #: sweettooth/extensions/templates/extensions/upload.html:29
 #: extensions-web-domain-django:1
@@ -505,6 +542,8 @@ msgid ""
 "Extensions distributed via this website are subject to the <a "
 "href=\"%(url)s\">Code of Conduct</a>."
 msgstr ""
+"Utvidelser som distribueres via dette nettstedet, er underlagt <a "
+"href=\"%(url)s\">atferdsreglene</a>."
 
 #: sweettooth/extensions/templates/extensions/upload.html:34
 #: extensions-web-domain-django:1
@@ -513,6 +552,8 @@ msgid ""
 "Extensions that violate the <a href=\"%(url)s\">Code of Conduct</a> will be "
 "removed from this website."
 msgstr ""
+"Utvidelser som bryter <a href=\"%(url)s\">atferdsreglene</a>, blir fjernet "
+"fra dette nettstedet."
 
 #: sweettooth/extensions/templates/extensions/upload.html:41
 #: extensions-web-domain-django:1
@@ -520,16 +561,18 @@ msgid ""
 "Before uploading, you can run the Shexli static analyzer locally to catch "
 "common packaging and review issues early."
 msgstr ""
+"Før du laster opp, kan du kjøre den statiske analysatoren Shexli lokalt for "
+"å finne vanlige problemer med pakking og vurdering tidlig."
 
 #: sweettooth/extensions/templates/extensions/upload.html:50
 #: extensions-web-domain-django:1
 msgid "Upload extension"
-msgstr ""
+msgstr "Last opp utvidelse"
 
 #: sweettooth/extensions/templates/extensions/upload.html:54
 #: extensions-web-domain-django:1
 msgid "Upload failed. Please try again."
-msgstr ""
+msgstr "Opplastingen mislyktes. Prøv igjen."
 
 #: sweettooth/ratings/admin.py:11 extensions-web-domain-django:1
 msgid "Content"
@@ -543,47 +586,47 @@ msgstr "Metadata"
 #: sweettooth/ratings/templates/comments/preview.html:45
 #: extensions-web-domain-django:1
 msgid "Post"
-msgstr ""
+msgstr "Publiser"
 
 #: sweettooth/ratings/templates/comments/form.html:27
 #: sweettooth/ratings/templates/comments/preview.html:46
 #: extensions-web-domain-django:1
 msgid "Preview"
-msgstr ""
+msgstr "Forhåndsvisning"
 
 #: sweettooth/ratings/templates/comments/form.html:8
 #: sweettooth/ratings/templates/comments/preview.html:27
 #: extensions-web-domain-django:1
 msgid "What do you think about this GNOME extension?"
-msgstr ""
+msgstr "Hva synes du om denne GNOME-utvidelsen?"
 
 #: sweettooth/ratings/templates/comments/preview.html:13
 #: extensions-web-domain-django:1
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rett feilen nedenfor"
+msgstr[1] "Rett feilene nedenfor"
 
 #: sweettooth/ratings/templates/comments/preview.html:4
 #: sweettooth/ratings/templates/comments/preview.html:15
 #: extensions-web-domain-django:1
 msgid "Preview your comment"
-msgstr ""
+msgstr "Forhåndsvis kommentaren din"
 
 #: sweettooth/ratings/templates/comments/preview.html:18
 #: extensions-web-domain-django:1
 msgid "Post Comment"
-msgstr ""
+msgstr "Publiser kommentar"
 
 #: sweettooth/ratings/templates/comments/preview.html:21
 #: extensions-web-domain-django:1
 msgid "Edit your comment"
-msgstr ""
+msgstr "Rediger kommentaren din"
 
 #: sweettooth/review/templates/review/review.html:101
 #: extensions-web-domain-django:1
 msgid "Shexli (experimental)"
-msgstr ""
+msgstr "Shexli (eksperimentell)"
 
 #: sweettooth/review/templates/review/review.html:117
 #: extensions-web-domain-django:1
@@ -597,22 +640,28 @@ msgid_plural ""
 "    Shexli found %(count)s issues that may need reviewer attention.\n"
 "    "
 msgstr[0] ""
+"\n"
+"    Shexli fant 1 problem som kan trenge oppmerksomhet fra en vurderer.\n"
+"    "
 msgstr[1] ""
+"\n"
+"    Shexli fant %(count)s problemer som kan trenge oppmerksomhet fra en vurderer.\n"
+"    "
 
 #: sweettooth/review/templates/review/review.html:151
 #: extensions-web-domain-django:1
 msgid "Shexli did not find any issues."
-msgstr ""
+msgstr "Shexli fant ingen problemer."
 
 #: sweettooth/review/templates/review/review.html:154
 #: extensions-web-domain-django:1
 msgid "Shexli could not analyze this version."
-msgstr ""
+msgstr "Shexli kunne ikke analysere denne versjonen."
 
 #: sweettooth/review/templates/review/review.html:156
 #: extensions-web-domain-django:1
 msgid "Shexli has not produced a result yet."
-msgstr ""
+msgstr "Shexli har ikke gitt noe resultat ennå."
 
 #: sweettooth/review/templates/review/review.html:73
 #: extensions-web-domain-django:1
@@ -620,6 +669,9 @@ msgid ""
 "You can upload the next version by the <a href='https://extensions.gnome.org/"
 "upload/'>same form</a> you've posted this version."
 msgstr ""
+"Du kan laste opp neste versjon med det <a "
+"href='https://extensions.gnome.org/upload/'>samme skjemaet</a> som du brukte"
+" til å sende inn denne versjonen."
 
 #: sweettooth/review/templates/review/review.html:76
 #: extensions-web-domain-django:1
@@ -627,6 +679,7 @@ msgid ""
 "You can change the extension icon by clicking on the icon in your extension "
 "page."
 msgstr ""
+"Du kan endre utvidelsesikonet ved å klikke på ikonet på utvidelsessiden din."
 
 #: sweettooth/review/templates/review/review.html:79
 #: extensions-web-domain-django:1
@@ -634,6 +687,8 @@ msgid ""
 "In case you want to inactivate an approved version, click on inactivate link "
 "in your extension page."
 msgstr ""
+"Hvis du vil deaktivere en godkjent versjon, klikker du på deaktiver-lenken "
+"på utvidelsessiden din."
 
 #: sweettooth/review/templates/review/review.html:82
 #: extensions-web-domain-django:1
@@ -641,6 +696,8 @@ msgid ""
 "You can find developer guides in <a href='https://gjs.guide/"
 "extensions/'>gjs.guide</a>."
 msgstr ""
+"Du finner utviklerveiledninger på <a "
+"href='https://gjs.guide/extensions/'>gjs.guide</a>."
 
 #: sweettooth/review/templates/review/review.html:85
 #: extensions-web-domain-django:1
@@ -648,23 +705,25 @@ msgid ""
 "If you need any help with your extension, you can ask us on <a href='https://"
 "matrix.to/#/#extensions:gnome.org'>GNOME Matrix Channel</a>."
 msgstr ""
+"Hvis du trenger hjelp med utvidelsen din, kan du spørre oss på <a "
+"href='https://matrix.to/#/#extensions:gnome.org'>GNOME Matrix-kanalen</a>."
 
 #: sweettooth/templates/base.html:16 extensions-web-domain-django:1
 msgid "Latest extensions in GNOME Shell Extensions"
-msgstr ""
+msgstr "Siste utvidelser i GNOME Shell-utvidelser"
 
 #: sweettooth/templates/base.html:17 sweettooth/templates/base.html:50
 #: extensions-web-domain-django:1
 msgid "GNOME Shell Extensions"
-msgstr ""
+msgstr "GNOME Shell-utvidelser"
 
 #: sweettooth/templates/base.html:96 extensions-web-domain-django:1
 msgid "Developers Guide"
-msgstr ""
+msgstr "Utviklerveiledning"
 
 #: sweettooth/templates/maintenance.html:5 extensions-web-domain-django:1
 msgid "The website is under maintenance. Please retry in a few minutes."
-msgstr ""
+msgstr "Nettstedet er under vedlikehold. Prøv igjen om noen minutter."
 
 #: sweettooth/templates/usermenu.html:10 extensions-web-domain-django:1
 msgid "Log out"
@@ -684,19 +743,24 @@ msgid ""
 "Shell integration that consists of two parts: browser extension and native "
 "host messaging application"
 msgstr ""
+"For å styre GNOME Shell-utvidelser fra dette nettstedet må du installere "
+"GNOME Shell-integrasjon, som består av to deler: en nettleserutvidelse og et"
+" vertsprogram for meldinger (native host messaging)"
 
 #: sweettooth/static/js/extensions.js:111 extensions-web-domain-djangojs:1
 msgid "Install GNOME Shell integration browser extension"
-msgstr ""
+msgstr "Installer nettleserutvidelsen for GNOME Shell-integrasjon"
 
 #: sweettooth/static/js/extensions.js:112 extensions-web-domain-djangojs:1
 msgid "Click here to install browser extension"
-msgstr ""
+msgstr "Klikk her for å installere nettleserutvidelsen"
 
 #: sweettooth/static/js/extensions.js:114 extensions-web-domain-djangojs:1
 #, javascript-format
 msgid "See %swiki page%s for native host connector installation instructions"
 msgstr ""
+"Se %swiki-siden%s for veiledning i å installere vertsprogrammet (native host"
+" connector)"
 
 #: sweettooth/static/js/extensions.js:123 extensions-web-domain-djangojs:1
 msgid ""
@@ -704,10 +768,13 @@ msgid ""
 "the interface may be disabled. See <a href=\"/about/#no-detection\">our "
 "troubleshooting entry</a> for more information."
 msgstr ""
+"Vi finner ingen kjørende GNOME på dette systemet, så noen deler av "
+"grensesnittet kan være slått av. Se <a href=\"/about/#no-"
+"detection\">feilsøkingsoppføringen vår</a> for mer informasjon."
 
 #: sweettooth/static/js/extensions.js:136 extensions-web-domain-djangojs:1
 msgid "GNOME Shell Extensions cannot list your installed extensions."
-msgstr ""
+msgstr "GNOME Shell-utvidelser kan ikke vise de installerte utvidelsene dine."
 
 #: sweettooth/static/js/fsui.js:125 extensions-web-domain-djangojs:1
 msgid "Compatible with"
@@ -745,19 +812,19 @@ msgstr "Utvikler"
 #: sweettooth/static/js/templates/extensions/comments_list.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "Show more reviews"
-msgstr ""
+msgstr "Vis flere anmeldelser"
 
 #: sweettooth/static/js/templates/extensions/comments_list.mst:25
 #: extensions-web-domain-djangojs:1
 msgid "There are no comments. Be the first!"
-msgstr ""
+msgstr "Det er ingen kommentarer. Vær den første!"
 
 #: sweettooth/static/js/templates/extensions/info_contents.mst:21
 #: extensions-web-domain-djangojs:1
 msgid "System extension"
-msgstr ""
+msgstr "Systemutvidelse"
 
 #: sweettooth/static/js/templates/extensions/uninstall.mst:1
 #: extensions-web-domain-djangojs:1
 msgid "You uninstalled"
-msgstr ""
+msgstr "Du avinstallerte"

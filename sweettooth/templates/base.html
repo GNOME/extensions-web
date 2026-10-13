@@ -1,4 +1,4 @@
-{% load static from static %}
+{% load static get_static_prefix from static %}
 {% load gravatar %}
 {% load i18n %}
 <!doctype html>
@@ -18,8 +18,9 @@
     <script>
         {% load static_paths %}
         var require = {
-            baseUrl: '/static/js/',
+            baseUrl: '{% get_static_prefix %}js/',
             paths: {% static_js_paths %},
+            config: { text: { useXhr: function () { return true; } } },
             waitSeconds: 30 // It's fails sometimes with default 7 secs
         };
 
