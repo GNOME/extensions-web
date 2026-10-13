@@ -42,20 +42,52 @@ server {
     }
 
     location /extension-data/ {
-        alias /extensions-web/www/uploaded-files/;
+        return 302 https://cdn.extensions.gnome.org$request_uri;
     }
 
     location /static/ {
-        location ~* \.(jpg|jpeg|gif|png|svg|ico|css|pdf|txt|bmp|js)$ {
-            access_log off;
-            expires 3d;
-        }
-
-        alias /extensions-web/www/static-files/;
+        return 302 https://cdn.extensions.gnome.org$request_uri;
     }
 
     location / {
         uwsgi_pass  ${EGO_NODE_ADDRESS}:8001;
         include     uwsgi_params;
+    }
+}
+
+server {
+    listen 8080;
+    server_name extensions-cdn-origin.apps.openshift.gnome.org;
+
+    charset utf-8;
+
+    sendfile                        on;
+    tcp_nopush                      on;
+    tcp_nodelay                     on;
+    server_tokens                   off;
+
+    gzip on;
+    gzip_vary on;
+    gzip_types text/css text/html text/plain application/javascript application/json application/xml;
+
+    add_header X-Content-Type-Options nosniff;
+    add_header Access-Control-Allow-Origin *;
+
+    location /extension-data/ {
+        alias /extensions-web/www/uploaded-files/;
+        expires 7d;
+    }
+
+    location /static/ {
+        alias /extensions-web/www/static-files/;
+        expires 1h;
+
+        location ~ "\.[0-9a-f]{12}\.\w+$" {
+            expires max;
+        }
+    }
+
+    location / {
+        return 404;
     }
 }
