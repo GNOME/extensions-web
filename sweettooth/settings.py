@@ -190,7 +190,7 @@ MEDIA_URL = "/extension-data/"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/stable/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = os.getenv("EGO_STATIC_URL", "/static/")
 
 STATICFILES_DIRS = (os.path.join(SITE_ROOT, "static"),)
 
