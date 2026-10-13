@@ -109,6 +109,9 @@ REST_KNOX = {
 
 BASE_URL = os.getenv("EGO_BASE_URL", "https://extensions.gnome.org")
 
+CDN77_CDN_ID = os.getenv("EGO_CDN77_CDN_ID", "")
+CDN77_TOKEN = os.getenv("EGO_CDN77_TOKEN", "")
+
 ROOT_URLCONF = "sweettooth.urls"
 
 TEMPLATES = [

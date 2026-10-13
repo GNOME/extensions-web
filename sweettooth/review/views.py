@@ -21,7 +21,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from sweettooth.decorators import ajax_view, model_view
-from sweettooth.extensions import models
+from sweettooth.extensions import cdn, models
 from sweettooth.review.diffutils import get_chunks
 from sweettooth.review.models import CodeReview, ShexliResult, get_all_reviewers
 from sweettooth.review.shexli import run_shexli_for_version
@@ -381,6 +381,9 @@ def submit_review_view(request, obj):
         review.new_status = newstatus
         version.status = newstatus
         version.save()
+
+        if newstatus == models.STATUS_REJECTED:
+            cdn.purge(version.source)
 
     review.save()
 

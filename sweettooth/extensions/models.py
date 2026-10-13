@@ -15,11 +15,13 @@ from django.core.files import File
 from django.core.files.move import file_move_safe
 from django.core.validators import URLValidator
 from django.db import models, transaction
-from django.dispatch import Signal
+from django.db.models.signals import post_delete
+from django.dispatch import Signal, receiver
 from django.forms import ValidationError
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+from . import cdn
 from .fields import HttpURLField
 
 (
@@ -752,3 +754,13 @@ class DonationUrl(models.Model):
 submitted_for_review = Signal()
 # providing_args=["request", "version", "review"]
 reviewed = Signal()
+
+
+@receiver(post_delete, sender=ExtensionVersion)
+def purge_version_file(instance, **kwargs):
+    cdn.purge(instance.source)
+
+
+@receiver(post_delete, sender=Extension)
+def purge_extension_images(instance, **kwargs):
+    cdn.purge(instance.screenshot, instance.icon)
