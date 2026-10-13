@@ -786,7 +786,10 @@ def ajax_upload_icon_view(request, extension):
         return data
 
     if max(data.image.size) > ICON_MAX_DIMENSION:
-        return HttpResponseForbidden(content="Too big icon")
+        return HttpResponseForbidden(
+            content="Icon must be at most "
+            f"{ICON_MAX_DIMENSION}x{ICON_MAX_DIMENSION} pixels"
+        )
 
     extension.icon = optimize_image(data, ICON_MAX_DIMENSION)
     extension.full_clean()
