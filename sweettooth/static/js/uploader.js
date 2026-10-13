@@ -3,7 +3,7 @@
 /*
     Replaces img src value with changed input value
  */
-define(['jquery'], function($) {
+define(['jquery', 'messages'], function($, messages) {
     "use strict";
 
     $.fn.uploadify = function(url) {
@@ -46,6 +46,15 @@ define(['jquery'], function($) {
             }
         }
 
+        function uploadFailed(xhr) {
+            var message = xhr.responseText || 'Upload failed';
+            if (xhr.responseJSON) {
+                message = Object.values(xhr.responseJSON)[0][0].message;
+            }
+
+            messages.addError($('<span>').text(message));
+        }
+
         $input.on('change', function(e) {
             var dt, file;
             if (e.originalEvent.dataTransfer)
@@ -68,7 +77,7 @@ define(['jquery'], function($) {
                                        contentType: false,
                                        processData: false,
                                        data: fd });
-                df.done(uploadComplete);
+                df.done(uploadComplete).fail(uploadFailed);
             } else {
                 var filereader = new FileReader();
                 filereader.onload = function(e) {
@@ -76,7 +85,7 @@ define(['jquery'], function($) {
                     var df = $.ajax(url, { type: 'POST',
                                            contentType: 'multipart/form-data; boundary="' + BOUNDARY + '"',
                                            data: buildMultipart(url) });
-                    df.done(uploadComplete);
+                    df.done(uploadComplete).fail(uploadFailed);
                 };
                 filereader.readAsBinaryString(file);
             }

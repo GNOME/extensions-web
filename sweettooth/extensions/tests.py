@@ -12,9 +12,11 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.core.exceptions import ValidationError
 from django.core.files.base import File
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, TransactionTestCase
 from django.test.utils import override_settings
 from django.urls import reverse
+from PIL import Image
 from rest_framework.test import APITransactionTestCase
 
 from sweettooth.extensions import models, views
@@ -1940,3 +1942,74 @@ class CdnPurgeTest(BasicUserTestCase, TestCase):
                 "/extension-data/icons/icon_1.png",
             ],
         )
+
+
+class ImageUploadTest(BasicUserTestCase, SilentDjangoRequestTest):
+    def setUp(self):
+        super().setUp()
+        media_root = tempfile.TemporaryDirectory()
+        self.addCleanup(media_root.cleanup)
+        settings_override = override_settings(MEDIA_ROOT=media_root.name)
+        settings_override.enable()
+        self.addCleanup(settings_override.disable)
+        self.extension = models.Extension.objects.create_from_metadata(
+            {
+                "uuid": "images@mecheye.net",
+                "name": "Images",
+                "description": "",
+                "shell-version": ["44"],
+            },
+            creator=self.user,
+        )
+
+    def upload(self, kind, image, image_format):
+        buffer = BytesIO()
+        image.save(buffer, image_format, quality=100)
+        extension = {"PNG": "png", "JPEG": "jpg"}[image_format]
+        return self.client.post(
+            reverse(f"extensions-ajax-{kind}", kwargs={"pk": self.extension.pk}),
+            {"file": SimpleUploadedFile(f"upload.{extension}", buffer.getvalue())},
+        )
+
+    def noise(self, mode, size, colors=None):
+        image = Image.new(mode, size)
+        image.frombytes(os.urandom(size[0] * size[1] * len(mode)))
+        if colors:
+            image = image.quantize(colors, method=Image.Quantize.FASTOCTREE)
+            image = image.convert(mode)
+        return image
+
+    def test_icon_larger_than_cap_is_rejected(self):
+        response = self.upload("icon", Image.new("RGB", (513, 1)), "PNG")
+
+        self.assertEqual(response.status_code, 403)
+        self.extension.refresh_from_db()
+        self.assertFalse(self.extension.icon)
+
+    def test_icon_with_few_colors_is_saved_as_exact_palette(self):
+        image = self.noise("RGBA", (512, 512), colors=200)
+
+        response = self.upload("icon", image, "PNG")
+
+        self.assertEqual(response.status_code, 200)
+        self.extension.refresh_from_db()
+        with Image.open(self.extension.icon.path) as saved:
+            self.assertEqual(saved.mode, "P")
+            self.assertEqual(saved.convert("RGBA").tobytes(), image.tobytes())
+
+    def test_screenshot_is_downscaled(self):
+        image = Image.linear_gradient("L").resize((3000, 1500)).convert("RGB")
+        response = self.upload("screenshot", image, "PNG")
+
+        self.assertEqual(response.status_code, 200)
+        self.extension.refresh_from_db()
+        with Image.open(self.extension.screenshot.path) as saved:
+            self.assertEqual(saved.size, (1920, 960))
+
+    def test_jpeg_screenshot_is_reencoded_progressive(self):
+        response = self.upload("screenshot", self.noise("RGB", (800, 600)), "JPEG")
+
+        self.assertEqual(response.status_code, 200)
+        self.extension.refresh_from_db()
+        with Image.open(self.extension.screenshot.path) as saved:
+            self.assertTrue(saved.info.get("progressive"))

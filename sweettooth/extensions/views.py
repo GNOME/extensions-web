@@ -1,5 +1,6 @@
 # SPDX-License-Identifer: AGPL-3.0-or-later
 
+import io
 import json
 from functools import reduce
 from itertools import product
@@ -9,6 +10,7 @@ from urllib.parse import unquote, urlencode, urlparse, urlunparse
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import BadRequest
+from django.core.files.base import ContentFile
 from django.core.paginator import InvalidPage, Paginator
 from django.core.validators import URLValidator
 from django.forms import Field, ValidationError
@@ -36,6 +38,7 @@ from django_filters.rest_framework import (
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, extend_schema
 from knox.auth import TokenAuthentication
+from PIL import Image, ImageOps
 from rest_framework import (
     authentication,
     filters,
@@ -696,6 +699,55 @@ def ajax_inline_edit_view(request, extension):
     return value
 
 
+ICON_MAX_DIMENSION = 512
+SCREENSHOT_MAX_DIMENSION = 1920
+
+
+def palettize(image, colors):
+    index = {color: i for i, (_, color) in enumerate(colors)}
+    pixels = zip(*[iter(image.tobytes())] * len(image.mode))
+    palettized = Image.frombytes("P", image.size, bytes(index[p] for p in pixels))
+    palettized.putpalette(b"".join(bytes(color) for _, color in colors), image.mode)
+    return palettized
+
+
+def optimize_image(file, max_dimension):
+    image = Image.open(file)
+    image_format = image.format
+    icc_profile = image.info.get("icc_profile")
+    if image_format not in ("PNG", "JPEG") or getattr(image, "is_animated", False):
+        file.seek(0)
+        return file
+
+    image = ImageOps.exif_transpose(image)
+    resized = max(image.size) > max_dimension
+    if resized and image.mode == "P":
+        image = image.convert("RGBA")
+    image.thumbnail((max_dimension, max_dimension))
+
+    buffer = io.BytesIO()
+    if image_format == "PNG":
+        colors = image.getcolors(256) if image.mode in ("RGB", "RGBA") else None
+        if colors:
+            image = palettize(image, colors)
+        image.save(buffer, "PNG", optimize=True, icc_profile=icc_profile)
+    else:
+        image.save(
+            buffer,
+            "JPEG",
+            quality=85,
+            optimize=True,
+            progressive=True,
+            icc_profile=icc_profile,
+        )
+
+    if not resized and buffer.tell() >= file.size:
+        file.seek(0)
+        return file
+
+    return ContentFile(buffer.getvalue(), name=file.name)
+
+
 def validate_uploaded_image(request, extension):
     if not extension.user_can_edit(request.user):
         return HttpResponseForbidden()
@@ -719,7 +771,7 @@ def ajax_upload_screenshot_view(request, extension):
     if isinstance(data, HttpResponse):
         return data
 
-    extension.screenshot = data
+    extension.screenshot = optimize_image(data, SCREENSHOT_MAX_DIMENSION)
     extension.full_clean()
     extension.save()
     return extension.screenshot.url
@@ -733,7 +785,13 @@ def ajax_upload_icon_view(request, extension):
     if isinstance(data, HttpResponse):
         return data
 
-    extension.icon = data
+    if max(data.image.size) > ICON_MAX_DIMENSION:
+        return HttpResponseForbidden(
+            content="Icon must be at most "
+            f"{ICON_MAX_DIMENSION}x{ICON_MAX_DIMENSION} pixels"
+        )
+
+    extension.icon = optimize_image(data, ICON_MAX_DIMENSION)
     extension.full_clean()
     extension.save()
     return extension.icon.url
