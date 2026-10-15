@@ -21,6 +21,7 @@ from rest_framework.test import APITransactionTestCase
 
 from sweettooth.extensions import models, views
 from sweettooth.extensions.admin import ExtensionVersionAdmin
+from sweettooth.extensions.documents import ExtensionDocument
 from sweettooth.testutils import (
     BasicAPIUserTestCase,
     BasicUserTestCase,
@@ -1813,6 +1814,90 @@ class QueryExtensionsTest(BasicUserTestCase, TestCase):
         self.assertEqual(
             views.grab_proper_extension_version(extension, "129.rc", True).version, 5
         )
+
+
+class ExtensionsShellVersionTest(BasicUserTestCase, TestCase):
+    def create_extension(self, name, shell_versions, **kwargs):
+        extension = models.Extension.objects.create_from_metadata(
+            dict(uuid=name + "@mecheye.net", name=name, **{"shell-version": ["44"]}),
+            creator=self.user,
+        )
+        self.create_version(extension, shell_versions, **kwargs)
+
+        return extension
+
+    def create_version(self, extension, shell_versions, **kwargs):
+        kwargs.setdefault("status", models.STATUS_ACTIVE)
+        models.ExtensionVersion.objects.create(
+            extension=extension, metadata={"shell-version": shell_versions}, **kwargs
+        )
+
+    def gather_uuids(self, **params):
+        response = self.client.get(reverse("extension-list"), params)
+        self.assertEqual(response.status_code, 200)
+
+        return sorted(extension["uuid"] for extension in response.json()["results"])
+
+    def test_shell_versions(self):
+        one = self.create_extension("one", ["3.2"])
+        two = self.create_extension("two", ["3.3.90"])
+        three = self.create_extension("three", ["50", "51"])
+        four = self.create_extension("four", ["51.beta"])
+
+        self.assertEqual(self.gather_uuids(shell_version="3.2"), [one.uuid])
+        self.assertEqual(self.gather_uuids(shell_version="3.3.90"), [two.uuid])
+        self.assertEqual(self.gather_uuids(shell_version="51"), [three.uuid])
+
+        # Base version querying.
+        self.assertEqual(self.gather_uuids(shell_version="3.2.2"), [one.uuid])
+        self.assertEqual(self.gather_uuids(shell_version="51.1"), [three.uuid])
+        self.assertEqual(
+            self.gather_uuids(shell_version="51.beta"), [four.uuid, three.uuid]
+        )
+
+        # Valid, but no extension declares it.
+        self.assertEqual(self.gather_uuids(shell_version="99"), [])
+
+    def test_complex_visibility(self):
+        one = self.create_extension("one", ["50"])
+        self.create_version(one, ["51"], status=models.STATUS_UNREVIEWED)
+
+        self.assertEqual(self.gather_uuids(shell_version="50"), [one.uuid])
+        self.assertEqual(self.gather_uuids(shell_version="51"), [])
+
+    def test_version_number_and_name(self):
+        self.create_extension("one", ["50"], version=51, version_name="51.1")
+
+        self.assertEqual(self.gather_uuids(shell_version="51"), [])
+        self.assertEqual(self.gather_uuids(shell_version="51.1"), [])
+
+    def test_bad_shell_version(self):
+        response = self.client.get(reverse("extension-list"), {"shell_version": "bad"})
+
+        self.assertEqual(response.status_code, 400)
+
+    def test_index_keeps_versions_whole(self):
+        properties = ExtensionDocument._doc_type.mapping.to_dict()["properties"]
+
+        self.assertEqual(properties["shell_versions"]["type"], "keyword")
+
+    @mock.patch("sweettooth.extensions.views.ExtensionDocument")
+    def test_search(self, document):
+        query = document.search.return_value.extra.return_value.query.return_value
+        query.filter.return_value.to_queryset.return_value = (
+            models.Extension.objects.all()
+        )
+        url = reverse("extension-search", kwargs={"query": "one"})
+        self.create_extension("one", ["51"])
+
+        self.client.get(url, {"shell_version": "51"})
+        query.filter.assert_called_with("terms", shell_versions=["51"])
+
+        self.client.get(url, {"shell_version": "99"})
+        query.filter.assert_called_with("terms", shell_versions=[])
+
+        response = self.client.get(url, {"shell_version": "bad"})
+        self.assertEqual(response.status_code, 400)
 
 
 class ExtensionDetailsTest(BasicUserTestCase, SilentDjangoRequestTest):

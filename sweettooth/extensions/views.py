@@ -13,6 +13,7 @@ from django.core.exceptions import BadRequest
 from django.core.files.base import ContentFile
 from django.core.paginator import InvalidPage, Paginator
 from django.core.validators import URLValidator
+from django.db.models import Exists, OuterRef
 from django.forms import Field, ValidationError
 from django.http import (
     Http404,
@@ -41,6 +42,7 @@ from knox.auth import TokenAuthentication
 from PIL import Image, ImageOps
 from rest_framework import (
     authentication,
+    exceptions,
     filters,
     mixins,
     parsers,
@@ -77,6 +79,18 @@ class ExtensionsFilter(FilterSet):
         choices=list(models.STATUSES.items()),
         distinct=True,
     )
+    shell_version = CharFilter(method="filter_shell_version")
+
+    def filter_shell_version(self, queryset, name, value):
+        shell_versions = resolve_shell_versions(value)
+
+        return queryset.filter(
+            Exists(
+                models.ExtensionVersion.objects.visible().filter(
+                    extension=OuterRef("pk"), shell_versions__in=shell_versions
+                )
+            )
+        )
 
     class Meta:
         model = models.Extension
@@ -165,6 +179,7 @@ class ExtensionsViewSet(
     @extend_schema(
         parameters=[
             OpenApiParameter(name="recommended", type=OpenApiTypes.BOOL),
+            OpenApiParameter(name="shell_version", type=OpenApiTypes.STR),
             OpenApiParameter(
                 name="ordering",
                 enum=[
@@ -221,6 +236,15 @@ class ExtensionsViewSet(
 
         if self.request.query_params.get("recommended") in ("true", "1"):
             queryset = queryset.filter("term", recommended=True)
+
+        shell_version = self.request.query_params.get("shell_version")
+        if shell_version:
+            queryset = queryset.filter(
+                "terms",
+                shell_versions=[
+                    str(version) for version in resolve_shell_versions(shell_version)
+                ],
+            )
 
         ordering = self.request.query_params.get("ordering")
         ordering_field = (
@@ -300,6 +324,22 @@ class ExtensionUploadPageView(LoginRequiredMixin, TemplateView):
             tos_label=serializer.fields["tos_compliant"].label,
             **kwargs,
         )
+
+
+def resolve_shell_versions(version_string: str) -> set[models.ShellVersion]:
+    """
+    Shell versions an extension has to declare to support `version_string`.
+
+    The set is empty when the version is valid but no extension supports it yet.
+    """
+    try:
+        models.parse_version_string(version_string)
+    except models.InvalidShellVersion:
+        raise exceptions.ValidationError(
+            {"shell_version": [f"Invalid GNOME Shell version: {version_string}"]}
+        )
+
+    return set(get_versions_for_version_strings([version_string]))
 
 
 def get_versions_for_version_strings(version_strings):
