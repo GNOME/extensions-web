@@ -2,8 +2,6 @@
 
 """Shared rule-facing constants derived from the canonical API data."""
 
-from __future__ import annotations
-
 from ...api_data import API
 
 DEPRECATED_IMPORT_TOKENS = API.imports.deprecated_modules

@@ -52,7 +52,7 @@ def comment_details(request, comment):
 def get_comments(request):
     try:
         extension = models.Extension.objects.get(pk=request.GET.get("pk"))
-    except (models.Extension.DoesNotExist, ValueError):
+    except models.Extension.DoesNotExist, ValueError:
         return HttpResponseNotFound()
 
     if not extension.allow_comments:

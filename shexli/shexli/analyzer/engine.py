@@ -11,8 +11,6 @@ Architectural invariants:
   get_file_fact(); ExtensionRule may not.
 """
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path

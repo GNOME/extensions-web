@@ -122,7 +122,7 @@ class ExtensionsViewSet(
         for uuid, update_data in updates.validated_data["installed"].items():
             try:
                 version = int(update_data["version"])
-            except (KeyError, TypeError):
+            except KeyError, TypeError:
                 continue
             except ValueError:
                 version = 1
@@ -241,7 +241,7 @@ class ExtensionsViewSet(
                 {
                     "count": paginator.count,
                     "results": self.serializer_class(
-                        [sr for sr in paginator.page(page).object_list],
+                        [*paginator.page(page).object_list],
                         many=True,
                         context={"request": request},
                     ).data,
@@ -341,11 +341,11 @@ def grab_proper_extension_version(
     def get_best_shell_version():
         visible_versions = extension.visible_versions
 
-        supported_shell_versions = set(
+        supported_shell_versions = {
             shell_version
             for version in visible_versions
             for shell_version in version.shell_versions.all()
-        )
+        }
 
         if not supported_shell_versions:
             return None
@@ -403,7 +403,7 @@ def find_extension_version_from_params(extension, params):
     elif vpk:
         try:
             return extension.visible_versions.get(pk=int(vpk))
-        except (models.ExtensionVersion.DoesNotExist, ValueError):
+        except models.ExtensionVersion.DoesNotExist, ValueError:
             return None
     else:
         return None
@@ -444,7 +444,7 @@ def shell_update(request):
         disable_version_validation = request.GET.get(
             "disable_version_validation", False
         )
-    except (KeyError, ValueError):
+    except KeyError, ValueError:
         return HttpResponseBadRequest()
 
     mocked_request = APIRequestFactory().post(
@@ -572,7 +572,7 @@ def ajax_query_search_query(
     paginator = Paginator(queryset.to_queryset(keep_order=True), page_size)
 
     try:
-        return ([sr for sr in paginator.page(page).object_list], paginator.num_pages)
+        return ([*paginator.page(page).object_list], paginator.num_pages)
     except InvalidPage:
         return ([], 0)
 
@@ -588,7 +588,7 @@ def ajax_query_view(request):
             return redirect((settings.STATIC_URL + "extensions.json"), permanent=True)
 
         n_per_page = min(n_per_page, 25)
-    except (KeyError, ValueError):
+    except KeyError, ValueError:
         n_per_page = 10
 
     version_strings = request.GET.getlist("shell_version")
@@ -681,8 +681,7 @@ def ajax_inline_edit_view(request, extension):
 
     key = request.POST["id"]
     value = request.POST["value"]
-    if key.startswith("extension_"):
-        key = key[len("extension_") :]
+    key = key.removeprefix("extension_")
 
     if key == "name":
         extension.name = value
@@ -838,7 +837,7 @@ def ajax_details_view(request):
     elif pk:
         try:
             extension = get_object_or_404(models.Extension.objects.visible(), pk=pk)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             raise Http404()
     else:
         return HttpResponseBadRequest()

@@ -36,7 +36,7 @@ IMAGE_TYPES = {
 }
 
 # Keep this in sync with the BINARY_TYPES list at the top of review.js
-BINARY_TYPES = set([".mo", ".compiled"])
+BINARY_TYPES = {".mo", ".compiled"}
 
 
 # Stolen from ReviewBoard
@@ -120,7 +120,7 @@ def highlight_file(filename, raw: bytes, formatter):
 
     try:
         return pygments.highlight(raw, lexer, formatter)
-    except (TypeError, UnicodeDecodeError):
+    except TypeError, UnicodeDecodeError:
         # Fallback to UTF-8 for old broken pygments version
         lexer.encoding = "utf-8"
         return pygments.highlight(raw, lexer, formatter)
@@ -191,12 +191,12 @@ def grab_lines(zipfile: ZipFile, filename: str):
     try:
         with zipfile.open(filename, "r") as f:
             return f.read().decode("utf-8").splitlines()
-    except (KeyError, UnicodeDecodeError):
+    except KeyError, UnicodeDecodeError:
         return None
 
 
 def get_file_info(zipfile) -> set[ZipInfo]:
-    return set(n for n in zipfile.infolist() if not n.filename.endswith("/"))
+    return {n for n in zipfile.infolist() if not n.filename.endswith("/")}
 
 
 def get_file_list(fileinfo: Iterable[ZipInfo]) -> set[str]:
@@ -545,16 +545,14 @@ def should_auto_approve(version: models.ExtensionVersion):
     if old_version is None:
         return False
 
-    old_session_modes = set(x.mode for x in old_version.session_modes.all())
+    old_session_modes = {x.mode for x in old_version.session_modes.all()}
     session_modes = [x.mode for x in version.session_modes.all()]
 
     if Counter(old_session_modes) != Counter(session_modes):
         return False
 
-    old_shell_versions: set[int] = set(
-        sv.major for sv in old_version.shell_versions.all()
-    )
-    new_shell_versions: set[int] = set(sv.major for sv in version.shell_versions.all())
+    old_shell_versions: set[int] = {sv.major for sv in old_version.shell_versions.all()}
+    new_shell_versions: set[int] = {sv.major for sv in version.shell_versions.all()}
 
     if any(v >= 45 for v in (new_shell_versions - old_shell_versions)):
         return False

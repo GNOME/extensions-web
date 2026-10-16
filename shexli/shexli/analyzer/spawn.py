@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from __future__ import annotations
 
 from ..api_data import API
 from ..ast import array_elements, call_arguments, call_callee_parts, node_text
