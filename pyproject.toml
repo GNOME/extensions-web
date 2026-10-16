@@ -13,7 +13,7 @@ description = "GNOME Shell extesions website."
 readme = "README.md"
 license = {file = "COPYING"}
 keywords = ["django"]
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Framework :: Django",
@@ -27,7 +27,7 @@ dependencies = [
     "django-autoslug==1.9.9",
     "django-contrib-comments==2.2.0",
     "django-cors-headers==4.6.0",
-    "django-filter==23.3",
+    "django-filter==23.4",
     "django-rest-registration==0.8.2",
     "django-rest-knox==4.2.0",
     "django-maintenance-mode==0.21.1",
@@ -44,8 +44,8 @@ dependencies = [
     "chardet==5.2.0",
     "dj-database-url==2.0.0",
     "dj-email-url==1.0.6",
-    "psycopg[binary]==3.2.3",
-    "uWSGI==2.0.28",
+    "psycopg[binary]==3.2.13",
+    "uwsgi==2.0.31",
 ]
 
 [project.optional-dependencies]

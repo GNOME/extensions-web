@@ -1,13 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from collections.abc import Mapping
 from dataclasses import dataclass
 from inspect import isabstract
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Generic, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 if TYPE_CHECKING:
     from ..engine import ExtensionModel
@@ -68,7 +67,7 @@ class ExtensionFactContext:
         return self.store.get_extension_fact(fact_type)
 
 
-class JSFileFactBuilder(ABC, Generic[T]):
+class JSFileFactBuilder[T](ABC):
     """Builds one typed file fact from a JSFileModel and other cached facts.
 
     Rule authors should add a builder instead of hiding file analysis inside a
@@ -93,7 +92,7 @@ class JSFileFactBuilder(ABC, Generic[T]):
         ...
 
 
-class ExtensionFactBuilder(ABC, Generic[T]):
+class ExtensionFactBuilder[T](ABC):
     """Builds one typed extension fact from an ExtensionModel.
 
     Attributes:

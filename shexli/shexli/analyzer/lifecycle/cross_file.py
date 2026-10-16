@@ -10,8 +10,6 @@ used by :func:`collect_resources_from_methods` and
 across file boundaries.
 """
 
-from __future__ import annotations
-
 from pathlib import Path
 from typing import TYPE_CHECKING, NamedTuple
 
@@ -198,7 +196,7 @@ def build_cross_file_indices_per_file(
     for js_file in js_files:
         try:
             source = js_file.read_text(encoding="utf-8")
-        except (OSError, UnicodeDecodeError):
+        except OSError, UnicodeDecodeError:
             continue
         tree = parse_js(source)
         file_index = build_cross_file_index(
