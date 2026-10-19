@@ -5,6 +5,7 @@ import re
 from urllib.parse import urlparse
 
 from ...spec import R
+from ..metadata import latest_stable_shell_major
 from .api import (
     ExtensionCheckContext,
     ExtensionFacts,
@@ -68,6 +69,7 @@ class MetadataValidationRule(ExtensionRule):
                 ],
             )
         else:
+            latest = latest_stable_shell_major()
             invalid: list[str] = []
             dev_count = 0
             future: list[str] = []
@@ -82,7 +84,7 @@ class MetadataValidationRule(ExtensionRule):
                 major, minor, _point = parsed
                 if major >= 40 and minor < -1:
                     dev_count += 1
-                if major > 50:
+                if major > latest:
                     future.append(raw)
             if invalid or dev_count > 1 or future:
                 ctx.add_finding(
