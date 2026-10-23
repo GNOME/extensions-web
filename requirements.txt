@@ -339,9 +339,9 @@ django-rest-registration==0.8.2 \
     --hash=sha256:5e3e9e7dc3fabc6cd39f024c82e7d4d18cda0ca216b2a60f64e0b1c4c65af3d9 \
     --hash=sha256:930fee0b88acf845936cb522c23e0d197b75f89f37dc3758a83eb633c443aac8
     # via extensions-web (pyproject.toml)
-djangorestframework==3.17.2 \
-    --hash=sha256:89ed713b6dc83e1539f214b7d10808ae19bb8511004beba886225da6d5c9dafa \
-    --hash=sha256:cb0546a7415d5b46c04e0f4fe0a54b2109f4fdd5e83ca773c8c6183a6493d042
+djangorestframework==3.18.2 \
+    --hash=sha256:8249bad7715eb37274ce5820fc5d9fd786b7579806589565f52a71c02b35f54b \
+    --hash=sha256:a92d6a4e128a2550bd2fe2e02008a9e47fe52c180e130bb438f5ba70ee933a3f
     # via
     #   django-rest-knox
     #   django-rest-registration
