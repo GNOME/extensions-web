@@ -34,7 +34,7 @@ class KnoxAuthTokenManager(AbstractAuthTokenManager):
             "knox",
         ]
 
-    def provide_token(self, user: AbstractBaseUser) -> AuthTokenType:
+    def provide_token(self, user: "AbstractBaseUser") -> AuthTokenType:
         request = HttpRequest()
         request.method = "POST"
         request.user = user
@@ -45,7 +45,7 @@ class KnoxAuthTokenManager(AbstractAuthTokenManager):
         return AuthTokenType(token)
 
     def revoke_token(
-        self, user: AbstractBaseUser, *, token: AuthTokenType | None = None
+        self, user: "AbstractBaseUser", *, token: AuthTokenType | None = None
     ) -> None:
         if token:
             AuthToken.objects.get(user=user, digest=token).delete()

@@ -13,6 +13,7 @@ from django.core.exceptions import BadRequest
 from django.core.files.base import ContentFile
 from django.core.paginator import InvalidPage, Paginator
 from django.core.validators import URLValidator
+from django.db.models import Exists, OuterRef
 from django.forms import Field, ValidationError
 from django.http import (
     Http404,
@@ -41,6 +42,7 @@ from knox.auth import TokenAuthentication
 from PIL import Image, ImageOps
 from rest_framework import (
     authentication,
+    exceptions,
     filters,
     mixins,
     parsers,
@@ -77,6 +79,18 @@ class ExtensionsFilter(FilterSet):
         choices=list(models.STATUSES.items()),
         distinct=True,
     )
+    shell_version = CharFilter(method="filter_shell_version")
+
+    def filter_shell_version(self, queryset, name, value):
+        shell_versions = resolve_shell_versions(value)
+
+        return queryset.filter(
+            Exists(
+                models.ExtensionVersion.objects.visible().filter(
+                    extension=OuterRef("pk"), shell_versions__in=shell_versions
+                )
+            )
+        )
 
     class Meta:
         model = models.Extension
@@ -122,7 +136,7 @@ class ExtensionsViewSet(
         for uuid, update_data in updates.validated_data["installed"].items():
             try:
                 version = int(update_data["version"])
-            except KeyError, TypeError:
+            except (KeyError, TypeError):
                 continue
             except ValueError:
                 version = 1
@@ -165,6 +179,7 @@ class ExtensionsViewSet(
     @extend_schema(
         parameters=[
             OpenApiParameter(name="recommended", type=OpenApiTypes.BOOL),
+            OpenApiParameter(name="shell_version", type=OpenApiTypes.STR),
             OpenApiParameter(
                 name="ordering",
                 enum=[
@@ -222,6 +237,15 @@ class ExtensionsViewSet(
         if self.request.query_params.get("recommended") in ("true", "1"):
             queryset = queryset.filter("term", recommended=True)
 
+        shell_version = self.request.query_params.get("shell_version")
+        if shell_version:
+            queryset = queryset.filter(
+                "terms",
+                shell_versions=[
+                    str(version) for version in resolve_shell_versions(shell_version)
+                ],
+            )
+
         ordering = self.request.query_params.get("ordering")
         ordering_field = (
             ordering if not ordering or ordering[0] != "-" else ordering[1:]
@@ -241,7 +265,7 @@ class ExtensionsViewSet(
                 {
                     "count": paginator.count,
                     "results": self.serializer_class(
-                        [*paginator.page(page).object_list],
+                        [sr for sr in paginator.page(page).object_list],
                         many=True,
                         context={"request": request},
                     ).data,
@@ -302,6 +326,22 @@ class ExtensionUploadPageView(LoginRequiredMixin, TemplateView):
         )
 
 
+def resolve_shell_versions(version_string: str) -> set[models.ShellVersion]:
+    """
+    Shell versions an extension has to declare to support `version_string`.
+
+    The set is empty when the version is valid but no extension supports it yet.
+    """
+    try:
+        models.parse_version_string(version_string)
+    except models.InvalidShellVersion:
+        raise exceptions.ValidationError(
+            {"shell_version": [f"Invalid GNOME Shell version: {version_string}"]}
+        )
+
+    return set(get_versions_for_version_strings([version_string]))
+
+
 def get_versions_for_version_strings(version_strings):
     def get_version(major, minor, point):
         try:
@@ -341,11 +381,11 @@ def grab_proper_extension_version(
     def get_best_shell_version():
         visible_versions = extension.visible_versions
 
-        supported_shell_versions = {
+        supported_shell_versions = set(
             shell_version
             for version in visible_versions
             for shell_version in version.shell_versions.all()
-        }
+        )
 
         if not supported_shell_versions:
             return None
@@ -403,7 +443,7 @@ def find_extension_version_from_params(extension, params):
     elif vpk:
         try:
             return extension.visible_versions.get(pk=int(vpk))
-        except models.ExtensionVersion.DoesNotExist, ValueError:
+        except (models.ExtensionVersion.DoesNotExist, ValueError):
             return None
     else:
         return None
@@ -444,7 +484,7 @@ def shell_update(request):
         disable_version_validation = request.GET.get(
             "disable_version_validation", False
         )
-    except KeyError, ValueError:
+    except (KeyError, ValueError):
         return HttpResponseBadRequest()
 
     mocked_request = APIRequestFactory().post(
@@ -572,7 +612,7 @@ def ajax_query_search_query(
     paginator = Paginator(queryset.to_queryset(keep_order=True), page_size)
 
     try:
-        return ([*paginator.page(page).object_list], paginator.num_pages)
+        return ([sr for sr in paginator.page(page).object_list], paginator.num_pages)
     except InvalidPage:
         return ([], 0)
 
@@ -588,7 +628,7 @@ def ajax_query_view(request):
             return redirect((settings.STATIC_URL + "extensions.json"), permanent=True)
 
         n_per_page = min(n_per_page, 25)
-    except KeyError, ValueError:
+    except (KeyError, ValueError):
         n_per_page = 10
 
     version_strings = request.GET.getlist("shell_version")
@@ -681,7 +721,8 @@ def ajax_inline_edit_view(request, extension):
 
     key = request.POST["id"]
     value = request.POST["value"]
-    key = key.removeprefix("extension_")
+    if key.startswith("extension_"):
+        key = key[len("extension_") :]
 
     if key == "name":
         extension.name = value
@@ -837,7 +878,7 @@ def ajax_details_view(request):
     elif pk:
         try:
             extension = get_object_or_404(models.Extension.objects.visible(), pk=pk)
-        except TypeError, ValueError:
+        except (TypeError, ValueError):
             raise Http404()
     else:
         return HttpResponseBadRequest()

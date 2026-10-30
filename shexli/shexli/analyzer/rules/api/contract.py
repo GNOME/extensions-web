@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from collections.abc import Callable

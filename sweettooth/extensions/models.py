@@ -5,7 +5,7 @@ import os
 import re
 import tempfile
 import zlib
-from typing import Any, Literal
+from typing import Any, Literal, Optional
 from urllib.parse import quote
 from zipfile import BadZipfile, ZipFile
 
@@ -283,7 +283,7 @@ class Extension(models.Model):
         return self.versions.filter(status=STATUS_ACTIVE)
 
     @property
-    def latest_version(self) -> ExtensionVersion | None:
+    def latest_version(self) -> Optional["ExtensionVersion"]:
         try:
             return self.visible_versions.latest()
         except ExtensionVersion.DoesNotExist:

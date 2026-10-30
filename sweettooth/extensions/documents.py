@@ -55,7 +55,7 @@ class ExtensionDocument(Document):
     creator = fields.TextField(
         analyzer=analyzer("autocomplete"),
     )
-    shell_versions = fields.TextField(multi=True)
+    shell_versions = fields.KeywordField(multi=True)
 
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).select_related("creator")
