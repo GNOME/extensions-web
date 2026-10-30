@@ -677,9 +677,9 @@ pygments==2.20.0 \
     # via
     #   -c requirements.txt
     #   extensions-web (pyproject.toml)
-pylint==3.3.1 \
-    --hash=sha256:2f846a466dd023513240bc140ad2dd73bfc080a5d85a710afdb728c420a5a2b9 \
-    --hash=sha256:9f3dcc87b1203e612b78d91a896407787e708b3f189b5fa0b307712d49ff0c6e
+pylint==4.0.9 \
+    --hash=sha256:6f1305780229ae720e89b8aff2b3ff857cbb268fbab98c8b586960267667ad34 \
+    --hash=sha256:c4ba5bbaf1e70ecf05f08cd7d6091ea04824b79a2b2d9f5b10dc25fc34cb1124
     # via
     #   extensions-web (pyproject.toml)
     #   pylint-django
