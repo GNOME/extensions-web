@@ -1,0 +1,22 @@
+FROM alpine:3.24
+
+ENV EGO_NODE_ADDRESS=127.0.0.1
+
+RUN set -ex \
+	&& apk add --no-cache \
+		curl \
+		gettext-envsubst \
+		libmaxminddb \
+		nginx \
+		nginx-mod-http-geoip2
+
+COPY openshift/docker/nginx.conf /etc/nginx/nginx.conf
+COPY openshift/docker/default.conf.template /etc/nginx/templates/default.conf.template
+COPY openshift/docker/geoip-update.sh openshift/docker/nginx-entrypoint.sh /usr/local/bin/
+
+EXPOSE 8080
+
+USER nginx
+
+ENTRYPOINT [ "/bin/sh", "/usr/local/bin/nginx-entrypoint.sh" ]
+CMD [ "nginx", "-e", "stderr", "-p", "/etc/nginx", "-g", "daemon off;" ]

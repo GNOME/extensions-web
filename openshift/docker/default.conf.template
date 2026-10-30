@@ -1,3 +1,13 @@
+geoip2 /tmp/geoip/GeoLite2-Country.mmdb {
+    auto_reload 5m;
+    $geoip2_country_code country iso_code;
+}
+
+map $uri $static_expires {
+    default 1h;
+    "~\.[0-9a-f]{12}\.\w+$" max;
+}
+
 server {
     listen 8080 default_server;
 
@@ -42,11 +52,25 @@ server {
     }
 
     location /extension-data/ {
-        return 302 https://cdn.extensions.gnome.org$request_uri;
+        if ($geoip2_country_code != CN) {
+            expires off;
+            add_header Cache-Control "no-store" always;
+            return 302 https://cdn.extensions.gnome.org$request_uri;
+        }
+
+        alias /extensions-web/www/uploaded-files/;
+        expires 7d;
     }
 
     location /static/ {
-        return 302 https://cdn.extensions.gnome.org$request_uri;
+        if ($geoip2_country_code != CN) {
+            expires off;
+            add_header Cache-Control "no-store" always;
+            return 302 https://cdn.extensions.gnome.org$request_uri;
+        }
+
+        alias /extensions-web/www/static-files/;
+        expires $static_expires;
     }
 
     location / {
@@ -80,11 +104,7 @@ server {
 
     location /static/ {
         alias /extensions-web/www/static-files/;
-        expires 1h;
-
-        location ~ "\.[0-9a-f]{12}\.\w+$" {
-            expires max;
-        }
+        expires $static_expires;
     }
 
     location / {
