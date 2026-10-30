@@ -1439,7 +1439,7 @@ class UpdateVersionTest(SilentDjangoRequestTest):
     }
 
     def build_response(self, installed):
-        return {k: dict(version=v) for k, v in installed.items()}
+        return dict((k, dict(version=v)) for k, v in installed.items())
 
     def grab_post_response(self, installed, shell_version="3.2.0"):
         installed = self.build_response(installed)

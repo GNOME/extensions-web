@@ -2,6 +2,8 @@
 
 """Typed access to the versioned GNOME API data in data/api.toml."""
 
+from __future__ import annotations
+
 import tomllib
 from dataclasses import dataclass
 from importlib.resources import files
@@ -73,7 +75,7 @@ def _load() -> ApiData:
     try:
         with files("shexli.data").joinpath("api.toml").open("rb") as fp:
             data = tomllib.load(fp)
-    except FileNotFoundError, ModuleNotFoundError:
+    except (FileNotFoundError, ModuleNotFoundError):
         with (_DATA_DIR / "api.toml").open("rb") as fp:
             data = tomllib.load(fp)
 
