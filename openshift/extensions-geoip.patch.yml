@@ -1,0 +1,23 @@
+spec:
+  template:
+    spec:
+      containers:
+      - name: nginx
+        image: quay.io/gnome_infrastructure/extensions-nginx:aarch64-latest
+        volumeMounts:
+        - $patch: replace
+        - mountPath: /extensions-web/www
+          name: extensions-data
+          subPath: www
+        - mountPath: /etc/nginx/templates/default.conf.template
+          name: nginx
+          subPath: default.conf
+      - name: extensions
+        env:
+        - name: EGO_STATIC_URL
+          value: /static/
+      initContainers:
+      - name: init
+        env:
+        - name: EGO_STATIC_URL
+          value: /static/

@@ -83,20 +83,6 @@ objects:
   kind: ImageStream
   metadata:
     annotations:
-      description: Keeps track of changes in the nginx:stable image
-    name: nginx
-  spec:
-    tags:
-    - from:
-        kind: DockerImage
-        name: nginx:stable
-      importPolicy:
-        scheduled: true
-      name: stable
-- apiVersion: v1
-  kind: ImageStream
-  metadata:
-    annotations:
       description: Keeps track of changes in the python image
     name: python
   spec:
@@ -158,34 +144,6 @@ objects:
         secretReference:
           name: gnome-gitlab
       type: GitLab
-- apiVersion: v1
-  kind: BuildConfig
-  metadata:
-    annotations:
-      description: Defines how to build the frontend
-      template.alpha.openshift.io/wait-for-ready: 'true'
-    name: frontend
-  spec:
-    output:
-      to:
-        kind: ImageStreamTag
-        name: frontend:latest
-    source:
-      contextDir: openshift/docker/nginx
-      git:
-        ref: ${SOURCE_REPOSITORY_REF}
-        uri: ${SOURCE_REPOSITORY_URL}
-      type: Git
-    strategy:
-      dockerStrategy:
-        forcePull: true
-        from:
-          kind: ImageStreamTag
-          name: nginx:stable
-      type: Docker
-    triggers:
-    - type: ImageChange
-    - type: ConfigChange
 - apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
@@ -294,19 +252,13 @@ objects:
           - mountPath: /extensions-web/data
             name: data-volume
             subPath: data
-        - args:
-          - -c
-          - envsubst '$EGO_NODE_ADDRESS' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
-            && nginx -g 'daemon off;'
-          command:
-          - bash
-          env:
+        - env:
           - name: EGO_NODE_ADDRESS
             value: ${EGO_NODE_ADDRESS}
-          image: ${DEFAULT_DOCKER_REGISTRY}/${NAME}/frontend:latest
+          image: quay.io/gnome_infrastructure/extensions-nginx:aarch64-latest
           livenessProbe:
             httpGet:
-              path: /health
+              path: /healthz
               port: 8080
             initialDelaySeconds: 45
             periodSeconds: 60
@@ -316,7 +268,7 @@ objects:
           - containerPort: 8080
           readinessProbe:
             httpGet:
-              path: /health
+              path: /healthz
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 60
