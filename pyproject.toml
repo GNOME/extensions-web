@@ -39,7 +39,7 @@ dependencies = [
     "Pygments==2.20.0",
     "tree-sitter==0.25.2",
     "tree-sitter-javascript>=0.25.0",
-    "pillow==12.3.0",
+    "pillow==13.0.0",
     "polib==1.1.1",
     "chardet==5.2.0",
     "dj-database-url==2.0.0",
@@ -53,8 +53,8 @@ dev = [
     "django-stubs==5.2.9",
     "djangorestframework-stubs==3.16.9",
     "pip-tools==7.5.3",
-    "pylint==3.3.1",
-    "pylint-django==2.6.1",
+    "pylint==4.0.9",
+    "pylint-django==2.8.0",
     "ruff==0.15.9",
 ]
 
