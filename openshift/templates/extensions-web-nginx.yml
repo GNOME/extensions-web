@@ -255,7 +255,7 @@ objects:
         - env:
           - name: EGO_NODE_ADDRESS
             value: ${EGO_NODE_ADDRESS}
-          image: quay.io/gnome_infrastructure/extensions-nginx:aarch64-latest
+          image: quay.io/gnome_infrastructure/extensions:nginx
           livenessProbe:
             httpGet:
               path: /healthz

@@ -187,7 +187,7 @@ build and deploy:
     - >-
       buildah bud
       --platform linux/arm64
-      -t quay.io/gnome_infrastructure/extensions-nginx:aarch64-latest
+      -t quay.io/gnome_infrastructure/extensions:nginx
       -f openshift/docker/Dockerfile.nginx
 
 build nginx image:
@@ -207,4 +207,4 @@ build and deploy nginx:
   script:
     - !reference [.build nginx image, script]
     - buildah login -u ${OCI_REGISTRY_USER} -p ${OCI_REGISTRY_PASSWORD} quay.io
-    - buildah push quay.io/gnome_infrastructure/extensions-nginx:aarch64-latest
+    - buildah push quay.io/gnome_infrastructure/extensions:nginx

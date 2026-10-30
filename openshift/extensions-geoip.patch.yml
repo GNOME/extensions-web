@@ -3,7 +3,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: quay.io/gnome_infrastructure/extensions-nginx:aarch64-latest
+        image: quay.io/gnome_infrastructure/extensions:nginx
         volumeMounts:
         - $patch: replace
         - mountPath: /extensions-web/www
