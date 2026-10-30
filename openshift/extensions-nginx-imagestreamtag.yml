@@ -1,0 +1,13 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStreamTag
+metadata:
+  name: extensions:nginx
+  namespace: extensions
+tag:
+  from:
+    kind: DockerImage
+    name: quay.io/gnome_infrastructure/extensions:nginx
+  importPolicy:
+    scheduled: true
+  referencePolicy:
+    type: Source
